@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
     select("users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value").
       joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
       where("orders.checked_out" => true).
-      group("orders.id").
+      group("orders.id, user_last_name, user_first_name").
       order("value DESC").
       first
   end
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
     select("users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value").
       joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
       where("orders.checked_out" => true).
-      group("users.id").
+      group("users.id, user_last_name, user_first_name").
       order("value DESC").
       first
   end
@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
     joins("JOIN orders ON users.id = orders.userid JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
       where("orders.checked_out" => true).
       select("users.id AS user_id, users.first_name AS user_first_name, users.last_name AS user_last_name, (SUM(purchases.quantity * products.price) / COUNT(DISTINCT orders.id)) AS value").
-      group("users.id").
+      group("users.id, user_last_name, user_first_name").
       order("value DESC").
       first
 
@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
     select("users.first_name AS user_first_name, users.last_name AS user_last_name, COUNT(DISTINCT orders.id) AS orders_placed").
       joins("JOIN orders ON users.id = orders.userid").
       where("orders.checked_out" => true).
-      group("users.id").
+      group("users.id, user_last_name, user_first_name").
       order("orders_placed DESC").
       first
   end
