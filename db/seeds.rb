@@ -4,7 +4,7 @@
 
 #scalar 10 => about 1,000 Cities, 1,000 Users, <1,000 Orders
 
-SCALAR = 5 # Seed multiplier; caution: exponential data increase
+SCALAR = 20 # Seed multiplier; caution: exponential data increase
  
 #generate products
 sample_categories = []
