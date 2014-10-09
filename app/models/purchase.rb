@@ -1,5 +1,10 @@
 class Purchase < ActiveRecord::Base
 
+  belongs_to :order
+  belongs_to :product
+
+  validates :product_id, uniqueness: { scope: :order_id }
+
   def self.revenue(last_x_days = nil)
 
     if last_x_days

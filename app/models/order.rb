@@ -1,5 +1,13 @@
 class Order < ActiveRecord::Base
 
+  belongs_to :user
+
+  belongs_to :shipping_address, foreign_key: :shipping_id, class: "Address"
+  belongs_to :billing_address, foreign_key: :billing_id, class: "Address"
+
+  has_many :purchases
+  has_many :products, through: :purchases
+
   def self.new_orders(last_x_days = nil)
     if last_x_days
       where("checkout_date > ?", Time.now - last_x_days.days).size

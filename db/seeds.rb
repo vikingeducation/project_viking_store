@@ -131,7 +131,7 @@ end
  
 #generate orders
 def no_cart?(user_id)
-  Order.where(:checked_out => false, :userid => user_id).empty?
+  Order.where(:checked_out => false, :user_id => user_id).empty?
 end
  
 def completion(user)
@@ -151,7 +151,7 @@ end
   if sample_user[:billing_id] || no_cart?(sample_user[:id])
     completed_order = completion(sample_user)
     o = Order.new()
-    o[:userid]        = sample_user.id
+    o[:user_id]        = sample_user.id
     o[:shipping_id]   = random_user_address(sample_user.id)
     o[:billing_id]    = random_user_address(sample_user.id)
     o[:checked_out]   = completed_order
