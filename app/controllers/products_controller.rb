@@ -59,7 +59,13 @@ class ProductsController < ApplicationController
 private
 
   def whitelisted_params
+    params[:product][:price] = clean_price(params[:product][:price])
     params.require(:product).permit(:name, :price, :category_id)
+  end
+
+  #takes a string parameter
+  def clean_price(input)
+    input[0] == "$" ? input[1..-1].to_f : input.to_f
   end
 
 end
