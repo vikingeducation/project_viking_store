@@ -10,17 +10,7 @@
     <th>Edit</th>
     <th>Delete</th>
   </thead>
-  <tbody>
-    <% @categories.each do |category|%>
-      <tr>
-        <td><%=category.id%></td>
-        <td><%=category.name%></td>
-        <td><%=link_to "show", category_path(category)%></td>
-        <td><%=link_to "edit", edit_category_path(category)%></td>
-        <td><%=link_to "delete", category_path(category),
-                        confirm: "Are you sure?", method: :delete %></td>
 
-      </tr>
-    <% end %>
-  </tbody>
+  <%= render "category_tbody" %>
+  
 </table>
