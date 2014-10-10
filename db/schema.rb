@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009034738) do
+ActiveRecord::Schema.define(version: 20141010202606) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address",    null: false
     t.string   "secondary_address"
     t.integer  "zip_code",          null: false
-    t.integer  "city",              null: false
-    t.integer  "state",             null: false
+    t.integer  "city_id",           null: false
+    t.integer  "state_id",          null: false
     t.integer  "user_id",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"

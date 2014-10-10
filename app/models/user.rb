@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   def self.top_three_states
     select("states.name AS state_name, COUNT(*) AS users_in_state").
-      joins("JOIN addresses ON users.billing_id = addresses.id JOIN states ON states.id = addresses.state").
+      joins("JOIN addresses ON users.billing_id = addresses.id JOIN states ON states.id = addresses.state_id").
       limit(3).
       order("users_in_state DESC").
       group("states.name")
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
   def self.top_three_cities
     select("cities.name AS city_name, COUNT(*) AS users_in_city").
-      joins("JOIN addresses ON users.billing_id = addresses.id JOIN cities ON cities.id = addresses.city").
+      joins("JOIN addresses ON users.billing_id = addresses.id JOIN cities ON cities.id = addresses.city_id").
       limit(3).
       order("users_in_city DESC").
       group("cities.name")
