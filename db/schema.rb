@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20141009034738) do
     t.string   "street_address",    null: false
     t.string   "secondary_address"
     t.integer  "zip_code",          null: false
-    t.integer  "city"
+    t.integer  "city",              null: false
     t.integer  "state",             null: false
     t.integer  "user_id",           null: false
     t.datetime "created_at"
