@@ -11,6 +11,16 @@ class Product < ActiveRecord::Base
             :allow_nil => false,
             :numericality => { :less_than_or_equal_to => 10_000 }
 
+  validates :name,
+            :presence => true,
+            :allow_blank => false,
+            :allow_nil => false
+
+  validates :category_id,
+            :presence => true,
+            :allow_blank => false,
+            :allow_nil => false
+
   def self.new_products(last_x_days = nil)
     if last_x_days
       where("created_at > ?", Time.now - last_x_days.days).size
