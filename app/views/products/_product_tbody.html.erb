@@ -3,9 +3,8 @@
     <tr>
       <td><%=product.id%></td>
       <td><%=product.name%></td>
-      <td>$<%=number_with_precision(product.price, precision: 2,
-                                    delimiter: ",") %></td>
-      <td><%=product.category ? product.category.name : "(deleted)" %></td>
+      <td><%=number_to_currency(product.price) %></td>
+      <td><%= category_link(product) %></td>
 
       <td><%=link_to "show", product_path(product)%></td>
       <td><%=link_to "edit", edit_product_path(product)%></td>

@@ -22,6 +22,9 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+
+    @product_numorders = @product.orders.count
+    @product_numcarts = @product.orders.where(:checked_out => false).count
   end
 
   def edit
@@ -43,7 +46,7 @@ class ProductsController < ApplicationController
 
   def destroy
     session[:return_to] ||= request.referer
-    if product.find(params[:id]).destroy
+    if Product.find(params[:id]).destroy
       flash[:success] = "Deleted."
       redirect_to action: :index
     else
