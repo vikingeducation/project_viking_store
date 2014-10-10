@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+ #admin-navbar {
+   border: 2px solid #bbb;
+   text-align: center;
+ }
+
+ .centered {
+   text-align: center;
+ }
+
+ .admin-main {
+   border: 2px dashed #bbb;
+   min-height: 500px;
+   padding-top: 1em;
+ }
+
+ #flasher {
+   background-color: #ddd;
+   border: 2px dashed #ccc;
+   border-radius: 6px;
+   clear: none;
+ }

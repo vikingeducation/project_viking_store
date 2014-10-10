@@ -10,6 +10,14 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(whitelisted_params)
+
+    if @category.save
+      flash[:success] = "New category saved."
+      redirect_to action: :index
+    else
+      flash.now[:error] = "Something was invalid."
+      render :new
+    end
   end
 
   def show
@@ -29,6 +37,7 @@ class CategoriesController < ApplicationController
 private
 
   def whitelisted_params
+    params.require(:category).permit(:name)
   end
 
 end
