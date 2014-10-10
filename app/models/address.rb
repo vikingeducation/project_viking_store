@@ -5,18 +5,18 @@ class Address < ActiveRecord::Base
   belongs_to :city
 
   has_many :orders_billing_here,
-           class: "Order",
+           class_name: "Order",
            foreign_key: :billing_id
 
   has_many :orders_shipping_here,
-           class: "Order",
+           class_name: "Order",
            foreign_key: :shipping_id
 
   has_one :user_shipping_here,
-           class: "User",
+           class_name: "User",
            foreign_key: :billing_id
 
-  has_many :user_billing_here,
-           class: "User",
+  has_one :user_billing_here,
+           class_name: "User",
            foreign_key: :shipping_id
 end
