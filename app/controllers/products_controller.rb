@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(whitelisted_params)
+    @product[:sku] = (Faker::Code.ean).to_i
 
     if @product.save
       flash[:success] = "New product saved."
@@ -58,7 +59,7 @@ class ProductsController < ApplicationController
 private
 
   def whitelisted_params
-    params.require(:product).permit(:name)
+    params.require(:product).permit(:name, :price, :category_id)
   end
 
 end
