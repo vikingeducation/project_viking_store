@@ -3,7 +3,9 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.all
   end
+
   def edit
+    @category = Category.find(params[:id])
   end
 
   def new 
@@ -26,6 +28,10 @@ class CategoriesController < ApplicationController
       flash[:error] = "Whoops!"
       render 'new' 
     end
+  end
+
+  def update
+
   end
 
   private
