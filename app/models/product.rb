@@ -9,4 +9,11 @@ class Product < ActiveRecord::Base
 		Product.where('created_at > ?',time).count
 	end
 
+  def times_ordered
+    self.orders.where(is_placed: true).count
+  end
+  
+  def carts_in
+    self.orders.where(is_placed: false).count
+  end
 end

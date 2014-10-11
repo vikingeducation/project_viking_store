@@ -17,15 +17,20 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    Category.find(params[:id]).destroy
-    flash[:success] = "Category #{params[:id]} deleted."
-    redirect_to categories_path
+    session[:return_to] ||= request.referer
+    @category = Category.find(params[:id])
+    if Category.find(params[:id]).destroy
+      flash[:success] = "Category #{@category.name} deleted."
+      redirect_to categories_path
+    else
+      redirect_to session.delete(:return_to)
+    end
   end
 
   def create
   @category = Category.new(cat_params)
     if @category.save
-      flash[:success] = "Category #{params[:id]} created!"
+      flash[:success] = "Category #{@category.name} created!"
       redirect_to categories_path
     else
       flash[:error] = "Whoops!"
