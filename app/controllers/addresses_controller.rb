@@ -1,7 +1,7 @@
 class AddressesController < ApplicationController
 
   def index
-    @addresses = Address.all
+    @addresses = Address.where("user_id IS NOT NULL")
     @user = User.find(params[:user_id]) if params[:user_id]
   end
 
@@ -48,12 +48,16 @@ class AddressesController < ApplicationController
 
   def destroy
     session[:return_to] ||= request.referer
-    if Address.find(params[:id]).destroy
+
+    @address = Address.find(params[:id])
+    @address.user_id = nil
+
+    if @address.save
       flash[:success] = "Deleted."
       redirect_to action: :index
     else
       flash[:error] = "Something went wrong in that deletion."
-      redirect_to session.delete[:return_to]
+      redirect_to session.delete(:return_to)
     end
   end
 

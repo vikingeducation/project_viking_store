@@ -3,14 +3,14 @@
     <tr>
       <td><%= order.id %>
       <td><%= link_to "#{order.user.id}", user_path(order.user)%></td>
-      <td><%= "#{order.shipping_address.street_address}" %></td>
-      <td><%= order.shipping_address.city.name %></td>
-      <td><%= order.shipping_address.state.name %></td>
-      <td><%= "QUANTITY" %></td>
-      <td><%= ORDER VALUE %></td>
-      <td><%= STATUS %></td>
-      <td><%= order.checkout_date.strftime.("%Y-%m-%d") %></td>
-      <td><%=link_to "show", '#'%></td>
+      <td><%= order_address(order) %></td>
+      <td><%= shipping_city(order)%></td>
+      <td><%= shipping_state(order) %></td>
+      <td><%= order.products.sum("quantity") %></td>
+      <td><%= number_to_currency(order.products.sum("quantity * price")) %></td>
+      <td><%= order_status(order) %></td>
+      <td><%= order_date(order) %></td>
+      <td><%=link_to "show", order_path(order) %></td>
       <td><%=link_to "edit", edit_order_path(order) %></td>
       <td><%=link_to "delete", order_path(order),
                                data: { confirm: "Are you sure?" },

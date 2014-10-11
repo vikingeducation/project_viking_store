@@ -21,14 +21,14 @@ class Address < ActiveRecord::Base
            foreign_key: :shipping_id
 
 
-  validates :street_address length: { maximum: 128 },
+  validates :street_address, length: { maximum: 128 },
                             presence: true
 
   validates :zip_code, numericality: { only_integer: true },
                        presence: true,
                        length: { is: 5 }
 
-  validates :city_id, :state_id, :user_id,
+  validates :city_id, :state_id,
                       numericality: { only_integer: true },
                       presence: true
 end

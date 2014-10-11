@@ -51,7 +51,7 @@ class UsersController < ApplicationController
         redirect_to action: :index
       else
         flash[:error] = "Something went wrong in that deletion."
-        redirect_to session.delete[:return_to]
+        redirect_to session.delete(:return_to)
       end
     end
 
