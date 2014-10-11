@@ -1,0 +1,45 @@
+<div class = "col-md-12">
+  <h2><%= "#{name(@user)}'s Addresses" %> </h2>
+</div>
+
+<div class = "wrapper panel">
+  <table>
+    <tr>
+      <td>Owner ID:
+      </td>
+      <td>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Owner Name: 
+      </td>
+      <td><%= link_to "User Name (click to view user)", '#' %>
+      </td>
+    </tr>
+
+    <tr>
+    <td>Street
+    </td>
+    <td>
+    </td>
+    </tr>
+
+    <tr>
+    <td>City
+    </td>
+    <td>
+    </td>
+    </tr>
+
+    <tr>
+    <td>State
+    </td>
+    <td>
+    </td>
+    </tr>
+  </table>
+</div>
+
+<%= link_to "Edit Address", '#' %>
+<%= link_to "Delete Address", '#' %>

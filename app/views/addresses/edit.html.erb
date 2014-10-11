@@ -1,0 +1,48 @@
+<div class = "col-md-12">
+  <h2><%= "Edit #{name(@user)}'s Addresses" %> </h2>
+</div>
+
+<%= form_for @address do |f| %>
+<div class = "wrapper panel">
+  <table>
+    <tr>
+      <td>Owner ID:
+      </td>
+      <td>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Owner Name: 
+      </td>
+      <td><%= link_to "User Name (click to view user)", '#' %>
+      </td>
+    </tr>
+
+    <tr>
+    <td>Street
+    </td>
+    <td><%= f.text_field :street_address value: @address.primary_address %>
+    </td>
+    </tr>
+
+    <tr>
+    <td>City
+    </td>
+    <td><%= f.text_field :city value: @address.city.name %>
+    </td>
+    </tr>
+
+    <tr>
+    <td>State
+    </td>
+    <td><%= f.collection_select(:state_id, State.all, :id, :name, prompt: "#{@address.state.name}" %>
+    </td>
+    </tr>
+  </table>
+</div>
+
+<%= f.submit "Update Address", class: "btn btn-primary
+                                      btn-lg btn-block btn-create"%>
+
+<%= link_to "Delete Address", '#' %>
