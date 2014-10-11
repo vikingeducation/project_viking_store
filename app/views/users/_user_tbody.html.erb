@@ -1,0 +1,19 @@
+<tbody>
+  <% @users.each do |user|%>
+    <tr>
+      <td><%= user.id %>
+      <td><%="#{user.first_name} #{user.last_name}"%></td>
+      <td><%= user.created_at.strftime("%Y-%m-%d") %></td>
+      <td><%= billing_city(user) %></td>
+      <td><%= billing_state(user) %></td>
+      <td><%= link_to "#{user.orders.where(:checked_out => true).count}", "#" %></td>
+      <td><%= last_order_date(user) %></td>
+
+      <td><%=link_to "show", user_path(user)%></td>
+      <td><%=link_to "edit", edit_user_path(user)%></td>
+      <td><%=link_to "delete", user_path(user),
+                      data: { confirm: "Are you sure?" },
+                      method: :delete %></td>
+    </tr>
+  <% end %>
+</tbody>
