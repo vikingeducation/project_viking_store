@@ -17,8 +17,6 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true, format: { with: /@/ }
 
-  validates :billing_id, :shipping_id, numericality: { is_integer: true }
-
 
 
   def self.new_users(last_x_days = nil)
