@@ -1,0 +1,134 @@
+<div class = "col-md-12">
+  <h2>User <%= "#{@user.id}: #{name(@user)}" %> </h2>
+</div>
+
+<div class = "wrapper panel">
+
+  <div class = "row">
+    <div class = "col-md-12">
+      <h3>Demographic Info</h3>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>First Name</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @user.first_name %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Last Name</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @user.last_name %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Email:</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= @user.email %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Telephone:</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= phone_number(@user) %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Default Billing Address:</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= billing_address(@user) %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Default Shipping Address:</strong>
+    </div>
+    <div class = "col-md-9">
+      <span><%= shipping_address(@user) %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-12">
+      <%= link_to "Edit #{name(@user)}'s Information", edit_user_path(@user) %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-12">
+        <%=link_to "Delete #{name(@user)}", user_path(@user),
+                    data: { confirm: "Are you sure?" }, method: :delete %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-12">
+      <%= link_to "View Saved Addresses", user_addresses_path(@user) %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-12">
+      <span class = "inactive">
+        <%= link_to_if cart(@user), "View Unplaced Order (cart)", users_path %>
+      </span>
+    </div>
+  </div>
+
+</div> <!--Container -->
+
+<div class = "wrapper panel">
+
+  <h3>Credit Card Information</h3>
+  <% @user.credit_cards.each do |card| %>
+    <%= render partial: "card_table", locals: {card: card} %>
+  <% end %>
+
+
+</div> <!--Container -->
+
+<div class = "wrapper panel">
+  <h3>Admin Actions for <%= name(@user) %> </h3>
+  <%= link_to "Create Order", "#",
+              class: "btn btn-primary btn-lg btn-block btn-create"%>
+
+  <%= link_to "Create Address", new_user_address_path(@user),
+              class: "btn btn-primary btn-lg btn-block btn-create"%>
+
+</div> <!--Container -->
+
+<div class = "wrapper panel">
+  <h3>Order History</h3>
+
+  <table class = "table table-striped">
+    <thead>
+      <th>ID</th>
+      <th>Order Date</th>
+      <th>Order Value</th>
+      <th>Status</th>
+      <th>SHOW</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </thead>
+    <tbody>
+      <%= render "user_order" %>
+    </tbody>
+  </table>
+
+</div> <!--Container -->

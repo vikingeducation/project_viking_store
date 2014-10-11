@@ -1,0 +1,83 @@
+<div class = "col-md-12">
+  <h2><%= "Edit User #{@user.id}: #{name(@user)}" %> </h2>
+</div>
+
+<div class = "wrapper panel">
+
+    <%= form_for @user do |f| %>
+    <div class = "row">
+      <div class = "col-md-12">
+        <h3>Demographic Info</h3>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-md-3">
+        <strong>First Name</strong>
+      </div>
+      <div class = "col-md-9">
+        <%= f.text_field :first_name, value: @user.first_name %>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-md-3">
+        <strong>Last Name</strong>
+      </div>
+      <div class = "col-md-9">
+        <%= f.text_field :last_name, value: @user.last_name %>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-md-3">
+        <strong>Email:</strong>
+      </div>
+      <div class = "col-md-9">
+        <%= f.email_field :email, value: @user.email %>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-md-3">
+        <strong>Default Billing Address:</strong>
+      </div>
+      <div class = "col-md-9">
+        <%= f.collection_select( :billing_id, @user.addresses, :id, :street_address, prompt: 'Select', selected: @user.billing_id ) %>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class = "col-md-3">
+        <strong>Default Shipping Address:</strong>
+      </div>
+      <div class = "col-md-9">
+        <%= f.collection_select( :shipping_id, @user.addresses, :id, :street_address, prompt: 'Select', selected: @user.shipping_id ) %>
+      </div>
+    </div>
+
+
+    <div class = "row">
+      <div class = "col-md-12">
+        <%= link_to "View Saved Addresses", "#" %>
+      </div>
+    </div>
+
+
+    <%= f.submit "Update #{name(@user)}", class: "btn btn-primary
+                                      btn-lg btn-block btn-create"%>
+
+
+    <div class = "row">
+      <div class = "col-md-12">
+          <%=link_to "Delete #{name(@user)}", user_path(@user),
+                      data: { confirm: "Are you sure?" }, method: :delete %>
+      </div>
+    </div>
+
+
+  <% end %> <!--form -->
+
+</div>
+
+</div> <!--Container -->

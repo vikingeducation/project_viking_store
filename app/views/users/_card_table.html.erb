@@ -1,0 +1,26 @@
+<div class = "card-wrapper">
+
+<table>
+  <tr>
+    <td>First Name:</td>
+    <td><%= @user.first_name %></td>
+  <tr>
+  <tr>
+    <td>Last Name:</td>
+    <td><%= @user.last_name %></td>
+  <tr>
+  <tr>
+    <td>Number:</td>
+    <td><%=card.card_number %></td>
+  <tr>
+  <tr>
+    <td>Expiration:</td>
+    <td><%= "#{card.exp_year}-#{card.exp_month}"%></td>
+  <tr>
+
+</table>
+
+<%=link_to "Remove Card", "#",
+              data: { confirm: "Are you sure?" }, method: :delete %>
+
+</div>

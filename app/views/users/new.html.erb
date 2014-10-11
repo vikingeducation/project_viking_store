@@ -1,0 +1,61 @@
+<div class = "row">
+  <div class = "col-md-12">
+    <h2><%= "Create User"%> </h2>
+  </div>
+</div>
+
+<div class = "wrapper panel">
+
+      <%= form_for @user do |f| %>
+      <div class = "row">
+        <div class = "col-md-12">
+          <h3>Demographic Info</h3>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-3">
+          <strong>First Name</strong>
+        </div>
+        <div class = "col-md-9">
+          <%= f.text_field :first_name, value: @user.first_name %>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-3">
+          <strong>Last Name</strong>
+        </div>
+        <div class = "col-md-9">
+          <%= f.text_field :last_name, value: @user.last_name %>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-3">
+          <strong>Email:</strong>
+        </div>
+        <div class = "col-md-9">
+          <%= f.email_field :email, value: @user.email %>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-12">
+          <%= link_to "View Saved Addresses", "#" %>
+        </div>
+      </div>
+
+
+      <%= f.submit "Create User", class: "btn btn-primary
+                                        btn-lg btn-block btn-create"%>
+
+
+
+    <% end %> <!--form -->
+
+  </div>
+
+</div>
+
+</div> <!--Container -->
