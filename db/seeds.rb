@@ -167,3 +167,15 @@ end
     generate_contents(o[:id])
   end
 end
+
+users_with_orders = Order.all.select("DISTINCT user_id")
+
+users_with_orders.each do |user|
+  card = CreditCard.new
+  card[:user_id] = user.user_id
+  card[:card_number] = Faker::Business.credit_card_number
+  card[:exp_month] = rand(12) + 1
+  card[:exp_year] = Time.now.year + rand(5) #so far, only good cards
+  card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
+  card.save
+end

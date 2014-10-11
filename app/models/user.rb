@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :addresses, dependent: :destroy
   has_many :orders
+  has_many :credit_cards, dependent: :destroy
 
 
 
