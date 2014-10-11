@@ -163,7 +163,7 @@ end
     o[:billing_id]    = random_user_address(sample_user.id)
     o[:checked_out]   = completed_order
     o[:checkout_date] = placement_date(sample_user) if completed_order
-    o.save
+    next unless o.save
     generate_contents(o[:id])
   end
 end
