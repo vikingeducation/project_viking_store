@@ -21,6 +21,11 @@ class Product < ActiveRecord::Base
             :allow_blank => false,
             :allow_nil => false
 
+  validates :sku, numericality: {is_integer: true},
+                  length: { maximum: 20 },
+                  presence: true
+
+
   def self.new_products(last_x_days = nil)
     if last_x_days
       where("created_at > ?", Time.now - last_x_days.days).size

@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
               :foreign_key => :shipping_id
 
 
+  validates :first_name, :last_name, :email, :billing_id, :shipping_id
+
+
 
   def self.new_users(last_x_days = nil)
     if last_x_days

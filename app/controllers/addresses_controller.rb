@@ -21,6 +21,7 @@ class AddressesController < ApplicationController
   end
 
   def create
+    @user = User.find_by(params[:user_id])
     @address = Address.new(whitelisted_params)
 
     if @address.save
