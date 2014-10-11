@@ -47,6 +47,12 @@ class User < ActiveRecord::Base
       first
   end
 
+  def self.order_values
+    select("orders.id as oid, SUM(purchases.quantity * products.price) AS value").
+      joins("JOIN orders ON users.id = orders.user_id JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
+      group("oid")
+  end
+
   def self.highest_lifetime
     select("users.first_name AS user_first_name, users.last_name AS user_last_name, SUM(purchases.quantity * products.price) AS value").
       joins("JOIN orders ON users.id = orders.user_id JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").

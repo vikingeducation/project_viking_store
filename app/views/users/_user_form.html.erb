@@ -1,74 +1,61 @@
-<%= form_for @product do |f| %>
-
+  <%= form_for @user do |f| %>
   <div class = "row">
-    <div class = "col-md-2">
-      <strong>Product ID:</strong>
-    </div>
-    <div class = "col-md-10">
-      <span>N/A</span>
-    </div>
-  </div>
-
-<!--create a helper method for this -->
-  <div class = "row">
-    <div class = "col-md-2">
-      <strong>Name:</strong>
-    </div>
-
-    <div class = "col-md-10">
-      <%= f.text_field :name, class: "form-control", placeholder: "enter a name" %>
-    </div>
-  </div>
-
-  <% unless @product.errors[:name].empty? %>
-  <div class = "row">
-    <div class="col-md-10 col-md-offset-2 error">
-      <%= "Product #{@product.errors[:name].first}" %>
-    </div>
-  </div>
-  <% end %>
-
-  <div class = "row">
-    <div class = "col-md-2">
-      <strong>Price:</strong>
-    </div>
-
-    <div class = "col-md-10">
-      <%= f.text_field :price, class: "form-control", placeholder: "$price", value: price_field(@product) %>
-    </div>
-  </div>
-
-  <% unless @product.errors[:price].empty? %>
-  <div class = "row">
-    <div class="col-md-10 col-md-offset-2 error">
-      <%= "Product #{@product.errors[:price].first}" %>
-    </div>
-  </div>
-  <% end %>
-
-  <div class = "row">
-    <div class = "col-md-2">
-      <strong>Category:</strong>
-    </div>
-
-    <div class = "col-md-10">
-      <%= f.collection_select( :category_id, Category.all,
-                               :id, :name, prompt: 'Select' ) %>
-    </div>
-  </div>
-
-  <% unless @product.errors[:category_id].empty? %>
-  <div class = "row">
-    <div class="col-md-10 col-md-offset-2 error">
-      <%= "Product #{@product.errors[:category_id].first}" %>
-    </div>
-  </div>
-  <% end %>
-
-
-  <div class ="row">
     <div class = "col-md-12">
-      <%= product_submit(f, @product)  %>
+      <h3>Demographic Info</h3>
     </div>
   </div>
-<% end %>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>First Name</strong>
+    </div>
+    <div class = "col-md-9">
+      <%= f.text_field :first_name, value: @user.first_name %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Last Name</strong>
+    </div>
+    <div class = "col-md-9">
+      <%= f.text_field :last_name, value: @user.last_name %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Email:</strong>
+    </div>
+    <div class = "col-md-9">
+      <%= f.email_field :email, value: @user.email %>
+    </div>
+  </div>
+
+  <% if request.path == "/users/edit" %>
+    <%= render "address_dropdowns" %>
+  <% else %>
+    <%= render partial: "address_inputs", locals: {f: f} %>
+  <% end %>
+
+
+  <div class = "row">
+    <div class = "col-md-12">
+      <%= link_to "View Saved Addresses", "#" %>
+    </div>
+  </div>
+
+
+  <%= f.submit "Update #{name(@user)}", class: "btn btn-primary
+                                    btn-lg btn-block btn-create"%>
+
+
+  <div class = "row">
+    <div class = "col-md-12">
+        <%=link_to "Delete #{name(@user)}", user_path(@user),
+                    data: { confirm: "Are you sure?" }, method: :delete %>
+    </div>
+  </div>
+
+
+<% end %> <!--form -->

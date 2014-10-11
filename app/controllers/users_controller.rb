@@ -23,6 +23,8 @@ class UsersController < ApplicationController
 
     def show
       @user = User.find(params[:id])
+
+      @user_orders_value = User.order_values
     end
 
     def edit
@@ -64,6 +66,7 @@ class UsersController < ApplicationController
     def clean_price(input)
       input[0] == "$" ? input[1..-1].to_f : input.to_f
     end
+
 
 
 end

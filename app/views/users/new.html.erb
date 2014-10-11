@@ -1,0 +1,95 @@
+<div class = "col-md-12">
+  <h2><%= "Create User" %> </h2>
+</div>
+
+<div class = "wrapper panel">
+
+  <div class = "col-md-12">
+    <h2><%= "Edit User #{@user.id}: #{name(@user)}" %> </h2>
+  </div>
+
+  <div class = "wrapper panel">
+
+      <%= form_tag "/create", method: "post" do %>
+      <div class = "row">
+        <div class = "col-md-12">
+          <h3>Demographic Info</h3>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-3">
+          <%= label_tag(:first_name, "First Name:") %>
+        </div>
+        <div class = "col-md-9">
+          <%= text_field_tag :first_name %>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-3">
+          <%= label_tag(:last_name, "First Name:") %>
+        </div>
+        <div class = "col-md-9">
+          <%= text_field_tag :last_name %>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-3">
+          <%= label_tag(:email, "Email:") %>
+        </div>
+        <div class = "col-md-9">
+          <%= email_field :user, :email %>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-3">
+          <%= label_tag(:street_address, "Street Address") %>
+        </div>
+        <div class = "col-md-9">
+          <%= text_field_tag :street_address %>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-3">
+          <%= label_tag(:secondary_address, "Secondary Address") %>
+        </div>
+        <div class = "col-md-9">
+          <%= text_field_tag :secondary_address %>
+        </div>
+      </div>
+
+
+      <div class = "row">
+        <div class = "col-md-6">
+          <%= label_tag(:zip_code, "Zip Code") %>
+        </div>
+        <div class = "col-md-6">
+          <%= number_field :user, :zip_code %>
+        </div>
+      </div>
+
+
+
+      <div class = "row">
+        <div class = "col-md-12">
+          <%= link_to "View Saved Addresses", "#" %>
+        </div>
+      </div>
+
+
+      <%= f.submit "Create User", class: "btn btn-primary
+                                        btn-lg btn-block btn-create"%>
+
+
+    <% end %> <!--form -->
+
+  </div>
+
+  </div> <!--Container -->
+</div>
+
+</div> <!--Container -->
