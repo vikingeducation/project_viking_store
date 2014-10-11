@@ -10,7 +10,7 @@
   </td>
 
   <td>
-    <%= order.products.sum("quantity * price") %>
+    <%= number_to_currency(order.products.sum("quantity * price")) %>
   </td>
   
   <td>
