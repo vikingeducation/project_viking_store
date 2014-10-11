@@ -10,7 +10,7 @@
   </td>
 
   <td>
-    <%= "value" %>
+    <%= order.products.sum("quantity * price") %>
   </td>
   
   <td>
