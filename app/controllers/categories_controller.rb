@@ -18,14 +18,14 @@ class CategoriesController < ApplicationController
 
   def destroy
     Category.find(params[:id]).destroy
-    flash[:success] = "Category deleted."
+    flash[:success] = "Category #{params[:id]} deleted."
     redirect_to categories_path
   end
 
   def create
   @category = Category.new(cat_params)
     if @category.save
-      flash[:success] = "Category created!"
+      flash[:success] = "Category #{params[:id]} created!"
       redirect_to categories_path
     else
       flash[:error] = "Whoops!"
@@ -35,9 +35,10 @@ class CategoriesController < ApplicationController
 
   def update
     @category = Category.find(params[:id])
+    old_name = @category.name
     if confirm_category( @category.id ) # TODO - put this in the model as callback (maybe)
       if @category.update(cat_params)
-        flash[:success] = "Category edited!"
+        flash[:success] = "Category #{old_name} edited to #{@category.name}"
         redirect_to @category
       else
         flash[:error] = "Whoops!"
