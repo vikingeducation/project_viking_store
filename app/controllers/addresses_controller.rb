@@ -1,15 +1,23 @@
 class AddressesController < ApplicationController
 
   def index
-    @addresses = Address.All
+    @addresses = Address.all
+    @user = User.find(params[:user_id]) if params[:user_id]
   end
 
   def show
-    @address = Address.new
+    @address = Address.find(params[:id])
+    @user = @address.user
   end
 
   def edit
     @address = Address.find(params[:id])
+    @user = @address.user
+  end
+
+  def new
+    @user = User.find(params[:user_id])
+    @address = Address.new
   end
 
   def create
@@ -51,9 +59,22 @@ class AddressesController < ApplicationController
   private
 
   def whitelisted_params
-    params.require(:address).permit(:street_address, :secondary_address, :city_id, :state_id, :zip_code, :user_id)
+    check_city
+
+    params.require(:address).permit(:street_address, :secondary_address,
+                               :city_id, :state_id, :zip_code, :user_id)
   end
 
+  def check_city
+    city = params[:address][:city]
+
+    if City.find_by(name: city)
+      params[:address][:city_id] = City.find_by(name: city).id
+    else
+      c = City.create(name: city)
+      params[:address][:city_id] = c.id
+    end
+  end
 
 
 

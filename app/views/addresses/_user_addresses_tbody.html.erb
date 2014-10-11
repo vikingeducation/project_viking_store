@@ -1,5 +1,5 @@
 <tbody>
-  <% @addresses.each do |address|%>
+  <% @user.addresses.each do |address|%>
     <tr>
       <td><%= address.id %>
       <td><%= link_to "#{name(address.user)}", user_path(address.user)%></td>

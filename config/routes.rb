@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   root 'admin#index'
 
   get 'analytics' => 'dashboard#index'
+  get 'addresses' => 'addresses#index'
 
   resources :categories
   resources :products
+
 
   resources :users do
     resources :addresses
