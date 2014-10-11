@@ -154,7 +154,7 @@ def placement_date(user)
 end
 
 (SCALAR**3).times do
-  sample_user = User.find((rand(User.count)+1).to_i)
+  sample_user = User.find((rand(User.count).to_i)+1)
   if sample_user[:billing_id] || no_cart?(sample_user[:id])
     completed_order = completion(sample_user)
     o = Order.new()
