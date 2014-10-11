@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :addresses
+    resource :orders, only: [:new, :create, :edit, :update, :index]
 
   end
 

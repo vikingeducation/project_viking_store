@@ -5,7 +5,7 @@ module OrdersHelper
   end
 
   def order_date(order)
-    order.checked_out ? order.checkout_date.strftime("%Y-%m-%d") : "N/A"
+    order.checked_out && order.id ? order.checkout_date.strftime("%Y-%m-%d") : "N/A"
   end
 
   def order_address(order)
@@ -23,5 +23,13 @@ module OrdersHelper
 
   def name(user)
     "#{address.user.first_name} #{address.user.last_name}"
+  end
+
+  def credit_card(user)
+    if user.credit_cards.first
+      user.credit_cards.first.card_number
+    else
+      "N/A"
+    end
   end
 end

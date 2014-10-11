@@ -1,0 +1,38 @@
+<div class="wrapper panel">
+  <h2>Logistical Information</h2>
+  <h3>Basic Information</h3>
+  <table>
+    <tr>
+      <td>Customer ID:</td>
+      <td><%= @user.id %></td>
+    </tr>
+
+    <tr>
+      <td>Customer:</td>
+      <td><%= link_to name(@user), user_path(@user) %></td>
+    </tr>
+
+    <tr>
+      <td>Date Placed:</td>
+      <td><%= order_date(@order) %></td>
+    </tr>
+  </table>
+
+<%= link_to "Edit Customer Profile", user_path(@user) %>
+
+  <h4>Order Status</h4>
+
+<%= form_for @order do |f| %>
+
+  <%= f.collection_select( :billing_id, @user.addresses, :id, :street_address, prompt: 'Select', selected: @order.billing_id ) %>
+
+  <%= f.collection_select( :shipping_id, @user.addresses, :id, :street_address, prompt: 'Select', selected: @order.shipping_id ) %>
+
+  <%= f.hidden_field :user_id, value: @user.id %>
+
+  <%= f.submit "Create Order in Shopping Cart", class: "btn btn-primary btn-lg btn-block btn-create" %>
+
+  <% end %>
+
+  <p class="informational">You can add products on the next screen, once it has been created!!!!!!!</p>
+</div>

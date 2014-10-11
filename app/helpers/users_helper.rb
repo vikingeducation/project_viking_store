@@ -10,7 +10,7 @@ module UsersHelper
   end
 
   def order_date(order)
-    order.checked_out ? order.checkout_date.strftime("%Y-%m-%d") : "N/A"
+    order.checked_out && order.id ? order.checkout_date.strftime("%Y-%m-%d") : "N/A"
   end
 
   def billing_address(user)

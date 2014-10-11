@@ -16,12 +16,13 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @user = User.find(params[:user_id])
   end
 
   def create
-    @Order = Order.new(whitelisted_params)
-
-    if @Order.save
+    @order = Order.new(whitelisted_params)
+    @order.checked_out = false
+    if @order.save
       flash[:success] = "New order saved."
       redirect_to action: :index
     else
@@ -56,24 +57,7 @@ class OrdersController < ApplicationController
   private
 
   def whitelisted_params
-    check_city
-
     params.require(:order).permit(:checked_out, :user_id,
                                :shipping_id, :billing_id, :checkout_date)
   end
-
-  def check_city
-    city = params[:address][:city]
-
-    if City.find_by(name: city)
-      params[:address][:city_id] = City.find_by(name: city).id
-    else
-      c = City.create(name: city)
-      params[:address][:city_id] = c.id
-    end
-  end
-
-
-
-
 end

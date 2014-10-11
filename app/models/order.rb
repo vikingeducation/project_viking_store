@@ -11,8 +11,7 @@ class Order < ActiveRecord::Base
 
   validates :user_id, presence: true,
                       numericality: { is_integer: true }
-
-  validates :checked_out, presence: true
+  validates :checked_out, :inclusion => { :in => [true, false] }
 
   def self.new_orders(last_x_days = nil)
     if last_x_days
