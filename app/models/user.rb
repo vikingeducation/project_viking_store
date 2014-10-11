@@ -13,6 +13,13 @@ class User < ActiveRecord::Base
               :foreign_key => :shipping_id
 
 
+  validates :first_name, :last_name, length: { maximum: 250 }, presence: true
+
+  validates :email, presence: true, format: { with: /@/ }
+
+  validates :billing_id, :shipping_id, numericality: { is_integer: true }
+
+
 
   def self.new_users(last_x_days = nil)
     if last_x_days

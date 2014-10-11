@@ -79,7 +79,7 @@
 
   <div class = "row">
     <div class = "col-md-12">
-      <%= link_to "View Saved Addresses", "#" %>
+      <%= link_to "View Saved Addresses", user_addresses_path(@user) %>
     </div>
   </div>
 
@@ -108,7 +108,7 @@
   <%= link_to "Create Order", "#",
               class: "btn btn-primary btn-lg btn-block btn-create"%>
 
-  <%= link_to "Create Address", "#",
+  <%= link_to "Create Address", new_user_address_path(@user),
               class: "btn btn-primary btn-lg btn-block btn-create"%>
 
 </div> <!--Container -->

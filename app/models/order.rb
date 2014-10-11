@@ -8,6 +8,13 @@ class Order < ActiveRecord::Base
   has_many :purchases
   has_many :products, through: :purchases
 
+
+  validates :user_id, presence: true,
+                      numericality: { is_integer: true }
+
+  validates :shipping_id, :billing_id, numericality: { is_integer: true }
+  validates :checked_out, presence: true
+
   def self.new_orders(last_x_days = nil)
     if last_x_days
       where("checkout_date > ?", Time.now - last_x_days.days).size
