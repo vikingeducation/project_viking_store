@@ -1,0 +1,11 @@
+<div class="row">
+<h2>New Product</h2>
+  <%= form_for @product do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= render 'fields', f: f %>
+    <%= f.submit "Create Products", class: "btn btn-large btn-primary new_category" %>
+
+  <% end %>
+
+
+</div>

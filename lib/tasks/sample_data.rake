@@ -16,7 +16,7 @@ namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
     SEED_MULTIPLIER = 3
-    
+
     gen_addresses
     gen_users
     gen_categories
@@ -78,7 +78,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     create = Faker::MakeDate.months_ago(6)
     billing_address = @addresses.sample
     shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name, 
+    User.create!(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create,
     default_billing_address_id: billing_address,
     default_shipping_address_id: shipping_address)
@@ -92,7 +92,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     create = Faker::MakeDate.months_ago(5)
     billing_address = @addresses.sample
     shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name, 
+    User.create!(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create,
     default_billing_address_id: billing_address,
     default_shipping_address_id: shipping_address)
@@ -106,7 +106,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     create = Faker::MakeDate.months_ago(4)
     billing_address = @addresses.sample
     shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name, 
+    User.create!(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create,
     default_billing_address_id: billing_address,
     default_shipping_address_id: shipping_address)
@@ -120,7 +120,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     create = Faker::MakeDate.months_ago(3)
     billing_address = @addresses.sample
     shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name, 
+    User.create!(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create,
     default_billing_address_id: billing_address,
     default_shipping_address_id: shipping_address)
@@ -134,7 +134,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     create = Faker::MakeDate.months_ago(2)
     billing_address = @addresses.sample
     shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name, 
+    User.create!(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create,
     default_billing_address_id: billing_address,
     default_shipping_address_id: shipping_address)
@@ -148,7 +148,7 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     create = Faker::MakeDate.months_ago(1)
     billing_address = @addresses.sample
     shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name, 
+    User.create!(first_name: first_name, last_name: last_name,
     email: email, phone: phone, created_at: create,
     default_billing_address_id: billing_address,
     default_shipping_address_id: shipping_address)
@@ -218,7 +218,7 @@ end
 
 def make_category
   (1..@categories.length).each do |n| #6 categories
-    name = Faker::Lorem.words(2)[0]
+    name = Faker::Lorem.characters(10)
     description = Faker::Hacker.say_something_smart
     Category.create!(name: name, description: description)
   end
