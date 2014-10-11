@@ -4,6 +4,6 @@ module AddressesHelper
   end
   
   def name(user)
-    "#{user.first_name} #{user.last_name}"
+    "#{address.user.first_name} #{address.user.last_name}"
   end
 end
