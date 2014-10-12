@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: {minimum: 1, maximum:64},
             format: { with: VALID_EMAIL_REGEX }
 
+
   def self.user(time)
     User.where('created_at > ?',time).count
   end
@@ -19,4 +20,5 @@ class User < ActiveRecord::Base
   def self.all_time
   	User.count
   end
+
 end
