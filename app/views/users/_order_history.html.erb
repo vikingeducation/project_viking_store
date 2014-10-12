@@ -1,0 +1,35 @@
+<h3>Order History</h3>
+<div class="panel panel-default">
+	<table class="table">
+		<thead>
+			<td>ID</td>
+			<td>Order Date</td>
+			<td>Order Value</td>
+			<td>Status</td>
+			<td>SHOW</td>
+			<td>EDIT</td>
+			<td>DELETE</td>
+		</thead>
+		
+		<% @user.orders.each do |order| %>
+			<tr>
+				<td><%= order.id %></td>
+				<td><%= order.placed_at %></td>
+				<td><%= OrderContent.where(order_id: order.id).select("SUM(quantity * current_price) AS total")[0].total %></td> 
+				<%# todo: move these queries to the model %>
+				<% if order.is_placed? %>
+					<td class="unplaced_order">PLACED</td>
+				<% else %>
+					<td class="placed_order">UNPLACED</td>
+				<% end %>
+				<td>x</td>
+				<td>x</td>
+				<td>x</td>
+			</tr>
+		<% end %>
+
+
+
+	</table>
+
+</div>

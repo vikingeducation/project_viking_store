@@ -1,0 +1,7 @@
+		<h3>Credit Card Information</h3>
+		<p>First Name: <%= @user.first_name %></p>
+		<p>Last Name: <%= @user.last_name %></p>
+		<p>Number: <%= @user.payment.cc_number %></p>
+		<p>Expiration: <%= @user.payment.exp_month %>/<%= @user.payment.exp_year %></p>
+		<p>CV2: <%= @user.payment.ccv %></p>
+		<p><%= link_to "Remove Card",'#' %></p>

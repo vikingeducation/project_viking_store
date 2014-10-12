@@ -1,0 +1,46 @@
+<div class="row">
+
+<h2 style="text-align:center;">Viking Store Users</h2>
+<button class="btn btn-large btn-primary new_category"><%= link_to "Create a new user", new_user_path %></button>
+
+<div class="panel panel-default">
+	<table class="table">
+		<thead>
+			<td>ID</td>
+			<td>Name</td>
+			<td>Joined</td>
+			<td>City</td>
+			<td>State</td>
+			<td>Orders</td>
+			<td>Last Order Date</td>
+			<td>SHOW</td>
+			<td>EDIT</td>
+			<td>DELETE</td>
+		</thead>
+		<% @users.each do |user| %>
+			<tr>
+				<td><%= user.id %></td>
+				<td><%= user.first_name %> <%= user.last_name %></td>
+				<td><%= user.created_at %></td>
+				<td><%= Address.find(user.default_billing_address_id).city %></td> 
+				<%# todo: move these queries to the model %>
+				<td><%= Address.find(user.default_billing_address_id).state %></td>
+				<td><%= link_to user.orders.where(is_placed: true).count, "#" %></td>
+				<% if user.orders.where(is_placed: true).any? %>
+					<td><%= user.orders.where(is_placed: true).last.placed_at %></td>
+				<% else %>
+					<td>N/A</td>
+				<% end %>
+				<td><%= link_to 'Show', user %></td>
+				<td><%= link_to 'Edit', edit_user_path(user) %></td>
+				<td><%= link_to "Delete", user, method: :delete, data: { confirm: "You sure?" } %></td>
+
+			</tr>
+		<% end %>
+
+
+
+	</table>
+
+</div>
+
