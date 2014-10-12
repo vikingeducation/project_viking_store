@@ -10,21 +10,21 @@
 			<td>EDIT</td>
 			<td>DELETE</td>
 		</thead>
-		
+
 		<% @user.orders.each do |order| %>
 			<tr>
 				<td><%= order.id %></td>
 				<td><%= order.placed_at %></td>
-				<td><%= OrderContent.where(order_id: order.id).select("SUM(quantity * current_price) AS total")[0].total %></td> 
+				<td><%= OrderContent.where(order_id: order.id).select("SUM(quantity * current_price) AS total")[0].total %></td>
 				<%# todo: move these queries to the model %>
 				<% if order.is_placed? %>
 					<td class="unplaced_order">PLACED</td>
 				<% else %>
 					<td class="placed_order">UNPLACED</td>
 				<% end %>
-				<td>x</td>
-				<td>x</td>
-				<td>x</td>
+				<td><%= link_to 'Show', order %></td>
+				<td><%= link_to 'Edit', edit_order_path(order) %></td>
+				<td><%= link_to "Delete", order, method: :delete, data: { confirm: "You sure?" } %></td>
 			</tr>
 		<% end %>
 

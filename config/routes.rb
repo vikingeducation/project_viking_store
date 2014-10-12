@@ -6,6 +6,7 @@ root 'admin#index'
   resources :admin, only: [:index]
   resources :categories
   resources :products #, only: [:new, :index, :show, :edit, :create]
+  resources :orders, only: [:edit, :show, :destroy, :update]
 
   resources :users
 

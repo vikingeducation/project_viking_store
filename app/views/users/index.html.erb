@@ -22,9 +22,14 @@
 				<td><%= user.id %></td>
 				<td><%= user.first_name %> <%= user.last_name %></td>
 				<td><%= user.created_at %></td>
-				<td><%= Address.find(user.default_billing_address_id).city %></td> 
-				<%# todo: move these queries to the model %>
-				<td><%= Address.find(user.default_billing_address_id).state %></td>
+				<% if user.default_billing_address_id %>
+					<td><%= Address.find(user.default_billing_address_id).city %></td>
+					<%# todo: move these queries to the model %>
+					<td><%= Address.find(user.default_billing_address_id).state %></td>
+				<% else %>
+					<td> None </td>
+					<td> None </td>
+				<% end %>
 				<td><%= link_to user.orders.where(is_placed: true).count, "#" %></td>
 				<% if user.orders.where(is_placed: true).any? %>
 					<td><%= user.orders.where(is_placed: true).last.placed_at %></td>
