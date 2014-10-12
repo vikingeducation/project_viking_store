@@ -24,8 +24,10 @@
 
 <%= form_for @order do |f| %>
 
+  <%= label :billing_id, "Billing Address" %>
   <%= f.collection_select( :billing_id, @user.addresses, :id, :street_address, prompt: 'Select', selected: @order.billing_id ) %>
 
+  <%= label :shipping_id, "Shipping Address" %>
   <%= f.collection_select( :shipping_id, @user.addresses, :id, :street_address, prompt: 'Select', selected: @order.shipping_id ) %>
 
   <%= f.hidden_field :user_id, value: @user.id %>

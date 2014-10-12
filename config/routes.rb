@@ -15,8 +15,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :addresses
-    resources :orders, only: [:new, :create, :edit, :update, :index, :destroy]
-
+    resources :orders
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

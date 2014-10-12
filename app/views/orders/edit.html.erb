@@ -1,6 +1,14 @@
-<div class="wrapper panel">
-  <h2>Logistical Information</h2>
-  <h3>Basic Information</h3>
+<div class = "row">
+  <div class = "col-md-12 heading">
+    <h2>Edit Order # <%= @order.id %></h2>
+  </div>
+</div>
+
+
+<div class = "panel wrapper">
+  <h3>Logistical Information</h2>
+
+  <h4>Basic Information</h3>
   <table>
     <tr>
       <td>Customer ID:</td>
@@ -42,6 +50,8 @@
 
   <% end %>
 
+</div>
+
 <div class = "panel wrapper">
 <%= form_for @order do |f| %>
 
@@ -54,13 +64,13 @@
         <th>REMOVE</th>
       </thead>
       <tbody>
-        <% @order.products.each do |product| %>
+        <% @order.purchases.each do |purchase| %>
           <tr>
-            <td><%= product.id %></td>
-            <td><%= f.text_field :quantity, value: "#{@order.purchases.find_by(:product_id => product.id).quantity}" %></td>
-            <td><%= number_to_currency(product.price) %></td>
-            <td><%= number_to_currency(@order.products.where(:id => product.id).sum("price*quantity")) %></td>
-            <td><%= link_to "REMOVE", order_purchase_path(@order.purchases.find_by(:product_id => product.id)), data: {message: "Do you really want to delete this?", method: :delete}%> </td>
+            <td><%= purchase.product.id %></td>
+            <td><%= f.text_field "quantity[#{purchase.id}]", value: purchase.quantity %></td>
+            <td><%= number_to_currency(purchase.product.price) %></td>
+            <td><%= number_to_currency(purchase.product.price * purchase.quantity) %></td>
+            <td><%= link_to "REMOVE", order_purchase_path(@order, purchase), data: {confirm: "Do you really want to delete this?", method: :delete}%> </td>
           </tr>
         <% end %>
       </tbody>

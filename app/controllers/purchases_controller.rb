@@ -45,10 +45,13 @@ class PurchasesController < ApplicationController
     end
 
     def destroy
+      @order = Order.find(params[:order_id])
+      @user = User.find(@order.user_id)
+
       session[:return_to] ||= request.referer
       if Purchase.find(params[:id]).destroy
         flash[:success] = "Deleted."
-        redirect_to action: :index
+        redirect_to edit_user_order_path(@user, @order)
       else
         flash[:error] = "Something went wrong in that deletion."
         redirect_to session.delete(:return_to)

@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
     @order.checked_out = false
     if @order.save
       flash[:success] = "New order saved."
-      redirect_to action: :index
+      redirect_to action: :edit
     else
       flash.now[:error] = "Something was invalid."
       render :new
@@ -34,14 +34,14 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-
+    update_purchases
     if params[:order][:checked_out] && !@order.checked_out
       @order.checkout_date = Time.now
     end
 
     if @order.update(whitelisted_params)
       flash[:success] = "Updated!"
-      redirect_to action: :index
+      redirect_to @order
     else
       flash.now[:error] = "Something went wrong."
       render :edit
@@ -60,6 +60,13 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def update_purchases
+    @purchases = {}
+    params[:order][:quantity].each do |purchase_id, quantity|
+      Purchase.find(purchase_id).update(quantity: quantity)
+    end
+  end
 
   def whitelisted_params
     params.require(:order).permit(:checked_out, :user_id,

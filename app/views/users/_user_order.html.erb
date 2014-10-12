@@ -18,15 +18,15 @@
   </td>
 
   <td>
-    <%= link_to "show", "#" %>
+    <%= link_to "show", user_order_path(@user, order) %>
   </td>
 
   <td>
-    <%= link_to "edit", "#" %>
+    <%= link_to "edit", edit_user_order_path(@user, order) %>
   </td>
 
   <td>
-    <%= link_to "delete", "#" %>
+    <%= link_to "delete", user_order_path(@user, order), data: {confirm: "Do you really want to delete this order?"}, :method => :delete %>
   </td>
 </tr>
 

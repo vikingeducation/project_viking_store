@@ -105,7 +105,7 @@
 
 <div class = "wrapper panel">
   <h3>Admin Actions for <%= name(@user) %> </h3>
-  <%= link_to "Create Order", new_user_orders_path(@user),
+  <%= link_to "Create Order", new_user_order_path(@user),
               class: "btn btn-primary btn-lg btn-block btn-create"%>
 
   <%= link_to "Create Address", new_user_address_path(@user),
