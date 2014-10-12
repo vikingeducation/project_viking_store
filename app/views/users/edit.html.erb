@@ -3,4 +3,6 @@
 
 <%= render 'user_form' %>
 
+<%= link_to "Delete #{@user.first_name} #{@user.last_name}", @user, method: :delete,
+      data: { confirm: "You sure?" } %>
 </div>

@@ -69,6 +69,54 @@ def make_product
   end
 end
 
+
+
+def make_address
+   (1..@users.length).each do |n| #everyone gets a first address
+    street = Faker::Address.street_address
+    city = Faker::Address.city
+    state = Faker::Address.state_abbr
+    zip = Faker::Address.zip
+    Address.create(user_id: n, street_address: street,
+      city: city, state: state, zip: zip)
+   end
+  (1..((@users.length)/2)).each do |n| #half the users get a second address
+    street = Faker::Address.street_address
+    city = Faker::Address.city
+    state = Faker::Address.state_abbr
+    zip = Faker::Address.zip
+    Address.create(user_id: n, street_address: street,
+      city: city, state: state, zip: zip)
+   end
+
+   (1..((@users.length)/3)).each do |n| #one-third of users get a third address
+    street = Faker::Address.street_address
+    city = Faker::Address.city
+    state = Faker::Address.state_abbr
+    zip = Faker::Address.zip
+    Address.create(user_id: n, street_address: street,
+      city: city, state: state, zip: zip)
+   end
+
+  (1..((@users.length)/4)).each do |n| #one-fourth of users get a fourth address
+    street = Faker::Address.street_address
+    city = Faker::Address.city
+    state = Faker::Address.state_abbr
+    zip = Faker::Address.zip
+    Address.create(user_id: n, street_address: street,
+      city: city, state: state, zip: zip)
+   end
+
+  (1..((@users.length)/5)).each do |n| #one-fifth of users get a fifth address
+    street = Faker::Address.street_address
+    city = Faker::Address.city
+    state = Faker::Address.state_abbr
+    zip = Faker::Address.zip
+    Address.create(user_id: n, street_address: street,
+      city: city, state: state, zip: zip)
+   end
+end
+
 def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
   (10*SEED_MULTIPLIER).times do |n| #users from 6 months ago
     first_name = Faker::Name.first_name
@@ -154,52 +202,6 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     default_shipping_address_id: shipping_address)
   end
 
-end
-
-def make_address
-   (1..@users.length).each do |n| #everyone gets a first address
-    street = Faker::Address.street_address
-    city = Faker::Address.city
-    state = Faker::Address.state_abbr
-    zip = Faker::Address.zip
-    Address.create(user_id: n, street_address: street,
-      city: city, state: state, zip: zip)
-   end
-  (1..((@users.length)/2)).each do |n| #half the users get a second address
-    street = Faker::Address.street_address
-    city = Faker::Address.city
-    state = Faker::Address.state_abbr
-    zip = Faker::Address.zip
-    Address.create(user_id: n, street_address: street,
-      city: city, state: state, zip: zip)
-   end
-
-   (1..((@users.length)/3)).each do |n| #one-third of users get a third address
-    street = Faker::Address.street_address
-    city = Faker::Address.city
-    state = Faker::Address.state_abbr
-    zip = Faker::Address.zip
-    Address.create(user_id: n, street_address: street,
-      city: city, state: state, zip: zip)
-   end
-
-  (1..((@users.length)/4)).each do |n| #one-fourth of users get a fourth address
-    street = Faker::Address.street_address
-    city = Faker::Address.city
-    state = Faker::Address.state_abbr
-    zip = Faker::Address.zip
-    Address.create(user_id: n, street_address: street,
-      city: city, state: state, zip: zip)
-   end
-
-  (1..((@users.length)/5)).each do |n| #one-fifth of users get a fifth address
-    street = Faker::Address.street_address
-    city = Faker::Address.city
-    state = Faker::Address.state_abbr
-    zip = Faker::Address.zip
-    Address.create(user_id: n, street_address: street,
-      city: city, state: state, zip: zip)
-   end
 end
 
 def make_payment
