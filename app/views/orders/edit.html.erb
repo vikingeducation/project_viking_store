@@ -76,11 +76,56 @@
       </tbody>
 
     </table>
+
     <%= f.hidden_field :user_id, value: @user.id %>
+    <%= f.hidden_field :update, value: true %>
+
 
     <%= f.submit "Update Order Contents", class: "btn btn-primary btn-lg btn-block btn-create" %>
 
 <% end %>
+</div>
+
+<div class = "panel wrapper">
+  <div class = "row">
+    <div class = "col-md-12 heading">
+      <h3>Add Products to Order</h3>
+      <p class = "informational">Add up to 5 products at a time</p>
+    </div>
+
+    <div class = "row">
+      <div class = "col-md-12">
+    <%= form_for @order do |f| %>
+
+      <table class = "table table-striped">
+        <thead>
+          <th>ProductID</th>
+          <th>Quantity</th>
+        </thead>
+        <tbody>
+          <% 1.upto(5) do |index| %>
+            <tr>
+              <td>
+                <%= f.text_field "product_id[#{index}]", value: "" %>
+              </td>
+              <td>
+                <%= f.text_field "product_quantity[#{index}]", value: ""%>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= f.hidden_field :user_id, value: @user.id %>
+      <%= f.hidden_field :add, value: true %>
+
+      <%= f.submit "Add Products", class: "btn btn-primary btn-lg btn-block btn-create" %>
+    <% end %>
+
+  </div>
+</div>
+
+  </div>
 </div>
 
 

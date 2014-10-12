@@ -34,10 +34,14 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    update_purchases
-    if params[:order][:checked_out] && !@order.checked_out
-      @order.checkout_date = Time.now
-    end
+    @user = User.find(params[:order][:user_id])
+
+    #special hidden params to ID which edit form was used
+    update_purchases if params[:order][:update]
+    add_contents if params[:order][:add]
+
+    @order.checkout_date = Time.now if new_checkout?(@order)
+
 
     if @order.update(whitelisted_params)
       flash[:success] = "Updated!"
@@ -61,15 +65,59 @@ class OrdersController < ApplicationController
 
   private
 
+  def add_contents
+    additions = parsed_additions
+
+    additions.each do |id, quantity|
+
+      next if id == 0 || quantity == 0
+      if @order.products.exists?(id)
+        purchase = @order.purchases.find_by(:product_id => id)
+        purchase.update(:quantity => quantity)
+      elsif Product.exists?(id)
+        purchase = Purchase.create(:order_id => @order.id,
+                                   :product_id => id,
+                                   :quantity => quantity)
+        purchase.save
+      else
+        flash[:error] = "Some of these products don't exist!"
+      end
+    end
+
+  end
+
+  def parsed_additions
+    new_items = Hash.new(0)
+
+    1.upto(5) do |index|
+      product_id = params[:order][:product_id][index.to_s].to_i
+      product_quantity = params[:order][:product_quantity][index.to_s].to_i
+      next if product_quantity < 0
+      new_items[product_id] += product_quantity
+    end
+    new_items
+  end
+
   def update_purchases
     @purchases = {}
+
     params[:order][:quantity].each do |purchase_id, quantity|
-      Purchase.find(purchase_id).update(quantity: quantity)
+      #ignores anything below 0, assuming it was a mistake
+      if quantity.to_i > 0
+        Purchase.find(purchase_id).update(quantity: quantity)
+      elsif quantity.to_i == 0
+        Purchase.find(purchase_id).destroy
+      end
     end
+  end
+
+  def new_checkout?(order)
+    params[:order][:checked_out] && !order.checked_out
   end
 
   def whitelisted_params
     params.require(:order).permit(:checked_out, :user_id,
                                :shipping_id, :billing_id, :checkout_date)
   end
+
 end
