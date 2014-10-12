@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
     @order.checked_out = false
     if @order.save
       flash[:success] = "New order saved."
-      redirect_to action: :edit
+      redirect_to @order
     else
       flash.now[:error] = "Something was invalid."
       render :new

@@ -13,6 +13,16 @@ class Order < ActiveRecord::Base
                       numericality: { is_integer: true }
   validates :checked_out, :inclusion => { :in => [true, false] }
 
+  validates_each :checked_out do |record, attr, checked_out|
+    if checked_out
+      true
+    elsif record.user.orders.where(:checked_out => false).count > 0
+      false
+    else
+      true
+    end
+  end
+
   def self.new_orders(last_x_days = nil)
     if last_x_days
       where("checkout_date > ?", Time.now - last_x_days.days).size

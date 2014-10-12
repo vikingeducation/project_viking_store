@@ -6,7 +6,7 @@
       <td><%= user.created_at.strftime("%Y-%m-%d") %></td>
       <td><%= billing_city(user) %></td>
       <td><%= billing_state(user) %></td>
-      <td><%= link_to "#{user.orders.where(:checked_out => true).count}", "#" %></td>
+      <td><%= link_to "#{user.orders.where(:checked_out => true).count}", user_orders_path(@user) %></td>
       <td><%= last_order_date(user) %></td>
 
       <td><%=link_to "show", user_path(user)%></td>
