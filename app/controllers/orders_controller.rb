@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    @user = @order.user
   end
 
   def new
@@ -33,6 +34,10 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
+
+    if params[:order][:checked_out] && !@order.checked_out
+      @order.checkout_date = Time.now
+    end
 
     if @order.update(whitelisted_params)
       flash[:success] = "Updated!"

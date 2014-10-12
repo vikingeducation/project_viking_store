@@ -1,0 +1,78 @@
+<div class="wrapper panel">
+  <h2>Logistical Information</h2>
+  <h3>Basic Information</h3>
+  <table>
+    <tr>
+      <td>Customer ID:</td>
+      <td><%= @user.id %></td>
+    </tr>
+
+    <tr>
+      <td>Customer:</td>
+      <td><%= link_to name(@user), user_path(@user) %></td>
+    </tr>
+
+    <tr>
+      <td>Date Placed:</td>
+      <td><%= order_date(@order) %></td>
+    </tr>
+  </table>
+
+<%= link_to "Edit Customer Profile", user_path(@user) %>
+
+  <h4>Order Status</h4>
+
+<%= form_for @order do |f| %>
+
+  <%= f.radio_button  :checked_out,  true  %>
+  <%= label :checked_out_true, "PLACED" %>
+  <%= f.radio_button  :checked_out, false %>
+  <%= label :checked_out_false, "UNPLACED" %>
+  <p class="informational">Only one unplaced order allowed!</p>
+
+  <%= label :billing_id, "Billing Address" %>
+  <%= f.collection_select( :billing_id, @user.addresses, :id, :street_address, prompt: 'Billing Address', selected: @order.billing_id ) %>
+
+  <%= label :shipping_id, "Shipping Address" %>
+  <%= f.collection_select( :shipping_id, @user.addresses, :id, :street_address, prompt: 'Shipping Address', selected: @order.shipping_id ) %>
+
+  <%= f.hidden_field :user_id, value: @user.id %>
+
+  <%= f.submit "Update Order Information", class: "btn btn-primary btn-lg btn-block btn-create" %>
+
+  <% end %>
+
+<div class = "panel wrapper">
+<%= form_for @order do |f| %>
+
+    <table class = "table table-striped table-bordered">
+      <thead>
+        <th>ID</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total Price</th>
+        <th>REMOVE</th>
+      </thead>
+      <tbody>
+        <% @order.products.each do |product| %>
+          <tr>
+            <td><%= product.id %></td>
+            <td><%= f.text_field :quantity, value: "#{@order.purchases.find_by(:product_id => product.id).quantity}" %></td>
+            <td><%= number_to_currency(product.price) %></td>
+            <td><%= number_to_currency(@order.products.where(:id => product.id).sum("price*quantity")) %></td>
+            <td><%= link_to "REMOVE", order_purchase_path(@order.purchases.find_by(:product_id => product.id)), data: {message: "Do you really want to delete this?", method: :delete}%> </td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+    <%= f.hidden_field :user_id, value: @user.id %>
+
+    <%= f.submit "Update Order Contents", class: "btn btn-primary btn-lg btn-block btn-create" %>
+
+<% end %>
+</div>
+
+
+
+</div>
