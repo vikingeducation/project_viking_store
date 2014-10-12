@@ -1,0 +1,14 @@
+<div class="row">
+	<h2><%= @address.user.first_name %> <%= @address.user.last_name %>'s Address</h2>
+
+	<p>Owner ID: <%= @address.user.id %></p>
+	<p>Owner Name: <%= link_to "#{@address.user.first_name} #{@address.user.last_name} (click to view user)", @address.user %></p>
+
+	<p>Street: <%= @address.street_address %></p>
+	<p>City: <%= @address.city %></p>
+	<p>State: <%= @address.state %></p>
+
+	<p><%= link_to "Edit Address", edit_address_path %></p>
+	<p><%= link_to "Delete Address", @address, method: :delete, data: { confirm: "You sure?" } %></p>
+
+</div>

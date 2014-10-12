@@ -1,0 +1,42 @@
+<div class="row">
+
+<h2 style="text-align:center;">Addresses</h2>
+
+	<p>Create new addresses from within <%= link_to "User", users_path %> profiles</p>
+
+
+<div class="panel panel-default">
+	<table class="table">
+		<thead>
+			<td>ID</td>
+			<td>User</td>
+			<td>Address</td>
+			<td>City</td>
+			<td>State</td>
+			<td>Orders</td>
+			<td>Created</td>
+			<td>SHOW</td>
+			<td>EDIT</td>
+			<td>DELETE</td>
+		</thead>
+		<% @addresses.each do |address| %>
+			<tr>
+				<td><%= address.id %></td>
+				<td><%= link_to "#{address.user.first_name} #{address.user.last_name}",address.user %></td>
+				<td><%= address.street_address %></td>
+				<td><%= address.city %></td>
+				<td><%= address.state %></td>
+				<td>orders</td>
+				<td><%= address.created_at %></td>
+				<td><%= link_to "SHOW", address %></td>
+				<td><%= link_to "EDIT", edit_address_path(address) %></td>
+				<td><%= link_to "Delete", address, method: :delete, data: { confirm: "You sure?" } %></td>
+			</tr>
+		<% end %>
+
+
+
+	</table>
+
+</div>
+

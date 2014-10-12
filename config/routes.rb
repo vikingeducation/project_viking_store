@@ -9,6 +9,7 @@ root 'admin#index'
   resources :orders, only: [:edit, :show, :destroy, :update]
 
   resources :users
+  resources :addresses
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
