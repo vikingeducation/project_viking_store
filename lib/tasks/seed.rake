@@ -124,12 +124,11 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     email = Faker::Internet.email
     phone = Faker::Number.number(10)
     create = Faker::MakeDate.months_ago(6)
-    billing_address = @addresses.sample
-    shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name,
-    email: email, phone: phone, created_at: create,
-    default_billing_address_id: billing_address,
-    default_shipping_address_id: shipping_address)
+    a = User.create!(first_name: first_name, last_name: last_name,
+    email: email, phone: phone, created_at: create)
+    a.default_billing_address_id = Address.where(user_id: a.id).sample
+    a.default_shipping_address_id = Address.where(user_id: a.id).sample
+    a.save
   end
 
   (20*SEED_MULTIPLIER).times do |n| #users from 5 months ago
@@ -138,12 +137,11 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     email = Faker::Internet.email
     phone = Faker::Number.number(10)
     create = Faker::MakeDate.months_ago(5)
-    billing_address = @addresses.sample
-    shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name,
-    email: email, phone: phone, created_at: create,
-    default_billing_address_id: billing_address,
-    default_shipping_address_id: shipping_address)
+    a = User.create!(first_name: first_name, last_name: last_name,
+    email: email, phone: phone, created_at: create)
+    a.default_billing_address_id = Address.where(user_id: a.id).sample
+    a.default_shipping_address_id = Address.where(user_id: a.id).sample
+    a.save
   end
 
   (40*SEED_MULTIPLIER).times do |n| #40 users from 4 months ago
@@ -152,12 +150,11 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     email = Faker::Internet.email
     phone = Faker::Number.number(10)
     create = Faker::MakeDate.months_ago(4)
-    billing_address = @addresses.sample
-    shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name,
-    email: email, phone: phone, created_at: create,
-    default_billing_address_id: billing_address,
-    default_shipping_address_id: shipping_address)
+    a = User.create!(first_name: first_name, last_name: last_name,
+    email: email, phone: phone, created_at: create)
+    a.default_billing_address_id = Address.where(user_id: a.id).sample
+    a.default_shipping_address_id = Address.where(user_id: a.id).sample
+    a.save
   end
 
   (60*SEED_MULTIPLIER).times do |n| #60 users from 3 months ago
@@ -166,12 +163,11 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     email = Faker::Internet.email
     phone = Faker::Number.number(10)
     create = Faker::MakeDate.months_ago(3)
-    billing_address = @addresses.sample
-    shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name,
-    email: email, phone: phone, created_at: create,
-    default_billing_address_id: billing_address,
-    default_shipping_address_id: shipping_address)
+    a = User.create!(first_name: first_name, last_name: last_name,
+    email: email, phone: phone, created_at: create)
+    a.default_billing_address_id = Address.where(user_id: a.id).sample
+    a.default_shipping_address_id = Address.where(user_id: a.id).sample
+    a.save
   end
 
   (80*SEED_MULTIPLIER).times do |n| #80 users from 2 months ago
@@ -180,12 +176,11 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     email = Faker::Internet.email
     phone = Faker::Number.number(10)
     create = Faker::MakeDate.months_ago(2)
-    billing_address = @addresses.sample
-    shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name,
-    email: email, phone: phone, created_at: create,
-    default_billing_address_id: billing_address,
-    default_shipping_address_id: shipping_address)
+    a = User.create!(first_name: first_name, last_name: last_name,
+    email: email, phone: phone, created_at: create)
+    a.default_billing_address_id = Address.where(user_id: a.id).sample
+    a.default_shipping_address_id = Address.where(user_id: a.id).sample
+    a.save
   end
 
   (120*SEED_MULTIPLIER).times do |n| #120 users from 1 months ago
@@ -194,12 +189,11 @@ def make_users #make da usahs (total users is 330*SEED_MULTIPLIER)
     email = Faker::Internet.email
     phone = Faker::Number.number(10)
     create = Faker::MakeDate.months_ago(1)
-    billing_address = @addresses.sample
-    shipping_address = @addresses.sample
-    User.create!(first_name: first_name, last_name: last_name,
-    email: email, phone: phone, created_at: create,
-    default_billing_address_id: billing_address,
-    default_shipping_address_id: shipping_address)
+    a = User.create!(first_name: first_name, last_name: last_name,
+    email: email, phone: phone, created_at: create)
+    a.default_billing_address_id = Address.where(user_id: a.id).sample
+    a.default_shipping_address_id = Address.where(user_id: a.id).sample
+    a.save
   end
 
 end
@@ -228,7 +222,7 @@ end
 
 
 def make_order_contents
-  (1..100*SEED_MULTIPLIER).each do |i| #100-scaled initial orders
+  (1..500*SEED_MULTIPLIER).each do |i| #500-scaled initial orders
     product_id = @products.sample
     quantity = (1..10).to_a.sample
     current_price = Product.find(product_id).price
@@ -241,13 +235,13 @@ def make_order_contents
     quantity = (1..10).to_a.sample
     current_price = Product.find(product_id).price
     OrderContent.create!(product_id: product_id,
-      order_id: ((100*SEED_MULTIPLIER)+n), quantity: quantity, current_price: current_price)
+      order_id: ((500*SEED_MULTIPLIER)+n), quantity: quantity, current_price: current_price)
   end
 end
 
 
 def make_order
-  (100*SEED_MULTIPLIER).times do |i| #100-scaled placed orders
+  (500*SEED_MULTIPLIER).times do |i| #500-scaled placed orders
     user_id = @users.sample
     billing = Address.where(user_id: user_id).sample.id
     shipping = Address.where(user_id: user_id).sample.id
