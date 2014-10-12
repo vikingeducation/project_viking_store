@@ -1,3 +1,8 @@
+<% if @product.id %>
+  <%= f.label :id %>
+  <%= @product.id %>
+<% end %>
+
 <%= f.label :title %>
 <%= f.text_field :title %>
 

@@ -15,7 +15,7 @@ end
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
-    SEED_MULTIPLIER = 3
+    SEED_MULTIPLIER = 1
 
     gen_addresses
     gen_users

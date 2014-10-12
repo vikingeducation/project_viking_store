@@ -43,7 +43,7 @@ class CategoriesController < ApplicationController
     old_name = @category.name
     if confirm_category( @category.id ) # TODO - put this in the model as callback (maybe)
       if @category.update(cat_params)
-        flash[:success] = "Category #{old_name} edited to #{@category.name}"
+        flash[:success] = "Category \"#{old_name}\" edited to \"#{@product.name}\""
         redirect_to @category
       else
         flash[:error] = "Whoops!"
