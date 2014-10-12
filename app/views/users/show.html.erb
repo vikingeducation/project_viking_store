@@ -10,7 +10,9 @@
 
 <div class="row">
 	<div class="user_cc">
+	<% if @user.payment %>
 		<%= render 'cc_info' %>
+	<% end %>
 	</div>
 </div>
 
