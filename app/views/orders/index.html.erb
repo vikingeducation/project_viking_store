@@ -1,0 +1,51 @@
+<div class="row">
+<% if @filtered %>
+	<h2 style="text-align:center;"><%= @first_name %> <%= @last_name %>'s Orders</h2>
+
+	<button style="btn btn-large btn-default"><%=link_to "Create a new order for #{@first_name} #{@last_name}", new_user_order_path(@user_id) %></button> 
+<% else %>
+<h2 style="text-align:center;">All Orders</h2>
+<p>Create new orders from within <%= link_to "User", users_path %> profiles
+
+<% end %>
+
+<div class="panel panel-default">
+	<table class="table">
+		<thead>
+			<td>ID</td>
+			<td>User ID</td>
+			<td>Address</td>
+			<td>City</td>
+			<td>State</td>
+			<td>Quantity</td>
+			<td>Total Value</td>
+			<td>Status</td>
+			<td>Date Placed</td>
+			<td>SHOW</td>
+			<td>EDIT</td>
+			<td>DELETE</td>
+		</thead>
+		<% @orders.each do |order| %>
+			<tr>
+				<td><%= order.id %></td>
+				<td><%= link_to order.user_id, order.user %></td>
+				<td><%= Address.find(order.shipping_address_id).street_address %></td>
+				<td><%= Address.find(order.shipping_address_id).city%></td>
+				<td><%= Address.find(order.shipping_address_id).state %></td>
+				<td><%= order.order_contents.select("SUM(quantity) as quant")[0].quant %></td>
+				<td><%= order.order_contents.select("SUM(quantity*current_price) as total")[0].total %>
+				<td><%= order.is_placed? ? "PLACED" : "UNPLACED" %></td>
+				<td><%= order.placed_at %></td>
+				<td><%= link_to 'Show', order %></td>
+				<td><%= link_to 'Edit', edit_order_path(order) %></td>
+				<td><%= link_to "Delete", order, method: :delete, data: { confirm: "You sure?" } %></td>
+
+			</tr>
+		<% end %>
+
+
+
+	</table>
+
+</div>
+

@@ -1,0 +1,42 @@
+<h2>Logistical Information</h2>
+  <%= form_for(@order) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+  <h4>Basic Information</h4>
+
+    <%= f.label :user_id, "Customer ID:" %>
+    <%= f.text_field :user_id, :value => @user.id, :readonly => true %>
+
+    <p>Customer: <%= link_to "#{@user.first_name} #{@user.last_name} (click to view)", @user %></p>
+    <p>Telephone: <%= @user.phone %>
+    <p>Date Placed: 
+    <% if @order.placed_at.nil? %>
+      N/A
+    <% else %>
+      <%= @order.placed_at %>
+    <% end %>
+
+   <% if params[:action] == 'edit' %>
+     <h4>Order Status</h4>
+     <%= f.label :is_placed, "Unplaced" %>
+     <%= f.radio_button :is_placed, false %>
+
+     <%= f.label :is_placed, "Placed" %>
+     <%= f.radio_button :is_placed, true %>
+      <% else %>
+        <p><%= link_to "Edit Customer Profile", edit_user_path(@user) %></p>
+      <% end %>
+
+  
+    <%= f.label :billing_address_id, "Billing Address:" %>
+      <%= f.collection_select( :billing_address_id, @addresses, :id, :street_address) %>
+
+    <%= f.label :shipping_address_id, "Shipping Address:" %>
+    <%= f.collection_select( :shipping_address_id, @addresses, :id, :street_address) %>
+  
+    <% if params[:action] == "edit" %>
+      <%= f.submit "Update Order Information" %>
+    <% else %>
+      <%= f.submit "Create Order in Shopping Cart" %>
+    <% end %>
+
+  <% end %>

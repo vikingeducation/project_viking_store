@@ -1,0 +1,39 @@
+<div class="row">
+	<% if @order.is_placed? %>
+		<h2>Order <%= @order.id %></h2>
+	<% else %>
+		<h2>Shopping Cart <%= @order.id %></h2>
+	<% end %>
+</div>
+
+<div class="row">
+	<div class="order_show">
+		<%= render 'logistics' %>
+	</div>
+</div>
+<div class="row">
+	<div class="order_show">
+		<%= render 'status' %>
+	</div>
+</div>
+<div class="row">
+	<div class="order_show">
+		<%= render 'address' %>
+	</div>
+</div>
+<div class="row">
+	<div class="order_show">
+		<%= render 'payments' %>
+	</div>
+</div>
+<div class="row">
+	<p><%= link_to "Edit order", edit_order_path %></p>
+	<p><%= link_to "Delete order", @order, method: :delete, data: {confirm: "You sure?"} %></p>
+</div>
+
+<div class="row">
+	<%= render 'order_contents' %>
+</div>
+
+
+

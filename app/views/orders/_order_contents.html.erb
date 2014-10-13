@@ -1,0 +1,21 @@
+<h3>Order Contents</h3>
+<div class="panel panel-default">
+	<table class="table">
+		<thead>
+			<td>Product ID</td>
+			<td>Product</td>
+			<td>Quantity</td>
+			<td>Price</td>
+			<td>Total Price</td>
+		</thead>
+		<% @order.order_contents.each do |content| %>
+			<tr>
+				<td><%= content.product_id %></td>
+				<td><%= link_to content.product.title, content.product %></td>
+				<td><%= content.quantity %></td>
+				<td><%= content.current_price %></td>
+				<td><%= @order.order_contents.select("SUM(quantity * current_price) AS total")[0].total %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>

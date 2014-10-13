@@ -1,0 +1,8 @@
+<div class="row">
+	<h2>Edit Order #<%= @order.id %></h2>
+</div>
+<div class="row">
+	<%= render 'order_form'%>
+
+	<%= link_to "Delete order", @order, method: :delete, data: {confirm: "You sure?"} %>
+</div>

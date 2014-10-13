@@ -1,0 +1,50 @@
+<div class="row">
+
+<% if @filtered %>
+	<h2 style="text-align:center;"><%= "#{User.find(@params_user_id).first_name} #{User.find(@params_user_id).last_name}\'s Addresses" %> </h2>
+	<button class="btn btn-large btn-primary">
+		<%= link_to "Create a new address for #{User.find(@params_user_id).first_name} #{User.find(@params_user_id).last_name}", new_user_address_path(@params_user_id)  %>
+	</button>
+<% else %>
+
+<h2 style="text-align:center;">Addresses</h2>
+
+	<p>Create new addresses from within <%= link_to "User", users_path %> profiles</p>
+
+<% end %>
+
+<div class="panel panel-default">
+	<table class="table">
+		<thead>
+			<td>ID</td>
+			<td>User</td>
+			<td>Address</td>
+			<td>City</td>
+			<td>State</td>
+			<td>Orders</td>
+			<td>Created</td>
+			<td>SHOW</td>
+			<td>EDIT</td>
+			<td>DELETE</td>
+		</thead>
+		<% @addresses.each do |address| %>
+			<tr>
+				<td><%= address.id %></td>
+				<td><%= link_to "#{address.user.first_name} #{address.user.last_name}",address.user %></td>
+				<td><%= address.street_address %></td>
+				<td><%= address.city %></td>
+				<td><%= address.state %></td>
+				<td>orders</td>
+				<td><%= address.created_at %></td>
+				<td><%= link_to "SHOW", address %></td>
+				<td><%= link_to "EDIT", edit_address_path(address) %></td>
+				<td><%= link_to "Delete", address, method: :delete, data: { confirm: "You sure?" } %></td>
+			</tr>
+		<% end %>
+
+
+
+	</table>
+
+</div>
+

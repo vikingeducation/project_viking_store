@@ -1,0 +1,20 @@
+<div class="row">
+	<h2><%= @category.name %></h2>
+	<p>ID: <%= @category.id %></p>
+	<p><%= @category.description %></p>
+	<ul>
+		<li><%= link_to "Edit", edit_category_path %></li>
+		<li><%= link_to "Delete", @category, method: :delete,
+		data: { confirm: "You sure?" } %></li>
+	</ul>
+</div>
+<div class="row">
+<h2>Products:</h2>
+	<ul>
+	<% if @category.products.any? %>
+		<% @category.products.each do |i| %>
+			<li><%= link_to i.title, i %></li>
+		<% end %>
+	<% end %>
+	</ul>
+</div>

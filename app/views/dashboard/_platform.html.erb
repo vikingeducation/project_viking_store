@@ -1,0 +1,86 @@
+<div class="panel panel-default">
+	<div class="panel-heading">Last 7 Days</div>
+	<table class="table">
+		<thead>
+			<td>Item</td>
+			<td>Data</td>
+		</thead>
+		<tr>
+			<td>New Users</td>
+			<td><%= @user_7 %></td>
+		</tr>
+		<tr>
+			<td>Orders</td>
+			<td><%= @orders_7 %></td>
+		</tr>
+		<tr>
+			<td>New Products</td>
+			<td><%= @products_7 %></td>
+		</tr>
+		<tr>
+			<td>Revenue</td>
+			<td><%= number_to_currency(@revenue_7) %></td>
+		</tr>
+	</table>
+</div>
+
+
+<div class="panel panel-default">
+	
+	<div class="panel-heading">Last 30 Days</div>
+	
+	<table class="table">
+		<thead>
+			<td>Item</td>
+			<td>Data</td>
+		</thead>
+		<tr>
+			<td>New Users</td>
+			<td><%= @user_30 %></td>
+		</tr>
+		<tr>
+			<td>Orders</td>
+			<td><%= @orders_30 %></td>
+		</tr>
+		<tr>
+			<td>New Products</td>
+			<td><%= @products_30 %></td>
+		</tr>
+		<tr>
+			<td>Revenue</td>
+			<td><%= number_to_currency(@revenue_30) %></td>
+		</tr>
+
+	</table>
+
+</div>
+
+<div class="panel panel-default">
+	
+	<div class="panel-heading">All Time</div>
+	
+	<table class="table">
+		<thead>
+			<td>Item</td>
+			<td>Data</td>
+		</thead>
+		<tr>
+			<td>New Users</td>
+			<td><%= @user_all %></td>
+		</tr>
+		<tr>
+			<td>Orders</td>
+			<td><%= @orders_all %></td>
+		</tr>
+		<tr>
+			<td>New Products</td>
+			<td><%= @products_all %></td>
+		</tr>
+		<tr>
+			<td>Revenue</td>
+			<td><%= number_to_currency(@revenue_all) %></td>
+		</tr>
+
+	</table>
+
+</div>

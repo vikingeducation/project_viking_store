@@ -1,0 +1,32 @@
+<div class="row">
+	<h2><%= @user.first_name %> <%= @user.last_name %></h2>
+</div>
+
+<div class="row">
+	<div class="user_demographic">
+		<%= render 'demographics' %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="user_cc">
+	<% if @user.payment %>
+		<%= render 'cc_info' %>
+	<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="user_admin_actions">
+		<%= render 'admin_actions' %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="user_order_history">
+		<%= render 'order_history' %>
+	</div>
+
+</div>
+
+
