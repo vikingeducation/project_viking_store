@@ -31,6 +31,33 @@ class AddressesController < ApplicationController
     end
   end
 
+  def edit
+    @address = Address.find(params[:id])
+    @user=User.find(@address.user_id)
+  end
+
+  def update
+    @address = Address.find(params[:id])
+      if @address.update(address_params)
+        flash[:success] = "Address  \"#{@address.street_address}\" edited successfully"
+        redirect_to @address
+      else
+        flash[:error] = "Whoops!"
+        @user=User.find(@address.user_id)
+        render 'edit'
+      end
+  end
+
+  def destroy
+   @address = Address.find(params[:id])
+    if Address.find(params[:id]).destroy
+      flash[:success] = "Address #{@address.street_address} successfully deleted."
+      redirect_to addresses_path
+    else
+      redirect_to @address
+    end
+  end
+
   private
 
   def address_params
