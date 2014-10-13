@@ -16,8 +16,10 @@ class Order < ActiveRecord::Base
   # makes any new order a placed order if shopping cart 
   # already exists
   before_create do |order|
-    unless order.user.orders.all?(&:checked_out)
+    if order.user.orders.all?(&:checked_out)
       order.checked_out = false
+    else
+      order.checked_out = true
       order.checkout_date = Time.now
     end
   end
