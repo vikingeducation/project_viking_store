@@ -1,0 +1,27 @@
+<h3>Demographic Information</h3>
+  <%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :phone %>
+  <%= f.text_field :phone %>
+
+  <%= f.label :default_billing_address_id, "Default Billing Address:" %>
+  <%= f.collection_select( :default_billing_address_id, @addresses, :id, :street_address) %>
+
+  <%= f.label :default_shipping_address_id, "Default Shipping Address:" %>
+  <%= f.collection_select( :default_shipping_address_id, @addresses, :id, :street_address) %>
+
+  <p><%= link_to "View saved addresses", '#'%></p>
+
+
+  <%= f.submit %>
+  <% end %>

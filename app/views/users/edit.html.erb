@@ -1,0 +1,12 @@
+<div class="col-sm-4">
+  <%= render 'layouts/admin_leftbar' %>
+</div>
+
+<div class="row">
+<h2>Edit User</h2>
+
+<%= render 'user_form' %>
+
+<%= link_to "Delete #{@user.first_name} #{@user.last_name}", @user, method: :delete,
+      data: { confirm: "You sure?" } %>
+</div>

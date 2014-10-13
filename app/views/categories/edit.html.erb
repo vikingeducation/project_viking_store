@@ -1,0 +1,14 @@
+<%= form_for (@category) do |f| %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<%= f.label :description %>
+	<%= f.text_area :description %>
+
+	<%= f.submit "Submit Edits" %>
+
+<% end %>
+
+<%= link_to "Delete", @category, method: :delete,
+      data: { confirm: "You sure?" } %>

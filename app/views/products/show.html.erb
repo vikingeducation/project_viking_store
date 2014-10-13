@@ -1,0 +1,22 @@
+<div class="row">
+	<h2 style="text-align:center;"><%= @product.title %></h2>
+
+	<h3>Product Information</h3>
+	<p>Product ID: <%= @product.id %></p>
+	<p>Name: <%= @product.title %></p>
+	<p>Price: <%= @product.price %></p>
+	<% if @product.category %>
+		<p>Category: <%= @product.category.name %></p>
+	<% else %>
+		<p> Category: None
+	<% end %>
+
+
+	<h3>Product Statistics</h3>
+
+	<p>Times ordered: <%= @times_ordered %></p>
+	<p>Carts in: <%= @carts_in %></p>
+
+	<p><%= link_to "Edit Product", edit_product_path(@product) %></p>
+	<p><%= link_to "Delete", @product, method: :delete, data: { confirm: "You sure?" } %></p>
+</div>

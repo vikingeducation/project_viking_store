@@ -1,0 +1,15 @@
+<!-- PHH -->
+<div class="row">
+<h2>Edit Product</h2>
+  <%= form_for @product do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= render 'fields', f: f %>
+    <%= f.submit "Update Product", class: "btn btn-large btn-primary new_category" %>
+
+  <% end %>
+
+<%= link_to "Delete", @product, method: :delete,
+    data: { confirm: "You sure?" } %>
+
+
+</div>

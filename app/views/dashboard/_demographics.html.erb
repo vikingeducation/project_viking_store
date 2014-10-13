@@ -1,0 +1,86 @@
+<div class="panel panel-default">
+	
+	<div class="panel-heading">Top 3 States Users Live In</div>
+	
+	<table class="table">
+		<thead>
+			<td>Item</td>
+			<td>Data</td>
+		</thead>
+		<tr>
+			<td><%= @state1 %></td>
+			<td><%= @state_count1 %></td>
+		</tr>
+		<tr>
+			<td><%= @state2 %></td>
+			<td><%= @state_count2 %></td>
+		</tr>
+		<tr>
+			<td><%= @state3 %></td>
+			<td><%= @state_count3 %></td>
+		</tr>
+
+	</table>
+
+</div>
+
+<div class="panel panel-default">
+	
+	<div class="panel-heading">Top 3 Cities Users Live In</div>
+	
+	<table class="table">
+		<thead>
+			<td>Item</td>
+			<td>Data</td>
+		</thead>
+		<tr>
+			<td><%= @city1 %></td>
+			<td><%= @city_count1 %></td>
+		</tr>
+		<tr>
+			<td><%= @city2 %></td>
+			<td><%= @city_count2 %></td>
+		</tr>
+		<tr>
+			<td><%= @city3 %></td>
+			<td><%= @city_count3 %></td>
+		</tr>
+
+	</table>
+
+</div>
+
+<div class="panel panel-default">
+	
+	<div class="panel-heading">Top User With...</div>
+	
+	<table class="table">
+		<thead>
+			<td>Item</td>
+			<td>Name</td>
+			<td>Data</td>
+		</thead>
+		<tr>
+			<td>Highest Single Order Value</td>
+			<td><%= @highest_first%> <%= @highest_last%></td>
+			<td><%= number_to_currency(@highest_single_value) %></td>
+		</tr>
+ 		<tr>
+			<td>Highest Lifetime Value</td>
+			<td><%= @highest_lifetime_first %> <%= @highest_lifetime_last %></td>
+			<td><%= number_to_currency(@highest_lifetime) %></td>
+		</tr>
+		<tr>
+			<td>Highest Average Order Value</td>
+			<td><%= @highest_average_first %> <%=@highest_average_last %></td>
+			<td><%= number_to_currency(@highest_average) %></td>
+		</tr> 
+		<tr>
+			<td>Most Orders Placed</td>
+			<td><%=  @most_orders_placed_first %> <%=  @most_orders_placed_last %></td>
+			<td><%= @most_orders_placed_count %></td>
+		</tr>
+
+	</table>
+
+</div>

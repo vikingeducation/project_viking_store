@@ -1,0 +1,60 @@
+<div class="panel panel-default">
+	
+	<div class="panel-heading">Orders By Day</div>
+	
+	<table class="table">
+		<thead>
+			<td>Date</td>
+			<td>Quantity</td>
+			<td>Value
+		</thead>
+
+		<% (1..7).each do |n| %>
+			<% if n==1 %>
+			<tr>
+				<td><%= (1.day.ago).strftime("%m/%d/%Y") %></td>
+				<td><%= Order.orders(1.day.ago) %></td>
+				<td><%= number_to_currency(OrderContent.revenue(1.day.ago)) %></td>
+			</tr>
+			<% else %>
+			<tr>
+				<td><%= (n.day.ago).strftime("%m/%d/%Y") %></td>
+				<td><%= Order.orders(n.day.ago) - Order.orders((n-1).days.ago) %></td>
+				<td><%= number_to_currency(OrderContent.revenue(n.day.ago) - OrderContent.revenue((n-1).day.ago)) %></td>
+			</tr>
+			<% end %>
+		<% end %>
+
+	</table>
+
+</div>
+<div class="panel panel-default">
+	
+	<div class="panel-heading">Orders By Week</div>
+	
+	<table class="table">
+		<thead>
+			<td>Date</td>
+			<td>Quantity</td>
+			<td>Value
+		</thead>
+
+		<% (1..7).each do |n| %>
+			<% if n==1 %>
+			<tr>
+				<td><%= (1.week.ago).strftime("%m/%d/%Y") %></td>
+				<td><%= Order.orders(1.week.ago) %></td>
+				<td><%= number_to_currency(OrderContent.revenue(1.week.ago)) %></td>
+			</tr>
+			<% else %>
+			<tr>
+				<td><%= (n.week.ago).strftime("%m/%d/%Y") %></td>
+				<td><%= Order.orders(n.week.ago) - Order.orders((n-1).weeks.ago) %></td>
+				<td><%= number_to_currency(OrderContent.revenue(n.week.ago) - OrderContent.revenue((n-1).week.ago)) %></td>
+			</tr>
+			<% end %>
+		<% end %>
+
+	</table>
+
+</div>
