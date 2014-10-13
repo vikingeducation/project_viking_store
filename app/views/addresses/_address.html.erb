@@ -1,6 +1,6 @@
 <tr>
   <td><%= address.id %></td>
-  <td><%= link_to address.user.first_name, user_path(address.user) %></td>
+  <td><%= link_to address.user.name, user_path(address.user) %></td>
   <td><%= address.street_address%></td>
   <td><%= address.city.name%></td>
   <td><%= address.state.name%></td>

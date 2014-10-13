@@ -1,5 +1,4 @@
 class CreditCardsController < ApplicationController
-
   def destroy
   	@credit_card = CreditCard.find(params[:id])
     @user = @credit_card.user

@@ -1,5 +1,4 @@
 class AddressesController < ApplicationController
-
   def index
     if params[:user_id].nil?
       @addresses = Address.all
@@ -31,6 +30,7 @@ class AddressesController < ApplicationController
 
   def show
     @address = Address.find(params[:id])
+    @user = @address.user
   end
 
   def edit
@@ -65,5 +65,4 @@ class AddressesController < ApplicationController
   def whitelisted_address_params
     params.require(:address).permit(:street_address, :state_id, :city_id, :user_id, :zip_code)
   end
-
 end

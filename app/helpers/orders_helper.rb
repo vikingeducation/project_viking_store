@@ -7,16 +7,8 @@ module OrdersHelper
     end
   end
 
-  def order_value(order)
-    number_to_currency(order.products.sum("quantity * price"))
-  end
-
   def order_status(order)
     order.checked_out ? "PLACED" : "UNPLACED"
-  end
-
-  def quantity(order)
-    order.purchases.sum(:quantity)
   end
 
   def order_title(order)

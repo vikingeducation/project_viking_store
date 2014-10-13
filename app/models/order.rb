@@ -12,6 +12,14 @@ class Order < ActiveRecord::Base
             :presence => true
   validates_inclusion_of :checked_out, :in => [true, false]
 
+  def order_value
+    products.sum("quantity * price")
+  end
+
+  def quantity
+    purchases.sum(:quantity)
+  end
+
   def self.new_orders(last_x_days = nil)
     if last_x_days
       where("checkout_date > ?", Time.now - last_x_days.days).size

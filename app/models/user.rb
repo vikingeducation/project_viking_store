@@ -17,6 +17,14 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def completed_orders
+    orders.where(checked_out: true)
+  end
+
+  def last_checkout_date
+    completed_orders.empty? ? "N/A" : completed_orders.order("created_at DESC").last.checkout_date
+  end
+
   def self.new_users(last_x_days = nil)
     if last_x_days
       where("created_at > ?", Time.now - last_x_days.days).size

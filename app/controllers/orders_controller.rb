@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-
   def index
     if params[:user_id].nil?
       @orders = Order.all
@@ -16,6 +15,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new(user_id: params[:user_id])
+    @user = @order.user
   end
 
   def create
@@ -31,10 +31,12 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @user = @order.user
   end
 
   def edit
     @order = Order.find(params[:id])
+    @user = @order.user
     @purchases = Purchase.where(order_id: @order.id)
   end
 
@@ -67,5 +69,4 @@ class OrdersController < ApplicationController
   def whitelisted_order_params
     params.require(:order).permit(:user_id, :billing_id, :shipping_id, :checked_out, :checkout_date, :credit_card_id)
   end
-
 end

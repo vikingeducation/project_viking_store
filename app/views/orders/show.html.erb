@@ -2,8 +2,8 @@
 
 <div class="panel">
 	<%= render "logistical" %>
-	<p>Number Products: <%= quantity(@order) %></p>
-	<p>Order Value: <%= order_value(@order) %></p>
+	<p>Number Products: <%= @order.quantity %></p>
+	<p>Order Value: <%= number_to_currency(@order.order_value) %></p>
 	<%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
 	<h4>Order Status</h4>
 	<h3 id="<%= order_status(@order).downcase %>">

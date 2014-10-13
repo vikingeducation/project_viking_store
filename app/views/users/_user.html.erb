@@ -1,12 +1,11 @@
 <tr>
   <td><%= user.id %></td>
-  <td><%= link_to "#{user.first_name} #{user.last_name}", user %></td>
+  <td><%= link_to "#{user.name}", user %></td>
   <td><%= user.created_at %></td>
   <td><%= user.billing.nil? ? "N/A" : user.billing.city.name %></td>
   <td><%= user.billing.nil? ? "N/A" : user.billing.state.name %></td>
-  <!-- evil view logic -->
-  <td><%= completed_orders(user).count %></td>
-  <td><%= completed_orders(user).empty? ? "N/A" : completed_orders(user).order("created_at DESC").last.checkout_date %></td>
+  <td><%= user.completed_orders.count %></td>
+  <td><%= user.last_checkout_date %></td>
   <td><%= link_to "edit", edit_user_path(user) %></td>
   <td><%= link_to "delete", user, :method => :delete, :data => { confirm: "Are you sure?" } %></td>
 </tr>

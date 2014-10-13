@@ -17,5 +17,4 @@ class Product < ActiveRecord::Base
       all.size
     end
   end
-
 end

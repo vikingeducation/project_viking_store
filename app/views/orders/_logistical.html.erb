@@ -1,6 +1,6 @@
 <h4><strong>Logistical Information</strong></h4><br>
 <h4>Basic Information</h4>
-<p>Owner ID: <%= @order.user.id %></p>
-<p>Owner Name: <%= link_to "#{@order.user.first_name} #{@order.user.last_name}", user_path(@order.user) %></p>
-<p>Phone Number: <%= @order.user.phone_number %></p>
+<p>Owner ID: <%= @user.id %></p>
+<p>Owner Name: <%= link_to "#{@user.name}", user_path(@user) %></p>
+<p>Phone Number: <%= @user.phone_number %></p>
 <p>Date Placed: <%= @order.created_at %></p>

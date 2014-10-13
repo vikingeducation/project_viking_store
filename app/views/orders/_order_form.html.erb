@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <%= render "partials/errors", :object => order %>
+    <%= render "shared/errors", :object => order %>
     <div class="panel">
       <%= render "logistical" %>
       <%= link_to "Edit Customer Profile", edit_user_path(order.user) %>
@@ -18,7 +18,7 @@
         <% else %>
           <%= f.hidden_field :checked_out, value: "0" %>
         <% end %>
- 
+
         <%= f.hidden_field :user_id %>
 
         <%= f.label :billing %>

@@ -18,4 +18,8 @@ class Address < ActiveRecord::Base
             :user_id, :presence => true
   validates :zip_code, numericality: {integer:true}
   validates :street_address, length: {maximum: 64}
+
+  def address_maker
+    "#{street_address}, #{city.name}, #{state.name} #{zip_code}"
+  end
 end

@@ -4,8 +4,8 @@
   <td><%= order.billing.nil? ? "N/A" : order.billing.street_address %></td>
   <td><%= order.billing.nil? ? "N/A" : order.billing.city.name %></td>
   <td><%= order.billing.nil? ? "N/A" : order.billing.state.name %></td>
-  <td><%= quantity(order) %></td>
-  <td><%= order_value(order) %></td>
+  <td><%= order.quantity %></td>
+  <td><%= number_to_currency(order.order_value) %></td>
   <td><%= order_status(order) %></td>
   <td><%= order.checkout_date %></td>
   <td><%= link_to "show", user_order_path(order.user_id, order.id) %></td>
