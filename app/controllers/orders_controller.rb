@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @user=@order.user
+    @addresses = get_valid_addresses
   end
 
   def new
@@ -34,7 +35,6 @@ class OrdersController < ApplicationController
   end
 
   def update
-    fail
     @order = Order.find(params[:id])
       if @order.update(order_params)
         flash[:success] = "Order  \"#{@order.id}\" edited successfully"
@@ -57,9 +57,6 @@ class OrdersController < ApplicationController
     @billing_street = @bill_address.street_address  
     @billing_city = @bill_address.city
     @billing_state = @bill_address.state
-
-
-
     render :layout => "admin_interface"
   end
 
@@ -67,14 +64,8 @@ class OrdersController < ApplicationController
 
   end
 
-  def edit
-    @order = Order.find(params[:id])
-    render :layout => "admin_interface"
-  end
 
-  def update
 
-  end
 
 # ---- utility methods ----
 

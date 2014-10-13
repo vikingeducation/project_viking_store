@@ -2,59 +2,7 @@
 	<h2>Edit Order #<%= @order.id %></h2>
 </div>
 <div class="row">
-	<h2>Logistical Information</h2>
-	<%= form_for(@order) do |f| %>
-  	<%= render 'shared/error_messages', object: f.object %>
-	<h4>Basic Information</h4>
+	<%= render 'order_form'%>
 
-	  <%= f.label :user_id, "Customer ID:" %>
-	  <%= f.text_field :user_id, :value => @order.user_id, :readonly => true %>
-
-	  <p>Customer: <%= link_to "#{@order.user.first_name} #{@order.user.last_name} (click to view)", @order.user %></p>
-	  <p>Telephone: <%= @order.user.phone %>
-	  <p>Date Placed: 
-	  <% if @order.placed_at.nil? %>
-	    N/A
-	  <% else %>
-	    <%= @order.placed_at %>
-	  <% end %>
-
-	 <h4>Order Status</h4>
-	 <%= f.label :is_placed, "Unplaced" %>
-	 <%= f.radio_button :is_placed, false %>
-
-	 <%= f.label :is_placed, "Placed" %>
-	 <%= f.radio_button :is_placed, true %>
-	
-	  <%= f.label :billing_address_id, "Billing Address:" %>
-  	  <%= f.collection_select( :billing_address_id, Address.where(user_id: @order.user_id), :id, :street_address) %>
-
-	  <%= f.label :shipping_address_id, "Shipping Address:" %>
-	  <%= f.collection_select( :shipping_address_id, Address.where(user_id: @order.user_id), :id, :street_address) %>
-
-	  <%= f.submit %>
-  
-
-  <% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<%= link_to "Delete order", @order, method: :delete, data: {confirm: "You sure?"} %>
 </div>
-
