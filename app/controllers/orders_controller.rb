@@ -22,10 +22,11 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(whitelisted_params)
-    @order.checked_out = false
+    @user = @order.user
+
     if @order.save
       flash[:success] = "New order saved."
-      redirect_to @order
+      redirect_to edit_order_path(@order)
     else
       flash.now[:error] = "Something was invalid."
       render :new
@@ -40,14 +41,11 @@ class OrdersController < ApplicationController
     update_purchases if params[:order][:update]
     add_contents if params[:order][:add]
 
-    @order.checkout_date = Time.now if new_checkout?(@order)
-
-
-    if @order.update(whitelisted_params)
+    if @order.update(whitelisted_params) || @order.purchases.each {|p| p.save}
       flash[:success] = "Updated!"
       redirect_to @order
     else
-      flash.now[:error] = "Something went wrong."
+      flash.now[:error] = "Failed to save due to #{@order.errors.full_messages.inspect}\n #{@order.purchases.last.errors.full_messages.inspect}"
       render :edit
     end
   end
@@ -69,18 +67,15 @@ class OrdersController < ApplicationController
     additions = parsed_additions
 
     additions.each do |id, quantity|
+      next if id == 0 || quantity == 0  # skip blanks
 
-      next if id == 0 || quantity == 0
       if @order.products.exists?(id)
         purchase = @order.purchases.find_by(:product_id => id)
         purchase.update(:quantity => quantity)
       elsif Product.exists?(id)
-        purchase = Purchase.create(:order_id => @order.id,
-                                   :product_id => id,
-                                   :quantity => quantity)
-        purchase.save
-      else
-        flash[:error] = "Some of these products don't exist!"
+        @order.purchases.build(:order_id => @order.id,
+                               :product_id => id,
+                               :quantity => quantity)
       end
     end
 
@@ -109,10 +104,6 @@ class OrdersController < ApplicationController
         Purchase.find(purchase_id).destroy
       end
     end
-  end
-
-  def new_checkout?(order)
-    params[:order][:checked_out] && !order.checked_out
   end
 
   def whitelisted_params

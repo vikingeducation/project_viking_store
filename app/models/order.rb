@@ -13,15 +13,23 @@ class Order < ActiveRecord::Base
                       numericality: { is_integer: true }
   validates :checked_out, :inclusion => { :in => [true, false] }
 
-  validates_each :checked_out do |record, attr, checked_out|
-    if checked_out
-      true
-    elsif record.user.orders.where(:checked_out => false).count > 0
-      false
-    else
-      true
+  # makes any new order a placed order if shopping cart 
+  # already exists
+  before_create do |order|
+    unless order.user.orders.all?(&:checked_out)
+      order.checked_out = false
+      order.checkout_date = Time.now
     end
   end
+
+  # make sure only a single unplaced order
+  # (shopping cart) can exist
+  before_save do |order|
+    unless order.checked_out
+      order.user.orders.all?(&:checked_out)
+    end
+  end
+
 
   def self.new_orders(last_x_days = nil)
     if last_x_days
