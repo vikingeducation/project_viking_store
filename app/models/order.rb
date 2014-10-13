@@ -15,8 +15,8 @@ class Order < ActiveRecord::Base
 
   # makes any new order a placed order if shopping cart 
   # already exists
-  before_create do |order|
-    if order.user.orders.all?(&:checked_out)
+  after_validation :checked_out, :on => :create do |order|
+    if User.find(order.user.id).orders.all?(&:checked_out)
       order.checked_out = false
     else
       order.checked_out = true
@@ -28,7 +28,7 @@ class Order < ActiveRecord::Base
   # (shopping cart) can exist
   before_save do |order|
     unless order.checked_out
-      order.user.orders.all?(&:checked_out)
+      User.find(order.user.id).orders.all?(&:checked_out)
     end
   end
 
