@@ -9,4 +9,4 @@ Project by (Michael Alexander | github: [betweenparentheses](https://github.com/
 
 Part of Week 5 of [Viking Code School](http://www.vikingcodeschool.com).
 
-[Link on Heroku using PostgreSQL](http://sleepy-escarpment-9365.herokuapp.com/)
+[Link on Heroku using PostgreSQL](http://fathomless-chamber-5888.herokuapp.com/)
