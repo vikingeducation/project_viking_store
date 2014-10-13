@@ -1,0 +1,7 @@
+<div class = "row">
+  <% flash.each do |name, msg| %>
+    <div class= "col-md-12 <%= name %>" id="flasher">
+      <%= msg %>
+    </div>
+  <% end %>
+</div>

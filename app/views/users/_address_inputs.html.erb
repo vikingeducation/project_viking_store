@@ -1,0 +1,5 @@
+<%= f.text_field :street_address %>
+<%= f.text_field :secondary_address %>
+<%= f.text_field :zip_code %>
+<%= f.collection_select( :city_id, City.all, :id, :name, prompt: 'Select City') %>
+<%= f.collection_select( :state_id, State.all, :id, :name, prompt: 'Select State') %>

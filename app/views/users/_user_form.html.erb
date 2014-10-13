@@ -1,0 +1,61 @@
+  <%= form_for @user do |f| %>
+  <div class = "row">
+    <div class = "col-md-12">
+      <h3>Demographic Info</h3>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>First Name</strong>
+    </div>
+    <div class = "col-md-9">
+      <%= f.text_field :first_name, value: @user.first_name %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Last Name</strong>
+    </div>
+    <div class = "col-md-9">
+      <%= f.text_field :last_name, value: @user.last_name %>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-3">
+      <strong>Email:</strong>
+    </div>
+    <div class = "col-md-9">
+      <%= f.email_field :email, value: @user.email %>
+    </div>
+  </div>
+
+  <% if request.path == "/users/edit" %>
+    <%= render "address_dropdowns" %>
+  <% else %>
+    <%= render partial: "address_inputs", locals: {f: f} %>
+  <% end %>
+
+
+  <div class = "row">
+    <div class = "col-md-12">
+      <%= link_to "View Saved Addresses", user_addresses_path(@user) %>
+    </div>
+  </div>
+
+
+  <%= f.submit "Update #{name(@user)}", class: "btn btn-primary
+                                    btn-lg btn-block btn-create"%>
+
+
+  <div class = "row">
+    <div class = "col-md-12">
+        <%=link_to "Delete #{name(@user)}", user_path(@user),
+                    data: { confirm: "Are you sure?" }, method: :delete %>
+    </div>
+  </div>
+
+
+<% end %> <!--form -->

@@ -1,0 +1,74 @@
+<%= form_for @product do |f| %>
+
+  <div class = "row">
+    <div class = "col-md-2">
+      <strong>Product ID:</strong>
+    </div>
+    <div class = "col-md-10">
+      <span>N/A</span>
+    </div>
+  </div>
+
+<!--create a helper method for this -->
+  <div class = "row">
+    <div class = "col-md-2">
+      <strong>Name:</strong>
+    </div>
+
+    <div class = "col-md-10">
+      <%= f.text_field :name, class: "form-control", placeholder: "enter a name" %>
+    </div>
+  </div>
+
+  <% unless @product.errors[:name].empty? %>
+  <div class = "row">
+    <div class="col-md-10 col-md-offset-2 error">
+      <%= "Product #{@product.errors[:name].first}" %>
+    </div>
+  </div>
+  <% end %>
+
+  <div class = "row">
+    <div class = "col-md-2">
+      <strong>Price:</strong>
+    </div>
+
+    <div class = "col-md-10">
+      <%= f.text_field :price, class: "form-control", placeholder: "$price", value: price_field(@product) %>
+    </div>
+  </div>
+
+  <% unless @product.errors[:price].empty? %>
+  <div class = "row">
+    <div class="col-md-10 col-md-offset-2 error">
+      <%= "Product #{@product.errors[:price].first}" %>
+    </div>
+  </div>
+  <% end %>
+
+  <div class = "row">
+    <div class = "col-md-2">
+      <strong>Category:</strong>
+    </div>
+
+    <div class = "col-md-10">
+      <%= f.collection_select( :category_id, Category.all,
+                               :id, :name, prompt: 'Select' ) %>
+    </div>
+  </div>
+
+  <% unless @product.errors[:category_id].empty? %>
+  <div class = "row">
+    <div class="col-md-10 col-md-offset-2 error">
+      <%= "Product #{@product.errors[:category_id].first}" %>
+    </div>
+  </div>
+  <% end %>
+
+
+  <div class ="row">
+    <div class = "col-md-12">
+      <%= product_submit(f, @product)  %>
+    </div>
+  </div>
+<% end %>

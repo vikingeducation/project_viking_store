@@ -1,0 +1,36 @@
+<div class = "panel wrapper">
+  <h3>Order Contents</h3>
+
+  <table class="table">
+    <thead>
+      <th>Product ID</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total Price</th>
+    </thead>
+
+    <tbody>
+    <% @order.products.each do |product| %>
+
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= product.name %></td>
+        <td><%= @order.purchases.find_by(:product_id => product.id).quantity %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= number_to_currency(@order.products.where(:id => product.id).sum("price*quantity")) %></td>
+      </tr>
+
+    <% end %>
+
+    </tbody>
+
+  </table>
+
+
+  <%=link_to "Edit Order", edit_order_path(@order) %>
+  
+  <%=link_to "Delete Order", order_path(@order),
+                               data: { confirm: "Are you sure?" },
+                               method: :delete %>
+</div>
