@@ -25,5 +25,5 @@
 
 		<p><%= link_to "Edit #{@user.first_name} #{@user.last_name}'s Information", edit_user_path(@user)%></p>
 		<p><%= link_to "Delete #{@user.first_name} #{@user.last_name}", @user, method: :delete, data: { confirm: "You sure?" } %></p>
-		<p><%= link_to "View Saved Addresses",'#'%></p>
+		<p><%= link_to "View Saved Addresses","/addresses/?user_id=#{@user.id}"%></p>
 		<p><%= link_to "View user cart", '#'%></p>

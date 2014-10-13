@@ -1,26 +1,24 @@
   <%= form_for(@address) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :user_id, "Owner ID:" %>
-  <%= f.text_field :user_id %>
+  <p>Owner ID: <%= @user.id %>
+  <p>Owner Name: <%= link_to "#{@user.first_name} #{@user.last_name} (click to view)", @user %></p>
 
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
+  <%= f.label :user_id %>
+  <%= f.text_field :user_id, :value => @user.id, :readonly => true %>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+  <%= f.label :street_address %>
+  <%= f.text_field :street_address %>
 
-  <%= f.label :phone %>
-  <%= f.text_field :phone %>
+  <%= f.label :city %>
+  <%= f.text_field :city %>
 
-  <%= f.label :default_billing_address_id, "Default Billing Address:" %>
-  <%= f.collection_select( :default_billing_address_id, @addresses, :id, :street_address) %>
+  <%= f.label :state %>
+  <%= f.text_field :state %>
 
-  <%= f.label :default_shipping_address_id, "Default Shipping Address:" %>
-  <%= f.collection_select( :default_shipping_address_id, @addresses, :id, :street_address) %>
-
-  <p><%= link_to "View saved addresses", '#'%></p>
-
+  <%= f.label :zip %>
+  <%= f.text_field :zip %>
 
   <%= f.submit %>
+
   <% end %>

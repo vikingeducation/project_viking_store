@@ -3,7 +3,7 @@
 <% if @filtered %>
 	<h2 style="text-align:center;"><%= "#{User.find(@params_user_id).first_name} #{User.find(@params_user_id).last_name}\'s Addresses" %> </h2>
 	<button class="btn btn-large btn-primary">
-		<%= link_to "Create a #{User.find(@params_user_id).first_name} #{User.find(@params_user_id).last_name} Address", new_address_path  %>
+		<%= link_to "Create a new address for #{User.find(@params_user_id).first_name} #{User.find(@params_user_id).last_name}", new_user_address_path(@params_user_id)  %>
 	</button>
 <% else %>
 

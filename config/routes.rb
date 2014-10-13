@@ -8,7 +8,9 @@ root 'admin#index'
   resources :products #, only: [:new, :index, :show, :edit, :create]
   resources :orders, only: [:edit, :show, :destroy, :update]
 
-  resources :users
+  resources :users do
+    resources :addresses
+  end
   resources :addresses
 
   get 'addresses/params[:user_id]' => 'addresses#index'
