@@ -1,0 +1,8 @@
+<h3>Basic Information</h3>
+<p>Customer ID: <% @order.user_id %></p>
+<p>Telephone: <%= @order.user.phone %></p>
+<p>Date Placed: <%= @order.placed_at %></p>
+<p># Products: <%= @order.order_contents.count %></p>
+<p>Order Value: <%= @order.order_contents.select("SUM (quantity*current_price) as total")[0].total %></p>
+
+<p><%= link_to "Edit customer profile", edit_user_path(@order.user) %></p>

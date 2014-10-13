@@ -7,6 +7,7 @@ class CategoriesController < ApplicationController
 
   def edit
     @category = Category.find(params[:id])
+    render :layout => "admin_interface"
   end
 
   def new
@@ -15,6 +16,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    render :layout => "admin_interface"
   end
 
   def destroy

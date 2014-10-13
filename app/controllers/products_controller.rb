@@ -11,16 +11,19 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+    render :layout => "admin_interface"
   end
 
   def new
     @product = Product.new
+    render :layout => "admin_interface"
   end
 
   def show
     @product = Product.find(params[:id])
     @times_ordered = @product.times_ordered
     @carts_in = @product.carts_in
+    render :layout => "admin_interface"
   end
 
   def create

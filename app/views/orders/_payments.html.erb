@@ -1,0 +1,2 @@
+<h3>Billing Card</h3>
+<p>Last 4 Digits <%= @order.user.payment.cc_number.to_s[-4..-1] %></p>

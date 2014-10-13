@@ -8,7 +8,7 @@ class OrderContent < ActiveRecord::Base
 			"JOIN orders ON orders.id  = order_contents.order_id").
 			where('orders.placed_at > ?',time).
 			select("quantity*current_price AS revenue").
-			map(&:revenue).inject(&:+).round(2)
+			map(&:revenue).inject(&:+)
 	end
 
 	def self.highest_first

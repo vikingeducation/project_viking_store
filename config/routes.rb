@@ -6,14 +6,19 @@ root 'admin#index'
   resources :admin, only: [:index]
   resources :categories
   resources :products #, only: [:new, :index, :show, :edit, :create]
-  resources :orders, only: [:edit, :show, :destroy, :update]
+  resources :orders
 
   resources :users do
     resources :addresses
   end
   resources :addresses
+  
+  resources :users do 
+    resources :orders
+  end
 
   get 'addresses/params[:user_id]' => 'addresses#index'
+  get 'orders/params[:user_id]' => 'orders#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
