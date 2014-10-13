@@ -38,7 +38,7 @@
 
   <h4>Billing Address</h4>
   
-  <% if @user.billing_address.user_id %>
+  <% if @user.billing_address %>
     <%= render partial: "address_table",
               locals: {address: @user.billing_address} %>
   <% else %>
@@ -48,7 +48,7 @@
 
   <h4>Shipping Address</h4>
   
-  <% if @user.shipping_address.user_id %>
+  <% if @user.shipping_address %>
      <%= render partial: "address_table",
                 locals: {address: @user.shipping_address} %>
   <% else %>
