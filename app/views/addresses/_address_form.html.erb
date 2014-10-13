@@ -36,7 +36,7 @@
         <%= f.text_field :zip_code, placeholder: "enter zip code here", :class => "form-control" %>
       </div>
 
-      <%= f.submit (form_type == "Edit" ? "Update" : form_type) + " Address", :class => "btn btn-large btn-primary btn-block" %>
+      <%= f.submit submit(form_type, "Address"), :class => "btn btn-large btn-primary btn-block" %>
     <% end %>
 
     <%= (link_to "Delete Address",

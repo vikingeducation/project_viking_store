@@ -1,13 +1,13 @@
-<h2><%= @order.checked_out ? "Order #{@order.id}" : "#{@order.user.first_name} #{@order.user.last_name}'s Cart" %></h2>
+<h2><%= order_title(@order) %></h2>
 
 <div class="panel">
 	<%= render "logistical" %>
-	<p>Number Products: <%= @order.purchases.sum(:quantity) %></p>
-	<p>Order Value: <%= number_to_currency(@order.products.sum("quantity * price")) %></p>
+	<p>Number Products: <%= quantity(@order) %></p>
+	<p>Order Value: <%= order_value(@order) %></p>
 	<%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
 	<h4>Order Status</h4>
-	<h3 id=<%= @order.checked_out ? 'placed' : 'unplaced' %>>
-	<%= @order.checked_out ? "PLACED" : "UNPLACED" %>
+	<h3 id="<%= order_status(@order).downcase %>">
+	<%= order_status(@order) %>
 	</h3>
 
 <% if @order.shipping %>
@@ -25,7 +25,7 @@
 <% end %>
 
 	<h4>Billing Card</h4>
-	<p>Last four digits: <%= @order.user.credit_card.card_number[-4..-1] %></p>
+	<p>Last four digits: <%= @order.user.credit_card.card_number[-4..-1] if @order.user.credit_card %></p>
 	<%= link_to "Edit order",
 	    edit_user_order_path(@order.user_id, @order.id) %><br>
 

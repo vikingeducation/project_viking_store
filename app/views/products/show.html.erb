@@ -9,12 +9,10 @@
 <table class="table table-striped table-bordered">
   <tr>
     <td>Times Ordered</td>
-    <!-- evil view logic -->
-    <td><%= @product.orders.where(checked_out: true).count %></td>
+    <td><%= checked_out(true) %></td>
   </tr>
   <tr>
     <td>Carts In</td>
-    <!-- evil view logic -->
     <td><%= checked_out(false) %></td>
   </tr>
 </table>

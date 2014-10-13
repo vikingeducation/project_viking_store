@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
             :uniqueness => true,
             :format => { :with => /@/ }
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def self.new_users(last_x_days = nil)
     if last_x_days
       where("created_at > ?", Time.now - last_x_days.days).size

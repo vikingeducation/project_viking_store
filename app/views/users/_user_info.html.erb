@@ -9,5 +9,5 @@
 <%= link_to "Edit #{@user.first_name} #{@user.last_name}'s Information", edit_user_path(@user.id) %><br>
 <%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user), :method => :delete, :data => { confirm: "Are you sure?" } %><br>
 <%= link_to "View Saved Addresses", user_addresses_path(@user.id) %><br>
-<%= @user.orders.all?{|o|o.checked_out} ? "Unplaced Order" : (link_to "Unplaced Order", "#") %>
+<%= cart_link(@user) %>
 </div>

@@ -1,14 +1,6 @@
-<h2><%=if @user
-    "#{@user.first_name} #{@user.last_name}'s Orders"
-    else
-      "Orders"
-    end%></h2>
+<h2><%= index_title(@user, "Orders") %></h2>
 <div class="panel">
-  <% if @user %>
-    <%= link_to "Create Order for #{@user.first_name} #{@user.last_name}", new_user_order_path(@user), :class => "btn btn-block btn-default btn-lg btn-primary" %>
-  <% else %>
-    <em>Create new orders from within <%= link_to "User", users_path %> Profiles</em><br>
-  <% end %>
+  <%= index_order_create(@user) %>
 
   <table class="table table-striped table-bordered">
     <thead>

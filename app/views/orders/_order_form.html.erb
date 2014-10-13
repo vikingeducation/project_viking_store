@@ -31,7 +31,7 @@
 
         <br>
 
-        <%= f.submit (form_type == "Edit" ? "Update" : form_type) + " Order", :class => "btn btn-large btn-primary btn-block" %>
+        <%= f.submit submit(form_type, "Order"), :class => "btn btn-large btn-primary btn-block" %>
       <% end %>
 
       <%= (link_to "Delete Order",

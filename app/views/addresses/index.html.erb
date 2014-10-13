@@ -1,14 +1,6 @@
-<h2><%=if @user 
-    "#{@user.first_name} #{@user.last_name}'s Addresses"
-    else
-      "Addresses"
-    end%></h2>
+<h2><%= index_title(@user, "Addresses") %></h2>
 <div class="panel">
-  <% if @user %>
-    <%= link_to "Create Address for #{@user.first_name} #{@user.last_name}", new_user_address_path(@user), :class => "btn btn-block btn-default btn-lg btn-primary" %>
-  <% else %>
-    <em>Create new addresses from within <%= link_to "User", users_path %> Profiles</em><br>
-  <% end %>
+  <%= index_address_create(@user) %>
 
   <table class="table table-striped table-bordered">
     <thead>

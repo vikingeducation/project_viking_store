@@ -6,13 +6,13 @@
       <h3><%= form_type %> Category</h3>
       <div class="form-group">
         <%= f.label "Category ID:" %>
-        <%= category.id ? category.id : "N/A" %>
+        <%= display_if(category.id) %>
       </div>
       <div class="form-group">
         <%= f.label :name %>
         <%= f.text_field :name, placeholder: "enter the category name here", :class => "form-control" %>
       </div>
-      <%= f.submit (form_type == "Edit" ? "Update" : form_type) + " Category", :class => "btn btn-large btn-primary btn-block" %>
+      <%= f.submit submit(form_type, "Category"), :class => "btn btn-large btn-primary btn-block" %>
     <% end %>
     <%= (link_to "Delete Category", category_path(@category), :method => :delete, :data => { confirm: "Are you sure?" }) if category.id %>
   </div>
