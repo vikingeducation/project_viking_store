@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
       redirect_to categories_path
     else
       flash.now[:error] = "Failed to create Category."
-      render new_category_path
+      render 'new'
     end
   end
 
@@ -33,7 +33,7 @@ class CategoriesController < ApplicationController
       redirect_to categories_path
     else
       flash.now[:error] = "Failed to update Category."
-      render edit_category_path
+      render 'edit'
     end
   end
 

@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       flash.now[:error] = "Failed to create User."
+      render 'new'
     end
   end
 
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       flash.now[:error] = "Failed to update User."
+      render 'edit'
     end
   end
 

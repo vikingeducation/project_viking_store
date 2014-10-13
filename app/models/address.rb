@@ -9,8 +9,6 @@ class Address < ActiveRecord::Base
   has_one :default_billing, foreign_key: :billing_id, :class_name => "User"
   has_one :default_shipping, foreign_key: :shipping_id, :class_name => "User"
 
-  validates_presence_of :user
-  validates_presence_of :state
   validates :street_address,
             :zip_code,
             :city_id,
@@ -18,6 +16,9 @@ class Address < ActiveRecord::Base
             :user_id, :presence => true
   validates :zip_code, numericality: {integer:true}
   validates :street_address, length: {maximum: 64}
+
+  validates_presence_of :user
+  validates_presence_of :state
 
   def address_maker
     "#{street_address}, #{city.name}, #{state.name} #{zip_code}"

@@ -1,7 +1,7 @@
-<h2><%= "Edit Order #{@order.id}"%></h2>
+<h2>Edit Order <%= @order.id %></h2>
 <%= render "order_form",  :order => @order,
                           :form_type => "Edit" %>
 <%= render "edit_order_contents", :purchases => @purchases,
                           				:form_type => "Edit" %>
-<%= render "edit_order_products", :order => @order, 
+<%= render "edit_order_products", :order => @order,
 																	:purchases => @purchases %>

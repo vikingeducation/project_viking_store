@@ -1,6 +1,6 @@
-<h3><%= "#{@user.name}'s" %> Address</h3>
+<h3><%= @user.name %>'s Address</h3>
 <p>Owner ID: <%= @user.id %></p>
-<p>Owner Name: <%= link_to "#{@user.name}", user_path(@user) %></p>
+<p>Owner Name: <%= link_to @user.name}, user_path(@user) %></p>
 <p>Street: <%= @address.street_address %></p>
 <p>City: <%= @address.city.name %></p>
 <p>State: <%= @address.state.name %></p>

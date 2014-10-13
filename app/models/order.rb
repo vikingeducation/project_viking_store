@@ -12,7 +12,7 @@ class Order < ActiveRecord::Base
             :presence => true
   validates_inclusion_of :checked_out, :in => [true, false]
 
-  def order_value
+  def value
     products.sum("quantity * price")
   end
 
@@ -59,16 +59,16 @@ class Order < ActiveRecord::Base
   end
 
   def self.orders_in(weeks_ago)
-    starting_sunday = Time.now.midnight - Time.now.wday - (7 * weeks_ago).days
+    starting_monday = Time.now.beginning_of_week
 
-    where(:checkout_date => (starting_sunday..( starting_sunday + 7.days ))).size
+    where(:checkout_date => (starting_monday..(starting_monday+7.days))).size
   end
 
   def self.weekly_revenue(weeks_ago)
-    starting_sunday = Time.now.midnight - Time.now.wday - (7 * weeks_ago).days
+    starting_monday = Time.now.beginning_of_week
 
     joins("JOIN purchases ON orders.id = purchases.order_id JOIN products ON purchases.product_id = products.id").
-      where(:checkout_date => (starting_sunday..( starting_sunday + 7.days ))).
-      sum("(purchases.quantity * products.price)")
+    where(:checkout_date => (starting_monday..(starting_monday+7.days))).
+    sum("(purchases.quantity * products.price)")
   end
 end

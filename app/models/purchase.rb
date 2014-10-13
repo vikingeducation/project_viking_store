@@ -4,6 +4,10 @@ class Purchase < ActiveRecord::Base
 
   validates :order_id, :product_id, :quantity, :presence => true
 
+  def value
+    product.price * quantity
+  end
+
   def self.revenue(last_x_days = nil)
     if last_x_days
       joins("JOIN products ON purchases.product_id = products.id JOIN orders ON orders.id = purchases.order_id").

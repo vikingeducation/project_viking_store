@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
       redirect_to products_path
     else
       flash.now[:error] = "Failed to create Product."
-      render new_product_path
+      render 'new'
     end
   end
 
@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
       redirect_to products_path
     else
       flash.now[:error] = "Failed to update Product."
-      render edit_product_path
+      render 'edit'
     end
   end
 

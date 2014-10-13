@@ -83,7 +83,7 @@ def generate_addresses(user_id)
       state_id:       city_instance["state"],
       zip_code:       city_instance["zip"],
       phone_number:   Faker::PhoneNumber.phone_number
-    } ).save
+    } ).save!
   end
 end
 
@@ -110,18 +110,22 @@ end
 
 (SCALAR*25).times do |x|
   sample_name = [Faker::Name.first_name, Faker::Name.last_name]
-  generate_addresses(x+1)
   generate_card(x+1)
 
-  User.new( {
+  u = User.new( {
     first_name:  sample_name[0],
     last_name:   sample_name[1],
     email:       Faker::Internet.email(sample_name.join(" ")),
-    billing_id:  random_user_address(x+1),
-    shipping_id: random_user_address(x+1),
     created_at:  creation_date,
     phone_number:   Faker::PhoneNumber.phone_number
-  } ).save
+  } )
+  u.save
+
+  generate_addresses(x+1)
+
+  u[:billing_id]  = random_user_address(x+1)
+  u[:shipping_id] = random_user_address(x+1)
+  u.save
 end
 
 #generate order contents

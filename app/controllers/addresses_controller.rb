@@ -44,7 +44,7 @@ class AddressesController < ApplicationController
       redirect_to user_addresses_path
     else
       flash.now[:error] = "Failed to update Address."
-      render edit_user_address_path
+      render 'edit'
     end
   end
 

@@ -4,6 +4,6 @@
     <td><%= link_to purchase.product.name, product_path(purchase.product) %></td>
     <td><%= purchase.quantity %></td>
     <td><%= number_to_currency(purchase.product.price) %></td>
-    <td><%= number_to_currency(purchase.product.price * purchase.quantity) %></td>
+    <td><%= number_to_currency(purchase.value) %></td>
   </tr>
 <% end %>
