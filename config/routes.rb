@@ -2,20 +2,22 @@ Rails.application.routes.draw do
 
   root 'admin#index'
 
-  get 'analytics' => 'dashboard#index'
-  get 'addresses' => 'addresses#index'
+  namespace :admin do
 
-  resources :categories
-  resources :products
-  resources :orders do
-    resources :purchases
-  end
+    get 'analytics' => 'dashboard#index', :controller => :admin
+    get 'addresses' => 'addresses#index'
+
+    resources :categories
+    resources :products
+    resources :orders do
+      resources :purchases
+    end
 
 
-
-  resources :users do
-    resources :addresses
-    resources :orders
+    resources :users do
+      resources :addresses
+      resources :orders
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
