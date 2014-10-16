@@ -26,7 +26,7 @@ class Admin::OrdersController < AdminController
 
     if @order.save
       flash[:success] = "New order saved."
-      redirect_to admin_edit_order_path(@order)
+      redirect_to edit_admin_order_path(@order)
     else
       flash.now[:error] = "Something was invalid."
       render :new
@@ -43,7 +43,7 @@ class Admin::OrdersController < AdminController
 
     if @order.update(whitelisted_params) || @order.purchases.each {|p| p.save}
       flash[:success] = "Updated!"
-      redirect_to @order
+      redirect_to [:admin, @order]
     else
       flash.now[:error] = "Failed to save due to #{@order.errors.full_messages.inspect}\n #{@order.purchases.last.errors.full_messages.inspect}"
       render :edit

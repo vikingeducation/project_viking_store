@@ -17,7 +17,17 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true, format: { with: /@/ }
 
+  def name
+    "#{first_name} #{last_name}"
+  end
 
+  def shopping_cart
+    cart
+  end
+
+  def cart
+    orders.where(:checked_out => false)
+  end
 
   def self.new_users(last_x_days = nil)
     if last_x_days
