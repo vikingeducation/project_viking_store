@@ -1,0 +1,71 @@
+// Place all the styles related to the store controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#store-navbar {
+  padding-top: 15px;
+  height: 3em;
+  border-bottom: 2px solid #333;
+}
+
+.store-header {
+  text-align: center;
+  border: 2px solid black;
+
+  .store-headline {
+    background-color: #888;
+    img {
+      opacity: 0.2;
+    }
+  }
+
+  .subhead {
+    vertical-align: middle;
+    height: 6em;
+    background-color: #333333;
+    color: white;
+  }
+
+  .store-summary {
+    font-style: italic;
+    height: 45px;
+    padding-top: 15px;
+    border-bottom: 2px solid black;
+  }
+}
+
+.store_items {
+  text-align: center;
+}
+
+.item-wrapper {
+  margin: 15px auto;
+}
+.item {
+  border: 2px solid black;
+  margin: 15px auto;
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  height: 20em;
+
+  .price-tag {
+    position: absolute;
+    right: -2px;
+    top: -2px;
+    border: 3px solid black;
+    padding: 2px;
+  }
+}
+
+.selector-div {
+  height: 60px;
+  padding: 15px;
+}
+
+footer {
+  background-color: #333;
+  color: #FFAA33;
+  text-align: center;
+}
+

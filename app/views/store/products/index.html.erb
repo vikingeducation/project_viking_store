@@ -1,0 +1,34 @@
+
+<header class = "store-header row">
+  <div class = "store-headline col-md-12">
+    <img src = "http://s3.amazonaws.com/viking_education/demos/viking_store_app/viking_ship_background_medium.jpg" width = "100%" height = "100%">
+    <h1>The Viking Store</h1>
+  </div>
+    
+  <div class = "subhead col-md-12">
+    <h3>The Best Viking Gear on the Whole Web</h3>
+  </div>
+
+  <div class = "store-summary col-md-12">
+    Choose from among our lineup of fine axes below
+  </div>
+</header>
+
+<div class = "selector-div col-md-3 pull-right">
+  <%= form_tag store_products_path, method: :get do %>
+    <%= collection_select :category, :id, Category.all, :id, :name %>
+    <%= submit_tag "Apply Filter" %>
+  <% end %>
+</div>
+
+<div class = "store-items col-md-12">
+  <% @products.each do |product| %>
+    <%= render partial: "order_product", locals: {product: product} %>
+  <% end %>
+</div>
+
+
+<div class = "nav col-md-12">
+  <span class = "navigator">  <a href = "#">&lt;&lt; Prev</a>&nbsp;&nbsp;&nbsp;<a href = "#">1</a>&nbsp;&nbsp;&nbsp;<span class = "current-page">2</span>&nbsp;&nbsp;&nbsp;<a href = "#">3</a>&nbsp;&nbsp;&nbsp;. . .&nbsp;&nbsp;&nbsp;<a href = "#">8</a>&nbsp;&nbsp;&nbsp;<a href = "#">9</a>&nbsp;&nbsp;&nbsp;<a href="#">Next&gt;&gt;</a>&nbsp;&nbsp;&nbsp;</span>
+</div>
+

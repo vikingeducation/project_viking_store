@@ -1,0 +1,20 @@
+<tbody>
+  <% @user.orders.each do |order|%>
+    <tr>
+      <td><%= order.id %>
+      <td><%= link_to "#{order.user.id}", admin_user_path(order.user)%></td>
+      <td><%= order_address(order) %></td>
+      <td><%= shipping_city(order)%></td>
+      <td><%= shipping_state(order) %></td>
+      <td><%= order.products.sum("quantity") %></td>
+      <td><%= number_to_currency(order.products.sum("quantity * price")) %></td>
+      <td><%= order_status(order) %></td>
+      <td><%= order_date(order) %></td>
+      <td><%=link_to "show", admin_order_path(order) %></td>
+      <td><%=link_to "edit", edit_admin_order_path(order) %></td>
+      <td><%=link_to "delete", admin_order_path(order),
+                               data: { confirm: "Are you sure?" },
+                               method: :delete %></td>
+    </tr>
+  <% end %>
+</tbody>

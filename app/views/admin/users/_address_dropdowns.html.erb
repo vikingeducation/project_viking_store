@@ -1,0 +1,17 @@
+<div class = "row">
+  <div class = "col-md-3">
+    <strong>Default Billing Address:</strong>
+  </div>
+  <div class = "col-md-9">
+    <%= f.collection_select( :billing_id, @user.addresses, :id, :street_address, prompt: 'Select', selected: @user.billing_id ) %>
+  </div>
+</div>
+
+<div class = "row">
+  <div class = "col-md-3">
+    <strong>Default Shipping Address:</strong>
+  </div>
+  <div class = "col-md-9">
+    <%= f.collection_select( :shipping_id, @user.addresses, :id, :street_address, prompt: 'Select', selected: @user.shipping_id ) %>
+  </div>
+</div>

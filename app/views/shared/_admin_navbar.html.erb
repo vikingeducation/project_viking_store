@@ -1,0 +1,28 @@
+<nav class = "col-md-2" id="admin-navbar">
+  <h4>Navigation Options</h4>
+  <div class = "row">
+    <div class = "col-md-12">
+      <%= link_to "Users", admin_users_path %>
+    </div>
+    <div class = "col-md-12">
+      <%= link_to "Addresses", admin_addresses_path %>
+    </div>
+
+    <div class = "col-md-12">
+      <%= link_to "Orders", admin_orders_path %>
+    </div>
+
+    <div class = "col-md-12">
+      <%= link_to "Products", admin_products_path %>
+    </div>
+
+    <div class = "col-md-12">
+      <%= link_to "Categories", admin_categories_path %>
+    </div>
+
+    <div class = "col-md-12">
+      <hr />
+      <%= link_to "Analytics Dashboard", admin_analytics_path %>
+    </div>
+  </div>
+</nav>

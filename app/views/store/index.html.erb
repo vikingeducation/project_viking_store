@@ -1,0 +1,47 @@
+
+<header class = "row store-header">
+  <div class = "col-md-12 store-headline">
+    <img src = "http://s3.amazonaws.com/viking_education/demos/viking_store_app/viking_ship_background_medium.jpg" width = "100%" height = "100%">
+    <h1>The Viking Store</h1>
+  </div>
+
+  <div class = "col-md-12 subhead">
+    <h3>The Best Viking Gear on the Whole Web</h3>
+  </div>
+
+  <div class = "col-md-12 store-summary">
+    Choose from among our lineup of fine axes below
+  </div>
+</header>
+
+<div class = "store-items">
+
+  <% @products.each do |product| %>
+    <%=render "order_product", locals: { product: product } %>
+
+  <% end %>
+  <div class = "item">
+    <h4>The Dainty Daisy</h4>
+    <div class = "price-tag">$100</div>
+    <img src = "http://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_dainty_daisy_small.jpg" height = "150px" width = "190px">
+    <div class = "add-button-container">
+      <form>
+        <input type="submit" class = "add-cart" value = "Add to Cart">
+      </form>
+    </div>
+  </div>
+
+
+<div class = "footer">
+  <h4>CONTACT</h4>
+  <div class = "contact-wrapper">
+  <p><img src = "http://s3.amazonaws.com/viking_education/demos/viking_store_app/icon_phone_white.png" width = "20px" height = "20px">
+    <span class = "phone-number">1 - 000 - 000 - 0000</span></p>
+  </div>
+  
+  <div class = "contact-wrapper">
+    <p><img src = "http://s3.amazonaws.com/viking_education/demos/viking_store_app/email_white.png" width = "22px" height = "15px">
+    contact@vikingstore.com
+    </p>
+  </div>
+</div>
