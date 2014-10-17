@@ -8,4 +8,22 @@ class Store::ProductsController < ApplicationController
       @products = Product.all
     end
   end
+
+  def update
+    @product_id = params[:id]
+    session[:cart] ||= Hash.new(0)
+
+    if Product.exists?(@product_id) && session[:cart][@product_id]
+      session[:cart][@product_id] += 1
+      flash[:success] = "Added another to your cart."
+    elsif Product.exists?(@product_id)
+      session[:cart][@product_id] = 1
+      flash[:success] = "Added new item to your cart."
+    else
+      flash[:error] = "Item requested doesn't seem to exist. Sorry!"
+    end
+
+    redirect_to action: :index
+  end
+
 end

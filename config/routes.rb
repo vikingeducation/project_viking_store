@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'store#index'
 
+  resources :sessions, :only => [:new, :create, :destroy]
+
   namespace :store do
     resources :products
     resources :users
