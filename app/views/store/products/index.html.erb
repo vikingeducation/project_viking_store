@@ -14,7 +14,7 @@
   </div>
 </header>
 
-<div class = "selector-div col-md-12">
+<div class = "selector-div col-md-3 pull-right">
   <%= form_tag store_products_path, method: :get do %>
     <%= collection_select :category, :id, Category.all, :id, :name %>
     <%= submit_tag "Apply Filter" %>

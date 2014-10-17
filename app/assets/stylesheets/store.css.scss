@@ -47,6 +47,7 @@
   text-align: center;
   padding: 15px;
   position: relative;
+  height: 20em;
 
   .price-tag {
     position: absolute;
@@ -55,6 +56,11 @@
     border: 3px solid black;
     padding: 2px;
   }
+}
+
+.selector-div {
+  height: 60px;
+  padding: 15px;
 }
 
 footer {
