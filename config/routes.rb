@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
 
-  root 'admin#index'
+  root 'store#index'
+
+  namespace :store do
+    resources :products
+    resources :users
+  end
 
   namespace :admin do
 
-    get 'analytics' => 'dashboard#index', :controller => :admin
+    get 'analytics' => 'dashboard#index'
     get 'addresses' => 'addresses#index'
 
     resources :categories

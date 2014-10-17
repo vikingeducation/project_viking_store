@@ -1,28 +1,20 @@
-<nav class = "col-md-2" id="admin-navbar">
-  <h4>Navigation Options</h4>
-  <div class = "row">
-    <div class = "col-md-12">
-      <%= link_to "Users", admin_users_path %>
-    </div>
-    <div class = "col-md-12">
-      <%= link_to "Addresses", admin_addresses_path %>
-    </div>
+<nav class = "navbar row" id = "store-navbar">
+  <div class = "col-md-2">
+    Viking Store
+  </div>
 
-    <div class = "col-md-12">
-      <%= link_to "Orders", admin_orders_path %>
-    </div>
-
-    <div class = "col-md-12">
-      <%= link_to "Products", admin_products_path %>
-    </div>
-
-    <div class = "col-md-12">
-      <%= link_to "Categories", admin_categories_path %>
-    </div>
-
-    <div class = "col-md-12">
-      <hr />
-      <%= link_to "Analytics Dashboard", admin_analytics_path %>
+  <div class = "col-md-3 col-md-offset-7">
+    <div class = "col-md-6">
+    <figure>
+      <%= link_to "#" do %>
+        <img src = "http://s3.amazonaws.com/viking_education/demos/viking_store_app/icon_empty_cart.png" height = "24px">
+        Your Cart
+      <% end %>
+    </figure>
+  </div>
+  <div class = "col-md-6">
+    <%= link_to "Sign In", "#" %>
     </div>
   </div>
+
 </nav>

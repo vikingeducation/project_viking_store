@@ -4,10 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
+
   private
 
   def require_current_user
-    unless current_user == User.find(session[:id])
+    unless current_user == User.find(params[:id])
       flash[:error] = "Access denied!!!"
       redirect_to root_url
     end

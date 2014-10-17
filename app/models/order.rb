@@ -41,9 +41,6 @@ class Order < ActiveRecord::Base
     where.(:checked_out => true)
   end
 
-  def self.containing_only_category(category)
-    joins(:products).where("products.category = ?", category)
-  end
 
   def self.new_orders(last_x_days = nil)
     if last_x_days

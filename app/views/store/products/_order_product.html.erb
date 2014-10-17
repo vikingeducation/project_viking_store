@@ -1,0 +1,18 @@
+<div class = "col-md-4 it">
+  <div class = "item col-md-8 col-md-offset-2">
+  <h4><%= product.name %></h4>
+
+  <div class = "price-tag"><%= product.price %></div>
+
+
+  <img src = "https://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_silent_night_small.jpg" height = "150px" width = "140px">
+
+  <div class = "add-button-container">
+
+    <%= form_for [:store, product] do |f| %>
+      <%= f.submit "Add to Cart"%>
+    <% end %>
+
+  </div>
+</div>
+</div>
