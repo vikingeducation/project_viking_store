@@ -1,0 +1,27 @@
+<div class="panel">
+	 <%= form_tag({controller: "purchases", action: "update"}, method: "patch") do %>
+	 <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total Price</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% purchases.each do |purchase| %>
+			  <tr>
+			    <td><%= purchase.product_id %></td>
+			    <td><%= text_field :purchases, "[#{purchase.id}][quantity]", value: "#{purchase.quantity}"%></td>
+			    <td><%= number_to_currency(purchase.product.price) %></td>
+			    <td><%= number_to_currency(purchase.product.price * purchase.quantity) %></td>
+			    <td><%= link_to("Delete product", admin_user_order_path(), :method => :delete,:data => { confirm: "Are you sure?" }) %></td>
+			  </tr>
+			<% end %>
+    </tbody>
+  </table>
+  <%= submit_tag %>
+  <% end %>
+</div>

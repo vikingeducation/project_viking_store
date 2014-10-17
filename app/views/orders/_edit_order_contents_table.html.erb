@@ -1,8 +1,0 @@
-<% order.purchases.each do |purchase| %>
-  <tr>
-    <td><%= purchase.product.id %></td>
-    <td><%= f.text_field :quantity %></td>
-    <td><%= number_to_currency(purchase.product.price) %></td>
-    <td><%= number_to_currency(purchase.value) %></td>
-  </tr>
-<% end %>

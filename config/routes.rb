@@ -1,16 +1,22 @@
 Rails.application.routes.draw do
 
-  root 'dashboard#index'
-  resources :categories
-  resources :products
-  resources :addresses, only: [:index]
-  resources :orders, only: [:index]
-  resources :users do
-    resources :addresses
-    resources :orders
+  root 'shop/products#index'
+  namespace :admin do
+    resources :categories
+    resources :products
+    resources :addresses, only: [:index]
+    resources :orders, only: [:index]
+    resources :purchases
+    resources :dashboard, only: [:index]
+
+    resources :users do
+      resources :addresses
+      resources :orders
+    end
+
+    resources :credit_cards, only: [:destroy]
   end
 
-  resources :credit_cards, only: [:destroy]
   #delete 'users/:id/cc' => 'users#destroy_credit_card'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,8 +1,0 @@
-<tr>
-  <td><%= product.id %></td>
-  <td><%= link_to product.name, product %></td>
-  <td><%= number_to_currency(product.price) %></td>
-  <td><%= product.category.nil? ? "N/A" : (link_to product.category.name, category_path(product.category)) %></td>
-  <td><%= link_to "edit", edit_product_path(product) %></td>
-  <td><%= link_to "delete", product, :method => :delete, :data => { confirm: "Are you sure?" } %></td>
-</tr>
