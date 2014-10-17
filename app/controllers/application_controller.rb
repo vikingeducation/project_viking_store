@@ -37,8 +37,10 @@ class ApplicationController < ActionController::Base
    
   private
 
+  #uses separate variable for the public to prevent 
+  #malicious use (not very well)
   def check_current_user
-    @current_user = current_user
+    @logged_in_user = current_user
   end
 
 end
