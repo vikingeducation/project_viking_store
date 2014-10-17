@@ -15,9 +15,8 @@ class ApplicationController < ActionController::Base
   
    # returns true/false that user is signed in or not.
    def user_signed_in?
-     !!@current_user
+     !!current_user
    end
-
 
   def require_login
     unless signed_in_user?
