@@ -13,7 +13,11 @@
     </figure>
   </div>
   <div class = "col-md-6">
-    <%= link_to "Sign In", new_session_path %>
+    <% if @current_user %>
+      <%= link_to "Sign Out", session_path(@current_user.id), method: "DELETE" %>
+    <% else %>
+      <%= link_to "Sign In", new_session_path %>
+    <% end %>
     </div>
   </div>
 
