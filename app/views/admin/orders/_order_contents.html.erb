@@ -1,0 +1,9 @@
+<% order.purchases.each do |purchase| %>
+  <tr>
+    <td><%= purchase.product.id %></td>
+    <td><%= link_to purchase.product.name, admin_product_path(purchase.product) %></td>
+    <td><%= purchase.quantity %></td>
+    <td><%= number_to_currency(purchase.product.price) %></td>
+    <td><%= number_to_currency(purchase.value) %></td>
+  </tr>
+<% end %>

@@ -1,0 +1,5 @@
+<form action="<%= sessions_path %>" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  <input id="email" name="email" type="email" class="form-control" />
+  <p><button type="submit" class="btn btn-swedish btn-submit">Sign In</button></p>
+</form>

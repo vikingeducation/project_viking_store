@@ -1,0 +1,38 @@
+@import 'colors';
+
+.navbar-offset {
+  padding-top: 50px;
+}
+
+nav.navbar-swedish {
+  background: $dark-normal;
+  a {
+    color: $flag-yellow;
+  }
+
+  li a:hover {
+    background: $normal-light;
+  }
+}
+
+.main-footer {
+  background: $normal-dark;
+  color: $flag-yellow;
+  a {
+    color: $flag-yellow;
+    text-decoration: underline;
+    &:hover {
+      color: $flag-yellow;
+      background-color: $flag-light-blue;
+    }
+  }
+}
+
+button.btn-swedish, input.btn-swedish {
+  background: $normal-dark;
+  color: $flag-yellow;
+  &:hover {
+    color: $flag-yellow;
+    background: $light-normal;
+  }
+}

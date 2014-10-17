@@ -1,0 +1,25 @@
+<article class="col-md-4 col-xs-6 product-panel">
+  <header class="row">
+    <div class="col-md-12">
+      <h4><%= link_to product.name, "#" %></h4>
+    </div>
+  </header>
+  <div class="row middle">
+    <div class="col-md-12">
+      <div class="description">
+        <div class="price-ribbon">
+          <%= number_to_currency(product.price) %>
+        </div>
+        <p><%= product.description %></p>
+      </div>
+    </div>
+  </div>
+  <footer class="row">
+    <div class="col-md-12">
+      <form action="<%= products_path %>" method="GET">
+        <%= hidden_field_tag(:item, product.id) %>
+        <p><button type="submit" class="btn btn-swedish btn-submit">Add to Cart</button></p>
+      </form>
+    </div>
+  </footer>
+</article>

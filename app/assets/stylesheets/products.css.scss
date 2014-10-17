@@ -1,0 +1,42 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'colors';
+
+.ugly-banner {
+  text-align: center;
+  color: #aaa;
+  border-bottom: 1px solid $flag-dark-blue;
+}
+
+article.product-panel {
+  margin-top: 15px;
+  a {
+    color: $flag-yellow;
+  }
+  header div h4 {
+    text-align: center;
+    color: $flag-yellow;
+    background: $normal-dark;
+    border-radius: 5px 5px 0 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .middle div.description {
+    height: 150px;
+    border-left: 1px solid $flag-blue;
+    border-right: 1px solid $flag-blue;
+    .price-ribbon {
+      border: 1px solid $flag-light-blue;
+      float: right;
+    }
+  }
+
+  footer div p {
+    text-align: center;
+    background: $dark-normal;
+    border-radius: 0 0 5px 5px;
+  }
+}
