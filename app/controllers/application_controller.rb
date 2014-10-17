@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :check_current_user
+  helper_method :current_user
 
   def sign_in(user)
     session[:current_user_id] = user.id
@@ -37,10 +37,5 @@ class ApplicationController < ActionController::Base
    
   private
 
-  #uses separate variable for the public to prevent 
-  #malicious use (not very well)
-  def check_current_user
-    @logged_in_user = current_user
-  end
 
 end
