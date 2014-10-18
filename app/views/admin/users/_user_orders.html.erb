@@ -1,3 +1,4 @@
+<% orders.each do |order| %>
 	<tr>
 	  <td><%= order.id %></td>
 	  <td><%= order.created_at %></td>
@@ -7,3 +8,4 @@
   	<td><%= link_to "edit", '#' %></td>
 	  <td><%= link_to "delete", '#' %></td>
 	</tr>
+<% end %>

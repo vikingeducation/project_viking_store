@@ -1,12 +1,15 @@
 source 'https://rubygems.org'
 
-#heeeeelp
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'sqlite3'
+  gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
+  gem 'pry-byebug'
 end
 
+gem 'twitter-bootstrap-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 

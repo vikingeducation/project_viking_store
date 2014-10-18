@@ -1,17 +1,7 @@
 	<main>
-		<header>
-			<div class="hero-section">
-				<h1>The Viking Store</h1>
-			</div>
-			<div class="tagline-block">
-				
-			</div>
-			<div class="choose-item">
-			</div>
+	<%= render 'shop/shared/hero_section' %>
 
-		</header>
-
-		<section>
+		<section class="container full-height">
 			<div class="row">
 				<div class="col-sm-12">
 					
@@ -19,12 +9,21 @@
 						<div class="filter-dropdown"></div>
 						<div class="filter-btn"></div>
 					</div>
+					<div class="row">
 
-					<div class="col-x-x">
-						
-						<%= render @products %>
+							<div class="col-xs-12 buffer">
+								<div class="pull-right">
+							    <%= form_tag shop_products_path, method: :get do %>
+								    <%= collection_select :category, :id, Category.all, :id, :name %>
+								    <%= submit_tag "Apply Filter" %>
+								  <% end %>
+								</div>
+							</div>
 
-					</div>
+
+							<%= render 'shop/products/product', products: @products %>
+
+
 				</div>
 			</div>
 		</secion>
