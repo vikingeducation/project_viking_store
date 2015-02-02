@@ -1,0 +1,14 @@
+<div class="panel">
+  <h4>Credit Card Information</h4>
+
+  <% if @user.credit_card.nil? %>
+    No Credit Card on file
+  <% else %>
+    <p>First Name: <%= @user.first_name %></p>
+    <p>Last Name: <%= @user.last_name %></p>
+    <p>Number: <%= @user.credit_card.card_number %></p>
+    <p>Expiration: <%="#{@user.credit_card.exp_month}-#{@user.credit_card.exp_year}"%></p>
+    <p>CCV: <%= @user.credit_card.ccv %></p>
+    <%= link_to "Delete Credit Card", admin_credit_card_path(@user.credit_card), :method => :delete, :data => { confirm: "Are you sure?" } %>
+  <% end %>
+</div>

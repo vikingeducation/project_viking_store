@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= render "shared/errors", :object => address %>
+
+    <%= form_for address, :url => { :action => (address.id ? :update : :create) } do |f| %>
+
+      <h3><%= form_type %> address</h3>
+      <div class="form-group">
+        <%= f.label "User ID:" %>
+        <%= address.user_id %>
+        <%= f.hidden_field :user_id %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :user %>
+        <%= link_to "#{address.user.name} (Click to view user)", user_path(address.user_id) %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :street_address %>
+        <%= f.text_field :street_address, placeholder: "enter street address here", :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :state %>
+        <%= f.collection_select :state_id, State.all, :id, :name, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :city %>
+        <%= f.collection_select :city_id, City.all, :id, :name, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :zip_code %>
+        <%= f.text_field :zip_code, placeholder: "enter zip code here", :class => "form-control" %>
+      </div>
+
+      <%= f.submit submit(form_type, "Address"), :class => "btn btn-large btn-primary btn-block" %>
+    <% end %>
+
+    <%= (link_to "Delete Address",
+    user_address_path(address.user_id, address.id),
+    :method => :delete,
+    :data => { confirm: "Are you sure?" }) if address.id %>
+  </div>
+</div>

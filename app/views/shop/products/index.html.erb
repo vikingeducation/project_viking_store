@@ -1,0 +1,30 @@
+	<main>
+	<%= render 'shop/shared/hero_section' %>
+
+		<section class="container full-height">
+			<div class="row">
+				<div class="col-sm-12">
+
+					<div class="filter-group">
+						<div class="filter-dropdown"></div>
+						<div class="filter-btn"></div>
+					</div>
+					<div class="row">
+
+							<div class="col-xs-12 buffer">
+								<div class="pull-right">
+							    <%= form_tag shop_products_path, method: :get do %>
+								    <%= collection_select :category, :id, Category.all, :id, :name %>
+								    <%= submit_tag "Apply Filter" %>
+								  <% end %>
+								</div>
+							</div>
+
+
+							<%= render 'shop/products/product', products: @products %>
+
+
+				</div>
+			</div>
+		</secion>
+	</main>

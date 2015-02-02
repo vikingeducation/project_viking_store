@@ -1,0 +1,12 @@
+        <li class="signed-in dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Sign In <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            <%= form_tag "#" do %>
+                <li>
+                   <i class="fa fa-fw"><%= text_field_tag "user" %></i>
+                </li>
+                   <i class="fa fa-fw"><%= text_field_tag "password" %></i>   
+                </li>
+                <% end%>
+            </ul>
+        </li>

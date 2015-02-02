@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VikingStore</title>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+    <%= render "shop/shared/navbar" %>
+
+
+
+      <%= yield %>
+
+  </div>
+</div>
+<footer>
+  <div class="footer-content">
+  <div class="admin-login">
+    <%= link_to("Admin Login", admin_dashboard_index_path) %>
+  </div>
+    <div class="footer-contact">
+      <p>Contact</p>
+      <div id="footer-phone">
+        <span class="contact-img"><%=image_tag("#")%></span>
+      </div>
+      <div id="footer-email">
+        <span class="contact-img"><%=image_tag("#")%></span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
