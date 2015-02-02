@@ -17,10 +17,16 @@
                 <span class="fa fa-shopping-cart"></span> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu alert-dropdown">
-                <li>
-                    <a href="#">Item: <span class="label label-default">Product in cart</span></a>
-                </li>
-                <li class="divider"></li>
+
+            <% if @cart %>
+                <% @cart.each do |k,v| %>
+                    <li>
+                        <a href="#"> (<%=v%>) <span class="label label-default"><%= find_product(@products, k, v) %></span></a>
+                    </li>
+                    <li class="divider"></li>
+                <% end %>
+            <% end %>
+
                 <li>
                     <a href="#">View All</a>
                 </li>

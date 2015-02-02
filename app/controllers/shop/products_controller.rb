@@ -1,6 +1,7 @@
 class Shop::ProductsController < ShopController
 
 	def index
+		@cart = session[:cart]
 		if params[:category]
 			@products = Product.where(category_id: params[:category][:id])
 		else

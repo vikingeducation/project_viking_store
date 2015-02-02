@@ -2,10 +2,10 @@ Rails.application.routes.draw do
 
   get 'shop/products/index' => 'shop#index'
   root 'shop#index'
-  
+
   namespace :shop do
     resources :products
-    resources :orders 
+    resources :orders
     post ':id/add_item' => 'orders#add_item'
 
   end
