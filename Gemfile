@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
-# Use postgresql as the database for Active Record
+# Sqlite3 for database
 gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -24,7 +24,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+<<<<<<< HEAD
 gem 'spring', '~> 1.3.3',       group: :development
+=======
+gem 'spring',  '~> 1.3.3',      group: :development
+>>>>>>> 150d8f542055b48e8febf80cf0f0df022604fc6e
 
 gem 'hirb',                      group: :development
 gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger',  group: :development
