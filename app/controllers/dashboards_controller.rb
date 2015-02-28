@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
   def index
-    @dashboard = Dashboard.new
+    @total_revenue = Order.total_revenue
   end
 end
