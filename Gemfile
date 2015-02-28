@@ -29,9 +29,11 @@ gem 'spring', '~> 1.3.3',       group: :development
 gem 'hirb',                      group: :development
 gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger',  group: :development
 
-gem 'pry-byebug', group: :development 
+gem 'pry-byebug', group: :development
 
 gem 'faker'
+
+gem 'twitter-bootstrap-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
