@@ -148,7 +148,7 @@ end
 
 #  #present? is a Rails method that's the opposite of #empty?
 def has_cart?(user_id)
-  Order.where("checkout_date IS NOT NULL AND user_id = ?", user_id).present?
+  Order.where("user_id = ? AND checkout_date IS NULL ", user_id).present?
 end
 
 # when was this order placed?
