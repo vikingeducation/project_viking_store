@@ -5,4 +5,8 @@ class Order < ActiveRecord::Base
       where("checked_out = ?", true).
       first.revenue
   end
+
+  def self.total_orders
+    where("checkout_date IS NOT NULL").count
+  end
 end
