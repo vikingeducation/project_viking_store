@@ -28,7 +28,7 @@ class Order < ActiveRecord::Base
     Order.where("checkout_date > ?", time_period).count
   end
 
-  def self.in_the_last_seven_days 
+  def self.in_the_last_seven_days
     self.recent_orders(7.days.ago)
   end
 
