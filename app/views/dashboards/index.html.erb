@@ -16,10 +16,22 @@
         <th>Item</th>
         <th>Data</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      <tr>
+        <td>New Users</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Orders</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>New Products</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Revenue</td>
+        <td></td>
+      </tr>
     </table>
     <h4>
       Last 30 Days
@@ -29,10 +41,22 @@
         <th>Item</th>
         <th>Data</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      <tr>
+        <td>New Users</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Orders</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>New Products</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Revenue</td>
+        <td></td>
+      </tr>
     </table>
     <h4>
       Total
@@ -42,10 +66,22 @@
         <th>Item</th>
         <th>Data</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      <tr>
+        <td>Users</td>
+        <td><%= User.count %></td>
+      </tr>
+      <tr>
+        <td>Orders</td>
+        <td><%= Order.count %></td>
+      </tr>
+      <tr>
+        <td>Products</td>
+        <td><%= Product.count %></td>
+      </tr>
+      <tr>
+        <td>Revenue</td>
+        <td><%= @dashboard.total_revenue %></td>
+      </tr>
     </table>
   </div>
   <div class="col-md-6" id="user-demographics">
