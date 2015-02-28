@@ -19,6 +19,8 @@ City.destroy_all
 
 # Seed multiplier
 MULTIPLIER = 10
+#seed random numbers to work predictably
+srand(42)
 
 #generate products
 sample_categories = []
@@ -141,12 +143,12 @@ end
 
 
 # a user can only have a single shopping cart
-# that cart is the SINGLE order without :checked_out true
+# that cart is the SINGLE order without a checkout_date
 # a user can only have one such order
 
 #  #present? is a Rails method that's the opposite of #empty?
 def has_cart?(user_id)
-  Order.where(:checked_out => false, :user_id => user_id).present?
+  Order.where("checkout_date IS NOT NULL AND user_id = ?", user_id).present?
 end
 
 # when was this order placed?
@@ -175,10 +177,7 @@ end
     # first generated order is a shopping cart
     # all since then are placed orders with checkout dates
     if has_cart?(sample_user.id)
-      o[:checked_out]   = has_cart?(sample_user.id)
       o[:checkout_date] = placement_date(sample_user)
-    else
-      o[:checked_out] = false
     end
 
     o.save
@@ -188,7 +187,7 @@ end
 
 
 users_with_orders = Order.all.select("DISTINCT user_id").
-                              where(:checked_out => true)
+                              where("checkout_date IS NOT NULL")
 
 users_with_orders.each do |user|
   card = CreditCard.new

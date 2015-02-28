@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225034915) do
+
+ActiveRecord::Schema.define(version: 20150228223038) do
 
   create_table "addresses", force: true do |t|
     t.string   "street_address",    null: false
@@ -63,9 +64,8 @@ ActiveRecord::Schema.define(version: 20150225034915) do
   add_index "order_contents", ["order_id", "product_id"], name: "index_order_contents_on_order_id_and_product_id", unique: true
 
   create_table "orders", force: true do |t|
-    t.boolean  "checked_out",   default: true, null: false
     t.datetime "checkout_date"
-    t.integer  "user_id",                      null: false
+    t.integer  "user_id",       null: false
     t.integer  "shipping_id"
     t.integer  "billing_id"
     t.datetime "created_at"
