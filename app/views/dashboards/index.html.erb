@@ -4,87 +4,7 @@
   </div>
 </div>
 <div class="row">
-  <!-- do not put stuff here -->
-  <div class="col-md-6" id="overall-platform">
-    <h3>
-      1. Overall Platform
-    </h3>
-    <h4>
-      Last 7 Days
-    </h4>
-    <table class="table table-striped">
-      <tr>
-        <th>Item</th>
-        <th>Data</th>
-      </tr>
-      <tr>
-        <td>New Users</td>
-        <td><%= @users_last_seven %></td>
-      </tr>
-      <tr>
-        <td>Orders</td>
-        <td><%= @orders_last_seven %></td>
-      </tr>
-      <tr>
-        <td>New Products</td>
-        <td><%= @products_last_seven %></td>
-      </tr>
-      <tr>
-        <td>Revenue</td>
-        <td><%= @revenue_last_seven %></td>
-      </tr>
-    </table>
-    <h4>
-      Last 30 Days
-    </h4>
-    <table class="table table-striped">
-      <tr>
-        <th>Item</th>
-        <th>Data</th>
-      </tr>
-      <tr>
-        <td>New Users</td>
-        <td><%= @users_last_thirty %></td>
-      </tr>
-      <tr>
-        <td>Orders</td>
-        <td><%= @orders_last_thirty %></td>
-      </tr>
-      <tr>
-        <td>New Products</td>
-        <td><%= @products_last_thirty %></td>
-      </tr>
-      <tr>
-        <td>Revenue</td>
-        <td><%= @revenue_last_thirty %></td>
-      </tr>
-    </table>
-    <h4>
-      Total
-    </h4>
-    <table class="table table-striped">
-      <tr>
-        <th>Item</th>
-        <th>Data</th>
-      </tr>
-      <tr>
-        <td>Users</td>
-        <td><%= User.count %></td>
-      </tr>
-      <tr>
-        <td>Orders</td>
-        <td><%= @total_orders %></td>
-      </tr>
-      <tr>
-        <td>Products</td>
-        <td><%= Product.count %></td>
-      </tr>
-      <tr>
-        <td>Revenue</td>
-        <td>$<%= @total_revenue %></td>
-      </tr>
-    </table>
-  </div>
+  <%= render "overall_platform" %>
   <div class="col-md-6" id="user-demographics">
     <h3>
       2. User Demographics & Behavior
@@ -94,24 +14,25 @@
     </h4>
     <table class="table table-striped">
       <tr>
-        <th>Item</th>
-        <th>Data</th>
+        <th>State</th>
+        <th>Users</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      <% @top_three_states.each do |state| %>
+        <tr>
+          <td><%= state.name %></td>
+          <td><%= state.users_by_state %></td>
+        </tr>
+      <% end %>
     </table>
     <h4>
       Top 3 Cities Users Live In (billing)
     </h4>
     <table class="table table-striped">
       <tr>
-        <th>Item</th>
-        <th>Data</th>
+        <th>City</th>
+        <th>Users</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      
     </table>
     <h4>
       Top User With...
@@ -122,10 +43,26 @@
         <th>User</th>
         <th>Qty.</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      <tr>
+        <td>Highest single order value</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Highest lifetime value</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Highest average order value</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Most orders placed</td>
+        <td></td>
+        <td></td>
+      </tr>
     </table>
   </div>
 

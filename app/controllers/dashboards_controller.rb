@@ -12,5 +12,7 @@ class DashboardsController < ApplicationController
 
     @total_orders = Order.total_orders
     @total_revenue = Order.total_revenue
+
+    @top_three_states = User.states_by_shipping_address
   end
 end
