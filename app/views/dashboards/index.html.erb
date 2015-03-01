@@ -11,86 +11,9 @@
 
 </div>
 <div class="row">
-  <div class="col-md-6" id="order-statistics">
-    <h3>
-      3. Order Statistics
-    </h3>
-    <h4>
-      Last 7 Days
-    </h4>
-    <table class="table table-striped">
-      <tr>
-        <th>Item</th>
-        <th>Data</th>
-      </tr>
-      <tr>
-        <td>Number of Orders</td>
-        <td><%= @orders_last_seven %></td>
-      </tr>
-      <tr>
-        <td>Total Revenue</td>
-        <td><%= number_to_currency(@revenue_last_seven) %></td>
-      </tr>
-      <tr>
-        <td>Average Order Value</td>
-        <td><%= number_to_currency(@average_order_value_seven) %></td>
-      </tr>
-      <tr>
-        <td>Largest Order Value</td>
-        <td><%= number_to_currency(@largest_order_value_seven) %></td>
-      </tr>
-    </table>
-    <h4>
-      Last 30 Days
-    </h4>
-    <table class="table table-striped">
-      <tr>
-        <th>Item</th>
-        <th>Data</th>
-      </tr>
-      <tr>
-        <td>Number of Orders</td>
-        <td><%= @orders_last_thirty %></td>
-      </tr>
-      <tr>
-        <td>Total Revenue</td>
-        <td><%= number_to_currency(@revenue_last_thirty) %></td>
-      </tr>
-      <tr>
-        <td>Average Order Value</td>
-        <td><%= number_to_currency(@average_order_value_thirty) %></td>
-      </tr>
-      <tr>
-        <td>Largest Order Value</td>
-        <td><%= number_to_currency(@largest_order_value_thirty) %></td>
-      </tr>
-    </table>
-    <h4>
-      Total
-    </h4>
-    <table class="table table-striped">
-      <tr>
-        <th>Item</th>
-        <th>Data</th>
-      </tr>
-      <tr>
-        <td>Number of Orders</td>
-        <td><%= @total_orders %></td>
-      </tr>
-      <tr>
-        <td>Total Revenue</td>
-        <td><%= number_to_currency(@total_revenue) %></td>
-      </tr>
-      <tr>
-        <td>Average Order Value</td>
-        <td><%= number_to_currency(@average_order_value_all) %></td>
-      </tr>
-      <tr>
-        <td>Largest Order Value</td>
-        <td><%= number_to_currency(@largest_order_value_all) %></td>
-      </tr>
-    </table>
-  </div>
+
+  <%= render "order_statistics" %>
+
   <div class="col-md-6" id="time-series-data">
     <h3>
       4. Time Series Data
@@ -104,13 +27,41 @@
         <th>Qty</th>
         <th>Value</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      <tr>
+        <td>Today</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Yesterday</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 2.days.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 3.days.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 4.days.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 5.days.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 6.days.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
     </table>
     <h4>
       Orders by Week
@@ -121,13 +72,41 @@
         <th>Qty</th>
         <th>Value</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      <tr>
+        <td>This week</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 1.week.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 2.weeks.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 3.weeks.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 4.weeks.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 5.weeks.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><%= 6.weeks.ago.strftime("%b %e") %></td>
+        <td></td>
+        <td></td>
+      </tr>
     </table>
   </div>
 </div>

@@ -80,4 +80,11 @@ class Order < ActiveRecord::Base
       first.
       order_value
   end
+
+  def self.quantity_of_orders_last_week(weeks_ago)
+    Order.select("COUNT(*) AS weeks_orders, SUM(quantity * price) AS weeks_value").
+      joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
+      where("checkout_date IS NOT NULL AND checkout_date BETWEEN ? AND ?", (weeks_ago+1).weeks.ago, weeks_ago.weeks.ago).
+      first
+  end
 end
