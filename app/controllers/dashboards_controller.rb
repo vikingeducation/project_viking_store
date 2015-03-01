@@ -1,4 +1,5 @@
 class DashboardsController < ApplicationController
+
   def index
     @users_last_seven =  User.in_the_last_seven_days
     @orders_last_seven = Order.in_the_last_seven_days

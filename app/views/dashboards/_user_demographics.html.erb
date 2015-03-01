@@ -44,17 +44,17 @@
     <tr>
       <td>Highest single order value</td>
       <td><%= "#{@highest_single_order_value.first_name} #{@highest_single_order_value.last_name}" %></td>
-      <td><%= @highest_single_order_value.order_value %></td>
+      <td><%= number_to_currency(@highest_single_order_value.order_value) %></td>
     </tr>
     <tr>
       <td>Highest lifetime value</td>
       <td><%= "#{@highest_lifetime_value.first_name} #{@highest_lifetime_value.last_name}" %></td>
-      <td><%= @highest_lifetime_value.lifetime_orders %></td>
+      <td><%= number_to_currency(@highest_lifetime_value.lifetime_orders) %></td>
     </tr>
     <tr>
       <td>Highest average order value</td>
       <td><%= "#{@highest_average_order_value.first_name} #{@highest_average_order_value.last_name}" %></td>
-      <td><%= @highest_average_order_value.average_order %></td>
+      <td><%= number_to_currency(@highest_average_order_value.average_order) %></td>
     </tr>
     <tr>
       <td>Most orders placed</td>

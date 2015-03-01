@@ -24,7 +24,7 @@
     </tr>
     <tr>
       <td>Revenue</td>
-      <td><%= @revenue_last_seven %></td>
+      <td><%= number_to_currency(@revenue_last_seven) %></td>
     </tr>
   </table>
   <h4>
@@ -49,7 +49,7 @@
     </tr>
     <tr>
       <td>Revenue</td>
-      <td><%= @revenue_last_thirty %></td>
+      <td><%= number_to_currency(@revenue_last_thirty) %></td>
     </tr>
   </table>
   <h4>
@@ -74,7 +74,7 @@
     </tr>
     <tr>
       <td>Revenue</td>
-      <td>$<%= @total_revenue %></td>
+      <td><%= number_to_currency(@total_revenue) %></td>
     </tr>
   </table>
 </div>
