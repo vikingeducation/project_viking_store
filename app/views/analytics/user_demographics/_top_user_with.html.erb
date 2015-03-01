@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  <tr>
+    <td>New Users</td>
+    <td><%= User.number_of_users(7) %></td>
+  </tr>
+  <tr>
+    <td>Orders</td>
+    <td><%= Order.number_of_orders(7) %></td>
+  </tr>
+  <tr>
+    <td>New Products</td>
+    <td><%= Product.number_of_products(7) %></td>
+  </tr>
+  <tr>
+    <td>Revenue</td>
+    <td><%= Order.total_revenue(7).round(2) %></td>
+  </tr>
+</table>
