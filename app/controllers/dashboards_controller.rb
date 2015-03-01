@@ -15,6 +15,10 @@ class DashboardsController < ApplicationController
 
     @top_three_states = User.states_by_shipping_address
     @top_three_cities = User.cities_by_shipping_address
+
     @highest_single_order_value = User.highest_single_order_value
+    @highest_lifetime_value = User.highest_lifetime_value
+    @highest_average_order_value = User.highest_average_order_value
+    @most_orders_placed = User.most_orders_placed
   end
 end

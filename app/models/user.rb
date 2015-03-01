@@ -37,4 +37,34 @@ class User < ActiveRecord::Base
       limit(1).
       first
   end
+
+  def self.highest_lifetime_value
+    User.select("first_name, last_name, SUM(quantity * price) AS lifetime_orders").
+      joins("JOIN orders ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
+      where("checkout_date IS NOT NULL").
+      group("users.id").
+      order("lifetime_orders DESC").
+      limit(1).
+      first
+  end
+
+  def self.highest_average_order_value
+    User.select("first_name, last_name, AVG(quantity * price) AS average_order").
+      joins("JOIN orders ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
+      where("checkout_date IS NOT NULL").
+      group("users.id").
+      order("average_order DESC").
+      limit(1).
+      first
+  end
+
+  def self.most_orders_placed
+    User.select("first_name, last_name, COUNT(*) AS orders_placed").
+      joins("JOIN orders ON users.id = orders.user_id").
+      where("checkout_date IS NOT NULL").
+      group("users.id").
+      order("orders_placed DESC").
+      limit(1).
+      first
+  end
 end

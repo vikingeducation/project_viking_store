@@ -4,72 +4,10 @@
   </div>
 </div>
 <div class="row">
+
   <%= render "overall_platform" %>
-  <div class="col-md-6" id="user-demographics">
-    <h3>
-      2. User Demographics & Behavior
-    </h3>
-    <h4>
-      Top 3 States Users Live In (billing)
-    </h4>
-    <table class="table table-striped">
-      <tr>
-        <th>State</th>
-        <th>Users</th>
-      </tr>
-      <% @top_three_states.each do |state| %>
-        <tr>
-          <td><%= state.name %></td>
-          <td><%= state.users_by_state %></td>
-        </tr>
-      <% end %>
-    </table>
-    <h4>
-      Top 3 Cities Users Live In (billing)
-    </h4>
-    <table class="table table-striped">
-      <tr>
-        <th>City</th>
-        <th>Users</th>
-      </tr>
-      <% @top_three_cities.each do |city| %>
-        <tr>
-          <td><%= city.name %></td>
-          <td><%= city.users_by_city %></td>
-        </tr>
-      <% end %>
-    </table>
-    <h4>
-      Top User With...
-    </h4>
-    <table class="table table-striped">
-      <tr>
-        <th>Item</th>
-        <th>User</th>
-        <th>Qty.</th>
-      </tr>
-      <tr>
-        <td>Highest single order value</td>
-        <td><%= "#{@highest_single_order_value.first_name} #{@highest_single_order_value.last_name}" %></td>
-        <td><%= @highest_single_order_value.order_value %></td>
-      </tr>
-      <tr>
-        <td>Highest lifetime value</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Highest average order value</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Most orders placed</td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
-  </div>
+
+  <%= render "user_demographics" %>
 
 </div>
 <div class="row">
