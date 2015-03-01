@@ -29,5 +29,21 @@ class DashboardsController < ApplicationController
     @largest_order_value_seven = Order.largest_order_value_seven
     @largest_order_value_thirty = Order.largest_order_value_thirty
     @largest_order_value_all = Order.largest_order_value_all
-  end
+
+    @recent_week = Order.quantity_of_orders_last_week(0)
+    @one_week_ago = Order.quantity_of_orders_last_week(1)
+    @two_weeks_ago = Order.quantity_of_orders_last_week(2)
+    @three_weeks_ago = Order.quantity_of_orders_last_week(3)
+    @four_weeks_ago = Order.quantity_of_orders_last_week(4)
+    @five_weeks_ago = Order.quantity_of_orders_last_week(5)
+    @six_weeks_ago = Order.quantity_of_orders_last_week(6)
+
+    @recent_day = Order.quantity_of_orders_by_day(0)
+    @one_day_ago = Order.quantity_of_orders_by_day(1)
+    @two_days_ago = Order.quantity_of_orders_by_day(2)
+    @three_days_ago = Order.quantity_of_orders_by_day(3)
+    @four_days_ago = Order.quantity_of_orders_by_day(4)
+    @five_days_ago = Order.quantity_of_orders_by_day(5)
+    @six_days_ago = Order.quantity_of_orders_by_day(6)
+    end
 end

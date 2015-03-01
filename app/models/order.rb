@@ -87,4 +87,11 @@ class Order < ActiveRecord::Base
       where("checkout_date IS NOT NULL AND checkout_date BETWEEN ? AND ?", (weeks_ago+1).weeks.ago, weeks_ago.weeks.ago).
       first
   end
+
+  def self.quantity_of_orders_by_day(days_ago)
+    Order.select("COUNT(*) AS days_orders, SUM(quantity * price) AS days_value").
+      joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
+      where("checkout_date IS NOT NULL AND checkout_date BETWEEN ? AND ?", (days_ago+1).days.ago, days_ago.days.ago).
+      first
+  end
 end
