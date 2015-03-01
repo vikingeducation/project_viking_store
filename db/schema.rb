@@ -52,6 +52,11 @@ ActiveRecord::Schema.define(version: 20150228223038) do
 
   add_index "credit_cards", ["card_number"], name: "index_credit_cards_on_card_number", unique: true
 
+  create_table "dashboards", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "order_contents", force: true do |t|
     t.integer  "order_id",               null: false
     t.integer  "product_id",             null: false

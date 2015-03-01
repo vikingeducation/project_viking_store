@@ -1,0 +1,95 @@
+<div class="col-md-6" id="time-series-data">
+  <h3>
+    4. Time Series Data
+  </h3>
+  <h4>
+    Orders by Day
+  </h4>
+  <table class="table table-striped">
+    <tr>
+      <th>Date</th>
+      <th>Qty</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>Today</td>
+      <td><%= @recent_day.days_orders %></td>
+      <td><%= number_to_currency(@recent_day.days_value) %></td>
+    </tr>
+    <tr>
+      <td>Yesterday</td>
+      <td><%= @one_day_ago.days_orders %></td>
+      <td><%= number_to_currency(@one_day_ago.days_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 2.days.ago.strftime("%b %e") %></td>
+      <td><%= @two_days_ago.days_orders %></td>
+      <td><%= number_to_currency(@two_days_ago.days_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 3.days.ago.strftime("%b %e") %></td>
+      <td><%= @three_days_ago.days_orders %></td>
+      <td><%= number_to_currency(@three_days_ago.days_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 4.days.ago.strftime("%b %e") %></td>
+      <td><%= @four_days_ago.days_orders %></td>
+      <td><%= number_to_currency(@four_days_ago.days_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 5.days.ago.strftime("%b %e") %></td>
+      <td><%= @five_days_ago.days_orders %></td>
+      <td><%= number_to_currency(@five_days_ago.days_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 6.days.ago.strftime("%b %e") %></td>
+      <td><%= @six_days_ago.days_orders %></td>
+      <td><%= number_to_currency(@six_days_ago.days_value) %></td>
+    </tr>
+  </table>
+  <h4>
+    Orders by Week
+  </h4>
+  <table class="table table-striped">
+    <tr>
+      <th>Date</th>
+      <th>Qty</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>This week</td>
+      <td><%= @recent_week.weeks_orders %></td>
+      <td><%= number_to_currency(@recent_week.weeks_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 1.week.ago.strftime("%b %e") %></td>
+      <td><%= @one_week_ago.weeks_orders %></td>
+      <td><%= number_to_currency(@one_week_ago.weeks_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 2.weeks.ago.strftime("%b %e") %></td>
+      <td><%= @two_weeks_ago.weeks_orders %></td>
+      <td><%= number_to_currency(@two_weeks_ago.weeks_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 3.weeks.ago.strftime("%b %e") %></td>
+      <td><%= @three_weeks_ago.weeks_orders %></td>
+      <td><%= number_to_currency(@three_weeks_ago.weeks_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 4.weeks.ago.strftime("%b %e") %></td>
+      <td><%= @four_weeks_ago.weeks_orders %></td>
+      <td><%= number_to_currency(@four_weeks_ago.weeks_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 5.weeks.ago.strftime("%b %e") %></td>
+      <td><%= @five_weeks_ago.weeks_orders %></td>
+      <td><%= number_to_currency(@five_weeks_ago.weeks_value) %></td>
+    </tr>
+    <tr>
+      <td><%= 6.weeks.ago.strftime("%b %e") %></td>
+      <td><%= @six_weeks_ago.weeks_orders %></td>
+      <td><%= number_to_currency(@six_weeks_ago.weeks_value) %></td>
+    </tr>
+  </table>
+</div>

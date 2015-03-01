@@ -1,0 +1,80 @@
+<div class="col-md-6" id="overall-platform">
+  <h3>
+    1. Overall Platform
+  </h3>
+  <h4>
+    Last 7 Days
+  </h4>
+  <table class="table table-striped">
+    <tr>
+      <th>Item</th>
+      <th>Data</th>
+    </tr>
+    <tr>
+      <td>New Users</td>
+      <td><%= @users_last_seven %></td>
+    </tr>
+    <tr>
+      <td>Orders</td>
+      <td><%= @orders_last_seven %></td>
+    </tr>
+    <tr>
+      <td>New Products</td>
+      <td><%= @products_last_seven %></td>
+    </tr>
+    <tr>
+      <td>Revenue</td>
+      <td><%= number_to_currency(@revenue_last_seven) %></td>
+    </tr>
+  </table>
+  <h4>
+    Last 30 Days
+  </h4>
+  <table class="table table-striped">
+    <tr>
+      <th>Item</th>
+      <th>Data</th>
+    </tr>
+    <tr>
+      <td>New Users</td>
+      <td><%= @users_last_thirty %></td>
+    </tr>
+    <tr>
+      <td>Orders</td>
+      <td><%= @orders_last_thirty %></td>
+    </tr>
+    <tr>
+      <td>New Products</td>
+      <td><%= @products_last_thirty %></td>
+    </tr>
+    <tr>
+      <td>Revenue</td>
+      <td><%= number_to_currency(@revenue_last_thirty) %></td>
+    </tr>
+  </table>
+  <h4>
+    Total
+  </h4>
+  <table class="table table-striped">
+    <tr>
+      <th>Item</th>
+      <th>Data</th>
+    </tr>
+    <tr>
+      <td>Users</td>
+      <td><%= User.count %></td>
+    </tr>
+    <tr>
+      <td>Orders</td>
+      <td><%= @total_orders %></td>
+    </tr>
+    <tr>
+      <td>Products</td>
+      <td><%= Product.count %></td>
+    </tr>
+    <tr>
+      <td>Revenue</td>
+      <td><%= number_to_currency(@total_revenue) %></td>
+    </tr>
+  </table>
+</div>
