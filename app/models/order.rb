@@ -36,4 +36,48 @@ class Order < ActiveRecord::Base
     self.recent_orders(30.days.ago)
   end
 
+  def self.average_order_value_seven
+    self.revenue_in_the_last_seven_days / self.in_the_last_seven_days
+  end
+
+  def self.average_order_value_thirty
+    self.revenue_in_the_last_thirty_days / self.in_the_last_thirty_days
+  end
+
+  def self.average_order_value_all
+    self.total_revenue / self.total_orders
+  end
+
+  def self.largest_order_value_seven
+    Order.select("quantity * price AS order_value").
+      joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
+      where("checkout_date IS NOT NULL AND checkout_date > ?", 7.days.ago).
+      group("orders.id").
+      order("order_value DESC").
+      limit(1).
+      first.
+      order_value
+  end
+
+  def self.largest_order_value_thirty
+    Order.select("quantity * price AS order_value").
+      joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
+      where("checkout_date IS NOT NULL AND checkout_date > ?", 30.days.ago).
+      group("orders.id").
+      order("order_value DESC").
+      limit(1).
+      first.
+      order_value
+  end
+
+  def self.largest_order_value_all
+    Order.select("quantity * price AS order_value").
+      joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
+      where("checkout_date IS NOT NULL").
+      group("orders.id").
+      order("order_value DESC").
+      limit(1).
+      first.
+      order_value
+  end
 end

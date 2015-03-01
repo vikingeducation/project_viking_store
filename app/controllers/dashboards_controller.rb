@@ -21,5 +21,13 @@ class DashboardsController < ApplicationController
     @highest_lifetime_value = User.highest_lifetime_value
     @highest_average_order_value = User.highest_average_order_value
     @most_orders_placed = User.most_orders_placed
+
+    @average_order_value_seven = Order.average_order_value_seven
+    @average_order_value_thirty = Order.average_order_value_thirty
+    @average_order_value_all = Order.average_order_value_all
+
+    @largest_order_value_seven = Order.largest_order_value_seven
+    @largest_order_value_thirty = Order.largest_order_value_thirty
+    @largest_order_value_all = Order.largest_order_value_all
   end
 end

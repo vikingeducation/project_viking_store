@@ -23,10 +23,22 @@
         <th>Item</th>
         <th>Data</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      <tr>
+        <td>Number of Orders</td>
+        <td><%= @orders_last_seven %></td>
+      </tr>
+      <tr>
+        <td>Total Revenue</td>
+        <td><%= number_to_currency(@revenue_last_seven) %></td>
+      </tr>
+      <tr>
+        <td>Average Order Value</td>
+        <td><%= number_to_currency(@average_order_value_seven) %></td>
+      </tr>
+      <tr>
+        <td>Largest Order Value</td>
+        <td><%= number_to_currency(@largest_order_value_seven) %></td>
+      </tr>
     </table>
     <h4>
       Last 30 Days
@@ -36,10 +48,22 @@
         <th>Item</th>
         <th>Data</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      <tr>
+        <td>Number of Orders</td>
+        <td><%= @orders_last_thirty %></td>
+      </tr>
+      <tr>
+        <td>Total Revenue</td>
+        <td><%= number_to_currency(@revenue_last_thirty) %></td>
+      </tr>
+      <tr>
+        <td>Average Order Value</td>
+        <td><%= number_to_currency(@average_order_value_thirty) %></td>
+      </tr>
+      <tr>
+        <td>Largest Order Value</td>
+        <td><%= number_to_currency(@largest_order_value_thirty) %></td>
+      </tr>
     </table>
     <h4>
       Total
@@ -49,10 +73,22 @@
         <th>Item</th>
         <th>Data</th>
       </tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
-      <tr></tr>
+      <tr>
+        <td>Number of Orders</td>
+        <td><%= @total_orders %></td>
+      </tr>
+      <tr>
+        <td>Total Revenue</td>
+        <td><%= number_to_currency(@total_revenue) %></td>
+      </tr>
+      <tr>
+        <td>Average Order Value</td>
+        <td><%= number_to_currency(@average_order_value_all) %></td>
+      </tr>
+      <tr>
+        <td>Largest Order Value</td>
+        <td><%= number_to_currency(@largest_order_value_all) %></td>
+      </tr>
     </table>
   </div>
   <div class="col-md-6" id="time-series-data">
