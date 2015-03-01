@@ -32,7 +32,12 @@
         <th>City</th>
         <th>Users</th>
       </tr>
-      
+      <% @top_three_cities.each do |city| %>
+        <tr>
+          <td><%= city.name %></td>
+          <td><%= city.users_by_city %></td>
+        </tr>
+      <% end %>
     </table>
     <h4>
       Top User With...
@@ -45,8 +50,8 @@
       </tr>
       <tr>
         <td>Highest single order value</td>
-        <td></td>
-        <td></td>
+        <td><%= "#{@highest_single_order_value.first_name} #{@highest_single_order_value.last_name}" %></td>
+        <td><%= @highest_single_order_value.order_value %></td>
       </tr>
       <tr>
         <td>Highest lifetime value</td>

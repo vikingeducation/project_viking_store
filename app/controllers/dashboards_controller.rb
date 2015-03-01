@@ -14,5 +14,7 @@ class DashboardsController < ApplicationController
     @total_revenue = Order.total_revenue
 
     @top_three_states = User.states_by_shipping_address
+    @top_three_cities = User.cities_by_shipping_address
+    @highest_single_order_value = User.highest_single_order_value
   end
 end
