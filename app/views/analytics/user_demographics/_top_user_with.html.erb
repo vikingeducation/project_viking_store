@@ -1,0 +1,35 @@
+<table class="table table-striped">
+  <tr>
+    <th>Item</th>
+    <th>User</th>
+    <th>Quantity</th>
+  </tr>
+  <tr>
+    <td>Highest Single Order Value</td>
+    <% User.highest_single_order_value.each do |item| %>
+      <td><%=item.first_name + " " + item.last_name%></td>
+      <td>$<%=item.value%></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Highest Lifetime Value</td>
+    <% User.highest_lifetime_value.each do |item| %>
+      <td><%=item.first_name + " " + item.last_name%></td>
+      <td>$<%=item.lifetime_spent%></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Highest Average Order Value</td>
+    <% User.highest_average_order_value.each do |item| %>
+      <td><%=item.first_name + " " + item.last_name%></td>
+      <td>$<%=item.avg%></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>Most Orders Placed</td>
+    <% User.most_orders_placed.each do |item| %>
+      <td><%=item.first_name + " " + item.last_name%></td>
+      <td><%=item.orders%></td>
+    <% end %>
+  </tr>
+</table>

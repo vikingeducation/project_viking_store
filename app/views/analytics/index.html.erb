@@ -1,0 +1,144 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="header">
+      <h1>Viking Store Analytics</h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <div class="row">
+      <h1>1. Overall Platform</h1>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Last 7 Days</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/platform/days_7" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Last 30 Days</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/platform/days_30" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Total</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/platform/days_all" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-6">
+    <div class="row">
+      <h1>2. User Demographics and Behavior</h1>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Top 3 States Users Live in (billing)</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/user_demographics/top_states" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Top 3 Cities Users Live in (billing)</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/user_demographics/top_cities" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Top User With....</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/user_demographics/top_user_with" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-6">
+    <div class="row">
+      <h1>3. Order Statistics</h1>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Last 7 Days</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/order/days_7" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Last 30 Days</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/order/days_30" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Total</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/order/days_all" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-6">
+    <div class="row">
+      <h1>4. Time Series Data</h1>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Orders by Day</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/time_series/orders_by_day" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row">
+          <h3>Orders by Week</h3>
+        </div>
+        <div class="row">
+          <%= render "analytics/time_series/orders_by_week" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

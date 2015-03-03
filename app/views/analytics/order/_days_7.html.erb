@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= Order.number_of_orders(7) %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td>$<%= Order.total_revenue(7).round(2) %></td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+    <td>$<%= Order.average_value(7).round(2) %></td>
+  </tr>
+  <tr>
+    <td>Largest Order Value</td>
+    <td>$<%= Order.largest_order_value(7).round(2) %></td>
+  </tr>
+</table>
