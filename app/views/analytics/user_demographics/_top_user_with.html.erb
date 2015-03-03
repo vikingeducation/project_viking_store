@@ -1,22 +1,35 @@
 <table class="table table-striped">
   <tr>
     <th>Item</th>
-    <th>Data</th>
+    <th>User</th>
+    <th>Quantity</th>
   </tr>
   <tr>
-    <td>New Users</td>
-    <td><%= User.number_of_users(7) %></td>
+    <td>Highest Single Order Value</td>
+    <% User.highest_single_order_value.each do |item| %>
+      <td><%=item.first_name + " " + item.last_name%></td>
+      <td>$<%=item.value%></td>
+    <% end %>
   </tr>
   <tr>
-    <td>Orders</td>
-    <td><%= Order.number_of_orders(7) %></td>
+    <td>Highest Lifetime Value</td>
+    <% User.highest_lifetime_value.each do |item| %>
+      <td><%=item.first_name + " " + item.last_name%></td>
+      <td>$<%=item.lifetime_spent%></td>
+    <% end %>
   </tr>
   <tr>
-    <td>New Products</td>
-    <td><%= Product.number_of_products(7) %></td>
+    <td>Highest Average Order Value</td>
+    <% User.highest_average_order_value.each do |item| %>
+      <td><%=item.first_name + " " + item.last_name%></td>
+      <td>$<%=item.avg%></td>
+    <% end %>
   </tr>
   <tr>
-    <td>Revenue</td>
-    <td><%= Order.total_revenue(7).round(2) %></td>
+    <td>Most Orders Placed</td>
+    <% User.most_orders_placed.each do |item| %>
+      <td><%=item.first_name + " " + item.last_name%></td>
+      <td><%=item.orders%></td>
+    <% end %>
   </tr>
 </table>

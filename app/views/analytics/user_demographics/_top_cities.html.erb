@@ -3,20 +3,10 @@
     <th>Item</th>
     <th>Data</th>
   </tr>
+  <% User.top_cities.each do |item| %>
   <tr>
-    <td>New Users</td>
-    <td><%= User.number_of_users(7) %></td>
+    <td><%= item.name %></td>
+    <td><%= item.number_of_users %></td>
   </tr>
-  <tr>
-    <td>Orders</td>
-    <td><%= Order.number_of_orders(7) %></td>
-  </tr>
-  <tr>
-    <td>New Products</td>
-    <td><%= Product.number_of_products(7) %></td>
-  </tr>
-  <tr>
-    <td>Revenue</td>
-    <td><%= Order.total_revenue(7).round(2) %></td>
-  </tr>
+  <% end %>
 </table>

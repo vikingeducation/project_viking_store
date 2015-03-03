@@ -18,15 +18,15 @@ class User < ActiveRecord::Base
   end
 
   def self.highest_single_order_value
-    User.select("first_name, last_name, quantity*price AS value").joins("JOIN orders ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").where("checkout_date IS NOT NULL").group("orders.id").order("value DESC").limit(3)
+    User.select("first_name, last_name, quantity*price AS value").joins("JOIN orders ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").where("checkout_date IS NOT NULL").group("orders.id").order("value DESC").limit(1)
   end
 
   def self.highest_lifetime_value
-    User.select("first_name, last_name, SUM(quantity*price) AS lifetime_spent").joins("JOIN orders ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").where("checkout_date IS NOT NULL").group("users.id").order("lifetime_spent DESC").limit(3)
+    User.select("first_name, last_name, SUM(quantity*price) AS lifetime_spent").joins("JOIN orders ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").where("checkout_date IS NOT NULL").group("users.id").order("lifetime_spent DESC").limit(1)
   end
 
   def self.highest_average_order_value
-    User.select("first_name, last_name, ((SUM(quantity*price))/COUNT(orders.id)) AS avg").joins("JOIN orders ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").group("users.id").order("avg DESC").limit(1)
+    User.select("first_name, last_name, AVG(quantity*price) AS avg").joins("JOIN orders ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").where("checkout_date IS NOT NULL").group("users.id").order("avg DESC").limit(1)
   end
 
   def self.most_orders_placed
