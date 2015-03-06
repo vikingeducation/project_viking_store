@@ -11,41 +11,13 @@
       <th>Qty</th>
       <th>Value</th>
     </tr>
-    <tr>
-      <td>Today</td>
-      <td><%= @recent_day.days_orders %></td>
-      <td><%= number_to_currency(@recent_day.days_value) %></td>
-    </tr>
-    <tr>
-      <td>Yesterday</td>
-      <td><%= @one_day_ago.days_orders %></td>
-      <td><%= number_to_currency(@one_day_ago.days_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 2.days.ago.strftime("%b %e") %></td>
-      <td><%= @two_days_ago.days_orders %></td>
-      <td><%= number_to_currency(@two_days_ago.days_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 3.days.ago.strftime("%b %e") %></td>
-      <td><%= @three_days_ago.days_orders %></td>
-      <td><%= number_to_currency(@three_days_ago.days_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 4.days.ago.strftime("%b %e") %></td>
-      <td><%= @four_days_ago.days_orders %></td>
-      <td><%= number_to_currency(@four_days_ago.days_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 5.days.ago.strftime("%b %e") %></td>
-      <td><%= @five_days_ago.days_orders %></td>
-      <td><%= number_to_currency(@five_days_ago.days_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 6.days.ago.strftime("%b %e") %></td>
-      <td><%= @six_days_ago.days_orders %></td>
-      <td><%= number_to_currency(@six_days_ago.days_value) %></td>
-    </tr>
+    <% @orders_by_day.each do |day| %>
+      <tr>
+        <td><%= day[1][:day].strftime("%b %e") %></td>
+        <td><%= day[1][:quantity] %></td>
+        <td><%= number_to_currency(day[1][:revenue]) %></td>
+      </tr>
+    <% end %>
   </table>
   <h4>
     Orders by Week
@@ -56,40 +28,12 @@
       <th>Qty</th>
       <th>Value</th>
     </tr>
-    <tr>
-      <td>This week</td>
-      <td><%= @recent_week.weeks_orders %></td>
-      <td><%= number_to_currency(@recent_week.weeks_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 1.week.ago.strftime("%b %e") %></td>
-      <td><%= @one_week_ago.weeks_orders %></td>
-      <td><%= number_to_currency(@one_week_ago.weeks_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 2.weeks.ago.strftime("%b %e") %></td>
-      <td><%= @two_weeks_ago.weeks_orders %></td>
-      <td><%= number_to_currency(@two_weeks_ago.weeks_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 3.weeks.ago.strftime("%b %e") %></td>
-      <td><%= @three_weeks_ago.weeks_orders %></td>
-      <td><%= number_to_currency(@three_weeks_ago.weeks_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 4.weeks.ago.strftime("%b %e") %></td>
-      <td><%= @four_weeks_ago.weeks_orders %></td>
-      <td><%= number_to_currency(@four_weeks_ago.weeks_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 5.weeks.ago.strftime("%b %e") %></td>
-      <td><%= @five_weeks_ago.weeks_orders %></td>
-      <td><%= number_to_currency(@five_weeks_ago.weeks_value) %></td>
-    </tr>
-    <tr>
-      <td><%= 6.weeks.ago.strftime("%b %e") %></td>
-      <td><%= @six_weeks_ago.weeks_orders %></td>
-      <td><%= number_to_currency(@six_weeks_ago.weeks_value) %></td>
-    </tr>
+    <% @orders_by_week.each do |week| %>
+      <tr>
+        <td><%= week[1][:sunday].strftime("%b %e") %></td>
+        <td><%= week[1][:quantity] %></td>
+        <td><%= number_to_currency(week[1][:revenue]) %></td>
+      </tr>
+    <% end %>
   </table>
 </div>

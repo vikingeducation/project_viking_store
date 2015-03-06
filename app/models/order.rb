@@ -6,17 +6,10 @@ class Order < ActiveRecord::Base
       first.revenue
   end
 
-  def self.revenue_in_the_last_seven_days
+  def self.revenue_since(time)
     Order.select("SUM(quantity * price) AS revenue").
       joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
-      where("checkout_date > ?", 7.days.ago).
-      first.revenue
-  end
-
-  def self.revenue_in_the_last_thirty_days
-    Order.select("SUM(quantity * price) AS revenue").
-      joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
-      where("checkout_date > ?", 30.days.ago).
+      where("checkout_date > ?", time.to_date).
       first.revenue
   end
 
@@ -24,34 +17,22 @@ class Order < ActiveRecord::Base
     where("checkout_date IS NOT NULL").count
   end
 
-  def self.recent_orders(time_period)
-    Order.where("checkout_date > ?", time_period).count
+  def self.checked_out_since(time)
+    Order.where("checkout_date > ?", time.to_date).count
   end
 
-  def self.in_the_last_seven_days
-    self.recent_orders(7.days.ago)
-  end
-
-  def self.in_the_last_thirty_days
-    self.recent_orders(30.days.ago)
-  end
-
-  def self.average_order_value_seven
-    self.revenue_in_the_last_seven_days / self.in_the_last_seven_days
-  end
-
-  def self.average_order_value_thirty
-    self.revenue_in_the_last_thirty_days / self.in_the_last_thirty_days
+  def self.average_order_value_since(time)
+   self.revenue_since(time) / self.checked_out_since(time)
   end
 
   def self.average_order_value_all
     self.total_revenue / self.total_orders
   end
 
-  def self.largest_order_value_seven
+  def self.largest_order_value_since(time)
     Order.select("quantity * price AS order_value").
       joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
-      where("checkout_date IS NOT NULL AND checkout_date > ?", 7.days.ago).
+      where("checkout_date IS NOT NULL AND checkout_date > ?", time.to_date).
       group("orders.id").
       order("order_value DESC").
       limit(1).
@@ -59,18 +40,7 @@ class Order < ActiveRecord::Base
       order_value
   end
 
-  def self.largest_order_value_thirty
-    Order.select("quantity * price AS order_value").
-      joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
-      where("checkout_date IS NOT NULL AND checkout_date > ?", 30.days.ago).
-      group("orders.id").
-      order("order_value DESC").
-      limit(1).
-      first.
-      order_value
-  end
-
-  def self.largest_order_value_all
+  def self.largest_order_value_ever
     Order.select("quantity * price AS order_value").
       joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
       where("checkout_date IS NOT NULL").
@@ -81,17 +51,61 @@ class Order < ActiveRecord::Base
       order_value
   end
 
-  def self.quantity_of_orders_last_week(weeks_ago)
-    Order.select("COUNT(*) AS weeks_orders, SUM(quantity * price) AS weeks_value").
+  def self.time_series_by_day
+    self.seven_recent_days.each_with_object({}) do |day, time_series|
+      time_series[day] = {}
+      time_series[day][:day] = day
+      time_series[day][:quantity] = self.quantity_and_revenue_on_day(day).quantity
+      time_series[day][:revenue] = self.quantity_and_revenue_on_day(day).revenue
+    end
+  end
+
+  def self.time_series_by_week
+    self.seven_recent_sundays.each_with_object({}) do |sunday,time_series|
+      time_series[sunday] = {}
+      time_series[sunday][:sunday] = sunday
+      time_series[sunday][:quantity] = self.quantity_and_revenue_in_week_following(sunday).quantity
+      time_series[sunday][:revenue] = self.quantity_and_revenue_in_week_following(sunday).revenue
+    end
+  end
+
+  # private
+
+  def self.seven_recent_days
+    date = Date.today
+    seven_days = []
+    7.times do |days_ago|
+      seven_days << (date - days_ago)
+    end
+    seven_days
+  end
+
+  def self.seven_recent_sundays
+    (1..7).each_with_object([]) do |num, sundays|
+      sundays << self.nth_recent_sunday(num)
+    end
+  end
+
+  def self.nth_recent_sunday(n)
+    date = Date.today - 7 * n
+    until date.sunday?
+      date += 1
+    end
+    date
+  end
+
+  def self.quantity_and_revenue_in_week_following(date)
+    Order.select("COUNT(*) AS quantity, SUM(quantity * price) AS revenue").
       joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
-      where("checkout_date BETWEEN ? AND ?", (weeks_ago+1).weeks.ago, weeks_ago.weeks.ago).
+      where("checkout_date BETWEEN ? AND ?", date, (date+6)).
       first
   end
 
-  def self.quantity_of_orders_by_day(days_ago)
-    Order.select("COUNT(*) AS days_orders, SUM(quantity * price) AS days_value").
+  def self.quantity_and_revenue_on_day(date)
+    Order.select("COUNT(*) AS quantity, SUM(quantity * price) AS revenue").
       joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
-      where("checkout_date BETWEEN ? AND ?", (days_ago+1).days.ago, days_ago.days.ago).
+      where("checkout_date BETWEEN ? AND ?", date.to_time, (date + 1).to_time).
       first
   end
+
 end
