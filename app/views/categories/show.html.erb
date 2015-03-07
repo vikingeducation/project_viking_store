@@ -1,6 +1,6 @@
-<h1>
+<h2>
   Category <%= @category.id %>: <%= @category.name %>
-</h1>
+</h2>
 
 <p>
   <%= @category.description %>
@@ -8,9 +8,10 @@
 
 <ul>
   <li><%= link_to "edit this category", edit_category_path(@category.id) %></li>
-  <li><%= link_to "delete this category", "#" %></li>
+  <li><%= link_to "delete this category", category_path(@category.id), data: {confirm: "Are you sure?"}, method: :delete %></li>
 </ul>
 
+<h3>Products in this category</h3>
 <table class="table">
   <tr>
     <th>ID</th>

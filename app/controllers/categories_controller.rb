@@ -7,6 +7,7 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
+    render layout: "admin"
   end
 
   def create
@@ -22,10 +23,12 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find params[:id]
+    render layout: "admin"
   end
 
   def edit
     @category = Category.find params[:id]
+    render layout: "admin"
   end
 
   def update
@@ -36,6 +39,18 @@ class CategoriesController < ApplicationController
     else
       flash[:error] = "There's an error."
       render :edit
+    end
+  end
+
+  def destroy
+    @category = Category.find(params[:id])
+    session[:return_to] ||= request.referer
+    if @category.destroy!
+      flash[:success] = "That category was deleted."
+      redirect_to categories_path
+    else
+      flash[:error] = "It didn't work."
+      redirect_to session.delete(:return_to)
     end
   end
 
