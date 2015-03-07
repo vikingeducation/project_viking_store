@@ -33,6 +33,10 @@ gem 'pry-byebug', group: :development
 
 gem 'faker'
 
+group :development do
+  gem "better_errors"
+end
+
 gem 'twitter-bootstrap-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

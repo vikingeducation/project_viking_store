@@ -39,7 +39,7 @@ end
 (MULTIPLIER * 10).times do
   p = Product.new()
   p[:name]        = Faker::Commerce.product_name
-  p[:category_id] = rand(Category.count)+1
+  p[:category_id] = Category.pluck(:id).sample
   p[:description] = Faker::Lorem.sentence
   p[:sku]         = (Faker::Code.ean).to_i
   p[:price]       = Faker::Commerce.price
@@ -127,7 +127,7 @@ def generate_contents(order_id)
   (rand(10)+1).times do
     c = OrderContents.new()
     c[:order_id]   = order_id
-    c[:product_id] = rand(Product.count)+1
+    c[:product_id] = Product.pluck(:id).sample
     c[:quantity]   = rand(10)+1
 
     # prevents breaking the uniqueness constraint on
