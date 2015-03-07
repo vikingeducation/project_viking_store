@@ -1,5 +1,15 @@
 class User < ActiveRecord::Base
 
+  has_many :addresses
+  has_many :credit_cards
+  has_many :orders
+  has_one :shipping_address,
+          class_name: "Address",
+          foreign_key: :user_id
+  has_one :billing_address,
+          class_name: "Address",
+          foreign_key: :user_id
+
   def self.new_since(time)
     date = Date.new(time.year,time.month,time.day)
     User.where("created_at > ?", date).count

@@ -1,4 +1,16 @@
 class Order < ActiveRecord::Base
+
+  has_many :order_contents,
+            class_name: "OrderContents"
+  has_many :products, through: :order_contents
+  belongs_to :user
+  belongs_to :shipping_address,
+              class_name: "Address",
+              foreign_key: :shipping_id
+  belongs_to :billing_address,
+              class_name: "Address",
+              foreign_key: :billing_id
+
   def self.total_revenue
     Order.select("SUM(quantity * price) AS revenue").
       joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
