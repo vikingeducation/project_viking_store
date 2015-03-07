@@ -47,10 +47,12 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new whitelisted_product_params
+    @product.sku = rand(10000000000123012301204102401204)
     if @product.save
       flash[:success] = "You created a new product."
       redirect_to products_path
     else
+      asdfaweg.asdfasdf
       flash[:error] = "There was an error."
       render :new
     end
@@ -65,6 +67,11 @@ class ProductsController < ApplicationController
   end
 
   def whitelisted_product_params
-    params.require(:product).permit(:name, :price, :category )
+    clean_up_money
+    params.require(:product).permit(:name, :price, :category_id)
+  end
+
+  def clean_up_money
+    params[:product][:price] = params[:product][:price][1..-1] if params[:product][:price][0] == "$"
   end
 end
