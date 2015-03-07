@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
 
-  has_many :addresses
-  has_many :credit_cards
-  has_many :orders
+  has_many :addresses, destroy: :dependent
+  has_many :credit_cards, destroy: :dependent
+  has_many :orders, destroy: :dependent
   has_one :shipping_address,
           class_name: "Address",
           foreign_key: :user_id
