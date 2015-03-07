@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-2 centered">
+    <%= link_to "Add a user", new_user_path, class: "btn btn-default" %>
+  </div>
+  <div class="col-md-8">
+    <h2 class="centered">
+      Viking Store Users
+    </h2>
+  </div>
+</div>
+
+<div class="row">
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Joined</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Orders</th>
+      <th>Last order date</th>
+      <th>SHOW</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= "#{user.first_name} #{user.last_name}" %></td>
+        <td><%= user.created_at.strftime("%d %b %Y") %></td>
+        <td><%= user.shipping_address.city.name unless user.shipping_address.nil? %></td>
+        <td><%= user.shipping_address.state.name unless user.shipping_address.nil? %></td>
+        <td><%= user.orders.where("checkout_date IS NOT NULL").count %></td>
+        <td><%= user.orders.last.checkout_date.strftime("%d %b %Y") unless (user.orders.last.nil? || user.orders.last.checkout_date.nil?) %></td>
+        <td>SHOW</td>
+        <td>EDIT</td>
+        <td>DELETE</td>
+      </tr>
+    <% end %>
+  </table>
+</div>
