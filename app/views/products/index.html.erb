@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="">
+  </div>
+  <div class="">
+    <h2 class="centered">
+      Products
+    </h2>
+  </div>
+</div>
+
+<div class="row">
+  <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Show</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= product.name %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= product.category.name %></td>
+        <td><%= link_to "show", "#" %></td>
+        <td><%= link_to "edit", '#' %></td>
+        <td><%= link_to "delete", '#' %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<p>
+  <%= link_to "Add a product", '#' %>
+</p>
