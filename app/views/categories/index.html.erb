@@ -6,9 +6,13 @@
   <% @categories.each do |category| %>
     <tr>
       <td><%= category.name %></td>
-      <td><%= link_to "SHOW", "#" %></td>
-      <td><%= link_to "EDIT", "#" %></td>
-      <td><%= link_to "DELETE", "#" %></td>
+      <td><%= link_to "show", "#" %></td>
+      <td><%= link_to "edit", "#" %></td>
+      <td><%= link_to "delete", "#" %></td>
     </tr>
   <% end %>
 </table>
+
+<p>
+  <%= link_to "Add a category", new_category_path %>
+</p>
