@@ -1,7 +1,8 @@
 <div class="row">
-  <div class="">
+  <div class="col-md-2 centered">
+    <%= link_to "Add a product", new_product_path, class: "btn btn-default" %>
   </div>
-  <div class="">
+  <div class="col-md-8">
     <h2 class="centered">
       Products
     </h2>
@@ -9,7 +10,8 @@
 </div>
 
 <div class="row">
-  <table class="table">
+  <div class="col-md-12">
+    <table class="table">
       <tr>
         <th>ID</th>
         <th>Name</th>
@@ -19,20 +21,17 @@
         <th>Edit</th>
         <th>Delete</th>
       </tr>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.id %></td>
-        <td><%= product.name %></td>
-        <td><%= number_to_currency(product.price) %></td>
-        <td><%= product.category.name %></td>
-        <td><%= link_to "show", "#" %></td>
-        <td><%= link_to "edit", '#' %></td>
-        <td><%= link_to "delete", '#' %></td>
-      </tr>
-    <% end %>
-  </table>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= product.name %></td>
+          <td><%= number_to_currency(product.price) %></td>
+          <td><%= link_to product.category.name, category_path(product.category.id) %></td>
+          <td><%= link_to "show", product_path(product.id) %></td>
+          <td><%= link_to "edit", '#' %></td>
+          <td><%= link_to "delete", '#' %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
-
-<p>
-  <%= link_to "Add a product", '#' %>
-</p>

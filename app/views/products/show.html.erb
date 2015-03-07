@@ -1,0 +1,44 @@
+<h2>
+  Product <%= @product.id %>
+</h2>
+
+<h3>
+  Product Information
+</h3>
+
+<table class="table">
+  <tr>
+    <td>Product ID</td>
+    <td><%= @product.id %></td>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td><%= @product.name %></td>
+  </tr>
+  <tr>
+    <td>Price</td>
+    <td><%= @product.price %></td>
+  </tr>
+  <tr>
+    <td>Category</td>
+    <td><%= link_to @product.category.name, category_path(@product.category.id) %></td>
+  </tr>
+</table>
+
+<h3>
+  Product Statistics
+</h3>
+
+<table class="table">
+  <tr>
+    <td>Times Ordered</td>
+    <td><%= @product.orders.where("checkout_date IS NOT NULL").count %></td>
+  </tr>
+  <tr>
+    <td>Carts In</td>
+    <td><%= @product.orders.where("checkout_date IS NULL").count %></td>
+  </tr>
+</table>
+
+<%= link_to "Edit this product", edit_product_path(@product.id), class: "btn btn-default" %>
+<%= link_to "Delete this product", product_path(@product.id), data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-default" %>

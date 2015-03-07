@@ -1,0 +1,21 @@
+<h3>
+  Edit this product
+</h3>
+
+<%= form_for @product do |f| %>
+
+  ID: <%= @product.id %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+
+  <%= f.label :category %>
+  <%= f.select :category, options_for_select(@list_of_category_names) %>
+
+  <%= f.submit %>
+<% end %>
+
+<%= link_to "Delete this product", product_path(@product.id), data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-default" %>
