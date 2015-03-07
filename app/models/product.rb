@@ -7,6 +7,10 @@ class Product < ActiveRecord::Base
   belongs_to :category
   has_many :users, through: :orders
 
+  before_validation(:cut_dollar_sign)
+
+  validates :name, :price, :category, :presence => true
+
   def self.new_products(time_period)
     Product.where("created_at > ?", time_period).count
   end
@@ -17,5 +21,9 @@ class Product < ActiveRecord::Base
 
   def self.in_the_last_thirty_days
     self.new_products(30.days.ago)
+  end
+
+  def cut_dollar_sign
+    self.price = self.price.to_s.tr!('$', '').to_f
   end
 end

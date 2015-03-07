@@ -28,11 +28,43 @@ class ProductsController < ApplicationController
     end
   end
 
+  def update
+    @product = Product.find params[:id]
+    if @product.update whitelisted_product_params
+      flash[:success] = "You successfully updated the product."
+      redirect_to products_path
+    else
+      flash[:error] = "There's an error."
+      render :edit
+    end
+  end
+
+  def new
+    @product = Product.new
+    @list_of_category_names = list_of_category_names
+    render layout: "admin"
+  end
+
+  def create
+    @product = Product.new whitelisted_product_params
+    if @product.save
+      flash[:success] = "You created a new product."
+      redirect_to products_path
+    else
+      flash[:error] = "There was an error."
+      render :new
+    end
+  end
+
   private
 
   def list_of_category_names
     Category.all.each_with_object([]) do |cat, list|
       list << cat.name
     end
+  end
+
+  def whitelisted_product_params
+    params.require(:product).permit(:name, :price, :category )
   end
 end
