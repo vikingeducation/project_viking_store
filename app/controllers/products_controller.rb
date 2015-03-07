@@ -52,7 +52,6 @@ class ProductsController < ApplicationController
       flash[:success] = "You created a new product."
       redirect_to products_path
     else
-      asdfaweg.asdfasdf
       flash[:error] = "There was an error."
       render :new
     end

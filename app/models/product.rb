@@ -9,6 +9,8 @@ class Product < ActiveRecord::Base
 
   validates :name, :price, :category, :presence => true
 
+  validates :price, numericality: { less_than: 10000 }
+
   def self.new_products(time_period)
     Product.where("created_at > ?", time_period).count
   end
