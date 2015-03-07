@@ -5,6 +5,7 @@ class Product < ActiveRecord::Base
             dependent: :destroy
   has_many :orders, through: :order_contents
   belongs_to :category
+  has_many :users, through: :orders
 
   def self.new_products(time_period)
     Product.where("created_at > ?", time_period).count

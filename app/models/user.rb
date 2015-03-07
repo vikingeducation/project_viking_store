@@ -1,18 +1,19 @@
 class User < ActiveRecord::Base
 
-  has_many :addresses, destroy: :dependent
-  has_many :credit_cards, destroy: :dependent
-  has_many :orders, destroy: :dependent
+  has_many :addresses, dependent: :destroy
+  has_many :credit_cards, dependent: :destroy
+  has_many :orders, dependent: :destroy
   has_one :shipping_address,
           class_name: "Address",
           foreign_key: :user_id
   has_one :billing_address,
           class_name: "Address",
           foreign_key: :user_id
+  has_many :order_contents, through: :orders
+  has_many :products, through: :order_contents
 
   def self.new_since(time)
-    date = Date.new(time.year,time.month,time.day)
-    User.where("created_at > ?", date).count
+    User.where("created_at > ?", time.to_date).count
   end
 
   def self.states_by_shipping_address

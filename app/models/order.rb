@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
             class_name: "OrderContents",
             dependent: :destroy
   has_many :products, through: :order_contents
+  has_many :categories, through: :products
   belongs_to :user
   belongs_to :shipping_address,
               class_name: "Address",
