@@ -1,0 +1,55 @@
+<div class="col-md-6" id="order-statistics">
+  <h3>
+    3. Order Statistics
+  </h3>
+  <h4>
+    Last 7 Days
+  </h4>
+  <table class="table table-striped">
+    <tr>
+      <th>Item</th>
+      <th>Data</th>
+    </tr>
+    <tr>
+      <td>Number of Orders</td>
+      <td><%= @orders_last_seven %></td>
+    </tr>
+    <tr>
+      <td>Total Revenue</td>
+      <td><%= number_to_currency(@revenue_last_seven) %></td>
+    </tr>
+    <tr>
+      <td>Average Order Value</td>
+      <td><%= number_to_currency(@average_order_value_seven) %></td>
+    </tr>
+    <tr>
+      <td>Largest Order Value</td>
+      <td><%= number_to_currency(@largest_order_value_seven) %></td>
+    </tr>
+  </table>
+  <h4>
+    Last 30 Days
+  </h4>
+  <table class="table table-striped">
+    <tr>
+      <th>Item</th>
+      <th>Data</th>
+    </tr>
+    <tr>
+      <td>Number of Orders</td>
+      <td><%= @orders_last_thirty %></td>
+    </tr>
+    <tr>
+      <td>Total Revenue</td>
+      <td><%= number_to_currency(@revenue_last_thirty) %></td>
+    </tr>
+    <tr>
+      <td>Average Order Value</td>
+      <td><%= number_to_currency(@average_order_value_thirty) %></td>
+    </tr>
+    <tr>
+      <td>Largest Order Value</td>
+      <td><%= number_to_currency(@largest_order_value_thirty) %></td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,39 @@
+<div class="col-md-6" id="time-series-data">
+  <h3>
+    4. Time Series Data
+  </h3>
+  <h4>
+    Orders by Day
+  </h4>
+  <table class="table table-striped">
+    <tr>
+      <th>Date</th>
+      <th>Qty</th>
+      <th>Value</th>
+    </tr>
+    <% @orders_by_day.each do |day| %>
+      <tr>
+        <td><%= day[1][:day].strftime("%b %e") %></td>
+        <td><%= day[1][:quantity] %></td>
+        <td><%= number_to_currency(day[1][:revenue]) %></td>
+      </tr>
+    <% end %>
+  </table>
+  <h4>
+    Orders by Week
+  </h4>
+  <table class="table table-striped">
+    <tr>
+      <th>Date</th>
+      <th>Qty</th>
+      <th>Value</th>
+    </tr>
+    <% @orders_by_week.each do |week| %>
+      <tr>
+        <td><%= week[1][:sunday].strftime("%b %e") %></td>
+        <td><%= week[1][:quantity] %></td>
+        <td><%= number_to_currency(week[1][:revenue]) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
