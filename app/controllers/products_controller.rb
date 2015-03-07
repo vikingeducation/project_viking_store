@@ -16,6 +16,18 @@ class ProductsController < ApplicationController
     render layout: "admin"
   end
 
+  def destroy
+    @product = Product.find(params[:id])
+    session[:return_to] ||= request.referer
+    if @product.destroy!
+      flash[:success] = "That product was deleted."
+      redirect_to products_path
+    else
+      flash[:error] = "It didn't work."
+      redirect_to session.delete(:return_to)
+    end
+  end
+
   private
 
   def list_of_category_names
