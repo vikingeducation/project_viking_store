@@ -1,0 +1,27 @@
+<h1>
+  Category <%= @category.id %>: <%= @category.name %>
+</h1>
+
+<p>
+  <%= @category.description %>
+</p>
+
+<ul>
+  <li><%= link_to "edit this category", edit_category_path(@category.id) %></li>
+  <li><%= link_to "delete this category", "#" %></li>
+</ul>
+
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>SKU</th>
+    <th>Name</th>
+  </tr>
+  <% @category.products.each do |product| %>
+    <tr>
+      <td><%= product.id %></td>
+      <td><%= product.sku %></td>
+      <td><%= link_to product.name, '#' %></td>
+    </tr>
+  <% end %>
+</table>

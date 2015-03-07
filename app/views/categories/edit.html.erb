@@ -1,5 +1,5 @@
 <h1>
-  Create a new category
+  Edit this category
 </h1>
 
 <% flash.each do |name, message| %>
@@ -7,12 +7,13 @@
 <% end %>
 
 <%= form_for @category do |f| %>
-
   <%= f.label :name %>
   <%= f.text_field :name %>
 
   <%= f.label :description %>
   <%= f.text_area :description %>
 
-  <%= f.submit "Create" %>
+  <%= f.submit "Edit" %>
 <% end %>
+
+<%= link_to "Delete this category", '#' %>
