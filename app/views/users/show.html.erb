@@ -32,7 +32,7 @@
   <br>
   <%= link_to "Delete" , user_path(@user.id), data: {confirm: "Are you sure?"}, method: :delete %>
   <br>
-  <%= link_to "View saved addresses" , "#" %>
+  <%= link_to "View saved addresses" , user_addresses_path(@user.id) %>
   <br>
   <%= link_to "View unplaced orders" , "#" %>
 </div>

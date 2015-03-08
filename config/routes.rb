@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     resources :orders, shallow: true
     resources :addresses, shallow: true
   end
+  resources :addresses, only: [:index]
 
 end
