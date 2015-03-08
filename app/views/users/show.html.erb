@@ -1,0 +1,39 @@
+<h1>User <%= @user.id.to_s + " : " + @user.first_name + " " + @user.last_name%></h1>
+
+<div>
+  <h3>Demographic Information</h3>
+  <table class="table table-striped">
+    <tr>
+      <td>First Name</td>
+      <td><%= @user.first_name %></td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td><%= @user.last_name %></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td>Default Billing Address</td>
+    </tr>
+    <tr>
+      <td><%= billing_address_for(@user) %></td>
+    </tr>
+    <tr>
+      <td>Default Shipping Address</td>
+    </tr>
+    <tr>
+      <td><%= shipping_address_for(@user) %></td>
+    </tr>
+  </table>
+  <%= link_to "Edit" , "#" %>
+  <br>
+  <%= link_to "Delete" , "#" %>
+  <br>
+  <%= link_to "View saved addresses" , "#" %>
+  <br>
+  <%= link_to "View unplaced orders" , "#" %>
+
+</div>
