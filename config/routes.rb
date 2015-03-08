@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :admins, only: [:index]
   resources :categories
   resources :products
-  resources :users
+  resources :users do
+    resources :credit_cards, only: [:destroy]
+  end
 
 end

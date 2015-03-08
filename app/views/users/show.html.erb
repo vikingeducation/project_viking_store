@@ -35,5 +35,35 @@
   <%= link_to "View saved addresses" , "#" %>
   <br>
   <%= link_to "View unplaced orders" , "#" %>
-
 </div>
+
+<% @credit_cards.each do |card| %>
+  <div>
+    <table class="table table-striped">
+      <tr>
+        <td>First Name</td>
+        <td><%= @user.first_name %></td>
+      </tr>
+      <tr>
+        <td>Last Name</td>
+        <td><%= @user.last_name %></td>
+      </tr>
+      <tr>
+        <td>Card Nickname</td>
+        <td><%= card.nickname %></td>
+      </tr>
+      <tr>
+        <td>Credit Card Number</td>
+        <td><%= card.card_number %></td>
+      </tr>
+      <tr>
+        <td>Expiration Date</td>
+        <td><%= "#{card.exp_month}/#{card.exp_year}" %></td>
+      </tr>
+      <tr>
+        <td><%= link_to "Delete this card", user_credit_card_path(@user.id, card.id ), data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-default" %></td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+

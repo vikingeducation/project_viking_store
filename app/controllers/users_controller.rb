@@ -8,5 +8,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @credit_cards = @user.credit_cards
   end
 end
