@@ -34,7 +34,7 @@
         <td><%= user.orders.last.checkout_date.strftime("%d %b %Y") unless (user.orders.last.nil? || user.orders.last.checkout_date.nil?) %></td>
         <td><%= link_to "SHOW", user_path(user.id) %></td>
         <td><%= link_to "EDIT", edit_user_path(user.id) %></td>
-        <td><%= link_to "DELETE", '#' %></td>
+        <td><%= link_to "DELETE", link_to "Delete", order_path(order.id), data: {confirm: "Are you sure?"}, method: :delete %></td>
       </tr>
     <% end %>
   </table>
