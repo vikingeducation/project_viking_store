@@ -13,10 +13,10 @@
   <%= f.text_field :email %>
 
   <%= f.label :shipping_id %>
-  <%= f.collection_select(:shipping_id, @user.addresses, :id, :street_address) %>
+  <%= f.collection_select(:shipping_id, @user.addresses, :id, :complete_address) %>
 
   <%= f.label :billing_id %>
-  <%= f.collection_select(:billing_id, @user.addresses, :id, :street_address) %>
+  <%= f.collection_select(:billing_id, @user.addresses, :id, :complete_address) %>
 
   <%= f.submit %>
 
