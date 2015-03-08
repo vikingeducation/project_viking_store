@@ -33,7 +33,7 @@
         <td><%= link_to user.orders.where("checkout_date IS NOT NULL").count, '#' %></td>
         <td><%= user.orders.last.checkout_date.strftime("%d %b %Y") unless (user.orders.last.nil? || user.orders.last.checkout_date.nil?) %></td>
         <td><%= link_to "SHOW", user_path(user.id) %></td>
-        <td><%= link_to "EDIT", '#' %></td>
+        <td><%= link_to "EDIT", edit_user_path(user.id) %></td>
         <td><%= link_to "DELETE", '#' %></td>
       </tr>
     <% end %>

@@ -69,7 +69,8 @@
 
 <div>
 <h1>Admin actions for <%= "#{@user.first_name} #{@user.last_name}" %> </h1>
-<%= link_to "Delete this card", user_credit_card_path(@user.id, card.id ), data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-default" %>
+<%= link_to "Create an order", new_user_order_path(@user.id), class: "btn btn-default" %>
+<%= link_to "Create an address", new_user_address_path(@user.id), class: "btn btn-default" %>
 </div>
 
 <div>
@@ -86,12 +87,12 @@
     <% @user.orders.each do |order| %>
       <tr>
         <td><%= order.id %></td>
-        <td><%= order.checkout_date.strftime("%d %b %Y") %></td>
-        <td><%= order.value %></td>
-        <td><%= order.status </td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><%= order.checkout_date.strftime("%d %b %Y") unless order.checkout_date.nil? %></td>
+        <td><%= number_to_currency order.value %></td>
+        <td><%= order.status %></td>
+        <td><%= link_to "Show", order_path(order.id) %></td>
+        <td><%= link_to "Edit", edit_order_path(order.id) %></td>
+        <td><%= link_to "Delete", order_path(order.id), data: {confirm: "Are you sure?"}, method: :delete %></td>
       </tr>
     <% end %>
   </table>

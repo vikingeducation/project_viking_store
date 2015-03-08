@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :credit_cards, only: [:destroy]
     resources :orders, shallow: true
+    resources :addresses, shallow: true
   end
 
 end
