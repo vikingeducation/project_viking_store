@@ -67,3 +67,8 @@
   </div>
 <% end %>
 
+<div>
+<h1>Admin actions for <%= "#{@user.first_name} #{@user.last_name}" %> </h1>
+<%= link_to "Delete this card", user_credit_card_path(@user.id, card.id ), data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-default" %>
+</div>
+

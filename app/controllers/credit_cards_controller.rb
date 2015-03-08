@@ -5,7 +5,7 @@ class CreditCardsController < ApplicationController
     session[:return_to] ||= request.referer
     if @credit_card.destroy!
       flash[:success] = "That credit card was deleted."
-      redirect_to users_path(params[:user_id])
+      redirect_to user_path(params[:user_id])
     else
       flash[:error] = "It didn't work."
       redirect_to session.delete(:return_to)

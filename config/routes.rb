@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :products
   resources :users do
     resources :credit_cards, only: [:destroy]
+    resources :orders, only: [:new, :create, :show]
   end
 
 end
