@@ -13,6 +13,14 @@ class Order < ActiveRecord::Base
               class_name: "Address",
               foreign_key: :billing_id
 
+  def value
+    total = 0
+    order_contents.each do |item|
+      total += item.quantity * item.product.price
+    end
+    return total
+  end
+
   def self.total_revenue
     Order.select("SUM(quantity * price) AS revenue").
       joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
@@ -121,5 +129,7 @@ class Order < ActiveRecord::Base
       where("checkout_date BETWEEN ? AND ?", date.to_time, (date + 1).to_time).
       first
   end
+
+
 
 end

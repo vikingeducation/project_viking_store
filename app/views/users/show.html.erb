@@ -72,3 +72,27 @@
 <%= link_to "Delete this card", user_credit_card_path(@user.id, card.id ), data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-default" %>
 </div>
 
+<div>
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Order date</th>
+      <th>Order value</th>
+      <th>Status</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <% @user.orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.checkout_date.strftime("%d %b %Y") %></td>
+        <td><%= order.value %></td>
+        <td><%= order.status </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
