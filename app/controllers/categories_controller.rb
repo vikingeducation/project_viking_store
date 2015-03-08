@@ -1,13 +1,13 @@
 class CategoriesController < ApplicationController
 
+  layout "admin", only: [:index, :new, :show, :edit]
+
   def index
     @categories = Category.all
-    render layout: "admin"
   end
 
   def new
     @category = Category.new
-    render layout: "admin"
   end
 
   def create
@@ -23,12 +23,10 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find params[:id]
-    render layout: "admin"
   end
 
   def edit
     @category = Category.find params[:id]
-    render layout: "admin"
   end
 
   def update

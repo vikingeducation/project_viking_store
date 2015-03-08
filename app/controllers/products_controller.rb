@@ -1,19 +1,17 @@
 class ProductsController < ApplicationController
+
+  layout "admin", only: [:index, :new, :show, :edit]
+
   def index
     @products = Product.all
-    render layout: "admin"
   end
 
   def show
     @product = Product.find(params[:id])
-    render layout: "admin"
   end
 
   def edit
     @product = Product.find(params[:id])
-    @categories = Category.all
-    @list_of_category_names = list_of_category_names
-    render layout: "admin"
   end
 
   def destroy
@@ -41,8 +39,6 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    @list_of_category_names = list_of_category_names
-    render layout: "admin"
   end
 
   def create
