@@ -1,0 +1,30 @@
+<h2>
+  <%= @address.user.full_name %>'s Address
+</h2>
+
+<table class="table table-striped">
+  <tr>
+    <td>Owner ID</td>
+    <td><%= @address.user.id %></td>
+  </tr>
+  <tr>
+    <td>Owner Name</td>
+    <td><%= link_to @address.user.full_name, user_path(@address.user.id) %></td>
+  </tr>
+  <tr>
+    <td>Street</td>
+    <td><%= @address.street_address %></td>
+  </tr>
+  <tr>
+    <td>City</td>
+    <td><%= @address.city.name %></td>
+  </tr>
+  <tr>
+    <td>State</td>
+    <td><%= @address.state.name %></td>
+  </tr>
+</table>
+
+<%= link_to "Edit this address", edit_address_path(@address.id), class: "btn btn-default" %>
+
+<%= link_to "Delete this address", address_path(@address.id), data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-default" %>

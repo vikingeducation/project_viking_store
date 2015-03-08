@@ -23,7 +23,7 @@
     <td><%= address.state.name %></td>
     <td><%= address.orders.count %></td>
     <td><%= address.created_at.strftime("%d %b %Y") %></td>
-    <td><%= link_to "Show", "#" %></td>
+    <td><%= link_to "Show", address_path(address.id) %></td>
     <td><%= link_to "Edit", "#" %></td>
     <td><%= link_to "Delete", "#" %></td>
   </tr>
