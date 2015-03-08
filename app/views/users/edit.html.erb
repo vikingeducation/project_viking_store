@@ -12,8 +12,14 @@
   <%= f.label :email %>
   <%= f.text_field :email %>
 
+  <%= f.label :shipping_id %>
+  <%= f.collection_select(:shipping_id, @user.addresses, :id, :street_address) %>
+
+  <%= f.label :billing_id %>
+  <%= f.collection_select(:billing_id, @user.addresses, :id, :street_address) %>
+
   <%= f.submit %>
 
-  <%= link_to "Delete", order_path(order.id), data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-default" %>
+  <%= link_to "Delete", user_path(@user.id), data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-default" %>
 
 <% end %>
