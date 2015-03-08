@@ -1,0 +1,33 @@
+<head>
+  <title>SolutionVikingStore</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="container">
+    <!-- header -->
+    <div class="row">
+      <header>
+      <div class="col-xs-12">
+        <strong><h1>Viking Store Admin Portal</h1></strong>
+      </div>
+      </header>
+    </div>
+    <div class="row">
+      <!-- navigation -->
+      <div class="col-xs-3">
+       <%= link_to "Users", #### %>
+       <%= link_to "Addresses", #### %>
+       <%= link_to "Orders", #### %>
+       <%= link_to "Products", #### %>
+       <%= link_to "Categories", #### %>
+       <%= link_to "Analytics Dashboard", dashboard_path %>
+      </div>
+      <!-- holds the changer -->
+      <div class="col-xs-9">
+        <%= yield %>
+      </div>
+    </div>   
+  </div>
+</body>

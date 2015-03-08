@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
 
+  has_many :orders
+  has_many :addresses
+  has_many :credit_cards
+
   def self.new_users(time_period)
     User.where("created_at > ?", time_period).count
   end

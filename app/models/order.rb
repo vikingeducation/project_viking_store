@@ -1,4 +1,8 @@
 class Order < ActiveRecord::Base
+
+  belongs_to :user
+  has_many :order_contents, :class_name => "OrderContents"
+  has_many :products, :through => :order_contents
   def self.total_revenue
     Order.select("SUM(quantity * price) AS revenue").
       joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
@@ -7,7 +11,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.revenue_in_the_last_seven_days
-    
+
     Order.select("SUM(quantity * price) AS revenue").
       joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
       where("checkout_date IS NOT NULL AND checkout_date > ?", 7.days.ago).
