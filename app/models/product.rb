@@ -15,4 +15,6 @@ class Product < ActiveRecord::Base
   def self.in_the_last_thirty_days
     self.new_products(30.days.ago)
   end
+
+  
 end

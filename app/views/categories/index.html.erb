@@ -1,0 +1,25 @@
+<h1>Product Categories</h1>
+
+<!-- button add a new category -->
+<div class="needbutton"><%= link_to "Add a New Category", new_category_path %></div>
+<br>
+<table class="table table-striped">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>SHOW</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  </tr>
+  <% @categories.each do |current_category| %>
+    <tr>
+      <td><%= current_category.id %></td>
+      <td><%= current_category.name %></td>
+      <td><%= link_to "show", category_path(current_category.id) %></td>
+      <td><%= link_to "edit", edit_category_path(current_category.id) %></td>
+      <td><%= link_to "delete", category_path(current_category.id),
+              method: :delete %></td>
+    </tr>
+  <% end %>
+
+</table>

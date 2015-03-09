@@ -1,0 +1,11 @@
+<h1> Edit Product <%= @product.id %>: <%= @product.name %></h1>
+<p>Product ID: <%= @product.id %></p>
+
+<%= form_for @product do |f| %>
+  <p><strong>Name:</strong>  <%= f.text_field :name %></p>
+  <p><strong>Price:</strong>  <%= f.text_field :price %></p>
+  <p><strong>Category:</strong>  <%= f.collection_select(:category_id, Category.all, :id, :name) %></p>
+  <%= f.submit "Update Product" %>
+<% end %>
+<%= link_to "Delete Product", category_path(@product.id),
+              method: :delete %>

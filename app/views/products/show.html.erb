@@ -1,0 +1,15 @@
+<h1>Product <%= @product.id %>: <%= @product.name %></h1>
+<h4>Product Information</h4>
+<p><strong> product ID:</strong> <%= @product.id %> </p>
+<p><strong> Name: </strong> <%= @product.name %> </p>
+<p><strong> Price: </strong> <%= @product.price %> </p>
+<p><strong> Category: </strong> <%= @product.category.name %> </p>
+<br>
+<h4>Product Statistics</h4>
+<p><strong> Times Ordered: </strong> <%= @product.orders.count %> </p>
+<p><strong> Carts In: </strong> <%= @product.orders.where.not(checkout_date: nil).count
+ %> </p>
+
+<p><%= link_to "Edit product", edit_product_path(@product.id) %></p>
+<p><%= link_to "Delete product", product_path(@product.id),
+        method: :delete %> </p>

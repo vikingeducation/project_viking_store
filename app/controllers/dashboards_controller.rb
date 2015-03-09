@@ -45,5 +45,7 @@ class DashboardsController < ApplicationController
     @four_days_ago = Order.quantity_of_orders_by_day(4)
     @five_days_ago = Order.quantity_of_orders_by_day(5)
     @six_days_ago = Order.quantity_of_orders_by_day(6)
+    render layout: "admin"
+    
     end
 end

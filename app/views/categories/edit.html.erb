@@ -1,0 +1,9 @@
+<h1> Edit Category <%= @category.id %>: <%= @category.name %></h1>
+<p>Category ID: <%= @category.id %></p>
+
+<%= form_for @category do |f| %>
+ <p>Name:   <%= f.text_field :name %></p>
+  <%= f.submit "Update Category" %>
+<% end %>
+<%= link_to "Delete Category", category_path(@category.id),
+              method: :delete %>
