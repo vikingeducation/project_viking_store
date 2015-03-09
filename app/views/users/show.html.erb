@@ -1,0 +1,18 @@
+<h1>User <%= @user.id %>: <%= @user.last_name %></h1>
+
+<div class="demographic user-show">
+  <h4><strong>Demographic Information</strong></h4>
+  <p><strong>First Name:</strong> <%= @user.first_name %></p>
+  <p><strong>Last Name:</strong> <%= @user.last_name %></p>
+  <p><strong>Email:</strong> <%= @user.email %></p>
+  <br>
+  <p><strong>Default Billing Address:</strong> </p>
+  <p><%= @user.addresses.where(:billing_id == :id)[0].street_address %>, <%= @user.addresses.where(:billing_id == :id)[0].city.name %>, <%= @user.addresses.where(:billing_id == :id)[0].state.name %></p>
+  <p><strong>Default Shipping Address:</strong> </p>
+  <p><%= @user.addresses.where(:shipping_id == :id)[0].street_address %>, <%= @user.addresses.where(:shipping_id == :id)[0].city.name %>, <%= @user.addresses.where(:shipping_id == :id)[0].state.name %></p>
+  <p><%= link_to "Edit #{@user.first_name} #{@user.last_name}'s Information", edit_user_path(@user.id) %></p>
+  <p><%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user.id),
+        method: :delete %> </p>
+  <p>STILL NEED SAVED ADDRESSES</p>
+  <p>STILL NEED UNPLACED ORDER (CART)</p>
+</div>

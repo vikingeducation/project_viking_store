@@ -1,1 +1,35 @@
-<h1>Hai I am a user</h1>
+<h1>Viking Store Users</h1>
+
+<!-- button add a new product -->
+<div class="needbutton"><%= link_to "Create a New User", new_user_path %></div>
+<br>
+<table class="table table-striped">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Joined</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Orders</th>
+    <th>Last Order Date</th>
+    <th>SHOW</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  </tr>
+  <% @users.each do |current_user| %>
+    <tr>
+      <td><%= current_user.id %></td>
+      <td><%= "#{current_user.first_name} #{current_user.last_name}" %></td>
+      <td><%= current_user.created_at %></td>
+      <td><%= current_user.addresses[0].city.name unless current_user.addresses[0] == nil %></td>
+      <td><%= current_user.addresses[0].state.name unless current_user.addresses[0] == nil %></td>
+      <td><%= link_to "#{current_user.orders.count}", order_path(current_user.id) %></td>
+      <td><%= current_user.orders[-1].created_at unless current_user.orders[-1] == nil %></td>
+      <td><%= link_to "show", user_path(current_user.id) %></td>
+      <td><%= link_to "edit", edit_user_path(current_user.id) %></td>
+      <td><%= link_to "delete", user_path(current_user.id),
+              method: :delete %></td>
+    </tr>
+  <% end %>
+
+</table>
