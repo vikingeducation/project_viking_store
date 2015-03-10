@@ -3,12 +3,12 @@ class User < ActiveRecord::Base
   has_many :addresses, dependent: :destroy
   has_many :credit_cards, dependent: :destroy
   has_many :orders
-  has_one :shipping_address,
+  belongs_to :shipping_address,
           class_name: "Address",
-          foreign_key: :user_id
-  has_one :billing_address,
+          foreign_key: :shipping_id
+  belongs_to :billing_address,
           class_name: "Address",
-          foreign_key: :user_id
+          foreign_key: :billing_id
   has_many :order_contents, through: :orders
   has_many :products, through: :order_contents
 
