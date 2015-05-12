@@ -25,5 +25,14 @@ class DashboardController < ApplicationController
     @highest_lifetime = User.highest_lifetime_value
     @highest_avg_order = User.highest_avg_order
     @most_orders = User.most_orders
+
+    @avg_order_value_week = Order.avg_value_since 7.days.ago
+    @largest_order_value_week = Order.largest_value_since 7.days.ago
+
+    @avg_order_value_month = Order.avg_value_since 30.days.ago
+    @largest_order_value_month = Order.largest_value_since 30.days.ago
+
+    @avg_order_value_total = Order.avg_value_total
+    @largest_order_value_total = Order.largest_value_total
   end
 end

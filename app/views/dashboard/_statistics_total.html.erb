@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= @orders_total %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td><%= @revenue_total.round(2) %></td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+    <td><%= @avg_order_value_total.round(2) %></td>
+  </tr>
+  <tr>
+    <td>Largest Order Value</td>
+    <td><%= @largest_order_value_total.round(2) %></td>
+  </tr>
+</table>
