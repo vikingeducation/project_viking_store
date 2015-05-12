@@ -16,7 +16,14 @@ class DashboardController < ApplicationController
     @products_total = Product.total
     @revenue_total = Order.total_revenue
 
+    # top 3s
     @top_states = User.top_3_billing_states
     @top_cities = User.top_3_billing_cities
+
+    # user awards
+    @highest_single_order = User.highest_single_order
+    @highest_lifetime = User.highest_lifetime_value
+    @highest_avg_order = User.highest_avg_order
+    @most_orders = User.most_orders
   end
 end
