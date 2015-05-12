@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  <% @top_states.each do |state| %>
+    <tr>
+      <td><%= state.name %></td>
+      <td><%= state.total %></td>
+    </tr>
+  <% end %>
+</table>
