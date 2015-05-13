@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
     count
   end
 
+  # selects the top 3 states based on number of users
   def self.top_3_billing_states
     select('states.name, COUNT(*) AS total')
       .joins('JOIN addresses ON users.billing_id = addresses.id JOIN states ON addresses.state_id = states.id')
@@ -15,6 +16,7 @@ class User < ActiveRecord::Base
       .limit(3)
   end
 
+  # selects the top 3 cities based on number of users
   def self.top_3_billing_cities
     select('cities.name, COUNT(*) AS total')
       .joins('JOIN addresses ON users.billing_id = addresses.id JOIN cities ON addresses.city_id = cities.id')
@@ -23,6 +25,7 @@ class User < ActiveRecord::Base
       .limit(3)
   end
 
+  # selects the highest valued order of all orders and the first, last name of the customer who placed it
   def self.highest_single_order
     # TRIPLE JOIN INCOMING
     select('first_name, last_name, quantity * price AS top_order')
@@ -33,6 +36,7 @@ class User < ActiveRecord::Base
       .limit(1).first
   end
 
+  # selects the highest lifetime value of placed orders and the first, last name of the customer who placed them
   def self.highest_lifetime_value
     # TRIPLE JOIN INCOMING
     select('first_name, last_name, SUM(quantity * price) AS consumerism')
@@ -43,6 +47,7 @@ class User < ActiveRecord::Base
       .limit(1).first
   end
 
+  # selects the highest average order price and the first, last name of the customer who placed them
   def self.highest_avg_order
     # TRIPLE JOIN INCOMING
     select('first_name, last_name, AVG(quantity * price) AS avg_val')
@@ -53,12 +58,13 @@ class User < ActiveRecord::Base
       .limit(1).first
   end
 
+  # selects the number of the most placed orders and the first, last name of the customer who placed them
   def self.most_orders
     select('first_name, last_name, COUNT(*) AS placed_orders')
-    .joins('JOIN orders ON users.id = orders.user_id')
-    .where('checkout_date IS NOT NULL')
-    .group('users.id')
-    .order('placed_orders DESC')
-    .limit(1).first
+      .joins('JOIN orders ON users.id = orders.user_id')
+      .where('checkout_date IS NOT NULL')
+      .group('users.id')
+      .order('placed_orders DESC')
+      .limit(1).first
   end
 end

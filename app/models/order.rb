@@ -3,19 +3,70 @@ EntireWeek = Struct.new(:sunday, :quantity, :revenue)
 
 class Order < ActiveRecord::Base
   def self.placed_since(time)
-    where("checkout_date >= ?", time).count
+    where('checkout_date >= ?', time).count
   end
 
   def self.total
     count
   end
 
+  # selects the avg value for all orders from a certain date to now
   def self.avg_value_since(time)
-    select("AVG(quantity * price) AS avg_value")
-    .joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id")
-    .where("checkout_date >= ?", time).last.avg_value
+    select('AVG(quantity * price) AS avg_value')
+      .joins('JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id')
+      .where('checkout_date >= ?', time).last.avg_value
   end
 
+  # selects the average of all order totals
+  def self.avg_value_total
+    select('AVG(quantity * price) AS avg_value')
+      .joins('JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id')
+      .where('checkout_date IS NOT NULL').last.avg_value
+  end
+
+  # selects the highest order value from a certain date to now
+  def self.largest_value_since(time)
+    select('MAX(quantity * price) AS largest_val')
+      .joins('JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id')
+      .where('checkout_date >= ?', time).last.largest_val
+  end
+
+  # selects the highest order value of all orders
+  def self.largest_value_total
+    select('MAX(quantity * price) AS largest_val')
+      .joins('JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id')
+      .where('checkout_date IS NOT NULL').last.largest_val
+  end
+
+  # selects total revenue from a certain date to now
+  def self.revenue_since(time)
+    select('SUM(quantity * price) AS revenue')
+      .joins('JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id')
+      .where('checkout_date >= ?', time).last.revenue
+  end
+
+  # selects the total revenue from all orders
+  def self.total_revenue
+    select('SUM(quantity * price) AS revenue')
+      .joins('JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id')
+      .where('checkout_date IS NOT NULL').last.revenue
+  end
+
+  # selects the quantity and revenue for a given day
+  def self.quantity_revenue_daily(date)
+    select('COUNT(*) AS quantity, SUM(quantity * price) AS revenue')
+      .joins('JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id')
+      .where('checkout_date BETWEEN ? AND ?', date.to_time, (date + 1).to_time).first
+  end
+
+  # selects the quantity and revenue for a given week
+  def self.quantity_revenue_entire_week(sunday)
+    select('COUNT(*) AS quantity, SUM(quantity * price) AS revenue')
+      .joins('JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id')
+      .where('checkout_date BETWEEN ? AND ?', sunday, (sunday + 6)).first
+  end
+
+  # returns an array of Week structs for each day of the past week
   def self.past_week_data
     results = []
     past_week.each do |day|
@@ -28,6 +79,7 @@ class Order < ActiveRecord::Base
     results
   end
 
+  # returns an array of EntireWeek structs for the past seven weeks
   def self.past_7_weeks_data
     results = []
     past_7_weeks.each do |sun|
@@ -40,6 +92,7 @@ class Order < ActiveRecord::Base
     results
   end
 
+  # returns the array of dates of the past 7 sundays
   def self.past_7_weeks
     results = []
     7.times do |week_count|
@@ -48,14 +101,14 @@ class Order < ActiveRecord::Base
     results
   end
 
+  # helper method to get past 7 sundays
   def self.past_7_weeks_helper(week_quantity)
     date = Date.today - 7 * week_quantity
-    until date.sunday?
-      date += 1
-    end
+    date += 1 until date.sunday?
     date
   end
 
+  # returns the array of of the past 7 days
   def self.past_week
     date = Date.today
     week = []
@@ -65,45 +118,4 @@ class Order < ActiveRecord::Base
     week
   end
 
-  def self.quantity_revenue_daily(date)
-    select("COUNT(*) AS quantity, SUM(quantity * price) AS revenue ")
-      .joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id")
-      .where("checkout_date BETWEEN ? AND ?", date.to_time, (date + 1).to_time).first
-  end
-
-  def self.quantity_revenue_entire_week(sunday)
-    select("COUNT(*) AS quantity, SUM(quantity * price) AS revenue ")
-      .joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id")
-      .where("checkout_date BETWEEN ? AND ?", sunday, (sunday + 6)).first
-  end
-
-  def self.avg_value_total
-    select("AVG(quantity * price) AS avg_value")
-      .joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id")
-      .where("checkout_date IS NOT NULL").last.avg_value
-  end
-
-  def self.largest_value_since(time)
-    select("MAX(quantity * price) AS largest_val")
-    .joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id")
-    .where("checkout_date >= ?", time).last.largest_val
-  end
-
-  def self.largest_value_total
-    select("MAX(quantity * price) AS largest_val")
-      .joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id")
-      .where("checkout_date IS NOT NULL").last.largest_val
-  end
-
-  def self.revenue_since(time)
-    select("SUM(quantity * price) AS revenue")
-      .joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id")
-      .where("checkout_date >= ?", time).last.revenue
-  end
-
-  def self.total_revenue
-    select("SUM(quantity * price) AS revenue")
-      .joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id")
-      .where("checkout_date IS NOT NULL").last.revenue
-  end
 end
