@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Quantity</th>
+    <th>Value</th>
+  </tr>
+  <% @order_day_data.each do |order| %>
+    <tr>
+      <td><%= order.day.month %>/<%= order.day.day %></td>
+      <td><%= order.quantity %></td>
+      <td><%= number_to_currency(order.revenue) %></td>
+    </tr>
+  <% end %>
+</table>

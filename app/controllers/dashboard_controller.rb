@@ -34,5 +34,8 @@ class DashboardController < ApplicationController
 
     @avg_order_value_total = Order.avg_value_total
     @largest_order_value_total = Order.largest_value_total
+
+    @order_day_data = Order.past_week_data
+    @order_week_data = Order.past_7_weeks_data
   end
 end
