@@ -2,6 +2,12 @@ Week = Struct.new(:day, :quantity, :revenue)
 EntireWeek = Struct.new(:sunday, :quantity, :revenue)
 
 class Order < ActiveRecord::Base
+
+  belongs_to :user
+  has_many :order_contents, class_name: "OrderContents"
+  has_many :products, through: :order_contents
+  has_many :categories, through: :products
+
   def self.placed_since(time)
     where('checkout_date >= ?', time).count
   end
@@ -14,7 +20,7 @@ class Order < ActiveRecord::Base
   def self.avg_value_since(time)
     select('AVG(quantity * price) AS avg_value')
       .joins('JOIN order_contents ON orders.id = order_contents.order_id JOIN products on products.id = order_contents.product_id')
-      .where('checkout_date >= ?', time).last.avg_value
+      .where('checkout_date >= ?', time).group('order_id').last.avg_value
   end
 
   # selects the average of all order totals

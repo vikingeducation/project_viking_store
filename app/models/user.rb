@@ -1,4 +1,10 @@
 class User < ActiveRecord::Base
+
+  has_many :addresses
+  has_many :orders
+  has_many :order_contents, through: :orders
+  has_many :products, through: :order_contents
+
   def self.created_since(time)
     where('created_at >= ?', time).count
   end
