@@ -1,0 +1,24 @@
+<h2 class="text-center">Categories</h2>
+
+<button type="submit" class="btn btn-info create-btn">
+  Create a New Category
+</button>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Desription</th>
+    <th>SHOW</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  </tr>
+  <% @categories.each do |category| %>
+    <tr>
+      <td><%= category.name %></td>
+      <td><%= category.description %></td>
+      <td><%= link_to "show", "#" %></td>
+      <td><%= link_to "edit", "#" %></td>
+      <td><%= link_to "delete", "#" %></td>
+    </tr>
+  <% end %>
+</table>
