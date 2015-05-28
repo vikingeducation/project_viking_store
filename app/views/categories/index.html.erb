@@ -7,7 +7,7 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Desription</th>
+    <th>Description</th>
     <th>SHOW</th>
     <th>EDIT</th>
     <th>DELETE</th>
@@ -16,7 +16,7 @@
     <tr>
       <td><%= category.name %></td>
       <td><%= category.description %></td>
-      <td><%= link_to "show", "#" %></td>
+      <td><%= link_to "show", category_path(category.id) %></td>
       <td><%= link_to "edit", edit_category_path(category.id) %></td>
       <td><%= link_to "delete", category_path(category.id), method: :delete, confirm: "Are you sure?" %></td>
     </tr>

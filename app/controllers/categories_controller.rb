@@ -9,13 +9,17 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
+  def show
+    @category = Category.find(params[:id])
+  end
+
   def create
     @category = Category.new(whitelisted_category_params)
     if @category.save
       flash[:success] = "Category created!"
       redirect_to categories_path
     else
-      flash[:error] = "Couldn't create category :("
+      flash[:error] = @category.errors.full_messages.to_sentence
       render "/categories/new"
     end
   end
@@ -26,13 +30,9 @@ class CategoriesController < ApplicationController
       flash[:success] = "Category obliterated!"
       redirect_to categories_path
     else
-      flash[:error] = "Couldn't delete category :("
+      flash[:error] = @category.errors.full_messages.to_sentence
       render "categories/show"
     end
-  end
-
-  def edit
-    @category = Category.find(params[:id])
   end
 
   def edit
@@ -45,7 +45,7 @@ class CategoriesController < ApplicationController
       flash[:success] = "Category updated!"
       redirect_to categories_path
     else
-      flash[:error] = "Couldn't update category :("
+      flash[:error] = @category.errors.full_messages.to_sentence
       render "categories/edit"
     end
   end

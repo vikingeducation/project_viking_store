@@ -1,0 +1,30 @@
+<h2>Product details</h2>
+<%= link_to "Edit product", edit_product_path(@product.id) %> |
+<%= link_to "Delete product", product_path(@product.id), method: :delete, confirm: "Are you sure?" %>
+
+<h4>Product name</h4>
+<%= @product.name %>
+
+<h4>Product category ID</h4>
+<%= @product.category_id %>
+
+<h4>Product SKU</h4>
+<%= @product.sku %>
+
+<h4>Product description</h4>
+<%= @product.description %>
+
+<h4>Product price</h4>
+<%= @product.price %>
+
+<h4>Product statistics</h4>
+<table>
+  <tr>
+    <td>Times ordered</td>
+    <td><%= @product.orders.where("checkout_date IS NOT NULL").count %></td>
+  </tr>
+  <tr>
+    <td>Carts In</td>
+    <td><%= @product.orders.where("checkout_date IS NULL").count %></td>
+  </tr>
+</table>
