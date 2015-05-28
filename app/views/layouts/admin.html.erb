@@ -22,7 +22,11 @@
         <div class="col-sm-12 text-center">
           <h1 class="admin-header">Viking Store Admin Portal</h1><br />
           <% flash.each do |type, msg| %>
-            <%= content_tag :div, msg, class: "alert alert-info" %>
+            <% if type == "error" %>
+              <%= content_tag :div, msg, class: "alert alert-danger" %>
+            <% else %>
+              <%= content_tag :div, msg, class: "alert alert-success" %>
+            <% end %>
           <% end %>
         </div>
       </div>

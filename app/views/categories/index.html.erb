@@ -1,8 +1,8 @@
 <h2 class="text-center">Categories</h2>
 
-<button type="submit" class="btn btn-info create-btn">
+<a href="/categories/new" class="btn btn-info create-btn">
   Create a New Category
-</button>
+</a>
 
 <table>
   <tr>
@@ -17,8 +17,8 @@
       <td><%= category.name %></td>
       <td><%= category.description %></td>
       <td><%= link_to "show", "#" %></td>
-      <td><%= link_to "edit", "#" %></td>
-      <td><%= link_to "delete", "#" %></td>
+      <td><%= link_to "edit", edit_category_path(category.id) %></td>
+      <td><%= link_to "delete", category_path(category.id), method: :delete, confirm: "Are you sure?" %></td>
     </tr>
   <% end %>
 </table>
