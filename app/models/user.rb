@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates :email,
             format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
             presence: true
-  has_many :addresses, depedent: :destroy
+  has_many :addresses, dependent: :destroy
   has_many :orders
   has_many :order_contents, through: :orders
   has_many :products, through: :order_contents

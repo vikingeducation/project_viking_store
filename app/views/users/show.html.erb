@@ -2,7 +2,7 @@
 <%= link_to "Edit user", edit_user_path(@user.id) %> |
 <%= link_to "Delete user", user_path(@user.id), method: :delete, confirm: "Are you sure?" %> |
 <%= link_to "View addresses", "#" %> |
-<%= link_to "Create address", "#" %> |
+<%= link_to "Create address", new_address_path %> |
 <%= link_to "View cart", "#" %> |
 <%= link_to "Create order", "#" %>
 
@@ -12,7 +12,7 @@
 <h4>User join date</h4>
 <%= @user.created_at %>
 
-<h4>User email </h4>
+<h4>User email</h4>
 <%= @user.email %>
 
 <h4>Credit card info</h4>
