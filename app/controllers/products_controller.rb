@@ -37,6 +37,8 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @times_product_ordered = @product.orders.where("checkout_date IS NOT NULL").count
+    @product_in_carts = @product.orders.where("checkout_date IS NULL").count
   end
 
   def update

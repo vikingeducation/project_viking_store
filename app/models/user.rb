@@ -1,9 +1,18 @@
 class User < ActiveRecord::Base
 
-  has_many :addresses
+  validates :first_name, :last_name,
+            length: { maximum: 64,
+                      minimum: 1 },
+            presence: true
+  validates :email,
+            format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
+            presence: true
+  has_many :addresses, depedent: :destroy
   has_many :orders
   has_many :order_contents, through: :orders
   has_many :products, through: :order_contents
+  has_many :credit_cards, dependent: :destroy
+  belongs_to :shipping_address, class_name: "Address", foreign_key: :shipping_id
 
   def self.created_since(time)
     where('created_at >= ?', time).count

@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
   resources :products
   resources :categories
+  resources :users
+  resources :credit_cards
 end

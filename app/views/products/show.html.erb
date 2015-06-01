@@ -21,10 +21,10 @@
 <table>
   <tr>
     <td>Times ordered</td>
-    <td><%= @product.orders.where("checkout_date IS NOT NULL").count %></td>
+    <td><%= @times_product_ordered %></td>
   </tr>
   <tr>
     <td>Carts In</td>
-    <td><%= @product.orders.where("checkout_date IS NULL").count %></td>
+    <td><%= @product_in_carts %></td>
   </tr>
 </table>

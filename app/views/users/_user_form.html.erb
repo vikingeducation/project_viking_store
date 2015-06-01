@@ -1,0 +1,9 @@
+<%= form_for @user do |f| %>
+  <h4>First name</h4>
+  <%= f.text_field :first_name %><br />
+  <h4>Last name</h4>
+  <%= f.text_field :last_name %><br />
+  <h4>Email</h4>
+  <%= f.email_field :email %><br />
+  <%= f.submit "Create user", class: "btn btn-primary" %>
+<% end %>

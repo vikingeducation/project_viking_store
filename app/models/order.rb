@@ -12,6 +12,22 @@ class Order < ActiveRecord::Base
     where('checkout_date >= ?', time).count
   end
 
+  def status
+    if checkout_date.nil?
+      'UNPLACED'
+    else
+      'PLACED'
+    end
+  end
+
+  def value
+    total = 0
+    order_contents.each do |item|
+      total += item.quantity * item.product.price
+    end
+    total
+  end
+
   def self.total
     count
   end
