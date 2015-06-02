@@ -2,19 +2,41 @@
   <h3 class="text-center">Logistical Information</h3>
   <br />
   <h4>Basic Information</h4>
-  <p><strong>Customer ID:</strong> <%= @user.id %></p>
-  <p><strong>Customer name:</strong> <%= link_to @user.first_name + ' ' + @user.last_name, user_path(@user.id) %></p>
+  <p><strong>Customer ID:</strong> <%= @order.user.id %></p>
+  <p><strong>Customer name:</strong> <%= link_to @order.user.first_name + ' ' + @order.user.last_name, user_path(@order.user.id) %></p>
   <p><strong>Telephone:</strong> N/A</p>
-  <p><%= link_to "Edit Customer Profile", edit_user_path(@user.id) %></p>
+  <p><%= link_to "Edit Customer Profile", edit_user_path(@order.user.id) %></p>
   <br />
 
+  <h4>Order Status</h4>
   <%= form_for @order do |f| %>
-    <%= f.hidden_field(:user_id, value: @user.id) %>
-    <h4>Shipping address</h4>
-    <%= f.collection_select( :shipping_id, Address.where("user_id = ?", @user.id), :id, :street_address) %><br />
-    <h4>Billing address</h4>
-    <%= f.collection_select( :billing_id, Address.where("user_id = ?", @user.id), :id, :street_address) %><br />
-    <%= f.submit "Confirm addresses", class: "btn btn-primary" %>
+    <%= f.radio_button "checkout_date", Time.now %><p class="order-status-placed">PLACED</p>
+    <%= f.radio_button "checkout_date", nil %><p class="order-status-unplaced">UNPLACED</p>
+    <%= f.submit "Update status", class: "btn btn-primary" %></td>
   <% end %>
+  <br />
+
+</div>
+
+<div class="order-contents">
+  <h3 class="text-center">Order Contents</h3>
+
+  <table class="center-order-contents-table">
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>SUBMIT</th>
+    </tr>
+    <% @order.products.each do |product| %>
+      <tr>
+        <% @order_contents = OrderContents.where("product_id == ?", product.id).first %>
+        <%= form_for @order_contents do |fo| %>
+          <td><%= fo.collection_select(:product_id, Product.all, :id, :name) %></td>
+          <td><%= fo.text_field :quantity %></td>
+          <td><%= fo.submit "Update", class: "btn btn-primary" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
 
 </div>

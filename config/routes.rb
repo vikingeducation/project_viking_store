@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :credit_cards
   resources :addresses
   resources :orders
+  resources :order_contents
 end

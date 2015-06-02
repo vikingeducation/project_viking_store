@@ -2,7 +2,7 @@ Week = Struct.new(:day, :quantity, :revenue)
 EntireWeek = Struct.new(:sunday, :quantity, :revenue)
 
 class Order < ActiveRecord::Base
-  validates :user_id, :shipping_address, :billing_address, presence: true
+  validates :user_id, :shipping_id, :billing_id, presence: true
 
   belongs_to :user
   has_many :order_contents, class_name: "OrderContents", dependent: :destroy

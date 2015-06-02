@@ -1,3 +1,4 @@
-<h2 class="text-center">Create a new order for <%= @user.first_name + ' ' + @user.last_name %></h2>
+<h2 class="text-center">Edit order <%= @order.id %> for <%= @order.user.first_name + ' ' + @order.user.last_name %></h2>
+<%= link_to "Delete this order", order_path(@order.id), method: :delete, data: { confirm: "Are you sure?" } %>
 
 <%= render partial: "order_form_edit" %>
