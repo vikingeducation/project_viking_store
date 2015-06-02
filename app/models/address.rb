@@ -13,6 +13,10 @@ class Address < ActiveRecord::Base
     errors.add(:user_with_id, "ID #{self.user_id} does not exist.") unless User.exists?(self.user_id)
   end
 
+  def full_address
+    "#{self.street_address}, #{self.city.name}, #{self.state.name}"
+  end
+
   def self.user_order(user_id)
     return all unless user_id
     where(user_id: user_id).order("created_at DESC")

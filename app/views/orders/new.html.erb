@@ -1,0 +1,4 @@
+<h2 class="text-center">Create a new order for <%= @user.first_name + ' ' + @user.last_name %></h2>
+<h3 class="text-center alert alert-warning"><strong>WARNING: Order creation is a two-step process. First, please select the billing and shipping addresses.</strong></h3>
+
+<%= render partial: "order_form" %>

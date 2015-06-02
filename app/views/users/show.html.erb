@@ -4,7 +4,7 @@
 <%= link_to "View addresses", "#" %> |
 <%= link_to "Create address", new_address_path %> |
 <%= link_to "View cart", "#" %> |
-<%= link_to "Create order", "#" %>
+<%= link_to "Create order", new_order_path(user_id: @user.id) %>
 
 <h4>User full name</h4>
 <%= @user.first_name + ' ' + @user.last_name %>

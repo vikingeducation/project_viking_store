@@ -1,0 +1,26 @@
+.order-status-unplaced {
+  font-size: 32px;
+  color: fuchsia;
+}
+
+.order-status-placed {
+  font-size: 32px;
+  color: chartreuse;
+}
+
+.user-info {
+  border: 2px solid black;
+  padding-left: 20px;
+}
+
+.order-contents {
+  border: 2px solid black;
+  margin-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.center-order-contents-table {
+  margin: 0 auto;
+  float: none;
+}

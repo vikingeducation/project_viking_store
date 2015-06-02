@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :products, through: :order_contents
   has_many :credit_cards, dependent: :destroy
   belongs_to :shipping_address, class_name: "Address", foreign_key: :shipping_id
+  belongs_to :billing_address, class_name: "Address", foreign_key: :billing_id
 
   def self.created_since(time)
     where('created_at >= ?', time).count
