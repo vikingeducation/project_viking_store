@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
+	# Return the total number of orders since a particular time.
+	# See the view for how to utilize the yield here.
 	def self.total_submitted_orders
-		# Allow us to pass in a block which will get the rows in a 
-		# particular timeframe.
 		if block_given?
 			in_timeframe = yield
 			in_timeframe.where("checkout_date NOT null").count
@@ -10,9 +10,9 @@ class Order < ActiveRecord::Base
 		end
 	end
 
+	# Returns the total revenue since a particular timeframe.
+	# See the view for how to utilize the yield here.
 	def self.total_revenue
-		# Allow us to pass in a block which will get the rows in a 
-		# particular timeframe.
 		if block_given?
 			in_timeframe = yield
 			in_timeframe.select("SUM(price * quantity) AS total_revenue").
@@ -25,8 +25,12 @@ class Order < ActiveRecord::Base
 		end
 	end
 
-	# Highest single order value.
-	def self.highest_order_value
+	# Returns the name and total order value of the highest order for a 
+	# particular time period. This timeframe is given as a block when the 
+	# method is called, for now it will be an ActiveRecord::Relation which will
+	# then have further queries called on it. Further down I found a better way to 
+	# go about this but this method also works.
+ 	def self.highest_order_value
 		if block_given?
 			in_timeframe = yield
 			in_timeframe.select("users.first_name AS first_name, users.last_name AS last_name, SUM(products.price * order_contents.quantity) AS order_price").
@@ -45,7 +49,8 @@ class Order < ActiveRecord::Base
 		end
 	end
 
-	# Highest lifetime order value
+	# Returns the first+last name and total order value for the user 
+	# with the highest lifetime order value.
 	def self.highest_lifetime_value
 		select("users.first_name AS first_name, users.last_name AS last_name, SUM(products.price * order_contents.quantity) AS total_price").
 		joins("JOIN users ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").
@@ -55,7 +60,8 @@ class Order < ActiveRecord::Base
 		limit(1).first
 	end
 
-	# Highest average order value
+	# Returns the first+last name as well as the average order value for the 
+	# user with the highest average order value.
 	def self.highest_average_value
 		select("users.first_name AS first_name, users.last_name AS last_name, AVG(products.price * order_contents.quantity) AS average_value").
 		joins("JOIN users ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").
@@ -65,7 +71,8 @@ class Order < ActiveRecord::Base
 		limit(1).first
 	end
 
-	# Most orders placed
+	# Returns the first+last name, as well as the number of orders, 
+	# for the user who has placed the most orders ever.
 	def self.most_orders_placed
 		select("users.first_name AS first_name, users.last_name AS last_name, COUNT(order_contents.order_id) AS orders").
 		joins("JOIN users ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").
@@ -75,7 +82,13 @@ class Order < ActiveRecord::Base
 		limit(1).first
 	end
 
-	# Average value of all orders w/ timeframe support
+	# Average value of all orders w/ timeframe support. NOTE: After
+	# messing around with the .yield way of doing timeframes I think that
+	# a simple parameter is probably the easiest way to actually go about this.
+	# Yield can lead to other problems (for instance, in this situation)
+	# when there are aggregate functions and other .where's to be concerned with.
+	### TODO: Go back and make all class functions which currently use yield
+	### take a timeframe (or similar) parameter.
 	def self.average_order_value(timeframe = nil)
 			if timeframe.nil?
 				average_stats = select("SUM(products.price * order_contents.quantity) AS order_value, COUNT(DISTINCT order_contents.order_id) AS number_of_orders").
@@ -90,9 +103,8 @@ class Order < ActiveRecord::Base
 			end	
 	end
 
-	# FINALLY the last method here is going to be order_by_date
-	# which will take a date parameter and return the orders 
-	# value of those orders based on the date.
+	# This will take a date parameter and return the number of orders 
+	# and the value of those orders on a particular day.
 	def self.order_by_day(date)
 		select("COUNT(DISTINCT orders.id) AS order_quantity, SUM(order_contents.quantity * products.price) AS order_value").
 		joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").
@@ -101,6 +113,8 @@ class Order < ActiveRecord::Base
 		limit(1).first
 	end
 
+	# Returns the quantity of orders and the value of those orders for a given timeframe.
+	# Technically it doesn't have to be a week but I am using it as such.
 	def self.order_by_week(start_date, end_date)
 		select("COUNT(DISTINCT orders.id) AS order_quantity, SUM(order_contents.quantity * products.price) AS order_value").
 		joins("JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id").

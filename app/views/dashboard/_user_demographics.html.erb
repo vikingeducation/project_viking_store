@@ -1,0 +1,83 @@
+<h2>2. User Demographics and Behavior:</h2>
+<h3>Top 3 States Users Live In (billing):</h3>
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<td><b>Item:</b></td>
+			<td><b>Data:</b></td>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<!-- Top 3 States (billing) -->
+		<% @top_states.each do |state| %>
+			<tr>
+				<td><%= state.name %></td>
+				<td><%= state.client_total %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<h3>Top 3 Cities Users Live In (billing):</h3>
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<td><b>Item:</b></td>
+			<td><b>Data:</b></td>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<!-- Top 3 States (billing) -->
+		<% @top_cities.each do |city| %>
+			<tr>
+				<td><%= city.name %></td>
+				<td><%= city.client_total %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<h3>Top Users With...</h3>
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<td><b>Item:</b></td>
+			<td><b>User:</b></td>
+			<td><b>Quantity:</b></td>
+		</tr>
+	</thead>
+	
+	<!-- Top User Stats -->
+	<tbody>
+		<!-- Highest single order value -->
+		<tr>
+			<% highest_order_value = Order.highest_order_value %>
+			<td>Highest Single Order Value:</td>
+			<td><%= "#{highest_order_value.first_name} #{highest_order_value.last_name}" %></td>
+			<td><%= number_to_currency(highest_order_value.order_price) %></td>
+		</tr>
+		<!-- Highest lifetime value of a customer -->
+		<tr>
+			<% highest_lifetime_value = Order.highest_lifetime_value %>
+			<td>Highest Lifetime Value Customer:</td>
+			<td><%= "#{highest_lifetime_value.first_name} #{highest_lifetime_value.last_name}" %></td>
+			<td><%= number_to_currency(highest_lifetime_value.total_price) %></td>
+		</tr>
+		<!-- Highest lifetime value of a customer -->
+		<tr>
+			<% highest_average_value = Order.highest_average_value %>
+			<td>Highest Average Order Value:</td>
+			<td><%= "#{highest_average_value.first_name} #{highest_average_value.last_name}" %></td>
+			<td><%= number_to_currency(highest_average_value.average_value) %></td>
+		</tr>
+		<!-- Most orders placed -->
+		<tr>
+			<% most_orders_placed = Order.most_orders_placed %>
+			<td>Most Orders Placed:</td>
+			<td><%= "#{most_orders_placed.first_name} #{most_orders_placed.last_name}" %></td>
+			<td><%= "#{most_orders_placed.orders} orders" %></td>
+		</tr>
+	</tbody>
+</table>
