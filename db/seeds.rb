@@ -2,7 +2,8 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-#BLOW AWAY EVERYTHING EVEN IF YOU DON'T RUN rake db:reset
+
+# Blow away all the existing records every time.
 
 User.destroy_all
 Address.destroy_all
@@ -15,29 +16,28 @@ State.destroy_all
 City.destroy_all
 
 
-
-
-# Seed multiplier
+# MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
 MULTIPLIER = 10
-#seed random numbers to work predictably
+
+
+# This seeds the random number generator so the rest of this file behaves predictably. (This was definitely not part of your assignment.)
 srand(42)
 
-#generate products
-sample_categories = []
+
+# Generate Category records for your Product records.
 
 MULTIPLIER.times do
-  sample_categories << Faker::Commerce.department
-end
-
-sample_categories.each do |name|
-  category = Category.new()
-  category[:name]        = name
+  category = Category.new
+  category[:name]        = Faker::Commerce.department
   category[:description] = Faker::Lorem.sentence
   category.save
 end
 
+
+# Generate Product records and assign them each to a random Category.
+
 (MULTIPLIER * 10).times do
-  p = Product.new()
+  p = Product.new
   p[:name]        = Faker::Commerce.product_name
   p[:category_id] = Category.pluck(:id).sample
   p[:description] = Faker::Lorem.sentence
@@ -46,7 +46,9 @@ end
   p.save
 end
 
-#generate addresses, MULTIPLIER*111 cities
+
+# Generate the State records.
+
 STATES =
 ["Alabama", "Alaska", "Arizona", "Arkansas", "California",
 "Colorado", "Connecticut", "Delaware", "Florida", "Georgia",
@@ -64,68 +66,79 @@ STATES.each do |state|
   state.save
 end
 
+
+# Generate some City records. Your Address model could have also included "city" as a string instead of a foreign key.
+
 (MULTIPLIER * 10).times do
   City.create( :name => Faker::Address.city )
 end
 
 
+# Because seeds.rb is run as a script, you'll need to put helper methods ABOVE where they are used to generate records.
 
+# This method selects one of a users several addresses for use setting shipping address and billing address.
 
-
-# picks all of a user's addresses, returns an id of one of them
-# for use setting shipping address and billing address
 def random_user_address(user_id)
   address_choices = (Address.select(:id).where(:user_id => user_id)).to_a
-  address_choices[0] ? address_choices.sample[:id] : nil
+  address_choices.sample[:id]
 end
 
+
+# This method creates 1 to 4 addresses associated with a specific user.
+
 def generate_addresses(user_id)
-  (rand(5)).times do
-    a = Address.new( user_id: user_id,
-                     street_address: Faker::Address.street_address,
-                     city_id: City.select(:id).sample.id,
-                     state_id: State.select(:id).sample.id,
-                     zip_code: Faker::Address.zip.to_i)
+  (rand(4) + 1).times do
+    a = Address.new
+    a[:user_id] = user_id
+    a[:street_address] = Faker::Address.street_address
+    a[:city_id] = City.select(:id).sample.id
+    a[:state_id] = State.select(:id).sample.id
+    a[:zip_code] = Faker::Address.zip.to_i
     a.save! #just to check if anything fails here
   end
 end
 
 
-# decaying creation date
+# This method returns a date that's random but weighted toward the current date.
+
 def creation_date
   time_frames = []
   (MULTIPLIER**2).times do |x|
-    time_frames << Time.now - ((x*3) + 1).month
+     time_frames << Time.now - ((x*3) + 1).month
   end
   date_range = (time_frames.sample..Time.now)
   rand(date_range)
 end
 
 
-
-# create users
+# Create your User records.
 (MULTIPLIER * 10).times do
-  sample_name = [Faker::Name.first_name, Faker::Name.last_name]
 
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
 
   u = User.new
-  u[:first_name]  = sample_name[0]
-  u[:last_name]   = sample_name[1]
-  u[:email]       = Faker::Internet.email(sample_name.join(" "))
+  u[:first_name]  = first_name
+  u[:last_name]   = last_name
+  u[:email]       = Faker::Internet.email("#{first_name} #{last_name}")
   u[:created_at]  = creation_date
   u.save
 
-  # add in billing addresses
+  # Create affilliated addresses and select billing and shipping addresses.
   generate_addresses(u.id)
   u[:billing_id]  = random_user_address(u.id)
   u[:shipping_id] = random_user_address(u.id)
   u.save
 end
 
-#generate order contents
+
+# Here are some methods that will help us create Order records.
+
+# This method adds random Product records to Orders through the OrderContents model.
+
 def generate_contents(order_id)
   (rand(10)+1).times do
-    c = OrderContents.new()
+    c = OrderContents.new
     c[:order_id]   = order_id
     c[:product_id] = Product.pluck(:id).sample
     c[:quantity]   = rand(10)+1
@@ -140,44 +153,39 @@ def generate_contents(order_id)
 end
 
 
-
-
-# a user can only have a single shopping cart
-# that cart is the SINGLE order without a checkout_date
-# a user can only have one such order
-
+# This method tells us whether a specific user already has a shopping cart, i.e. an order that has not been checked out.
 #  #present? is a Rails method that's the opposite of #empty?
+
 def has_cart?(user_id)
   Order.where("user_id = ? AND checkout_date IS NULL ", user_id).present?
 end
 
-# when was this order placed?
+
+# This method generates a random timestamp between when the user was created and right now.
 def placement_date(user)
   rand(user[:created_at]..Time.now)
 end
 
 
+# Now we can finally create some Order records.
 
-# FINALLY MAKE ORDERS
-(MULTIPLIER* 30).times do
-  # grab all extant IDs, sample them for one, then get the id number
-  # out of the ActiveRecord relation that is returned.
-  sample_id = User.select(:id).sample.id
-  sample_user = User.find(sample_id)
+(MULTIPLIER * 30).times do
+
+  user = User.all.sample
 
   # 2 kinds of users can have orders built
   # a user with a billing address is one
   # a user who still needs a shopping cart built is the other
-  if sample_user[:billing_id] || !has_cart?(sample_user[:id])
-    o = Order.new()
-    o[:user_id]        = sample_user.id
-    o[:shipping_id]   = random_user_address(sample_user.id)
-    o[:billing_id]    = random_user_address(sample_user.id)
+  if user[:billing_id] || !has_cart?(user[:id])
+    o = Order.new
+    o[:user_id]       = user.id
+    o[:shipping_id]   = random_user_address(user.id)
+    o[:billing_id]    = random_user_address(user.id)
 
     # first generated order is a shopping cart
     # all since then are placed orders with checkout dates
-    if has_cart?(sample_user.id)
-      o[:checkout_date] = placement_date(sample_user)
+    if has_cart?(user.id)
+      o[:checkout_date] = placement_date(user)
     end
 
     o.save
@@ -186,6 +194,7 @@ end
 end
 
 
+# Create some CreditCard records for users who have an order.
 users_with_orders = Order.all.select("DISTINCT user_id").
                               where("checkout_date IS NOT NULL")
 
