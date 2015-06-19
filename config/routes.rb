@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'public#index'
+
   namespace :admin do
     root 'dashboard#index'
     resources :admin, only: [:index]
