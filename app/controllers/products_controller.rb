@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = params[:category_filter] ? Category.find(params[:category_filter]).products : Product.all
   end
 end

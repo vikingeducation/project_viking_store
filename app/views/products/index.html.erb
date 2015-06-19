@@ -24,8 +24,10 @@
 
   <div class="row">
     <section class="col-sm-12 filter">
-      <%= collection_select(:category, :id, Category.all, :id, :name, prompt: true) %>
-      <button class="btn btn-warning cart">Apply Filter</button>
+      <form method="GET">
+        <%= select_tag :category_filter, options_for_select(Category.all.map {|cat| [cat.name, cat.id] }, selected: params[:category_filter]) %>
+        <button type="submit" class="btn btn-warning cart">Apply Filter</button>
+      </form>
     </section>
   </div>
 
