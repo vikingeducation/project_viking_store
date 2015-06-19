@@ -1,7 +1,7 @@
 class CreateOrderContents < ActiveRecord::Migration
   def change
     create_table :order_contents do |t|
-      t.integer  "order_id",               null: false
+      t.integer  "order_id"
       t.integer  "product_id",             null: false
       t.integer  "quantity",   default: 1, null: false
       t.timestamps

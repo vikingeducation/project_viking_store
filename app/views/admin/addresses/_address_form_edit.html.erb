@@ -1,0 +1,15 @@
+<%= form_for [:admin, @address] do |f| %>
+  <h4>User ID</h4>
+  <%= f.text_field :user_id %><br />
+  <h4>Street address</h4>
+  <%= f.text_field :street_address %><br />
+  <h4>Secondary address</h4>
+  <%= f.text_field :secondary_address %><br />
+  <h4>Zip code</h4>
+  <%= f.text_field :zip_code %><br />
+  <h4>City</h4>
+  <%= f.collection_select(:city_id, City.all, :id, :name) %><br />
+  <h4>State</h4>
+  <%= f.collection_select(:state_id, State.all, :id, :name) %><br />
+  <%= f.submit "Update address", class: "btn btn-primary" %>
+<% end %>

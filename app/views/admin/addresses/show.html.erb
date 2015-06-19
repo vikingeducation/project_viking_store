@@ -1,0 +1,23 @@
+<h2><%= @address.street_address %>: <%= @address.user.first_name + ' ' + @address.user.last_name %></h2>
+<%= link_to "Edit user with this address", edit_admin_user_path(@address.user.id) %> |
+<%= link_to "Delete address", admin_address_path(@address.id), method: :delete, data: { confirm: "Are you sure?" } %> |
+<%= link_to "Edit address", "#" %>
+
+<h4>Street address</h4>
+<%= @address.street_address %>
+
+<h4>Secondary address</h4>
+<% if @address.secondary_address %>
+  <%= @address.secondary_address %>
+<% else %>
+  <p>None provided.</p>
+<% end %>
+
+<h4>Zip code</h4>
+<%= @address.zip_code %>
+
+<h4>City</h4>
+<%= @address.city %>
+
+<h4>State</h4>
+<%= @address.state %>

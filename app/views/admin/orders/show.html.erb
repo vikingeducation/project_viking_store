@@ -1,0 +1,84 @@
+<h2 class="text-center">
+  Order <%= @order.id %>
+  <% if @order.status == 'UNPLACED' %>
+    (Shopping Cart)
+  <% end %>
+</h2>
+
+<div class="user-info">
+  <h3 class="text-center">Logistical Information</h3>
+  <br />
+  <h4>Basic Information</h4>
+  <p><strong>Customer ID:</strong> <%= @order.user.id %></p>
+  <p><strong>Customer name:</strong> <%= link_to @order.user.first_name + ' ' + @order.user.last_name, admin_user_path(@order.user.id) %></p>
+  <p><strong>Telephone:</strong> N/A</p>
+  <p><strong>Date Placed:</strong>
+    <% if @order.checkout_date %>
+      <%= @order.checkout_date %>
+    <% else %>
+      <p>Order not yet placed.</p>
+    <% end %>
+  </p>
+  <p><strong># Products:</strong> <%= @order.products.count %></p>
+  <p><strong>Order Value:</strong> <%= number_to_currency(@order.value) %></p>
+  <p><%= link_to "Edit Customer Profile", edit_admin_user_path(@order.user.id) %></p>
+  <br />
+
+  <h4>Order Status</h4>
+  <% if @order.status == 'PLACED' %>
+    <p class="order-status-placed"><%= @order.status %></p>
+  <% else %>
+    <p class="order-status-unplaced"><%= @order.status %></p>
+  <% end %>
+  <br />
+
+  <h4>Shipping Address</h4>
+  <% if @order.user.shipping_address %>
+    <p><strong>Street:</strong> <%= @order.user.shipping_address.street_address %></p>
+    <p><strong>City:</strong> <%= @order.user.shipping_address.city.name %></p>
+    <p><strong>State:</strong> <%= @order.user.shipping_address.state.name %></p>
+  <% else %>
+    <p>None provided.</p>
+  <% end %>
+  <br />
+
+  <h4>Billing Address</h4>
+  <% if @order.user.shipping_address %>
+    <p><strong>Street:</strong> <%= @order.user.billing_address.street_address %></p>
+    <p><strong>City:</strong> <%= @order.user.billing_address.city.name %></p>
+    <p><strong>State:</strong> <%= @order.user.billing_address.state.name %></p>
+  <% else %>
+    <p>None provided.</p>
+  <% end %>
+  <br />
+
+  <h4>Billing Card</h4>
+  <% if @order.user.credit_cards.first %>
+    <p><%= @order.user.credit_cards.first.card_number if @order.user.credit_cards.first %></p>
+  <% else %>
+    <p>None provided.</p>
+  <% end %>
+</div>
+
+<div class="order-contents">
+  <h3 class="text-center">Order Contents</h3>
+
+  <table class="center-order-contents-table">
+    <tr>
+      <th>Product ID</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total Price</th>
+    </tr>
+    <% @order.products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= product.name %></td>
+        <td><%= @order.order_contents.where("product_id == ?", product.id).first.quantity %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= number_to_currency(@order.products.where("product_id = ?", product.id).count * product.price) %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
