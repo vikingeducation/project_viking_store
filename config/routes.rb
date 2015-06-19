@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'public#index'
+  root 'products#index'
+  resources :orders
 
   namespace :admin do
     root 'dashboard#index'

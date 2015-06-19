@@ -24,7 +24,8 @@
 
   <div class="row">
     <section class="col-sm-12 filter">
-      <%= collection_select(:category, Category.all, :id, :name, prompt: true) %>
+      <%= collection_select(:category, :id, Category.all, :id, :name, prompt: true) %>
+      <button class="btn btn-warning cart">Apply Filter</button>
     </section>
   </div>
 
