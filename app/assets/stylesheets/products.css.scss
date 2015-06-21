@@ -17,6 +17,12 @@
   }
 }
 
+.flashes {
+  text-align: center;
+  margin-top: 15px;
+  padding: -5px;
+}
+
 .call-to-action {
   box-sizing: border-box;
   border-bottom: 3px solid grey;
@@ -29,7 +35,7 @@
 }
 
 .filter {
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 10px;
   text-align: right;
   .filter-text {

@@ -23,9 +23,19 @@
 <main class="container">
 
   <div class="row">
-    <section class="col-sm-12 filter">
+    <section class="col-sm-9 flashes">
+      <% flash.each do |type, msg| %>
+        <% if type == "error" %>
+          <%= content_tag :div, msg, class: "alert alert-danger" %>
+        <% else %>
+          <%= content_tag :div, msg, class: "alert alert-success" %>
+        <% end %>
+      <% end %>
+    </section>
+
+    <section class="col-sm-3 filter">
       <form method="GET">
-        <%= select_tag :category_filter, options_for_select(Category.all.map {|cat| [cat.name, cat.id] }, selected: params[:category_filter]) %>
+        <%= select_tag :category_filter, options_for_select(@category_filter, selected: params[:category_filter]) %>
         <button type="submit" class="btn btn-warning cart">Apply Filter</button>
       </form>
     </section>
@@ -38,7 +48,10 @@
         <div class="product-listing">
           <h4 class="product-name"><%= product.name %></h4>
           <%= image_tag("dubs.png", class: 'img-responsive') %>
-          <button class="btn btn-warning cart">Add to cart</button>
+          <%= form_tag carts_path(0), method: 'POST' do %>
+            <%= hidden_field_tag(:item, product.id) %>
+            <%= submit_tag 'Add to cart', class: 'btn btn-warning cart' %>
+          <% end %>
         </div>
       </section>
     <% end %>

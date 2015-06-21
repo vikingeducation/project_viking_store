@@ -10,6 +10,7 @@
 
   <h4>Order Status</h4>
   <%= form_for [:admin, @order] do |f| %>
+    <%# fix Time.now stringifcation %>
     <%= f.radio_button "checkout_date", Time.now %><p class="order-status-placed">PLACED</p>
     <%= f.radio_button "checkout_date", nil %><p class="order-status-unplaced">UNPLACED</p>
     <%= f.submit "Update status", class: "btn btn-primary" %></td>
