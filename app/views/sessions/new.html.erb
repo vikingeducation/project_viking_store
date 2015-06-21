@@ -1,0 +1,75 @@
+<header class="container-fluid">
+
+  <div class="row">
+    <section class="col-sm-12 header">
+      <h1 class="sign-in-title">Sign Up or Sign In</h1>
+    </section>
+  </div>
+
+</header>
+
+<main class="container">
+
+  <div class="row">
+    <section class="col-sm-9 flashes">
+      <% flash.each do |type, msg| %>
+        <% if type == "error" %>
+          <%= content_tag :div, msg, class: "alert alert-danger" %>
+        <% else %>
+          <%= content_tag :div, msg, class: "alert alert-success" %>
+        <% end %>
+      <% end %>
+    </section>
+
+  <div class="row sign-in-prompts">
+
+    <section class="col-sm-6">
+      <h4><em>I do NOT have an account...</em></h4>
+    </section>
+
+    <section class="col-sm-6">
+      <h4><em>I have an account...</em></h4>
+    </section>
+
+  </div>
+
+  <div class="row sign-in-options">
+
+    <section class="col-sm-6">
+      <div class="sign-up-button">
+        <%= link_to "Sign Up", "#", class: "btn btn-block btn-primary" %>
+      </div>
+    </section>
+
+    <section class="col-sm-6">
+      <div class="sign-in-form">
+        <%= form_tag sessions_path, method: "POST" do %>
+          <p><strong>Email Address</strong></p>
+          <%= email_field_tag "email", nil, class: "form-control" %>
+          <%= submit_tag "Sign In", class: "btn btn-block btn-primary" %>
+        <% end %>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-12 text-right admin-login">
+        <p><a href="#">Admin Login</a></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 text-center contact-info">
+        <p class="contact-header">CONTACT</p>
+        <p>1 - 000 - 000 - 0000</p>
+        <p>contact@vikingstore.com</p>
+      </div>
+    </div>
+
+  </div>
+</footer>
