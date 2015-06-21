@@ -10,4 +10,15 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    user = current_user
+    if sign_out
+      flash[:success] = "You have successfully signed out."
+      redirect_to root_path
+    else
+      flash[:error] = "Something went wrong when signing you out."
+      redirect_to root_path
+    end
+  end
 end

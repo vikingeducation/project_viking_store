@@ -34,6 +34,7 @@ class CartsController < ApplicationController
 
   def edit
     @products = session[:cart]
+    # @products = User.find(current_user.id).orders.where("checkout_date IS NULL").first.products
     @total = total
   end
 end

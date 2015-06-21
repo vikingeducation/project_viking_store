@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_out
-    session.delete(:current_user_id) && current_user = nil
+    session.delete(:current_user_id)
   end
 
   def current_user
@@ -26,4 +26,13 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
   helper_method :signed_in_user?
+
+  private
+
+  def require_login
+    unless signed_in_user?
+      flash[:error] = "You need to sign in to view this!"
+      redirect_to new_session_path
+    end
+  end
 end

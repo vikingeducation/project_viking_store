@@ -11,7 +11,7 @@
 <main class="container">
 
   <div class="row">
-    <section class="col-sm-9 flashes">
+    <section class="col-sm-12 flashes">
       <% flash.each do |type, msg| %>
         <% if type == "error" %>
           <%= content_tag :div, msg, class: "alert alert-danger" %>
