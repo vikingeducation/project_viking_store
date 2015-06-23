@@ -1,0 +1,53 @@
+<h2>4. Time Series Data:</h2>
+
+<!-- Orders statistics by day -->
+
+<h3>Orders by Day:</h3>
+
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<td><b>Date:</b></td>
+			<td><b>Quantity:</b></td>
+			<td><b>Value:</b></td>
+		</tr>
+	
+	</thead>
+	
+	<!-- Statistics by day -->
+	<tbody>
+		<% 7.times do |i| %>
+			<tr>
+				<% daily_information = Order.order_by_day(i.day.ago) %>
+				<td><%= what_is_the_date?(i) %></td>
+				<td><%= daily_information.order_quantity %></td>
+				<td><%= number_to_currency(daily_information.order_value) %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<!-- Orders by week -->
+<h3>Orders by Week:</h3>
+
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<td><b>Date:</b></td>
+			<td><b>Quantity:</b></td>
+			<td><b>Value:</b></td>
+		</tr>
+	</thead>
+	
+	<!-- Statistics by week -->
+	<tbody>
+		<% 7.times do |i| %>
+			<tr>
+				<% daily_information = Order.order_by_week((((i*7)+6).day.ago), (i*7).day.ago) %>
+				<td>Week ending: <%= (i*7).days.ago.strftime("%B %e, %Y") %></td>
+				<td><%= daily_information.order_quantity %></td>
+				<td><%= number_to_currency(daily_information.order_value) %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

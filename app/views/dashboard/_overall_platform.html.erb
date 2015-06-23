@@ -1,0 +1,99 @@
+<h2>1. Overall Platform:</h2>
+<h3>Totals:</h3>
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<td><b>Item:</b></td>
+			<td><b>Data:</b></td>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<!-- Total Users -->
+		<tr>
+			<td>Total Users:</td>
+			<td><%= User.total %></td>
+		</tr>
+		<!-- Total Submitted Orders -->
+		<tr>
+			<td>Total Submitted Orders:</td>
+			<td><%= Order.total_submitted_orders %></td>
+		</tr>
+		<!-- Total Product Listed -->
+		<tr>
+			<td>Total Products Listed:</td>
+			<td><%= Product.total_product %></td>
+		</tr>
+		<!-- Total Revenue -->
+		<tr>
+			<td>Total Revenue:</td>
+			<td><%= number_to_currency(Order.total_revenue) %></td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>Last 7 Days:</h3>
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<td><b>Item:</b></td>
+			<td><b>Data:</b></td>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<!-- Total Users -->
+		<tr>
+			<td>Total Users:</td>
+			<td><%= User.total{User.where("created_at >= ?",1.week.ago)} %></td>
+		</tr>
+		<!-- Total Submitted Orders -->
+		<tr>
+			<td>Total Submitted Orders:</td>
+			<td><%= Order.total_submitted_orders{Order.where("checkout_date >= ?",1.week.ago)} %></td>
+		</tr>
+		<!-- Total Product Listed -->
+		<tr>
+			<td>Total Products Listed:</td>
+			<td><%= Product.total_product{Product.where("created_at >= ?",1.week.ago)} %></td>
+		</tr>
+		<!-- Total Revenue -->
+		<tr>
+			<td>Total Revenue:</td>
+			<td><%= number_to_currency(Order.total_revenue{Order.where("checkout_date >= ?",1.week.ago)}) %></td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>Last 30 Days:</h3>
+<table class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<td><b>Item:</b></td>
+			<td><b>Data:</b></td>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<!-- Total Users -->
+		<tr>
+			<td>Total Users:</td>
+			<td><%= User.total{User.where("created_at >= ?",1.month.ago)} %></td>
+		</tr>
+		<!-- Total Submitted Orders -->
+		<tr>
+			<td>Total Submitted Orders:</td>
+			<td><%= Order.total_submitted_orders{Order.where("checkout_date >= ?",1.month.ago)} %></td>
+		</tr>
+		<!-- Total Product Listed -->
+		<tr>
+			<td>Total Products Listed:</td>
+			<td><%= Product.total_product{Product.where("created_at >= ?",1.month.ago)} %></td>
+		</tr>
+		<!-- Total Revenue -->
+		<tr>
+			<td>Total Revenue:</td>
+			<td><%= number_to_currency(Order.total_revenue{Order.where("checkout_date >= ?",1.month.ago)}) %></td>
+		</tr>
+	</tbody>
+</table>
