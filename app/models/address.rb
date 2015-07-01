@@ -1,9 +1,9 @@
 class Address < ActiveRecord::Base
 
-  validates :street_address, :city, length: { maximum: 64 }, presence: true
+  validates :street_address, length: { maximum: 64 }, presence: true
   validates :zip_code, length: { is: 5 }, numericality: true, presence: true
-  validates :user_id, presence: true
-  validate :validate_user_exists
+  # validates :user_id, presence: true
+  # validate :validate_user_exists
 
   belongs_to :user
   belongs_to :city

@@ -7,13 +7,15 @@ class User < ActiveRecord::Base
   validates :email,
             format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
             presence: true
-  has_many :addresses, dependent: :destroy
+  has_many :addresses, # dependent: :destroy
   has_many :orders
   has_many :order_contents, through: :orders
   has_many :products, through: :order_contents
   has_many :credit_cards, dependent: :destroy
   belongs_to :shipping_address, class_name: "Address", foreign_key: :shipping_id
   belongs_to :billing_address, class_name: "Address", foreign_key: :billing_id
+
+  accepts_nested_attributes_for :addresses
 
   def self.created_since(time)
     where('created_at >= ?', time).count

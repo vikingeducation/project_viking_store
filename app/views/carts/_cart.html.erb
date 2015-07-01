@@ -1,0 +1,91 @@
+<main class="container">
+
+  <div class="row">
+    <section class="col-sm-12 flashes">
+      <% flash.each do |type, msg| %>
+        <% if type == "error" %>
+          <%= content_tag :div, msg, class: "alert alert-danger" %>
+        <% else %>
+          <%= content_tag :div, msg, class: "alert alert-success" %>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
+
+  <%= form_tag cart_path, method: "PUT" do %>
+  <div class="row">
+    <section class="col-sm-12 cart-box">
+
+      <div class="container-fluid">
+
+        <div class="row cart-product-listing">
+
+        <% @products.each do |product_id, quantity| %>
+          <section class="col-sm-8">
+            <div class="product-info">
+              <div class="row">
+                <div class="col-sm-3">
+                  <%= image_tag("dubs.png", class: 'img-responsive') %>
+                </div>
+                <div class="col-sm-5">
+                  <h3><%= Product.find(product_id).name %></h3>
+                  <p>Foo Category</p>
+                </div>
+                <div class="col-sm-3">
+                  <h3><%= number_to_currency(Product.find(product_id).price) %></h4>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="col-sm-4">
+            <div class="product-quantities">
+              <div class="row">
+                <div class="col-sm-7">
+                  <h4>Quantity</h4>
+                  <p><%= number_field_tag "[updated]#{product_id}", quantity, class: "form-control" %></p>
+                </div>
+                <div class="col-sm-5">
+                  <h4>Total Price</h4>
+                  <p><%= number_to_currency(Product.find(product_id).price * quantity) %></p>
+                </div>
+              </div>
+              <%= label_tag "Remove Item?" %>
+              <%= check_box_tag "[deleted]#{product_id}" %>
+            </div>
+          </section>
+        <% end %>
+        </div>
+
+        <div class="row checkout">
+
+          <section class="col-sm-8">
+            <div class="checkout total-price">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h3>TOTAL</h3>
+                  <h4><%= number_to_currency(@total) %></h4>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="checkout-buttons col-sm-12 col-sm-4">
+            <div class="update-contents">
+              <%= submit_tag "Update Contents", class: "btn btn-block btn-info" %>
+            </div>
+            <br/>
+            <div class="submit-checkout">
+              <%= link_to "Check Out", "/orders", class: "btn btn-block btn-primary" %>
+              <br/>
+            </div>
+          </section>
+
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+  <% end %>
+</main>

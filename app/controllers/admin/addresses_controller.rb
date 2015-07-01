@@ -10,6 +10,7 @@ class Admin::AddressesController < AdminController
 
   def create
     @address = Address.new(whitelisted_address_params)
+    @address.user_id = current_user.id
     if @address.save
       flash[:success] = "Address created!"
       redirect_to admin_addresses_path(user_id: @address.user_id)

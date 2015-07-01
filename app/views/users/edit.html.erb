@@ -1,18 +1,14 @@
-<header class="container">
+<header class="container-fluid">
 
   <div class="row">
     <section class="col-sm-12 header">
-      <h1 class="cart-title">Shopping Cart Contents</h1>
+      <h1 class="sign-in-title">Sign Up</h1>
     </section>
   </div>
 
 </header>
 
-<% if session[:cart].nil? || session[:cart].empty? %>
-  <p class="text-center">Add some items to your cart!</p>
-<% else %>
-  <%= render partial: 'cart' %>
-<% end %>
+<%= render partial: 'user_form' %>
 
 <footer class="footer">
   <div class="container">
