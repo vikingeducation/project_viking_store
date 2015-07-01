@@ -1,0 +1,16 @@
+.sign-in-title {
+  font-size: 46px;
+}
+
+.sign-in-prompts {
+  text-align: center;
+}
+
+.sign-in-options {
+  .sign-up-button, .sign-in-form {
+    box-sizing: border-box;
+    border: 3px solid grey;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+}

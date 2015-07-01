@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= @orders_month %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td><%= number_to_currency(@revenue_month) %></td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+    <td><%= number_to_currency(@avg_order_value_month) %></td>
+  </tr>
+  <tr>
+    <td>Largest Order Value</td>
+    <td><%= number_to_currency(@largest_order_value_month) %></td>
+  </tr>
+</table>

@@ -1,0 +1,89 @@
+<main class="container">
+
+  <div class="row">
+    <section class="col-sm-12 flashes">
+      <% flash.each do |type, msg| %>
+        <% if type == "error" %>
+          <%= content_tag :div, msg, class: "alert alert-danger" %>
+        <% else %>
+          <%= content_tag :div, msg, class: "alert alert-success" %>
+        <% end %>
+      <% end %>
+    </section>
+  </div>
+
+  <div class="row">
+
+  <%= form_for @user do |user_fields| %>
+    <%= user_fields.fields_for :addresses do |address_fields| %>
+      <section class="col-sm-6">
+        <h3>Saved Address 1 (Optional)</h3>
+        <div>
+          <h4>Street Address</h4>
+          <%= address_fields.text_field :street_address %>
+        </div>
+        <div>
+          <h4>State</h4>
+          <%= address_fields.collection_select :state_id, State.all, :id, :name %>
+        </div>
+        <div>
+          <h4>State</h4>
+          <%= address_fields.collection_select :city_id, City.all, :id, :name %>
+        </div>
+        <div>
+          <h4>Zip Code</h4>
+          <%= address_fields.text_field :zip_code %>
+        </div>
+        <div>
+          <%= address_fields.label :billing_address %>
+          <%= user_fields.radio_button :billing_id, address_fields.index %>
+        </div>
+        <div>
+          <%= address_fields.label :shipping_address %>
+          <%= user_fields.radio_button :shipping_id, address_fields.index %>
+        </div>
+      </section>
+    <% end %>
+
+    <section class="col-sm-6">
+      <div class="form-group">
+        <div>
+          <h4>Email Address</h4>
+          <%= user_fields.email_field :email, placeholder: "foo@bar.com" %>
+        </div>
+        <div>
+          <h4>Confirm Email</h4>
+          <%= user_fields.email_field :email, placeholder: "foo@bar.com" %>
+        </div>
+        <div>
+          <h4>First Name</h4>
+          <%= user_fields.text_field :first_name, placeholder: "Foo" %>
+        </div>
+        <div>
+          <h4>Last Name</h4>
+          <%= user_fields.text_field :last_name, placeholder: "Bar" %>
+        </div>
+      </div>
+    </section>
+
+    <% if @user.persisted? %>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-6">
+          <h4>Submit Profile Changes</h4>
+          <%= user_fields.submit "Confirm", class: "btn btn-block btn-primary" %>
+          <%= link_to "Delete my Account", user_path(@user.id), method: "DELETE", data: {confirm: "Really want to delete your account?"} %>
+        </div>
+      </div>
+      <% else %>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-6">
+          <h4>Complete Sign Up</h4>
+          <%= user_fields.submit "Sign Up", class: "btn btn-block btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  </div>
+
+</main>

@@ -1,0 +1,80 @@
+<header class="container-fluid">
+
+  <div class="row">
+    <section class="col-sm-12 header">
+      <h1 class="title">The Viking Store</h1>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col-sm-12 subheader">
+      <h3 class="subtitle">The Best Viking Gear on the Whole Web</h3>
+    </section>
+  </div>
+
+  <div class="row">
+    <section class="col-sm-12 call-to-action">
+      <p class="action"><em>Choose from among our lineup of fine items below</em></p>
+    </section>
+  </div>
+
+</header>
+
+<main class="container">
+
+  <div class="row">
+    <section class="col-sm-9 flashes">
+      <% flash.each do |type, msg| %>
+        <% if type == "error" %>
+          <%= content_tag :div, msg, class: "alert alert-danger" %>
+        <% else %>
+          <%= content_tag :div, msg, class: "alert alert-success" %>
+        <% end %>
+      <% end %>
+    </section>
+
+    <section class="col-sm-3 filter">
+      <form method="GET">
+        <%= select_tag :category_filter, options_for_select(@category_filter, selected: params[:category_filter]) %>
+        <button type="submit" class="btn btn-warning cart">Apply Filter</button>
+      </form>
+    </section>
+  </div>
+
+  <div class="row">
+
+    <% @products.each do |product| %>
+      <section class="col-sm-4">
+        <div class="product-listing">
+          <h4 class="product-name"><%= product.name %></h4>
+          <%= image_tag("dubs.png", class: 'img-responsive') %>
+          <%= form_tag carts_path(0), method: 'POST' do %>
+            <%= hidden_field_tag(:item, product.id) %>
+            <%= submit_tag 'Add to cart', class: 'btn btn-warning cart' %>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-12 text-right admin-login">
+        <p><a href="#">Admin Login</a></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 text-center contact-info">
+        <p class="contact-header">CONTACT</p>
+        <p>1 - 000 - 000 - 0000</p>
+        <p>contact@vikingstore.com</p>
+      </div>
+    </div>
+
+  </div>
+</footer>

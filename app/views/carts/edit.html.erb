@@ -1,0 +1,35 @@
+<header class="container">
+
+  <div class="row">
+    <section class="col-sm-12 header">
+      <h1 class="cart-title">Shopping Cart Contents</h1>
+    </section>
+  </div>
+
+</header>
+
+<% if session[:cart].nil? || session[:cart].empty? %>
+  <p class="text-center">Add some items to your cart!</p>
+<% else %>
+  <%= render partial: 'cart' %>
+<% end %>
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-12 text-right admin-login">
+        <p><a href="#">Admin Login</a></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 text-center contact-info">
+        <p class="contact-header">CONTACT</p>
+        <p>1 - 000 - 000 - 0000</p>
+        <p>contact@vikingstore.com</p>
+      </div>
+    </div>
+
+  </div>
+</footer>

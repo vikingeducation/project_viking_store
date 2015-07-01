@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  <tr>
+    <td>Users</td>
+    <td><%= @users_total %></td>
+  </tr>
+  <tr>
+    <td>Orders</td>
+    <td><%= @orders_total %></td>
+  </tr>
+  <tr>
+    <td>Products</td>
+    <td><%= @products_total %></td>
+  </tr>
+  <tr>
+    <td>Revenue</td>
+    <td><%= number_to_currency(@revenue_total) %></td>
+  </tr>
+</table>

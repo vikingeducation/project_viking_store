@@ -1,0 +1,10 @@
+<nav class="navbar navbar-inverse">
+  <%= link_to "Viking Store", root_path, class: "navbar-brand" %>
+  <p class="navbar-text pull-right"><%= link_to "Your cart", edit_cart_path(0), class: 'navbar-link' %> /
+  <% if signed_in_user? %>
+    <%= link_to "Sign out", session_path(current_user.id), method: "DELETE", class: "navbar-link" %>
+  <% else %>
+    <%= link_to "Sign in", new_session_path, class: 'navbar-link' %>
+  <% end %>
+  </p>
+</nav>

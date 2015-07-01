@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SolutionVikingStore</title>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+  <!-- Bootstrap Javascripts -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+  <title>The Viking Store</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body data-no-turbolink>
 
+<%= render partial: '/products/navbar' %>
 <%= yield %>
 
 </body>

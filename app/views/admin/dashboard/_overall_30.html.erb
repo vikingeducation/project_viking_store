@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  <tr>
+    <td>New Users</td>
+    <td><%= @new_users_month %></td>
+  </tr>
+  <tr>
+    <td>Orders</td>
+    <td><%= @orders_month %></td>
+  </tr>
+  <tr>
+    <td>Revenue</td>
+    <td><%= number_to_currency(@revenue_month) %></td>
+  </tr>
+</table>
