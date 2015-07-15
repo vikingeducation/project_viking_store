@@ -35,8 +35,8 @@ module DashboardHelper
 
 
   def get_time_series
-    { 'Orders by Day' => Order.order_stats_by_day_range(1),
-      'Orders by Week' => Order.order_stats_by_day_range(7)
+    { 'Orders by Day' => time_series(1),
+      'Orders by Week' => time_series(7)
     }
   end
 
@@ -55,5 +55,24 @@ module DashboardHelper
     table_data
 
   end
+
+
+  def time_series(interval)
+    output = {}
+
+    7.times do |i|
+      start_day = Time.now - (interval * i).days
+      query = Order.order_stats_by_day_range(interval, start_day)
+
+      data = [ query['Number of Orders'], query['Total Revenue'] ]
+
+      output[start_day.to_date.to_s] = data
+    end
+
+    output
+  end
+
+
+
 
 end

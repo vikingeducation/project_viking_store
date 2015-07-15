@@ -39,17 +39,39 @@ class Order < ActiveRecord::Base
     if number_of_days.nil?
       full_query = base_query.where("orders.checkout_date IS NOT NULL").first
     else
-      full_query = base_query.where("orders.checkout_date > ?", start - number_of_days.days).first
+      full_query = base_query.where("orders.checkout_date BETWEEN ? AND ?", start - number_of_days.days, start).first
+    end
+
+
+    if full_query.count == 0
+      average_order = 0
+    else
+      average_order = full_query.revenue / full_query.count
     end
 
 
     table_data = {'Number of Orders' => full_query.count,
                   'Total Revenue' => full_query.revenue,
-                  'Average Order Value' => full_query.revenue / full_query.count,
+                  'Average Order Value' => average_order,
                   'Largest Order Value' => full_query.maximum
                   }
 
     table_data
+
+  end
+
+
+  def self.time_series_by_day
+
+    Order.select("date(orders.checkout_date),
+                  COUNT(DISTINCT orders.id) AS quantity,
+                  SUM(products.price * order_contents.quantity) AS value").
+          joins("JOIN order_contents ON orders.id = order_contents.order_id
+                JOIN products ON order_contents.product_id = products.id").
+          where("orders.checkout_date > ?", Time.now - 7.days).
+          group("date(orders.checkout_date)").
+          order("date(orders.checkout_date) DESC")
+
 
   end
 

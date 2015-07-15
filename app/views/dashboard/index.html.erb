@@ -7,15 +7,17 @@
   </div>
 
 
-  <div class='row'>
 
-    <% @data.each do |panel, tables| %>
+  <% @data.each_with_index do |(panel, tables), index| %>
+
+     <%= "<div class='row'>".html_safe if index.even? %>
 
         <%= render :partial => 'panel', :locals => { panel_title: panel,tables: tables } %>
 
-    <% end %>
+    <%= "</div>".html_safe if index.odd? %> <!-- row -->
 
-  </div> <!-- row -->
+  <% end %>
+
 
 
 </div>
