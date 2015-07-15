@@ -4,9 +4,10 @@ class DashboardController < ApplicationController
 
   def index
 
-    @data = { 'Last 7 Days' => aggregate_data(7),
-              'Last 30 Days' => aggregate_data(30),
-              'Total' => aggregate_data
+    @data = { "1. Overall Platform" => get_aggregate_data,
+              "2. User Demographics and Behavior" => get_demographic_data,
+              "3. Order Statistics" => {},
+              "4. Time Series Data" => {}
             }
   end
 

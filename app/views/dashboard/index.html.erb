@@ -9,9 +9,9 @@
 
   <div class='row'>
 
-    <% 4.times do %>
+    <% @data.each do |panel, tables| %>
 
-        <%= render :partial => 'panel', :locals => { data: @data } %>
+        <%= render :partial => 'panel', :locals => { panel_title: panel, tables: tables } %>
 
     <% end %>
 

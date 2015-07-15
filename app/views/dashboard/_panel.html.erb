@@ -2,13 +2,13 @@
 
   <div class='panel panel-default'>
 
-    <h2 class='text-center'>1. Overall Platform</h2>
+    <h2 class='text-center'><%= panel_title %></h2>
 
 
     <div class='panel-body'>
 
-      <% data.each do |day_range, values| %>
-        <%= render :partial => 'table_section', :locals => { day_range: day_range, values: values } %>
+      <% tables.each do |table_title, values| %>
+        <%= render :partial => 'table_section', :locals => { table_title: table_title, values: values } %>
       <% end %>
 
     </div> <!-- panel-body -->
