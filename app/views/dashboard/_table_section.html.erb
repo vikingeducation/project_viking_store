@@ -15,15 +15,12 @@
 
       <tbody>
 
-        <tr>
-          <td>New Users</td>
-          <td>100</td>
-        </tr>
-
-        <tr>
-          <td>Orders</td>
-          <td>160</td>
-        </tr>
+        <% data.each do |key, value| %>
+          <tr>
+            <td><%= key %></td>
+            <td><%= value %></td>
+          </tr>
+        <% end %>
 
       </tbody>
 

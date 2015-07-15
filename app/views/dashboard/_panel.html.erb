@@ -8,7 +8,7 @@
     <div class='panel-body'>
 
       <% 3.times do %>
-        <%= render 'table_section' %>
+        <%= render :partial => 'table_section', :locals => { data: data } %>
       <% end %>
 
     </div> <!-- panel-body -->

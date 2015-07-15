@@ -11,7 +11,7 @@
 
     <% 4.times do %>
 
-        <%= render 'panel' %>
+        <%= render :partial => 'panel', :locals => { data: @data } %>
 
     <% end %>
 
