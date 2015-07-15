@@ -12,18 +12,19 @@ class Order < ActiveRecord::Base
 
   # for all new orders within past x days
   def self.calc_revenue(day_range = nil)
+    base_query = Order.joins("JOIN order_contents ON orders.id = order_contents.order_id
+                 JOIN products ON order_contents.product_id = products.id")
+
     if day_range.nil?
-      Order.joins("JOIN order_contents ON orders.id = order_contents.order_id
-                 JOIN products ON order_contents.product_id = products.id").
-            where("orders.checkout_date IS NOT NULL").
-            sum("products.price * order_contents.quantity")
+      filter_query = base_query.where("orders.checkout_date IS NOT NULL")
     else
-      Order.joins("JOIN order_contents ON orders.id = order_contents.order_id
-                   JOIN products ON order_contents.product_id = products.id").
-            where("orders.checkout_date > ?", Time.now - day_range.days).
-            sum("products.price * order_contents.quantity")
+      filter_query = base_query.where("orders.checkout_date > ?", Time.now - day_range.days)
     end
+
+    filter_query.sum("products.price * order_contents.quantity")
   end
+
+
 
   # Pulls stats for a period of time.  Optional arguments for 1) the number of days
   # to include in the range, and 2) the starting date from which to count backwards/
@@ -32,7 +33,8 @@ class Order < ActiveRecord::Base
   def self.order_stats_by_day_range(number_of_days = nil, start = Time.now)
     base_query = Order.select("COUNT(DISTINCT orders.id) AS count,
                                 SUM(products.price * order_contents.quantity) AS revenue,
-                                MAX(products.price * order_contents.quantity) AS maximum").
+                                MAX(products.price * order_contents.quantity) AS maximum,
+                                SUM(products.price * order_contents.quantity) / COUNT(DISTINCT orders.id) AS average").
                         joins("JOIN order_contents ON orders.id = order_contents.order_id
                               JOIN products ON order_contents.product_id = products.id")
 
@@ -42,43 +44,14 @@ class Order < ActiveRecord::Base
       full_query = base_query.where("orders.checkout_date BETWEEN ? AND ?", start - number_of_days.days, start).first
     end
 
-
-    if full_query.count == 0
-      average_order = 0
-    else
-      average_order = full_query.revenue / full_query.count
-    end
-
-
     table_data = {'Number of Orders' => full_query.count,
                   'Total Revenue' => full_query.revenue,
-                  'Average Order Value' => average_order,
+                  'Average Order Value' => full_query.average,
                   'Largest Order Value' => full_query.maximum
                   }
 
     table_data
 
   end
-
-
-  def self.time_series_by_day
-
-    Order.select("date(orders.checkout_date),
-                  COUNT(DISTINCT orders.id) AS quantity,
-                  SUM(products.price * order_contents.quantity) AS value").
-          joins("JOIN order_contents ON orders.id = order_contents.order_id
-                JOIN products ON order_contents.product_id = products.id").
-          where("orders.checkout_date > ?", Time.now - 7.days).
-          group("date(orders.checkout_date)").
-          order("date(orders.checkout_date) DESC")
-
-
-  end
-
-
-
-  private
-
-
 
 end

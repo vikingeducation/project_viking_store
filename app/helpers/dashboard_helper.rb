@@ -19,8 +19,8 @@ module DashboardHelper
 
 
   def get_demographic_data
-    { 'Top 3 States Users Live In (billing)' => User.top_3_by_state,
-      'Top 3 Cities Users Live In (billing)' => User.top_3_by_city,
+    { 'Top 3 States Users Live In (billing)' => User.top_3_by('state'),
+      'Top 3 Cities Users Live In (billing)' => User.top_3_by('city'),
       'Top User With...' => User.top_users
     }
   end
@@ -60,6 +60,7 @@ module DashboardHelper
   def time_series(interval)
     output = {}
 
+    # can this be improved?  currently runs 7(x2) small queries
     7.times do |i|
       start_day = Time.now - (interval * i).days
       query = Order.order_stats_by_day_range(interval, start_day)

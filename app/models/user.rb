@@ -9,19 +9,11 @@ class User < ActiveRecord::Base
   end
 
 
-  def self.top_3_by_state
+  # Returns Top 3 Users by City or State
+  def self.top_3_by(geography)
     User.joins("JOIN addresses ON users.billing_id = addresses.id
-                JOIN states ON addresses.state_id = states.id").
-          group("states.name").
-          order("count(distinct users.id) DESC").limit(3).
-          count(:id)
-  end
-
-
-  def self.top_3_by_city
-    User.joins("JOIN addresses ON users.billing_id = addresses.id
-                JOIN cities ON addresses.city_id = cities.id").
-          group("cities.name").
+                JOIN #{geography.pluralize} ON addresses.#{geography}_id = #{geography.pluralize}.id").
+          group("#{geography.pluralize}.name").
           order("count(distinct users.id) DESC").limit(3).
           count(:id)
 
@@ -39,17 +31,6 @@ class User < ActiveRecord::Base
 
   private
 
-
-=begin
-  def self.get_order_values
-    User.select("users.*, orders.id AS order_id, SUM(products.price * order_contents.quantity) AS order_value").
-          joins("JOIN orders ON users.id = orders.user_id
-                 JOIN order_contents ON orders.id = order_contents.order_id
-                 JOIN products ON order_contents.product_id = products.id").
-          where("orders.checkout_date IS NOT NULL").
-          group("users.id, orders.id")
-  end
-=end
 
 
   def self.biggest_order
