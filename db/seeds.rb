@@ -61,7 +61,8 @@ end
 
 # This method selects one of a users several addresses for use setting shipping address and billing address.
 def random_user_address(user_id)
-  User.find(user_id).addresses.sample[:id]
+  # User.find(user_id).addresses.sample[:id] ## had to correct with following line:
+  User.joins("JOIN addresses ON users.id = addresses.user_id").pluck("addresses.id").sample
 end
 
 # This method creates a single address affiliated with a user.
