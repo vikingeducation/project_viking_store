@@ -8,7 +8,12 @@
     <div class='panel-body'>
 
       <% tables.each do |table_title, values| %>
-        <%= render :partial => 'table_section', :locals => { table_title: table_title, values: values } %>
+        <%= render  :partial => 'table_section',
+                    :locals => {
+                      table_title: table_title,
+                      table_headers: get_table_headers(table_title),
+                      table_data: values
+                    } %>
       <% end %>
 
     </div> <!-- panel-body -->

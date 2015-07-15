@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
           group("cities.name").
           order("count(distinct users.id) DESC").limit(3).
           count(:id)
+
   end
 
 
@@ -52,7 +53,9 @@ class User < ActiveRecord::Base
 
 
   def self.biggest_order
-    result = User.select("users.*, orders.id AS order_id, SUM(products.price * order_contents.quantity) AS order_value").
+    result = User.select("users.*,
+                          orders.id AS order_id,
+                          SUM(products.price * order_contents.quantity) AS order_value").
                   joins("JOIN orders ON users.id = orders.user_id
                          JOIN order_contents ON orders.id = order_contents.order_id
                          JOIN products ON order_contents.product_id = products.id").
@@ -61,12 +64,13 @@ class User < ActiveRecord::Base
                   order('order_value DESC').
                   first
 
-    [result.first_name, result.last_name, result.order_value]
+    [result.first_name + " " + result.last_name, result.order_value]
   end
 
 
   def self.highest_lifetime_orders
-    result = User.select("users.*, SUM(products.price * order_contents.quantity) AS lifetime_value").
+    result = User.select("users.*,
+                          SUM(products.price * order_contents.quantity) AS lifetime_value").
                   joins("JOIN orders ON users.id = orders.user_id
                          JOIN order_contents ON orders.id = order_contents.order_id
                          JOIN products ON order_contents.product_id = products.id").
@@ -75,12 +79,13 @@ class User < ActiveRecord::Base
                   order('lifetime_value DESC').
                   first
 
-    [result.first_name, result.last_name, result.lifetime_value]
+    [result.first_name + " " + result.last_name, result.lifetime_value]
   end
 
 
   def self.highest_average_order
-    result = User.select("users.*, SUM(products.price * order_contents.quantity) / COUNT(DISTINCT orders.id) AS average_order_value").
+    result = User.select("users.*,
+                          round( SUM(products.price * order_contents.quantity) / COUNT(DISTINCT orders.id), 2) AS average_order_value").
                   joins("JOIN orders ON users.id = orders.user_id
                          JOIN order_contents ON orders.id = order_contents.order_id
                          JOIN products ON order_contents.product_id = products.id").
@@ -89,7 +94,7 @@ class User < ActiveRecord::Base
                   order('average_order_value DESC').
                   first
 
-    [result.first_name, result.last_name, result.average_order_value]
+    [result.first_name + " " + result.last_name, result.average_order_value]
   end
 
 
@@ -101,7 +106,7 @@ class User < ActiveRecord::Base
                   order('order_count DESC').
                   first
 
-    [result.first_name, result.last_name, result.order_count]
+    [result.first_name + " " + result.last_name, result.order_count]
   end
 
 

@@ -8,17 +8,28 @@
 
       <thead class='bg-primary'>
         <tr>
-          <td>Item</td>
-          <td>Data</td>
+          <% table_headers.each do |header| %>
+            <td><%= header %></td>
+          <% end %>
         </tr>
       </thead>
 
+
       <tbody>
 
-        <% values.each do |label, data| %>
+        <% table_data.each do |label, data| %>
           <tr>
+
             <td><%= label %></td>
-            <td><%= data %></td>
+
+            <% if data.is_a?(Array) %>
+              <% data.each do |cell| %>
+                <td><%= cell %></td>
+              <% end %>
+            <% else %>
+              <td><%= data %></td>
+            <% end %>
+
           </tr>
         <% end %>
 
