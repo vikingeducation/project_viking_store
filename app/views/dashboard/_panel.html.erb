@@ -7,8 +7,8 @@
 
     <div class='panel-body'>
 
-      <% 3.times do %>
-        <%= render :partial => 'table_section', :locals => { data: data } %>
+      <% data.each do |day_range, values| %>
+        <%= render :partial => 'table_section', :locals => { day_range: day_range, values: values } %>
       <% end %>
 
     </div> <!-- panel-body -->
