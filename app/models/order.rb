@@ -25,20 +25,21 @@ class Order < ActiveRecord::Base
     end
   end
 
-
-  def self.order_stats_by_day_range(day_range = nil)
-    # all days
-
+  # Pulls stats for a period of time.  Optional arguments for 1) the number of days
+  # to include in the range, and 2) the starting date from which to count backwards/
+  # Defaults to selecting all days in the database and using the current time as the
+  # Starting point.
+  def self.order_stats_by_day_range(number_of_days = nil, start = Time.now)
     base_query = Order.select("COUNT(DISTINCT orders.id) AS count,
                                 SUM(products.price * order_contents.quantity) AS revenue,
                                 MAX(products.price * order_contents.quantity) AS maximum").
                         joins("JOIN order_contents ON orders.id = order_contents.order_id
                               JOIN products ON order_contents.product_id = products.id")
 
-    if day_range.nil?
+    if number_of_days.nil?
       full_query = base_query.where("orders.checkout_date IS NOT NULL").first
     else
-      full_query = base_query.where("orders.checkout_date > ?", Time.now - day_range.days).first
+      full_query = base_query.where("orders.checkout_date > ?", start - number_of_days.days).first
     end
 
 

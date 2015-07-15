@@ -3,7 +3,8 @@ module DashboardHelper
   def get_table_headers(table_title)
     case table_title
       when 'Top User With...' then ['Item','User','Quantity']
-      when 'Orders by Day' || 'Orders by Week' then ['Date','Quantity','Value']
+      when 'Orders by Day' then ['Date','Quantity','Value']
+      when 'Orders by Week' then ['Date','Quantity','Value']
       else ['Item','Data']
     end
   end
@@ -33,6 +34,13 @@ module DashboardHelper
   end
 
 
+  def get_time_series
+    { 'Orders by Day' => Order.order_stats_by_day_range(1),
+      'Orders by Week' => Order.order_stats_by_day_range(7)
+    }
+  end
+
+
 
   private
 
@@ -47,6 +55,5 @@ module DashboardHelper
     table_data
 
   end
-
 
 end
