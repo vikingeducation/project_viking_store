@@ -10,7 +10,8 @@ module DashboardHelper
 
   def get_demographic_data
     { 'Top 3 States Users Live In (billing)' => User.top_3_by_state,
-      'Top 3 Cities Users Live In (billing)' => User.top_3_by_city
+      'Top 3 Cities Users Live In (billing)' => User.top_3_by_city,
+      'Top User With...' => User.top_users
     }
   end
 
@@ -28,6 +29,6 @@ module DashboardHelper
   end
 
 
-
+  
 
 end

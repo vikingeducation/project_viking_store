@@ -25,4 +25,12 @@ class Order < ActiveRecord::Base
     end
   end
 
+
+
+
+
+  private
+
+
+
 end
