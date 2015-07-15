@@ -25,6 +25,14 @@ module DashboardHelper
   end
 
 
+  def get_order_stats
+    { 'Last 7 Days' => Order.order_stats_by_day_range(7),
+      'Last 30 Days' => Order.order_stats_by_day_range(30),
+      'Total' => Order.order_stats_by_day_range()
+    }
+  end
+
+
 
   private
 
