@@ -39,16 +39,50 @@ class Order < ActiveRecord::Base
                               JOIN products ON order_contents.product_id = products.id")
 
     if number_of_days.nil?
-      full_query = base_query.where("orders.checkout_date IS NOT NULL").first
+      filter_query = base_query.where("orders.checkout_date IS NOT NULL").first
     else
-      full_query = base_query.where("orders.checkout_date BETWEEN ? AND ?", start - number_of_days.days, start).first
+      filter_query = base_query.where("orders.checkout_date BETWEEN ? AND ?", start - number_of_days.days, start).first
+    end
+
+    full_query = filter_query
+
+    if full_query.nil?
+      max_order = nil
+    else
+      max_order = full_query.maximum
     end
 
     {'Number of Orders' => full_query.count,
     'Total Revenue' => full_query.revenue,
     'Average Order Value' => full_query.average,
-    'Largest Order Value' => full_query.maximum
+    'Largest Order Value' => Order.largest_order(number_of_days, start)
     }
+
+  end
+
+
+  def self.largest_order(number_of_days, start)
+    base_query = Order.select("orders.id,
+                  SUM(products.price * order_contents.quantity) AS order_total").
+            joins("JOIN order_contents ON orders.id = order_contents.order_id
+                  JOIN products ON order_contents.product_id = products.id").
+            group("orders.id").
+            order("SUM(products.price * order_contents.quantity) DESC")
+
+    if number_of_days.nil?
+      full_query = base_query.where("orders.checkout_date IS NOT NULL").first
+    else
+      full_query = base_query.where("orders.checkout_date BETWEEN ? AND ?", start - number_of_days.days, start).first
+    end
+
+
+    if full_query.nil?
+      max_order = nil
+    else
+      max_order = full_query.order_total
+    end
+
+    max_order
 
   end
 
