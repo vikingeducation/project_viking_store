@@ -44,14 +44,13 @@ class Order < ActiveRecord::Base
       full_query = base_query.where("orders.checkout_date BETWEEN ? AND ?", start - number_of_days.days, start).first
     end
 
-    table_data = {'Number of Orders' => full_query.count,
-                  'Total Revenue' => full_query.revenue,
-                  'Average Order Value' => full_query.average,
-                  'Largest Order Value' => full_query.maximum
-                  }
-
-    table_data
+    {'Number of Orders' => full_query.count,
+    'Total Revenue' => full_query.revenue,
+    'Average Order Value' => full_query.average,
+    'Largest Order Value' => full_query.maximum
+    }
 
   end
+
 
 end

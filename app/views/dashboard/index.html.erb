@@ -12,7 +12,7 @@
 
      <%= "<div class='row'>".html_safe if index.even? %>
 
-        <%= render :partial => 'panel', :locals => { panel_title: panel,tables: tables } %>
+        <%= render :partial => 'panel', :locals => { panel_title: panel, tables: tables } %>
 
     <%= "</div>".html_safe if index.odd? %> <!-- row -->
 
