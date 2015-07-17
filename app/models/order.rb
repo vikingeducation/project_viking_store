@@ -30,31 +30,35 @@ class Order < ActiveRecord::Base
   # to include in the range, and 2) the starting date from which to count backwards/
   # Defaults to selecting all days in the database and using the current time as the
   # Starting point.
+=begin
+Order.select("orders.id, COUNT(DISTINCT orders.id) AS count,
+                                SUM(products.price * order_contents.quantity) AS revenue,
+                                SUM(products.price * order_contents.quantity) / COUNT(DISTINCT orders.id) AS average").
+                        joins("JOIN order_contents ON orders.id = order_contents.order_id
+                              JOIN products ON order_contents.product_id = products.id").
+                        where("orders.checkout_date BETWEEN ? AND ?", Time.now - 7.days, Time.now)
+=end
+
+
+
   def self.order_stats_by_day_range(number_of_days = nil, start = Time.now)
+
     base_query = Order.select("COUNT(DISTINCT orders.id) AS count,
                                 SUM(products.price * order_contents.quantity) AS revenue,
-                                MAX(products.price * order_contents.quantity) AS maximum,
                                 SUM(products.price * order_contents.quantity) / COUNT(DISTINCT orders.id) AS average").
                         joins("JOIN order_contents ON orders.id = order_contents.order_id
                               JOIN products ON order_contents.product_id = products.id")
 
     if number_of_days.nil?
-      filter_query = base_query.where("orders.checkout_date IS NOT NULL").first
+      filter_query = base_query.where("orders.checkout_date IS NOT NULL").each.first
     else
-      filter_query = base_query.where("orders.checkout_date BETWEEN ? AND ?", start - number_of_days.days, start).first
+      filter_query = base_query.where("orders.checkout_date BETWEEN ? AND ?", start - number_of_days.days, start).each.first
     end
 
-    full_query = filter_query
 
-    if full_query.nil?
-      max_order = nil
-    else
-      max_order = full_query.maximum
-    end
-
-    {'Number of Orders' => full_query.count,
-    'Total Revenue' => full_query.revenue,
-    'Average Order Value' => full_query.average,
+    {'Number of Orders' => filter_query.count,
+    'Total Revenue' => filter_query.revenue,
+    'Average Order Value' => filter_query.average,
     'Largest Order Value' => Order.largest_order(number_of_days, start)
     }
 

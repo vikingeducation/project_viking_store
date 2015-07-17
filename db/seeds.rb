@@ -84,11 +84,13 @@ def generate_addresses_for_user(user_id)
 end
 
 # Returns the timestamp for midnight of the day the file is run.
+# Corrected to use last night's midnight instead of a future midnight!
 def midnight_tonight
-  (Time.now.to_date + 1).to_time
+  (Time.now.to_date + 0).to_time
 end
 
 # This method returns a date that's random but weighted toward the current date.
+# I don't think this is weighted at all???
 def creation_date
   time_frames = []
   (MULTIPLIER**2).times do |x|

@@ -10,6 +10,20 @@ module DashboardHelper
   end
 
 
+  def pretty_present(data)
+    unless data.is_a?(Array)
+      [data]
+    else
+      data
+    end
+  end
+
+
+  def currency_if_float(input)
+    input.is_a?(BigDecimal) ? number_to_currency(input) : input
+  end
+
+
   def get_aggregate_data
     { 'Last 7 Days' => aggregates_by_day_range(7),
       'Last 30 Days' => aggregates_by_day_range(30),
