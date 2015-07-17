@@ -60,8 +60,8 @@ gem 'binding_of_caller'
 
 gem "twitter-bootstrap-rails"
 
+gem 'pg'
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end

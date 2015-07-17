@@ -15,7 +15,7 @@ State.destroy_all
 City.destroy_all
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
-MULTIPLIER = 20
+MULTIPLIER = 10
 
 
 
