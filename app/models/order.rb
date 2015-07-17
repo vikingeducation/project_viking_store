@@ -1,7 +1,11 @@
 class Order < ActiveRecord::Base
   belongs_to :user
-  has_many :addresses
+  has_many :order_contents, :class_name => "OrderContents"
   has_many :products, :through => :order_contents
+
+  belongs_to :billing_address, :class_name => 'Address', :foreign_key => :billing_id
+  belongs_to :shipping_address, :class_name => 'Address', :foreign_key => :shipping_id
+
 
   def self.count_orders(day_range = nil)
     if day_range.nil?
