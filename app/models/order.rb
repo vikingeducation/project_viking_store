@@ -1,4 +1,7 @@
 class Order < ActiveRecord::Base
+  belongs_to :user
+  has_many :addresses
+  has_many :products, :through => :order_contents
 
   def self.count_orders(day_range = nil)
     if day_range.nil?

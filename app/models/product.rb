@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
+  belongs_to :category
+  has_many :orders, :through => :order_contents
 
   def self.count_new_products(day_range = nil)
     if day_range.nil?
