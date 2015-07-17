@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :addresses
-  has_many :credit_cards
+  has_many :addresses, :dependent => :destroy
+  has_many :credit_cards, :dependent => :destroy
   has_many :orders
 
   def self.count_new_users(day_range = nil)
