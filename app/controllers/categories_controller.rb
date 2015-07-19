@@ -5,10 +5,18 @@ class CategoriesController < ApplicationController
     render :layout => 'portal'
   end
 
+
+  def show
+    @category = Category.find(params[:id])
+    render :layout => 'portal'
+  end
+
+
   def new
     @category = Category.new
     render :layout => 'portal'
   end
+
 
   def create
     @category = Category.new(category_params)
