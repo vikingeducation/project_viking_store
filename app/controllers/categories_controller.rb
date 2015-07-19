@@ -1,20 +1,22 @@
 class CategoriesController < ApplicationController
+  layout 'portal'
 
   def index
     @categories = Category.all
-    render :layout => 'portal'
+#    render :layout => 'portal'
   end
 
 
   def show
     @category = Category.find(params[:id])
-    render :layout => 'portal'
+    @products = @category.products
+#    render :layout => 'portal'
   end
 
 
   def new
     @category = Category.new
-    render :layout => 'portal'
+#    render :layout => 'portal'
   end
 
 
@@ -23,10 +25,10 @@ class CategoriesController < ApplicationController
 
     if @category.save
       flash[:success] = "Category successfully created!"
-      redirect_to categories_path, :layout => 'portal'
+      redirect_to categories_path#, :layout => 'portal'
     else
       flash.now[:danger] = "Category not saved - please try again."
-      render :new, :layout => 'portal'
+      render :new#, :layout => 'portal'
     end
 
   end
