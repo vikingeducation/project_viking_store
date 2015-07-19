@@ -1,4 +1,6 @@
 #navbar {
+  border: 1px solid #999;
+
   li {
     a {
       padding-top: 0;
@@ -7,6 +9,7 @@
   }
 
   .dashboard-link {
-    border-top: 1px solid black;
+    margin-top: 10px;
+    border-top: 1px solid #999;
   }
 }
