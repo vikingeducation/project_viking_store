@@ -12,18 +12,45 @@
 
     <div class='container'>
 
-      <div class='row'>
-        <div class='col-xs-12'>
-          <header>
-            <h1>Viking Store Admin Portal</h1>
-          </header>
+
+      <header>
+        <div class='row'>
+          <div class='col-xs-12'>
+              <h1>Viking Store Admin Portal</h1>
+          </div>
         </div>
-      </div>
+      </header>
 
-      <nav></nav>
 
-      <%= yield %> <!-- sections -->
+      <div class='row'>
+        <div class='col-xs-3'>
 
+          <nav id='navbar'>
+            <h4>Navigation Options</h4>
+
+            <%= link_to 'Users', '#' %>
+            <%= link_to 'Addresses', '#' %>
+            <%= link_to 'Orders', '#' %>
+            <%= link_to 'Products', '#' %>
+            <%= link_to 'Categories', '#' %>
+
+            <div class='dashboard_link'>
+              <%= link_to 'Analytics Dashboard', '#' %>
+            </div>
+
+          </nav>
+
+        </div> <!-- column -->
+
+
+        <div class='col-xs-9'>
+
+          <%= yield %> <!-- sections -->
+
+        </div> <!-- column -->
+
+
+      </div> <!-- row -->
     </div> <!-- container -->
 
   </body>
