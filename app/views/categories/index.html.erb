@@ -5,10 +5,11 @@
 
       <h1 class='text-center'>Product Categories</h1>
 
-      <%= link_to 'Add a New Category', '#', class: 'btn btn-primary btn-lg btn-block' %>
+      <%= link_to 'Add a New Category', new_category_path, class: 'btn btn-primary btn-lg btn-block' %>
 
     </div>
   </div>
+
 
   <div class='row'>
     <div class='col-xs-10 col-xs-offset-1'>
@@ -26,13 +27,7 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          <%= render @categories %>
         </tbody>
 
 
