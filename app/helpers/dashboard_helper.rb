@@ -25,7 +25,8 @@ module DashboardHelper
 
 
   def get_aggregate_data
-    { 'Last 7 Days' => aggregates_by_day_range(7),
+    {
+      'Last 7 Days' => aggregates_by_day_range(7),
       'Last 30 Days' => aggregates_by_day_range(30),
       'Total' => aggregates_by_day_range()
     }
@@ -60,7 +61,8 @@ module DashboardHelper
 
 
   def aggregates_by_day_range(day_range = nil)
-    table_data = {'New Users' => User.count_new_users(day_range),
+    table_data = {
+                  'New Users' => User.count_new_users(day_range),
                   'Orders' => Order.count_orders(day_range),
                   'New Products' => Product.count_new_products(day_range),
                   'Revenue' => Order.calc_revenue(day_range)

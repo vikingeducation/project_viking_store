@@ -9,6 +9,7 @@ class Category < ActiveRecord::Base
 
   def self.list_all_categories
     categories = []
+    # map with &
     Category.all.each { |cat| categories << cat.name }
     categories
   end
