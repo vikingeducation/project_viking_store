@@ -1,0 +1,140 @@
+<section id='product-show'>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <h1 class='text-center'><%= "#{@product.name.titleize} #{@product.id}" %></h1>
+
+    </div>
+  </div>
+
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+
+
+
+      <div class='row'>
+
+        <div class='col-xs-12'>
+          <h4><strong>Product Information</strong></h4>
+        </div>
+
+      </div>
+
+
+      <div class='row'>
+
+        <div class='col-xs-3'>
+          <p><strong>Product ID:</strong></p>
+        </div>
+
+        <div class='col-xs-9'>
+          <p><%= @product.id %></p>
+        </div>
+
+      </div>
+
+
+      <div class='row'>
+
+        <div class='col-xs-3'>
+          <p><strong>Name:</strong></p>
+        </div>
+
+        <div class='col-xs-9'>
+          <p><%= @product.name %></p>
+        </div>
+
+      </div>
+
+
+      <div class='row'>
+
+        <div class='col-xs-3'>
+          <p><strong>Price:</strong></p>
+        </div>
+
+        <div class='col-xs-9'>
+          <p><%= currency_if_float(@product.price) %></p>
+        </div>
+
+      </div>
+
+
+      <div class='row'>
+
+        <div class='col-xs-3'>
+          <p><strong>Category:</strong></p>
+        </div>
+
+        <div class='col-xs-9'>
+          <p><%= link_to @product.category.name, category_path(@product.category.id) %></p>
+        </div>
+
+      </div>
+
+
+
+
+      <div class='row'>
+
+        <div class='col-xs-12'>
+          <h4><strong><%= "Products Statistics" %></strong></h4>
+        </div>
+
+      </div>
+
+
+      <div class='row'>
+
+        <div class='col-xs-3'>
+          <p><strong>Times Ordered:</strong></p>
+        </div>
+
+        <div class='col-xs-9'>
+          <p><%= 10 %></p>
+        </div>
+
+      </div>
+
+
+      <div class='row'>
+
+        <div class='col-xs-3'>
+          <p><strong>Carts In:</strong></p>
+        </div>
+
+        <div class='col-xs-9'>
+          <p><%= 5 %></p>
+        </div>
+
+      </div>
+
+
+
+
+      <div class='row'>
+
+        <div class='col-xs-12'>
+          <%= link_to 'Edit Product', edit_product_path(@product.id) %>
+        </div>
+
+      </div>
+
+      <div class='row'>
+
+        <div class='col-xs-12'>
+          <%= link_to 'Delete Product', product_path(@product.id),
+                :method => :delete,
+                :data => { :confirm => 'Delete product?' } %>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+</section>
