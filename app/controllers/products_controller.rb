@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @available_categories = Category.list_all_categories
   end
 
 

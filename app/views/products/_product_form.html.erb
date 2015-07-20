@@ -19,7 +19,7 @@
   <div class='form-group'>
     <div class='row'>
       <div class='col-xs-3'>
-        <%= f.label :name, 'Name:' %>
+        <%= f.label :name, 'Name:', :placeholder => 'enter a name' %>
       </div>
       <div class='col-xs-9'>
         <%= f.text_field :name %>
@@ -36,7 +36,7 @@
         <%= f.label :price, 'Price:' %>
       </div>
       <div class='col-xs-9'>
-        <%= f.number_field :price, min: 0.01, step: 0.01 %>
+        <%= f.text_field :price, :placeholder => '$price' %>
         <%= render_error(product,:price) %>
       </div>
     </div>
@@ -50,7 +50,7 @@
         <%= f.label :category, 'Category:' %>
       </div>
       <div class='col-xs-9'>
-        <%= f.select :category, Category.all %>
+        <%= f.select :category, available_categories %>
         <%= render_error(product,:category) %>
       </div>
     </div>
