@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'dashboard' => 'dashboard#index'
 
 
-  resources :categories, :only => [:index, :new, :create, :show]
+  resources :categories
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -39,7 +39,7 @@
       <div class='row'>
 
         <div class='col-xs-12'>
-          <%= link_to 'Edit Category', '#' %>
+          <%= link_to 'Edit Category', edit_category_path(@category.id) %>
         </div>
 
       </div>
@@ -47,7 +47,9 @@
       <div class='row'>
 
         <div class='col-xs-12'>
-          <%= link_to 'Delete Category', '#' %>
+          <%= link_to 'Delete Category', category_path(@category.id),
+                :method => :delete,
+                :data => { :confirm => 'Delete category?' } %>
         </div>
 
       </div>
