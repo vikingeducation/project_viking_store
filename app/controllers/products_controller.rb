@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
 
 
   def index
-    @products = Product.all
+    @products = Product.all.order(:id)
   end
 
 
