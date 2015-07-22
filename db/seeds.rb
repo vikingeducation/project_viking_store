@@ -1,6 +1,71 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+# MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
+MULTIPLIER = 10
+
+
+# A list of states.
+STATES =  [
+            ["AK", "Alaska"],
+            ["AL", "Alabama"],
+            ["AR", "Arkansas"],
+            ["AS", "American Samoa"],
+            ["AZ", "Arizona"],
+            ["CA", "California"],
+            ["CO", "Colorado"],
+            ["CT", "Connecticut"],
+            ["DC", "District of Columbia"],
+            ["DE", "Delaware"],
+            ["FL", "Florida"],
+            ["GA", "Georgia"],
+            ["GU", "Guam"],
+            ["HI", "Hawaii"],
+            ["IA", "Iowa"],
+            ["ID", "Idaho"],
+            ["IL", "Illinois"],
+            ["IN", "Indiana"],
+            ["KS", "Kansas"],
+            ["KY", "Kentucky"],
+            ["LA", "Louisiana"],
+            ["MA", "Massachusetts"],
+            ["MD", "Maryland"],
+            ["ME", "Maine"],
+            ["MI", "Michigan"],
+            ["MN", "Minnesota"],
+            ["MO", "Missouri"],
+            ["MS", "Mississippi"],
+            ["MT", "Montana"],
+            ["NC", "North Carolina"],
+            ["ND", "North Dakota"],
+            ["NE", "Nebraska"],
+            ["NH", "New Hampshire"],
+            ["NJ", "New Jersey"],
+            ["NM", "New Mexico"],
+            ["NV", "Nevada"],
+            ["NY", "New York"],
+            ["OH", "Ohio"],
+            ["OK", "Oklahoma"],
+            ["OR", "Oregon"],
+            ["PA", "Pennsylvania"],
+            ["PR", "Puerto Rico"],
+            ["RI", "Rhode Island"],
+            ["SC", "South Carolina"],
+            ["SD", "South Dakota"],
+            ["TN", "Tennessee"],
+            ["TX", "Texas"],
+            ["UT", "Utah"],
+            ["VA", "Virginia"],
+            ["VI", "Virgin Islands"],
+            ["VT", "Vermont"],
+            ["WA", "Washington"],
+            ["WI", "Wisconsin"],
+            ["WV", "West Virginia"],
+            ["WY", "Wyoming"]
+          ]
+
+
+
 
 # Blow away all the existing records every time.
 
@@ -14,8 +79,6 @@ Product.destroy_all
 State.destroy_all
 City.destroy_all
 
-# MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
-MULTIPLIER = 10
 
 
 
@@ -46,11 +109,10 @@ def generate_product
   p.save
 end
 
-# A list of states.
-STATES = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
+# state[0] to use abbreviation, state[1] to use name
 def generate_state(state)
-  state = State.new({:name => state})
+  state = State.new({:name => state[0]})
   state.save
 end
 

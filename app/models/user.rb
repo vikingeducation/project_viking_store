@@ -1,11 +1,57 @@
 class User < ActiveRecord::Base
   has_many :created_addresses, :class_name => 'Address', :dependent => :destroy
 
-  belongs_to :default_billing_address_id, :class_name => 'Address', :foreign_key => :billing_id
-  belongs_to :default_shipping_address_id, :class_name => 'Address', :foreign_key => :shipping_id
+  belongs_to :default_billing_address, :class_name => 'Address', :foreign_key => :billing_id
+  belongs_to :default_shipping_address, :class_name => 'Address', :foreign_key => :shipping_id
 
   has_many :credit_cards, :dependent => :destroy
   has_many :orders
+
+
+
+  # Portal functions
+  def self.get_index_data
+    data = User.all
+    output = []
+
+    data.each do |user|
+      output << [
+                  user,
+                  user.get_user_city,
+                  user.get_user_state,
+                  user.get_order_count,
+                  user.get_last_order_date
+                ]
+    end
+
+    output
+  end
+
+
+
+  def get_user_city
+    self.default_billing_address.city.name
+  end
+
+
+  def get_user_state
+    self.default_billing_address.state.name
+  end
+
+
+  def get_order_count
+    self.orders.where("checkout_date IS NOT NULL").count
+  end
+
+
+  def get_last_order_date
+    last = self.orders.maximum(:checkout_date)
+    last.to_date if last
+  end
+
+
+
+  # Dashboard functions
 
   def self.count_new_users(day_range = nil)
     if day_range.nil?
@@ -40,6 +86,11 @@ class User < ActiveRecord::Base
 
 
 
+  # Portal PRIVATE methods
+  
+
+
+  # Dashboard PRIVATE methods
   def self.biggest_order
     result = User.select("users.*,
                           orders.id AS order_id,
