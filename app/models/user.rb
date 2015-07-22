@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
   has_many :created_addresses, :class_name => 'Address', :dependent => :destroy
 
-  belongs_to :default_billing_address, :class_name => 'Address', :foreign_key => :billing_id
-  belongs_to :default_shipping_address, :class_name => 'Address', :foreign_key => :shipping_id
+  belongs_to :default_billing_address, :class_name => 'Address', :foreign_key => :billing_id, :dependent => :destroy
+  belongs_to :default_shipping_address, :class_name => 'Address', :foreign_key => :shipping_id, :dependent => :destroy
 
   has_many :credit_cards, :dependent => :destroy
 
-  has_many :orders
+  has_many :orders # make dependent if not checked out
   has_many :order_contents, :through => :orders
   has_many :products, :through => :order_contents
 
