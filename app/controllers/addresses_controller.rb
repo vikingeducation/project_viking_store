@@ -15,4 +15,13 @@ class AddressesController < ApplicationController
 
   end
 
+
+  def show
+    @address = Address.find(params[:id])
+    @user = User.find(@address.user_id)
+    @street = @address.street_address
+    @city = @address.city.name
+    @state = @address.state.name
+  end
+
 end
