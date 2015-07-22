@@ -11,6 +11,30 @@ class Address < ActiveRecord::Base
 
 
 # Portal methods
+  def self.get_index_data
+    data = Address.all.order(:id)
+    output = []
+
+    data.each do |address|
+      output << [
+                  address,
+                  address.created_by_user,
+                  address.city.name,
+                  address.state.name,
+                  address.get_order_count
+                ]
+    end
+
+    output
+
+  end
+
+
+  def get_order_count
+    self.billed_orders.where("checkout_date IS NOT NULL").count
+  end
+
+
   def stringify
     "#{self.street_address}, #{self.city.name}, #{self.state.name}" || "No saved address"
   end

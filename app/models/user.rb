@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
 # Portal methods
   def self.get_index_data
-    data = User.all
+    data = User.all.order(:id)
     output = []
 
     data.each do |user|

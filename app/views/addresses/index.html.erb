@@ -1,0 +1,46 @@
+<section id='address-index'>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <h1 class='text-center'>Addresses</h1>
+
+      <p class='text-center'>
+        <em>Create new addresses from within <%= link_to 'User', users_path %> profiles.</em>
+      </p>
+
+    </div>
+  </div>
+
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <table class='table table-striped table-bordered'>
+
+        <thead class='bg-primary'>
+          <tr>
+            <td>ID</td>
+            <td>User</td>
+            <td>Address</td>
+            <td>City</td>
+            <td>State</td>
+            <td>Orders</td>
+            <td>Created</td>
+            <td>SHOW</td>
+            <td>EDIT</td>
+            <td>DELETE</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%= render :partial => 'address', :collection => @addresses %>
+        </tbody>
+
+
+      </table>
+
+    </div>
+  </div>
+
+</section>
