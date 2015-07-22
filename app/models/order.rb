@@ -46,14 +46,6 @@ class Order < ActiveRecord::Base
   # to include in the range, and 2) the starting date from which to count backwards/
   # Defaults to selecting all days in the database and using the current time as the
   # Starting point.
-=begin
-Order.select("orders.id, COUNT(DISTINCT orders.id) AS count,
-                                SUM(products.price * order_contents.quantity) AS revenue,
-                                SUM(products.price * order_contents.quantity) / COUNT(DISTINCT orders.id) AS average").
-                        joins("JOIN order_contents ON orders.id = order_contents.order_id
-                              JOIN products ON order_contents.product_id = products.id").
-                        where("orders.checkout_date BETWEEN ? AND ?", Time.now - 7.days, Time.now)
-=end
 
 
 

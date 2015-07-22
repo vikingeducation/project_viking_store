@@ -1,0 +1,3 @@
+<%= "<p class=text-muted>".html_safe unless cart %>
+<%= link_to_if cart, "View Unplaced Order (Cart)", 'order_path(cart)' %>
+<%= "</p>".html_safe unless cart %>
