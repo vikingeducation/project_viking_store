@@ -1,0 +1,29 @@
+<section id='user-new'>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <h1 class='text-center'>
+        New User
+      </h1>
+
+    </div>
+  </div>
+
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <%= render :partial => 'user_form',
+            :locals => {
+                        :user => @user,
+                        :available_addresses => @available_addresses,
+                        :button_label => 'Create User'
+                       },
+            :layout => 'layouts/users/show_user_panel' %>
+
+    </div>
+  </div>
+
+
+</section>

@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   has_many :products, :through => :order_contents
 
 
+  validates :first_name, :last_name, :email, :presence => true, :length => { :in => 1..64 }
+  validates :email, :format => { :with => /.+@.+/, :message => "format is invalid." }
+
 
 # Portal methods
   def self.get_index_data
@@ -33,12 +36,12 @@ class User < ActiveRecord::Base
 
 
   def get_user_city
-    self.default_billing_address.city.name
+    self.default_billing_address.city.name if self.default_billing_address
   end
 
 
   def get_user_state
-    self.default_billing_address.state.name
+    self.default_billing_address.state.name if self.default_billing_address
   end
 
 
@@ -48,19 +51,28 @@ class User < ActiveRecord::Base
 
 
   def get_last_order_date
-    last = self.orders.maximum(:checkout_date)
-    last.to_date if last
+    self.orders.maximum(:checkout_date).to_date if get_order_count > 0
   end
 
 
   def get_order_history
-    self.products.group("orders.id").select(
-                                            "orders.id,
-                                            orders.created_at,
-                                            SUM(order_contents.quantity * products.price) AS value,
-                                            (CASE WHEN orders.checkout_date IS NOT NULL THEN 'PLACED'
-                                              ELSE 'UNPLACED' END) AS status"
-                                            )
+    self.products.group("orders.id").order("orders.checkout_date DESC").
+            select(
+                  "orders.id,
+                  orders.created_at,
+                  SUM(order_contents.quantity * products.price) AS value,
+                  (CASE WHEN orders.checkout_date IS NOT NULL THEN 'PLACED' ELSE 'UNPLACED' END) AS status"
+                  )
+  end
+
+
+  def get_billing_address_string
+    self.default_billing_address.stringify if self.default_billing_address
+  end
+
+
+  def get_shipping_address_string
+    self.default_shipping_address.stringify if self.default_shipping_address
   end
 
 

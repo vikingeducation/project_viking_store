@@ -15,4 +15,9 @@ class Address < ActiveRecord::Base
     "#{self.street_address}, #{self.city.name}, #{self.state.name}" || "No saved address"
   end
 
+
+  def id_and_address
+    "#{id} (#{street_address})"
+  end
+
 end
