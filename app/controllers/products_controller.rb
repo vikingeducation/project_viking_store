@@ -10,6 +10,8 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @times_ordered = @product.times_ordered
+    @carts_in = @product.carts_in
   end
 
 

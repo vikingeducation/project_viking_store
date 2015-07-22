@@ -7,6 +7,21 @@ class Product < ActiveRecord::Base
   validates :price, :numericality => true, :length =>{ :in => 0..10_000 }
 
 
+
+  # Portal methods
+  def times_ordered
+    self.orders.where("checkout_date IS NOT NULL").count
+  end
+
+
+  def carts_in
+    self.orders.where("checkout_date IS NULL").count
+  end
+
+
+
+
+  # Dashboard methods
   def self.count_new_products(day_range = nil)
     if day_range.nil?
       Product.all.count
