@@ -16,13 +16,13 @@ class Address < ActiveRecord::Base
     output = []
 
     data.each do |address|
-      output << [
-                  address,
-                  address.created_by_user,
-                  address.city.name,
-                  address.state.name,
-                  address.get_order_count
-                ]
+      output << {
+                  :relation => address,
+                  :user => address.created_by_user,
+                  :city_name => address.city.name,
+                  :state_name => address.state.name,
+                  :order_count => address.get_order_count
+                }
     end
 
     output

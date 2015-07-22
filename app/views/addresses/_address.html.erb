@@ -1,14 +1,14 @@
 <tr>
-  <td><%= address[0].id %></td>
-  <td><%= link_to "#{address[1].first_name} #{address[1].last_name}", user_path(address[1].id) %></td>
-  <td><%= address[0].street_address %></td>
-  <td><%= address[2] %></td>
-  <td><%= address[3] %></td>
-  <td><%= address[4] %></td>
-  <td><%= address[0].created_at.to_date %></td>
-  <td><%= link_to 'show', address_path(address[0].id) %></td>
-  <td><%= link_to 'edit', edit_address_path(address[0].id) %></td>
-  <td><%= link_to 'delete', address_path(address[0].id),
+  <td><%= address[:relation].id %></td>
+  <td><%= link_to "#{address[:user].first_name} #{address[:user].last_name}", user_path(address[:user].id) %></td>
+  <td><%= address[:relation].street_address %></td>
+  <td><%= address[:city_name] %></td>
+  <td><%= address[:state_name] %></td>
+  <td><%= address[:order_count] %></td>
+  <td><%= address[:relation].created_at.to_date %></td>
+  <td><%= link_to 'show', address_path(address[:relation].id) %></td>
+  <td><%= link_to 'edit', edit_address_path(address[:relation].id) %></td>
+  <td><%= link_to 'delete', address_path(address[:relation].id),
             :method => :delete,
             :data => { :confirm => 'Delete address?' } %></td>
 </tr>
