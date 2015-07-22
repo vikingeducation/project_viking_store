@@ -12,6 +12,7 @@
       <%= render :partial => 'show_demographics',
             :locals => {
                         :user => @user,
+                        :cart => @cart,
                         :default_billing => @default_billing,
                         :default_shipping => @default_shipping
                        },
@@ -24,7 +25,7 @@
                         :user => @user,
                         :credit_card => @credit_card
                        },
-            :layout => 'layouts/users/show_user_panel' %>
+            :layout => 'layouts/users/show_user_panel' if @credit_card %>
 
 
       <!-- Admin Actions -->

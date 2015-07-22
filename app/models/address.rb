@@ -12,7 +12,7 @@ class Address < ActiveRecord::Base
 
 # Portal methods
   def stringify
-    "#{self.street_address}, #{self.city.name}, #{self.state.name}"
+    "#{self.street_address}, #{self.city.name}, #{self.state.name}" || "No saved address"
   end
 
 end

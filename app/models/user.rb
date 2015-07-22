@@ -64,6 +64,11 @@ class User < ActiveRecord::Base
   end
 
 
+  def get_cart
+    self.orders.where("checkout_date IS NULL").first
+  end
+
+
 
 # Dashboard methods
 

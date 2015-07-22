@@ -70,7 +70,7 @@ class ProductsController < ApplicationController
       flash[:success] = "Product deleted!"
       redirect_to products_path
     else
-      flash.now[:danger] = "Delete failed - please try again."
+      flash[:danger] = "Delete failed - please try again."
       redirect_to :back
     end
 
