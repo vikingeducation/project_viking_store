@@ -1,92 +1,47 @@
 <section id='user-show'>
 
+
   <div class='row'>
-    <div class='col-xs-10 col-xs-offset-1'>
+    <div class='col-xs-12'>
 
       <h1 class='text-center'><%= "User #{@user.id}: #{@user.first_name} #{@user.last_name}" %></h1>
 
-    </div>
-  </div>
 
 
-  <div class='row'>
-    <div class='col-xs-10 col-xs-offset-1'>
+    <!-- User Demographics -->
+      <%= render :partial => 'show_demographics',
+            :locals => {
+                        :user => @user,
+                        :default_billing => @default_billing,
+                        :default_shipping => @default_shipping
+                       },
+            :layout => 'layouts/users/show_user_panel' %>
 
 
+      <!-- Credit Card -->
+      <%= render :partial => 'show_credit_card',
+            :locals => {
+                        :user => @user,
+                        :credit_card => @credit_card
+                       },
+            :layout => 'layouts/users/show_user_panel' %>
 
 
-      <div class='row'>
-
-        <div class='col-xs-12'>
-          <h4><strong>Demographic Information</strong></h4>
-        </div>
-
-      </div>
-
-
-      <div class='row'>
-
-        <div class='col-xs-3'>
-          <p><strong>First Name:</strong></p>
-        </div>
-
-        <div class='col-xs-9'>
-          <p><%= @user.first_name %></p>
-        </div>
-
-      </div>
+      <!-- Admin Actions -->
+      <%= render :partial => 'show_admin_actions',
+            :locals => {
+                        :user => @user
+                       },
+            :layout => 'layouts/users/show_user_panel' %>
 
 
-      <div class='row'>
-
-        <div class='col-xs-3'>
-          <p><strong>Last Name:</strong></p>
-        </div>
-
-        <div class='col-xs-9'>
-          <p><%= @user.last_name %></p>
-        </div>
-
-      </div>
-
-
-      <div class='row'>
-
-        <div class='col-xs-3'>
-          <p><strong>Email:</strong></p>
-        </div>
-
-        <div class='col-xs-9'>
-          <p><%= @user.email %></p>
-        </div>
-
-      </div>
-
-
-      <div class='row'>
-
-        <div class='col-xs-3'>
-          <p><strong>Default Billing Address:</strong></p>
-        </div>
-
-        <div class='col-xs-9'>
-          <p><%= @default_billing %></p>
-        </div>
-
-      </div>
-
-
-      <div class='row'>
-
-        <div class='col-xs-3'>
-          <p><strong>Default Shipping Address:</strong></p>
-        </div>
-
-        <div class='col-xs-9'>
-          <p><%= @default_shipping %></p>
-        </div>
-
-      </div>
+      <!-- Order History -->
+      <%= render :partial => 'show_order_history',
+            :locals => {
+                        :user => @user,
+                        :user_orders => @user_orders
+                       },
+            :layout => 'layouts/users/show_user_panel' %>
 
 
 

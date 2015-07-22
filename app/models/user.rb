@@ -5,11 +5,14 @@ class User < ActiveRecord::Base
   belongs_to :default_shipping_address, :class_name => 'Address', :foreign_key => :shipping_id
 
   has_many :credit_cards, :dependent => :destroy
+
   has_many :orders
+  has_many :order_contents, :through => :orders
+  has_many :products, :through => :order_contents
 
 
 
-  # Portal functions
+# Portal methods
   def self.get_index_data
     data = User.all
     output = []
@@ -50,8 +53,19 @@ class User < ActiveRecord::Base
   end
 
 
+  def get_order_history
+    self.products.group("orders.id").select(
+                                            "orders.id,
+                                            orders.created_at,
+                                            SUM(order_contents.quantity * products.price) AS value,
+                                            (CASE WHEN orders.checkout_date IS NOT NULL THEN 'PLACED'
+                                              ELSE 'UNPLACED' END) AS status"
+                                            )
+  end
 
-  # Dashboard functions
+
+
+# Dashboard methods
 
   def self.count_new_users(day_range = nil)
     if day_range.nil?
@@ -86,11 +100,11 @@ class User < ActiveRecord::Base
 
 
 
-  # Portal PRIVATE methods
-  
+# Portal PRIVATE methods
 
 
-  # Dashboard PRIVATE methods
+
+# Dashboard PRIVATE methods
   def self.biggest_order
     result = User.select("users.*,
                           orders.id AS order_id,

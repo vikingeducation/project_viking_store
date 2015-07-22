@@ -8,6 +8,14 @@ class Order < ActiveRecord::Base
   belongs_to :shipping_address, :class_name => 'Address', :foreign_key => :shipping_id
 
 
+# Portal methods
+  def calculate_order_value
+    self.products.sum("order_contents.quantity * products.price")
+  end
+
+
+
+# Dashboard methods
   def self.count_orders(day_range = nil)
     if day_range.nil?
       Order.where("checkout_date IS NOT NULL").count

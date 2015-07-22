@@ -8,4 +8,11 @@ class Address < ActiveRecord::Base
 
   has_many :billed_orders, :class_name => 'Order', :foreign_key => :billing_id
   has_many :shipped_orders, :class_name => 'Order', :foreign_key => :shipping_id
+
+
+# Portal methods
+  def stringify
+    "#{self.street_address}, #{self.city.name}, #{self.state.name}"
+  end
+
 end

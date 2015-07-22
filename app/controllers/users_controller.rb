@@ -10,8 +10,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @default_billing = nil
-    @default_shipping = nil
+    @default_billing = @user.default_billing_address.stringify
+    @default_shipping = @user.default_shipping_address.stringify
+    @credit_card = @user.credit_cards.first
+    @user_orders = @user.get_order_history
   end
 
 end
