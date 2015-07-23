@@ -1,11 +1,13 @@
-Project: Viking Store Admin
-========================
+[The Viking Store Dashboard][1]
+=====================
+Rails Project from [Viking Code School][2]
+------------------------------------------
 
-##To Get Going On This Assignment
-- run `rake db:create`
-- run `rake db:migrate`
-- run `rake db:seed`
+### Student: [Adam Kinson][3]
 
-- take a look around the schema file to see how models were created
+The Viking Store e-commerce application for Viking Commerce Inc.
 
-Link to solution info on the seeding of this lives [here](https://gist.github.com/betweenparentheses/0b6b325ceaaea76a521d)
+
+[1]: #
+[2]: https://github.com/kinsona/assignment_viking_store
+[3]: http://www.vikingcodeschool.com/unit-8-databases-sql-and-activerecord/assignment-setting-up-the-db

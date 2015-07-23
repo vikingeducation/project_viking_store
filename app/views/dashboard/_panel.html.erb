@@ -1,0 +1,22 @@
+<div class='col-md-6'>
+
+  <div class='panel panel-default'>
+
+    <h2 class='text-center'><%= panel_title %></h2>
+
+
+    <div class='panel-body'>
+
+      <% tables.each do |table_title, values| %>
+        <%= render  :partial => 'table_section',
+                    :locals => {
+                      table_title: table_title,
+                      table_headers: get_table_headers(table_title),
+                      table_data: values
+                    } %>
+      <% end %>
+
+    </div> <!-- panel-body -->
+
+  </div> <!-- panel -->
+</div> <!-- col -->

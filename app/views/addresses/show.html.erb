@@ -1,0 +1,116 @@
+<section id='address-show'>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <h1 class='text-center'><%= "#{@user.first_name} #{@user.last_name}'s Address" %></h1>
+
+    </div>
+  </div>
+
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+
+      <div class='row-group'>
+
+        <div class='row'>
+
+          <div class='col-xs-3'>
+            <p><strong>Owner ID:</strong></p>
+          </div>
+
+          <div class='col-xs-9'>
+            <p><%= @user.id %></p>
+          </div>
+
+        </div>
+
+
+        <div class='row'>
+
+          <div class='col-xs-3'>
+            <p><strong>Owner Name:</strong></p>
+          </div>
+
+          <div class='col-xs-9'>
+            <%= link_to "#{@user.first_name} #{@user.last_name} (click to view)", user_path(@user.id) %>
+          </div>
+
+        </div>
+
+      </div> <!-- row-group -->
+
+
+      <div class='row-group'>
+
+        <div class='row'>
+
+          <div class='col-xs-3'>
+            <p><strong>Street:</strong></p>
+          </div>
+
+          <div class='col-xs-9'>
+            <p><%= @street %></p>
+          </div>
+
+        </div>
+
+
+        <div class='row'>
+
+          <div class='col-xs-3'>
+            <p><strong>City:</strong></p>
+          </div>
+
+          <div class='col-xs-9'>
+            <p><%= @city %></p>
+          </div>
+
+        </div>
+
+
+        <div class='row'>
+
+          <div class='col-xs-3'>
+            <p><strong>State:</strong></p>
+          </div>
+
+          <div class='col-xs-9'>
+            <p><%= @state %></p>
+          </div>
+
+        </div>
+
+      </div> <!-- row-group -->
+
+
+
+      <div class='row-group'>
+
+        <div class='row'>
+
+          <div class='col-xs-12'>
+            <%= link_to 'Edit Address', edit_address_path(@address.id) %>
+          </div>
+
+        </div>
+
+        <div class='row'>
+
+          <div class='col-xs-12'>
+            <%= link_to 'Delete Address', address_path(@address.id),
+                  :method => :delete,
+                  :data => { :confirm => 'Delete address?' } %>
+          </div>
+
+        </div>
+
+      </div> <!-- row-group -->
+
+
+    </div>
+  </div>
+
+</section>

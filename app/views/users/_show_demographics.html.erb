@@ -1,0 +1,101 @@
+<div class='row'>
+
+  <div class='col-xs-12'>
+    <h4 class='text-center'><strong><u>Demographic Information</u></strong></h4>
+  </div>
+
+</div>
+
+
+
+<div class='row'>
+
+  <div class='col-xs-3'>
+    <p><strong>First Name:</strong></p>
+  </div>
+
+  <div class='col-xs-9'>
+    <p><%= user.first_name %></p>
+  </div>
+
+</div>
+
+
+
+<div class='row'>
+
+  <div class='col-xs-3'>
+    <p><strong>Last Name:</strong></p>
+  </div>
+
+  <div class='col-xs-9'>
+    <p><%= user.last_name %></p>
+  </div>
+
+</div>
+
+
+
+<div class='row'>
+
+  <div class='col-xs-3'>
+    <p><strong>Email:</strong></p>
+  </div>
+
+  <div class='col-xs-9'>
+    <p><%= user.email %></p>
+  </div>
+
+</div>
+
+
+
+<div class='row'>
+
+  <div class='col-xs-12'>
+    <p><strong>Default Billing Address:</strong></p>
+  </div>
+
+  <div class='col-xs-12'>
+    <p><%= default_billing %></p>
+  </div>
+
+</div>
+
+
+
+<div class='row'>
+
+  <div class='col-xs-12'>
+    <p><strong>Default Shipping Address:</strong></p>
+  </div>
+
+  <div class='col-xs-12'>
+    <p><%= default_shipping %></p>
+  </div>
+
+</div>
+
+
+
+<div class='row'>
+
+  <div class='col-xs-12'>
+    <%= link_to "Edit #{user.first_name} #{user.last_name}'s Information", edit_user_path(user.id) %>
+  </div>
+
+  <div class='col-xs-12'>
+    <%= link_to "Delete #{user.first_name} #{user.last_name}", user_path(user.id),
+                :method => :delete,
+                :data => { :confirm => 'Delete user?' } %>
+  </div>
+
+  <div class='col-xs-12'>
+    <%= link_to "View Saved Addresses", addresses_path(:user_id => user.id) %>
+  </div>
+
+  <div class='col-xs-12'>
+    <%= render partial: 'show_cart_on_demographics', :locals => { :cart => cart } %>
+  </div>
+
+</div>

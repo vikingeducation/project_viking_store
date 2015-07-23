@@ -1,0 +1,67 @@
+<%= form_for product do |f| %>
+
+
+  <!-- ID NUMBER -->
+  <div class='form-group'>
+    <div class='row'>
+      <div class='col-xs-3'>
+        <%= f.label :id, 'Product ID:' %>
+      </div>
+      <div class='col-xs-9'>
+        <% product.id = 'N/A' if product.id.nil? %>
+        <%= f.text_field :id, disabled: true %>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- NAME -->
+  <div class='form-group'>
+    <div class='row'>
+      <div class='col-xs-3'>
+        <%= f.label :name, 'Name:', :placeholder => 'enter a name' %>
+      </div>
+      <div class='col-xs-9'>
+        <%= f.text_field :name %>
+        <%= render_error(product,:name) %>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PRICE -->
+  <div class='form-group'>
+    <div class='row'>
+      <div class='col-xs-3'>
+        <%= f.label :price, 'Price:' %>
+      </div>
+      <div class='col-xs-9'>
+        <%= f.text_field :price, :placeholder => '$price' %>
+        <%= render_error(product,:price) %>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- CATEGORY -->
+  <div class='form-group'>
+    <div class='row'>
+      <div class='col-xs-3'>
+        <%= f.label :category_id, 'Category:' %>
+      </div>
+      <div class='col-xs-9'>
+        <%= f.collection_select :category_id, available_categories, :id, :name %>
+        <%= render_error(product,:category_id) %>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- BUTTON -->
+  <div class='row'>
+    <div class='col-xs-8 col-xs-offset-2'>
+      <%= f.submit "#{button_label} Product", class: 'btn btn-primary btn-lg btn-block' %>
+    </div>
+  </div>
+
+<% end %>
