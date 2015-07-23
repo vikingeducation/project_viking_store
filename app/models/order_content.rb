@@ -1,2 +1,2 @@
-class OrderContents < ActiveRecord::Base
+class OrderContent < ActiveRecord::Base
 end
