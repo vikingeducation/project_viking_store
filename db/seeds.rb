@@ -7,7 +7,7 @@
 User.destroy_all
 Address.destroy_all
 Order.destroy_all
-OrderContents.destroy_all
+OrderContent.destroy_all
 Category.destroy_all
 CreditCard.destroy_all
 Product.destroy_all
@@ -61,7 +61,7 @@ end
 
 # This method selects one of a users several addresses for use setting shipping address and billing address.
 def random_user_address(user_id)
-  User.find(user_id).addresses.sample[:id]
+  Address.where("user_id = ?", user_id).sample[:id]
 end
 
 # This method creates a single address affiliated with a user.
@@ -117,18 +117,18 @@ end
 
 # Here are some methods that will help us create Order records.
 
-# This method adds random Product records to Orders through the OrderContents model.
+# This method adds random Product records to Orders through the OrderContent model.
 
 def generate_contents(order_id)
   (rand(10) + 1).times do
-    c = OrderContents.new
+    c = OrderContent.new
     c[:order_id]   = order_id
     c[:product_id] = Product.pluck(:id).sample
     c[:quantity]   = rand(10)+1
 
     # prevents breaking the uniqueness constraint on
     # [:order_id, :product_id]
-    if OrderContents.where(:product_id => c.product_id,
+    if OrderContent.where(:product_id => c.product_id,
                           :order_id => c.order_id).empty?
       c.save
     end
