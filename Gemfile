@@ -43,7 +43,6 @@ group :development, :test do
   gem 'spring'
 
   # Faker gem for creating seed data
-  gem 'faker'
 
   # Jazz Hands for fancier debugging and table views
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
@@ -51,7 +50,10 @@ group :development, :test do
 end
 
 
+gem 'faker'
+
 gem 'pg'
+
 
 # Better Errors
 group :development do
