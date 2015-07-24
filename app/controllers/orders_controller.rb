@@ -19,9 +19,11 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @user = @order.user
-    @shipping_address = @order.shipping_address
-    @billing_address = @order.billing_address
-    @card = nil
+    @order_status = @order.define_status
+    @shipping_address = @order.shipping_address.build_address_display_hash
+    @billing_address = @order.billing_address.build_address_display_hash
+    @card = @order.get_card_last_4
+    @order_contents = @order.build_contents_table_data
   end
 
 end

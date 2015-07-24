@@ -50,4 +50,13 @@ class Address < ActiveRecord::Base
     "#{id} (#{street_address})"
   end
 
+
+  def build_address_display_hash
+    {
+      :street_address => self.street_address,
+      :city_name => self.city.name,
+      :state_name => self.state.name
+    }
+  end
+
 end

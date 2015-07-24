@@ -4,7 +4,7 @@
   <div class='row'>
     <div class='col-xs-12'>
 
-      <h1 class='text-center'><%= "Order #{@order.id}" %></h1>
+      <h1 class='text-center'><%= show_order_title(@order) %></h1>
 
 
 
@@ -12,6 +12,7 @@
       <%= render :partial => 'show_logistics',
             :locals => {
                         :order => @order,
+                        :order_status => @order_status,
                         :user => @user,
                         :shipping_address => @shipping_address,
                         :billing_address => @billing_address,
@@ -21,12 +22,12 @@
 
 
       <!-- Order Contents -->
-      <%# render :partial => 'show_contents',
+      <%= render :partial => 'show_contents',
             :locals => {
-                        :user => @user,
-                        :credit_card => @credit_card
+                        :order => @order,
+                        :order_contents => @order_contents
                        },
-            :layout => 'layouts/shared/show_panel' if @credit_card %>
+            :layout => 'layouts/shared/show_panel' if @order_contents %>
 
 
 

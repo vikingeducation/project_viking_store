@@ -16,21 +16,17 @@ class Order < ActiveRecord::Base
     orders = orders.where(:user_id => user_id) if user_id
 
 
-    output = []
-
-    orders.each do |order|
-      output << {
-                  :relation => order,
-                  :user => order.user,
-                  :address => order.shipping_address,
-                  :quantity => order.count_total_quantity,
-                  :order_value => order.calculate_order_value,
-                  :status => order.define_status,
-                  :date_placed => order.checkout_date
-                }
+    orders.map do |order|
+      {
+        :relation => order,
+        :user => order.user,
+        :address => order.shipping_address,
+        :quantity => order.count_total_quantity,
+        :order_value => order.calculate_order_value,
+        :status => order.define_status,
+        :date_placed => order.checkout_date
+      }
     end
-
-    output
 
   end
 
@@ -51,6 +47,27 @@ class Order < ActiveRecord::Base
     else
       'UNPLACED'
     end
+  end
+
+
+  def get_card_last_4
+    self.user.credit_cards.first.card_number
+  end
+
+
+  def build_contents_table_data
+    order_contents = self.order_contents.all
+
+    order_contents.map do |content_row|
+      {
+        :product_id => content_row.product_id,
+        :product_name => content_row.product.name,
+        :quantity => content_row.quantity,
+        :price => content_row.product.price,
+        :total_price => content_row.quantity * content_row.product.price
+      }
+    end
+
   end
 
 
