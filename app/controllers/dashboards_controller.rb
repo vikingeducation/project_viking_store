@@ -23,7 +23,7 @@ class DashboardsController < ApplicationController
 
     @user_3_cities=User.top_3_cities
 
-    # @top_users=User.top_user_with
+    @top_users=User.top_user_with
 
 
   end

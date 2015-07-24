@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     end
     h
   end
-  
+
 
 
   def self.top_3_cities
@@ -32,15 +32,25 @@ class User < ActiveRecord::Base
 
 
   def top_user_with
-    { "Highest single" => User.all.count,
-              "Orders"=> Order.all.count,
-              "Products" => Product.all.count,
-              "Revenue" => Order.total(100000).round}
+    { "Highest single order value" => highest_order_value,
+      "Highest lifetime value"=> highest_rev_tot,
+      "Highest average order volume" => highest_avg_order_value,
+      "Most orders place" => most_orders}
 
   end
 
   def highest_order_value #name, value
-    self.joins("JOIN orders ON user.id = orders.user_id")
+    result = self.joins("JOIN orders ON users.id = orders.user_id") \
+        .joins("JOIN order_contents ON orders.id = order_contents.order_id") \
+        .joins("JOIN products ON order_contents.product_id = products.id") \
+        .select("SUM(price * quantity) AS cost, order_id") \
+        .group(:order_id).order("cost DESC").limit(1) #.sum(:cost)
+
+    name = User.joins("JOIN orders ON users.id = orders.user_id") \
+        .select("CONCAT(first_name, ' ', last_name)") \
+        .where("orders.id = 226")
+
+    [name, result.first.cost]
   end
 
   def highest_rev_tot

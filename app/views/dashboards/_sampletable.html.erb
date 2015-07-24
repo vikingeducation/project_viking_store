@@ -3,15 +3,19 @@
 <table class="table table-striped">
   <h4><%=title%></h4>
   <tr>
-    <%headers.each {|head| '<td> head </td>'.htmlsafe}%>
+    <%headers.each do |head| %>
+    <td> <%= head %> </td>
+    <% end %>
   <tr>
     <% table_data.each do |name, num|%>
       <tr>
         <td> <%= name %></td>
         <% if  num.is_a? Array %>
-          <%num.each {|el| '<td><%= el %></td>'.htmlsafe}%>
+          <% num.each do |el| %>
+          <td> %= num %></td>
+          <% end %>
         <% else%>
-          <td><%=num %></td>
+          <td><%= num %></td>
         <%end%>
       <tr>
       <%end%>
