@@ -13,7 +13,7 @@ class OrderContent < ActiveRecord::Base
       OrderContent.select("ROUND(SUM(quantity * products.price), 2) AS total")
                   .joins("JOIN products ON order_contents.product_id=products.id")
                   .joins("JOIN orders ON order_contents.order_id=orders.id")
-                  .where("checkout_date IS NOT NULL AND order_contents.created_at > ?", timeframe.days.ago)
+                  .where("checkout_date > ?", timeframe.days.ago)
                   .first.total
     end
   end
