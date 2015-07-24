@@ -11,16 +11,17 @@
     <!-- Logistical Information -->
       <%= render :partial => 'show_logistics',
             :locals => {
+                        :order => @order,
                         :user => @user,
-                        :cart => @cart,
-                        :default_billing => @default_billing,
-                        :default_shipping => @default_shipping
+                        :shipping_address => @shipping_address,
+                        :billing_address => @billing_address,
+                        :card => @card
                        },
             :layout => 'layouts/shared/show_panel' %>
 
 
       <!-- Order Contents -->
-      <%= render :partial => 'show_contents',
+      <%# render :partial => 'show_contents',
             :locals => {
                         :user => @user,
                         :credit_card => @credit_card

@@ -5,4 +5,13 @@ module ApplicationHelper
   end
 
 
+  def color_status_text(status)
+    if status == 'UNPLACED'
+      "class=text-danger"
+    else
+      "class=text-success"
+    end
+  end
+
+
 end
