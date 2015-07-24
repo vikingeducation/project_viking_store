@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   end
 
   def self.get_overall
-    overall = {'Last 7' => 7, 'Last 30' => 30, 'Total' => nil}
+    overall = {'Last 7 Days' => 7, 'Last 30 Days' => 30, 'Total' => nil}
     overall.each do |key, limit|
       result = []
       result << User.in_last(limit)

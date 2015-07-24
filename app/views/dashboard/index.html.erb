@@ -1,23 +1,63 @@
-<h1> Viking Store Analytics Dashboard </h1>
+<div class = "row">
+  <div class = "col-sm-6 col-sm-offset-3">
+    <h1>Viking Store Analytics Dashboard</h1>
+  </div>
+</div>
+<hr>
 
-<% @overall.each do |key, value| %>
-	<h3> <%= key %> </h3>
-	<% value.each do |val| %>
-		<li> <%= val %> </li>
-	<% end %>
-<% end %>
+<div class = "row">
+  <div class = "col-sm-6">
 
-<% @demographics.each do |key, value| %>
+    <div class = "row">
+      <div class = "col-sm-6 col-sm-offset-3">
+        <h3>1. Overall Platform</h3>
+      </div>
+    </div>
 
-  <h3> <%= key %> </h3>
-  <% value.each do |pairs| %>
-    <li><%= pairs[0] %> : <%= pairs[1] %></li>
-  <% end %>
-<% end %>
+    <% @overall.each do |key, value| %>
+      <h4> <%= key %> </h4>
+      <table class="table table-hover">
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+          <% value.each do |val| %>
+        <tr>
+          <td></td>
+          <td> <%= val %> </td>
+        </tr>
+          <% end %>
 
-<h3> Top User with... </h3>
-<% @superlatives.each do |key, values| %>
-	<li> <%= key %>
-		<%= values[0] %> : <%= values[1] %>
-	</li>
-<% end %>
+      </table>
+    <% end %>
+  </div>
+
+  <div class = "col-sm-6">
+
+    <div class = "row">
+      <div class = "col-sm-6 col-sm-offset-3">
+        <h3>1. User Demographics and Behavior</h3>
+      </div>
+    </div>
+
+    <% @demographics.each do |key, value| %>
+
+      <h3> <%= key %> </h3>
+      <% value.each do |pairs| %>
+        <li><%= pairs[0] %> : <%= pairs[1] %></li>
+      <% end %>
+    <% end %>
+
+    <h3> Top User with... </h3>
+    <% @superlatives.each do |key, values| %>
+      <li> <%= key %>
+        <%= values[0] %> : <%= values[1] %>
+      </li>
+    <% end %>
+
+  </div>
+</div>
+
+<div class = "row">
+  
+</div>
