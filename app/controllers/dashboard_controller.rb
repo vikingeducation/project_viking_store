@@ -30,6 +30,13 @@ class DashboardController < ApplicationController
     @highest_lifetime_value = User.highest_lifetime_value
     @highest_avg_value = User.highest_avg_value
     @most_orders_placed = User.most_orders_placed
+
+    @avg_order_value = Order.avg_order_value.first.avg
+    @avg_order_value_last_30 = Order.avg_order_value_ago(30).first.avg
+    @avg_order_value_last_7 = Order.avg_order_value_ago(7).first.avg
+
+    @largest_order_value_last_30 = Order.largest_order_value_ago(30).first.sum
+    @largest_order_value_last_7 = Order.largest_order_value_ago(7).first.sum
   end
 
   def top_cities_states

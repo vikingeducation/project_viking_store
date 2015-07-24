@@ -20,4 +20,35 @@ class Order < ActiveRecord::Base
     Order.find_by_sql("select count(*) as counter,cities.name  FROM orders JOIN addresses on orders.billing_id = addresses.id Join  cities on cities.id = addresses.city_id where checkout_date NOTNULL group by city_id ORDER BY counter DESC limit 3")
   end
 
+  def self.avg_order_value
+    Order.find_by_sql("SELECT ROUND(avg(price*quantity),2) as avg FROM products JOIN order_contents ON products.id = order_contents.product_id GROUP BY order_id")
+  end
+
+  
+
+  def self.avg_order_value_ago(num_days_ago)
+    sum = 0
+    avg_order_value_array(num_days_ago).each do |item|
+      array << item.avg
+    end
+    array.each do |item|
+      sum += item
+    end
+    return sum/array.length
+  end
+
+  def avg_order_value_array(num_days_ago)
+    Order.find_by_sql("SELECT ROUND(avg(price*quantity),2) as avg FROM products JOIN order_contents ON products.id = order_contents.product_id JOIN orders ON orders.id = order_contents.order_id GROUP BY order_id HAVING orders.checkout_date > DATETIME('now','-7 days')")
+  end
+
+  def self.largest_order_value_ago(num_days_ago)
+    Order.find_by_sql("SELECT checkout_date, ROUND(sum(price*quantity),2) AS sum, quantity FROM products JOIN order_contents ON products.id=order_contents.product_id JOIN orders ON orders.id = order_contents.order_id GROUP BY order_id HAVING orders.checkout_date >DATETIME('now','-#{num_days_ago} days') ORDER BY sum DESC  LIMIT 1")
+  end
+
+
+
+
+
+
+
 end
