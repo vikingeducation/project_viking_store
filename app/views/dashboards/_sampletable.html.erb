@@ -6,10 +6,10 @@
     <td>Item</td>
     <td>Data</td>
   <tr>
-    <% table_data.each do |table|%>
+    <% table_data.each do |name, num|%>
     <tr>
-      <td> <%="#{table[0]}"%></td>
-      <td><%="#{table[1]}"%></td>
+      <td> <%= name %></td>
+      <td><%= num %></td>
     <tr>
       <%end%>
 </table>
