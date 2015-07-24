@@ -15,6 +15,20 @@ class User < ActiveRecord::Base
     self.joins("JOIN addresses ON addresses.user_id=users.id").joins("JOIN cities ON cities.id=addresses.city_id").select("cities.name, count(*) AS count ").group("cities.name").order(:count).reverse_order.limit(3)
   end
 
+  def highest_order_value #name, value
+    self.joins("JOIN orders ON user.id = orders.user_id").
+  end
 
+  def highest_rev_tot
+
+  end
+
+  def highest_avg_order_value
+
+  end
+
+  def most_orders
+
+  end
 
 end
