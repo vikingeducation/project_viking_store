@@ -41,3 +41,21 @@ gem 'faker'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem "twitter-bootstrap-rails"
+
+
+group :development, :test do
+  # Note: Need to pull this fork directly because
+  # the original uses pry-debugger which doesn't work
+  # with Ruby 2
+  gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
+  gem 'pry-byebug'
+end
+
+
+
+
+
+
+
+
