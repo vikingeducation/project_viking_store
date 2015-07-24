@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
         .select("SUM(price * quantity) AS cost, order_id") \
         .group(:order_id).order("cost DESC").limit(1) #.sum(:cost)
 
-     
+
     name = User.joins("JOIN orders ON users.id = orders.user_id") \
         .select("CONCAT(first_name, ' ', last_name) AS fullname") \
         .where("orders.id = #{result.first.order_id}")
@@ -63,9 +63,9 @@ class User < ActiveRecord::Base
         .select("SUM(price * quantity) AS cost, user_id") \
         .group(:user_id).order("cost DESC").limit(1)
 
-        
+
       name = User.select("CONCAT(first_name, ' ', last_name) AS fullname").where("users.id=#{result.first.user_id}")
-      
+
 
     [name.first.fullname, result.first.cost.round]
 
