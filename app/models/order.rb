@@ -61,6 +61,7 @@ class Order < ActiveRecord::Base
 
     order_contents.map do |content_row|
       {
+        :relation => content_row,
         :product_id => content_row.product_id,
         :product_name => content_row.product.name,
         :quantity => content_row.quantity,

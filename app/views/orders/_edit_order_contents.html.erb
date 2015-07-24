@@ -13,33 +13,34 @@
 <div class='row show-block'>
   <div class='col-xs-12'>
 
-    <%= form_tag do %>
+    <%= form_for order do |f| %>
 
       <table class='table table-striped table-bordered table-condensed'>
 
-          <thead class='bg-primary'>
-            <tr>
-              <td>ID</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Total Price</td>
-              <td>REMOVE</td>
-            </tr>
-          </thead>
+        <thead class='bg-primary'>
+          <tr>
+            <td>ID</td>
+            <td>Quantity</td>
+            <td>Price</td>
+            <td>Total Price</td>
+            <td>REMOVE</td>
+          </tr>
+        </thead>
 
-          <tbody>
-            <%= render :partial => 'edit_order_content', :collection => order_contents %>
-          </tbody>
+        <tbody>
+          <%= render :partial => 'edit_order_content',
+                :collection => order_contents %>
+        </tbody>
 
 
-        </table>
+      </table>
 
 
       <!-- BUTTON -->
       <div class='row'>
 
         <div class='col-xs-10 col-xs-offset-1'>
-          <%= submit_tag "#{button_label}", class: 'btn btn-primary btn-lg btn-block' %>
+          <%= f.submit "#{button_label}", class: 'btn btn-primary btn-lg btn-block' %>
         </div>
 
       </div>

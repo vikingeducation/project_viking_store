@@ -54,55 +54,90 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
-    @status = @order.define_status
-    @user = User.find(@order.user_id)
-    @available_addresses = @user.created_addresses
-    @available_cards = @user.credit_cards.all
-
-    @order_contents = @order.build_contents_table_data
+    reset_order_instance_variables
   end
 
 
   def update
     @order = Order.find(params[:id])
 
-    params[:order][:checkout_date] = @order.update_checkout_date(params[:status])
+    #update_info
+    if params[:commit] == 'Update Order Information'
+      params[:order][:checkout_date] = @order.update_checkout_date(params[:status])
 
-    if @order.update(order_params)
-      flash[:success] = "Order successfully updated!"
-      redirect_to @order
-    else
-      flash.now[:danger] = "Order not saved - please try again."
-      @status = @order.define_status
-      @user = User.find(@order.user_id)
-      @available_addresses = @user.created_addresses
-      @available_cards = @user.credit_cards.all
-      render :edit
+      if @order.update(order_params)
+        flash[:success] = "Order successfully updated!"
+        redirect_to @order
+      else
+        flash.now[:danger] = "Order not saved - please try again."
+        reset_order_instance_variables
+        render :edit
+      end
     end
+
+
+    #update_contents
+    if params[:commit] == 'Update Order Contents'
+      #update quantity for order/product id combo
+      @order_contents = @order.order_contents
+
+      @order_contents.each do |content_row|
+        new_quantity = params[content_row.id.to_s].to_i
+        # delete if zero
+        content_row.update(:quantity => new_quantity)
+      end
+
+      redirect_to @order
+
+      #@order_content_row = OrderContents.find(params[:id])
+
+      #if @order_content_row.update(content_params)
+      #  flash[:success] = "Order successfully updated!"
+       # redirect_to @order
+      #else
+      #  flash.now[:danger] = "Order not saved - please try again."
+      #  reset_order_instance_variables
+      #  render :edit
+      #end
+    end
+
+    #add_products
   end
 
 
-=begin
   def destroy
-    @user = User.find(params[:id])
+    @order = Order.find(params[:id])
 
-    if @user.destroy
-      flash[:success] = "User deleted!"
-      redirect_to users_path
+    if @order.destroy
+      flash[:success] = "Order deleted!"
+      redirect_to user_path(@order.user_id)
     else
       flash[:danger] = "Delete failed - please try again."
       redirect_to :back
     end
 
   end
-=end
 
 
   private
 
 
+  def reset_order_instance_variables
+    @status = @order.define_status
+    @user = User.find(@order.user_id)
+    @available_addresses = @user.created_addresses
+    @available_cards = @user.credit_cards.all
+    @order_contents = @order.build_contents_table_data
+  end
+
+
   def order_params
     params.require(:order).permit(:checkout_date, :shipping_id, :billing_id, :billing_card_id, :user_id)
+  end
+
+
+  def content_params
+    params.require(:order_content).permit(:quantity)
   end
 
 end
