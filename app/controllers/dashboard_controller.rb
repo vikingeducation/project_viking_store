@@ -20,6 +20,10 @@ class DashboardController < ApplicationController
 
     @lifetime_value = Order.lifetime_value
 
+    @avg_value = Order.avg_value
+
+    @most_orders = Order.most_orders_placed
+
   end
 
   def show
