@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'hirb'
+gem 'better_errors'
+gem 'chart-js-rails'
  # gem 'jazz_hands'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
