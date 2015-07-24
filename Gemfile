@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
+gem 'hirb'
 # Sqlite3 for database
 gem 'sqlite3'
 # Use SCSS for stylesheets
