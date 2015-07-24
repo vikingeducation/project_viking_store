@@ -1,60 +1,67 @@
 <h3>Top 3 States Users Live In (Billing)</h3>
 <table class="table">
   <tr>
-    <%= 
-    <td>State</td>
-    <td><%= @user_seven %></td>
+    <td> <strong>States</strong></td>
+    <td><strong>Number of Users</strong></td>
+  </tr>
+    <tr>
+    <td> <%= @states[0][0] %> </td>
+    <td><%= @states[0][1] %></td>
   </tr>
   <tr>
-    <td>Orders</td>
-    <td><%= @order_seven %></td>
+    <td><%= @states[1][0] %></td>
+    <td><%= @states[1][1] %></td>
   </tr>
-  <tr>
-    <td>Products</td>
-    <td><%= @product_seven %></td>
-  </tr>
-  <tr>
-    <td>Revenue</td>
-    <td><%= @revenue_seven %></td>
+    <td><%= @states[2][0] %></td>
+    <td><%= @states[2][1] %></td>
   </tr>
 </table>
 
 <h3>Top 3 Cities Users Live In (Billing)</h3>
 <table class="table">
   <tr>
-    <td>New Users</td>
-    <td><%= @user_thirty %></td>
+    <td> <strong>Cities</strong></td>
+    <td><strong>Number of Users</strong></td>
+  </tr>
+    <tr>
+    <td> <%= @cities[0][0] %> </td>
+    <td><%= @cities[0][1] %></td>
   </tr>
   <tr>
-    <td>Orders</td>
-    <td><%= @order_thirty %></td>
+    <td><%= @cities[1][0] %></td>
+    <td><%= @cities[1][1] %></td>
   </tr>
-  <tr>
-    <td>Products</td>
-    <td><%= @product_thirty %></td>
-  </tr>
-  <tr>
-    <td>Revenue</td>
-    <td><%= @revenue_thirty %></td>
+    <td><%= @cities[2][0] %></td>
+    <td><%= @cities[2][1] %></td>
   </tr>
 </table>
 
 <h3>Top Users With... </h3>
 <table class="table">
   <tr>
-    <td>New Users</td>
-    <td><%= @user_total %></td>
+    <td><b>Users</td>
+    <td><b>User</td>
+    <td><b>Quantity</td>
+
   </tr>
   <tr>
-    <td>Orders</td>
-    <td><%= @order_total %></td>
+    <td>Highest Single Order Value</td>
+    <td><%=@best_order[1]%></td>
+    <td><%= @best_order[0]%></td>
   </tr>
   <tr>
-    <td>Products</td>
-    <td><%= @product_total %></td>
+    <td>Highest Lifetime Value</td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
-    <td>Revenue</td>
-    <td><%= @revenue_total %></td>
+    <td>Highest Average Order Value</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Most Orders Placed</td>
+    <td></td>
+    <td></td>
   </tr>
 </table>

@@ -13,7 +13,12 @@ class DashboardController < ApplicationController
     @revenue_thirty = Order.revenue(30)
     @revenue_total = Order.revenue
 
-    @result = User.get_top_states
+    @states = User.get_top_states
+    @cities = User.get_top_cities
+
+    @best_order = Order.best
+
+    @lifetime_value = Order.lifetime_value
 
   end
 
