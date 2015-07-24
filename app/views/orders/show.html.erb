@@ -1,0 +1,35 @@
+<section id='order-show'>
+
+
+  <div class='row'>
+    <div class='col-xs-12'>
+
+      <h1 class='text-center'><%= "Order #{@order.id}" %></h1>
+
+
+
+    <!-- Logistical Information -->
+      <%= render :partial => 'show_logistics',
+            :locals => {
+                        :user => @user,
+                        :cart => @cart,
+                        :default_billing => @default_billing,
+                        :default_shipping => @default_shipping
+                       },
+            :layout => 'layouts/shared/show_panel' %>
+
+
+      <!-- Order Contents -->
+      <%= render :partial => 'show_contents',
+            :locals => {
+                        :user => @user,
+                        :credit_card => @credit_card
+                       },
+            :layout => 'layouts/shared/show_panel' if @credit_card %>
+
+
+
+    </div>
+  </div>
+
+</section>
