@@ -26,4 +26,12 @@ class OrdersController < ApplicationController
     @order_contents = @order.build_contents_table_data
   end
 
+
+  def new
+    @order = Order.new
+    @user = User.find(params[:user_id])
+    @available_addresses = @user.created_addresses
+    @available_cards = @user.credit_cards.all
+  end
+
 end
