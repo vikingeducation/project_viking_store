@@ -2,6 +2,10 @@
 <p>Find me in app/views/dashboard/index.html.erb</p>
 
 <div class="container">
-
-<%= render partial: 'platform_panel' %>
+	<div class="row">
+		<h1>Overall Platform</h1>
+		<%= render partial: 'overall_platform' %>
+		<h1>User Demographics</h1>
+		<%= render partial: 'user_demographics' %>
+	</div>
 </div>
