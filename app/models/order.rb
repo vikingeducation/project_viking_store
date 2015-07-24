@@ -34,7 +34,7 @@ class Order < ActiveRecord::Base
 
   def self.revenue_in_last(days=nil)
     if days.nil?
-      revenue.where('orders.checkout_date NOT NULL').first.cost
+      revenue.where('orders.checkout_date IS NOT NULL').first.cost
     else
       revenue.where('orders.checkout_date > ?', DateTime.now - days).first.cost
     end
@@ -45,12 +45,14 @@ class Order < ActiveRecord::Base
       self.select('SUM(products.price * order_contents.quantity)/(COUNT(DISTINCT orders.id)) as average_order').
       joins('JOIN order_contents ON order_contents.order_id = orders.id').
       joins('JOIN products ON order_contents.product_id = products.id').
-      where('orders.checkout_date > ?', DateTime.now - days).first.average_order
+      where('orders.checkout_date > ?', DateTime.now - days).
+      group('orders.id').first.average_order
     else
       self.select('SUM(products.price * order_contents.quantity)/(COUNT(DISTINCT orders.id)) as average_order').
       joins('JOIN order_contents ON order_contents.order_id = orders.id').
       joins('JOIN products ON order_contents.product_id = products.id').
-      where('orders.checkout_date NOT NULL').first.average_order
+      where('orders.checkout_date IS NOT NULL').
+      group('orders.id').first.average_order
     end
   end
 
@@ -65,7 +67,7 @@ class Order < ActiveRecord::Base
       self.select('SUM(products.price * order_contents.quantity) as max_order').
       joins('JOIN order_contents ON order_contents.order_id = orders.id').
       joins('JOIN products ON order_contents.product_id = products.id').
-      where('orders.checkout_date NOT NULL').
+      where('orders.checkout_date IS NOT NULL').
       group('orders.id').order('max_order DESC').first.max_order
     end
   end
@@ -79,12 +81,12 @@ class Order < ActiveRecord::Base
       unless days
       self.select('SUM(products.price * order_contents.quantity) as cost').joins(
         'JOIN order_contents ON orders.id = order_contents.
-        order_id JOIN products ON order_contents.product_id = products.id')
+        order_id JOIN products ON order_contents.product_id = products.id').order('cost')
       else
         self.select('SUM(products.price * order_contents.quantity) as cost').joins(
         'JOIN order_contents ON orders.id = order_contents.
         order_id JOIN products ON order_contents.product_id = products.id').
-        where('orders.checkout_date > ?', DateTime.now - days)
+        where('orders.checkout_date > ?', DateTime.now - days).order('cost')
       end
     end
 end

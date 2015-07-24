@@ -4,7 +4,7 @@ gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
 # Sqlite3 for database
-gem 'sqlite3'
+# gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -31,6 +31,8 @@ gem 'better_errors',      group: :development
 gem 'binding_of_caller',      group: :development
 
 gem 'pry'
+
+gem 'pg'
 
 gem 'faker'
 # Use ActiveModel has_secure_password

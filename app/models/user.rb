@@ -69,29 +69,29 @@ class User < ActiveRecord::Base
     def self.high_single_order_value
       self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity) as cost').
       joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
-      where("orders.checkout_date NOT NULL").
-      group('orders.id').order('cost DESC').limit(1)
+      where("orders.checkout_date IS NOT NULL").
+      group('orders.id, full_name').order('cost DESC').limit(1)
     end
 
     def self.high_lifetime_value
       self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity) as cost').
       joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
-      where("orders.checkout_date NOT NULL").
-      group('users.id').order('cost DESC').limit(1)
+      where("orders.checkout_date IS NOT NULL").
+      group('users.id, full_name').order('cost DESC').limit(1)
     end
 
     def self.high_average_value
       self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity)/(COUNT(DISTINCT orders.id)) as average_value').
       joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
-      where("orders.checkout_date NOT NULL").
-      group('users.id').order('average_value DESC').limit(1)
+      where("orders.checkout_date IS NOT NULL").
+      group('users.id, full_name').order('average_value DESC').limit(1)
     end
 
     def self.most_orders
       self.select('users.first_name || users.last_name AS full_name, COUNT(orders.id) as number_of_orders').
       joins('JOIN orders ON users.id = orders.user_id').
-      where("orders.checkout_date NOT NULL").
-      group('users.id').order('number_of_orders DESC').limit(1)
+      where("orders.checkout_date IS NOT NULL").
+      group('users.id, full_name').order('number_of_orders DESC').limit(1)
     end
 
 
