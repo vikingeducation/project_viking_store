@@ -13,8 +13,8 @@ class DashboardController < ApplicationController
     @revenue_thirty = Order.revenue(30)
     @revenue_total = Order.revenue
 
-    @states = User.get_top_states
-    @cities = User.get_top_cities
+    @states = State.get_top_states
+    @cities = City.get_top_cities
 
     @best_order = Order.best
 
