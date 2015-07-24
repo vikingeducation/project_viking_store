@@ -20,5 +20,29 @@ class DashboardController < ApplicationController
 
     @top_three_states = Order.top_state_orders 
     @top_three_cities = Order.top_city_orders
+    @states_names = top_cities_states[0]
+    @states_data = top_cities_states[1]
+
+    @cities_names = top_cities_states[2]
+    @cities_data = top_cities_states[3]
+  end
+
+  def top_cities_states
+    state_arr = []
+    city_arr = []
+    state_data = []
+    city_data = []
+      @top_three_states.each do |state|
+         state_arr <<  "#{state.name}" 
+         state_data << "#{state.counter}"
+      end 
+      state_data << 0
+    @top_three_cities.each do |city| 
+        city_arr <<  "#{city.name}"
+        city_data << "#{city.counter}"
+     end 
+    [state_arr,state_data, city_arr, city_data]
   end
 end
+
+
