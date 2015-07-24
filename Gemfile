@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'better_errors'
-gem 'chart-js-rails'
+gem 'chartjs-ror'
  # gem 'jazz_hands'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
