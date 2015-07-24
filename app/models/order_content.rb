@@ -2,7 +2,7 @@ class OrderContent < ActiveRecord::Base
   belongs_to :order
   belongs_to :product
 
-  def revenue(timeframe = nil)
+  def self.revenue(timeframe = nil)
     if timeframe.nil?
       OrderContent.select("ROUND(SUM(quantity * products.price), 2) AS total")
                   .joins("JOIN products ON order_contents.product_id=products.id")

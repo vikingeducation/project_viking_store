@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
 
-  def order_count(timeframe = nil)
+  def self.order_count(timeframe = nil)
 
     if timeframe.nil?
       return Order.where("checkout_date IS NOT NULL").count
