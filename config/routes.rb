@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :users
   resources :credit_cards, :only => [:destroy]
   resources :addresses
+  resources :orders
 
 
   # The priority is based upon order of creation: first created -> highest priority.

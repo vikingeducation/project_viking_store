@@ -9,8 +9,48 @@ class Order < ActiveRecord::Base
 
 
 # Portal methods
+  def self.get_index_data(user_id = nil)
+
+    orders = Order.order(:id).limit(100)
+
+    orders = orders.where(:user_id => user_id) if user_id
+
+
+    output = []
+
+    orders.each do |order|
+      output << {
+                  :relation => order,
+                  :user => order.user,
+                  :address => order.shipping_address,
+                  :quantity => order.count_total_quantity,
+                  :order_value => order.calculate_order_value,
+                  :status => order.define_status,
+                  :date_placed => order.checkout_date
+                }
+    end
+
+    output
+
+  end
+
+
+  def count_total_quantity
+    self.order_contents.sum(:quantity)
+  end
+
+
   def calculate_order_value
     self.products.sum("order_contents.quantity * products.price")
+  end
+
+
+  def define_status
+    if self.checkout_date
+      'PLACED'
+    else
+      'UNPLACED'
+    end
   end
 
 
