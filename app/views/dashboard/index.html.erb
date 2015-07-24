@@ -1,5 +1,7 @@
+<h1> Viking Store Analytics Dashboard </h1>
+
 <% @overall.each do |key, value| %>
-	<h1> <%= key %> </h1>
+	<h3> <%= key %> </h3>
 	<% value.each do |val| %>
 		<li> <%= val %> </li>
 	<% end %>
@@ -7,8 +9,15 @@
 
 <% @demographics.each do |key, value| %>
 
-  <h1> <%= key %> </h1>
+  <h3> <%= key %> </h3>
   <% value.each do |pairs| %>
-    <%= pairs[0], pairs[1] %>
+    <li><%= pairs[0] %> : <%= pairs[1] %></li>
   <% end %>
+<% end %>
+
+<h3> Top User with... </h3>
+<% @superlatives.each do |key, values| %>
+	<li> <%= key %>
+		<%= values[0] %> : <%= values[1] %>
+	</li>
 <% end %>
