@@ -28,6 +28,8 @@ class DashboardController < ApplicationController
 
     @highest_single_order_value = User.highest_order_value
     @highest_lifetime_value = User.highest_lifetime_value
+    @highest_avg_value = User.highest_avg_value
+    @most_orders_placed = User.most_orders_placed
   end
 
   def top_cities_states
