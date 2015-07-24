@@ -1,10 +1,10 @@
-<section id='order-new'>
+<section id='order-edit'>
 
   <div class='row'>
     <div class='col-xs-10 col-xs-offset-1'>
 
       <h1 class='text-center'>
-        <%= "New Order for #{@user.first_name} #{@user.last_name}" %>
+        <%= "Edit Order #{@order.id}" %>
       </h1>
 
     </div>
@@ -20,7 +20,7 @@
                         :user => @user,
                         :available_addresses => @available_addresses,
                         :available_cards => @available_cards,
-                        :button_label => 'Create Order in Shopping Cart'
+                        :button_label => 'Update Order Information'
                        },
             :layout => 'layouts/shared/show_panel' %>
 

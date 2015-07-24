@@ -27,7 +27,7 @@ module ApplicationHelper
     if available_cards.empty?
       "N/A"
     else
-      f.collection_select field_sym, available_cards, :id, :id_and_address
+      f.collection_select field_sym, available_cards, :id, :id_and_card_number
     end
   end
 

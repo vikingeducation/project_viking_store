@@ -73,6 +73,7 @@ class Order < ActiveRecord::Base
 
 
 
+
 # Dashboard methods
   def self.count_orders(day_range = nil)
     if day_range.nil?

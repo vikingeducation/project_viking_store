@@ -1,81 +1,167 @@
 <div class='row'>
 
   <div class='col-xs-12'>
-    <h4 class='text-center'><strong><u>Logistical Information</u></strong></h4>
+    <h3 class='text-center'><strong><u>Logistical Information</u></strong></h3>
   </div>
 
 </div>
 
 
+
+<div class='row show-block'>
+  <div class='col-xs-12'>
+
+    <div class='row'>
+      <div class='col-xs-12'>
+        <h4><strong>Basic Information</strong></h4>
+      </div>
+    </div>
+
+
+    <div class='row'>
+
+      <div class='col-xs-3'>
+        <p><strong>Customer ID:</strong></p>
+      </div>
+
+      <div class='col-xs-9'>
+        <p><%= user.id %></p>
+      </div>
+
+    </div>
+
+    <div class='row'>
+
+      <div class='col-xs-3'>
+        <p><strong>Customer:</strong></p>
+      </div>
+
+      <div class='col-xs-9'>
+        <%= link_to "#{user.first_name} #{user.last_name} (click to view user)", user_path(user.id) %>
+      </div>
+
+    </div>
+
+
+    <div class='row'>
+
+      <div class='col-xs-3'>
+        <p><strong>Date Placed:</strong></p>
+      </div>
+
+      <div class='col-xs-9'>
+        <p><%= order.checkout_date.to_date if order.checkout_date %></p>
+      </div>
+
+    </div>
+
+    <div class='row'>
+
+      <div class='col-xs-12'>
+        <%= link_to 'Edit Customer Profile', edit_user_path(user.id) %>
+      </div>
+
+    </div>
+
+
+  </div>
+</div> <!-- basic info -->
+
+
+
 <%= form_for order do |f| %>
 
+  <%= f.hidden_field :user_id, :value => user.id %>
 
-  <!-- SHIPPING ADDRESS -->
-  <div class='form-group'>
-    <div class='row'>
 
+    <!-- ORDER STATUS -->
+    <%= render :partial => 'order_form_status',
+          :locals => {
+                      :f => f,
+                      :order => @order,
+                      :user => @user,
+                      :available_addresses => @available_addresses,
+                      :available_cards => @available_cards,
+                      :button_label => 'Update Order Information'
+                     } %>
+
+
+
+    <div class='row show-block'>
       <div class='col-xs-12'>
-        <%= f.label :shipping_id, 'Shipping Address:' %>
+
+      <!-- SHIPPING ADDRESS -->
+      <div class='form-group'>
+        <div class='row'>
+
+          <div class='col-xs-12'>
+            <%= f.label :shipping_id, 'Shipping Address:' %>
+          </div>
+
+          <div class='col-xs-12'>
+            <%= render_user_addresses(f, available_addresses, :shipping_id) %>
+            <%= render_error(order,:shipping_id) %>
+          </div>
+
+        </div>
       </div>
 
-      <div class='col-xs-12'>
-        <%= render_user_addresses(f, available_addresses, :shipping_id) %>
-        <%= render_error(order,:shipping_id) %>
+
+      <!-- BILLING ADDRESS -->
+      <div class='form-group'>
+        <div class='row'>
+
+          <div class='col-xs-12'>
+            <%= f.label :billing_id, 'Billing Address:' %>
+          </div>
+
+          <div class='col-xs-12'>
+            <%= render_user_addresses(f, available_addresses, :billing_id) %>
+            <%= render_error(order,:billing_id) %>
+          </div>
+
+        </div>
       </div>
 
-    </div>
-  </div>
 
+      <!-- BILLING CARD -->
+      <div class='form-group'>
+        <div class='row'>
 
-  <!-- BILLING ADDRESS -->
-  <div class='form-group'>
-    <div class='row'>
+          <div class='col-xs-12'>
+            <%= f.label :billing_card_id, 'Billing Card:' %>
+          </div>
 
-      <div class='col-xs-12'>
-        <%= f.label :billing_id, 'Billing Address:' %>
+          <div class='col-xs-12'>
+            <%= render_user_cards(f, available_cards, :billing_card_id) %>
+            <%= render_error(order,:billing_card_id) %>
+          </div>
+
+        </div>
       </div>
 
-      <div class='col-xs-12'>
-        <%= render_user_addresses(f, available_addresses, :billing_id) %>
-        <%= render_error(order,:billing_id) %>
+
+
+      <!-- BUTTON -->
+      <div class='row'>
+
+        <div class='col-xs-10 col-xs-offset-1'>
+          <%= f.submit "#{button_label}", class: 'btn btn-primary btn-lg btn-block' %>
+        </div>
+
       </div>
 
-    </div>
-  </div>
-
-
-  <!-- BILLING CARD -->
-  <div class='form-group'>
-    <div class='row'>
-
-      <div class='col-xs-12'>
-        <%= f.label :credit_card, 'Billing Card:' %>
+      <div class='row'>
+        <div class='col-xs-8 col-xs-offset-2'>
+          <p class='text-center text-muted'><em>
+            You can add products on the next screen,<br>
+            once it's been created.
+        </em></p>
+        </div>
       </div>
 
-      <div class='col-xs-12'>
-        <%= render_user_cards(f, available_cards, :credit_card_id) %>
-        <%= render_error(order,:credit_card_id) %>
+
       </div>
-
-    </div>
-  </div>
-
-
-
-  <!-- BUTTON -->
-  <div class='row'>
-
-    <div class='col-xs-10 col-xs-offset-1'>
-      <%= f.submit "#{button_label}", class: 'btn btn-primary btn-lg btn-block' %>
-    </div>
-
-  </div>
-
-  <div class='row'>
-    <div class='col-xs-8 col-xs-offset-2'>
-      <p class='text-muted'><em>You can add products on the next screen, once it's been created.</em></p>
-    </div>
-  </div>
-
+    </div> <!-- end of form show block -->
 
 <% end %>
