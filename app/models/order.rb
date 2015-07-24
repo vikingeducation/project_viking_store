@@ -5,8 +5,9 @@ class Order < ActiveRecord::Base
   end
 
   def self.total(num_days)
-    result = self.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id").select("SUM(price * quantity) AS revenue , orders.id").where("checkout_date > ?",Time.now - num_days.day)
-    result.first.revenue
+    # result = self.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id").select("SUM(price * quantity) AS revenue , orders.id").where("checkout_date > ?",Time.now - num_days.day)
+    # result.first.revenue
+    result = Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id").select("*").where("checkout_date > ?",Time.now - num_days.day).sum("price * quantity")
   end
 
 

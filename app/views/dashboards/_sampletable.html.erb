@@ -1,16 +1,19 @@
 
 <div>
 <table class="table table-striped">
-  <%=title%>
+  <h4><%=title%></h4>
   <tr>
-    <td>Item</td>
-    <td>Data</td>
+    <%headers.each {|head| '<td> head </td>'.htmlsafe}%>
   <tr>
     <% table_data.each do |name, num|%>
-    <tr>
-      <td> <%= name %></td>
-      <td><%= num %></td>
-    <tr>
+      <tr>
+        <td> <%= name %></td>
+        <% if  num.is_a? Array %>
+          <%num.each {|el| '<td><%= el %></td>'.htmlsafe}%>
+        <% else%>
+          <td><%=num %></td>
+        <%end%>
+      <tr>
       <%end%>
 </table>
 </div>
