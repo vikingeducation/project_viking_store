@@ -6,6 +6,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :billing_address, :class_name => 'Address', :foreign_key => :billing_id
   belongs_to :shipping_address, :class_name => 'Address', :foreign_key => :shipping_id
+  belongs_to :billing_card, :class_name => 'CreditCard', :foreign_key => :billing_card_id
 
 
 # Portal methods
@@ -51,7 +52,7 @@ class Order < ActiveRecord::Base
 
 
   def get_card_last_4
-    self.user.credit_cards.first.card_number
+    self.billing_card.card_number if self.billing_card_id
   end
 
 

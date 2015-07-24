@@ -123,8 +123,12 @@ end
 
 # This method selects one of a users several addresses for use setting shipping address and billing address.
 def random_user_address(user_id)
-  # User.find(user_id).addresses.sample[:id] ## had to correct with following line:
-  User.joins("JOIN addresses ON users.id = addresses.user_id").pluck("addresses.id").sample
+  User.find(user_id).created_addresses.sample.id
+end
+
+# This method selects one of a users credit cards for use setting the card used for billing a particular order.
+def random_user_card(user_id)
+  User.find(user_id).credit_cards.sample.id
 end
 
 # This method creates a single address affiliated with a user.
@@ -244,20 +248,35 @@ def generate_credit_cards_for_checked_out_orders
                                 where("checkout_date IS NOT NULL")
 
   users_with_orders.each do |user|
-    card = CreditCard.new
-    card[:user_id] = user.user_id
+    # loop until valid card is saved
+    loop do
+      card = CreditCard.new
+      card[:user_id] = user.user_id
 
-    # last 4 digits only
-    card[:card_number] = Faker::Number.number(4)
-    card[:exp_month] = rand(12) + 1
+      # last 4 digits only
+      card[:card_number] = Faker::Number.number(4)
+      card[:exp_month] = rand(12) + 1
 
-    #so far, only good cards
-    card[:exp_year] = Time.now.year + rand(5)
-    card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
+      #so far, only good cards
+      card[:exp_year] = Time.now.year + rand(5)
+      card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
 
-    # for when card numbers collide
-    card.save if CreditCard.
-                 where(:card_number => card.card_number).empty?
+      if CreditCard.where(:card_number => card.card_number).empty?
+        card.save
+        break
+      end
+    end
+
+  end
+end
+
+
+def assign_credit_cards_to_orders
+  completed_orders = Order.where("checkout_date IS NOT NULL")
+
+  completed_orders.each do |o|
+    o[:billing_card_id] = random_user_card(o.user_id)
+    o.save
   end
 end
 
@@ -283,3 +302,4 @@ STATES.each { |state| generate_state state }
 # Create orders and add the credit card records.
 (MULTIPLIER * 30).times { generate_order }
 generate_credit_cards_for_checked_out_orders
+assign_credit_cards_to_orders

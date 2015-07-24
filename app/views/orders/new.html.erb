@@ -16,6 +16,7 @@
 
       <%= render :partial => 'order_form',
             :locals => {
+                        :order => @order,
                         :user => @user,
                         :available_addresses => @available_addresses,
                         :available_cards => @available_cards,
