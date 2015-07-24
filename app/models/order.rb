@@ -1,15 +1,21 @@
 class Order < ActiveRecord::Base
 
   def self.time_series_day(days=7)
+    # self.select("date, coalesce(count,0) AS count FROM generate_series('#{DateTime.now-7}'::timestamp, '#{DateTime.now}'::timestamp, '1 day') AS date").
+    # joins('LEFT OUTER JOIN (#{self.aggregate_daily_results}) AS results ON date = results.day')
+    self.find_by_sql("SELECT date, coalesce(count,0) AS count FROM generate_series('#{DateTime.now-7}'::timestamp, '#{DateTime.now}'::timestamp, '1 day') AS date LEFT OUTER JOIN (SELECT date_trunc('day', orders.checkout_date) AS day, count(orders.id), SUM(order_contents.quantity * products.price) FROM orders JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id WHERE (orders.checkout_date >= '2015-07-17 23:35:05.531882' AND orders.checkout_date < '2015-07-24 23:35:05.531991') GROUP BY day  ORDER BY day DESC) AS results ON date = results.day")
+  end
+
+  def self.aggregate_daily_results
     self.select("date_trunc('day', orders.checkout_date) AS day, count(orders.id), SUM(order_contents.quantity * products.price)").
     joins('JOIN order_contents ON orders.id = order_contents.order_id').
     joins('JOIN products ON products.id = order_contents.product_id').
     where('orders.checkout_date >= ? AND orders.checkout_date < ?',
       DateTime.now - 7,DateTime.now).
     group('day').
-    order('day')
-  end
+    order('day DESC')
 
+  end
 
   def self.get_statistics
     overall = {'Last 7 Days' => 7, 'Last 30 Days' => 30, 'Total' => nil}
