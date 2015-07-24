@@ -1,0 +1,16 @@
+
+<div>
+<table class="table table-striped">
+  Last 7 days
+  <tr>
+    <td>Item</td>
+    <td>Data</td>
+  <tr>
+    <% last7days.each do |table|%>
+    <tr>
+      <td> <%="#{table[0]}"%></td>
+      <td><%="#{table[1]}"%></td>
+    <tr>
+      <%end%>
+</table>
+</div>
