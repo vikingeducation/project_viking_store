@@ -31,46 +31,66 @@ class User < ActiveRecord::Base
   end
 
 
-  def top_user_with
+  def self.top_user_with
     { "Highest single order value" => highest_order_value,
       "Highest lifetime value"=> highest_rev_tot,
       "Highest average order volume" => highest_avg_order_value,
-      "Most orders place" => most_orders}
+      "Most orders place" => most_orders
+    }
 
   end
 
-  def highest_order_value #name, value
+  def self.highest_order_value #name, value
     result = self.joins("JOIN orders ON users.id = orders.user_id") \
         .joins("JOIN order_contents ON orders.id = order_contents.order_id") \
         .joins("JOIN products ON order_contents.product_id = products.id") \
         .select("SUM(price * quantity) AS cost, order_id") \
         .group(:order_id).order("cost DESC").limit(1) #.sum(:cost)
 
+     
     name = User.joins("JOIN orders ON users.id = orders.user_id") \
-        .select("CONCAT(first_name, ' ', last_name)") \
-        .where("orders.id = result.first.order_id")
+        .select("CONCAT(first_name, ' ', last_name) AS fullname") \
+        .where("orders.id = #{result.first.order_id}")
 
-    [name, result.first.cost]
+
+    [name.first.fullname, result.first.cost.round]
   end
 
-  def highest_rev_tot
+  def self.highest_rev_tot
     result = self.joins("JOIN orders ON users.id = orders.user_id") \
         .joins("JOIN order_contents ON orders.id = order_contents.order_id") \
         .joins("JOIN products ON order_contents.product_id = products.id") \
         .select("SUM(price * quantity) AS cost, user_id") \
         .group(:user_id).order("cost DESC").limit(1)
 
-      name = User.find(result.first.user_id)
+        
+      name = User.select("CONCAT(first_name, ' ', last_name) AS fullname").where("users.id=#{result.first.user_id}")
+      
 
-    [name, result.first.cost]
-
-  end
-
-  def highest_avg_order_value
+    [name.first.fullname, result.first.cost.round]
 
   end
 
-  def most_orders
+  def self.highest_avg_order_value
+    result = self.joins("JOIN orders ON users.id = orders.user_id") \
+        .joins("JOIN order_contents ON orders.id = order_contents.order_id") \
+        .joins("JOIN products ON order_contents.product_id = products.id") \
+        .select("SUM(price * quantity)/COUNT(DISTINCT orders.id) AS aver, order_id").group(:order_id).order("aver DESC").limit(1)
+
+    name = User.joins("JOIN orders ON users.id = orders.user_id") \
+        .select("CONCAT(first_name, ' ', last_name) AS fullname") \
+        .where("orders.id = #{result.first.order_id}")
+
+      [name.first.fullname, result.first.aver.round]
+  end
+
+  def self.most_orders
+    result = self.joins("JOIN orders ON users.id = orders.user_id") \
+        .select("COUNT(orders.id) AS amount, orders.user_id").group(:user_id).order("amount DESC").limit(1)
+
+    name = User.select("CONCAT(first_name, ' ', last_name) AS fullname").where("users.id=#{result.first.user_id}")
+
+    [name.first.fullname, result.first.amount.round]
 
   end
 
