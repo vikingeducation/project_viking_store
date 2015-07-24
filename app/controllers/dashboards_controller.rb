@@ -1,19 +1,23 @@
 class DashboardsController < ApplicationController
 
   def index
-    last7 = 7.days.ago.to_date
-    new_users = User.find_by_sql("SELECT count(*) \
-      FROM users WHERE created_at <= #{last7}")
+    
+    user_all=User.where("created_at > ?",Time.now - 7.day)
+     user_num=user_all.count
 
-    User.where()
+    all_orders=Order.where("created_at > ?",Time.now - 7.day)
+    order_num=all_orders.count
 
-    #method to get data
-    #dataform = {}
-    # dataform[title]= AR relations obj
-    # AR rel obj ~ array
-    # section_data ={'last7': [data], 'last30': [data], ...}
+    prod_all=Product.where("created_at > ?",Time.now - 7.day)
+    prod_num=prod_all.count
 
-    #pass 4 diff. section_data as 4 variables to view
+    revenue = 0
+    days=7.days.ago
+    all_orders.each do |order|
+      revenue+=Order.find_by_sql("SELECT sum(price * quantity) AS sum FROM orders JOIN order_contents ON (orders.id = order_id) JOIN products ON (products.id = product_id) WHERE orders.checkout_date < #{days}") 
+    end
+    @table_data={"New Users" => user_num, "Orders"=>order_num, "New Products" => prod_num, "Revenue" => revenue}
+    # Order.join(order_contents).join(products).where("checkout_date < ?", )
   end
 
 end
