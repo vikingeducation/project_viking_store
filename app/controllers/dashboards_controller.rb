@@ -2,14 +2,22 @@ class DashboardsController < ApplicationController
 
   def index
 
-    user_num=User.user_created_days_ago(7)
 
-    order_num=Order.order_created_days_ago(7)
+    @last7={ "New Users" => User.user_created_days_ago(7),
+              "Orders"=>Order.order_created_days_ago(7),
+              "New Products" => Product.product_created_days_ago(7),
+              "Revenue" => Order.total(7)}
 
-    prod_num=Product.product_created_days_ago(7)
 
-    tot_revenue = 7#Order.total(7)
-    @table_data={"New Users" => user_num, "Orders"=>order_num, "New Products" => prod_num, "Revenue" => tot_revenue}
+    @last30={ "New Users" => User.user_created_days_ago(30),
+              "Orders"=>Order.order_created_days_ago(30),
+              "New Products" => Product.product_created_days_ago(30),
+              "Revenue" => Order.total(30)}
+
+    @total={ "Users" => User.all,
+              "Orders"=>Order.all,
+              "Products" => Product.all,
+              "Revenue" => Order.all}
 
   end
 

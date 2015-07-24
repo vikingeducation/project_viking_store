@@ -3,8 +3,22 @@
 <div class='col-md-6 col-sm-12'>
 
   <h2>1. Overall Platform</h2>
-
   <%= render partial: "sampletable", :locals => {:table_data => @table_data, :title => "Last 7 days"} %>
 
 
+
+  <%= render partial: 'sampletable', :locals => {:table_data => @last30, :title => "Last 30 Days"} %>
+  <%=render partial: 'sampletable', :locals => {:table_data => @total, :title => "Total"} %>
 </div>
+
+<!-- <div class='col-md-6 col-sm-12'>
+
+  <h2>2. User Demographiics and Behavior</h2>
+
+  <%= partial: '_sampletable', :locals => {:table_data => @last7, :title => title} %>
+
+  <%= partial: '_sampletable', :locals => {:table_data => @last30, :title => title} %>
+  <%= partial: '_sampletable', :locals => {:table_data => @total, :title => title} %>
+
+</div> -->
+
