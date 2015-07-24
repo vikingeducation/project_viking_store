@@ -22,7 +22,7 @@ def self.best(input=nil)
   table = revenue_table(input).select(:order_id, :quantity, :product_id, :price)
   revenue = table.select("round(MAX(quantity * price), 2) AS max, orders.user_id AS user")
   users = revenue.joins("JOIN users ON user_id = users.id").select("users.first_name, users.last_name")
-  [revenue.first[:max], "#{users.first[:first_name]} #{users.first[:last_name]}"] 
+  [revenue.first[:max], "#{users.first[:first_name]} #{users.first[:last_name]}"]
 end
 
 def self.lifetime_value(input=nil)
