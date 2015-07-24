@@ -7,5 +7,5 @@ class DashboardController < ApplicationController
     @demographics = User.get_demographics
 
     @superlatives = User.get_superlatives
-    end
+  end
 end
