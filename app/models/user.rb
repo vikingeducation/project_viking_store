@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
           .group("states.name")
           .order("num_of_users DESC")
           .limit(num)
-    else
+    elsif scope == 'city'
       User.select("COUNT(*) AS num_of_users, cities.name")
           .joins("JOIN addresses ON users.billing_id=addresses.id")
           .joins("JOIN cities ON addresses.city_id=cities.id")
@@ -38,26 +38,21 @@ class User < ActiveRecord::Base
     # Returns highest order if "single", returns total revenue from user if "total"
     # Returns highest average order value for user if "average"
     if scope == 'single'
-      User.select("ROUND(SUM(quantity * products.price), 2) AS total, (users.first_name||' '||users.last_name) AS user_name")
-          .joins("JOIN orders ON orders.user_id=users.id")
-          .joins("JOIN order_contents ON order_contents.order_id=orders.id")
-          .joins("JOIN products ON order_contents.product_id=products.id")
-          .where("checkout_date IS NOT NULL")
-          .group("users.id, orders.id")
-          .order("total DESC")
-          .first
+      group_by = "users.id, orders.id"
     elsif scope == 'total'
-      User.select("ROUND(SUM(quantity * products.price), 2) AS total, (users.first_name||' '||users.last_name) AS user_name")
-          .joins("JOIN orders ON orders.user_id=users.id")
-          .joins("JOIN order_contents ON order_contents.order_id=orders.id")
-          .joins("JOIN products ON order_contents.product_id=products.id")
-          .where("checkout_date IS NOT NULL")
-          .group("users.id")
-          .order("total DESC")
-          .first
+      group_by = "users.id"
     else
       raise ArgumentError.new("Invalid Input")
     end
+
+    User.select("ROUND(SUM(quantity * products.price), 2) AS total, (users.first_name||' '||users.last_name) AS user_name")
+        .joins("JOIN orders ON orders.user_id=users.id")
+        .joins("JOIN order_contents ON order_contents.order_id=orders.id")
+        .joins("JOIN products ON order_contents.product_id=products.id")
+        .where("checkout_date IS NOT NULL")
+        .group(group_by)
+        .order("total DESC")
+        .first
   end
 
 
