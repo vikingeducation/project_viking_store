@@ -1,6 +1,14 @@
-<% @results.each do |key, value| %>
+<% @overall.each do |key, value| %>
 	<h1> <%= key %> </h1>
 	<% value.each do |val| %>
 		<li> <%= val %> </li>
 	<% end %>
+<% end %>
+
+<% @demographics.each do |key, value| %>
+
+  <h1> <%= key %> </h1>
+  <% value.each do |pairs| %>
+    <%= pairs[0], pairs[1] %>
+  <% end %>
 <% end %>
