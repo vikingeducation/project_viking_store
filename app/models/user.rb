@@ -23,7 +23,21 @@ class User < ActiveRecord::Base
   end
 
   def self.high_single_order_value
-    self.select('users.first_name, SUM(products.price * order_contents.quantity) as cost').joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').group('orders.id').order('cost DESC').limit(1)
+    self.select('users.first_name, users.last_name, SUM(products.price * order_contents.quantity) as cost').
+    joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
+    group('orders.id').order('cost DESC').limit(1)
+  end
+
+  def self.high_lifetime_value
+    self.select('users.first_name, users.last_name, SUM(products.price * order_contents.quantity) as cost').
+    joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
+    group('users.id').order('cost DESC').limit(1)
+  end
+
+  def self.high_average_value
+    self.select('users.first_name, users.last_name, SUM(products.price * order_contents.quantity)/(COUNT(orders.id)  - 1) as cost').
+    joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
+    group('users.id').order('cost DESC').limit(100)
   end
 
 
