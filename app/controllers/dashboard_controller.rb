@@ -25,6 +25,9 @@ class DashboardController < ApplicationController
 
     @cities_names = top_cities_states[2]
     @cities_data = top_cities_states[3]
+
+    @highest_single_order_value = User.highest_order_value
+    @highest_lifetime_value = User.highest_lifetime_value
   end
 
   def top_cities_states

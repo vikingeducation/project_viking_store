@@ -113,24 +113,6 @@
             </tbody>
           </table>
           
-      <!--  <%   data = {
-    labels: @states_names,
-
-    datasets: [
-        {
-            label: "top_three_states",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: @states_data
-        },
-    ]
-}
-options = {} %>
-<%= line_chart data, options %> -->
 
          <h2>Top 3 Cities Users Live In (billing)</h2>
           <table class="table table-striped table-bordered">
@@ -167,7 +149,34 @@ options = {} %>
               <% end %>
              
             </tbody>
-          </table>  
+          </table> 
+          <h2>Top User With...</h2>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>User</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @highest_single_order_value.each do |item| %>
+              <tr>
+                <td>Highest Single Order Value</td>
+                <td><%= item.first_name %> <%= item.last_name %></td>
+                <td><%= item.sum %></td>
+              </tr>
+              <% end %>
+              <% @highest_lifetime_value.each do |item| %>
+                <tr>
+                  <td>Highest Lifetime Value</td>
+                  <td><%= item.first_name %> <%= item.last_name %></td>
+                  <td><%= item.sum %></td>
+                </tr>
+              <% end %>
+             
+            </tbody>
+          </table> 
         </div>
 
 
