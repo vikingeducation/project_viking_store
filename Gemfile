@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+gem 'hirb'
+ # gem 'jazz_hands'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
 gem 'hirb'
@@ -28,7 +29,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',  '~> 1.3.6',      group: :development
 
 gem 'pry'
-
+# gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
 gem 'faker'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

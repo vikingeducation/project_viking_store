@@ -3,7 +3,8 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-body">A basic Panel
-          <table class="table table-striped">
+          <h2>Last 7 Days</h2>
+          <table class="table table-striped table-bordered">
             <thead>
               <tr>
                 <th>Item</th>
@@ -12,8 +13,8 @@
             </thead>
             <tbody>
               <tr>
-                <td>New </td>
-                <td>100</td>
+                <td>New Users  </td>
+                 <td>100</td>
               </tr>
               <tr>
                 <td>orders </td>
@@ -23,8 +24,67 @@
                 <td>products </td>
                 <td>50</td>
               </tr>
+              <tr>
+                <td>Revenue </td>
+                <td>50</td>
+              </tr>
             </tbody>
           </table>
+          <h2>Last 30 Days</h2>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>New Users  </td>
+                 <td>100</td>
+              </tr>
+              <tr>
+                <td>orders </td>
+                <td>75</td>
+              </tr>
+              <tr>
+                <td>products </td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Revenue </td>
+                <td>50</td>
+              </tr>
+            </tbody>
+          </table>
+          <h2>Total</h2>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>New Users  </td>
+                 <td><%= @users.count %></td>
+              </tr>
+              <tr>
+                <td>orders </td>
+                <td><%= @orders.count %></td>
+              </tr>
+              <tr>
+                <td>products </td>
+                <td><%= @products.count %></td>
+              </tr>
+              <tr>
+                <td>Revenue </td>
+                <td><%= @revenue %></td>
+              </tr>
+            </tbody>
+          </table>
+
         </div>
 
       </div>
