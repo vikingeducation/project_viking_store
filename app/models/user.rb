@@ -12,10 +12,10 @@ class User < ActiveRecord::Base
     overall = {'Last 7 Days' => 7, 'Last 30 Days' => 30, 'Total' => nil}
     overall.each do |key, limit|
       result = []
-      result << User.in_last(limit)
-      result << Order.in_last(limit)
-      result << Product.in_last(limit)
-      result << Order.revenue_in_last(limit)
+      result << ["New Users", self.in_last(limit)]
+      result << ["Orders", Order.in_last(limit)]
+      result << ["New Products", Product.in_last(limit)]
+      result << ["Revenue", Order.revenue_in_last(limit)]
       overall[key] = result
     end
     overall

@@ -23,32 +23,44 @@
         </tr>
           <% value.each do |val| %>
         <tr>
-          <td></td>
-          <td> <%= val %> </td>
+          <td> <%= val[0] %> </td>
+          <td> <%= val[1] %> </td>
         </tr>
           <% end %>
 
       </table>
+      <br>
     <% end %>
   </div>
 
   <div class = "col-sm-6">
 
     <div class = "row">
-      <div class = "col-sm-6 col-sm-offset-3">
+      <div class = "col-sm-12">
         <h3>1. User Demographics and Behavior</h3>
       </div>
     </div>
 
     <% @demographics.each do |key, value| %>
 
-      <h3> <%= key %> </h3>
+      <h4> <%= key %> </h4>
+      <table class="table table-hover">
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
       <% value.each do |pairs| %>
-        <li><%= pairs[0] %> : <%= pairs[1] %></li>
+        <tr>
+          <td> <%= pairs[0] %> </td>
+          <td> <%= pairs[1] %> </td>
+        </tr>
       <% end %>
+      </table>
+      <br>
     <% end %>
 
-    <h3> Top User with... </h3>
+    <h4> Top User with... </h4>
+    
     <% @superlatives.each do |key, values| %>
       <li> <%= key %>
         <%= values[0] %> : <%= values[1] %>
