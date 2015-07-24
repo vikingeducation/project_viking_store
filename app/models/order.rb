@@ -5,15 +5,10 @@ def self.new_orders(input_day)
 end
 
 def self.revenue_table(input)
-
 	# if input is given:
-  table = self.where("checkout_date > ?", input.days.ago)
-              .joins("JOIN order_contents ON orders.id = order_contents.order_id")
-              .joins("JOIN products ON products.id = order_contents.product_id") if input
+  table = self.where("checkout_date > ?", input.days.ago).joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON products.id = order_contents.product_id") if input
   # if no input, get all orders with checkout date
-  table = self.where("checkout_date IS NOT NULL")
-              .joins("JOIN order_contents ON orders.id = order_contents.order_id")
-              .joins("JOIN products ON products.id = order_contents.product_id") unless input
+  table = self.where("checkout_date IS NOT NULL").joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON products.id = order_contents.product_id") unless input
   return table.select(:order_id, :quantity, :product_id, :price)
 end
 
@@ -23,11 +18,11 @@ def self.revenue(input=nil)
 	revenue.first[:sum]
 end
 
-def self.best(input=nil)
+def self.highest_single_order(input=nil)
   table = revenue_table(input)
-  revenue = table.select("round(MAX(quantity * price), 2) AS max, orders.user_id AS user")
-  users = revenue.joins("JOIN users ON user_id = users.id").select("users.first_name, users.last_name")
-  [revenue.first[:max], "#{users.first[:first_name]} #{users.first[:last_name]}"]
+  revenue_table = table.select("round(SUM(quantity * price), 2) AS sum").group(:order_id).order("sum desc")
+  users_revenue = revenue_table.joins("JOIN users ON user_id = users.id").select("users.first_name, users.last_name")
+  [revenue_table.first[:sum], "#{users_revenue.first[:first_name]} #{users_revenue.first[:last_name]}"]
 end
 
 def self.lifetime_value(input=nil)

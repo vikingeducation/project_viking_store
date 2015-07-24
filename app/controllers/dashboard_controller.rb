@@ -16,7 +16,7 @@ class DashboardController < ApplicationController
     @states = State.get_top_states
     @cities = City.get_top_cities
 
-    @best_order = Order.best
+    @highest_single_order = Order.highest_single_order
 
     @lifetime_value = Order.lifetime_value
 
