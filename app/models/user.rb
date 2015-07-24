@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
 
   def self.get_top_states
    	result = []
-   	table = Order.joins("JOIN addresses ON orders.billing_id = addresses.id")
-   	top_states = table.select("addresses.state_id, count(*) AS users").group("addresses.state_id").order("users desc").limit(3)
+   	top_states = user_address_table.select("addresses.state_id, count(*) AS users").group("addresses.state_id").order("users desc").limit(3)
    	table = top_states.joins("JOIN states ON state_id = states.id")
    	table.select("states.name")
    	result = [
@@ -17,15 +16,13 @@ class User < ActiveRecord::Base
    			]
   end
 
-  def order_address_table
-  	table = Order.joins("JOIN addresses ON orders.billing_id = addresses.id")
-  	return table
+  def self.user_address_table
+  	User.joins("JOIN addresses ON users.billing_id = addresses.id")
   end
 
   def self.get_top_cities
     result = []
-    table = order.joins("JOIN addresses ON orders.billing_id = addresses.id")
-    top_cities = table.select("addresses.city_id, count(*) AS users").group("addresses.city_id").order("users desc").limit(3)
+    top_cities = user_address_table.select("addresses.city_id, count(*) AS users").group("addresses.city_id").order("users desc").limit(3)
     table = top_cities.joins("JOIN cities ON city_id = cities.id")
     table.select("cities.name")
     result = [
