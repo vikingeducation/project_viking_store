@@ -9,5 +9,7 @@ class DashboardController < ApplicationController
     @superlatives = User.get_superlatives
 
     @statistics = Order.get_statistics
+
+    @days_series = Order.time_series_day
   end
 end

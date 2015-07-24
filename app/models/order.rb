@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
 
   def self.time_series_day(days=7)
-    self.select("date_trunc('day', orders.checkout_date) AS day").
+    self.select("date_trunc('day', orders.checkout_date) AS day, count(orders.id), SUM(order_contents.quantity * products.price)").
     joins('JOIN order_contents ON orders.id = order_contents.order_id').
     joins('JOIN products ON products.id = order_contents.product_id').
     where('orders.checkout_date >= ? AND orders.checkout_date < ?',
@@ -42,17 +42,15 @@ class Order < ActiveRecord::Base
 
   def self.average_in_last(days = nil)
     unless days.nil?
-      self.select('SUM(products.price * order_contents.quantity)/(COUNT(DISTINCT orders.id)) as average_order').
+      self.select('(SUM(products.price * order_contents.quantity)/COUNT(DISTINCT orders.id)) as average_order').
       joins('JOIN order_contents ON order_contents.order_id = orders.id').
       joins('JOIN products ON order_contents.product_id = products.id').
-      where('orders.checkout_date > ?', DateTime.now - days).
-      group('orders.id').first.average_order
+      where('orders.checkout_date > ?', DateTime.now - days).order('1').first.average_order
     else
-      self.select('SUM(products.price * order_contents.quantity)/(COUNT(DISTINCT orders.id)) as average_order').
+      self.select('(SUM(products.price * order_contents.quantity)/COUNT(DISTINCT orders.id)) as average_order').
       joins('JOIN order_contents ON order_contents.order_id = orders.id').
       joins('JOIN products ON order_contents.product_id = products.id').
-      where('orders.checkout_date IS NOT NULL').
-      group('orders.id').first.average_order
+      where('orders.checkout_date IS NOT NULL').order('1').first.average_order
     end
   end
 
