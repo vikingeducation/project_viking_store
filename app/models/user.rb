@@ -48,12 +48,21 @@ class User < ActiveRecord::Base
 
     name = User.joins("JOIN orders ON users.id = orders.user_id") \
         .select("CONCAT(first_name, ' ', last_name)") \
-        .where("orders.id = 226")
+        .where("orders.id = result.first.order_id")
 
     [name, result.first.cost]
   end
 
   def highest_rev_tot
+    result = self.joins("JOIN orders ON users.id = orders.user_id") \
+        .joins("JOIN order_contents ON orders.id = order_contents.order_id") \
+        .joins("JOIN products ON order_contents.product_id = products.id") \
+        .select("SUM(price * quantity) AS cost, user_id") \
+        .group(:user_id).order("cost DESC").limit(1)
+
+      name = User.find(result.first.user_id)
+
+    [name, result.first.cost]
 
   end
 
