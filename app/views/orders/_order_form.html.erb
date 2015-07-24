@@ -76,14 +76,7 @@
 
     <!-- ORDER STATUS -->
     <%= render :partial => 'order_form_status',
-          :locals => {
-                      :f => f,
-                      :order => @order,
-                      :user => @user,
-                      :available_addresses => @available_addresses,
-                      :available_cards => @available_cards,
-                      :button_label => 'Update Order Information'
-                     } %>
+          :locals => { :status => status } if status %>
 
 
 
@@ -151,14 +144,11 @@
 
       </div>
 
-      <div class='row'>
-        <div class='col-xs-8 col-xs-offset-2'>
-          <p class='text-center text-muted'><em>
-            You can add products on the next screen,<br>
-            once it's been created.
-        </em></p>
-        </div>
-      </div>
+
+      <%= render 'order_add_products_warning' if order.id.nil? %>
+
+      <%= render :partial => 'order_delete_link',
+            :locals => { :order_id => order.id } unless order.id.nil? %>
 
 
       </div>

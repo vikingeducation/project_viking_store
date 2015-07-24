@@ -54,27 +54,35 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    @status = @order.define_status
     @user = User.find(@order.user_id)
     @available_addresses = @user.created_addresses
     @available_cards = @user.credit_cards.all
+
+    @order_contents = @order.build_contents_table_data
   end
 
 
-=begin
   def update
-    @user = User.find(params[:id])
+    @order = Order.find(params[:id])
 
-    if @user.update(user_params)
-      flash[:success] = "User successfully updated!"
-      redirect_to users_path
+    params[:order][:checkout_date] = @order.update_checkout_date(params[:status])
+
+    if @order.update(order_params)
+      flash[:success] = "Order successfully updated!"
+      redirect_to @order
     else
-      flash.now[:danger] = "User not saved - please try again."
+      flash.now[:danger] = "Order not saved - please try again."
+      @status = @order.define_status
+      @user = User.find(@order.user_id)
       @available_addresses = @user.created_addresses
+      @available_cards = @user.credit_cards.all
       render :edit
     end
   end
 
 
+=begin
   def destroy
     @user = User.find(params[:id])
 
@@ -94,7 +102,7 @@ class OrdersController < ApplicationController
 
 
   def order_params
-    params.require(:order).permit(:shipping_id, :billing_id, :billing_card_id, :user_id)
+    params.require(:order).permit(:checkout_date, :shipping_id, :billing_id, :billing_card_id, :user_id)
   end
 
 end

@@ -5,17 +5,17 @@
       <div class='row'>
 
         <div class='col-xs-12'>
-          <%= f.label :checkout_date, 'Order Status:' %>
+          <h4><strong>Order Status:</strong></h4>
         </div>
 
         <div class='col-xs-12'>
-          <%= f.label :checkout_date, "PLACED", :class => "text-success" %>
-          <%= f.radio_button :checkout_date, DateTime.now %>
+          <%= label_tag 'status', "PLACED", :class => "text-success" %>
+          <%= radio_button_tag 'status', "PLACED", status=='PLACED' %>
         </div>
 
         <div class='col-xs-12'>
-          <%= f.label :checkout_date, "UNPLACED", :class => "text-danger" %>
-          <%= f.radio_button :checkout_date, nil %>
+          <%= label_tag 'status', "UNPLACED", :class => "text-danger" %>
+          <%= radio_button_tag 'status', "UNPLACED", status=='UNPLACED' %>
         </div>
 
       </div>

@@ -11,16 +11,35 @@
   </div>
 
 
+<!-- BASIC INFO FORM -->
   <div class='row'>
     <div class='col-xs-12'>
 
       <%= render :partial => 'order_form',
             :locals => {
                         :order => @order,
+                        :status => @status,
                         :user => @user,
                         :available_addresses => @available_addresses,
                         :available_cards => @available_cards,
                         :button_label => 'Update Order Information'
+                       },
+            :layout => 'layouts/shared/show_panel' %>
+
+    </div>
+  </div>
+
+
+
+<!-- ORDER CONTENTS -->
+  <div class='row'>
+    <div class='col-xs-12'>
+
+      <%= render :partial => 'edit_order_contents',
+            :locals => {
+                        :order => @order,
+                        :order_contents => @order_contents,
+                        :button_label => 'Update Order Contents'
                        },
             :layout => 'layouts/shared/show_panel' %>
 

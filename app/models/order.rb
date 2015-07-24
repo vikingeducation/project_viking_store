@@ -72,6 +72,15 @@ class Order < ActiveRecord::Base
   end
 
 
+  def update_checkout_date(new_status)
+    if new_status == "PLACED" && self.checkout_date.nil?
+      DateTime.now
+    elsif new_status =="UNPLACED"
+      nil
+    end
+  end
+
+
 
 
 # Dashboard methods
