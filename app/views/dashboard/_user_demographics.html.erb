@@ -1,0 +1,70 @@
+<div class= "col-sm-5 col-sm-offset-1">
+<h2>User Demographics</h2>
+<h3>Top 3 States Users Live In (Billing)</h3>
+<table class="table table-striped">
+  <tr>
+    <td> <strong>States</strong></td>
+    <td><strong>Number of Users</strong></td>
+  </tr>
+    <tr>
+    <td> <%= @states[0][0] %> </td>
+    <td><%= @states[0][1] %></td>
+  </tr>
+  <tr>
+    <td><%= @states[1][0] %></td>
+    <td><%= @states[1][1] %></td>
+  </tr>
+    <td><%= @states[2][0] %></td>
+    <td><%= @states[2][1] %></td>
+  </tr>
+</table>
+
+<h3>Top 3 Cities Users Live In (Billing)</h3>
+<table class="table table-striped">
+  <tr>
+    <td> <strong>Cities</strong></td>
+    <td><strong>Number of Users</strong></td>
+  </tr>
+    <tr>
+    <td> <%= @cities[0][0] %> </td>
+    <td><%= @cities[0][1] %></td>
+  </tr>
+  <tr>
+    <td><%= @cities[1][0] %></td>
+    <td><%= @cities[1][1] %></td>
+  </tr>
+    <td><%= @cities[2][0] %></td>
+    <td><%= @cities[2][1] %></td>
+  </tr>
+</table>
+
+<h3>Top Users With... </h3>
+<table class="table table-striped">
+  <tr>
+    <td><b>Users</td>
+    <td><b>User</td>
+    <td><b>Quantity</td>
+
+  </tr>
+  <tr>
+    <td>Highest Single Order Value</td>
+    <td><%=@highest_single_order[1]%></td>
+    <td><%= @highest_single_order[0]%></td>
+  </tr>
+  <tr>
+    <td>Highest Lifetime Value</td>
+    <td><%= @lifetime_value[1] %></td>
+    <td><%= @lifetime_value[0] %></td>
+  </tr>
+  <tr>
+    <td>Highest Average Order Value</td>
+    <td><%= @avg_value[1] %></td>
+    <td><%= @avg_value[0] %></td>
+  </tr>
+  <tr>
+    <td>Most Orders Placed</td>
+    <td><%= @most_orders[1] %></td>
+    <td><%= @most_orders[0] %></td>
+  </tr>
+</table>
+</div>
