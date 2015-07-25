@@ -7,16 +7,18 @@
 
 <div class = "row">
   <div class = "col-sm-6">
-
+    <div class="panel panel-default">
+  <div class="panel-heading">Overall Platform</div>
+  <div class="panel-body">
     <div class = "row">
       <div class = "col-sm-6 col-sm-offset-3">
-        <h3>1. Overall Platform</h3>
+        
       </div>
     </div>
 
     <% @overall.each do |key, value| %>
       <h4> <%= key %> </h4>
-      <table class="table table-hover">
+      <table class="table table-bordered table-hover">
         <tr>
           <th>Item</th>
           <th>Data</th>
@@ -32,7 +34,8 @@
       <br>
     <% end %>
   </div>
-
+</div>
+</div>
   <div class = "col-sm-6">
 
     <div class = "row">

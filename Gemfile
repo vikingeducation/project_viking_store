@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+
+gem "twitter-bootstrap-rails"
 gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
