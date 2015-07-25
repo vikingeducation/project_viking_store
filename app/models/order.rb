@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.top_state_orders
-    Order.find_by_sql("select count(*) as counter,states.name  FROM orders JOIN addresses on orders.billing_id = addresses.id Join  states on states.id = addresses.state_id where checkout_date NOTNULL group by state_id ORDER BY counter DESC limit 3")
+    Order.select("count(*) as counter, states.name").joins("JOIN addresses on orders.billing_id = addresses.id").joins("Join  states on states.id = addresses.state_id").where("checkout_date NOTNULL").group("state_id").order("counter DESC").limit("3")
   end
 
   def self.top_city_orders
