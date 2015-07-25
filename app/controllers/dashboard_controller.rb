@@ -10,7 +10,7 @@ class DashboardController < ApplicationController
 
     @statistics = Order.get_statistics
 
-    @days_series = Order.time_series_day
+    @days_series = get_filled_table(Order.time_series_day)
 
     @weeks_series = Order.time_series_week
   end
@@ -18,11 +18,24 @@ class DashboardController < ApplicationController
   def get_filled_table(table)
     results = []
     table.each do |row|
-      results << row.date.to_date
+      row_hash = {}
+      row_hash[:date] = row.day.to_date
+      row_hash[:count] = row.count
+      row_hash[:sum] = row.sum
+      results << row_hash
     end
-    dates_range = ((DateTime.now - 7).to_date..(DateTime.now).to_date)
+
+    dates_range = ((DateTime.now - 6).to_date..(DateTime.now).to_date)
     dates_range.each do |date|
-      unless results.include?(date)
-        
+      unless results.any?{|val| val.values.include?(date)}
+        row_hash = {}
+        row_hash[:date] = date
+        row_hash[:count] = 0
+        row_hash[:sum] = 0
+        results << row_hash
+      end
+    end
+    results = results.sort_by {|k| k[:date]}
+    results.reverse
   end
 end

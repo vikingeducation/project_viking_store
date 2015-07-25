@@ -117,6 +117,7 @@
       </div>
     </div>
 
+    <h4> Last 7 days</h4>
     <table class="table table-hover">
       <tr>
         <th>Item</th>
@@ -125,15 +126,16 @@
       </tr>
     <% @days_series.each do |row| %>
       <tr>
-        <td> <%= row.day %> </td>
-        <td> <%= row.count %> </td>
-        <td> <%= number_to_currency(row.sum) %> </td>
+        <td> <%= row[:date] %> </td>
+        <td> <%= row[:count] %> </td>
+        <td> <%= number_to_currency(row[:sum]) %> </td>
       </tr>
     <% end %>
 
     </table>
     <br>
 
+    <h4> Last 7 weeks</h4>
     <table class="table table-hover">
         <tr>
           <th>Item</th>
@@ -142,7 +144,7 @@
         </tr>
       <% @weeks_series.each do |row| %>
         <tr>
-          <td> <%= row.day %> </td>
+          <td> <%= row.week.to_date %> </td>
           <td> <%= row.count %> </td>
           <td> <%= number_to_currency(row.sum) %> </td>
         </tr>
