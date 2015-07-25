@@ -39,13 +39,24 @@
   <body>
 	<div class="container">
 
-	  <%= yield %>
+    <%= flash.messages.each do %>
+      <%=  %>
 
-      <footer>
-        <p>&copy; Company 2015</p>
-      </footer>
+    <div class="row">
 
-    </div> <!-- /container -->
+      <%= render partial: 'shared/navbar' %>
+
+      <div class="col-xs-9">
+        <%= yield %>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>&copy; Company 2015</p>
+    </footer>
+
+  </div> <!-- /container -->
 
   </body>
 </html>
