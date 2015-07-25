@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :adminpanel, only: [:index, :new, :create]
   resources :users, only: [:index, :new, :create]
+  resources :categories, only: [:show, :edit, :delete]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
