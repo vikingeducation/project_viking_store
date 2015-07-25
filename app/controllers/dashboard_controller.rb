@@ -1,60 +1,41 @@
 class DashboardController < ApplicationController
 
   def index
-    @users = User.all
-    @orders = Order.all
-    @products = Product.all
+    # Assign arrays to the hash based on the starting values for the hash.
+    @overall = User.get_overall
 
-    @revenue_last_30 = Order.revenue_ago(30).first.price
-    @revenue_last_7 = Order.revenue_ago(7).first.price
-    @revenue = Order.revenue.first.price
+    @demographics = User.get_demographics
 
-    @users_last_30 = User.count_last_30
-    @users_last_7 = User.count_last_7
+    @superlatives = User.get_superlatives
 
-    @orders_count_last_30 = Order.count_last(30)
-    @orders_count_last_7 = Order.count_last(7)
+    @statistics = Order.get_statistics
 
-    @products_count_last_30 = Product.count_last(30)
-    @products_count_last_7 = Product.count_last(7)
+    @days_series = get_filled_table(Order.time_series_day)
 
-    @top_three_states = Order.top_state_orders 
-    @top_three_cities = Order.top_city_orders
-    @states_names = top_cities_states[0]
-    @states_data = top_cities_states[1]
-
-    @cities_names = top_cities_states[2]
-    @cities_data = top_cities_states[3]
-
-    @highest_single_order_value = User.highest_order_value
-    @highest_lifetime_value = User.highest_lifetime_value
-    @highest_avg_value = User.highest_avg_value
-    @most_orders_placed = User.most_orders_placed
-
-    @avg_order_value = Order.avg_order_value.first.avg
-    @avg_order_value_last_30 = Order.avg_order_value_ago(30).first.avg
-    @avg_order_value_last_7 = Order.avg_order_value_ago(7).first.avg
-
-    @largest_order_value_last_30 = Order.largest_order_value_ago(30).first.sum
-    @largest_order_value_last_7 = Order.largest_order_value_ago(7).first.sum
+    @weeks_series = Order.time_series_week
   end
 
-  def top_cities_states
-    state_arr = []
-    city_arr = []
-    state_data = []
-    city_data = []
-      @top_three_states.each do |state|
-         state_arr <<  "#{state.name}" 
-         state_data << "#{state.counter}"
-      end 
-      state_data << 0
-    @top_three_cities.each do |city| 
-        city_arr <<  "#{city.name}"
-        city_data << "#{city.counter}"
-     end 
-    [state_arr,state_data, city_arr, city_data]
+  def get_filled_table(table)
+    results = []
+    table.each do |row|
+      row_hash = {}
+      row_hash[:date] = row.day.to_date
+      row_hash[:count] = row.count
+      row_hash[:sum] = row.sum
+      results << row_hash
+    end
+
+    dates_range = ((DateTime.now - 6).to_date..(DateTime.now).to_date)
+    dates_range.each do |date|
+      unless results.any?{|val| val.values.include?(date)}
+        row_hash = {}
+        row_hash[:date] = date
+        row_hash[:count] = 0
+        row_hash[:sum] = 0
+        results << row_hash
+      end
+    end
+    results = results.sort_by {|k| k[:date]}
+    results.reverse
   end
 end
-
-

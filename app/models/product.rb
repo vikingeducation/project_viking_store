@@ -1,6 +1,11 @@
 class Product < ActiveRecord::Base
 
-  def self.count_last(num_days_ago)
-    Product.where("updated_at > ?", num_days_ago.days.ago).count
+  def self.in_last(days=nil)
+    if days.nil?
+      self.count
+    else
+      self.where('created_at > ?', DateTime.now - days).count
+    end
   end
+
 end

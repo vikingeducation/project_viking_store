@@ -1,46 +1,103 @@
 class Order < ActiveRecord::Base
 
-  def self.revenue
-    Order.find_by_sql("SELECT Round(SUM(quantity*price),2) as price from order_contents JOIN products ON products.id = product_id")
+  def self.time_series_day(days=7)
+
+    self.select("date_trunc('day', orders.checkout_date) AS day, count(DISTINCT orders.id), SUM(order_contents.quantity * products.price)").
+    joins('JOIN order_contents ON orders.id = order_contents.order_id').
+    joins('JOIN products ON products.id = order_contents.product_id').
+    where('orders.checkout_date >= ? AND orders.checkout_date < ?',
+      DateTime.now - 7,DateTime.now).
+    group('day').
+    order('day DESC')
   end
 
-   def self.revenue_ago(num_days_ago)
-    Order.find_by_sql("SELECT Round(SUM(price),2) as price from order_contents JOIN products ON products.id = product_id JOIN orders ON order_id = orders.id where orders.checkout_date > DATETIME('now','-#{num_days_ago} days')")
+  def self.time_series_week(weeks=7)
+
+    self.select("date_trunc('week', orders.checkout_date) AS week, count(DISTINCT orders.id), SUM(order_contents.quantity * products.price)").
+    joins('JOIN order_contents ON orders.id = order_contents.order_id').
+    joins('JOIN products ON products.id = order_contents.product_id').
+    where('orders.checkout_date >= ? AND orders.checkout_date < ?',
+      DateTime.now - (7 * weeks), DateTime.now).
+    group('week').
+    order('week DESC')
   end
 
-  def self.count_last(num_days_ago)
-    Order.where("checkout_date > ?", num_days_ago.days.ago).count
+  def self.get_statistics
+    overall = {'Last 7 Days' => 7, 'Last 30 Days' => 30, 'Total' => nil}
+    overall.each do |key, limit|
+      result = []
+      result << ["Number of Orders", self.in_last(limit)]
+      result << ["Total Revenue", self.revenue_in_last(limit)]
+      result << ["Average Order Value", self.average_in_last(limit)]
+      result << ["Largest Order Value", self.largest_in_last(limit)]
+      overall[key] = result
+    end
+    overall
   end
 
-  def self.top_state_orders
-    Order.select("count(*) as counter, states.name").joins("JOIN addresses on orders.billing_id = addresses.id").joins("Join  states on states.id = addresses.state_id").where("checkout_date NOTNULL").group("state_id").order("counter DESC").limit("3")
+  def self.in_last(days=nil)
+    if days.nil?
+      self.count
+    else
+      self.where('checkout_date > ?', DateTime.now - days).count
+    end
   end
 
-  def self.top_city_orders
-    Order.find_by_sql("select count(*) as counter,cities.name  FROM orders JOIN addresses on orders.billing_id = addresses.id Join  cities on cities.id = addresses.city_id where checkout_date NOTNULL group by city_id ORDER BY counter DESC limit 3")
+  def self.revenue_in_last(days=nil)
+    if days.nil?
+      revenue.where('orders.checkout_date IS NOT NULL').first.cost
+    else
+      revenue.where('orders.checkout_date > ?', DateTime.now - days).first.cost
+    end
   end
 
-  def self.avg_order_value
-    Order.find_by_sql("SELECT ROUND(sum(price*quantity)/count(DISTINCT order_id),2) as avg FROM products JOIN order_contents ON
-        products.id = order_contents.product_id  JOIN orders ON order_id = orders.id")
+  def self.average_in_last(days = nil)
+    unless days.nil?
+      self.select('(SUM(products.price * order_contents.quantity)/COUNT(DISTINCT orders.id)) as average_order').
+      joins('JOIN order_contents ON order_contents.order_id = orders.id').
+      joins('JOIN products ON order_contents.product_id = products.id').
+      where('orders.checkout_date > ?', DateTime.now - days).order('1').first.average_order
+    else
+      self.select('(SUM(products.price * order_contents.quantity)/COUNT(DISTINCT orders.id)) as average_order').
+      joins('JOIN order_contents ON order_contents.order_id = orders.id').
+      joins('JOIN products ON order_contents.product_id = products.id').
+      where('orders.checkout_date IS NOT NULL').order('1').first.average_order
+    end
   end
 
-  
-
-  def self.avg_order_value_ago(num_days_ago)
-    Order.find_by_sql("SELECT Round(sum(price*quantity)/count(DISTINCT order_id),2) as avg FROM products JOIN order_contents ON
- products.id = order_contents.product_id  JOIN orders ON order_id = orders.id WHERE checkout_date > DATETIME('now','-#{num_days_ago} days')")
+  def self.largest_in_last(days = nil)
+    unless days.nil?
+      self.get_largest_overall.
+      where('orders.checkout_date > ?', DateTime.now - days).
+      group('orders.id').order('max_order DESC').first.max_order
+    else
+      self.get_largest_overall.
+      where('orders.checkout_date IS NOT NULL').
+      group('orders.id').order('max_order DESC').first.max_order
+    end
   end
 
-
-  def self.largest_order_value_ago(num_days_ago)
-    Order.find_by_sql("SELECT checkout_date, ROUND(sum(price*quantity),2) AS sum, quantity FROM products JOIN order_contents ON products.id=order_contents.product_id JOIN orders ON orders.id = order_contents.order_id GROUP BY order_id HAVING orders.checkout_date >DATETIME('now','-#{num_days_ago} days') ORDER BY sum DESC  LIMIT 1")
+  def self.revenue_in_last(days)
+    self.revenue(days).first.cost
   end
 
+  private
+    def self.get_largest_overall
+      self.select('SUM(products.price * order_contents.quantity) as max_order').
+      joins('JOIN order_contents ON order_contents.order_id = orders.id').
+      joins('JOIN products ON order_contents.product_id = products.id')
+    end
 
-
-  
-
-
-
+    def self.revenue(days=nil)
+      unless days
+      self.select('SUM(products.price * order_contents.quantity) as cost').joins(
+        'JOIN order_contents ON orders.id = order_contents.
+        order_id JOIN products ON order_contents.product_id = products.id').order('cost')
+      else
+        self.select('SUM(products.price * order_contents.quantity) as cost').joins(
+        'JOIN order_contents ON orders.id = order_contents.
+        order_id JOIN products ON order_contents.product_id = products.id').
+        where('orders.checkout_date > ?', DateTime.now - days).order('cost')
+      end
+    end
 end
