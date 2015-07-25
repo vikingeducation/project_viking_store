@@ -54,44 +54,70 @@ class User < ActiveRecord::Base
 
     def self.top_states(limit = 3)
       self.select('states.name, COUNT(addresses.state_id) AS total').
-      joins('JOIN addresses ON users.billing_id = addresses.id JOIN states ON states.id = addresses.state_id').
-      group('states.name').order('COUNT(addresses.state_id) DESC').
+      join_to_states.
+      group('states.name').
+      order('COUNT(addresses.state_id) DESC').
       limit(limit)
     end
 
     def self.top_cities(limit = 3)
       self.select('cities.name, COUNT(addresses.city_id) AS total').
-      joins('JOIN addresses ON users.billing_id = addresses.id JOIN cities ON cities.id = addresses.city_id').
-      group('cities.name').order('COUNT(addresses.city_id) DESC').
+      join_to_cities.
+      group('cities.name').
+      order('COUNT(addresses.city_id) DESC').
       limit(limit)
     end
 
     def self.high_single_order_value
       self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity) as cost').
-      joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
+      join_to_products.
       where("orders.checkout_date IS NOT NULL").
       group('orders.id, full_name').order('cost DESC').limit(1)
     end
 
     def self.high_lifetime_value
       self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity) as cost').
-      joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
+      join_to_products.
       where("orders.checkout_date IS NOT NULL").
       group('users.id, full_name').order('cost DESC').limit(1)
     end
 
     def self.high_average_value
       self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity)/(COUNT(DISTINCT orders.id)) as average_value').
-      joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
+      join_to_products.
       where("orders.checkout_date IS NOT NULL").
       group('users.id, full_name').order('average_value DESC').limit(1)
     end
 
     def self.most_orders
       self.select('users.first_name || users.last_name AS full_name, COUNT(orders.id) as number_of_orders').
-      joins('JOIN orders ON users.id = orders.user_id').
+      join_to_orders.
       where("orders.checkout_date IS NOT NULL").
       group('users.id, full_name').order('number_of_orders DESC').limit(1)
+    end
+
+    def self.join_to_orders
+      self.joins('JOIN orders ON users.id = orders.user_id')
+    end
+
+    def self.join_to_order_contents
+      self.join_to_orders.joins('JOIN order_contents ON order_contents.order_id = orders.id')
+    end
+
+    def self.join_to_products
+      self.join_to_order_contents.joins('JOIN products ON order_contents.product_id = products.id')
+    end
+
+    def self.join_to_addresses
+      self.joins('JOIN addresses ON users.billing_id = addresses.id')
+    end
+
+    def self.join_to_states
+      self.join_to_addresses.joins('JOIN states ON states.id = addresses.state_id')
+    end
+
+    def self.join_to_cities
+      self.join_to_addresses.joins('JOIN cities ON cities.id = addresses.city_id')
     end
 
 
