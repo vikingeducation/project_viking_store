@@ -40,7 +40,8 @@ class Order < ActiveRecord::Base
     # if scope == 'days'
     # t = 7
     Order.select("ROUND(SUM(quantity * products.price), 2) AS total, 
-                  DATE(checkout_date) as d, SUM(quantity) as num_items")
+                  DATE(checkout_date) AS d,
+                  COUNT(DISTINCT orders.id) AS num_items")
        .joins("JOIN order_contents ON order_contents.order_id=orders.id")
        .joins("JOIN products ON order_contents.product_id=products.id")
        .where("checkout_date IS NOT NULL AND checkout_date > ?", 7.days.ago)
@@ -50,7 +51,8 @@ class Order < ActiveRecord::Base
   def self.last_seven_weeks
 
     Order.select("ROUND(SUM(quantity * products.price), 2) AS total, 
-                  ROUND((julianday(current_date) - julianday(checkout_date))/7, 0) AS wk, SUM(quantity) as num_items")
+                  ROUND((julianday(current_date) - julianday(checkout_date))/7, 0) AS wk, 
+                  COUNT(DISTINCT orders.id) AS num_items")
        .joins("JOIN order_contents ON order_contents.order_id=orders.id")
        .joins("JOIN products ON order_contents.product_id=products.id")
        .where("checkout_date IS NOT NULL AND checkout_date > ?", 49.days.ago)

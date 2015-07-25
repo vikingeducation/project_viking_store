@@ -3,7 +3,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-6 bordered">
+	<div class="col-md-5 bordered">
 		<div class="col-xs-12 text-center">
 			<h2>1. Overall Platform</h2>
 		</div>
@@ -110,7 +110,7 @@
 			</table>
 		</div>	
 	</div>
-	<div class="col-md-6 bordered">
+	<div class="col-md-5 bordered">
 		<div class="col-xs-12 text-center">
 			<h2>2. User Demographics and Behavior</h2>
 		</div>
@@ -206,7 +206,7 @@
 
 </div>
 <div class="row">
-	<div class="col-md-6 bordered">
+	<div class="col-md-5 bordered">
 		<div class="col-xs-12 text-center">
 			<h2>3. Order Statistics</h2>
 		</div>
@@ -312,7 +312,7 @@
 			</table>
 		</div>
 	</div>
-	<div class="col-md-6 bordered">
+	<div class="col-md-5 bordered">
 		<div class="col-xs-12 text-center">
 			<h2>4. Time Series Data</h2>
 		</div>
@@ -335,7 +335,7 @@
 				<tr>
 					<td><%= day.d %></td>
 					<td><%= day.num_items %></td>
-					<td><%= day.total %></td>
+					<td>$<%= day.total %></td>
 				</tr>
 				<% end %>
 
@@ -359,11 +359,7 @@
 
 				<% @stats_7_weeks.each do |week| %>
 				<tr>
-					<% if week.wk == 0 %>
-						<td>Last</td>
-					<% else %>
-						<td><%= week.wk %></td>
-						<% end %>
+					<td><%= (DateTime.now-7*week.wk).strftime('%Y-%m-%d') %></td>
 					<td><%= week.num_items %></td>
 					<td>$<%= week.total %></td>
 				</tr>

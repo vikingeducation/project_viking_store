@@ -50,6 +50,8 @@ class AnalyticsController < ApplicationController
     @stats_7_days = Order.last_seven_days
     @stats_7_weeks = Order.last_seven_weeks
 
-
+    def num_orders(days)
+      Order.order_count(days)
+    end
   end
 end
