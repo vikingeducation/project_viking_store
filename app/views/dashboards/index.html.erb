@@ -15,9 +15,22 @@
 <div class='col-md-6 col-sm-12'>
 
   <h3>2. User Demographics and Behaviour</h3>
-  <%= render partial: "sampletable", :locals => {:table_data => @user_3_states, :title => "Top 3 states user live in (billing)", :headers => ["Item","Data"]} %>
-  <%= render partial: "sampletable", :locals => {:table_data => @user_3_cities, :title => "Top 3 cities user live in (billing)", :headers => ["Item","Data"]} %>
-  <%= render partial: "sampletable", :locals => {:table_data => @top_users, :title => "Top user with..", :headers => ["Item","User","Quantity"]} %>
+  <%= render partial: "sampletable", :locals => {:table_data => @user_3_states, :title => "Last 7 Days", :headers => ["Item","Data"]} %>
+  <%= render partial: "sampletable", :locals => {:table_data => @user_3_cities, :title => "Last 30 Days", :headers => ["Item","Data"]} %>
+  <%= render partial: "sampletable", :locals => {:table_data => @top_users, :title => "Total", :headers => ["Item","Data","Quantity"]} %>
 
+</div>
+<br>
+<br>
+<div class='col-md-6 col-sm-12'>
+  <h3>3. Order Statistic</h3>
+  <%= render partial: "sampletable", :locals => {:table_data => @orderlast7, :title => "Last 7 Days", :headers => ["Item","Data"]} %>
+  <%= render partial: "sampletable", :locals => {:table_data => @orderlast30, :title => "Last 30 Days", :headers => ["Date","Quantity"]} %>
+  <%= render partial: "sampletable", :locals => {:table_data => @ordertotal, :title => "Total", :headers => ["Date","Quantity"]} %>
   </div>
 
+<div class='col-md-6 col-sm-12'>
+  <h3>4. Time series data</h3>
+  <%= render partial: "sampletable", :locals => {:table_data => @orders_by_date, :title => "Orders by day", :headers => ["Date","Quantity","Value"]} %>
+  <%= render partial: "sampletable", :locals => {:table_data => @orders_by_week, :title => "Orders by week", :headers => ["Date","Quantity","Value"]} %>
+  </div>
