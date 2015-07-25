@@ -30,8 +30,8 @@ class Order < ActiveRecord::Base
   def self.orders_by_week
     result = {}
     7.times do |i|
-      start_weekday = Time.now - i.day*7
-      result[start_weekday.strftime("%m/%d")] = time_order_summary(start_weekday, 7)
+      start_weekday = Time.now.end_of_day - (i*7).day
+      result[start_weekday.strftime("%m/%d")] = self.time_order_summary(start_weekday, 7)
     end
     result
   end
