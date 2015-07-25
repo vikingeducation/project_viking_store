@@ -1,0 +1,157 @@
+<div class = "row">
+  <div class = "col-sm-6 col-sm-offset-3">
+    <h1>Viking Store Analytics Dashboard</h1>
+  </div>
+</div>
+<hr>
+
+<div class = "row">
+  <div class = "col-sm-6">
+
+    <div class = "row">
+      <div class = "col-sm-6 col-sm-offset-3">
+        <h3>1. Overall Platform</h3>
+      </div>
+    </div>
+
+    <% @overall.each do |key, value| %>
+      <h4> <%= key %> </h4>
+      <table class="table table-hover">
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+          <% value.each do |val| %>
+        <tr>
+          <td> <%= val[0] %> </td>
+          <td> <%= val[1].is_a?(Integer) ? val[1] : number_to_currency(val[1]) %> </td>
+        </tr>
+          <% end %>
+
+      </table>
+      <br>
+    <% end %>
+  </div>
+
+  <div class = "col-sm-6">
+
+    <div class = "row">
+      <div class = "col-sm-12">
+        <h3>1. User Demographics and Behavior</h3>
+      </div>
+    </div>
+
+    <% @demographics.each do |key, value| %>
+
+      <h4> <%= key %> </h4>
+      <table class="table table-hover">
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+      <% value.each do |pairs| %>
+        <tr>
+          <td> <%= pairs[0] %> </td>
+          <td> <%= pairs[1] %> </td>
+        </tr>
+      <% end %>
+      </table>
+      <br>
+    <% end %>
+
+    <h4> Top User with... </h4>
+
+    <table class="table table-hover">
+        <tr>
+          <th>Item</th>
+          <th>User</th>
+          <th>Quantity</th>
+        </tr>
+        <% @superlatives.each do |key, values| %>
+          <tr>
+            <td> <%= key %> </td>
+            <td> <%= values[0] %> </td>
+            <td> <%= values[1].is_a?(Integer) ? values[1] :  number_to_currency(values[1]) %> </td>
+          </tr>
+
+        <% end %>
+      </table>
+  </div>
+</div>
+
+<div class = "row">
+
+  <div class = "col-sm-6">
+
+    <div class = "row">
+      <div class = "col-sm-6 col-sm-offset-3">
+        <h3>3. Order Statistics</h3>
+      </div>
+    </div>
+
+    <% @statistics.each do |key, value| %>
+      <h4> <%= key %> </h4>
+      <table class="table table-hover">
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+          <% value.each do |val| %>
+        <tr>
+          <td> <%= val[0] %> </td>
+          <td> <%= val[1].is_a?(Integer) ? val[1] : number_to_currency(val[1]) %> </td>
+        </tr>
+          <% end %>
+
+      </table>
+      <br>
+    <% end %>
+  </div>
+
+
+  <div class = "col-sm-6">
+
+    <div class = "row">
+      <div class = "col-sm-6 col-sm-offset-3">
+        <h3>4. Time Series</h3>
+      </div>
+    </div>
+
+    <h4> Last 7 days</h4>
+    <table class="table table-hover">
+      <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Revenue</th>
+      </tr>
+    <% @days_series.each do |row| %>
+      <tr>
+        <td> <%= row[:date] %> </td>
+        <td> <%= row[:count] %> </td>
+        <td> <%= number_to_currency(row[:sum]) %> </td>
+      </tr>
+    <% end %>
+
+    </table>
+    <br>
+
+    <h4> Last 7 weeks</h4>
+    <table class="table table-hover">
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Revenue</th>
+        </tr>
+      <% @weeks_series.each do |row| %>
+        <tr>
+          <td> <%= row.week.to_date %> </td>
+          <td> <%= row.count %> </td>
+          <td> <%= number_to_currency(row.sum) %> </td>
+        </tr>
+      <% end %>
+
+      </table>
+      <br>
+  </div>
+</div>
+
