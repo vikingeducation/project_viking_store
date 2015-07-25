@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'dashboard#index'
 
-  get 'dashboard/admin' => 'dashboard#admin'
+  get '/admin' => 'admin#index'
   resources :dashboard, only: :index
   resources :categories
 end

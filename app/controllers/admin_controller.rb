@@ -1,4 +1,5 @@
-class DashboardController < ApplicationController
+class AdminController < ApplicationController
+
 
   def index
     # Assign arrays to the hash based on the starting values for the hash.
