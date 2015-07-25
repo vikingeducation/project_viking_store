@@ -1,10 +1,20 @@
 <ul>
-  <li><%= @category.id %></li>
-  <li><%= @category.name %></li>
-  <li><%= @category.description %></li>
+  <li>Category ID: <%= @category.id %></li>
+  <li>Category Name: <%= @category.name %></li>
+  <li>Category Description: <%= @category.description %></li>
   <li><%= link_to "edit", edit_category_path(@category) %></li>
   <li><%= link_to "delete", category_path(@category), method: :delete %></li>
 </ul>
 <table class="table table-bordered">
-  <%= render partial: "products/product", locals: => {product_list: @products_list} %>
+  <h3>Product List</h3>
+  <tr>
+    <th>Product ID</th>
+    <th>Product Name</th>
+  </tr>
+  <% @product_list.each do |product| %>
+    <tr>
+      <td><%= product.id %></td>
+      <td><%= link_to product.name, "#" %> </td>
+    </tr>
+  <% end %>
 </table>
