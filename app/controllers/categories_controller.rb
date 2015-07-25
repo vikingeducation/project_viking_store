@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(white_listed_cat_params)
     if @category.save
       flash[:success] = "New category created"
-      redirect_to @category
+      redirect_to categories_path
     else
       flash.now[:error] = "Did not create category, try again."
       render :new
@@ -48,4 +48,23 @@ class CategoriesController < ApplicationController
       render :edit
     end
   end
+
+  private
+
+  def white_listed_cat_params
+    params.require(:category).permit(:name, :description)
+  end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+

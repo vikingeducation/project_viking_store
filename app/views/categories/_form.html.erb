@@ -1,5 +1,10 @@
 <%=form_for @category do |f|%>
 
+  <% if @category.persisted? %>
+    <%= "Category ID: #{@category.id}" %>
+  <% else %>
+    <p>N/A</p>
+  <% end %>
 
   <%=f.label :name %>
   <%=f.text_field :name %>
