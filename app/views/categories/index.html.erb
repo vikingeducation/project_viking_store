@@ -1,0 +1,10 @@
+<h1> Categories <h1>
+
+<% @categories.each do |category| %>
+    <div class="category col-md-2">
+		<%= link_to category.name, category %><br>
+		<%= link_to "Edit #{category.name}",edit_category_path(category) %><br>
+		<%= link_to "Delete #{category.name}", category_path(category), method: 'delete' %>
+	</div>
+	<br>
+<% end %>
