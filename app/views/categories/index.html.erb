@@ -1,10 +1,21 @@
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Show</th>
-    |<th>EDit</th>
-    |<th>Delete</th>
-  </tr>
-  <%= render @categories %>
-</table>
+<div class="row">
+  <h3>Viking Store Categories</h3>
+
+  <%= link_to new_category_path do %>
+    <button class="btn btn-primary btn-lg col-xs-8 col-xs-offset-2">Create Category</button>
+  <% end %>
+
+</div>
+
+<div class="row">
+  <table class="table table-bordered">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <%= render @categories %>
+  </table>
+</div>
