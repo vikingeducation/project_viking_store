@@ -32,7 +32,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     if @category.update(white_listed_cat_params)
       flash[:success] = "Category updated."
-      redirect_to @category
+      redirect_to categories_path
     else
       flash.now[:error] = "Did not update category, try again."
       render :edit
