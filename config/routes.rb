@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   get "/dashboard" => "analytics#dashboard"
 
+  get "/admin" => "admins#portal"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
