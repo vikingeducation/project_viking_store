@@ -1,0 +1,8 @@
+<h1> <%= @category.name %> </h1>
+
+<%= @category.description %>
+<%= render partial: "index_return" %>
+
+<% @category.products.each do |product| %>
+	<li> <%= product.name %> </li>
+<% end %>
