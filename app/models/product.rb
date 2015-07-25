@@ -11,4 +11,16 @@ class Product < ActiveRecord::Base
   def category
     Category.find_by(id: self.category_id)
   end
+
+  def times_ordered
+    Product.joins("JOIN order_contents ON products.id = order_contents.product_id").
+    joins("JOIN orders ON orders.id = order_contents.order_id").
+    where("product_id = #{self.id} AND orders.checkout_date IS NOT NULL").count
+  end
+
+  def carts_in
+    Product.joins("JOIN order_contents ON products.id = order_contents.product_id").
+    joins("JOIN orders ON orders.id = order_contents.order_id").
+    where("product_id = #{self.id} AND orders.checkout_date IS NULL").count
+  end
 end

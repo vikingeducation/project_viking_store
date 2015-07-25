@@ -18,3 +18,8 @@
   height:  700px; // Set this height to the appropriate size
   overflow: scroll;
 }
+
+.show-products h3{
+  color: blue;  
+
+} 
