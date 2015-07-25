@@ -1,10 +1,19 @@
-<h1> Categories <h1>
+<h1 class="page-header"> Categories </h1>
 
+<div class="category col-md-12">
+<ul class="list-group">
 <% @categories.each do |category| %>
-    <div class="category col-md-2">
-		<%= link_to category.name, category %><br>
-		<%= link_to "Edit #{category.name}",edit_category_path(category) %><br>
-		<%= link_to "Delete #{category.name}", category_path(category), method: 'delete' %>
-	</div>
-	<br>
+  
+  <li class="list-group-item"> 
+
+		
+		<%= link_to "Edit",edit_category_path(category) ,class: 'btn btn-xs btn-primary'%> 
+		<%= link_to "Delete", category_path(category), method: 'delete', class: 'btn btn-xs btn-danger' %>  
+    <%= link_to category.name, category %>   
+	</li>
+
 <% end %>
+  
+</ul>
+</div>
+<%= link_to 'New Category' , new_category_path, class: 'btn btn-primary' %>
