@@ -1,14 +1,14 @@
-<h1>Dashboard</h1>
+<div class="container">
+	<h1 class="text-center">Viking Store Analytics Dashboard</h1>
+</div>
 
 <div class="container">
 	<div class="row">
-		<h1>Overall Platform</h1>
 		<%= render partial: 'overall_platform' %>
-		<h1>User Demographics</h1>
 		<%= render partial: 'user_demographics' %>
-		<h1>Order Statistics</h1>
+	</div>
+	<div class="row">
 		<%= render partial: 'order_statistics' %>
-		<h1>Time Series Data</h1>
 		<%= render partial: 'time_series_data' %>
 	</div>
 </div>
