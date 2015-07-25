@@ -32,7 +32,7 @@ def self.lifetime_value(start_day=99999999.days.ago, end_day=0.days.ago)
   [revenue_table.first[:sum], "#{users_revenue.first[:first_name]} #{users_revenue.first[:last_name]}"]
 end
 
-def self.avg_value(input=99999999)
+def self.highest_avg_order_value(input=99999999)
 
   table = Order.find_by_sql(["  SELECT first_name, last_name, AVG(total) AS average
                                 FROM(
