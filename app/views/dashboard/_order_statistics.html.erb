@@ -1,0 +1,59 @@
+<h3>Last 7 Days</h3>
+<table class="table">
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= @order_seven %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td><%= @revenue_seven %></td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+    <td><%= @highest_7day_order[0] %></td>
+  </tr>
+  <tr>
+    <td>Largest Order Value</td>
+    <td><%= @highest_7day_order[0] %></td>
+  </tr>
+</table>
+
+<h3>Last 30 Days</h3>
+<table class="table">
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= @order_thirty %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td><%= @revenue_thirty %></td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+    <td><%= @highest_30day_order[0] %></td>
+  </tr>
+  <tr>
+    <td>Largest Order Value</td>
+    <td><%= @highest_30day_order[0] %></td>
+  </tr>
+</table>
+
+<h3>Total</h3>
+<table class="table">
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= @order_total %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td><%= @revenue_total %></td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+    <td><%= @highest_single_order[0] %></td>
+  </tr>
+  <tr>
+    <td>Largest Order Value</td>
+    <td><%= @highest_single_order[0] %></td>
+  </tr>
+</table>

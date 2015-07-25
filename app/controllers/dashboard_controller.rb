@@ -17,10 +17,14 @@ class DashboardController < ApplicationController
     @cities = City.get_top_cities
 
     @highest_single_order = Order.highest_single_order
+    @highest_7day_order = Order.highest_single_order(7)
+    @highest_30day_order = Order.highest_single_order(30)
 
     @lifetime_value = Order.lifetime_value
 
     @avg_value = Order.avg_value
+    @avg_7day_value = Order.avg_value(7)
+    @avg_30day_value = Order.avg_value(30)
 
     @most_orders = Order.most_orders_placed
 
