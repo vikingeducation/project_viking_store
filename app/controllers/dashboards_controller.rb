@@ -20,9 +20,7 @@ class DashboardsController < ApplicationController
               "Revenue" => Order.total(100000).round}
 
     @user_3_states=User.top_3_states
-
     @user_3_cities=User.top_3_cities
-
     @top_users=User.top_user_with
 
     @orders_by_date=Order.orders_by_days

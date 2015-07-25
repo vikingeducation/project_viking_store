@@ -20,8 +20,12 @@
   <%= render partial: "sampletable", :locals => {:table_data => @top_users, :title => "Total", :headers => ["Item","Data","Quantity"]} %>
 
 </div>
-<br>
-<br>
+
+<div class='container'>
+
+</div>
+
+
 <div class='col-md-6 col-sm-12'>
   <h3>3. Order Statistic</h3>
   <%= render partial: "sampletable", :locals => {:table_data => @orderlast7, :title => "Last 7 Days", :headers => ["Item","Data"]} %>
