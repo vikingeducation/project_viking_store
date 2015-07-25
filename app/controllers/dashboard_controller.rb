@@ -3,6 +3,7 @@ class DashboardController < ApplicationController
   	@user_seven = User.new_users(7)
   	@user_thirty = User.new_users(30)
   	@user_total = User.all.count
+    @avg_value = Order.avg_value
   	@order_seven = Order.new_orders(7.days.ago, 0.days.ago)
   	@order_thirty = Order.new_orders(30.days.ago, 0.days.ago)
   	@order_total = Order.all.count

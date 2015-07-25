@@ -32,29 +32,28 @@ def self.lifetime_value(start_day=99999999.days.ago, end_day=0.days.ago)
   [revenue_table.first[:sum], "#{users_revenue.first[:first_name]} #{users_revenue.first[:last_name]}"]
 end
 
-# def self.avg_value(input=99999999)
-
-#   table = Order.find_by_sql(["  SELECT first_name, last_name, AVG(total) AS average
-#                                 FROM(
-#                                 SELECT users.first_name, users.last_name, orders.id, product_id, SUM(quantity * price) AS total, user_id FROM orders
-#                                 JOIN order_contents ON orders.id = order_contents.order_id
-#                                 JOIN products ON products.id = order_contents.product_id
-#                                 JOIN users ON user_id = users.id
-#                                 WHERE orders.checkout_date > ?
-#                                 GROUP BY orders.id
-#                                 ORDER BY user_id
-#                                 )
-#                                 GROUP BY user_id
-#                                 ORDER BY average desc
-#                                 LIMIT 1", input.days.ago])
-
-#   return [table[0][:average], "#{table[0][:first_name]} #{table[0][:last_name]}"]
-
-# end
-
-
 def self.avg_value(input=99999999)
 
+  table = Order.find_by_sql(["  SELECT first_name, last_name, AVG(total) AS average
+                                FROM(
+                                SELECT users.first_name, users.last_name, orders.id, product_id, SUM(quantity * price) AS total, user_id FROM orders
+                                JOIN order_contents ON orders.id = order_contents.order_id
+                                JOIN products ON products.id = order_contents.product_id
+                                JOIN users ON user_id = users.id
+                                WHERE orders.checkout_date > ?
+                                GROUP BY orders.id
+                                ORDER BY user_id
+                                )
+                                GROUP BY user_id
+                                ORDER BY average desc
+                                LIMIT 1", input.days.ago])
+
+  return [table[0][:average], "#{table[0][:first_name]} #{table[0][:last_name]}"]
+
+end
+
+
+def self.avg_value_by_time(input=99999999)
   table = Order.find_by_sql(["
                                 SELECT users.first_name, users.last_name, orders.id, product_id, SUM(quantity * price) AS total, user_id FROM orders
                                 JOIN order_contents ON orders.id = order_contents.order_id
@@ -67,9 +66,6 @@ def self.avg_value(input=99999999)
 
   total = table.inject(0) {|sum, val| sum + val[:total]}
   avg = total/table.length
-
-  return [table[0][:average], "#{table[0][:first_name]} #{table[0][:last_name]}"]
-
 end
 
 def self.most_orders_placed(input=nil)
