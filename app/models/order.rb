@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
     self.revenue(timeframe) / self.order_count(timeframe)
   end
 
-  def self.largest_order_value(timeframe = nil)
+  def self.largest_order_value(timeframe = 100000000000)
 
     Order.select("ROUND(SUM(quantity * products.price), 2) AS total")
          .joins("JOIN order_contents ON order_contents.order_id=orders.id")
