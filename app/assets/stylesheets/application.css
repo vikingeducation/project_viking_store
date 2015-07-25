@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.main-content{
+  height:  700px; // Set this height to the appropriate size
+  overflow: scroll;
+}

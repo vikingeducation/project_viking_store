@@ -38,8 +38,10 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:id])
+    cat_id = params[:id]
+    @category = Category.find(cat_id)
     if @category.destroy
+      deassociate_products(cat_id)
       flash[:success] = "Category #{@category.name} successfully deleted!"
       redirect_to categories_path
     else
@@ -51,5 +53,9 @@ class CategoriesController < ApplicationController
   private
     def whitelist_category_params
       params.require(:category).permit(:name, :description)
+    end
+
+    def deassociate_products(id)
+      Product.where(category_id: id).update_all(category_id: nil)
     end
 end

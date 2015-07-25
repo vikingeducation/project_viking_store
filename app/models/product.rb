@@ -8,4 +8,7 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def category
+    Category.find_by(id: self.category_id)
+  end
 end
