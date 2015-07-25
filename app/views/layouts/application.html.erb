@@ -5,10 +5,27 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!-- Latest compiled and minified CSS -->
+  <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" %>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"%>
 </head>
 <body>
+<div class='container'>
 
-<%= yield %>
+  <div class='row'>
 
+    <h1>
+      Viking Store Analytics Dashboard
+    </h1>
+
+  </div>
+
+  <div>
+    <%= yield %>
+  </div>
+
+</div>
 </body>
 </html>

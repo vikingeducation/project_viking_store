@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'pg'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
 # Sqlite3 for database
@@ -25,6 +25,16 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',  '~> 1.3.3',      group: :development
+
+group :development, :test do
+  # Note: Need to pull this fork directly because
+  # the original uses pry-debugger which doesn't work
+  # with Ruby 2
+  gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
+  gem 'pry-byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
 
 gem 'pry'
 

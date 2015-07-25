@@ -1,0 +1,23 @@
+
+<div>
+<table class="table table-striped">
+  <h4><%=title%></h4>
+  <tr>
+    <%headers.each do |head| %>
+    <td> <%= head %> </td>
+    <% end %>
+  <tr>
+    <% table_data.each do |name, num|%>
+      <tr>
+        <td> <%= name %></td>
+        <% if  num.is_a? Array %>
+          <% num.each do |el| %>
+          <td> <%= el %></td>
+          <% end %>
+        <% else%>
+          <td><%= num %></td>
+        <%end%>
+      <tr>
+      <%end%>
+</table>
+</div>
