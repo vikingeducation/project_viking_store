@@ -23,9 +23,9 @@ class DashboardController < ApplicationController
 
     @lifetime_value = Order.lifetime_value
 
-    @avg_value = Order.avg_value
-    @avg_7day_value = Order.avg_value(7)
-    @avg_30day_value = Order.avg_value(30)
+    @avg_total_value = Order.avg_value_by_time
+    @avg_7day_value = Order.avg_value_by_time(7)
+    @avg_30day_value = Order.avg_value_by_time(30)
 
     @most_orders = Order.most_orders_placed
 

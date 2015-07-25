@@ -52,7 +52,6 @@ def self.avg_value(input=99999999)
 
 end
 
-
 def self.avg_value_by_time(input=99999999)
   table = Order.find_by_sql(["
                                 SELECT users.first_name, users.last_name, orders.id, product_id, SUM(quantity * price) AS total, user_id FROM orders
@@ -66,6 +65,7 @@ def self.avg_value_by_time(input=99999999)
 
   total = table.inject(0) {|sum, val| sum + val[:total]}
   avg = total/table.length
+  return avg.round(2)
 end
 
 def self.most_orders_placed(input=nil)
