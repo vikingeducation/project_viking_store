@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
 
   def self.order_created_days_ago(num_days)
-    self.where("checkout_date > ?", Time.now - num_days.day).count("DISTINCT orders.id")
+    self.where("checkout_date > ?", Time.now.end_of_day - num_days.day).count("DISTINCT orders.id")
   end
 
   def self.orders_by_days
@@ -20,16 +20,16 @@ class Order < ActiveRecord::Base
     order_join_table = Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id")
 
     value = order_join_table.select("*") \
-          .where("checkout_date BETWEEN ? AND ?", date.midnight, date.end_of_day).sum("price * quantity")
+          .where("checkout_date BETWEEN ? AND ?", (date-day_span).midnight, date.end_of_day).sum("price * quantity")
 
-    quantity = order_join_table.where("checkout_date BETWEEN ? AND ?", day_span.days.ago.midnight, date.end_of_day).count("DISTINCT order_id")
+    quantity = order_join_table.where("checkout_date BETWEEN ? AND ?", (date-day_span).midnight, date.end_of_day).count("DISTINCT order_id")
 
 
     [quantity, value]
   end
 
   def self.orders_by_week
-    
+
     result = {}
     7.times do |i|
       start_weekday = Time.now - i.day*7
@@ -61,34 +61,34 @@ class Order < ActiveRecord::Base
 
 
 
-  def orders_by_day #shows last 7 days D, Q, Value
-    now = Time.now
-    result = {}
-    7.times do |i|
-      day = now + i
-      result[day] = time_order_summary(day)
-    end
-  end
+  # def orders_by_day #shows last 7 days D, Q, Value
+  #   now = Time.now
+  #   result = {}
+  #   7.times do |i|
+  #     day = now + i
+  #     result[day] = time_order_summary(day)
+  #   end
+  # end
 
-  def time_order_summary(date, day_span = 0)
-    order_join_table = Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id")
+  # def time_order_summary(date, day_span = 0)
+  #   order_join_table = Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id")
 
-    value = order_join_table.select("*") \
-          .where("checkout_date BETWEEN ? AND ?", date.midnight, date.end_of_day).sum("price * quantity")
+  #   value = order_join_table.select("*") \
+  #         .where("checkout_date BETWEEN ? AND ?", date.midnight, date.end_of_day).sum("price * quantity")
 
-    quantity = order_join_table.where("checkout_date BETWEEN ? AND ?", day_span.days.ago.midnight, date.end_of_day).count("DISTINCT order_id")
+  #   quantity = order_join_table.where("checkout_date BETWEEN ? AND ?", day_span.days.ago.midnight, date.end_of_day).count("DISTINCT order_id")
 
-    [quantity, value]
-  end
+  #   [quantity, value]
+  # end
 
-  def orders_by_week
-    now = Time.now
-    result = {}
-    7.times do |i|
-      start_weekday = now + (i+1) *7
-      result[start_weekday] = time_order_summary(start_weekday, 7)
-    end
-  end
+  # def orders_by_week
+  #   now = Time.now
+  #   result = {}
+  #   7.times do |i|
+  #     start_weekday = now + (i+1) *7
+  #     result[start_weekday] = time_order_summary(start_weekday, 7)
+  #   end
+  # end
 
 
 
