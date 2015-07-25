@@ -1,20 +1,25 @@
 class Order < ActiveRecord::Base
 
   def self.time_series_day(days=7)
-    # self.select("date, coalesce(count,0) AS count FROM generate_series('#{DateTime.now-7}'::timestamp, '#{DateTime.now}'::timestamp, '1 day') AS date").
-    # joins('LEFT OUTER JOIN (#{self.aggregate_daily_results}) AS results ON date = results.day')
-    self.find_by_sql("SELECT date, coalesce(orders_count,0) AS my_count, coalesce(order_value,0) AS my_value FROM generate_series('#{DateTime.now-7}'::timestamp, '#{DateTime.now}'::timestamp, '1 day') AS date FULL OUTER JOIN (SELECT date_trunc('day', orders.checkout_date) AS day, count(orders.id) AS orders_count, SUM(order_contents.quantity * products.price) AS order_value FROM orders JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id WHERE (orders.checkout_date >= '#{DateTime.now-7}' AND orders.checkout_date < '#{DateTime.now}') GROUP BY day) AS results ON date = results.day ORDER BY date DESC")
-  end
 
-  def self.aggregate_daily_results
-    self.select("date_trunc('day', orders.checkout_date) AS day, count(orders.id), SUM(order_contents.quantity * products.price)").
+    self.select("date_trunc('day', orders.checkout_date) AS day, count(DISTINCT orders.id), SUM(order_contents.quantity * products.price)").
     joins('JOIN order_contents ON orders.id = order_contents.order_id').
     joins('JOIN products ON products.id = order_contents.product_id').
     where('orders.checkout_date >= ? AND orders.checkout_date < ?',
       DateTime.now - 7,DateTime.now).
     group('day').
     order('day DESC')
+  end
 
+  def self.time_series_week(weeks=7)
+
+    self.select("date_trunc('week', orders.checkout_date) AS week, count(DISTINCT orders.id), SUM(order_contents.quantity * products.price)").
+    joins('JOIN order_contents ON orders.id = order_contents.order_id').
+    joins('JOIN products ON products.id = order_contents.product_id').
+    where('orders.checkout_date >= ? AND orders.checkout_date < ?',
+      DateTime.now - (7 * weeks), DateTime.now).
+    group('week').
+    order('week DESC')
   end
 
   def self.get_statistics

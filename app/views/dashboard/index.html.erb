@@ -117,13 +117,30 @@
       </div>
     </div>
 
-      <table class="table table-hover">
+    <table class="table table-hover">
+      <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Revenue</th>
+      </tr>
+    <% @days_series.each do |row| %>
+      <tr>
+        <td> <%= row.day %> </td>
+        <td> <%= row.count %> </td>
+        <td> <%= number_to_currency(row.sum) %> </td>
+      </tr>
+    <% end %>
+
+    </table>
+    <br>
+
+    <table class="table table-hover">
         <tr>
           <th>Item</th>
           <th>Quantity</th>
           <th>Revenue</th>
         </tr>
-      <% @days_series.each do |row| %>
+      <% @weeks_series.each do |row| %>
         <tr>
           <td> <%= row.day %> </td>
           <td> <%= row.count %> </td>
@@ -134,5 +151,5 @@
       </table>
       <br>
   </div>
-
+</div>
 
