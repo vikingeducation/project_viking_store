@@ -1,0 +1,7 @@
+<tr>
+  <td><%= category.name %></td>
+  <td><%= category.description %></td>
+  <td><%= link_to "show", category_path(category) %></td>
+  <td><%= link_to "edit", edit_category_path(category) %></td>
+  <td><%= link_to "delete", category_path(category), method: :delete %></td>
+</tr>

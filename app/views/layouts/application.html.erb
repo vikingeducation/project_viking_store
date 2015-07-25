@@ -39,8 +39,11 @@
   <body>
 	<div class="container">
 
-    <%= flash.messages.each do %>
-      <%=  %>
+    <div class = "row">
+      <div class = "col-xs-10 col-xs-offset-1">
+        <%= render partial: "shared/flash" %>
+      </div>
+    </div>
 
     <div class="row">
 
