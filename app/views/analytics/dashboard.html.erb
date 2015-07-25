@@ -25,17 +25,17 @@
 
 				<tr>
 					<td>Orders</td>
-					<td><%= @orders_7_day %></td>
+					<td><%= @orders_7 %></td>
 				</tr>
 
 				<tr>
 					<td>New Products</td>
-					<td>10</td>
+					<td><%= @new_product_7 %></td>
 				</tr>
 
 				<tr>
 					<td>Revenue</td>
-					<td>$50,000</td>
+					<td><%= @revenue_7 %></td>
 				</tr>
 
 			</table>
@@ -54,22 +54,23 @@
 
 				<tr>
 					<td>New Users</td>
-					<td>100</td>
+					<td><%= @new_users_30 %></td>
+				</tr></td>
 				</tr>
 
 				<tr>
 					<td>Orders</td>
-					<td>150</td>
+					<td><%= @orders_30 %></td>
 				</tr>
 
 				<tr>
 					<td>New Products</td>
-					<td>10</td>
+					<td><%= @new_product_30 %></td>
 				</tr>
 
 				<tr>
 					<td>Revenue</td>
-					<td>$50,000</td>
+					<td><%= @revenue_30 %></td>
 				</tr>
 
 			</table>
@@ -88,28 +89,28 @@
 
 				<tr>
 					<td>New Users</td>
-					<td>100</td>
+					<td><%= @users_total %></td>
 				</tr>
 
 				<tr>
 					<td>Orders</td>
-					<td>150</td>
+					<td><%= @orders_total %></td>
 				</tr>
 
 				<tr>
 					<td>New Products</td>
-					<td>10</td>
+					<td><%= @product_total %></td>
 				</tr>
 
 				<tr>
 					<td>Revenue</td>
-					<td>$50,000</td>
+					<td><%= @revenue_total %></td>
 				</tr>
 
 			</table>
 		</div>	
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-6 bordered">
 		<div class="col-xs-12 text-center">
 			<h2>2. User Demographics and Behavior</h2>
 		</div>
@@ -124,20 +125,14 @@
 					Data
 				</th>
 
-				<tr>
-					<td>California</td>
-					<td>23</td>
-				</tr>
+				<% @top_states.each do |state| %>
 
-				<tr>
-					<td>Texas</td>
-					<td>10</td>
-				</tr>
+					<tr>
+						<td><%= state.name %></td>
+						<td><%= state.num_of_users %></td>
+					</tr>
 
-				<tr>
-					<td>Oregon</td>
-					<td>10</td>
-				</tr>
+				<% end %>
 
 			</table>
 		</div>
@@ -153,19 +148,14 @@
 					Data
 				</th>
 
-				<tr>
-					<td>Los Angeles</td>
-					<td>23</td>
-				</tr>
+				<% @top_cities.each do |city| %>
 
-				<tr>
-					<td>San Francisco</td>
-					<td>10</td>
-				</tr>
+					<tr>
+						<td><%= city.name %></td>
+						<td><%= city.num_of_users %></td>
+					</tr>
 
-				<tr>
-					<td>Austin</td>
-					<td>10</td>
+				<% end %>
 				</tr>
 
 			</table>
@@ -188,26 +178,26 @@
 
 				<tr>
 					<td>Highest Single Order Value</td>
-					<td>Joe Smith</td>
-					<td>$650</td>
+					<td><%= @highest_single_value.user_name %></td>
+					<td>$<%= @highest_single_value.total %></td>
 				</tr>
 
 				<tr>
-					<td>Highest Lifetime Value</td>
-					<td>Jane Cook</td>
-					<td>$5000</td>
+					<td>Highest Total Order Value</td>
+					<td><%= @highest_total_value.user_name %></td>
+					<td>$<%= @highest_total_value.total %></td>
 				</tr>
 
 				<tr>
 					<td>Highest Average Order Value</td>
-					<td>Jimmy Boffet</td>
-					<td>$750</td>
+					<td><%= @highest_average_value.user_name %></td>
+					<td>$<%= @highest_average_value.average %></td>
 				</tr>
 
 				<tr>
 					<td>Most Orders Placed</td>
-					<td>Jimmy Boffet</td>
-					<td>22</td>
+					<td><%= @most_orders_placed.user_name %></td>
+					<td><%= @most_orders_placed.num_of_orders %></td>
 				</tr>
 
 			</table>
@@ -216,7 +206,7 @@
 
 </div>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-6 bordered">
 		<div class="col-xs-12 text-center">
 			<h2>3. Order Statistics</h2>
 		</div>
@@ -233,22 +223,22 @@
 
 				<tr>
 					<td>Number of Orders</td>
-					<td>100</td>
+					<td><%= @orders_7 %></td>
 				</tr>
 
 				<tr>
-					<td>total Revenue</td>
-					<td>150</td>
+					<td>Total Revenue</td>
+					<td>$<%= @revenue_7 %></td>
 				</tr>
 
 				<tr>
 					<td>Average Order Value</td>
-					<td>10</td>
+					<td>$<%= @avg_order_value_7 %></td>
 				</tr>
 
 				<tr>
 					<td>Largest Order Value</td>
-					<td>$50,000</td>
+					<td>$<%= @largest_order_value_7 %></td>
 				</tr>
 
 			</table>
@@ -267,22 +257,22 @@
 
 				<tr>
 					<td>Number of Orders</td>
-					<td>100</td>
+					<td><%= @orders_30 %></td>
 				</tr>
 
 				<tr>
-					<td>total Revenue</td>
-					<td>150</td>
+					<td>Total Revenue</td>
+					<td>$<%= @revenue_30 %></td>
 				</tr>
 
 				<tr>
 					<td>Average Order Value</td>
-					<td>10</td>
+					<td>$<%= @avg_order_value_30 %></td>
 				</tr>
 
 				<tr>
 					<td>Largest Order Value</td>
-					<td>$50,000</td>
+					<td>$<%= @largest_order_value_30 %></td>
 				</tr>
 
 			</table>
@@ -301,28 +291,28 @@
 
 				<tr>
 					<td>Number of Orders</td>
-					<td>100</td>
+					<td><%= @orders_total %></td>
 				</tr>
 
 				<tr>
-					<td>total Revenue</td>
-					<td>150</td>
+					<td>Total Revenue</td>
+					<td>$<%= @revenue_total %></td>
 				</tr>
 
 				<tr>
 					<td>Average Order Value</td>
-					<td>10</td>
+					<td>$<%= @avg_order_value_total %></td>
 				</tr>
 
 				<tr>
 					<td>Largest Order Value</td>
-					<td>$50,000</td>
+					<td>$<%= @largest_order_value_total %></td>
 				</tr>
 
 			</table>
 		</div>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-6 bordered">
 		<div class="col-xs-12 text-center">
 			<h2>4. Time Series Data</h2>
 		</div>
@@ -341,47 +331,13 @@
 					Value
 				</th>
 
+				<% @stats_7_days.each do |day| %>
 				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
+					<td><%= day.d %></td>
+					<td><%= day.num_items %></td>
+					<td><%= day.total %></td>
 				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
+				<% end %>
 
 			</table>
 		</div>
@@ -401,47 +357,17 @@
 					Value
 				</th>
 
+				<% @stats_7_weeks.each do |week| %>
 				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
+					<% if week.wk == 0 %>
+						<td>Last</td>
+					<% else %>
+						<td><%= week.wk %></td>
+						<% end %>
+					<td><%= week.num_items %></td>
+					<td>$<%= week.total %></td>
 				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
-
-				<tr>
-					<td>Today</td>
-					<td>100</td>
-					<td>$100</td>
-				</tr>
+				<% end %>
 
 			</table>
 		</div>

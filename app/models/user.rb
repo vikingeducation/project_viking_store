@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
           GROUP BY user_id
           ORDER BY average DESC
           LIMIT 1
-        ")
+        ").first
   end
 
   def self.most_order
