@@ -1,12 +1,12 @@
 class Order < ActiveRecord::Base
 
 def self.new_orders(start_day, end_day)
-	self.where("checkout_date > ? AND checkout_date < ?", start_day, end_day).count
+	self.where("checkout_date > ? AND checkout_date <= ?", start_day, end_day).count
 end
 
 def self.revenue_table(start_day=99999999.days.ago, end_day=0.days.ago)
 	# if input is given:
-  table = self.where("checkout_date > ? AND checkout_date < ?", start_day, end_day).joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON products.id = order_contents.product_id")
+  table = self.where("checkout_date > ? AND checkout_date <= ?", start_day, end_day).joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON products.id = order_contents.product_id")
   # if no input, get all orders with checkout date
   # table = self.where("checkout_date IS NOT NULL").joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON products.id = order_contents.product_id") unless input
   return table.select(:order_id, :quantity, :product_id, :price)

@@ -1,0 +1,87 @@
+<h3>Orders by day </h3>
+<table class="table">
+  <tr>
+    <td><b>Date</td>
+    <td><b>Quantity</td>
+    <td><b>Value</td>
+  </tr>
+  <tr>
+    <td>Today</td>
+    <td><%=  @order_today %></td>
+    <td><%= @revenue_today %></td>
+  </tr>
+  <tr>
+    <td>Yesterday</td>
+    <td><%= @order_yesterday %></td>
+    <td><%= @revenue_yesterday %></td>
+  </tr>
+  <tr>
+    <td>2 days ago</td>
+    <td><%= @order_2_days_ago %></td>
+    <td><%= @revenue_2_days_ago %></td>
+  </tr>
+  <tr>
+    <td>3 days ago</td>
+    <td><%= @order_3_days_ago %></td>
+    <td><%= @revenue_3_days_ago %></td>
+  </tr>
+  <tr>
+    <td>4 days ago</td>
+    <td><%= @order_4_days_ago %></td>
+    <td><%= @revenue_4_days_ago %></td>
+  </tr>
+  <tr>
+    <td>5 days ago</td>
+    <td><%= @order_5_days_ago %></td>
+    <td><%= @revenue_5_days_ago %></td>
+  </tr>
+  <tr>
+    <td>6 days ago</td>
+    <td><%= @order_6_days_ago %></td>
+    <td><%= @revenue_6_days_ago %></td>
+  </tr>
+</table>
+
+<h3>Orders by week</h3>
+<table class="table">
+  <tr>
+    <td><b>Date</td>
+    <td><b>Quantity</td>
+    <td><b>Value</td>
+  </tr>
+  <tr>
+    <td>This week</td>
+    <td><%= @order_this_week %></td>
+    <td><%= @revenue_this_week %></td>
+  </tr>
+  <tr>
+    <td>Last week</td>
+    <td><%= @order_last_week %></td>
+    <td><%= @revenue_last_week %></td>
+  </tr>
+  <tr>
+    <td><%= "#{2.weeks.ago.month} / #{2.weeks.ago.day}" %></td>
+    <td><%= @order_3_last_week %></td>
+    <td><%= @revenue_3_last_week %></td>
+  </tr>
+  <tr>
+    <td><%= "#{3.weeks.ago.month} / #{3.weeks.ago.day}" %></td>
+    <td><%= @order_4_last_week %></td>
+    <td><%= @revenue_4_last_week %></td>
+  </tr>
+  <tr>
+    <td><%= "#{4.weeks.ago.month} / #{4.weeks.ago.day}"  %></td>
+    <td><%= @order_5_last_week %></td>
+    <td><%= @revenue_5_last_week %></td>
+  </tr>
+  <tr>
+    <td><%= "#{5.weeks.ago.month} / #{5.weeks.ago.day}" %></td>
+    <td><%= @order_6_last_week %></td>
+    <td><%= @revenue_6_last_week %></td>
+  </tr>
+  <tr>
+    <td><%= "#{6.weeks.ago.month} / #{6.weeks.ago.day}" %></td>
+    <td><%= @order_7_last_week %></td>
+    <td><%= @revenue_7_last_week %></td>
+  </tr>
+</table>
