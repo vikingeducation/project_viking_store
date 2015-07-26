@@ -2,11 +2,18 @@
 
 <%= @category.description %>
 
-
+<table class="table table-bordered">
+<tr>
+<th>ID</th>
+<th>Name</th>
+</tr>
 <% @category.products.each do |product| %>
-	<li> <%= link_to product.name, product %> </li>
+<tr>
+    <td> <%= product.id %></td>
+	<td> <%= link_to product.name, product %> </td>
+</tr>
 <% end %>
-
+</table>
 <br>
 
 <%= link_to "Edit",edit_category_path(@category) ,class: 'btn btn-xs btn-primary'%>

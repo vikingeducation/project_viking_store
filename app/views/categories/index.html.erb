@@ -2,19 +2,23 @@
 <%= link_to 'New Category' , new_category_path, class: 'btn btn-success btn-lg center-block' %>
 <div class="category col-md-12">
 
-<ul class="list-group">
-<% @categories.each do |category| %>
-
-  <li class="list-group-item">
-
-		<%= link_to "Edit",edit_category_path(category) ,class: 'btn btn-xs btn-primary'%>
-		<%= link_to "Delete", category_path(category), method: 'delete',:data => {confirm: 'Are you sure you want to delete?'}, class: 'btn btn-xs btn-danger' %>
-     <%= link_to category, class: 'btn btn-primary' do %>
-     	<span class="badge"><%= category.products.count %></span>&nbsp;<%=category.name%>
-     <% end %>
-	</li>
-
-<% end %>
-
-</ul>
+<table class="table table-bordered">
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<% @categories.each do |category| %>
+		<tr>
+			<td><%=category.id%></td>
+		    <td><%= link_to category, class: 'btn btn-primary' do %>
+		     	<span class="badge"><%= category.products.count %></span>&nbsp;<%=category.name%>
+		     <% end %></td>
+			<td><%= link_to "Edit",edit_category_path(category) ,class: 'btn btn-xs btn-primary'%></td>
+			<td><%= link_to "Delete", category_path(category), method: 'delete',:data => {confirm: 'Are you sure you want to delete?'}, class: 'btn btn-xs btn-danger' %></td>
+			</li>
+		</tr>
+	<% end %>
+</table>
 </div>
