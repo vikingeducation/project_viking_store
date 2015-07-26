@@ -1,8 +1,14 @@
 <h1> <%= @category.name %> </h1>
 
 <%= @category.description %>
-<%= render partial: "index_return" %>
+
 
 <% @category.products.each do |product| %>
 	<li> <%= link_to product.name, product %> </li>
 <% end %>
+
+<br>
+
+<%= link_to "Edit",edit_category_path(@category) ,class: 'btn btn-xs btn-primary'%>
+<%= link_to "Delete", category_path(@category), method: 'delete',:data => {confirm: 'Are you sure you want to delete?'}, class: 'btn btn-xs btn-danger' %>
+<%= render partial: "index_return" %>

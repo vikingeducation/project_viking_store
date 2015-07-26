@@ -1,19 +1,18 @@
-<h1 class="page-header"> Categories </h1>
-
+<h1 class="page-header text-center"> Categories </h1>
+<%= link_to 'New Category' , new_category_path, class: 'btn btn-success btn-lg center-block' %>
 <div class="category col-md-12">
+
 <ul class="list-group">
 <% @categories.each do |category| %>
 
   <li class="list-group-item">
 
-
 		<%= link_to "Edit",edit_category_path(category) ,class: 'btn btn-xs btn-primary'%>
-		<%= link_to "Delete", category_path(category), method: 'delete', class: 'btn btn-xs btn-danger' %>
-    <%= link_to category.name, category %>
+		<%= link_to "Delete", category_path(category), method: 'delete',:data => {confirm: 'Are you sure you want to delete?'}, class: 'btn btn-xs btn-danger' %>
+     <%= link_to category.name, category, class: 'btn btn-primary' %>
 	</li>
 
 <% end %>
 
 </ul>
 </div>
-<%= link_to 'New Category' , new_category_path, class: 'btn btn-primary' %>

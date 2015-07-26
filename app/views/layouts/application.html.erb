@@ -25,14 +25,17 @@
       <div class="panel-body">
 
         <ul class="nav nav-pills">
-          <li><a href="/admin">Home</a></li>
+         
           <li><%= link_to "Products", products_path %></a></li>
           <li><%= link_to "Categories", categories_path %></li>
+          <li class="disabled"><a href="">Addresses</a></li>
+          <li class="disabled"><a href="">Users</a></li>
+          <li class="disabled"><a href="">Orders</a></li>
         </ul>
         <hr>
 
         <ul class="nav nav-pills">
-          <li><a href="#">Analytics Dashboard</a></li>
+          <li><%= link_to "Analytics Dashboard", root_path %></li>
         </ul>
       </div>
     </div>
