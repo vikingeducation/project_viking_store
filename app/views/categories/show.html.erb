@@ -1,10 +1,27 @@
-<%= @category.name %>
-<%= @category.description %>
-<%= @category.id %>
+<h1> <% "#{@category.name} page" %> </h1>
 
-<td> <%= link_to "Edit", edit_category_path(category.id) %></td>
-<td> <%= link_to "Delete", category_path(category.id), method: :delete %></td>#delete
+<%= @category.name %><br>
+<%= @category.description %><br>
+<%= @category.id %><br>
 
+<td> <%= link_to "Edit", edit_category_path(@category.id) %></td>
+<td> <%= link_to "Delete", category_path(@category.id), method: :delete, data: {confirm: "Are you sure?"} %></td>
 
-#table of products
-#product names linked to that product show page
+ <table class="table">
+<% @products.each do |product|%>
+     
+        <% if product.category_id == @category.id %>
+        
+        <tr>  
+
+          <td> <%= product.id %></td>
+          <td> <%= link_to "#{product.name}", product_path%></td>
+          <td> <%= product.description %></td>
+          <td> <%= product.price %></td>
+
+        </tr>
+       
+      <%end%>
+
+<%end%>
+</table>

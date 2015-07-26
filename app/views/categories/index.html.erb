@@ -1,3 +1,7 @@
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
 <h1>Viking Store Admin Portal</h1>
 
 <nav>
@@ -29,7 +33,7 @@
 
         <td> <%= link_to "Show", category_path(category.id) %></td>
         <td> <%= link_to "Edit", edit_category_path(category.id) %></td>
-        <td> <%= link_to "Delete", category_path(category.id), method: :delete %></td>
+        <td> <%= link_to "Delete", category_path(category.id), method: :delete , data: {confirm: "Are you sure?"}%></td>
       <tr>
       <%end%>
 

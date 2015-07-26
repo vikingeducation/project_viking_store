@@ -15,16 +15,17 @@ def create
   @category=Category.new(whitelist_category_input)
 
   if @category.save
-    flash[:success] = "Category created"
+    flash.notice = "Category created"
     redirect_to categories_path
   else
-    flash.now[:failure] = "Failed"
+    flash.now.notice = "Failed"
     render :new
   end
 end
 
 def show
 	@category = Category.find(params[:id])
+  @products=Product.all
 end
 
 def edit
@@ -34,7 +35,7 @@ end
 def update
   @category= Category.find(params[:id])
   if @category.update(whitelist_category_input)
-    flash[:success] = "Category updated"
+    flash.notice = "Category updated"
     redirect_to category_path(@category.id)
   else
     render :edit
@@ -42,6 +43,15 @@ def update
 end
 
 def destroy
+  @category= Category.find(params[:id])
+  if @category.destroy
+    flash.notice = "Category deleted"
+    redirect_to categories_path
+  else
+    flash.now.notice = "Category is not deleted"
+    render :edit
+  end
+
 end
 
 def whitelist_category_input
