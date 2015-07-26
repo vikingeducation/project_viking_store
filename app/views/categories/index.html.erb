@@ -11,12 +11,17 @@
 	</tr>
 	<% @categories.each do |category| %>
 		<tr>
-			<td><%=category.id%></td>
-		    <td><%= link_to category, class: 'btn btn-primary' do %>
-		     	<span class="badge"><%= category.products.count %></span>&nbsp;<%=category.name%>
+			<td class="text-center"><%=category.id%></td>
+		  <td class="text-center"><%= link_to category, class: 'btn btn-primary' do %>
+		     	<%=category.name%>
+          <span class="badge">
+            <%= category.products.count %>
+          </span>&nbsp;
 		     <% end %></td>
-			<td><%= link_to "Edit",edit_category_path(category) ,class: 'btn btn-xs btn-primary'%></td>
-			<td><%= link_to "Delete", category_path(category), method: 'delete',:data => {confirm: 'Are you sure you want to delete?'}, class: 'btn btn-xs btn-danger' %></td>
+
+			<td class="text-center"><%= link_to "Edit",edit_category_path(category) ,class: 'btn btn-xs btn-primary'%></td>
+
+			<td class="text-center"><%= link_to "Delete", category_path(category), method: 'delete',:data => {confirm: 'Are you sure you want to delete?'}, class: 'btn btn-xs btn-danger' %></td>
 			</li>
 		</tr>
 	<% end %>
