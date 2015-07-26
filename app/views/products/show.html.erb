@@ -6,7 +6,7 @@
 
 <h3>Name:  <span class="text-info"><%= @product.name %> </span> </h3>
 
-<h3>Price:  <span class="text-info"><%= @product.price %> </span></h3>
+<h3>Price:  <span class="text-info"><%= number_to_currency(@product.price) %> </span></h3>
 <% if @product.category %>
 <h3>Category:  <span class="text-info"><%= link_to @product.category.name, @product.category %></span></h3>
 <% end %>

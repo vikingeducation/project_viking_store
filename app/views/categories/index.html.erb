@@ -9,7 +9,9 @@
 
 		<%= link_to "Edit",edit_category_path(category) ,class: 'btn btn-xs btn-primary'%>
 		<%= link_to "Delete", category_path(category), method: 'delete',:data => {confirm: 'Are you sure you want to delete?'}, class: 'btn btn-xs btn-danger' %>
-     <%= link_to category.name, category, class: 'btn btn-primary' %>
+     <%= link_to category, class: 'btn btn-primary' do %>
+     	<span class="badge"><%= category.products.count %></span>&nbsp;<%=category.name%>
+     <% end %>
 	</li>
 
 <% end %>
