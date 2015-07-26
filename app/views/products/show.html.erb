@@ -2,22 +2,21 @@
   <%= @product.id %>
 </h1>
 
-<h3>Product id:  <span class="show-product"><%= @product.id %></span></h3> 
+<h3>Product id:  <span class="text-info"><%= @product.id %></span></h3>
 
-<h3>Name:  <span class="show-product"><%= @product.name %> </span> </h3>
+<h3>Name:  <span class="text-info"><%= @product.name %> </span> </h3>
 
-<h3>Price:  <span class="show-product"><%= @product.price %> </span></h3>
-
-<h3>Category:  <span class="show-product"><%= @product.category.name %></span></h3>
+<h3>Price:  <span class="text-info"><%= @product.price %> </span></h3>
+<% if @product.category %>
+<h3>Category:  <span class="text-info"><%= link_to @product.category.name, @product.category %></span></h3>
+<% end %>
 
 
 <h2>Product Statistics</h2>
 
-<h3>Times product ordered:  <span class="show-product"><%= @product.times_ordered %></span></h3>
+<h3>Times product ordered:  <span class="text-info"><%= @product.times_ordered %></span></h3>
 
-<h3>Carts product in:  <span class="show-product"><%= @product.carts_in %></span></h3>
+<h3>Carts product in:  <span class="text-info"><%= @product.carts_in %></span></h3>
 
-
-
-edit product link
-delete product link
+<%= link_to "Edit",edit_product_path(@product) ,class: 'btn btn-xs btn-primary'%></td>
+<%= link_to "Delete", product_path(@product), method: 'delete', class: 'btn btn-xs btn-danger' %>

@@ -1,0 +1,39 @@
+<%= form_for @product do |f| %>
+  <% if @product.persisted? %>
+  <div class="form-group">
+    <h4> product ID: <%= @product.id %> </h4>
+  </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :name, "Product Name" %>
+    <%= f.text_field :name ,class: 'form-control' %>
+    <%= field_with_errors(@product, :name) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :sku, "SKU" %>
+    <%= f.text_field :sku ,class: 'form-control' %>
+    <%= field_with_errors(@product, :sku) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, "Description" %>
+    <%= f.text_field :description , class: 'form-control'  %>
+  	<%= field_with_errors(@product, :description) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :price, "Price" %>
+    <%= f.text_field :price , class: 'form-control'  %>
+    <%= field_with_errors(@product, :price) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :category_id, "Category ID" %>
+    <%= f.text_field :category_id , class: 'form-control'  %>
+    <%= field_with_errors(@product, :category_id) %>
+  </div>
+  <div class="form-group">
+	<% if @product.new_record? %>
+    	<%= f.submit "Create!", class: 'btn btn-primary' %>
+    <% else %>
+    	<%= f.submit "Update!", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+<% end %>

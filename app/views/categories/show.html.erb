@@ -4,5 +4,5 @@
 <%= render partial: "index_return" %>
 
 <% @category.products.each do |product| %>
-	<li> <%= product.name %> </li>
+	<li> <%= link_to product.name, product %> </li>
 <% end %>

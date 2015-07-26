@@ -12,8 +12,8 @@
 <%= render partial: 'shared/navbar' %>
 <hr><br>
 <div class="container">
-  <%= render partial: "shared/flash_messages", flash: flash %>
  <h1 class="text-center">Viking Store Admin Panel</h1>
+
 
 <div class="row">
   <div class="col-md-2 side-nav">
@@ -25,11 +25,9 @@
       <div class="panel-body">
 
         <ul class="nav nav-pills">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Orders</a></li>
-          <li><a href="#">Products</a></li>
-          <li><a href="#">Categories</a></li>
-          <li><a href="#">address</a></li>
+          <li><a href="/admin">Home</a></li>
+          <li><%= link_to "Products", products_path %></a></li>
+          <li><%= link_to "Categories", categories_path %></li>
         </ul>
         <hr>
 
@@ -40,6 +38,7 @@
     </div>
   </div>
   <div class="col-md-10 main-content">
+  <%= render partial: "shared/flash_messages", flash: flash %>
       <%= yield %>
   </div>
 </div>

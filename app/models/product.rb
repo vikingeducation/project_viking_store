@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
-
+  validates  :name, :sku, {:uniqueness => true , :presence => true}
+  validates  :description,  :presence => true
   def self.in_last(days=nil)
     if days.nil?
       self.count
