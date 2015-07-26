@@ -43,6 +43,7 @@ class CategoriesController < ApplicationController
     session[:return_to] ||= request.referer
     @category = Category.find(params[:id])
     if @category.destroy
+      Product.delete_category(params[:id])
       flash[:success] = "Category deleted."
       redirect_to categories_path
     else

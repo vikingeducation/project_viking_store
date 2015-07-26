@@ -11,8 +11,7 @@ class Product < ActiveRecord::Base
   end
 
   def self.delete_category(cat_id)
-    self.category_items(cat_id).each do |p|
-      p.update(:category_id => nil)
-    end
+    Product.where("category_id = ?", cat_id)
+            .update_all(:category_id => nil)
   end
 end
