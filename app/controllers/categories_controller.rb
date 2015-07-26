@@ -40,13 +40,14 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    session[:return_to] ||= request.referer
     @category = Category.find(params[:id])
     if @category.destroy
       flash[:success] = "Category deleted."
       redirect_to categories_path
     else
-      flash.now[:error] = "Can not be deleted."
-      render :edit
+      flash[:error] = "Can not be deleted."
+      redirect_to session.delete(:return_to)
     end
   end
 

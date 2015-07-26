@@ -3,7 +3,7 @@
   <li>Category Name: <%= @category.name %></li>
   <li>Category Description: <%= @category.description %></li>
   <li><%= link_to "edit", edit_category_path(@category) %></li>
-  <li><%= link_to "delete", category_path(@category), method: :delete %></li>
+  <li><%= link_to "delete", category_path(@category), method: :delete,  data: {confirm: "Really really delete this category?"} %></li>
 </ul>
 <table class="table table-bordered">
   <h3>Product List</h3>
