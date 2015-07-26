@@ -1,8 +1,12 @@
 <tr>
   <td><%= product.id %></td>
   <td><%= product.name %></td>
+  <td><%= product.sku %></td>
   <td><%= product.description %></td>
+  <td><%= product.price %></td>
+  <td><%= product.category_id %></td>
   <td><%= link_to "show", product_path(product) %></td>
   <td><%= link_to "edit", edit_product_path(product) %></td>
   <td><%= link_to "delete", product_path(product), method: :delete %></td>
 </tr>
+
