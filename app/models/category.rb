@@ -5,10 +5,8 @@ validates :name,
 validates :id, :presence => true
 
 def initial_table
-
-  @table_data = Category.joins("JOIN products ON users.billing_id = addresses.id").joins("JOIN states ON states.id = addresses.state_id").select("states.name, count(*) AS count")
-
-
+  # @table_data = Category.joins("JOIN products ON products.category_id = category.id")
+  # .select("product_id").group("products.category_id = category.id")
 end
 
 def get_prices

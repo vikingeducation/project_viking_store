@@ -12,11 +12,13 @@ def new
 end
 
 def create
-  @category=Category.new(whitelist_new_user_input)
+  @category=Category.new(whitelist_category_input)
 
   if @category.save
-    redirect_to user_path(@category)
+    flash[:success] = "Category created"
+    redirect_to categories_path
   else
+    flash.now[:failure] = "Failed"
     render :new
   end
 end
@@ -26,12 +28,23 @@ def show
 end
 
 def edit
+  @category= Category.find(params[:id])
+end
+
+def update
+  @category= Category.find(params[:id])
+  if @category.update(whitelist_category_input)
+    flash[:success] = "Category updated"
+    redirect_to category_path(@category.id)
+  else
+    render :edit
+  end
 end
 
 def destroy
 end
 
-def whitelist_new_user_input
+def whitelist_category_input
   params.require(:category).permit(:name, :description)
 end
 

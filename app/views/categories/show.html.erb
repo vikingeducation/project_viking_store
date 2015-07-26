@@ -1,2 +1,10 @@
-<%= category.name %>
-<%= category.description %>
+<%= @category.name %>
+<%= @category.description %>
+<%= @category.id %>
+
+<td> <%= link_to "Edit", edit_category_path(category.id) %></td>
+<td> <%= link_to "Delete", category_path(category.id), method: :delete %></td>#delete
+
+
+#table of products
+#product names linked to that product show page

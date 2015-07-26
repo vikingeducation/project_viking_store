@@ -12,8 +12,6 @@
 </ul>
 </nav>
 
-
-
 <div>
 <table class="table table-striped">
   <h4>"Categories"</h4>
@@ -25,15 +23,13 @@
   <tr>
     <% @table_data.each do |category|%>
       <tr>
-
         <td> <%= category.id %></td>
         <td> <%= category.name %></td>
         <td> <%= category.description %></td>
-      
+
         <td> <%= link_to "Show", category_path(category.id) %></td>
         <td> <%= link_to "Edit", edit_category_path(category.id) %></td>
         <td> <%= link_to "Delete", category_path(category.id), method: :delete %></td>
-      
       <tr>
       <%end%>
 
