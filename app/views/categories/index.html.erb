@@ -1,0 +1,41 @@
+<h1>Viking Store Admin Portal</h1>
+
+<nav>
+  <ul class="nav nav-pills nav-stacked">
+    <h4>Navigation Options</h4>
+    <li>Users</li>
+    <li>Addresses</li>
+    <li>Orders</li>
+    <li>Products</li>
+    <li><%= link_to "Categories", "/categories" %></li>
+    <li><%= link_to "Analytics Dashboard", root_path%></li>
+</ul>
+</nav>
+
+
+
+<div>
+<table class="table table-striped">
+  <h4>"Categories"</h4>
+  <%= link_to "Create a New Category", new_category_path %>
+  <tr>
+    <%@headers.each do |head| %>
+    <td> <%= head %> </td>
+    <% end %>
+  <tr>
+    <% @table_data.each do |category|%>
+      <tr>
+
+        <td> <%= category.id %></td>
+        <td> <%= category.name %></td>
+        <td> <%= category.description %></td>
+      
+        <td> <%= link_to "Show", category_path(category.id) %></td>
+        <td> <%= link_to "Edit", edit_category_path(category.id) %></td>
+        <td> <%= link_to "Delete", category_path(category.id), method: :delete %></td>
+      
+      <tr>
+      <%end%>
+
+</table>
+</div>

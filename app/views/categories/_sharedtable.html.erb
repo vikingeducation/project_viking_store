@@ -8,12 +8,13 @@
     <td> <%= head %> </td>
     <% end %>
   <tr>
-    <% @table_data.each do |user|%>
+    <% @table_data.each do |category|%>
       <tr>
 
-        <td> <%= user.id %></td>
-        <td> <%= "#{user.first_name} #{user.last_name}" %></td>
-        <td> <%= user.created_at %></td>
+        <td> <%= category.id %></td>
+        <td> <%= category.name %></td>
+        <td> <%= category.description %></td>
+      
       <tr>
       <%end%>
 </table>

@@ -1,0 +1,21 @@
+<%= form_for @category do |f| %>
+
+<% unless @category.errors.empty? %>
+  <div class="error">
+    <%= @category.errors[:name].first %>
+    </div>
+<%end%>
+  <%= f.label :name %>
+  <%= f.text_field :name,  placeholder: "Categoryname" %>
+<br>
+<% unless @category.errors.empty? %>
+  <div class="error">
+    <%= @category.errors[:description].first %>
+    </div>
+<%end%>
+  <%= f.label :description %>
+  <%= f.text_field :description, value: "description" %>
+<br>
+
+  <%= f.submit "Edit" %>
+<% end %>
