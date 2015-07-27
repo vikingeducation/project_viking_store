@@ -1,0 +1,25 @@
+<h1> <%= @user.name %> </h1>
+
+<div>
+<h2> Demographic Information </h2>
+<h5>First Name: <%= @user.first_name %></h5>
+<h5>Last Name: <%= @user.last_name %></h5>
+<h5>Email: <%= @user.email %></h5>
+<h2> Default Billing Address </h2>
+<%= @user.default_billing_address.street_address %>,
+<%= @user.default_billing_address.city.name %>,
+<%= @user.default_billing_address.state.name %>
+<h2> Default Shipping Address </h2>
+<%= @user.default_shipping_address.street_address %>,
+<%= @user.default_shipping_address.city.name %>,
+<%= @user.default_shipping_address.state.name %>
+<br>
+<h5><%= link_to "Edit this User's information.", edit_user_path(@user) %></h5>
+<h5><%= link_to "Delete this user.", @user, method: 'delete' %></h5>
+<h5>View Saved Addresses</h5>
+<h5>View Unplaced Order (Cart)</h5>
+</div>
+
+<div>
+<h2></h2>
+</div>

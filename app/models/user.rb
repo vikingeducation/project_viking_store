@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :addresses
 
-  belongs_to :default_billing_addressx, class_name:  "Address",
+  belongs_to :default_billing_address, class_name:  "Address",
               :foreign_key => :billing_id
 
   belongs_to :default_shipping_address, class_name:  "Address",
@@ -15,6 +15,26 @@ class User < ActiveRecord::Base
   # 1. Overall Platform
 
   # Last 7 Days
+
+  def name
+    self.first_name + " " + self.last_name
+  end
+
+  def city
+    self.default_shipping_address.city.name
+  end
+
+  def state
+    self.default_shipping_address.state.name
+  end
+
+  def last_order_date
+    if self.orders.order(:checkout_date).last && self.orders.order(:checkout_date).last.checkout_date
+      self.orders.order(:checkout_date).last.checkout_date
+    else
+      "N/A"
+    end
+  end
 
   def self.user_count(timeframe = nil)
 
