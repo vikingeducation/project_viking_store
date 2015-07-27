@@ -1,4 +1,12 @@
 class User < ActiveRecord::Base
+has_many :addresses
+belongs_to :shipping_address, :class_name => "Address",
+                              :foreign_key => "shipping_id"
+belongs_to :billing_address, :class_name => "Address",
+                              :foreign_key => "billing_id"
+
+ 
+
 
   def self.in_last(days = nil)
     if days.nil?
