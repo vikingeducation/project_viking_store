@@ -47,4 +47,20 @@
   </div>
 
 
+
+<!-- ADD PRODUCTS -->
+  <div class='row'>
+    <div class='col-xs-12'>
+
+      <%= render :partial => 'edit_add_products',
+            :locals => {
+                        :order => @order,
+                        :button_label => 'Add Products'
+                       },
+            :layout => 'layouts/shared/show_panel' %>
+
+    </div>
+  </div>
+
+
 </section>

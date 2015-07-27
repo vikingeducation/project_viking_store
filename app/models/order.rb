@@ -57,7 +57,7 @@ class Order < ActiveRecord::Base
 
 
   def build_contents_table_data
-    order_contents = self.order_contents.all
+    order_contents = self.order_contents.all.order(:product_id)
 
     order_contents.map do |content_row|
       {

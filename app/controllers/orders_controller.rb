@@ -88,20 +88,36 @@ class OrdersController < ApplicationController
       end
 
       redirect_to @order
-
-      #@order_content_row = OrderContents.find(params[:id])
-
-      #if @order_content_row.update(content_params)
-      #  flash[:success] = "Order successfully updated!"
-       # redirect_to @order
-      #else
-      #  flash.now[:danger] = "Order not saved - please try again."
-      #  reset_order_instance_variables
-      #  render :edit
-      #end
     end
 
+
     #add_products
+    if params[:commit] == 'Add Products'
+      # "new_products"=>{"0"=>{"id"=>"162", "quantity"=>"4"}
+      params[:new_products].each do |new_product|
+
+        submitted_product_id = new_product[1][:id].to_i
+        # if product_id is valid
+        if Product.ids.include?(submitted_product_id)
+
+          # if product is already in Order
+          unless @order.product_ids.include?(submitted_product_id)
+            # add OrderContent row for it with quantity
+            o = OrderContents.new
+            o.order_id = @order.id
+            o.product_id = submitted_product_id
+            o.quantity = new_product[1][:quantity].to_i
+            o.save!
+          end
+
+        end
+
+      end
+
+      redirect_to @order
+
+    end
+
   end
 
 
