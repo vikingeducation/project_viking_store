@@ -1,5 +1,9 @@
 class Product < ActiveRecord::Base
 
+  has_many :order_contents
+  belongs_to :categories
+  has_many :orders, through: :order_contents
+
   def self.product_count(timeframe = 1000000)
 
     Product.where("created_at > ?", timeframe.days.ago).count

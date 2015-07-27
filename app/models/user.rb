@@ -1,5 +1,15 @@
 class User < ActiveRecord::Base
-  has_many :address
+  has_many :addresses
+
+  belongs_to :primary_billing, class_name:  "Address",
+              :foreign_key => :billing_id
+
+  belongs_to :primary_shipping, class_name:  "Address",
+              :foreign_key => :shipping_id
+
+  has_many :orders
+  has_many :credit_cards
+
 
   # 1. Overall Platform
 
@@ -15,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   def self.top_user_location(scope, num=3)
-    # Finds top user 
+    # Finds top user
     if scope == 'state'
       User.select("COUNT(*) AS num_of_users, states.name")
           .joins("JOIN addresses ON users.billing_id=addresses.id")
@@ -57,7 +67,7 @@ class User < ActiveRecord::Base
 
 
   def self.highest_avg_order_value
-      # subquery = 
+      # subquery =
       # User.select("ROUND(SUM(quantity * products.price), 2) AS order_total, users.id AS user_num, users.first_name, users.last_name")
       #     .joins("JOIN orders ON orders.user_id=users.id")
       #     .joins("JOIN order_contents ON order_contents.order_id=orders.id")

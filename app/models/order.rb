@@ -1,5 +1,14 @@
 class Order < ActiveRecord::Base
 
+  belongs_to :user
+
+  belongs_to :billing, class_name:  "Address"
+
+  belongs_to :shipping, class_name:  "Address"
+
+  has_many :order_contents
+  has_many :products, through: :order_contents
+
   def self.order_count(timeframe = 100000000000000)
 
     if timeframe.nil?
@@ -39,7 +48,7 @@ class Order < ActiveRecord::Base
 
     # if scope == 'days'
     # t = 7
-    Order.select("ROUND(SUM(quantity * products.price), 2) AS total, 
+    Order.select("ROUND(SUM(quantity * products.price), 2) AS total,
                   DATE(checkout_date) AS d,
                   COUNT(DISTINCT orders.id) AS num_items")
        .joins("JOIN order_contents ON order_contents.order_id=orders.id")
@@ -50,8 +59,8 @@ class Order < ActiveRecord::Base
 
   def self.last_seven_weeks
 
-    Order.select("ROUND(SUM(quantity * products.price), 2) AS total, 
-                  ROUND((julianday(current_date) - julianday(checkout_date))/7, 0) AS wk, 
+    Order.select("ROUND(SUM(quantity * products.price), 2) AS total,
+                  ROUND((julianday(current_date) - julianday(checkout_date))/7, 0) AS wk,
                   COUNT(DISTINCT orders.id) AS num_items")
        .joins("JOIN order_contents ON order_contents.order_id=orders.id")
        .joins("JOIN products ON order_contents.product_id=products.id")
