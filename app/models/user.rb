@@ -1,16 +1,17 @@
 class User < ActiveRecord::Base
   has_many :addresses
 
-  belongs_to :primary_billing, class_name:  "Address",
+  belongs_to :default_billing_addressx, class_name:  "Address",
               :foreign_key => :billing_id
 
-  belongs_to :primary_shipping, class_name:  "Address",
+  belongs_to :default_shipping_address, class_name:  "Address",
               :foreign_key => :shipping_id
 
   has_many :orders
   has_many :credit_cards
 
-
+  has_many :order_contents, through: :orders
+  has_many :products, through: :order_contents
   # 1. Overall Platform
 
   # Last 7 Days
