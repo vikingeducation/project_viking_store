@@ -1,4 +1,9 @@
 class Product < ActiveRecord::Base
+  belongs_to :category
+  has_many :order_contents
+  has_many :orders , :through => :order_contents
+
+
   validates  :name, :sku, {:uniqueness => true , :presence => true}
   validates  :description,  :presence => true
   def self.in_last(days=nil)
@@ -9,9 +14,6 @@ class Product < ActiveRecord::Base
     end
   end
 
-  def category
-    Category.find_by(id: self.category_id)
-  end
 
   def times_ordered
     Product.joins("JOIN order_contents ON products.id = order_contents.product_id").

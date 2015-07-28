@@ -1,8 +1,8 @@
 class Category < ActiveRecord::Base
+  has_many :products
+
   validates  :name, {:uniqueness => true , :presence => true}
   validates  :description, :presence => true
+  
 
-  def products
-    Product.where(category_id: self.id)
-  end
 end
