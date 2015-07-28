@@ -50,6 +50,8 @@ group :development, :test do
   # with Ruby 2
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
   gem 'pry-byebug'
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 

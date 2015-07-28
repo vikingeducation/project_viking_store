@@ -1,5 +1,7 @@
 <%= form_for address do |f| %>
-    <div class="form-group">
+	<% f.hidden_field :user_id, :value => address.user.id %>
+
+  <div class="form-group">
 		<%= f.label :street_address %>
 		<%= f.text_field :street_address %>
 	</div>
@@ -7,7 +9,12 @@
 	<div class="form-group">
 		<%= f.label :city_id %>
 		<%= f.collection_select(:city_id, City.all, :id, :name) %>
-    </div>
+  </div>
+
+  <div class="form-group">
+		<%= f.label :zip_code %>
+		<%= f.text_field :zip_code %>
+	</div>
 
 	<div class="form-group">
 		<%= f.label :state_id %>
@@ -17,4 +24,6 @@
 	<div class="form-group">
 		<%= f.submit %>
 	</div>
+
+
 <% end %>
