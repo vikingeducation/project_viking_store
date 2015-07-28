@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  validates :first_name, :last_name, :email, presence: true
+                                           , length: {}
+
+
   has_many :addresses
 
   belongs_to :default_billing_address, class_name:  "Address",
