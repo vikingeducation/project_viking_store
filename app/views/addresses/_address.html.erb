@@ -1,0 +1,12 @@
+<tr>
+  <td><%= address.id %></td>
+  <td><%= address.user.name %></td>
+  <td><%= address.street_address%></td>
+  <td><%= address.city.name %></td>
+  <td><%= address.state.name %></td>
+  <td><%= address.orders.count %></td>
+  <td><%= address.created_at %></td>
+  <td><%= link_to "show", address_path(address) %></td>
+  <td><%= link_to "edit", edit_address_path(address) %></td>
+  <td><%= link_to "delete", address_path(address), method: :delete %></td>
+</tr>

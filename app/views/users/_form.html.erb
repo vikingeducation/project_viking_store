@@ -1,21 +1,32 @@
 <%= form_for user do |f| %>
-	<%= f.label :first_name %>
-	<%= f.text_field :first_name %>
+    <div class="form-group">
+		<%= f.label :first_name %>
+		<%= f.text_field :first_name %>
+	</div>
 
-	<%= f.label :last_name %>
-	<%= f.text_field :last_name %>
+	<div class="form-group">
+		<%= f.label :last_name %>
+		<%= f.text_field :last_name %>
+	</div>
 
-	<%= f.label :email %>
-	<%= f.text_field :email %>
-
+	<div class="form-group">
+		<%= f.label :email %>
+		<%= f.text_field :email %>
+	</div>
 
   <% if user.persisted? %>
-    <%= f.label :billing_id %>
-    <%= f.collection_select(:billing_id, user.addresses, :id, :full_address ) %>
+  	<div class="form-group">
+	    <%= f.label :billing_id %>
+	    <%= f.collection_select(:billing_id, user.addresses, :id, :full_address ) %>
+	</div>
 
-    <%= f.label :shipping_id %>
-    <%= f.collection_select(:shipping_id, user.addresses, :id, :full_address) %>
+	<div class="form-group">
+		<%= f.label :shipping_id %>
+		<%= f.collection_select(:shipping_id, user.addresses, :id, :full_address) %>
+    </div>
   <% end %>
 
-	<%= f.submit %>
+	<div class="form-group">
+		<%= f.submit %>
+	</div>
 <% end %>
