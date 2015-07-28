@@ -12,7 +12,7 @@ class Address < ActiveRecord::Base
   belongs_to :state
 
   has_many :orders, foreign_key: :billing_id, dependent: :nullify
-  
+
   has_many :orders_ship_to, class_name: "Order", foreign_key: :shipping_id, dependent: :nullify
 
   def full_address

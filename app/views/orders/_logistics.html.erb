@@ -1,0 +1,6 @@
+<h2> Logistical Information </h2>
+
+<%= render partial: "orders/basic_info", locals: {order: order}%>
+<%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
+
+<%= render partial: "orders/address_form", locals: {order: order}%>

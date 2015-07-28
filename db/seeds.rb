@@ -183,7 +183,7 @@ def generate_credit_cards_for_checked_out_orders
     card[:user_id] = user.user_id
 
     # last 4 digits only
-    card[:card_number] = Faker::Number.number(4)
+    card[:card_number] = Faker::Number.number(16)
     card[:exp_month] = rand(12) + 1
 
     #so far, only good cards

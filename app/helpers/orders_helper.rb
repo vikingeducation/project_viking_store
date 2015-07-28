@@ -14,4 +14,12 @@ module OrdersHelper
               class: "btn btn-primary"
     end
   end
+
+  def display_date_or_na(order)
+    if order.created_at.nil?
+      "N/A"
+    else
+      order.created_at
+    end
+  end
 end

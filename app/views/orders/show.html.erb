@@ -1,18 +1,32 @@
 <h1> Logistical Information </h1>
 
-<h2>Basic Information</h2>
+<%= render partial: "orders/basic_info", locals: {order: @order} %>
 
-<h3> <%= Customer ID: @order.user.id %> </h3>
-<h3> Customer: <%= link_to @order.user.name, user_path(@order.user) %> </h3>
-<h3> <%= Email: @order.user.email %> </h3>
-<h3> <%= Date Placed: @order.created_at %> </h3>
-<h3> <%= Number of Products: @order.products.count %> </h3>
-<h3> <%= Order Value: @order.value %> </h3>
+<h3> Number of Products:<%= @order.products.count %> </h3>
+<h3> Order Value:<%= @order.value %> </h3>
 <%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
 
-<h1> Product Statistics </h1>
-<h3> Times Ordered <%= @product.times_ordered %> </h3>
-<h3> Carts In <%= @product.carts_in %> </h3>
+<h2> Order Status </h2>
+<p><%= @order.status %></p>
 
-<%= link_to "Edit this Product!", edit_product_path(@product) %>
-<%= link_to "Delete this Product!", @product, method: 'delete' %>
+<h2> Shipping Address </h2>
+  <p>Street Address: <%= @order.shipping.street_address %></p>
+  <p>State: <%= @order.shipping.state.name %></p>
+  <p>City: <%= @order.shipping.city.name %></p>
+<h2> Billing Address </h2>
+  <p>Street Address: <%= @order.billing.street_address %></p>
+  <p>State: <%= @order.billing.state.name %></p>
+  <p>City: <%= @order.billing.city.name %></p>
+<br>
+
+<h3> Billing Card </h3>
+<p> Last 4 digits: <%= @order.user.credit_cards.first.card_number %></p>
+
+<h5><%= link_to "Edit this order's information.", edit_order_path(@order) %></h5>
+<h5><%= link_to "Delete this order.", @order, method: 'delete' %></h5>
+
+<%= render partial: "orders/contents", locals: {order: @order} %>
+
+
+<%= link_to "Edit this Order!", edit_order_path(@order) %>
+<%= link_to "Delete this Order!", @order, method: 'delete' %>

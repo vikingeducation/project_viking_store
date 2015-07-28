@@ -7,8 +7,8 @@ class OrdersController < ApplicationController
   end
 
   def new
-    # @address = Address.new
-    # @address.user = User.find(params[:user_id])
+    @order = Order.new
+    @order.user = User.find(params[:user_id])
   end
 
   def create
@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    # @address = Address.find(params[:id])
+    @order = Order.find(params[:id])
   end
 
   def destroy

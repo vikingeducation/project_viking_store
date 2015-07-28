@@ -1,0 +1,21 @@
+<h1> Order Contents </h1>
+
+<table class="table table-bordered">
+  <tr>
+  	<th>ProductID</th>
+  	<th>Product</th>
+  	<th>Quantity</th>
+  	<th>Price</th>
+  	<th>Total Price </th>
+  </tr>
+
+  <% order.order_contents.each do |order_content| %>
+	<tr>
+	  <td><%= order_content.product.id %> </td>
+	  <td><%= order_content.product.name %> </td>
+	  <td><%= order_content.quantity %></td>
+	  <td><%= order_content.product.price %> </td>
+	  <td><%= order_content.quantity * order_content.product.price %></td>
+	</tr>
+  <% end %>
+</table>
