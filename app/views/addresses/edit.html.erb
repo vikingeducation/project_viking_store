@@ -1,0 +1,5 @@
+<h1> Edit address for <%= link_to @address.user.name, @address.user %> </h1>
+
+<%= render partial: "addresses/form", locals: {address: @address} %>
+
+<%= link_to "Delete this address!", @address, method: 'delete' %>
