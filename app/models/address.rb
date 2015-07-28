@@ -10,4 +10,8 @@ class Address < ActiveRecord::Base
   has_many :orders, foreign_key: :billing_id
   has_many :orders, foreign_key: :shipping_id
 
+  def full_address
+    self.street_address + ", " + self.city.name + ", " + self.state.name
+  end
+
 end

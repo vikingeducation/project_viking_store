@@ -1,9 +1,21 @@
 <%= form_for user do |f| %>
 	<%= f.label :first_name %>
 	<%= f.text_field :first_name %>
+
 	<%= f.label :last_name %>
 	<%= f.text_field :last_name %>
+
 	<%= f.label :email %>
 	<%= f.text_field :email %>
+
+
+  <% if user.persisted? %>
+    <%= f.label :billing_id %>
+    <%= f.collection_select(:billing_id, user.addresses, :id, :full_address ) %>
+
+    <%= f.label :shipping_id %>
+    <%= f.collection_select(:shipping_id, user.addresses, :id, :full_address) %>
+  <% end %>
+
 	<%= f.submit %>
 <% end %>
