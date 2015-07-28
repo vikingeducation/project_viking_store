@@ -10,6 +10,15 @@ class Order < ActiveRecord::Base
   has_many :products, through: :order_contents
   has_many :categories, through: :products
 
+  def value
+    self.order_contents.reduce(0){|sum, oc| sum += oc.quantity * oc.product.price}
+  end
+
+  def status
+    self.checkout_date.nil? ?  "UNPLACED" : "PLACED"
+  end
+
+
   def self.order_count(timeframe = 100000000000000)
 
     if timeframe.nil?
