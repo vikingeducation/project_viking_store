@@ -20,7 +20,35 @@ class AddressesController < ApplicationController
     end
   end
 
+  def edit
+    @address = Address.find(params[:id])
+  end
+
+  def update
+    @address = Address.find(params[:id])
+    if @address.update(white_listed_address_params)
+      flash[:success] = "Address is updated."
+      redirect_to addresses_path(user_id: @address.user_id)
+    else
+      flash.now[:danger] = "Not able to update the address."
+      render :edit
+    end
+  end
+
   def show
+    @address = Address.find(params[:id])
+  end
+
+  def destroy
+    @address = Address.find(params[:id])
+    user_id = @address.user_id if @address
+    if @address.destroy
+      flash[:success] = "Address is destroyed."
+      redirect_to addresses_path(user_id: user_id)
+    else
+      flash[:danger] = "Not able to destroy the address."
+      redirect_to @address
+    end
   end
 
   private

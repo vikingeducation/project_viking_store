@@ -3,19 +3,12 @@ class Product < ActiveRecord::Base
   belongs_to :category
   has_many :orders, through: :order_contents
 
-  def self.product_count(timeframe = 1000000)
-
-    Product.where("created_at > ?", timeframe.days.ago).count
-
-  end
-
-  def self.category_items(cat_id)
-    Product.where("category_id = ?", cat_id).select("id, name")
-  end
-
-  def self.delete_category(cat_id)
-    Product.where("category_id = ?", cat_id)
-            .update_all(:category_id => nil)
+  def self.in_last(days=nil)
+    if days.nil?
+      self.count
+    else
+      self.where('created_at > ?', DateTime.now - days).count
+    end
   end
 
   def times_ordered

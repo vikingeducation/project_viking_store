@@ -1,57 +1,40 @@
 class AnalyticsController < ApplicationController
 
   def dashboard
-    @new_users_7 = User.user_count(7)
-    @orders_7 = Order.order_count(7)
-    @new_product_7 = Product.product_count(7)
-    @revenue_7 = "$#{Order.revenue(7)}"
+    @overall = User.get_overall
 
-    @new_users_30 = User.user_count(30)
-    @orders_30 = Order.order_count(30)
-    @new_product_30 = Product.product_count(30)
-    @revenue_30 = "$#{Order.revenue(30)}"
+    @demographics = Address.get_demographics
 
-    @users_total = User.user_count
-    @orders_total = Order.order_count
-    @product_total = Product.product_count
-    @revenue_total = "$#{Order.revenue}"
+    @superlatives = User.get_superlatives
 
-    # -----------------------------------------------------
+    @statistics = Order.get_statistics
 
-    @top_states = User.top_user_location('state')
-    @top_cities = User.top_user_location('city')
+    @days_series = get_filled_table(Order.time_series_day)
 
-    #------------------------------------------------------
+    @weeks_series = Order.time_series_week
+  end
 
-    @highest_single_value = User.highest_value
-    @highest_total_value = User.highest_value('total')
-    @highest_average_value = User.highest_avg_order_value
-    @most_orders_placed = User.most_order
-
-    #------------------------------------------------------
-
-    @orders_7 = Order.order_count(7)
-    @revenue_7 = Order.revenue(7)
-    @avg_order_value_7 = Order.avg_order_value(7)
-    @largest_order_value_7 = Order.largest_order_value(7)
-
-    @orders_30 = Order.order_count(30)
-    @revenue_30 = Order.revenue(30)
-    @avg_order_value_30 = Order.avg_order_value(30)
-    @largest_order_value_30 = Order.largest_order_value(30)
-
-    @orders_total = Order.order_count
-    @revenue_total = Order.revenue
-    @avg_order_value_total = Order.avg_order_value
-    @largest_order_value_total = Order.largest_order_value
-
-    #------------------------------------------------------
-
-    @stats_7_days = Order.last_seven_days
-    @stats_7_weeks = Order.last_seven_weeks
-
-    def num_orders(days)
-      Order.order_count(days)
+  def get_filled_table(table)
+    results = []
+    table.each do |row|
+      row_hash = {}
+      row_hash[:date] = row.day.to_date
+      row_hash[:count] = row.count
+      row_hash[:sum] = row.sum
+      results << row_hash
     end
+
+    dates_range = ((DateTime.now - 6).to_date..(DateTime.now).to_date)
+    dates_range.each do |date|
+      unless results.any?{|val| val.values.include?(date)}
+        row_hash = {}
+        row_hash[:date] = date
+        row_hash[:count] = 0
+        row_hash[:sum] = 0
+        results << row_hash
+      end
+    end
+    results = results.sort_by {|k| k[:date]}
+    results.reverse
   end
 end
