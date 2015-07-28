@@ -10,6 +10,8 @@ class Order < ActiveRecord::Base
   has_many :products, through: :order_contents
   has_many :categories, through: :products
 
+  validates :checkout_date, :only_one_unplaced
+
   def value
     self.order_contents.reduce(0){|sum, oc| sum += oc.quantity * oc.product.price}
   end
@@ -118,6 +120,16 @@ class Order < ActiveRecord::Base
         order_id JOIN products ON order_contents.product_id = products.id').
         where('orders.checkout_date > ?', DateTime.now - days).order('cost')
       end
+    end
+
+    def only_one_unplaced
+      if self.checkout_date.nil? and self.has_cart?
+        errors.add(:checkout_date, "You can only have one unplaced order!") 
+      end
+    end
+
+    def has_cart?
+      Order.where("user_id = ? AND checkout_date IS NULL", self.user_id).present?
     end
 end
 

@@ -12,29 +12,29 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # @address = Address.new(white_listed_address_params)
-    # if @address.save
-    #   flash[:success] = "Address is created."
-    #   redirect_to addresses_path(user_id: @address.user_id)
-    # else
-    #   flash.now[:danger] = "Not able to create the address."
-    #   render :new
-    # end
+    @order = Order.new(white_listed_order_params)
+    if @order.save
+      flash[:success] = "Order is created."
+      redirect_to edit_order_path(@order.id)
+    else
+      flash.now[:danger] = "Not able to create the order."
+      render :new
+    end
   end
 
   def edit
-    # @address = Address.find(params[:id])
+    @order = Order.find(params[:id])
   end
 
   def update
-    # @address = Address.find(params[:id])
-    # if @address.update(white_listed_address_params)
-    #   flash[:success] = "Address is updated."
-    #   redirect_to addresses_path(user_id: @address.user_id)
-    # else
-    #   flash.now[:danger] = "Not able to update the address."
-    #   render :edit
-    # end
+    @order = Order.find(params[:id])
+    if @order.update(white_listed_order_params)
+      flash[:success] = "Order is updated."
+      redirect_to order_path(@order)
+    else
+      flash.now[:danger] = "Not able to update the order."
+      render :edit
+    end
   end
 
   def show
@@ -69,8 +69,8 @@ class OrdersController < ApplicationController
       end
     end
 
-    def white_listed_address_params
-      # params.require(:address).permit(:user_id, :zip_code, :street_address, :city_id, :state_id)
+    def white_listed_order_params
+      params.require(:order).permit(:user_id, :shipping_id, :billing_id, :checkout_date)
     end
 
 end
