@@ -1,6 +1,8 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+# You'll see little puts statements in the file to give you status updates as the file runs.
+puts "Destroying old records"
 
 # Blow away all the existing records every time.
 
@@ -13,6 +15,8 @@ CreditCard.destroy_all
 Product.destroy_all
 State.destroy_all
 City.destroy_all
+
+puts "Old records destroyed"
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
 MULTIPLIER = 10
@@ -87,7 +91,7 @@ def midnight_tonight
   (Time.now.to_date + 1).to_time
 end
 
-# This method returns a date that's random but weighted toward the current date.
+# This method returns a random date
 def creation_date
   time_frames = []
   (MULTIPLIER**2).times do |x|
@@ -206,15 +210,25 @@ srand(42)
 
 # Create states and cities
 STATES.each { |state| generate_state state }
+puts "Created states"
+
 (MULTIPLIER * 10).times { generate_city }
+puts "Created cities"
 
 # Create categories and products
  MULTIPLIER.times       { generate_category }
+
+puts "Created categories"
 (MULTIPLIER * 10).times { generate_product }
+puts "Created products"
 
 # Create users
 (MULTIPLIER * 10).times { generate_user }
+puts "Created users"
 
 # Create orders and add the credit card records.
 (MULTIPLIER * 30).times { generate_order }
+puts "Created orders"
 generate_credit_cards_for_checked_out_orders
+puts "Created credit card orders"
+puts "DONE!"
