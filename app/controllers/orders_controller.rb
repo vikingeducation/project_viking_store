@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
 
   def index
-    @orders = Order.all
+    @user = User.find_by(id: params[:user_id])
+    @orders = params[:user_id] ? render_user(params[:user_id]) : render_all
     # @addresses = params[:user_id] ? render_user(params[:user_id]) : render_all
   end
 
@@ -53,6 +54,20 @@ class OrdersController < ApplicationController
   end
 
   private
+
+    def render_all
+      Order.all
+    end
+
+    def render_user(user_id)
+      orders = Order.where("user_id = #{user_id}")
+      if orders.empty?
+        flash[:notice] = "User not found."
+        return Order.all
+      else
+        return orders
+      end
+    end
 
     def white_listed_address_params
       # params.require(:address).permit(:user_id, :zip_code, :street_address, :city_id, :state_id)

@@ -1,0 +1,12 @@
+<h1> <%= @address.user.name %>'s Address <h1>
+
+<h3>Street: <%= @address.street_address %> </h3>
+
+<h3>City: <%= @address.city.name %> </h3>
+
+<h3>State: <%= @address.state.name %> </h3>
+
+<h3>Zip Code: <%= @address.zip_code %> </h3>
+
+<%= link_to "Edit Address", edit_address_path(@address) %>
+<%= link_to "Delete Address", address_path(@address), method: 'delete' %>

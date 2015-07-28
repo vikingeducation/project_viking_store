@@ -1,20 +1,14 @@
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Order Date</th>
-    <th>Order Value</th>
-    <th>Status</th>
-    <th>SHOW</th>
-    <th>EDIT</th>
-    <th>DELETE</th>
-  </tr>
-  <tr>
-    <td><%= order.id %></td>
-    <td><%= order.created_at %></td>
-    <td><%= order.value %></td>
-    <td><%= order.status %></td>
-    <td><%= link_to "show", order_path(order) %></td>
-    <td><%= link_to "edit", edit_order_path(order) %></td>
-    <td><%= link_to "delete", order_path(order), method: :delete %></td>
-  </tr>
-</table>
+<tr>
+  <td><%= order.id %></td>
+  <td><%= link_to order.user_id, order.user %></td>
+  <td><%= order.billing.street_address%></td>
+  <td><%= order.billing.city.name %></td>
+  <td><%= order.billing.state.name %></td>
+  <td><%= order.products.count %></td>
+  <td><%= order.value %></td>
+  <td><%= order.status %></td>
+  <td><%= order.created_at %></td>
+  <td><%= link_to "show", order_path(order) %></td>
+  <td><%= link_to "edit", edit_order_path(order) %></td>
+  <td><%= link_to "delete", order_path(order), method: :delete %></td>
+</tr>
