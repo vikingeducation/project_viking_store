@@ -5,15 +5,15 @@ class Address < ActiveRecord::Base
   validates :street_address, presence: true, length: {in: 1..64}
 
   belongs_to :user
-  has_many :users_bill_to, foreign_key: :billing_id, dependent: :nullify
-  has_many :users_ship_to, foreign_key: :shipping_id, dependent: :nullify
+  has_many :users_bill_to, class_name: "User", foreign_key: :billing_id, dependent: :nullify
+  has_many :users_ship_to, class_name: "User", foreign_key: :shipping_id, dependent: :nullify
 
   belongs_to :city
   belongs_to :state
 
   has_many :orders, foreign_key: :billing_id, dependent: :nullify
-  has_many :orders_bill_to, foreign_key: :billing_id, dependent: :nullify
-  has_many :orders_ship_to, foreign_key: :shipping_id, dependent: :nullify
+  
+  has_many :orders_ship_to, class_name: "Order", foreign_key: :shipping_id, dependent: :nullify
 
   def full_address
     self.street_address + ", " + self.city.name + ", " + self.state.name

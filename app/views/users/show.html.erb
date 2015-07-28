@@ -28,11 +28,11 @@
 
 <div class="row text-center">
 <h2>Admin Actions for <%= @user.first_name %> <%= @user.last_name %></h2>
-  <%= link_to '#' do %>
+  <%= link_to "#" do %>
     <button class="btn btn-primary btn-lg col-xs-8 col-xs-offset-2">Create Order</button>
   <% end %>
 
-  <%= link_to '#' do %>
+  <%= link_to new_address_path(user_id: @user.id) do %>
     <button class="btn btn-primary btn-lg col-xs-8 col-xs-offset-2">Create Address</button>
   <% end %>
 </div>
