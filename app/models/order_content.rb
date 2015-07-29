@@ -5,6 +5,46 @@ class OrderContent < ActiveRecord::Base
   validates_with OrderContentValidator
 
 
+  def self.update_all(records)
+    records.each do |oc|
+      order_content = OrderContent.find(oc[0])
+      if order_content && oc[1][:quantity].to_i <= 0
+        order_content.destroy
+      else
+        order_content.update(quantity: oc[1][:quantity])
+      end
+    end
+  end
+
+  def self.create_or_update_many(potential_contents)
+    potential_contents.reject! { |p_oc| p_oc[:product_id] == "" || 
+                                        p_oc[:quantity] == "" ||
+                                        p_oc[:quantity].to_i <= 0 }
+    begin
+      ActiveRecord::Base.transaction do
+        potential_contents.each do |potential_oc|
+          if self.find_by(order_id: potential_oc[:order_id])
+            create_or_update_record(potential_oc)
+          end
+        end
+      end
+    rescue
+      return "There was an error in your form. No changes have been made."
+    end
+    return nil
+  end
+
+  def self.create_or_update_record(record)
+    order_content = self.find_by(order_id: record[:order_id], product_id: record[:product_id])
+    if order_content
+      order_content.update!(quantity: record[:quantity])
+    else
+      self.create!(order_id: record[:order_id], product_id: record[:product_id], quantity: record[:quantity])
+    end
+  end
+
+
+
   def self.revenue(timeframe = nil)
     if timeframe.nil?
       OrderContent.select("ROUND(SUM(quantity * products.price), 2) AS total")

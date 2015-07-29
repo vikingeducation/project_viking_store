@@ -1,14 +1,8 @@
 class OrderContentsController < ApplicationController
+
   def update_everything
     @order = Order.find(params[:order][:id])
-    order_contents = params[:order_content]
-    order_contents.each do |oc|
-      if OrderContent.find(oc[0]) && oc[1][:quantity].to_i <= 0
-        OrderContent.find(oc[0]).destroy
-      else
-        OrderContent.find(oc[0]).update(quantity: oc[1][:quantity])
-      end
-    end
+    OrderContent.update_all(params[:order_content])
     redirect_to order_path(@order.id)
   end
 
@@ -31,10 +25,7 @@ class OrderContentsController < ApplicationController
   #
   def create_oc
     order = Order.find(params[:order][:id])
-    oc = params[:order_content]
-    oc.reject! { |p_oc| p_oc[:product_id] == "" || p_oc[:quantity] == "" ||
-     p_oc[:quantity].to_i <= 0 }
-    errors = create_order_content_records(oc)
+    errors = OrderContent.create_or_update_many(params[:order_content])
     if errors
       flash[:danger] = errors
     else
@@ -43,34 +34,8 @@ class OrderContentsController < ApplicationController
     redirect_to edit_order_path(order)
   end
 
+
   private
 
-    def whitelist_order_contents
-      params.permit(:order_content => [])
-    end
 
-    def create_order_content_records(oc)
-      begin
-        ActiveRecord::Base.transaction do
-          oc.each do |potential_oc|
-            if OrderContent.find_by(order_id: potential_oc[:order_id])
-              new_oc = create_or_update_record(potential_oc)
-            end
-          end
-        end
-      rescue
-        return "There was an error in your form. No changes have been made."
-      end
-      return nil
-    end
-
-    def create_or_update_record(record)
-      order_content = OrderContent.find_by(order_id: record[:order_id], product_id: record[:product_id])
-      if order_content
-        order_content.update!(quantity: record[:quantity])
-      else
-        order_content = OrderContent.create!(order_id: record[:order_id], product_id: record[:product_id], quantity: record[:quantity])
-      end
-      return order_content
-    end
 end
