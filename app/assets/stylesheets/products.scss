@@ -2,11 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#product-index {
+#storefront-footer {
+  background-color: #333;
+  color: #FFF;
+  height: 170px;
 
-  .btn {
-    margin-top: 15px;
-    margin-bottom: 25px;
+  .contact-title {
+    color: #F6B26B
   }
-
 }
