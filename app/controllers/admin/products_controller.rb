@@ -1,4 +1,4 @@
-class ProductsController < ApplicationController
+class Admin::ProductsController < AdminController
 
   layout 'portal'
 

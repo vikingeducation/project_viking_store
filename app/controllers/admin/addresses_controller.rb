@@ -1,4 +1,4 @@
-class AddressesController < ApplicationController
+class Admin::AddressesController < AdminController
 
   layout 'portal'
 

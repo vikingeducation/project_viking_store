@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.0'
+#ruby '2.2.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -57,6 +57,7 @@ gem 'pg'
 
 # Better Errors
 group :development do
+  gem 'bullet'
   gem 'better_errors'
 end
 gem 'binding_of_caller'

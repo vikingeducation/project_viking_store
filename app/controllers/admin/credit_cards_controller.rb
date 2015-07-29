@@ -1,4 +1,4 @@
-class CreditCardsController < ApplicationController
+class Admin::CreditCardsController < AdminController
 
 
   def destroy

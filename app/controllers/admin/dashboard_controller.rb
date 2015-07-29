@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class Admin::DashboardController < AdminController
 
   include DashboardHelper
 

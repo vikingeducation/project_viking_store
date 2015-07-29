@@ -1,17 +1,18 @@
 Rails.application.routes.draw do
 
 
-  root 'dashboard#index'
-
-  get 'dashboard' => 'dashboard#index'
+  root 'admin/dashboard#index'
 
 
-  resources :categories
-  resources :products
-  resources :users
-  resources :credit_cards, :only => [:destroy]
-  resources :addresses
-  resources :orders
+  namespace :admin do
+    get 'dashboard' => 'dashboard#index'
+    resources :categories
+    resources :products
+    resources :users
+    resources :credit_cards, :only => [:destroy]
+    resources :addresses
+    resources :orders
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

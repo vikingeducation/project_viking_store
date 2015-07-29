@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class Admin::OrdersController < AdminController
 
   layout 'portal'
 
