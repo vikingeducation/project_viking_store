@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   root 'products#index'
 
+  resource :session, :only => [:new, :create, :destroy]
   resources :products, :only => [:index]
+  resources :orders, :only => [:create, :update]
 
 
   namespace :admin do

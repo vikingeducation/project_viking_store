@@ -15,6 +15,13 @@ class User < ActiveRecord::Base
   validates :email, :format => { :with => /.+@.+/, :message => "format is invalid." }
 
 
+# Storefront methods
+  def has_cart?
+    self.orders.where('checkout_date IS NULL').empty?
+  end
+
+
+
 # Portal methods
   def self.get_index_data
     data = User.all.order(:id)

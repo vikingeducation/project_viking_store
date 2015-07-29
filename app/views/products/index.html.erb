@@ -64,7 +64,7 @@
           </div>
 
           <div class='row'>
-            <%= render @products %>
+            <%= render @products, :locals => { :cart => @cart } %>
           </div>
 
         </div>
