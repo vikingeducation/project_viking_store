@@ -32,17 +32,27 @@ class OrderContentsController < ApplicationController
   def create_oc
     order = Order.find(params[:order][:id])
     oc = params[:order_content]
+    oc.reject! { |p_oc| p_oc[:product_id] == "" || p_oc[:quantity] == "" || p_oc[:quantity].to_i <= 0}
     oc.each do |potential_oc|
       if OrderContent.find_by(order_id: potential_oc[:order_id])
-        unless OrderContent.create(potential_oc)
+        unless OrderContent.create(order_id: potential_oc[:order_id], product_id: potential_oc[:product_id], quantity: potential_oc[:quantity])
           flash[:danger] = "Failed to create row in order_contents table."
+          redirect_to edit_order_path(order)
+          break
         end
       else
         flash[:danger] = "Could not find order or product id."
         redirect_to edit_order_path(order)
+        break
       end
     end
     flash[:success] = "Products properly added to order!"
     redirect_to order
+  end
+
+  private
+
+  def whitelist_order_contents
+    params.permit(:order_content => [])
   end
 end
