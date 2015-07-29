@@ -13,7 +13,7 @@
         <%= fields_for "order_content[]", OrderContent.new do |field| %>
           <%= field.hidden_field :order_id, value: order.id %>
           <td><%= field.text_field :product_id %></td>
-          <td><%= field.text_field :quantity %></td>
+          <td><%= field.text_field :quantity, value: "" %></td>
         <% end %>
       </tr>
     <% end %>

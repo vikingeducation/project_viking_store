@@ -24,18 +24,25 @@ class OrderContentsController < ApplicationController
     end
   end
 
-  def create_oc
-    @order = Order.find(params[:order][:id])
-    order_contents = params[:order_content]
-    order_contents.each do |oc|
-      # if Product.find(oc[0]) and oc[1][:quantity].to_i > 0
-      #   @order_content = OrderContent.new(product_id: oc[0].to_i,
-      #                                     quantity: oc[1][:quantity].to_i,
-      #                                     order_id: @order.id)
-      oc.each do |c|
 
+  # Product_id must be able to be found
+  # Order_id must be able to be found
+  # (Validation) should fail if we have a row in order_contents where product_id and order_id are together already
+  #
+  def create_oc
+    order = Order.find(params[:order][:id])
+    oc = params[:order_content]
+    oc.each do |potential_oc|
+      if OrderContent.find_by(order_id: potential_oc[:order_id])
+        unless OrderContent.create(potential_oc)
+          flash[:danger] = "Failed to create row in order_contents table."
+        end
+      else
+        flash[:danger] = "Could not find order or product id."
+        redirect_to edit_order_path(order)
       end
     end
+    flash[:success] = "Products properly added to order!"
+    redirect_to order
   end
-
 end

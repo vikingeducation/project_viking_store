@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
       flash[:success] = "Order is created."
       redirect_to edit_order_path(@order.id)
     else
-      flash.now[:danger] = "Not able to create the order."
+      flash.now[:danger] = get_error_message("create", @order)
       render :new
     end
   end
@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
       flash[:success] = "Order is updated."
       redirect_to order_path(@order)
     else
-      flash.now[:danger] = "Not able to update the order."
+      flash.now[:danger] = get_error_message("update", @order)
       render :edit
     end
   end
@@ -53,6 +53,11 @@ class OrdersController < ApplicationController
   end
 
   private
+
+    def get_error_message(action, object_with_errors)
+      "Not able to #{action} the order. REASON: #{
+      object_with_errors.errors.full_messages.first}"
+    end
 
     def render_all
       Order.all.limit(100)
