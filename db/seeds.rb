@@ -45,7 +45,7 @@ def generate_product
   p[:name]        = Faker::Commerce.product_name
   p[:category_id] = Category.pluck(:id).sample
   p[:description] = Faker::Lorem.sentence
-  p[:sku]         = (Faker::Code.ean).to_i
+  p[:sku]         = Faker::Code.ean
   p[:price]       = random_price
   p.save
 end
@@ -179,24 +179,28 @@ end
 
 # Create some CreditCard records for users who have an order.
 def generate_credit_cards_for_checked_out_orders
-  users_with_orders = Order.all.select("DISTINCT user_id").
+  checked_out_orders = Order.all.select("DISTINCT user_id").
                                 where("checkout_date IS NOT NULL")
 
-  users_with_orders.each do |user|
+  checked_out_orders.each do |order|
     card = CreditCard.new
-    card[:user_id] = user.user_id
+    card[:user_id] = order.user_id
 
     # last 4 digits only
-    card[:card_number] = Faker::Number.number(4)
+    card[:card_number] = Faker::Number.number(16)
     card[:exp_month] = rand(12) + 1
 
     #so far, only good cards
     card[:exp_year] = Time.now.year + rand(5)
     card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
 
-    # for when card numbers collide
-    card.save if CreditCard.
-                 where(:card_number => card.card_number).empty?
+    card.save
+
+    affiliated_orders = Order.where("user_id = ?", order.user_id).where("checkout_date IS NOT NULL")
+    affiliated_orders.each do |aff_ord|
+      aff_ord.credit_card_id = card.id
+      aff_ord.save
+    end
   end
 end
 
