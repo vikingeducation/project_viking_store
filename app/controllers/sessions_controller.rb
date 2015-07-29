@@ -8,9 +8,11 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       sign_in user
+      merge_visitor_cart
       flash[:success] = "Thanks for signing in!"
+      redirect_to root_path
     else
-      flash.new[:error] = "We couldn't sign you in due to an error."
+      flash.now[:error] = "No record found.  Please sign up!"
       render :new
     end
   end

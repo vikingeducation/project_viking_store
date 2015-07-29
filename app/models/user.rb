@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
 # Storefront methods
   def has_cart?
-    self.orders.where('checkout_date IS NULL').empty?
+    !self.orders.where('checkout_date IS NULL').empty?
   end
 
 

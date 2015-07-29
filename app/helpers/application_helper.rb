@@ -1,5 +1,14 @@
 module ApplicationHelper
 
+  def user_sign_in_out
+    if current_user
+      link_to "Sign Out", session_path, method: 'DELETE'
+    else
+      link_to "Sign In", new_session_path
+    end
+  end
+
+
   def render_error(resource, field_sym=nil)
     "#{field_sym.to_s.titleize} #{resource.errors[field_sym].first}" unless resource.errors[field_sym].empty?
   end
