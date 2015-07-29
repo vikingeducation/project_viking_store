@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150724144228) do
+ActiveRecord::Schema.define(version: 20150729153634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20150724144228) do
     t.string   "street_address",    null: false
     t.string   "secondary_address"
     t.integer  "zip_code",          null: false
-    t.integer  "city_id",           null: false
-    t.integer  "state_id",          null: false
+    t.integer  "city_id"
+    t.integer  "state_id"
     t.integer  "user_id",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20150724144228) do
 
   create_table "orders", force: :cascade do |t|
     t.datetime "checkout_date"
-    t.integer  "user_id",         null: false
+    t.integer  "user_id"
     t.integer  "shipping_id"
     t.integer  "billing_id"
     t.datetime "created_at"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20150724144228) do
     t.decimal  "sku",                                 null: false
     t.text     "description"
     t.decimal  "price",       precision: 8, scale: 2, null: false
-    t.integer  "category_id",                         null: false
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

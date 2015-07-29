@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
   belongs_to :user
-  has_many :order_contents, :class_name => "OrderContents"
+  has_many :order_contents, :class_name => "OrderContents", :dependent => :destroy
   has_many :products, :through => :order_contents
   has_many :categories, :through => :products
 
