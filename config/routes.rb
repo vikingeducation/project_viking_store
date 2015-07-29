@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get "/admin" => "admins#portal"
   post '/orders/update_everything' => "orders#update_everything"
+  post '/orders/create_oc' => "orders#create_oc"
   resources :categories
   resources :products
   resources :users

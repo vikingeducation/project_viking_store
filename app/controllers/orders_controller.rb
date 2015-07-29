@@ -35,6 +35,20 @@ class OrdersController < ApplicationController
     redirect_to order_path(@order.id)
   end
 
+  def create_oc
+    @order = Order.find(params[:order][:id])
+    order_contents = params[:order_content]
+    order_contents.each do |oc|
+      # if Product.find(oc[0]) and oc[1][:quantity].to_i > 0
+      #   @order_content = OrderContent.new(product_id: oc[0].to_i, 
+      #                                     quantity: oc[1][:quantity].to_i,
+      #                                     order_id: @order.id)
+      oc.each do |c|
+        
+      end
+    end
+  end
+
   def update
     @order = Order.find(params[:id])
     if @order.update(white_listed_order_params)
