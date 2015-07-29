@@ -1,4 +1,4 @@
-module AddressesHelper
+module Admin::AddressesHelper
 
   def address_create(user)
     if user

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
 
-  root 'admin/dashboard#index'
+  root 'products#index'
+
+  resources :products, :only => [:index]
 
 
   namespace :admin do

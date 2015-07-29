@@ -1,4 +1,4 @@
-module DashboardHelper
+module Admin::DashboardHelper
 
   def get_table_headers(table_title)
     case table_title

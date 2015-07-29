@@ -1,4 +1,4 @@
-module OrdersHelper
+module Admin::OrdersHelper
 
   def order_create(user)
     if user
