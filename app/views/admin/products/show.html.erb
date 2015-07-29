@@ -70,7 +70,7 @@
         </div>
 
         <div class='col-xs-9'>
-          <p><%= link_to @product.category.name, category_path(@product.category.id) %></p>
+          <p><%= link_to @product.category.name, admin_category_path(@product.category.id) %></p>
         </div>
 
       </div>
@@ -118,7 +118,7 @@
       <div class='row'>
 
         <div class='col-xs-12'>
-          <%= link_to 'Edit Product', edit_product_path(@product.id) %>
+          <%= link_to 'Edit Product', edit_admin_product_path(@product.id) %>
         </div>
 
       </div>
@@ -126,7 +126,7 @@
       <div class='row'>
 
         <div class='col-xs-12'>
-          <%= link_to 'Delete Product', product_path(@product.id),
+          <%= link_to 'Delete Product', admin_product_path(@product.id),
                 :method => :delete,
                 :data => { :confirm => 'Delete product?' } %>
         </div>

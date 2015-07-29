@@ -2,10 +2,10 @@
   <td><%= product.id %></td>
   <td><%= product.name %></td>
   <td><%= currency_if_float(product.price) %></td>
-  <td><%= link_to product.category.name, category_path(product.category.id) %></td>
-  <td><%= link_to 'show', product_path(product.id) %></td>
-  <td><%= link_to 'edit', edit_product_path(product.id) %></td>
-  <td><%= link_to 'delete', product_path(product.id),
+  <td><%= link_to product.category.name, admin_category_path(product.category.id) %></td>
+  <td><%= link_to 'show', admin_product_path(product.id) %></td>
+  <td><%= link_to 'edit', edit_admin_product_path(product.id) %></td>
+  <td><%= link_to 'delete', admin_product_path(product.id),
             :method => :delete,
             :data => { :confirm => 'Delete product?' } %></td>
 </tr>
