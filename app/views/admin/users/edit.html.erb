@@ -27,7 +27,7 @@
       <div class='row'>
 
         <div class='col-xs-12 text-center'>
-          <%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user.id),
+          <%= link_to "Delete #{@user.first_name} #{@user.last_name}", admin_user_path(@user.id),
                       :method => :delete,
                       :data => { :confirm => 'Delete #{@user.first_name} #{@user.last_name}?' } %>
         </div>

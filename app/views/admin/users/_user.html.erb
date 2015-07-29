@@ -5,12 +5,12 @@
 
   <td><%= user[1] %></td>
   <td><%= user[2] %></td>
-  <td><%= link_to user[3], '#' %></td>
+  <td><%= link_to user[3], admin_orders_path(:user_id => user[0].id) %></td>
   <td><%= user[4] %></td>
 
-  <td><%= link_to 'show', user_path(user[0].id) %></td>
-  <td><%= link_to 'edit', edit_user_path(user[0].id) %></td>
-  <td><%= link_to 'delete', user_path(user[0].id),
+  <td><%= link_to 'show', admin_user_path(user[0].id) %></td>
+  <td><%= link_to 'edit', edit_admin_user_path(user[0].id) %></td>
+  <td><%= link_to 'delete', admin_user_path(user[0].id),
             :method => :delete,
             :data => { :confirm => 'Delete user?' } %></td>
 </tr>

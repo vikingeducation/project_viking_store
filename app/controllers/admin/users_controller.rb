@@ -29,7 +29,7 @@ class Admin::UsersController < AdminController
 
     if @user.save
       flash[:success] = "User successfully created!"
-      redirect_to @user
+      redirect_to [:admin, @user]
     else
       flash.now[:danger] = "User not saved - please try again."
       @available_addresses = @user.created_addresses
@@ -50,7 +50,7 @@ class Admin::UsersController < AdminController
 
     if @user.update(user_params)
       flash[:success] = "User successfully updated!"
-      redirect_to users_path
+      redirect_to admin_users_path
     else
       flash.now[:danger] = "User not saved - please try again."
       @available_addresses = @user.created_addresses
@@ -64,7 +64,7 @@ class Admin::UsersController < AdminController
 
     if @user.destroy
       flash[:success] = "User deleted!"
-      redirect_to users_path
+      redirect_to admin_users_path
     else
       flash[:danger] = "Delete failed - please try again."
       redirect_to :back
@@ -77,9 +77,8 @@ class Admin::UsersController < AdminController
   private
 
 
-
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :billing_id, :shipping_id)
-  end
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :email, :billing_id, :shipping_id)
+    end
 
 end
