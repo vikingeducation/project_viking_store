@@ -33,10 +33,13 @@ class OrderContentsController < ApplicationController
     order = Order.find(params[:order][:id])
     oc = params[:order_content]
     oc.reject! { |p_oc| p_oc[:product_id] == "" || p_oc[:quantity] == "" ||
-     p_oc[:quantity].to_i <= 0 || p_oc[:product_id].to_i > 2147483647 ||
-     p_oc[:quantity].to_i > 2147483647}
+     p_oc[:quantity].to_i <= 0 }
     errors = create_order_content_records(oc)
-    flash[:success] = "Products properly added to order!" unless errors
+    if errors
+      flash[:danger] = errors
+    else
+      flash[:success] = "Products properly added to order!"
+    end
     redirect_to edit_order_path(order)
   end
 
@@ -47,19 +50,16 @@ class OrderContentsController < ApplicationController
     end
 
     def create_order_content_records(oc)
-      ActiveRecord::Base.transaction do
-        oc.each do |potential_oc|
-          if OrderContent.find_by(order_id: potential_oc[:order_id])
-            new_oc = create_or_update_record(potential_oc)
-            if new_oc.errors.any?
-              flash[:danger] = new_oc.errors.full_messages.first
-              return new_oc
+      begin
+        ActiveRecord::Base.transaction do
+          oc.each do |potential_oc|
+            if OrderContent.find_by(order_id: potential_oc[:order_id])
+              new_oc = create_or_update_record(potential_oc)
             end
-          else
-            flash[:danger] = "Could not find order or product id."
-            break
           end
         end
+      rescue
+        return "There was an error in your form. No changes have been made."
       end
       return nil
     end

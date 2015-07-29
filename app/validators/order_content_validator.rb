@@ -1,5 +1,6 @@
 class OrderContentValidator < ActiveModel::Validator
   def validate(record)
+    binding.pry
     if record.product_id.to_i >= 2147483647
       record.errors[:product_id] << "The product id is way too large."
     end
