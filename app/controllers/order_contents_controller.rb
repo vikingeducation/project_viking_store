@@ -32,27 +32,45 @@ class OrderContentsController < ApplicationController
   def create_oc
     order = Order.find(params[:order][:id])
     oc = params[:order_content]
-    oc.reject! { |p_oc| p_oc[:product_id] == "" || p_oc[:quantity] == "" || p_oc[:quantity].to_i <= 0}
-    oc.each do |potential_oc|
-      if OrderContent.find_by(order_id: potential_oc[:order_id])
-        unless OrderContent.create(order_id: potential_oc[:order_id], product_id: potential_oc[:product_id], quantity: potential_oc[:quantity])
-          flash[:danger] = "Failed to create row in order_contents table."
-          redirect_to edit_order_path(order)
-          break
-        end
-      else
-        flash[:danger] = "Could not find order or product id."
-        redirect_to edit_order_path(order)
-        break
-      end
-    end
-    flash[:success] = "Products properly added to order!"
-    redirect_to order
+    oc.reject! { |p_oc| p_oc[:product_id] == "" || p_oc[:quantity] == "" ||
+     p_oc[:quantity].to_i <= 0 || p_oc[:product_id].to_i > 2147483647 ||
+     p_oc[:quantity].to_i > 2147483647}
+    errors = create_order_content_records(oc)
+    flash[:success] = "Products properly added to order!" unless errors
+    redirect_to edit_order_path(order)
   end
 
   private
 
-  def whitelist_order_contents
-    params.permit(:order_content => [])
-  end
+    def whitelist_order_contents
+      params.permit(:order_content => [])
+    end
+
+    def create_order_content_records(oc)
+      ActiveRecord::Base.transaction do
+        oc.each do |potential_oc|
+          if OrderContent.find_by(order_id: potential_oc[:order_id])
+            new_oc = create_or_update_record(potential_oc)
+            if new_oc.errors.any?
+              flash[:danger] = new_oc.errors.full_messages.first
+              return new_oc
+            end
+          else
+            flash[:danger] = "Could not find order or product id."
+            break
+          end
+        end
+      end
+      return nil
+    end
+
+    def create_or_update_record(record)
+      order_content = OrderContent.find_by(order_id: record[:order_id], product_id: record[:product_id])
+      if order_content
+        order_content.update!(quantity: record[:quantity])
+      else
+        order_content = OrderContent.create!(order_id: record[:order_id], product_id: record[:product_id], quantity: record[:quantity])
+      end
+      return order_content
+    end
 end

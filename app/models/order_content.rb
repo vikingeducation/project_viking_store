@@ -2,6 +2,7 @@ class OrderContent < ActiveRecord::Base
   belongs_to :order
   belongs_to :product
   validates_uniqueness_of :order_id, scope: :product_id
+  validates_with OrderContentValidator
 
 
   def self.revenue(timeframe = nil)
