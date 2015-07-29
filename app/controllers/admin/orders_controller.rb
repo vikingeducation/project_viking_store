@@ -10,7 +10,7 @@ class Admin::OrdersController < AdminController
       @filtered_user = User.find(params[:user_id]) if params[:user_id]
     rescue
       flash[:danger] = "User not found.  Redirecting to Orders Index."
-      redirect_to orders_path
+      redirect_to admin_orders_path
     end
 
   end
@@ -40,7 +40,7 @@ class Admin::OrdersController < AdminController
 
     if @order.save
       flash[:success] = "Order successfully created!"
-      redirect_to edit_order_path(@order.id)
+      redirect_to edit_admin_order_path(@order.id)
     else
       flash.now[:danger] = "Order not saved - please try again."
       @user = User.find(params[:user_id])
@@ -67,7 +67,7 @@ class Admin::OrdersController < AdminController
 
       if @order.update(order_params)
         flash[:success] = "Order successfully updated!"
-        redirect_to @order
+        redirect_to [:admin, @order]
       else
         flash.now[:danger] = "Order not saved - please try again."
         reset_order_instance_variables
@@ -87,7 +87,7 @@ class Admin::OrdersController < AdminController
         content_row.update(:quantity => new_quantity)
       end
 
-      redirect_to @order
+      redirect_to [:admin, @order]
     end
 
 
@@ -114,7 +114,7 @@ class Admin::OrdersController < AdminController
 
       end
 
-      redirect_to @order
+      redirect_to [:admin, @order]
 
     end
 
@@ -126,7 +126,7 @@ class Admin::OrdersController < AdminController
 
     if @order.destroy
       flash[:success] = "Order deleted!"
-      redirect_to user_path(@order.user_id)
+      redirect_to admin_user_path(@order.user_id)
     else
       flash[:danger] = "Delete failed - please try again."
       redirect_to :back
@@ -135,25 +135,26 @@ class Admin::OrdersController < AdminController
   end
 
 
+
   private
 
 
-  def reset_order_instance_variables
-    @status = @order.define_status
-    @user = User.find(@order.user_id)
-    @available_addresses = @user.created_addresses
-    @available_cards = @user.credit_cards.all
-    @order_contents = @order.build_contents_table_data
-  end
+    def reset_order_instance_variables
+      @status = @order.define_status
+      @user = User.find(@order.user_id)
+      @available_addresses = @user.created_addresses
+      @available_cards = @user.credit_cards.all
+      @order_contents = @order.build_contents_table_data
+    end
 
 
-  def order_params
-    params.require(:order).permit(:checkout_date, :shipping_id, :billing_id, :billing_card_id, :user_id)
-  end
+    def order_params
+      params.require(:order).permit(:checkout_date, :shipping_id, :billing_id, :billing_card_id, :user_id)
+    end
 
 
-  def content_params
-    params.require(:order_content).permit(:quantity)
-  end
+    def content_params
+      params.require(:order_content).permit(:quantity)
+    end
 
 end

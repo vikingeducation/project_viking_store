@@ -13,7 +13,7 @@
 </div>
 
 
-<%= form_tag "/orders/#{order.id}", method: "post" do %>
+<%= form_tag "/admin/orders/#{order.id}", method: "post" do %>
   <%= hidden_field_tag :_method, :patch %>
 
   <table class='table table-striped table-bordered table-condensed'>

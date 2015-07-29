@@ -6,7 +6,7 @@ module OrdersHelper
         new_order_path(:user_id => user.id),
         class: 'btn btn-primary btn-lg btn-block'
     else
-      render 'shared/point_to_users_index'
+      render 'admin/shared/point_to_users_index'
     end
   end
 
