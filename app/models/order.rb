@@ -10,8 +10,7 @@ class Order < ActiveRecord::Base
   has_many :products, through: :order_contents
   has_many :categories, through: :products
 
-  validates :checkout_date, :only_one_unplaced
-
+  validates_with OrderValidator
   def value
     self.order_contents.reduce(0){|sum, oc| sum += oc.quantity * oc.product.price}
   end
@@ -22,7 +21,6 @@ class Order < ActiveRecord::Base
 
 
   def self.time_series_day(days=7)
-
     self.select("date_trunc('day', orders.checkout_date) AS day, count(DISTINCT orders.id), SUM(order_contents.quantity * products.price)").
     joins('JOIN order_contents ON orders.id = order_contents.order_id').
     joins('JOIN products ON products.id = order_contents.product_id').
@@ -102,6 +100,10 @@ class Order < ActiveRecord::Base
     self.revenue(days).first.cost
   end
 
+  def has_cart?
+    Order.where("user_id = ? AND checkout_date IS NULL", self.user_id).present?
+  end
+
   private
     def self.get_largest_overall
       self.select('SUM(products.price * order_contents.quantity) as max_order').
@@ -120,16 +122,6 @@ class Order < ActiveRecord::Base
         order_id JOIN products ON order_contents.product_id = products.id').
         where('orders.checkout_date > ?', DateTime.now - days).order('cost')
       end
-    end
-
-    def only_one_unplaced
-      if self.checkout_date.nil? and self.has_cart?
-        errors.add(:checkout_date, "You can only have one unplaced order!") 
-      end
-    end
-
-    def has_cart?
-      Order.where("user_id = ? AND checkout_date IS NULL", self.user_id).present?
     end
 end
 

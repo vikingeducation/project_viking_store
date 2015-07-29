@@ -26,6 +26,15 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def update_everything
+    @order = Order.find(params[:order][:id])
+    order_contents = params[:order_content]
+    order_contents.each do |oc|
+      OrderContent.find(oc[0]).update(quantity: oc[1][:quantity])
+    end
+    redirect_to order_path(@order.id)
+  end
+
   def update
     @order = Order.find(params[:id])
     if @order.update(white_listed_order_params)
@@ -42,15 +51,14 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    # @address = Address.find(params[:id])
-    # user_id = @address.user_id if @address
-    # if @address.destroy
-    #   flash[:success] = "Address is destroyed."
-    #   redirect_to addresses_path(user_id: user_id)
-    # else
-    #   flash[:danger] = "Not able to destroy the address."
-    #   redirect_to @address
-    # end
+    @order = Order.find(params[:id])
+    if @order.destroy
+      flash[:success] = "Order is deleted."
+      redirect_to orders_path
+    else
+      flash.now[:danger] = "Not able to delete the order."
+      render @order
+    end
   end
 
   private

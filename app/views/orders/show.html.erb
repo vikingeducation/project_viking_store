@@ -3,7 +3,7 @@
 <%= render partial: "orders/basic_info", locals: {order: @order} %>
 
 <h3> Number of Products:<%= @order.products.count %> </h3>
-<h3> Order Value:<%= @order.value %> </h3>
+<h3> Order Value:<%= number_to_currency(@order.value) %> </h3>
 <%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
 
 <h2> Order Status </h2>
@@ -19,8 +19,10 @@
   <p>City: <%= @order.billing.city.name %></p>
 <br>
 
-<h3> Billing Card </h3>
-<p> Last 4 digits: <%= @order.user.credit_cards.first.card_number %></p>
+<% if @order.user.credit_cards.any? %>
+	<h3> Billing Card </h3>
+	<p> Last 4 digits: <%= @order.user.credit_cards.first.card_number %></p>
+<% end %>
 
 <h5><%= link_to "Edit this order's information.", edit_order_path(@order) %></h5>
 <h5><%= link_to "Delete this order.", @order, method: 'delete' %></h5>

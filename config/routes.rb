@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "/dashboard" => "analytics#dashboard"
 
   get "/admin" => "admins#portal"
-
+  post '/orders/update_everything' => "orders#update_everything"
   resources :categories
   resources :products
   resources :users
