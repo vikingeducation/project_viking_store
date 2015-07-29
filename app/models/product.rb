@@ -7,6 +7,15 @@ class Product < ActiveRecord::Base
   validates :price, :numericality => true, :length =>{ :in => 0..10_000 }
 
 
+  # Storefront methods
+  def self.filter_by(category = nil)
+    if category
+      where(:category_id => category.id)
+    else
+      all
+    end
+  end
+
 
   # Portal methods
   def times_ordered

@@ -35,6 +35,35 @@
         <div class='col-xs-10 col-xs-offset-1'>
 
           <div class='row'>
+            <div class='col-xs-4 col-xs-offset-8'>
+
+              <form action="<%= products_path %>" method="GET">
+                <div class='form-group'>
+                  <div class='row'>
+                    <div class='col-xs-6'>
+
+                      <%= select_tag  :category_id,
+                                      options_from_collection_for_select( Category.all,
+                                                                          :id,
+                                                                          :name,
+                                                                          params[:category_id]
+                                                                        ),
+                                      :include_blank => true,
+                                      :class => 'form-control'
+                      %>
+
+                    </div>
+                    <div class='col-xs-6'>
+                      <input type="submit" class='btn btn-default btn-block'>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+          <div class='row'>
             <%= render @products %>
           </div>
 
