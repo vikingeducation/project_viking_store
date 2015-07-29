@@ -11,7 +11,7 @@
   <% orders.each do |order| %>
     <tr>
       <td><%= order.id %></td>
-      <td><%= order.created_at %></td>
+      <td><%= order.created_or_checkout_date %></td>
       <td><%= number_to_currency(order.value) %></td>
       <td><%= order.status %></td>
       <td><%= link_to "show", order_path(order) %></td>

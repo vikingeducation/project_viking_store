@@ -1,5 +1,5 @@
 <h1> Order Contents </h1>
-<%= form_for order, url: orders_update_everything_path, method: 'post' do %>
+<%= form_for order, url: order_contents_update_everything_path, method: 'post' do %>
   <%= hidden_field :order, :id, :value => order.id %>
 <table class="table table-bordered">
   <tr>
@@ -18,7 +18,7 @@
     <% end %>
       <td><%= order_content.product.price %> </td>
       <td><%= order_content.quantity * order_content.product.price %></td>
-      <td> REMOVE </td>
+      <td><%= link_to "REMOVE", order_contents_remove_oc_path({order_id: order.id, id: order_content.id})%> </td>
     </tr>
   <% end %>
 </table>

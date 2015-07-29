@@ -34,8 +34,8 @@ class User < ActiveRecord::Base
   end
 
   def last_order_date
-    if self.orders.order(:checkout_date).last && self.orders.order(:checkout_date).last.checkout_date
-      self.orders.order(:checkout_date).last.checkout_date
+    if self.orders.where("checkout_date IS NOT NULL").order(:checkout_date).last
+      self.orders.where("checkout_date IS NOT NULL").order(:checkout_date).last.checkout_date
     else
       "N/A"
     end

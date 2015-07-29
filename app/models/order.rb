@@ -11,6 +11,7 @@ class Order < ActiveRecord::Base
   has_many :categories, through: :products
 
   validates_with OrderValidator
+
   def value
     self.order_contents.reduce(0){|sum, oc| sum += oc.quantity * oc.product.price}
   end
@@ -28,6 +29,10 @@ class Order < ActiveRecord::Base
       DateTime.now - 7,DateTime.now).
     group('day').
     order('day DESC')
+  end
+
+  def created_or_checkout_date
+    self.checkout_date.nil? ? self.created_at : self.checkout_date
   end
 
   def self.time_series_week(weeks=7)

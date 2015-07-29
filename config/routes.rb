@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   get "/dashboard" => "analytics#dashboard"
 
   get "/admin" => "admins#portal"
-  post '/orders/update_everything' => "orders#update_everything"
-  post '/orders/create_oc' => "orders#create_oc"
+  get '/order_contents/remove_oc' => "order_contents#remove_oc"
+  post '/order_contents/update_everything' => "order_contents#update_everything"
+  post '/order_contents/create_oc' => "order_contents#create_oc"
   resources :categories
   resources :products
   resources :users

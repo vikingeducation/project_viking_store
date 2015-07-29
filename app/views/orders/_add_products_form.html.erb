@@ -1,7 +1,7 @@
 <h2>Add Products to Order</h2>
 <h5>Add up to 5 products at a time.</h5>
 
-<%= form_for order, url: orders_create_oc_path, method: 'post' do %>
+<%= form_for order, url: order_contents_create_oc_path, method: 'post' do %>
   <%= hidden_field :order, :id, :value => order.id %>
   <table class="table-bordered">
     <tr>
@@ -15,7 +15,7 @@
           <td><%= field.text_field :product_id %></td>
           <td><%= field.text_field :quantity %></td>
         <% end %>
-      </tr> 
+      </tr>
     <% end %>
   </table>
     <div class="actions">

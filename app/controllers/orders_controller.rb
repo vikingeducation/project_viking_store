@@ -26,29 +26,6 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  def update_everything
-    @order = Order.find(params[:order][:id])
-    order_contents = params[:order_content]
-    order_contents.each do |oc|
-      OrderContent.find(oc[0]).update(quantity: oc[1][:quantity])
-    end
-    redirect_to order_path(@order.id)
-  end
-
-  def create_oc
-    @order = Order.find(params[:order][:id])
-    order_contents = params[:order_content]
-    order_contents.each do |oc|
-      # if Product.find(oc[0]) and oc[1][:quantity].to_i > 0
-      #   @order_content = OrderContent.new(product_id: oc[0].to_i, 
-      #                                     quantity: oc[1][:quantity].to_i,
-      #                                     order_id: @order.id)
-      oc.each do |c|
-        
-      end
-    end
-  end
-
   def update
     @order = Order.find(params[:id])
     if @order.update(white_listed_order_params)
@@ -78,16 +55,16 @@ class OrdersController < ApplicationController
   private
 
     def render_all
-      Order.all
+      Order.all.limit(100)
     end
 
     def render_user(user_id)
       orders = Order.where("user_id = #{user_id}")
       if orders.empty?
         flash[:notice] = "User not found."
-        return Order.all
+        return render_all
       else
-        return orders
+        return orders.limit(100)
       end
     end
 
