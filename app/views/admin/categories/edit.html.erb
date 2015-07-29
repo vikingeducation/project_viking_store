@@ -21,7 +21,7 @@
   <div class='row'>
     <div class='col-xs-12 text-center '>
 
-      <%= link_to 'Delete Category', category_path(@category.id),
+      <%= link_to 'Delete Category', admin_category_path(@category.id),
             :method => :delete,
             :data => { :confirm => 'Delete category?' } %>
 

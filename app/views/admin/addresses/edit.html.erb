@@ -22,14 +22,14 @@
                         :states => @states,
                         :button_label => "Update Address"
                        },
-            :layout => 'layouts/admin/shared/show_panel' %>
+            :layout => 'layouts/shared/show_panel' %>
 
 
       <!-- DELETE ADDRESS -->
       <div class='row'>
 
         <div class='col-xs-12 text-center'>
-          <%= link_to "Delete Address", address_path(@address.id),
+          <%= link_to "Delete Address", admin_address_path(@address.id),
                       :method => :delete,
                       :data => { :confirm => 'Delete address?' } %>
         </div>

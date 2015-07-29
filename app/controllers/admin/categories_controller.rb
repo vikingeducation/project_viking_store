@@ -24,7 +24,7 @@ class Admin::CategoriesController < AdminController
 
     if @category.save
       flash[:success] = "Category successfully created!"
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash.now[:danger] = "Category not saved - please try again."
       render :new
@@ -43,7 +43,7 @@ class Admin::CategoriesController < AdminController
 
     if @category.update(category_params)
       flash[:success] = "Category successfully updated!"
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash.now[:danger] = "Category not saved - please try again."
       render :edit
@@ -56,7 +56,7 @@ class Admin::CategoriesController < AdminController
 
     if @category.destroy
       flash[:success] = "Category deleted!"
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash.now[:danger] = "Delete failed - please try again."
       redirect_to :back

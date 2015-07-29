@@ -10,7 +10,7 @@ class Admin::AddressesController < AdminController
       @filtered_user = User.find(params[:user_id]) if params[:user_id]
     rescue
       flash[:danger] = "User not found.  Redirecting to Address Index."
-      redirect_to addresses_path
+      redirect_to admin_addresses_path
     end
 
   end
@@ -38,7 +38,7 @@ class Admin::AddressesController < AdminController
 
     if @address.save
       flash[:success] = "Address successfully created!"
-      redirect_to addresses_path(:user_id => @address.user_id)
+      redirect_to admin_addresses_path(:user_id => @address.user_id)
     else
       flash.now[:danger] = "Address not saved - please try again."
       @user = User.find(@address.user_id)
@@ -62,7 +62,7 @@ class Admin::AddressesController < AdminController
 
     if @address.update(address_params)
       flash[:success] = "Address successfully updated!"
-      redirect_to @address
+      redirect_to [:admin, @address]
     else
       flash.now[:danger] = "Address not saved - please try again."
       @user = User.find(@address.user_id)
@@ -78,7 +78,7 @@ class Admin::AddressesController < AdminController
 
     if @address.destroy
       flash[:success] = "Address deleted!"
-      redirect_to addresses_path(:user_id => @address.user_id)
+      redirect_to admin_addresses_path(:user_id => @address.user_id)
     else
       flash[:danger] = "Delete failed - please try again."
       redirect_to :back
