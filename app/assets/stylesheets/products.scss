@@ -11,3 +11,22 @@
     color: #F6B26B
   }
 }
+
+
+#products-index {
+  .jumbotron {
+    background-image: url("viking_ship_background_medium.jpg");
+    background-size: contain;
+    background-position: center;
+    height: 320px;
+  }
+
+  .sub-jumbo {
+    background-color: #333;
+    color: #FFF;
+  }
+
+  .products-index-header {
+
+  }
+}
