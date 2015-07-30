@@ -29,46 +29,60 @@ class ApplicationController < ActionController::Base
 
 
   def signed_in_user?
-    !!@current_user
+    !!current_user
   end
   helper_method :signed_in_user?
 
 
   def merge_visitor_cart
-    if current_user.has_cart?
-      cart = current_user.get_cart
-    else
-      cart = current_user.orders.build
-    end
+    cart = current_user.get_or_build_cart
 
-    # run through session[:visitor_cart] and add qty based on id's
     if session[:visitor_cart]
+
       session[:visitor_cart].each do |add_id, add_quantity|
-
-        if product_exists?(cart, add_id.to_i)
-          cart.update_quantity(add_id.to_i, add_quantity)
-          #cart.order_contents.where(:product_id => add_id.to_i).first.increase_quantity(add_quantity)
-        else
-          product = Product.find(add_id)
-          cart.products << product
-        end
-
+        update_quantity(cart, add_id.to_i, add_quantity)
         cart.save!
-
       end
 
       session.delete(:visitor_cart)
-
     end
-
   end
 
 
   private
 
+
+  def require_login
+    unless signed_in_user?
+      flash[:error] = "Please sign in before checking out."
+      redirect_to new_session_path
+    end
+  end
+
+
+  def get_or_build_cart
+    if current_user.has_cart?
+      current_user.get_cart
+    else
+      current_user.orders.build
+    end
+  end
+
+
+  def update_quantity(cart, product_id, add_quantity)
+    if product_exists?(cart, product_id)
+      cart.update_quantity(product_id, add_quantity)
+    else
+      product = Product.find(product_id)
+      cart.products << product
+    end
+  end
+
+
   def product_exists?(order, product_id)
     order.products.pluck(:product_id).include?(product_id)
   end
+
 
 
 end

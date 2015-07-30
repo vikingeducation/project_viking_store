@@ -22,6 +22,15 @@ class User < ActiveRecord::Base
   end
 
 
+  def get_or_build_cart
+    if self.has_cart?
+      self.get_cart
+    else
+      self.orders.build
+    end
+  end
+
+
 
 # Portal methods
   def self.get_index_data

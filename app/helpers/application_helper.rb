@@ -9,6 +9,15 @@ module ApplicationHelper
   end
 
 
+  def current_user_cart
+    if current_user
+      current_user.get_or_build_cart
+    else
+      0
+    end
+  end
+
+
   def render_error(resource, field_sym=nil)
     "#{field_sym.to_s.titleize} #{resource.errors[field_sym].first}" unless resource.errors[field_sym].empty?
   end
