@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
     category = Category.where("id = ?", params[:category_id].to_i).first
     @products = Product.filter_by(category).limit(6)
 
-    add_product_to_visitor_cart if params[:add_product_id]
+    add_product_to_visitor_cart if params[:add_product_id] && current_user.nil?
   end
 
 

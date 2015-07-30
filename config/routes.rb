@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :products, :only => [:index]
   resources :orders, :only => [:create, :update]
 
+  resources :users, :only => [:new, :create] do
+    resources :addresses, :only => [:new, :create]
+  end
+
 
   namespace :admin do
     get 'dashboard' => 'dashboard#index'

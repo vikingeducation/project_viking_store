@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
 
 
   def sign_out
-    session.delete(:current_user_id) && @current_user = nil
+    @current_user = nil
+    session.delete(:current_user_id)
   end
 
 
@@ -41,23 +42,33 @@ class ApplicationController < ActionController::Base
     end
 
     # run through session[:visitor_cart] and add qty based on id's
-    session[:visitor_cart].each do |add_id, add_quantity|
+    if session[:visitor_cart]
+      session[:visitor_cart].each do |add_id, add_quantity|
 
-      if cart.products.pluck(:product_id).include?(add_id.to_i)
-        cart.order_contents.where(:product_id => add_id.to_i).increase_quantity(add_quantity) # not saving?
-        # cart.order_contents.increase_quantity(add_quantity)
-      else
-        product = Product.find(add_id)
-        cart.products << product
+        if product_exists?(cart, add_id.to_i)
+          cart.update_quantity(add_id.to_i, add_quantity)
+          #cart.order_contents.where(:product_id => add_id.to_i).first.increase_quantity(add_quantity)
+        else
+          product = Product.find(add_id)
+          cart.products << product
+        end
+
+        cart.save!
+
       end
 
-      cart.save!
+      session.delete(:visitor_cart)
 
     end
 
-    # clear visitor_cart
-    session.delete(:visitor_cart)
-
   end
+
+
+  private
+
+  def product_exists?(order, product_id)
+    order.products.pluck(:product_id).include?(product_id)
+  end
+
 
 end

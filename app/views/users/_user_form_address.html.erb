@@ -1,0 +1,49 @@
+<div class='panel panel-default'>
+
+  <div class='panel-body'>
+
+    <h4 class='text-center'>Saved Address <%= number %> (optional)</h4>
+
+    <%= fields_for :addresses do |address_fields| %>
+
+      <div class='row'>
+        <div class='col-xs-12'>
+          <div class='form-group'>
+            <%= address_fields.label :street_address, 'Street Address' %>
+            <%= address_fields.text_field :street_address, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-xs-12'>
+          <div class='form-group'>
+            <%= address_fields.label :city, 'City' %>
+            <%= address_fields.text_field :city, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class='row'>
+
+        <div class='col-xs-6'>
+          <div class='form-group'>
+            <%= address_fields.label :state, 'State' %>
+            <%= address_fields.collection_select :state_id, State.all, :id, :name, {}, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class='col-xs-6'>
+          <div class='form-group'>
+            <%= address_fields.label :zip_code, 'ZIP Code' %>
+            <%= address_fields.text_field :zip_code, class: 'form-control' %>
+          </div>
+        </div>
+
+      </div>
+
+    </div> <!-- panel-body -->
+
+  <% end %>
+
+</div>

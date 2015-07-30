@@ -1,0 +1,32 @@
+<%= form_for user do |user_fields| %>
+
+  <div class='row'>
+
+<!-- Left side -->
+    <div class='col-md-6'>
+
+      <!-- First Address -->
+      <%= render :partial => 'user_form_address', :locals => { :number => 2 } %>
+
+      <!-- Second Address -->
+      <%= render :partial => 'user_form_address', :locals => { :number => 2 } %>
+
+
+    </div>
+
+
+<!-- Right side -->
+
+    <div class='col-md-6'>
+
+      <!-- Account Info -->
+      <%= render :partial => 'user_form_info', :locals => { :user_fields => user_fields } %>
+
+      <%= render :partial => 'user_form_submit', :locals => { :user_fields => user_fields } %>
+
+    </div>
+  </div>
+
+
+
+<% end %>

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, :presence => true, :length => { :in => 1..64 }
   validates :email, :format => { :with => /.+@.+/, :message => "format is invalid." }
 
+  validates_confirmation_of :email
 
 # Storefront methods
   def has_cart?

@@ -9,6 +9,13 @@ class Order < ActiveRecord::Base
   belongs_to :billing_card, :class_name => 'CreditCard', :foreign_key => :billing_card_id
 
 
+# Storefront methods
+def update_quantity(product_id, amount)
+  self.order_contents.where(:product_id => product_id).first.increase_quantity(amount)
+end
+
+
+
 # Portal methods
   def self.get_index_data(user_id = nil)
 
