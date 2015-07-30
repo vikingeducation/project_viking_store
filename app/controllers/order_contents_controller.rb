@@ -1,5 +1,6 @@
 class OrderContentsController < ApplicationController
 
+  # params[:order_content] is an array of order_contents to update
   def update_everything
     @order = Order.find(params[:order][:id])
     OrderContent.update_all(params[:order_content])
@@ -19,10 +20,10 @@ class OrderContentsController < ApplicationController
   end
 
 
-  # Product_id must be able to be found
-  # Order_id must be able to be found
-  # (Validation) should fail if we have a row in order_contents where product_id and order_id are together already
-  #
+  # order_content is an array of order_contents to create.
+  # If the order_content already exists, we update it instead.
+  # create_or_update_many performs a transaction so if anything fails the
+  # whole transaction gets rolled back.
   def create_oc
     order = Order.find(params[:order][:id])
     errors = OrderContent.create_or_update_many(params[:order_content])
@@ -36,6 +37,5 @@ class OrderContentsController < ApplicationController
 
 
   private
-
 
 end

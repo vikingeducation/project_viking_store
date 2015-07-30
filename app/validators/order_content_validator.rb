@@ -1,12 +1,14 @@
 class OrderContentValidator < ActiveModel::Validator
+  # Product id and quantity cannot be out of range.
+  # Cannot create order_content rows if product or order does not exist.
   def validate(record)
 
-    if record.product_id.to_i >= 2147483647
-      record.errors[:product_id] << "The product id is way too large."
+    if record.product_id.to_i >= 10000 ||  record.product_id.to_i < 1
+      record.errors[:product_id] << "The product id is out of range."
     end
 
-    if record.quantity.to_i >= 10000
-      record.errors[:quantity] << "The quantity is way too large."
+    if record.quantity.to_i >= 10000 || record.quantity.to_i < 1
+      record.errors[:quantity] << "The quantity is out of range."
     end
 
     unless Product.find_by(id: record.product_id)

@@ -76,7 +76,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.average_in_last(days = nil)
-    unless days.nil?
+    if days
       self.select('(SUM(products.price * order_contents.quantity)/COUNT(DISTINCT orders.id)) as average_order').
       joins('JOIN order_contents ON order_contents.order_id = orders.id').
       joins('JOIN products ON order_contents.product_id = products.id').

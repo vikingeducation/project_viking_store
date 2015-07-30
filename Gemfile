@@ -49,6 +49,8 @@ group :development, :test do
   # Note: Need to pull this fork directly because
   # the original uses pry-debugger which doesn't work
   # with Ruby 2
+  gem 'guard-rspec'
+  gem 'rspec-rails'
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
   gem 'pry-byebug'
   gem "better_errors"

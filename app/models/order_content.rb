@@ -17,9 +17,10 @@ class OrderContent < ActiveRecord::Base
   end
 
   def self.create_or_update_many(potential_contents)
-    potential_contents.reject! { |p_oc| p_oc[:product_id] == "" || 
-                                        p_oc[:quantity] == "" ||
-                                        p_oc[:quantity].to_i <= 0 }
+    # The reason we use reject rather than placing this in validation
+    # is so the user isn't forced to fill in all of the form.
+    potential_contents.reject! { |p_oc| p_oc[:product_id] == "" ||
+                                        p_oc[:quantity] == "" }
     begin
       ActiveRecord::Base.transaction do
         potential_contents.each do |potential_oc|
