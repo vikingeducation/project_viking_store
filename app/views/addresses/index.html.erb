@@ -1,0 +1,22 @@
+<div class="row">
+  <%= address_owner %>
+</div>
+
+<div class="row">
+  <table class="table table-bordered">
+    <%= button_for_new_address %>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Orders</th>
+      <th>Created</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <%= render @addresses %>
+  </table>
+</div>

@@ -1,4 +1,48 @@
 class User < ActiveRecord::Base
+<<<<<<< HEAD
+=======
+  validates :first_name, :last_name, :email, presence: true,
+                                            length: {in: 1..64}
+  validates :email, :format => { :with => /@/ }
+
+
+  has_many :addresses
+
+  belongs_to :default_billing_address, class_name:  "Address",
+              :foreign_key => :billing_id
+
+  belongs_to :default_shipping_address, class_name:  "Address",
+              :foreign_key => :shipping_id
+
+  has_many :orders
+  has_many :credit_cards
+
+  has_many :order_contents, through: :orders
+  has_many :products, through: :order_contents
+  # 1. Overall Platform
+
+  # Last 7 Days
+
+  def name
+    self.first_name + " " + self.last_name
+  end
+
+  def city
+    self.default_shipping_address.city.name
+  end
+
+  def state
+    self.default_shipping_address.state.name
+  end
+
+  def last_order_date
+    if self.orders.where("checkout_date IS NOT NULL").order(:checkout_date).last
+      self.orders.where("checkout_date IS NOT NULL").order(:checkout_date).last.checkout_date
+    else
+      "N/A"
+    end
+  end
+>>>>>>> 76a0957610bfb218e242a9bb5f2df4c8fe630680
 
   def self.in_last(days = nil)
     if days.nil?
@@ -21,6 +65,7 @@ class User < ActiveRecord::Base
     overall
   end
 
+<<<<<<< HEAD
   def self.get_demographics
     demographics = {'Top 3 states' => [], 'Top 3 cities' => [] }
     self.top_states.each do |state|
@@ -32,6 +77,9 @@ class User < ActiveRecord::Base
     end
     demographics
   end
+=======
+
+>>>>>>> 76a0957610bfb218e242a9bb5f2df4c8fe630680
 
   def self.get_superlatives
     superlatives = {}
@@ -52,6 +100,7 @@ class User < ActiveRecord::Base
 
   private
 
+<<<<<<< HEAD
     def self.top_states(limit = 3)
       self.select('states.name, COUNT(addresses.state_id) AS total').
       join_to_states.
@@ -71,26 +120,40 @@ class User < ActiveRecord::Base
     def self.high_single_order_value
       self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity) as cost').
       join_to_products.
+=======
+    def self.high_single_order_value
+      self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity) as cost').
+      joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
+>>>>>>> 76a0957610bfb218e242a9bb5f2df4c8fe630680
       where("orders.checkout_date IS NOT NULL").
       group('orders.id, full_name').order('cost DESC').limit(1)
     end
 
     def self.high_lifetime_value
       self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity) as cost').
+<<<<<<< HEAD
       join_to_products.
+=======
+      joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
+>>>>>>> 76a0957610bfb218e242a9bb5f2df4c8fe630680
       where("orders.checkout_date IS NOT NULL").
       group('users.id, full_name').order('cost DESC').limit(1)
     end
 
     def self.high_average_value
       self.select('users.first_name || users.last_name AS full_name, SUM(products.price * order_contents.quantity)/(COUNT(DISTINCT orders.id)) as average_value').
+<<<<<<< HEAD
       join_to_products.
+=======
+      joins('JOIN orders ON users.id = orders.user_id JOIN order_contents ON order_contents.order_id = orders.id JOIN products ON order_contents.product_id = products.id').
+>>>>>>> 76a0957610bfb218e242a9bb5f2df4c8fe630680
       where("orders.checkout_date IS NOT NULL").
       group('users.id, full_name').order('average_value DESC').limit(1)
     end
 
     def self.most_orders
       self.select('users.first_name || users.last_name AS full_name, COUNT(orders.id) as number_of_orders').
+<<<<<<< HEAD
       join_to_orders.
       where("orders.checkout_date IS NOT NULL").
       group('users.id, full_name').order('number_of_orders DESC').limit(1)
@@ -121,4 +184,21 @@ class User < ActiveRecord::Base
     end
 
 
+=======
+      joins('JOIN orders ON users.id = orders.user_id').
+      where("orders.checkout_date IS NOT NULL").
+      group('users.id, full_name').order('number_of_orders DESC').limit(1)
+    end
+>>>>>>> 76a0957610bfb218e242a9bb5f2df4c8fe630680
 end
+
+
+
+
+
+
+
+
+
+
+

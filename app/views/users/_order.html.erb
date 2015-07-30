@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+  <tr>
+    <th>ID</th>
+    <th>Order Date</th>
+    <th>Order Value</th>
+    <th>Status</th>
+    <th>SHOW</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  </tr>
+  <% orders.each do |order| %>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= order.created_or_checkout_date %></td>
+      <td><%= number_to_currency(order.value) %></td>
+      <td><%= order.status %></td>
+      <td><%= link_to "show", order_path(order) %></td>
+      <td><%= link_to "edit", edit_order_path(order) %></td>
+      <td><%= link_to "delete", order_path(order), method: :delete %></td>
+    </tr>
+  <% end %>
+</table>

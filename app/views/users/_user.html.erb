@@ -1,0 +1,12 @@
+<tr>
+  <td><%= user.id %></td>
+  <td><%= user.name %></td>
+  <td><%= user.created_at%></td>
+  <td><%= user.city %></td>
+  <td><%= user.state %></td>
+  <td><%= user.orders.count %></td>
+  <td><%= user.last_order_date %></td>
+  <td><%= link_to "show", user_path(user) %></td>
+  <td><%= link_to "edit", edit_user_path(user) %></td>
+  <td><%= link_to "delete", user_path(user), method: :delete %></td>
+</tr>

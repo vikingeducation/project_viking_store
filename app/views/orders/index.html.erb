@@ -1,0 +1,24 @@
+<div class="row">
+  <%= order_owner %>
+</div>
+
+<div class="row">
+  <table class="table table-bordered">
+    <%= button_for_new_order %>
+    <tr>
+      <th>ID</th>
+      <th>UserID</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Orders</th>
+      <th>Total Value</th>
+      <th>Status</th>
+      <th>Date Placed</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <%= render @orders %>
+  </table>
+</div>

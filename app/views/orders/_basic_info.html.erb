@@ -1,0 +1,6 @@
+<h2>Basic Information</h2>
+
+<h3> Customer ID: <%= order.user.id %> </h3>
+<h3> Customer: <%= link_to order.user.name, user_path(order.user) %> </h3>
+<h3> Email: <%= order.user.email %> </h3>
+<h3> Date Placed:<%= display_date_or_na(order) %> </h3>

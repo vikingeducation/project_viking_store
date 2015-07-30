@@ -1,0 +1,15 @@
+<h1> Product Information </h1>
+
+<h3> <%= @product.id %> </h3>
+<h3> <%= @product.name %> </h3>
+<h3> <%= number_to_currency(@product.price) %> </h3>
+<% if @product.category %>
+	<h3> <%= @product.category.name %> </h3>
+<% end %>
+
+<h1> Product Statistics </h1>
+<h3> Times Ordered <%= @product.times_ordered %> </h3>
+<h3> Carts In <%= @product.carts_in %> </h3>
+
+<%= link_to "Edit this Product!", edit_product_path(@product) %>
+<%= link_to "Delete this Product!", @product, method: 'delete' %>

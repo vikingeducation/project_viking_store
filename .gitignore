@@ -19,4 +19,8 @@
 solution_viking_store_development
 solution_viking_store_test
 
+
 /path/*
+
+vendor/bundle/*
+

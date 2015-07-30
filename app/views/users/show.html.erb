@@ -1,0 +1,43 @@
+<div class="row text-center">
+<h1> <%= @user.name %> </h1>
+<h2> Demographic Information </h2>
+<h5>First Name: <%= @user.first_name %></h5>
+<h5>Last Name: <%= @user.last_name %></h5>
+<h5>Email: <%= @user.email %></h5>
+<h2> Default Billing Address </h2>
+	<%= display_address(@user, "billing") %>
+<h2> Default Shipping Address </h2>
+	<%= display_address(@user, "shipping") %>
+<br>
+<h5><%= link_to "Edit this User's information.", edit_user_path(@user) %></h5>
+<h5><%= link_to "Delete this user.", @user, method: 'delete' %></h5>
+<h5><%= link_to "View Saved Addresses", addresses_path(user_id: @user.id) %> </h5>
+<h5>View Unplaced Order (Cart)</h5>
+</div>
+
+<% if @user.credit_cards.first %>
+  <div class="row text-center">
+    <h2>Credit Card Information</h2>
+    <h5>First Name: <%= @user.first_name %></h5>
+    <h5>Last Name: <%= @user.last_name %></h5>
+    <h5>Number: <%= @user.credit_cards.first.card_number %></h5>
+    <h5>Expiration: <%= @user.credit_cards.first.exp_year%>-<%= @user.credit_cards.first.exp_month%></h5>
+    <h5><%= link_to "Remove Card", '#', method: :delete, data: {confirm: "Are you sure?"}%></h5>
+  </div>
+<% end %>
+
+<div class="row text-center">
+<h2>Admin Actions for <%= @user.first_name %> <%= @user.last_name %></h2>
+  <%= link_to new_order_path(user_id: @user.id) do %>
+    <button class="btn btn-primary btn-lg col-xs-8 col-xs-offset-2">Create Order</button>
+  <% end %>
+
+  <%= link_to new_address_path(user_id: @user.id) do %>
+    <button class="btn btn-primary btn-lg col-xs-8 col-xs-offset-2">Create Address</button>
+  <% end %>
+</div>
+<div class="row text-center">
+<h5>Order History</h5>
+
+<%= render partial: 'users/order', locals: { orders: @user.orders} %>
+</div>

@@ -1,8 +1,19 @@
 Rails.application.routes.draw do
-  # root to: 'dashboard#index'
 
-  get '/admin'
-  resources :dashboard, only: :index
+  root to: "admins#portal"
+
+  get "/dashboard" => "analytics#dashboard"
+
+  get "/admin" => "admins#portal"
+  get '/order_contents/remove_oc' => "order_contents#remove_oc"
+  post '/order_contents/update_everything' => "order_contents#update_everything"
+  post '/order_contents/create_oc' => "order_contents#create_oc"
+  resources :categories
+  resources :products
+  resources :users
+  resources :addresses
+  resources :orders
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
