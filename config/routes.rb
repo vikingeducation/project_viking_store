@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :products, :only => [:index]
   resources :orders, :only => [:create, :edit, :update]
 
-  resources :users, :only => [:new, :create] do
-    resources :addresses, :only => [:new, :create]
+  resources :users, :only => [:new, :create, :edit, :update, :destroy] do
+    resources :addresses, :only => [:new, :create, :edit, :update]
   end
 
 

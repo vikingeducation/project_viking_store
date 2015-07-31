@@ -10,9 +10,13 @@ class Address < ActiveRecord::Base
   has_many :shipped_orders, :class_name => 'Order', :foreign_key => :shipping_id, :dependent => :nullify
 
 
-  validates :street_address, :city_id, :state_id, :zip_code, :user_id, :presence => true
+  validates :street_address, :city_id, :state_id, :zip_code, :presence => true
   validates :street_address, :length => { :maximum => 64 }
   validates :zip_code, :length => { :in => 4..5 }
+
+
+# Storefront methods
+
 
 
 # Portal methods

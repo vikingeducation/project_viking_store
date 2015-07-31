@@ -10,8 +10,8 @@ module ApplicationHelper
 
 
   def current_user_cart
-    if current_user
-      current_user.get_or_build_cart
+    if current_user && current_user.has_cart?
+      current_user.get_cart
     else
       0
     end

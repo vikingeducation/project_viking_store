@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :created_addresses, :class_name => 'Address', :dependent => :destroy
+  accepts_nested_attributes_for :created_addresses, :reject_if => :all_blank
 
   belongs_to :default_billing_address, :class_name => 'Address', :foreign_key => :billing_id
   belongs_to :default_shipping_address, :class_name => 'Address', :foreign_key => :shipping_id
@@ -15,6 +16,7 @@ class User < ActiveRecord::Base
   validates :email, :format => { :with => /.+@.+/, :message => "format is invalid." }
 
   validates_confirmation_of :email
+
 
 # Storefront methods
   def has_cart?
