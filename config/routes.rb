@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   post '/order_contents/update_everything' => "order_contents#update_everything"
   post '/order_contents/create_oc' => "order_contents#create_oc"
   resources :categories
-  resources :users
   resources :orders
   namespace :admin do
+    resources :users
     resources :addresses
     resources :categories
     resources :products
