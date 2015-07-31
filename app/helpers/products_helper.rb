@@ -1,9 +1,10 @@
 module ProductsHelper
   def cart_helper(product)
-    if session[:cart].any?{|value| value[:product_id] == product.id}
-      return "in_cart_btn"
+    cart = session[:cart]
+    if count = cart.find{|value| value["product_id"].to_i == product.id}
+      render partial: "in_cart_btn", locals: {product: product, quantity: count["quantity"].to_i}
     else
-      return "add_to_cart_btn"
+      render partial: "add_to_cart_btn", locals: {product: product}
     end
   end
 end

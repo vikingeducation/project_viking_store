@@ -1,5 +1,7 @@
 <div class="col-xs-12 product_cart_btn">
-  <div class="btn cart_btn">
-    <%= link_to "Add to Cart", '#', method: "patch" %>
-  </div>
+  <%= form_tag cart_path(0), method: "patch" do %>
+    <%= hidden_field_tag :product_id, product.id %>
+    <%= number_field_tag :quantity, 1, min: 1, max: 10 %>
+    <%= submit_tag "Add to Cart", class: "btn cart_btn"%>
+  <% end %>
 </div>

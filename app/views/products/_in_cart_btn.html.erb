@@ -1,5 +1,7 @@
 <div class="col-xs-12 product_cart_btn">
-  <div class="btn in_cart_btn">
-    In Cart
-  </div>
+  <%= form_tag cart_path(0), method: "patch" do %>
+    <%= hidden_field_tag :product_id, product.id %>
+    <%= number_field_tag :quantity, quantity, min: 0, max: 10 %>
+    <%= submit_tag "Remove/Update", class: "btn cart_btn"%>
+  <% end %>
 </div>
