@@ -17,7 +17,7 @@ class Admin::ProductsController < AdminController
 
   def new
     @product = Product.new
-    @available_categories = Category.list_all_categories
+    @available_categories = Category.all
   end
 
 
@@ -34,7 +34,7 @@ class Admin::ProductsController < AdminController
       redirect_to admin_products_path
     else
       flash.now[:danger] = "Product not saved - please try again."
-      @available_categories = Category.list_all_categories
+      @available_categories = Category.all
       render :new
     end
 
@@ -43,7 +43,7 @@ class Admin::ProductsController < AdminController
 
   def edit
     @product = Product.find(params[:id])
-    @available_categories = Category.list_all_categories
+    @available_categories = Category.all
   end
 
 
@@ -57,7 +57,7 @@ class Admin::ProductsController < AdminController
       redirect_to admin_products_path
     else
       flash.now[:danger] = "Product not saved - please try again."
-      @available_categories = Category.list_all_categories
+      @available_categories = Category.all
       render :edit
     end
   end

@@ -92,28 +92,27 @@ end
 
 
 # Dashboard methods
-  def self.count_orders(day_range = nil)
+
+  def self.within_days(day_range = nil, last_day = DateTime.now)
     if day_range.nil?
-      Order.where("checkout_date IS NOT NULL").count
+      where("checkout_date IS NOT NULL")
     else
-      Order.where("checkout_date > ?", Time.now - day_range.days).count
+      where("checkout_date BETWEEN ? AND ?", last_day - day_range.days, last_day)
     end
+  end
+
+
+  def self.count_orders(day_range = nil, last_day = DateTime.now)
+    Order.within_days(day_range, last_day).count
   end
 
 
 
   # for all new orders within past x days
-  def self.calc_revenue(day_range = nil)
-    base_query = Order.joins("JOIN order_contents ON orders.id = order_contents.order_id
-                 JOIN products ON order_contents.product_id = products.id")
-
-    if day_range.nil?
-      filter_query = base_query.where("orders.checkout_date IS NOT NULL")
-    else
-      filter_query = base_query.where("orders.checkout_date > ?", Time.now - day_range.days)
+  def self.calc_revenue(day_range = nil, last_day = DateTime.now)
+    Order.within_days(day_range, last_day).inject(0) do |sum, o|
+      sum += o.products.sum("products.price * order_contents.quantity")
     end
-
-    filter_query.sum("products.price * order_contents.quantity")
   end
 
 
@@ -125,7 +124,7 @@ end
 
 
 
-  def self.order_stats_by_day_range(number_of_days = nil, start = Time.now)
+  def self.order_stats_by_day_range(number_of_days = nil, last_day = DateTime.now)
 
     base_query = Order.select("COUNT(DISTINCT orders.id) AS count,
                                 SUM(products.price * order_contents.quantity) AS revenue,
@@ -133,17 +132,12 @@ end
                         joins("JOIN order_contents ON orders.id = order_contents.order_id
                               JOIN products ON order_contents.product_id = products.id")
 
-    if number_of_days.nil?
-      filter_query = base_query.where("orders.checkout_date IS NOT NULL").each.first
-    else
-      filter_query = base_query.where("orders.checkout_date BETWEEN ? AND ?", start - number_of_days.days, start).each.first
-    end
-
+    filter_query = base_query.within_days(number_of_days, last_day).each.first
 
     {'Number of Orders' => filter_query.count,
     'Total Revenue' => filter_query.revenue,
     'Average Order Value' => filter_query.average,
-    'Largest Order Value' => Order.largest_order(number_of_days, start)
+    'Largest Order Value' => Order.largest_order(number_of_days, last_day)
     }
 
   end

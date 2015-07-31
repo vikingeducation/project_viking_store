@@ -6,9 +6,4 @@ class Category < ActiveRecord::Base
                    :length => { :in => 4..16 }
 
 
-
-  def self.list_all_categories
-    Category.all
-  end
-
 end
