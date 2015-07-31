@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root to: "admins#portal"
 
-  get "/dashboard" => "analytics#dashboard"
+  get "/admin/dashboard" => "admin/analytics#dashboard"
 
   get "/admin" => "admins#portal"
   get '/order_contents/remove_oc' => "order_contents#remove_oc"
