@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
 
   # This should render your sign-in form!
   def new
+    user = User.new
   end
 
   # Sign in our user to create a new session
@@ -10,7 +11,7 @@ class SessionsController < ApplicationController
   # that's it (no password checking).  This is
   # obviously very simplistic and that's the idea
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find_by_email(params[:session][:email])
     if user
       sign_in user
       flash[:success] = "Thanks for signing in!"

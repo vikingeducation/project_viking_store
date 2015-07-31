@@ -16,10 +16,11 @@
       
       
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Your Cart</a></li>
         <% if signed_in_user? %>
-          <li><a href="#">Your Cart</a></li>
-        <% else %>
-          <li><a href="#">Login</a></li>
+          <li><a href="#">Sign Out</a></li>
+          <% else %>
+          <li><%= link_to 'Login', new_session_path  %></li>
         <% end -%>
       </ul>
     </div><!-- /.navbar-collapse -->
