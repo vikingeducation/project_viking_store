@@ -5,9 +5,16 @@ class ProductsController < ApplicationController
     category = Category.where("id = ?", params[:category_id].to_i).first
     @products = Product.filter_by(category).limit(6)
 
-    add_product_to_visitor_cart if params[:add_product_id] && current_user.nil?
+    add_product if params[:add_product_id]
 
-    if params[:add_product_id] && current_user
+  end
+
+
+  private
+
+
+  def add_product
+    if current_user
       cart = get_or_build_cart
       update_quantity(cart, params[:add_product_id], 1)
       if cart.save
@@ -15,12 +22,10 @@ class ProductsController < ApplicationController
       else
         flash.now[:danger] = "Item not added.  Please try again."
       end
+    else
+      add_product_to_visitor_cart
     end
-
   end
-
-
-  private
 
 
   def add_product_to_visitor_cart
