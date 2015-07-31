@@ -19,4 +19,7 @@ Rails.application.routes.draw do
     resources :addresses
     resources :orders
   end
+
+  resource :session, :only => [:new, :create, :destroy]
+  resources :users
 end
