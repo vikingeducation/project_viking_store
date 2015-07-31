@@ -1,0 +1,59 @@
+<div class='container'>
+
+  <h1 class='text-center'>Checkout</h1>
+
+  <%= form_for [current_user, @order] do |order_fields| %>
+
+    <div class='row'>
+
+      <div class='col-md-6'>
+        <h3 class='text-center'>Shipping + Billing</h3>
+
+        <div class='form-group'>
+          <%= order_fields.label :shipping_id, 'Shipping Address' %>
+          <%= order_fields.collection_select :shipping_id, @order.user.created_addresses, :id, :street_address, {}, class: 'form-control' %>
+        </div>
+
+        <div class='form-group'>
+          <%= order_fields.label :billing_id, 'Billing Address' %>
+          <%= order_fields.collection_select :billing_id, @order.user.created_addresses, :id, :street_address, {}, class: 'form-control' %>
+        </div>
+
+        <%= link_to 'Edit Saved Addresses', edit_user_path(current_user) %>
+
+
+
+        <%= order_fields.fields_for :credit_cards do |cc_fields| %>
+
+          <div class='form-group'>
+            <%= cc_fields.label :card_number, 'Credit Card Number' %>
+            <%= cc_fields.text_field :card_number, class: 'form-control' %>
+          </div>
+
+          <div class='row'>
+            <div class='col-sm-6'>
+              <%= cc_fields.label :exp_year, 'Expiration' %>
+              <%= cc_fields.text_field :exp_year, class: 'form-control' %>
+            </div>
+            <div class='col-sm-6'>
+              <%= cc_fields.label :exp_month, 'CVV' %>
+              <%= cc_fields.text_field :exp_month, class: 'form-control' %>
+            </div>
+          </div>
+
+        <% end %>
+
+        <%= link_to 'Delete Card', '#' %>
+
+
+      </div>
+
+      <div class='col-md-6'>
+      </div>
+
+    </div>
+
+  <% end %>
+
+
+</div>

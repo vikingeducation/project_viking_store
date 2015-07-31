@@ -5,14 +5,6 @@ class OrdersController < ApplicationController
   before_action :require_current_user, :only => [:edit, :update]
 
 
-  def new
-  end
-
-
-  def create
-  end
-
-
   def show
     redirect_to action: :edit
   end
@@ -35,6 +27,12 @@ class OrdersController < ApplicationController
 
     redirect_to action: :edit
   end
+
+
+  def checkout
+    @order = Order.find(params[:id])
+  end
+
 
 
   private
