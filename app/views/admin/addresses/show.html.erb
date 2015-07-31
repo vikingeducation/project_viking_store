@@ -8,5 +8,5 @@
 
 <h3>Zip Code: <%= @address.zip_code %> </h3>
 
-<%= link_to "Edit Address", edit_address_path(@address) %>
-<%= link_to "Delete Address", address_path(@address), method: 'delete' %>
+<%= link_to "Edit Address", [:admin, @address, action: 'edit'] %>
+<%= link_to "Delete Address", [:admin, @address], method: 'delete' %>

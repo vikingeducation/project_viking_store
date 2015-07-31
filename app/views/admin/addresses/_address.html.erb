@@ -6,7 +6,7 @@
   <td><%= address.state.name %></td>
   <td><%= address.orders.count %></td>
   <td><%= address.created_at %></td>
-  <td><%= link_to "show", address_path(address) %></td>
-  <td><%= link_to "edit", edit_address_path(address) %></td>
-  <td><%= link_to "delete", address_path(address), method: :delete %></td>
+  <td><%= link_to "show", [:admin, address] %></td>
+  <td><%= link_to "edit", [:admin, address, action: 'edit'] %></td>
+  <td><%= link_to "delete", [:admin, address], method: 'delete' %></td>
 </tr>
