@@ -8,4 +8,9 @@ class OrderContents < ActiveRecord::Base
   end
 
 
+  def total_cost
+    self.quantity * self.product.price
+  end
+
+
 end

@@ -1,0 +1,26 @@
+<div class='row product-panel'>
+
+  <div class='col-xs-6'>
+    <div class='form-group'>
+      <%= content_fields.label :quantity %>
+      <%= content_fields.number_field :quantity, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class='col-xs-6'>
+    <h4>Total Price</h4>
+    <p><%= number_to_currency(content_fields.object.total_cost) %></p>
+  </div>
+
+
+  <div class='col-xs-12'>
+
+    <div class='form-group text-muted'>
+      <% if content_fields.object.persisted? %>
+        <%= content_fields.check_box :_destroy %>
+        <%= content_fields.label :_destroy, "Remove Item" %>
+      <% end %>
+    </div>
+
+  </div>
+</div>

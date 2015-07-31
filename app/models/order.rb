@@ -1,6 +1,9 @@
 class Order < ActiveRecord::Base
   belongs_to :user
+
   has_many :order_contents, :class_name => "OrderContents", :dependent => :destroy
+  accepts_nested_attributes_for :order_contents
+
   has_many :products, :through => :order_contents
   has_many :categories, :through => :products
 
