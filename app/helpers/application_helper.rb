@@ -9,6 +9,17 @@ module ApplicationHelper
   end
 
 
+  def cart_link
+    if signed_in_user?
+      user = current_user
+      cart = current_user.get_cart || 'cart'
+    else
+      user, cart = 'visitor', 'cart'
+    end
+    edit_user_order_path(user, cart)
+  end
+
+=begin
   def current_user_cart
     if current_user && current_user.has_cart?
       current_user.get_cart
@@ -16,7 +27,7 @@ module ApplicationHelper
       0
     end
   end
-
+=end
 
   def render_error(resource, field_sym=nil)
     "#{field_sym.to_s.titleize} #{resource.errors[field_sym].first}" unless resource.errors[field_sym].empty?
