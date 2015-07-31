@@ -1,138 +1,124 @@
-<div class="navbar">
+
+<div id="store">
+<!--   <div class="navbar">
     <div class="logo">Viking Store</div>
     <div class="navbar-elements">
-      <div class="cart-image"><img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/icon_empty_cart.png" width="30px" height="30px"></div>
-      <div class="cart">Your Cart</div>
-    </div>
-  </div>
-  <div class="main-heading">
-    <h1>The Viking Store</h1>
-  </div>
-  <div class="heading1">
-    <h2>The Best Viking Gear on the Whole Web</h2>
-  </div>
-  <div class="sub-heading">
-    <h3>Choose from among our lineup of fine axes below</h3>
-  </div>
+        <div class="cart-image"><img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/icon_empty_cart.png" width="30px" height="30px"></div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="cart">Login </li>
+          <li class="cart"> Your Cart</li>
+        </ul>
+        
+    </div> 
 
+  </div> -->
 
-  <div class="store-frame">
-    <div class="product-wrapper">
-
-      <div class="product">
-        <div class="title">
-          <h4>The Silent Night</h4>
-        </div>
-        <div class="pimg">
-          <div class="price">$200</div>
-          <img src="https://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_silent_night_small.jpg">
-        </div>
-        <div class="pfooter">
-          <button><h5>Add to Cart</h5></button>
-        </div>
-      </div>
-
-      <div class="product">
-        <div class="title">
-          <h4>The Dainty Daisy</h4>
-        </div>
-        <div class="pimg">
-          <div class="price">$100</div>
-          <img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_dainty_daisy_small.jpg">
-        </div>
-        <div class="pfooter">
-          <button><h5>Add to Cart</h5></button>
-        </div>
-      </div>
-
-      <div class="product">
-        <div class="title">
-          <h4>Double Trouble</h4>
-        </div>
-        <div class="pimg">
-          <div class="price">$340</div>
-          <img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_double_trouble_small.jpg">
-        </div>
-        <div class="pfooter">
-          <button><h5>Add to Cart</h5></button>
-        </div>
-      </div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Viking Store</a>
     </div>
 
-    <div class = "product-wrapper" >
-      <div class="product">
-        <div class="title">
-          <h4>Whispering Wind</h4>
-        </div>
-        <div class="pimg">
-          <div class="price">$225</div>
-          <img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_whispering_wind_small.jpg">
-        </div>
-        <div class="pfooter">
-          <button><h5>Add to Cart</h5></button>
-        </div>
-      </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Your Cart</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<!--  ======================Products============================ -->
+    <div class="jumbotron">
+      <h1>The Viking Store</h1>
+    </div>
+    <div class="heading1">
+      <h2>The Best Viking Gear on the Whole Web</h2>
+    </div>
+    <div class="sub-heading">
+      <h3>Choose from among our lineup of products below</h3>
+    </div>
+  <div class="container">
 
-      <div class="product">
-        <div class="title">
-          <h4>The Cunning Cutter</h4>
-        </div>
-        <div class="pimg">
-          <div class="price">$200</div>
-          <img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_cunning_cutter_small.jpg">
-        </div>
-        <div class="pfooter">
-          <button><h5>Add to Cart</h5></button>
-        </div>
-      </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <ul class="nav navbar-nav pull-right">
+          
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <% @categories.each do |cat| %>
+                  <li> <%= link_to cat.name, home_path(:cat_id => cat.id) %> </li>
 
-      <div class="product">
-        <div class="title">
-          <h4>The Kingmaker</h4>
-        </div>
-        <div class="pimg">
-          <div class="price">$400</div>
-          <img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_kingmaker_small.jpg">
-        </div>
-        <div class="pfooter">
-          <button><h5>Add to Cart</h5></button>
-        </div>
+                  <% end %>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
-    
-      <div class = "pagination" >
-        <div class="prev">
-          <a href="#">&lt;&lt; Prev</a>
-        </div>
-        <div class="page">
-          <a href="#">1</a>
-        </div>
-        <div class="page"><strong>2</strong>
-        </div>
-        <div class="page">
-          <a href="#">3</a>
-        </div>
-        <div id="ellipsis">. . .
-        </div>
-        <div class="page">
-          <a href="#">8</a>
-        </div>
-        <div class="page">
-          <a href="#">9</a>
-        </div>
-        <div class="next">
-          <a href="#">Next &gt;&gt;</a>
+    <div class="store-frame">
+      <div class="product-wrapper row">
+        
+        <% @products.each do |product| %>
+
+          <div class="col-md-4">
+            <div class="title">
+              <h4><%= product.name %></h4>
+            </div>
+            <div class="pimg">
+              <div class="price"><%= product.price %></div>
+              <img class="img-responsive img-thumbnail" src="https://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_silent_night_small.jpg">
+            </div>
+            <div class="pfooter">
+              <button><h5>Add to Cart</h5></button>
+            </div>
+          </div>
+          <% end %>
+      
+        <div class = "pagination" >
+          <div class="prev">
+            <a href="#">&lt;&lt; Prev</a>
+          </div>
+          <div class="page">
+            <a href="#">1</a>
+          </div>
+          <div class="page"><strong>2</strong>
+          </div>
+          <div class="page">
+            <a href="#">3</a>
+          </div>
+          <div id="ellipsis">. . .
+          </div>
+          <div class="page">
+            <a href="#">8</a>
+          </div>
+          <div class="page">
+            <a href="#">9</a>
+          </div>
+          <div class="next">
+            <a href="#">Next &gt;&gt;</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="footer">
-    <div class="contact">
-      <h4>Contact</h4>
-      <img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/icon_phone_white.png" height="20px" width="25px">
-      <p>1 - 000 - 000 - 0000</p>
-      <div></div>
-      <img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/email_white.png" height="20px" width="25px">
-      <p>contact@vikingstore.com</p>
+    <div class="footer">
+      <div class="contact">
+        <h4>Contact</h4>
+        <img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/icon_phone_white.png" height="20px" width="25px">
+        <p>1 - 000 - 000 - 0000</p>
+        <div></div>
+        <img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/email_white.png" height="20px" width="25px">
+        <p>contact@vikingstore.com</p>
+      </div>
+    </div>
     </div>
   </div>

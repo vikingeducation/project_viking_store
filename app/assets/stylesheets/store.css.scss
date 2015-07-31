@@ -2,226 +2,228 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  font-family: Helvetica, sans-serif;
-}
+#store{
+//   body {
+//     font-family: Helvetica, sans-serif;
+//   }
 
-h1 {
-  font-size: 80px;
-  color: #333;
-  text-align: center;
-  text-shadow:3px 3px 4px #fff;
-}
+//   h1 {
+//     font-size: 80px;
+//     color: #333;
+//     text-align: center;
+//     text-shadow:3px 3px 4px #fff;
+//   }
 
-h2 {
-  font-size: 40px;
-  color: #333;
-  text-align: center;
-}
+//   h2 {
+//     font-size: 40px;
+//     color: #333;
+//     text-align: center;
+//   }
 
-h3 {
-  font-size: 26px;
-  color: #777;
-  text-align: center;
-}
+//   h3 {
+//     font-size: 26px;
+//     color: #777;
+//     text-align: center;
+//   }
 
-h4 {
-  font-size: 18px;
-  color: #fff;
-  text-align: center;
-  padding: 15px;
-}
+//   h4 {
+//     font-size: 18px;
+//     color: #fff;
+//     text-align: center;
+//     padding: 15px;
+//   }
 
-h5 {
-  font-size: 18px;
-  color: #333;
-  text-align: center;
-}
+//   h5 {
+//     font-size: 18px;
+//     color: #333;
+//     text-align: center;
+//   }
 
-strong{
-  font-weight: bold;
-}
+//   strong{
+//     font-weight: bold;
+//   }
 
-a {
-  color: royalblue;
-  text-decoration: none;
-}
+//   a {
+//     color: royalblue;
+//     text-decoration: none;
+//   }
 
-a:hover{
-  text-decoration: underline;
-}
+//   a:hover{
+//     text-decoration: underline;
+//   }
 
-.navbar {
-  height: 50px;
-  padding: 12px;
-}
+//   .navbar {
+//     height: 50px;
+//     padding: 12px;
+//   }
 
-.logo {
-  float: left;
-  font-size: 24px;
-  color: #555;
-  padding: 11px 0px 9px 100px;
-}
+//   .logo {
+//     float: left;
+//     font-size: 24px;
+//     color: #555;
+//     padding: 11px 0px 9px 100px;
+//   }
 
-.navbar-elements {
-  float: right;
-  height: 40px;
-  padding: 5px 50px 5px 0px;
-  text-align: center;
-}
+//   .navbar-elements {
+//     float: right;
+//     height: 40px;
+//     padding: 5px 50px 5px 0px;
+//     text-align: center;
+//   }
 
-.cart-image {
-  display: inline-block;
-}
+//   .cart-image {
+//     display: inline-block;
+//   }
 
-.cart {
-  font-size: 20px;
-  color: #555;
-  display: inline-block;
-}
+//   .cart {
+//     font-size: 20px;
+//     color: #555;
+//     display: inline-block;
+//   }
 
-.main-heading {
-  clear:both;
-  position: relative;
-}
+//   .main-heading {
+//     clear:both;
+//     position: relative;
+//   }
 
-.main-heading:before {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url(http://s3.amazonaws.com/viking_education/demos/viking_store_app/viking_ship_background_medium.jpg) no-repeat;
-  background-size: 100% 100%;
-  opacity: 0.3;
-  z-index: -1;
-}
+//   .main-heading:before {
+//     content: "";
+//     display: block;
+//     position: absolute;
+//     width: 100%;
+//     height: 100%;
+//     background: url(http://s3.amazonaws.com/viking_education/demos/viking_store_app/viking_ship_background_medium.jpg) no-repeat;
+//     background-size: 100% 100%;
+//     opacity: 0.3;
+//     z-index: -1;
+//   }
 
-.main-heading h1{
-  padding: 240px;
-  font-weight: bold;
-  color: #333;
-}
+//   .main-heading h1{
+//     padding: 240px;
+//     font-weight: bold;
+//     color: #333;
+//   }
 
-.heading1 {
-  height: 200px;
-  background-color: #333;
-}
+//   .heading1 {
+//     height: 200px;
+//     background-color: #333;
+//   }
 
-.heading1 h2 {
-  padding: 80px;
-  color: white;
-}
+//   .heading1 h2 {
+//     padding: 80px;
+//     color: white;
+//   }
 
 
-.sub-heading {
-  height: 85px;
-}
+//   .sub-heading {
+//     height: 85px;
+//   }
 
-.sub-heading h3 {
-  font-style: italic;
-  padding: 30px;
-}
+//   .sub-heading h3 {
+//     font-style: italic;
+//     padding: 30px;
+//   }
 
-.store-frame {
-  border: 2px solid #777;
-}
+//   .store-frame {
+//     border: 2px solid #777;
+//   }
 
-.product-wrapper {
-  height: 100%;
-  text-align: center;
-  margin: 10px 150px 0px 150px;
-}
+//   .product-wrapper {
+//     height: 100%;
+//     text-align: center;
+//     margin: 10px 150px 0px 150px;
+//   }
 
-.product {
-  height: 300px;
-  width: 250px;
-  margin: 10px;
-  border: 2px solid #555;
-  display: inline-block;
-}
+//   .product {
+//     height: 300px;
+//     width: 250px;
+//     margin: 10px;
+//     border: 2px solid #555;
+//     display: inline-block;
+//   }
 
-.title {
-  height: 60px;
-  background-color: #333;
-}
+//   .title {
+//     height: 60px;
+//     background-color: #333;
+//   }
 
-.pimg {
-  height:180px;
-}
+//   .pimg {
+//     height:180px;
+//   }
 
-.pimg img {
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  position: relative;
-  top: -20px;
-}
+//   .pimg img {
+//     height: 100%;
+//     width: 100%;
+//     z-index: -1;
+//     position: relative;
+//     top: -20px;
+//   }
 
-.price {
-  float: right;
-  border: 1px solid #aaa;
-  padding: 3px 5px 3px 5px;
-}
+//   .price {
+//     float: right;
+//     border: 1px solid #aaa;
+//     padding: 3px 5px 3px 5px;
+//   }
 
-.pfooter {
-  height: 60px;
-  background-color: #333;
-}
+//   .pfooter {
+//     height: 60px;
+//     background-color: #333;
+//   }
 
-button {
-  margin-top: 15px;
-  background-color: orange;
-  border: 2px solid #999;
-}
+//   button {
+//     margin-top: 15px;
+//     background-color: orange;
+//     border: 2px solid #999;
+//   }
 
-.pagination {
-  margin-top: 40px;
-  margin-bottom: 20px;
-  text-align: center;
-}
+//   .pagination {
+//     margin-top: 40px;
+//     margin-bottom: 20px;
+//     text-align: center;
+//   }
 
-.prev {
-  display: inline-block;
-  padding: 5px 20px 0px 20px;
-}
+//   .prev {
+//     display: inline-block;
+//     padding: 5px 20px 0px 20px;
+//   }
 
-.page {
-  display: inline-block;
-  padding: 5px;
-}
+//   .page {
+//     display: inline-block;
+//     padding: 5px;
+//   }
 
-#ellipsis {
-  padding: 5px 20px 0px 20px;
-  display: inline-block;
-}
+//   #ellipsis {
+//     padding: 5px 20px 0px 20px;
+//     display: inline-block;
+//   }
 
-.next {
-  display: inline-block;
-  padding: 5px 20px 0px 20px;
-}
+//   .next {
+//     display: inline-block;
+//     padding: 5px 20px 0px 20px;
+//   }
 
-.footer{
-  background-color: #333;
-  text-align: center;
-}
+//   .footer{
+//     background-color: #333;
+//     text-align: center;
+//   }
 
-.contact {
-  display: inline-block;
-  padding: 0px 0px 30px 0px;
-}
+//   .contact {
+//     display: inline-block;
+//     padding: 0px 0px 30px 0px;
+//   }
 
-.contact h4 {
-  padding: 40px 20px 20px 20px;
-  color: orange;
-}
+//   .contact h4 {
+//     padding: 40px 20px 20px 20px;
+//     color: orange;
+//   }
 
-.contact img {
-  display: inline-block;
-}
+//   .contact img {
+//     display: inline-block;
+//   }
 
-.contact p {
-  color: white;
-  display: inline-block;
-  padding: 10px;
-}
+//   .contact p {
+//     color: white;
+//     display: inline-block;
+//     padding: 10px;
+//   }
+ }
