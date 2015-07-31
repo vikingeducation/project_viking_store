@@ -9,12 +9,12 @@ Rails.application.routes.draw do
   post '/order_contents/update_everything' => "order_contents#update_everything"
   post '/order_contents/create_oc' => "order_contents#create_oc"
   resources :categories
-  resources :products
   resources :users
   resources :orders
   namespace :admin do
     resources :addresses
     resources :categories
+    resources :products
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

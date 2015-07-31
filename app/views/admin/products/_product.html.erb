@@ -1,0 +1,16 @@
+<tr>
+  <td><%= product.id %></td>
+  <td><%= product.name %></td>
+  <td><%= product.sku %></td>
+  <td><%= product.description %></td>
+  <td><%= product.price %></td>
+  <% if product.category_id %>
+  <td><%= link_to product.category_id, admin_category_path(product.category_id) %></td>
+  <% else %>
+  <td>N/A</td>
+  <% end %>
+  <td><%= link_to "show", admin_product_path(product) %></td>
+  <td><%= link_to "edit", edit_admin_product_path(product) %></td>
+  <td><%= link_to "delete", admin_product_path(product), method: :delete %></td>
+</tr>
+

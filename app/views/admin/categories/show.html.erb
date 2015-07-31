@@ -14,7 +14,7 @@
   <% @category.products.each do |product| %>
     <tr>
       <td><%= product.id %></td>
-      <td><%= link_to product.name, '#' %> </td>
+      <td><%= link_to product.name, admin_product_path(product) %> </td>
     </tr>
   <% end %>
 </table>
