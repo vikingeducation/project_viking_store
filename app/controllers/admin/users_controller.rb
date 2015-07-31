@@ -15,7 +15,7 @@ class  Admin::UsersController < ApplicationController
     @user = User.new(whitelist_user_params)
     if @user.save
       flash[:success] = "New User #{@user.name} successfully created!"
-      redirect_to @user
+      redirect_to [:admin, @user]
     else
       flash.now[:danger] = "Failed to create new user. Please Try again."
       render :new
@@ -30,7 +30,7 @@ class  Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(whitelist_user_params)
       flash[:success] = "User #{@user.name} successfully updated!"
-      redirect_to @user
+      redirect_to [:admin, @user]
     else
       flash.now[:danger] = "Failed to update user. Please try again."
       render :edit
@@ -41,10 +41,10 @@ class  Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.destroy
       flash[:success] = "User #{@user.name} successfully deleted!"
-      redirect_to @user
+      redirect_to admin_users_path
     else
       flash.now[:danger] = "Failed to delete user. Please try again."
-      redirect_to @user
+      redirect_to [:admin, @user]
     end
   end
 

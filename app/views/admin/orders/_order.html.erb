@@ -1,6 +1,6 @@
 <tr>
   <td><%= order.id %></td>
-  <td><%= link_to order.user_id, order.user %></td>
+  <td><%= link_to order.user_id, [:admin, order.user] %></td>
   <td><%= order.billing.street_address%></td>
   <td><%= order.billing.city.name %></td>
   <td><%= order.billing.state.name %></td>
@@ -8,7 +8,7 @@
   <td><%= order.value %></td>
   <td><%= order.status %></td>
   <td><%= order.created_at %></td>
-  <td><%= link_to "show", order_path(order) %></td>
-  <td><%= link_to "edit", edit_order_path(order) %></td>
-  <td><%= link_to "delete", order_path(order), method: :delete %></td>
+  <td><%= link_to "show", admin_order_path(order) %></td>
+  <td><%= link_to "edit", edit_admin_order_path(order) %></td>
+  <td><%= link_to "delete", admin_order_path(order), method: :delete %></td>
 </tr>

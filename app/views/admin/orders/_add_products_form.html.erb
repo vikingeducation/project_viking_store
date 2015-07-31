@@ -1,7 +1,7 @@
 <h2>Add Products to Order</h2>
 <h5>Add up to 5 products at a time.</h5>
 
-<%= form_for order, url: order_contents_create_oc_path, method: 'post' do %>
+<%= form_for [:admin, order], url: admin_order_contents_create_oc_path, method: 'post' do %>
   <%= hidden_field :order, :id, :value => order.id %>
   <table class="table-bordered">
     <tr>

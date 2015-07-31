@@ -2,7 +2,7 @@
   <td><%= category.id %></td>
   <td><%= category.name %></td>
   <td><%= category.description %></td>
-  <td><%= link_to "show", category_path(category) %></td>
-  <td><%= link_to "edit", edit_category_path(category) %></td>
-  <td><%= link_to "delete", category_path(category), method: :delete,  data: {confirm: "Really really delete this category?"} %></td>
+  <td><%= link_to "show", admin_category_path(category) %></td>
+  <td><%= link_to "edit", edit_admin_category_path(category) %></td>
+  <td><%= link_to "delete", admin_category_path(category), method: :delete,  data: {confirm: "Really really delete this category?"} %></td>
 </tr>

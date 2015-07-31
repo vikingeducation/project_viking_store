@@ -11,7 +11,7 @@ class  Admin::ProductsController < ApplicationController
     @product = Product.new(whitelist_product_params)
     if @product.save
       flash[:success] = "Your Product #{@product.name} has been created!"
-      redirect_to @product
+      redirect_to [:admin, @product]
     else
       flash[:danger] = "There was an error creating your product, try again."
       render :new
@@ -26,7 +26,7 @@ class  Admin::ProductsController < ApplicationController
     @product = Product.find(params[:id])
     if @product.update(whitelist_product_params)
       flash[:success] = "Your Product #{@product.name} has been edited!"
-      redirect_to @product
+      redirect_to [:admin, @product]
     else
       flash[:danger] = "There was an error editing your product, try again."
       render :edit
@@ -37,10 +37,10 @@ class  Admin::ProductsController < ApplicationController
     @product = Product.find(params[:id])
     if @product.destroy
       flash[:success] = "Your Product #{@product.name} has been deleted!"
-      redirect_to products_path
+      redirect_to admin_products_path
     else
       flash[:danger] = "There was an error deleting your product, try again."
-      redirect_to @product
+      redirect_to [:admin, @product]
     end
   end
 

@@ -14,14 +14,14 @@ class  Admin::CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @product_list = Product.category_items(params[:id])
+    @product_list = @category.products
   end
 
   def create
     @category = Category.new(white_listed_cat_params)
     if @category.save
       flash[:success] = "New category created"
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash.now[:error] = "Did not create category, try again."
       render :new
@@ -32,7 +32,7 @@ class  Admin::CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     if @category.update(white_listed_cat_params)
       flash[:success] = "Category updated."
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash.now[:error] = "Did not update category, try again."
       render :edit
@@ -43,9 +43,8 @@ class  Admin::CategoriesController < ApplicationController
     session[:return_to] ||= request.referer
     @category = Category.find(params[:id])
     if @category.destroy
-      Product.delete_category(params[:id])
       flash[:success] = "Category deleted."
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash[:error] = "Can not be deleted."
       redirect_to session.delete(:return_to)

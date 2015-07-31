@@ -14,9 +14,9 @@
       <td><%= order.created_or_checkout_date %></td>
       <td><%= number_to_currency(order.value) %></td>
       <td><%= order.status %></td>
-      <td><%= link_to "show", order_path(order) %></td>
-      <td><%= link_to "edit", edit_order_path(order) %></td>
-      <td><%= link_to "delete", order_path(order), method: :delete %></td>
+      <td><%= link_to "show", admin_order_path(order) %></td>
+      <td><%= link_to "edit", edit_admin_order_path(order) %></td>
+      <td><%= link_to "delete", admin_order_path(order), method: :delete %></td>
     </tr>
   <% end %>
 </table>
