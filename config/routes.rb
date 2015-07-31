@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :orders
   namespace :admin do
     resources :addresses
+    resources :categories
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
