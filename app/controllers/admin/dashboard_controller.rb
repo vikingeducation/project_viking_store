@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class  Admin::DashboardController < ApplicationController
 
   def index
     # Assign arrays to the hash based on the starting values for the hash.

@@ -1,4 +1,4 @@
-class AnalyticsController < ApplicationController
+class  Admin::AnalyticsController < ApplicationController
 
   def dashboard
     @overall = User.get_overall

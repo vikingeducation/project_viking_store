@@ -10,7 +10,7 @@ module AddressesHelper
   def button_for_new_address
     if @user
       link_to "Create a new address for #{@user.name}!",
-              new_address_path(user_id: @user.id),
+              new_admin_address_path(user_id: @user.id),
               class: "btn btn-primary"
     end
   end
