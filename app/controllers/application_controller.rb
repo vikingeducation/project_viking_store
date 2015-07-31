@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
 
 
   def product_exists?(order, product_id)
-    order.products.pluck(:product_id).include?(product_id)
+    order.products.pluck(:product_id).include?(product_id.to_i)
   end
 
 

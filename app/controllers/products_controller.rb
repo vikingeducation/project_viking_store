@@ -6,6 +6,17 @@ class ProductsController < ApplicationController
     @products = Product.filter_by(category).limit(6)
 
     add_product_to_visitor_cart if params[:add_product_id] && current_user.nil?
+
+    if params[:add_product_id] && current_user
+      cart = get_or_build_cart
+      update_quantity(cart, params[:add_product_id], 1)
+      if cart.save
+        flash.now[:success] = "Item added to cart!"
+      else
+        flash.now[:danger] = "Item not added.  Please try again."
+      end
+    end
+
   end
 
 

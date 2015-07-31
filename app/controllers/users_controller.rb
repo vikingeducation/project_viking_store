@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
-  before_action :require_current_user, :exclude => [:new, :create]
+  before_action :require_current_user, :only => [:edit, :update, :destroy]
 
   def new
     @user = User.new
-    @user.created_addresses.build
+    @user.created_addresses.build Array.new(2)
   end
 
 
@@ -59,13 +59,14 @@ class UsersController < ApplicationController
               :last_name,
               :shipping_id,
               :billing_id,
-              #:addresses_ids,
               { :created_addresses_attributes => [
+                  :id,
                   :street_address,
                   :city_id,
                   :state_id,
                   :zip_code,
-                  :user_id ] } )
+                  :user_id,
+                  :_destroy ] } )
   end
 
 
