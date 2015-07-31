@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class Admin::OrdersController < AdminController
 
   def index
     @user = User.find_by(id: params[:user_id])
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
     @order = Order.new(white_listed_order_params)
     if @order.save
       flash[:success] = "Order is created."
-      redirect_to edit_order_path(@order.id)
+      redirect_to edit_admin_order_path(@order.id)
     else
       flash.now[:danger] = get_error_message("create", @order)
       render :new
@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if @order.update(white_listed_order_params)
       flash[:success] = "Order is updated."
-      redirect_to order_path(@order)
+      redirect_to admin_order_path(@order)
     else
       flash.now[:danger] = get_error_message("update", @order)
       render :edit
@@ -45,10 +45,10 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if @order.destroy
       flash[:success] = "Order is deleted."
-      redirect_to orders_path
+      redirect_to admin_orders_path
     else
       flash.now[:danger] = "Not able to delete the order."
-      render @order
+      render admin_order_path(@order)
     end
   end
 

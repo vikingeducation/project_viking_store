@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates :email, :format => { :with => /@/ }
 
 
-  has_many :addresses
+  has_many :addresses, dependent: :nullify
 
   belongs_to :default_billing_address, class_name:  "Address",
               :foreign_key => :billing_id

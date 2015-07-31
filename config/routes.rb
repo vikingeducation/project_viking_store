@@ -8,9 +8,8 @@ Rails.application.routes.draw do
   get '/order_contents/remove_oc' => "order_contents#remove_oc"
   post '/order_contents/update_everything' => "order_contents#update_everything"
   post '/order_contents/create_oc' => "order_contents#create_oc"
-  resources :categories
-  resources :orders
   namespace :admin do
+    resources :orders
     resources :users
     resources :addresses
     resources :categories

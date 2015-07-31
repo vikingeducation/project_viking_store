@@ -4,7 +4,7 @@ class OrderContentsController < ApplicationController
   def update_everything
     @order = Order.find(params[:order][:id])
     OrderContent.update_all(params[:order_content])
-    redirect_to order_path(@order.id)
+    redirect_to admin_order_path(@order.id)
   end
 
   def remove_oc
@@ -12,10 +12,10 @@ class OrderContentsController < ApplicationController
     oc = OrderContent.find(params[:id])
     if oc.destroy
       flash[:success] = "Successfully removed product from order!"
-      redirect_to order_path(order.id)
+      redirect_to admin_order_path(order.id)
     else
       flash[:danger] = "Failed to remove product from order!"
-      redirect_to order_path(order.id)
+      redirect_to admin_order_path(order.id)
     end
   end
 
@@ -32,7 +32,7 @@ class OrderContentsController < ApplicationController
     else
       flash[:success] = "Products properly added to order!"
     end
-    redirect_to edit_order_path(order)
+    redirect_to edit_admin_order_path(order)
   end
 
 

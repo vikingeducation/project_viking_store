@@ -1,4 +1,4 @@
-<h1> Edit address for <%= link_to @address.user.name, @address.user %> </h1>
+<h1> Edit address for <%= link_to @address.user.name, [:admin, @address.user] %> </h1>
 
 <%= render partial: "admin/addresses/form", locals: {address: @address} %>
 
