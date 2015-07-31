@@ -1,0 +1,6 @@
+<%= form_tag do %>
+  <%= collection_select(:category_id, :category_id, Category.all, :id, :name ) %>
+  <div class="col-xs-2  text-center">
+    <%= submit_tag "Apply Filter", class: "btn btn-primary btn-block filter_btn" %>
+  </div>
+<% end %>

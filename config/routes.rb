@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get "/admin/dashboard" => "admin/analytics#dashboard"
 
-  get "/admin" => "admins#portal"
+  get "/admin" => "admin/analytics#dashboard"
   get '/order_contents/remove_oc' => "order_contents#remove_oc"
   post '/order_contents/update_everything' => "order_contents#update_everything"
   post '/order_contents/create_oc' => "order_contents#create_oc"
