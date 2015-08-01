@@ -6,7 +6,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :shipping, class_name:  "Address"
 
-  has_many :order_contents
+  has_many :order_contents, dependent: :destroy
   has_many :products, through: :order_contents
   has_many :categories, through: :products
 

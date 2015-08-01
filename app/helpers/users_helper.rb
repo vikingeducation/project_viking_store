@@ -9,34 +9,38 @@ module UsersHelper
     end
   end
 
-  def address_id(address, index)
-    if address.persisted?
-      address.id
+  def is_default_billing?(user, address_id)
+    user.billing_id == address_id
+  end
+
+  def is_default_shipping?(user, address_id)
+    user.shipping_id == address_id
+  end
+
+
+  # If the user is persisted, we just make a radio button with the value of
+  # the address' id.
+  # If the user ISN'T persisted, we have to do a hacky work around
+  # in which we save the address given and set it to the user's default
+  # in the create method of the users controller.
+  def generate_shipping_button(user, user_address, index)
+    if user.persisted?
+      return radio_button_tag("user[shipping_id]",
+                              user_address.id,
+                              checked = is_default_shipping?(user, user_address.id))
     else
-      Address.last.id + index + 1
+      return radio_button_tag("shipping_address", index)
     end
   end
 
-  def is_default_billing?(user, address)
-    user.billing_id == address
-  end
-
-  def is_default_shipping?(user, address)
-    user.shipping_id == address
-  end
-
-  def generate_shipping_button(user, user_address, index)
-    address = address_id(user_address, index)
-    return radio_button_tag("user[shipping_id]",
-                            address,
-                            checked = is_default_shipping?(user, address))
-  end
-
   def generate_billing_button(user, user_address, index)
-    address = address_id(user_address, index)
-    return radio_button_tag("user[billing_id]",
-                            address,
-                            checked = is_default_billing?(user, address))
+    if user.persisted?
+      return radio_button_tag("user[billing_id]",
+                              user_address.id,
+                              checked = is_default_billing?(user, user_address.id))
+    else
+      return radio_button_tag("billing_address", index)
+    end
   end
 
 end

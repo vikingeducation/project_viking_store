@@ -9,6 +9,7 @@
 	    <% if current_user %>
 	    	<li><a>Welcome, <%= current_user.name %>!</a></li>
 			<li><%= link_to "Sign Out", session_path, method: 'delete' %></li>
+			<li><%= link_to "Edit Account", edit_user_path(current_user) %>
 	    <% else %>
 		    <li><%= link_to "Sign In", new_session_path %></li>
 		<% end %>

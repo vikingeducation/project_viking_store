@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :products, only: [:index, :show]
-  resources :users, only: [:new, :create, :edit, :update]
+  resources :users, only: [:new, :create, :edit, :update, :destroy]
   resource :carts, only: [:update]
   resource :session, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

@@ -28,4 +28,11 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
   helper_method :signed_in_user?
+
+  def require_login
+    unless signed_in_user?
+      flash[:danger] = "You need to be signed in to view this page."
+      redirect_to root_path #< if we've defined a custom login path
+    end
+  end
 end
