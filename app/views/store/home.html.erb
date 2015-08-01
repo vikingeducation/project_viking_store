@@ -43,8 +43,11 @@
     </div>
     <div class="store-frame">
       <div class="product-wrapper row">
-        
+        <div class="text-center">
+         <%= will_paginate @products %>
+        </div>
         <% @products.each do |product| %>
+          
 
           <div class="col-md-4 text-center">
             <div class="title">
@@ -63,31 +66,10 @@
 
           </div>
           <% end %>
-      
-        <div class = "pagination" >
-          <div class="prev">
-            <a href="#">&lt;&lt; Prev</a>
+          <div class="text-center">
+           <%= will_paginate @products %>
           </div>
-          <div class="page">
-            <a href="#">1</a>
-          </div>
-          <div class="page"><strong>2</strong>
-          </div>
-          <div class="page">
-            <a href="#">3</a>
-          </div>
-          <div id="ellipsis">. . .
-          </div>
-          <div class="page">
-            <a href="#">8</a>
-          </div>
-          <div class="page">
-            <a href="#">9</a>
-          </div>
-          <div class="next">
-            <a href="#">Next &gt;&gt;</a>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>

@@ -6,9 +6,9 @@ class StoreController < ApplicationController
     session[:cart] ||= {}
     @categories = Category.all
     if params[:cat_id]
-      @products = Category.find(params[:cat_id]).products
+      @products = Category.find(params[:cat_id]).products.paginate(:page => params[:page], :per_page => 6)
     else
-      @products = Product.all
+      @products = Product.all.paginate(:page => params[:page], :per_page => 6)
     end
   end
 
