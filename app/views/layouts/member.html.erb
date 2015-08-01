@@ -38,15 +38,15 @@
   </head>
   <body>
 
+    <%= render partial: 'shared/user_navbar' %>
+
     <div class = "row">
       <div class = "col-xs-10 col-xs-offset-1">
         <%= render partial: "shared/flash", flash: flash %>
       </div>
     </div>
 
-    <%= render partial: 'shared/user_navbar' %>
-
-        <%= yield %>
+    <%= yield %>
 
     <%= render partial: 'shared/home_footer' %>
 

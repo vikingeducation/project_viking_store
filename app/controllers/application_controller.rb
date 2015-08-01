@@ -5,11 +5,11 @@ class ApplicationController < ActionController::Base
 
   def sign_in(user)
     session[:current_user_id] = user.id
-    current_user = user
+    self.current_user=(user)
   end
 
   def sign_out
-    session.delete(:current_user_id) && current_user = nil
+    session.delete(:current_user_id) && self.current_user=(nil)
   end
 
   def current_user
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   def require_login
     unless signed_in_user?
       flash[:error] = "You need to sign in to view this"
-      redirect_to login_path #< if we've defined a custom login path
+      redirect_to new_session_path
     end
   end
 

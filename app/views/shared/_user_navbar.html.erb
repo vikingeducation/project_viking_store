@@ -18,7 +18,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Your Cart</a></li>
         <% if signed_in_user? %>
-          <li><a href="#">Sign Out</a></li>
+          <li>
+            <%= link_to "Log out", session_path, method: :delete %>
+          </li>
           <% else %>
           <li><%= link_to 'Login', new_session_path  %></li>
         <% end -%>

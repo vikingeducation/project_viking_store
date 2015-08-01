@@ -13,17 +13,16 @@
   </div> -->
 <!--  ======================Products============================ -->
 <!-- <a class="btn btn-primary" data-toggle="modal" href="#myModal" >Login</a> -->
-<%= link_to "Open modal", "#my-modal", :class => "btn", "data-toggle" => "modal" %>
-<%= render  'store/login' %>
-    <div class="jumbotron">
-      <h1>The Viking Store</h1>
-    </div>
-    <div class="heading1">
-      <h2>The Best Viking Gear on the Whole Web</h2>
-    </div>
-    <div class="sub-heading">
-      <h3>Choose from among our lineup of products below</h3>
-    </div>
+
+<div class="jumbotron">
+  <h1>The Viking Store</h1>
+</div>
+<div class="heading1">
+  <h2>The Best Viking Gear on the Whole Web</h2>
+</div>
+<div class="sub-heading">
+  <h3>Choose from among our lineup of products below</h3>
+</div>
   <div class="container">
 
     <div class="row">
@@ -47,17 +46,21 @@
         
         <% @products.each do |product| %>
 
-          <div class="col-md-4">
+          <div class="col-md-4 text-center">
             <div class="title">
               <h4><%= product.name %></h4>
             </div>
             <div class="pimg">
               <div class="price"><%= product.price %></div>
-              <img class="img-responsive img-thumbnail" src="https://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_silent_night_small.jpg">
+              <%= image_tag "https://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_silent_night_small.jpg", class: "img-responsive img-thumbnail", style: "height:150px;width:150px" %>
             </div>
-            <div class="pfooter">
-              <button><h5>Add to Cart</h5></button>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <%= link_to "Add to Cart", add_to_cart_path( {product_id: product.id } ), class: 'btn btn-lg btn-success' %>
+              </div>
             </div>
+
           </div>
           <% end %>
       

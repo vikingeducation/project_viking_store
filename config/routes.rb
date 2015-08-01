@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: "admin#portal"
+  root to: "store#home"
 
   get "admin/dashboard" => "admin/analytics#dashboard"
 
@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   post 'admin/order_contents/create_oc' => "admin/order_contents#create_oc"
 
   get '/home' => "store#home"
-  #resources :store
+
+  get '/add_to_cart' => "store#add_to_cart"
 
   namespace :admin do
     resources :categories
