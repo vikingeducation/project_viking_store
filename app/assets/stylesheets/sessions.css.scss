@@ -1,3 +1,19 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.user-section{
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.user-buttons{
+  padding:10px;
+  margin: 10px;
+  
+}

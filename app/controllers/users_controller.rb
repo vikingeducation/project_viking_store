@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
 
-  before_action :require_login, :exclude => [:new, :create]
+  layout 'clear'
+  
+  before_action :require_login, :except => [:new, :create]
 
   def new
+    @user = User.new
   end
 
   def create
+
   end
 
   before_action :require_current_user, :only => [:edit, :update, :destroy]
