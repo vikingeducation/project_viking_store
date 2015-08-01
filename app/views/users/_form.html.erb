@@ -1,42 +1,81 @@
-<%= form_for user do |f| %>
+<div class="container">
+  <h1 class = "text-center">Sign Up</h1>
+  <hr>
 
-  <div class="form-group">
-    <%= f.label :email, class: 'form-control' %>
-    <%= f.email_field :email, class: 'form-control' %>
+  <div class="row">
+    <%= form_for user do |f| %>
+
+    <div class="col-sm-5 col-sm-offset-1">
+      <h3 class = "text-center" >Saved Address (Optional)</h3>
+
+      <%= f.fields_for :addresses do |address_field| %>
+
+        <div class="form-group">
+          <%= address_field.label :street_address %>
+          <%= address_field.email_field :street_address, class: 'form-control', placeholder: "1234 fake street" %>
+        </div>
+
+        <div class="form-group">
+          <%= address_field.label :city %>
+          <%= address_field.email_field :city, class: 'form-control', placeholder: "Somewhere" %>
+        </div>
+
+      <% end -%>
+    </div>
+
+    <div class="col-sm-5">
+
+      <h3 class = "text-center">Account Information</h3>
+
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control', placeholder: "example@domain.com" %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :confirm_email, "Confirm Email"%>
+          <%= email_field_tag :confirm_email, "", class: 'form-control', placeholder: "example@domain.com" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :confirm_password, "Confirm password" %>
+          <%= password_field_tag :confirm_password, "", class: 'form-control' %>
+        </div>
+
+
+        <div class="form-group">
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, class: 'form-control', placeholder: "John" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, class: 'form-control', placeholder: "Smith" %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :mobile, 'Tel Number (optional)' %>
+          <%= text_field_tag :mobile, "", class: 'form-control', placeholder: "(123)456-7890" %>
+        </div>
+
+        <hr>
+        <div class="form-group">
+          <h2 class = "text-center">Complete Sign Up</h2>
+          <%= f.submit "Sign Up", class: "btn btn-lg btn-success btn-block" %>
+          <% if user.persisted? %>
+            <%= link_to "Delete my account", user_path(user), method: :delete, class: "btn btn-lg btn-danger", data: {confirm: "Really delete your account?"} %>
+          <% end -%>
+        </div>
+      <% end %>
+
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :confirm_email, class: 'form-control' %>
-    <%= f.email_field :confirm_email, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :password, class: 'form-control' %>
-    <%= f.password_field :password, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :confirm_password, class: 'form-control' %>
-    <%= f.password_field :confirm_password, class: 'form-control' %>
-  </div>
+</div>
 
 
-  <div class="form-group">
-		<%= f.label :first_name, class: 'form-control' %>
-		<%= f.text_field :first_name, class: 'form-control' %>
-	</div>
-
-  <div class="form-group">
-    <%= f.label :last_name, class: 'form-control' %>
-    <%= f.text_field :last_name, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label 'Tel Number (optional)', class: 'form-control' %>
-    <%= f.text_field :mobile, class: 'form-control' %>
-  </div>
-
-	<div class="form-group">
-		<%= f.submit %>
-	</div>
-<% end %>

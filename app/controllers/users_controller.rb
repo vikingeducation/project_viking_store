@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @user.addresses.build
   end
 
   def create
