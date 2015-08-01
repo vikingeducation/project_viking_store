@@ -1,5 +1,5 @@
 <% user.addresses.each_with_index do |user_address, index| %>
-	<%= fields_for :address, user_address do |address_fields| %>
+	<%= fields_for "address[]", user_address do |address_fields| %>
 		<div class="col-xs-12">
 			<div class="col-xs-12 text-center">
 			  <h3>Saved Address <%= index + 1 %> (Optional)</h3>
@@ -25,10 +25,10 @@
 
 			  <div class="form_group">
 			    <%= label_tag "Set as Default Shipping Address" %>
-			    <%= radio_button_tag(:default_address_id, user_address.id) %>
+			    <%= radio_button_tag("user[shipping_id]", Address.last.id + index + 1) %>
 
 			    <%= label_tag "Set as Default Billing Address" %>
-			    <%= radio_button_tag(:default_billing_id, user_address.id) %>
+			    <%= radio_button_tag("user[billing_id]", Address.last.id + index + 1) %>
 			  </div>
 			  <% end %>
 			</div>

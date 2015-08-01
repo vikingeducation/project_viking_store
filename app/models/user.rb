@@ -55,9 +55,9 @@ class User < ActiveRecord::Base
   end
 
   def create_new_unplaced_order(session_cart)
-    new_order = Order.create(user_id: self.user_id,
-                               billing_id: self.default_billing_address_id,
-                               shipping_id: self.default_shipping_address_id,
+    new_order = Order.create(user_id: self.id,
+                               billing_id: self.billing_id,
+                               shipping_id: self.shipping_id,
                                checkout_date: nil)
     session_cart.each do |new_cart|
       OrderContent.create(order_id: new_order.id,
@@ -99,7 +99,30 @@ class User < ActiveRecord::Base
     overall
   end
 
+  def rebuild_user_addresses(addresses)
+    addresses.reject!{|address| address["street_address"].blank? &&
+                                address["city"].blank? &&
+                                address["zip_code"].blank?}
+    addresses.each do |address|
+      a = Address.new(user_id: self.id)
+      a.street_address = address["street_address"]
+      a.city = City.find_or_create_by(name: address["city"])
+      a.state_id = address["state_id"].to_i
+      a.zip_code = address["zip_code"].to_i
+      a.save!
+    end
+    self.deorphan_addresses
+  end
 
+  def deorphan_addresses
+    unless b_address = Address.find_by(id: self.billing_id) && b_address.user_id = self.id
+      self.billing_id = nil
+    end
+
+    unless s_address = Address.find_by(id: self.shipping_id) && s_address.user_id = self.id
+      self.shipping_id = nil
+    end
+  end
 
   def self.get_superlatives
     superlatives = {}
