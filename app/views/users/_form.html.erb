@@ -1,14 +1,19 @@
 <div class="container">
-  <h1 class = "text-center">Sign Up</h1>
+  <h1 class = "text-center">
+    <%= user.persisted? ? "Edit Profile" : "Sign up" %>
+  </h1>
   <hr>
 
   <div class="row">
-    <%= form_for user do |f| %>
+    <%= form_for user do |user_fields| %>
 
     <div class="col-sm-5 col-sm-offset-1">
-      <h3 class = "text-center" >Saved Address (Optional)</h3>
 
-      <%= f.fields_for :addresses do |address_field| %>
+      <%= user_fields.fields_for :addresses do |address_field| %>
+
+      <h3 class = "text-center" >
+        <%= address_field.object.persisted? ? "Change your Address" : "Save an Address (Optional)" %>
+      </h3>
 
         <div class="form-group">
           <%= address_field.label :street_address %>
@@ -16,14 +21,14 @@
         </div>
 
         <div class="form-group">
-          <%= address_field.label :city %>
-          <%= address_field.text_field :city, class: 'form-control', placeholder: "Somewhere" %>
+          <%= address_field.label :city_id, "City" %>
+          <%= address_field.text_field :city_id, class: 'form-control', placeholder: "Somewhere", value: address_field.object.persisted? ? address_field.object.city.name : "" %>
         </div>
 
         <div class="row">
           <div class="form-group col-sm-6">
             <%= address_field.label :state %>
-            <%= address_field.collection_select(:state_id, State.all, :id, :name, {}, {class: "form-control"}) %>
+            <%= address_field.collection_select(:state_id, State.all, :id, :name, {include_blank: true}, {class: "form-control"}) %>
           </div>
 
           <div class="form-group col-sm-6">
@@ -31,6 +36,29 @@
             <%= address_field.text_field :zip_code, class: 'form-control', placeholder: "12345" %>
           </div>
         </div>
+
+        <div class="form-group col-sm-12">
+          <div class="radio">
+            <%= user_fields.radio_button :shipping_id, address_field.object.id, {class: 'radio', checked: user.shipping_id == address_field.object.id} %>
+            <%# user_fields.check_box :shipping_id, {class: 'checkbox'}, user.shipping_id, "0" %>
+            <%= user_fields.label :shipping_id, "Default shipping address", style: "font-weight:bold" %>
+          </div>
+          <div class="radio">
+            <%= user_fields.radio_button :billing_id, address_field.object.id, {class: 'radio', checked: user.billing_id == address_field.object.id } %>
+            <%# user_fields.check_box :billing_id, {class: 'checkbox'}, user.billing_id, "0" %>
+            <%= user_fields.label :billing_id, "Default billing address", style: "font-weight:bold" %>
+          </div>
+        </div>
+
+        <% if address_field.object.persisted? %>
+          <%= address_field.check_box :_destroy %>
+          <%= address_field.label :_destroy, "Delete Address?", {class: 'alert-danger'} %>
+        <% end %>
+
+        <hr>
+
+        <%# address_field.collection_radio_buttons(:author_ids, User.all, :id, :name, {}, {}) %>
+        <%# user_fields.collection_check_boxes(:tag_ids, Tag.all, :id, :name, {}, {}) %>
 
       <% end -%>
     </div>
@@ -40,8 +68,8 @@
       <h3 class = "text-center">Account Information</h3>
 
         <div class="form-group">
-          <%= f.label :email %>
-          <%= f.email_field :email, class: 'form-control', placeholder: "example@domain.com" %>
+          <%= user_fields.label :email %>
+          <%= user_fields.email_field :email, class: 'form-control', placeholder: "example@domain.com" %>
         </div>
 
         <div class="form-group">
@@ -50,8 +78,8 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :password %>
-          <%= f.password_field :password, class: 'form-control' %>
+          <%= user_fields.label :password %>
+          <%= user_fields.password_field :password, class: 'form-control' %>
         </div>
 
         <div class="form-group">
@@ -61,13 +89,13 @@
 
 
         <div class="form-group">
-          <%= f.label :first_name %>
-          <%= f.text_field :first_name, class: 'form-control', placeholder: "John" %>
+          <%= user_fields.label :first_name %>
+          <%= user_fields.text_field :first_name, class: 'form-control', placeholder: "John" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :last_name %>
-          <%= f.text_field :last_name, class: 'form-control', placeholder: "Smith" %>
+          <%= user_fields.label :last_name %>
+          <%= user_fields.text_field :last_name, class: 'form-control', placeholder: "Smith" %>
         </div>
 
         <div class="form-group">
@@ -77,10 +105,13 @@
 
         <hr>
         <div class="form-group">
-          <h2 class = "text-center">Complete Sign Up</h2>
-          <%= f.submit "Sign Up", class: "btn btn-lg btn-success btn-block" %>
+          <h3 class = "text-center">
+            <%= user.persisted? ? "Edit Profile" : "Complete Sign up" %>
+          </h3>
+          <%= user_fields.submit user.persisted? ? "Save Changes" : "Sign Up", class: "btn btn-lg btn-primary btn-block" %>
+          <hr>
           <% if user.persisted? %>
-            <%= link_to "Delete my account", user_path(user), method: :delete, class: "btn btn-lg btn-danger", data: {confirm: "Really delete your account?"} %>
+            <%= link_to "Delete my account", user_path(user), method: :delete, class: "btn btn-lg btn-danger btn-block", data: {confirm: "Really delete your account?"} %>
           <% end -%>
         </div>
       <% end %>

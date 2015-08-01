@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates :email, :format => { :with => /@/ }
 
 
-  has_many :addresses
+  has_many :addresses, dependent: :destroy
 
   belongs_to :default_billing_address, class_name:  "Address",
               :foreign_key => :billing_id
@@ -13,13 +13,14 @@ class User < ActiveRecord::Base
               :foreign_key => :shipping_id
 
   has_many :orders
-  has_many :credit_cards
+  has_many :credit_cards, dependent: :destroy
 
   has_many :order_contents, through: :orders
   has_many :products, through: :order_contents
-  # 1. Overall Platform
 
-  # Last 7 Days
+  accepts_nested_attributes_for :addresses,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
 
   def name
     self.first_name + " " + self.last_name

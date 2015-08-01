@@ -18,12 +18,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    sign_out
-    if current_user
-      flash[:error] = "Angry robots have prevented you from signing out.  You're stuck here forever."
+    if sign_out
+      flash[:success] = "You have successfully signed out"
       redirect_to root_path
     else
-      flash[:success] = "You have successfully signed out"
+      flash[:error] = "Angry robots have prevented you from signing out.  You're stuck here forever."
       redirect_to root_path
     end
   end
