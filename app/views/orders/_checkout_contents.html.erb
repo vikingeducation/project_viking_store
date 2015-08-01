@@ -1,6 +1,6 @@
 <tr>
-  <td>Product</td>
-  <td>Quantity</td>
-  <td>Price</td>
-  <td>Total Price</td>
+  <td><%= content_row.product.name %></td>
+  <td><%= content_row.quantity %></td>
+  <td><%= number_to_currency(content_row.product.price) %></td>
+  <td><%= number_to_currency(content_row.total_cost) %></td>
 </tr>

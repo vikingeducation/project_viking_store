@@ -74,14 +74,47 @@
           <div class='col-sm-6'>
             <%= link_to 'Edit Order', edit_user_order_path(current_user, @order) %>
             <br>
-            <%= link_to 'Delete Order', edit_user_order_path(current_user, @order), :method => 'DELETE' %>
+            <%= link_to 'Delete Order', user_order_path(current_user, @order), :method => 'DELETE' %>
           </div>
 
           <div class='col-sm-6'>
-            
+            <div class='row text-muted'>
+              <div class='col-xs-6'>
+                <p>Shipping:</p>
+              </div>
+              <div class='col-xs-6'>
+                <p><%= number_to_currency(@shipping_charge) %></p>
+              </div>
+            </div>
+            <div class='row text-muted'>
+              <div class='col-xs-6'>
+                <p>Tax:</p>
+              </div>
+              <div class='col-xs-6'>
+                <p><%= number_to_currency(@tax) %></p>
+              </div>
+            </div>
+            <div class='row'>
+              <strong>
+                <div class='col-xs-6'>
+                  <p>TOTAL:</p>
+                </div>
+                <div class='col-xs-6'>
+                  <p><%= number_to_currency(@order.calculate_order_value + @shipping_charge + @tax) %></p>
+                </div>
+              </strong>
+            </div>
           </div>
 
         </div>
+
+        <div class='row'> <!-- button -->
+          <div class='col-xs-12'>
+            <h3 class='text-center'>Place Your Order</h3>
+
+            <%= order_fields.submit 'Place Order!', class: 'btn btn-primary btn-lg btn-block' %>
+          </div>
+        </div> <!-- button -->
 
 
       </div> <!-- RIGHT column -->

@@ -31,6 +31,8 @@ class OrdersController < ApplicationController
 
   def checkout
     @order = Order.find(params[:id])
+    @shipping_charge = 12
+    @tax = 12
   end
 
 
