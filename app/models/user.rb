@@ -19,7 +19,10 @@ class User < ActiveRecord::Base
   has_many :order_contents, through: :orders
   has_many :products, through: :order_contents
 
-  accepts_nested_attributes_for :addresses, :reject_if => :all_blank
+  accepts_nested_attributes_for :addresses, reject_if:
+                                proc { |attributes|
+                                attributes['zip_code'].blank? &&
+                                attributes['street_address'].blank? }
   # 1. Overall Platform
 
   # Last 7 Days

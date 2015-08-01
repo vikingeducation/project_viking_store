@@ -22,6 +22,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+    @user.addresses.build
+  end
+
   private
     def whitelisted_user_params
       params.require(:user).permit(:email, :email_confirmation,
