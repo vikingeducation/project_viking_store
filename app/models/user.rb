@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  validates_confirmation_of :email
   validates :first_name, :last_name, :email, presence: true,
                                             length: {in: 1..64}
   validates :email, :format => { :with => /@/ }
@@ -34,22 +35,23 @@ class User < ActiveRecord::Base
   end
 
   def merge_carts(session_cart)
-    db_cart = cart
-    if db_cart && session_cart
-      merge_session_cart_into_db_cart(session_cart, db_cart)
+    if cart && session_cart
+      merge_session_cart_into_db_cart(session_cart, cart.id)
     else
       create_new_unplaced_order(session_cart)
     end
   end
 
-  def merge_session_cart_into_db_cart(session_cart, db_cart)
-    order_id = db_cart.id
-    session_cart.each do |potential_cart|
-      potential_cart[:order_id] = order_id
-      potential_cart[:quantity] = potential_cart["quantity"].to_i
-      potential_cart[:product_id] = potential_cart["product_id"].to_i
+  def merge_session_cart_into_db_cart(session_cart, cart_id)
+    # Rails converts all of our hash keys into strings.
+    # The order_contents model expects symbols
+    # We convert all the keys into symbols then add in the order id
+    keyed_session_cart = session_cart.map do |potential_cart|
+      keyed_cart = potential_cart.inject({}){|memo,(k,v)| memo[k.to_sym] = v.to_i; memo}
+      keyed_cart[:order_id] = cart_id
+      keyed_cart
     end
-    OrderContent.create_or_update_many(session_cart)
+    OrderContent.create_or_update_many(keyed_session_cart)
   end
 
   def create_new_unplaced_order(session_cart)

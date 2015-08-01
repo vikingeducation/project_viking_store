@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    session[:cart] ||= []
-    @cart = get_cart
+    session[:cart] ||= [] unless current_user
 
     @selected = get_selected
     if @selected == "" || @selected == nil
@@ -22,9 +21,5 @@ class ProductsController < ApplicationController
       else
         session[:filter]
       end
-    end
-
-    def get_cart
-
     end
 end

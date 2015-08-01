@@ -11,6 +11,7 @@ class CartsController < ApplicationController
   private
     def update_session_cart
       cart = session[:cart]
+
       product_id, quantity = params["product_id"], params["quantity"].to_i
       if product = cart.find{|value| value["product_id"] == product_id}
         if quantity == 0
@@ -26,7 +27,6 @@ class CartsController < ApplicationController
       end
 
       session[:cart] = cart
-
     end
 
     def update_database_cart

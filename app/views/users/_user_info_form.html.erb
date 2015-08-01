@@ -1,0 +1,36 @@
+<h3>Account Information</h3>
+
+<div class="form_group">
+	<%= f.label :email, "Email Address" %><br>
+	<%= f.text_field :email %>
+</div>
+
+<div class="form_group">
+	<%= f.label :email_confirmation, "Confirm Email" %><br>
+	<%= f.text_field :email_confirmation %>
+</div>
+
+<div class="form_group">
+	<%= f.label "Password" %><br>
+	<%= text_field_tag "Password", nil, disabled: true %>
+</div>
+
+
+<div class="form_group">
+	<%= f.label "Confirm Password" %><br>
+	<%= text_field_tag "Confirm Password", nil, disabled: true %>
+</div>
+
+<div class="form_group">
+	<%= f.label :first_name %><br>
+	<%= f.text_field :first_name %>
+</div>
+
+<div class="form_group">
+	<%= f.label :last_name %><br>
+	<%= f.text_field :last_name %>
+</div>
+
+<div class="form_group">
+  	<%= f.submit "Sign Up!", class: "btn btn-block btn-primary"%>
+</div>

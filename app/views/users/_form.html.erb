@@ -1,0 +1,13 @@
+<div class="row">
+    <%= form_for @user do |f|%>
+    <div class="col-xs-6 content">
+      <%= render partial: "users/addresses", locals: {user: @user} %>
+
+    </div>
+    <div class="col-xs-6 sidebar-outer" >
+        <div class="fixed col-xs-6">
+            <%= render partial: "users/user_info_form", locals: {f: f} %>
+        </div>
+    </div>
+    <% end %>
+</div>
