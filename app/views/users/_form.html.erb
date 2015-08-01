@@ -12,12 +12,24 @@
 
         <div class="form-group">
           <%= address_field.label :street_address %>
-          <%= address_field.email_field :street_address, class: 'form-control', placeholder: "1234 fake street" %>
+          <%= address_field.text_field :street_address, class: 'form-control', placeholder: "1234 fake street" %>
         </div>
 
         <div class="form-group">
           <%= address_field.label :city %>
-          <%= address_field.email_field :city, class: 'form-control', placeholder: "Somewhere" %>
+          <%= address_field.text_field :city, class: 'form-control', placeholder: "Somewhere" %>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <%= address_field.label :state %>
+            <%= address_field.collection_select(:state_id, State.all, :id, :name, {}, {class: "form-control"}) %>
+          </div>
+
+          <div class="form-group col-sm-6">
+            <%= address_field.label :zip_code %>
+            <%= address_field.text_field :zip_code, class: 'form-control', placeholder: "12345" %>
+          </div>
         </div>
 
       <% end -%>
