@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 
   has_many :order_contents, through: :orders
   has_many :products, through: :order_contents
+
+  accepts_nested_attributes_for :addresses, :reject_if => :all_blank
   # 1. Overall Platform
 
   # Last 7 Days
@@ -104,7 +106,8 @@ class User < ActiveRecord::Base
                                 address["city"].blank? &&
                                 address["zip_code"].blank?}
     addresses.each do |address|
-      a = Address.new(user_id: self.id)
+      a = Address.find_by(id: address["id"])
+      a ||= Address.new(user_id: self.id)
       a.street_address = address["street_address"]
       a.city = City.find_or_create_by(name: address["city"])
       a.state_id = address["state_id"].to_i
@@ -115,11 +118,11 @@ class User < ActiveRecord::Base
   end
 
   def deorphan_addresses
-    unless b_address = Address.find_by(id: self.billing_id) && b_address.user_id = self.id
+    unless (b_address = Address.find_by(id: self.billing_id)) && b_address.user_id = self.id
       self.billing_id = nil
     end
 
-    unless s_address = Address.find_by(id: self.shipping_id) && s_address.user_id = self.id
+    unless (s_address = Address.find_by(id: self.shipping_id)) && s_address.user_id = self.id
       self.shipping_id = nil
     end
   end

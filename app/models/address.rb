@@ -1,7 +1,6 @@
 class Address < ActiveRecord::Base
 
-  validates :zip_code, :city_id, :state_id, :user_id,
-            presence: true
+  validates :zip_code, :city_id, :state_id, presence: true
   validates :street_address, presence: true, length: {in: 1..64}
 
   belongs_to :user

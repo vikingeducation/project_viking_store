@@ -1,7 +1,7 @@
 <div class="row">
     <%= form_for @user do |f|%>
     <div class="col-xs-6 content">
-      <%= render partial: "users/addresses", locals: {user: @user} %>
+      <%= render partial: "users/addresses", locals: {user: @user, f: f} %>
 
     </div>
     <div class="col-xs-6 sidebar-outer" >
