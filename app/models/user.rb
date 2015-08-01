@@ -33,6 +33,41 @@ class User < ActiveRecord::Base
     self.default_shipping_address.state.name
   end
 
+  def merge_carts(session_cart)
+    db_cart = cart
+    if db_cart && session_cart
+      merge_session_cart_into_db_cart(session_cart, db_cart)
+    else
+      create_new_unplaced_order(session_cart)
+    end
+  end
+
+  def merge_session_cart_into_db_cart(session_cart, db_cart)
+    order_id = db_cart.id
+    session_cart.each do |potential_cart|
+      potential_cart[:order_id] = order_id
+      potential_cart[:quantity] = potential_cart["quantity"].to_i
+      potential_cart[:product_id] = potential_cart["product_id"].to_i
+    end
+    OrderContent.create_or_update_many(session_cart)
+  end
+
+  def create_new_unplaced_order(session_cart)
+    new_order = Order.create(user_id: self.user_id,
+                               billing_id: self.default_billing_address_id,
+                               shipping_id: self.default_shipping_address_id,
+                               checkout_date: nil)
+    session_cart.each do |new_cart|
+      OrderContent.create(order_id: new_order.id,
+                          product_id: new_cart["product_id"].to_i,
+                          quantity: new_cart["quantity"].to_i)
+    end
+  end
+
+  def cart
+    self.orders.where("checkout_date IS NULL").first
+  end
+
   def last_order_date
     if self.orders.where("checkout_date IS NOT NULL").order(:checkout_date).last
       self.orders.where("checkout_date IS NOT NULL").order(:checkout_date).last.checkout_date

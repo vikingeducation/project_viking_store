@@ -35,6 +35,10 @@ class OrderContent < ActiveRecord::Base
     return nil
   end
 
+  def product_by_id(id)
+    self.find_by(product_id: id)
+  end
+
   def self.create_or_update_record(record)
     order_content = self.find_by(order_id: record[:order_id], product_id: record[:product_id])
     if order_content

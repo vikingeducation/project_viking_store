@@ -1,5 +1,4 @@
 class OrderContentsController < ApplicationController
-
   # params[:order_content] is an array of order_contents to update
   def update_everything
     @order = Order.find(params[:order][:id])

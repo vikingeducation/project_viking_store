@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
 
   # "sign out" by removing the ID and deleting the current_user
   def sign_out
-    session.delete(:current_user_id) && current_user = nil
+    current_user = nil
+    return session.delete(:current_user_id)
   end
 
   def current_user

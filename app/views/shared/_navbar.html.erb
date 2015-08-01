@@ -6,7 +6,11 @@
 
 <div class="navbar" id="navbar">
 	<ul class="nav navbar-nav navbar-right">
-		<li><a> Sign In </a></li>
-		<li><a> Sign Out </a></li>
+	    <% if current_user %>
+	    	<li><a>Welcome, <%= current_user.name %>!</a></li>
+			<li><%= link_to "Sign Out", session_path, method: 'delete' %></li>
+	    <% else %>
+		    <li><%= link_to "Sign In", new_session_path %></li>
+		<% end %>
 	</ul>
 </div>
