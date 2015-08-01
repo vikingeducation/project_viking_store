@@ -2,16 +2,10 @@ Rails.application.routes.draw do
 
   root to: "store#home"
 
-  get "admin/dashboard" => "admin/analytics#dashboard"
-
-  get "/admin" => "admin#portal"
-  get 'admin/order_contents/remove_oc' => "admin/order_contents#remove_oc"
-  post 'admin/order_contents/update_everything' => "admin/order_contents#update_everything"
-  post 'admin/order_contents/create_oc' => "admin/order_contents#create_oc"
-
   get '/home' => "store#home"
 
   get '/add_to_cart' => "store#add_to_cart"
+  get "/admin" => "admin#portal"
 
   namespace :admin do
     resources :categories
@@ -19,6 +13,11 @@ Rails.application.routes.draw do
     resources :users
     resources :addresses
     resources :orders
+
+    get "dashboard" => "analytics#dashboard"
+    get 'order_contents/remove_oc' => "order_contents#remove_oc"
+    post 'order_contents/update_everything' => "order_contents#update_everything"
+    post 'order_contents/create_oc' => "order_contents#create_oc"
   end
 
   resource :session, :only => [:new, :create, :destroy]
