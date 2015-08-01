@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   belongs_to :user
+  accepts_nested_attributes_for :user
 
   has_many :order_contents, :class_name => "OrderContents", :dependent => :destroy
   accepts_nested_attributes_for :order_contents, :reject_if => proc { |attributes| attributes['quantity'].to_i < 0 }, :allow_destroy => true

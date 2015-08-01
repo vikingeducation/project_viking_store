@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   belongs_to :default_shipping_address, :class_name => 'Address', :foreign_key => :shipping_id
 
   has_many :credit_cards, :dependent => :destroy
+  accepts_nested_attributes_for :credit_cards, :reject_if => :all_blank, :allow_destroy => true
 
   has_many :orders, :dependent => :nullify # make dependent if not checked out
   has_many :order_contents, :through => :orders
