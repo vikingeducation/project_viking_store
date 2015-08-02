@@ -25,9 +25,12 @@
           </li>
         <% end -%>
         <li>
-          <a href="#">Your Cart
-            <span>(<%= session[:cart].values.reduce(0,:+) %>)</span>
-          </a>
+          <%= image_tag "http://s3.amazonaws.com/viking_education/demos/viking_store_app/icon_empty_cart.png", class: "img-responsive", style: "height:25px;width:25px;margin-top:15px" %>
+        </li>
+        <li>
+          <%= link_to edit_order_path(1) do %>
+            <span>Your Cart (<%= session[:cart].values.reduce(0,:+) %>)</span>
+          <% end -%>
         </li>
         <% if signed_in_user? %>
           <li>

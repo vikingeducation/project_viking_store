@@ -1,22 +1,9 @@
 <div id="store">
-<!--   <div class="navbar">
-    <div class="logo">Viking Store</div>
-    <div class="navbar-elements">
-        <div class="cart-image"><img src="http://s3.amazonaws.com/viking_education/demos/viking_store_app/icon_empty_cart.png" width="30px" height="30px"></div>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="cart">Login </li>
-          <li class="cart"> Your Cart</li>
-        </ul>
-        
-    </div> 
-
-  </div> -->
 <!--  ======================Products============================ -->
-<!-- <a class="btn btn-primary" data-toggle="modal" href="#myModal" >Login</a> -->
-
-<div class="jumbotron">
+<header class = "container-fluid">
   <h1>The Viking Store</h1>
-</div>
+  <%# image_tag "http://s3.amazonaws.com/viking_education/demos/viking_store_app/viking_ship_background_medium.jpg", class: "img-responsive" %>
+</header>
 <div class="heading1">
   <h2>The Best Viking Gear on the Whole Web</h2>
 </div>
@@ -60,6 +47,7 @@
 
             <div class="row">
               <div class="col-xs-12">
+                <br>
                 <%= link_to "Add to Cart", add_to_cart_path( {product_id: product.id } ), class: 'btn btn-lg btn-success' %>
               </div>
             </div>
