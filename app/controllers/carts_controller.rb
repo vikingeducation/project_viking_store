@@ -38,7 +38,6 @@ class CartsController < ApplicationController
       current_user.get_new_cart
       redirect_to root_path
     else
-      binding.pry
       @order.checkout_date = nil
       flash[:success] = "We failed to place your order. Please Try Again."
       redirect_to checkout_path
