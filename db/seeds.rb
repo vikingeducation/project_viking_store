@@ -199,7 +199,7 @@ def generate_contents(order_id)
     # [:order_id, :product_id]
     if OrderContents.where(:product_id => c.product_id,
                           :order_id => c.order_id).empty?
-      c.save
+      c.save!
     end
   end
 end
@@ -231,14 +231,18 @@ def generate_order
     o[:shipping_id]   = random_user_address(user.id)
     o[:billing_id]    = random_user_address(user.id)
 
+
+    o.save!
+
+    generate_contents(o[:id])
+
     # first generated order is a shopping cart
     # all since then are placed orders with checkout dates
-    if has_cart?(user.id)
+    if user.orders.where("checkout_date IS NULL").count > 1
       o[:checkout_date] = placement_date(user)
     end
 
-    o.save
-    generate_contents(o[:id])
+    o.save!
   end
 end
 

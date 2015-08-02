@@ -4,7 +4,10 @@ class Address < ActiveRecord::Base
   belongs_to :created_by_user, :class_name => 'User', :foreign_key => :user_id
 
   has_many :default_billing_users, :class_name => 'User', :foreign_key => :billing_id, :dependent => :nullify
+  accepts_nested_attributes_for :default_billing_users, :allow_destroy => true
+
   has_many :default_shipping_users, :class_name => 'User', :foreign_key => :shipping_id, :dependent => :nullify
+  accepts_nested_attributes_for :default_shipping_users, :allow_destroy => true
 
   has_many :billed_orders, :class_name => 'Order', :foreign_key => :billing_id, :dependent => :nullify
   has_many :shipped_orders, :class_name => 'Order', :foreign_key => :shipping_id, :dependent => :nullify
