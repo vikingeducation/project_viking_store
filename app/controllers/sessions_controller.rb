@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
 
+  before_action :store_referer, :only => [:new]
+
+
   def new
   end
 
@@ -10,7 +13,7 @@ class SessionsController < ApplicationController
       sign_in user
       merge_visitor_cart
       flash[:success] = "Thanks for signing in!"
-      redirect_to root_path
+      redirect_to referer
     else
       flash.now[:error] = "No record found.  Please sign up!"
       render :new
@@ -21,11 +24,28 @@ class SessionsController < ApplicationController
   def destroy
     if sign_out
       flash[:success] = "You have successfully signed out."
-      redirect_to root_path
     else
       flash[:error] = "Oops."
-      redirect_to root_path
     end
+
+    session.delete(:referer) if session[:referer]
+    redirect_to root_path
+  end
+
+
+  private
+
+
+  def store_referer
+    # used .request_uri instead of  .path  because it won't carry over ?category_id query param
+    # this will get fixed if I nest Product under Category
+    referer = URI(request.referer)
+    session[:referer] = referer.request_uri unless referer.path == "/session/new"
+  end
+
+
+  def referer
+    session.delete(:referer)
   end
 
 end
