@@ -2,7 +2,7 @@
 
   <h1 class='text-center'>Checkout</h1>
 
-  <%= form_for [current_user, @order] do |order_fields| %>
+  <%= form_for [current_user, @order], url: {action: "finalize"} do |order_fields| %>
 
     <div class='row'>
 
@@ -23,30 +23,33 @@
 
 
 
+          <%= order_fields.fields_for :billing_card do |cc_fields| %>
 
-          <%= order_fields.fields_for :user do |user_fields| %>
-            <%= user_fields.fields_for :credit_cards do |cc_fields| %>
+            <%= cc_fields.hidden_field :user_id, :value => current_user.id %>
 
-              <div class='form-group'>
-                <%= cc_fields.label :card_number, 'Credit Card Number' %>
-                <%= cc_fields.text_field :card_number, class: 'form-control' %>
+            <div class='form-group'>
+              <%= cc_fields.label :card_number, 'Credit Card Number' %>
+              <%= cc_fields.text_field :card_number, class: 'form-control' %>
+              <%= render_error(cc_fields.object,:card_number) %>
+            </div>
+
+            <div class='row'>
+              <div class='col-sm-6'>
+                <%= cc_fields.label :exp_year, 'Expiration' %>
+                <%= cc_fields.text_field :exp_year, class: 'form-control' %>
+                <%= render_error(cc_fields.object,:exp_year) %>
               </div>
-
-              <div class='row'>
-                <div class='col-sm-6'>
-                  <%= cc_fields.label :exp_year, 'Expiration' %>
-                  <%= cc_fields.text_field :exp_year, class: 'form-control' %>
-                </div>
-                <div class='col-sm-6'>
-                  <%= cc_fields.label :exp_month, 'CVV' %>
-                  <%= cc_fields.text_field :exp_month, class: 'form-control' %>
-                </div>
+              <div class='col-sm-6'>
+                <%= cc_fields.label :exp_month, 'CVV' %>
+                <%= cc_fields.text_field :exp_month, class: 'form-control' %>
+                <%= render_error(cc_fields.object,:exp_month) %>
               </div>
+            </div>
+
+            <%= link_to 'Delete Card', user_credit_card_path(current_user, cc_fields.object.id), method: 'DELETE' if cc_fields.object.persisted? %>
 
           <% end %>
-        <% end %>
 
-        <%= link_to 'Delete Card', '#' %>
 
       </div> <!-- LEFT column -->
 
@@ -115,6 +118,7 @@
           <div class='col-xs-12'>
             <h3 class='text-center'>Place Your Order</h3>
 
+            <%= order_fields.hidden_field :checkout_date, :value => DateTime.now %>
             <%= order_fields.submit 'Place Order!', class: 'btn btn-primary btn-lg btn-block' %>
           </div>
         </div> <!-- button -->
