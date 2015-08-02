@@ -1,29 +1,65 @@
-<h1> Order Contents </h1>
-<%= form_for order do %>
+<%= form_for order, url: update_order_path, method: 'post' do |f| %>
+
+
+  <% order.order_contents.each do |record| %>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col-xs-3">
+            <%= image_tag "https://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_silent_night_small.jpg", class: "img-responsive img-thumbnail", style: "height:120px;width:120px" %>
+          </div>
+          <div class="col-xs-6">
+            <h3>
+              <strong><%= record.product.name %></strong>
+            </h3>
+            <h5>
+              <%= record.product.category.name %>
+            </h5>
+          </div>
+          <div class="col-xs-3">
+            <h5><%= number_to_currency(record.product.price) %></h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-4">
+
+        <%= fields_for :order_contents do |order_field| %>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <%= order_field.label :quantity %>
+            <%= order_field.text_field :quantity %>
+            <%= order_field.label :remove_item %>
+            <%= order_field.check_box :_destroy %>
+          </div>
+          <div class="col-xs-6">
+            <h5>Total Price</h5>
+            <h5>
+              <strong>
+                <%= number_to_currency(record.quantity * record.product.price) %>
+              </strong>
+            </h5>
+          </div>
+        </div>
+
+        <% end %>
+      </div>
+    </div>
+  <% end -%>
   <%= hidden_field :order, :id, :value => order.id %>
-<table class="table table-bordered">
-  <tr>
-    <th>ProductID</th>
-    <th>Quantity</th>
-    <th>Price</th>
-    <th>Total Price </th>
-    <th>Remove</th>
-  </tr>
 
-  <% order.order_contents.each do |order_content| %>
-    <tr>
-      <td><%= order_content.product.id %> </td>
-    <%= fields_for "order_content[]", order_content do |order_field| %>
-      <td><%= order_field.text_field :quantity %></td>
-    <% end %>
-      <td><%= order_content.product.price %> </td>
-      <td><%= order_content.quantity * order_content.product.price %></td>
-      <td><%= link_to "REMOVE", admin_order_contents_remove_oc_path({order_id: order.id, id: order_content.id})%> </td>
-    </tr>
-  <% end %>
-</table>
+  <div class="row">
+    <div class="col-sm-8 text-center">
+      <h3>Total</h3>
+      <h4><%= number_to_currency(order.value) %></h4>
+    </div>
 
-  <div class="actions">
-    <%= submit_tag %>
+    <div class="col-sm-4">
+      <%= f.submit "Update Contents", class: "btn btn-primary btn-block" %>
+      <br>
+      <%= link_to "Check Out", '/', class: "btn btn-success btn-block" %>
+    </div>
   </div>
+
 <% end %>
