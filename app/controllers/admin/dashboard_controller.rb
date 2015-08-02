@@ -1,6 +1,6 @@
 class Admin::DashboardController < AdminController
 
-  include DashboardHelper
+  include Admin::DashboardHelper
 
   def index
 
