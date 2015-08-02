@@ -6,6 +6,7 @@ class OrderContent < ActiveRecord::Base
 
 
   def self.update_all(records)
+    return if records.nil?
     records.each do |oc|
       order_content = OrderContent.find(oc[0])
       if order_content && oc[1][:quantity].to_i <= 0

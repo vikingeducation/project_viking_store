@@ -1,0 +1,59 @@
+<h1 class="text-center"> Checkout </h1>
+<%= form_for @user.cart, url: finalize_path do |f|%>
+<div class="col-xs-6">
+  <div class="col-xs-10 col-xs-offset-1">
+    <%= f.label :shipping_id, "Shipping Address" %>
+    <%= f.collection_select(:shipping_id, @user.addresses, :id, :full_address, required: true) %>
+
+    <%= f.label :billing_id, "Billing Address" %>
+    <%= f.collection_select(:billing_id, @user.addresses, :id, :full_address, required: true) %>
+
+    <%= link_to "Edit Your Addresses!", edit_user_path(@user) %>
+  </div>
+
+  <div class="col-xs-10 col-xs-offset-1">
+    <%= f.label :credit_card_number %>
+    <%= f.text_field :credit_card_number, required: true, value: @cc.card_number if @cc%>
+
+    <%= f.label :credit_card_expiration %>
+    <%= f.text_field :credit_card_expiration, required: true, value: "#{@cc.exp_month} / #{@cc.exp_year}" if @cc %>
+  </div>
+</div>
+
+<div class="col-xs-6">
+	<h3 class="text-center">Review Your Order</h3>
+	<table class="table table-bordered">
+	  <tr>
+	  	<th>Product Name</th>
+	  	<th>Quantity</th>
+	  	<th>Price</th>
+	  	<th>Total Price </th>
+	  </tr>
+
+	  <% @user.cart.order_contents.each do |order_content| %>
+	    <tr>
+	      <td><%= order_content.product.name %> </td>
+	    <%= fields_for "order_content[]", order_content do |order_field| %>
+	  	  <td><%= order_field.text_field :quantity %></td>
+	    <% end %>
+	      <td><%= order_content.product.price %> </td>
+	      <td><%= order_content.quantity * order_content.product.price %></td>
+	    </tr>
+	  <% end %>
+	</table>
+	<div class="col-xs-4">
+	  <div class="col-xs-12">
+	    <%= link_to "Edit Order", edit_carts_path %>
+	  </div>
+	  <div class="col-xs-12">
+	    <%= link_to "Delete Order", edit_carts_path %>
+	  </div>
+	</div>
+
+	<div class="col-xs-4 col-xs-offset-4">
+	  Your Total <%= @user.cart.value %>
+	</div>
+
+	<%= f.submit "Place your Order!" %>
+</div>
+<% end %>

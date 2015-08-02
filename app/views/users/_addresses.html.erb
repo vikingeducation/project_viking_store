@@ -31,8 +31,13 @@
 			    <%= label_tag "Set as Default Billing Address" %>
 				<%= generate_billing_button(user, user_address, index) %>
 			  </div>
-			  <% end %>
-			</div>
 
+			  <% if user_address.persisted? %>
+			    <%= address_fields.label :_destroy, "Delete this address." %>
+			    <%= address_fields.check_box :_destroy %>
+			  <% end %>
+		  <% end %>
 		</div>
+
+	</div>
 <% end %>

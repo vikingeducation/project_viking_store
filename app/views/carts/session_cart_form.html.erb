@@ -1,0 +1,41 @@
+<h1> Your cart </h1>
+<%= form_tag carts_path, method: 'patch' do %>
+<table class="table table-bordered">
+  <tr>
+    <th>Product Name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Total Price </th>
+    <th>Remove</th>
+  </tr>
+    <% order.each_with_index do |p, index| %>
+      <tr>
+        <td><%= Product.find(p["product_id"].to_i).name %></td>
+        <%= hidden_field_tag "edited_cart[#{index.to_i}][product_id]", p["product_id"] %>
+        <td><%= text_field_tag "edited_cart[#{index.to_i}][quantity]", p["quantity"] %></td>
+        <td><%= Product.find(p["product_id"].to_i).price %></td>
+        <td><%= Product.find(p["product_id"].to_i).price * p["quantity"].to_i %></td>
+        <td>Set quantity to 0.</td>
+      </div>
+    <% end %>
+
+  <% end %>
+
+</table>
+  <div class="actions">
+    <%= submit_tag "Update Cart!" %>
+  </div>
+
+<div class="col-xs-2 col-xs-offset-10">
+  <div class="col-xs-12">
+    Your Total <%= order_value(order) %>
+  </div>
+
+  <div class="col-xs-12">
+    <%= link_to "Checkout", checkout_path %>
+  </div>
+
+  <div class="col-xs-12">
+    <%= link_to "Delete Cart", carts_path, method: 'delete' %>
+  </div>
+</div>

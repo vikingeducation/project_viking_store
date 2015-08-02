@@ -1,0 +1,42 @@
+<h1> Your Cart </h1>
+<%= form_for order, url: order_contents_update_everything_path, method: 'post' do %>
+  <%= hidden_field :order, :id, :value => order.id %>
+<table class="table table-bordered">
+  <tr>
+  	<th>Product Name</th>
+  	<th>Quantity</th>
+  	<th>Price</th>
+  	<th>Total Price </th>
+    <th>Remove</th>
+  </tr>
+
+  <% order.order_contents.each do |order_content| %>
+    <tr>
+      <td><%= order_content.product.name %> </td>
+    <%= fields_for "order_content[]", order_content do |order_field| %>
+  	  <td><%= order_field.text_field :quantity %></td>
+    <% end %>
+      <td><%= order_content.product.price %> </td>
+      <td><%= order_content.quantity * order_content.product.price %></td>
+      <td><%= link_to "REMOVE", order_contents_remove_oc_path({order_id: order.id, id: order_content.id})%> </td>
+    </tr>
+  <% end %>
+</table>
+
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>
+
+<div class="col-xs-2 col-xs-offset-10">
+  <div class="col-xs-12">
+    Your Total <%= order.value %>
+  </div>
+
+  <div class="col-xs-12">
+    <%= link_to "Checkout", checkout_path %>
+    <%= link_to "Delete Cart", carts_path, method: 'delete' %>
+  </div>
+</div>
+
+

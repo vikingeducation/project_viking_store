@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :addresses, reject_if:
                                 proc { |attributes|
                                 attributes['zip_code'].blank? &&
-                                attributes['street_address'].blank? }
+                                attributes['street_address'].blank? },
+                                allow_destroy: true;
   # 1. Overall Platform
 
   # Last 7 Days
@@ -37,6 +38,10 @@ class User < ActiveRecord::Base
 
   def state
     self.default_shipping_address.state.name
+  end
+
+  def first_credit_card
+    CreditCard.find_by(user_id: self.id)
   end
 
   def merge_carts(session_cart)
@@ -73,6 +78,10 @@ class User < ActiveRecord::Base
 
   def cart
     self.orders.where("checkout_date IS NULL").first
+  end
+
+  def get_new_cart
+    self.orders.create
   end
 
   def last_order_date

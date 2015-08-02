@@ -1,17 +1,19 @@
 <div class="navbar-header">
-	<a class="navbar-brand">
-		Viking Store
-	</a>
 </div>
 
 <div class="navbar" id="navbar">
+	<ul class="nav navbar-nav navbar-left">
+		<li><%= link_to "Viking Store", root_path %></li>
+	</ul>
+
 	<ul class="nav navbar-nav navbar-right">
 	    <% if current_user %>
 	    	<li><a>Welcome, <%= current_user.name %>!</a></li>
 			<li><%= link_to "Sign Out", session_path, method: 'delete' %></li>
-			<li><%= link_to "Edit Account", edit_user_path(current_user) %>
+			<li><%= link_to "Edit Account", edit_user_path(current_user) %></li>
 	    <% else %>
 		    <li><%= link_to "Sign In", new_session_path %></li>
 		<% end %>
+	    	<li><%= link_to "Edit Cart", edit_carts_path %></li>
 	</ul>
 </div>

@@ -1,9 +1,10 @@
 class OrderContentsController < ApplicationController
+  before_filter :store_referer
   # params[:order_content] is an array of order_contents to update
   def update_everything
     @order = Order.find(params[:order][:id])
     OrderContent.update_all(params[:order_content])
-    redirect_to admin_order_path(@order.id)
+    redirect_to referer
   end
 
   def remove_oc
@@ -11,11 +12,10 @@ class OrderContentsController < ApplicationController
     oc = OrderContent.find(params[:id])
     if oc.destroy
       flash[:success] = "Successfully removed product from order!"
-      redirect_to admin_order_path(order.id)
     else
       flash[:danger] = "Failed to remove product from order!"
-      redirect_to admin_order_path(order.id)
     end
+    redirect_to referer
   end
 
 
@@ -31,10 +31,9 @@ class OrderContentsController < ApplicationController
     else
       flash[:success] = "Products properly added to order!"
     end
-    redirect_to edit_admin_order_path(order)
+    redirect_to referer
   end
 
 
   private
-
 end

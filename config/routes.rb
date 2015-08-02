@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: "products#index"
 
   get "/admin/dashboard" => "admin/analytics#dashboard"
+  get "/checkout" => "carts#checkout"
+  patch "/finalize" => "carts#finalize_order"
 
   get "/admin" => "admin/analytics#dashboard"
   get '/order_contents/remove_oc' => "order_contents#remove_oc"
@@ -18,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show]
   resources :users, only: [:new, :create, :edit, :update, :destroy]
-  resource :carts, only: [:update]
+  resource :carts, only: [:update, :edit, :destroy]
   resource :session, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

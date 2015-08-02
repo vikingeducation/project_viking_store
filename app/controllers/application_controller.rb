@@ -35,4 +35,16 @@ class ApplicationController < ActionController::Base
       redirect_to root_path #< if we've defined a custom login path
     end
   end
+
+  def store_referer
+    session[:referer] = URI(request.referer).path
+  end
+
+  # this is one of those times when using "delete"
+  # really comes in handy because it returns the
+  # object we want AND removes it from the hash in
+  # one operation.
+  def referer
+    session.delete(:referer)
+  end
 end

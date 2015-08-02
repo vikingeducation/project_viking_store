@@ -66,7 +66,8 @@ class UsersController < ApplicationController
                                                            :street_address,
                                                            :zip_code,
                                                            :city_id,
-                                                           :state_id]})
+                                                           :state_id,
+                                                           :_destroy]})
     end
 
     def require_current_user
