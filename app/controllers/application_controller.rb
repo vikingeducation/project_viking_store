@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   def sign_in(user)
     session[:current_user_id] = user.id
     @current_user = user
+    merge_visitor_cart
   end
 
 

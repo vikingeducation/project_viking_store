@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       sign_in user
-      merge_visitor_cart
       flash[:success] = "Thanks for signing in!"
       redirect_to referer
     else
