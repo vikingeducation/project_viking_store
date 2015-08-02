@@ -82,7 +82,7 @@ class OrdersController < ApplicationController
 
 
   def require_active_cart
-    unless current_user.has_cart?
+    unless session[:visitor_cart] || (signed_in_user? && current_user.has_cart?)
       flash[:danger] = "Cart is empty!  Add products before looking in your cart."
       redirect_to root_path
     end
