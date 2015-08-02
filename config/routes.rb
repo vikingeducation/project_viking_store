@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :users, :only => [:new, :create, :edit, :update, :destroy] do
     resources :addresses, :only => [:new, :create, :edit, :update]
-    resources :orders, :only => [:show, :create, :edit, :update]
+    resources :orders, :only => [:show, :create, :edit, :update, :destroy]
     resources :credit_cards, :only => [:destroy]
     get 'orders/:id/checkout' => 'orders#checkout', as: :checkout
     patch 'orders/:id/checkout' => 'orders#finalize', as: :finalize

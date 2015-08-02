@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
 
-  before_action :require_active_cart, :only => [:show, :edit, :checkout]
+  before_action :require_active_cart, :only => [:show, :edit, :destroy, :checkout]
 
   before_action :require_login, :exclude => [:new, :create]
-  before_action :require_current_user, :only => [:edit, :update, :checkout, :finalize]
+  before_action :require_current_user, :only => [:edit, :update, :destroy, :checkout, :finalize]
 
 
 
@@ -22,12 +22,23 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
 
     if @order.update(order_params)
-      flash.now[:success] = "Order updated!"
+      flash[:success] = "Order updated!"
     else
-      flash.now[:danger] = "Error!  Please try again."
+      flash[:danger] = "Error!  Please try again."
     end
 
     redirect_to action: :edit
+  end
+
+
+  def destroy
+    if current_user.get_cart.destroy!
+      flash[:success] = "Order deleted!"
+      redirect_to root_path
+    else
+      flash[:danger] = "Error!  Order not deleted."
+      redirect_to :back
+    end
   end
 
 
@@ -45,12 +56,14 @@ class OrdersController < ApplicationController
 
     # only continue if Card is saved and Addresses are selected and Cart isn't empty
 
-    if @order.update(checkout_params)
+    if @order.update(checkout_params) #&& validate_finalized_order
       flash[:success] = "Order completed!  Thank you!"
       redirect_to root_path
     else
       flash.now[:danger] = "Error!  Please try again."
-      render :finalize
+      @shipping_charge = 12
+      @tax = 12
+      render :checkout
     end
 
   end
@@ -93,4 +106,10 @@ class OrdersController < ApplicationController
                 :checkout_date,
                 { :billing_card_attributes => [:card_number, :exp_month, :exp_year, :user_id] } )
   end
+
+
+  def validate_finalized_order
+    @order
+  end
+
 end

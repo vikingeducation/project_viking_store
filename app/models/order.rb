@@ -12,7 +12,13 @@ class Order < ActiveRecord::Base
   belongs_to :shipping_address, :class_name => 'Address', :foreign_key => :shipping_id
 
   belongs_to :billing_card, :class_name => 'CreditCard', :foreign_key => :billing_card_id
-  accepts_nested_attributes_for :billing_card, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :billing_card, :reject_if => proc { |attributes| attributes.values.include?("") }, :allow_destroy => true
+
+
+  validates :billing_address, :presence => { message: "is missing!"}, if: :checkout_date
+  validates :shipping_address, :presence => { message: "is missing!"}, if: :checkout_date
+  validates :order_contents, :presence => { message: "are empty!"}, if: :checkout_date
+
 
 
 # Storefront methods
