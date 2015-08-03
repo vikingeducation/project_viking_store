@@ -2,9 +2,12 @@ class ProductsController < ApplicationController
 
   def index
     current_user
+
+    # these two could be combined in Product model
     category = Category.where("id = ?", params[:category_id].to_i).first
     @products = Product.filter_by(category).limit(6)
 
+    # button should redirect to action, on a Cart controller
     add_product if params[:add_product_id]
 
   end
