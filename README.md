@@ -1,11 +1,4 @@
 Project: Viking Store Admin
 ========================
 
-##To Get Going On This Assignment
-- run `rake db:create`
-- run `rake db:migrate`
-- run `rake db:seed`
-
-- take a look around the schema file to see how models were created
-
-Link to solution info on the seeding of this lives [here](https://gist.github.com/betweenparentheses/0b6b325ceaaea76a521d)
+The Viking Store is an application that simulates most aspects of a real online shopping website. A user can sign up, sign in, add products to an order and checkout their orders. We also built an admin dashboard which is meant to give important statistics about the status of the site, such as number of orders in the past 7 days, most valued user, most popular product, and much more, all using SQL queries or Active Record relations. In addition, the admin panel also allows an admin to interact with the database with a web interface and do all four CRUD (Create, Read, Update, and Destroy) actions for all models.
