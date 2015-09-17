@@ -1,0 +1,46 @@
+<div class = 'container'>
+    <div class = 'col-md-9'>
+        <%= form_for @product do |t|%>
+            <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr>
+                            <td>name</td>
+                            <td><%= t.text_field :name%></td>
+                        </tr>
+
+                        <tr>
+                            <td>SKU</td>
+                            <td><%= t.text_field :sku%></td>
+                        </tr>
+
+                        <tr>
+                            <td>description</td>
+                            <td><%= t.text_area :description, size: "30x10"%></td>
+                        </tr>
+
+                        <tr>
+                            <td>price</td>
+                            <td><%= t.text_field :price%></td>
+                        </tr>
+
+                        <tr>
+                            <td>category_id</td>
+                            <td><%= t.text_field :category_id%></td>
+                        </tr>
+
+                     </tbody>
+            </table>
+            <%= t.submit "Submit", :class => "btn btn-info" %>
+            <%end%>
+      </div>
+</div>

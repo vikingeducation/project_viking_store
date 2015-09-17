@@ -1,0 +1,30 @@
+<div class = 'container'>
+
+    <div class='col-md-3'>
+        <%= render partial: "/edits/editbar"%>
+    </div>
+    <div class = 'col-md-9'>
+      <table class="table">
+            <thead>
+                <tr>
+                    <th>Check_out(in cart when empty)</th>
+                    <th>User ID</th>
+                    <th>Show details</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            <%@orders.each do |order|%>
+                <tr>
+                    <td><%= order.checkout_date%></td>
+                    <td><%= order.user_id%></td>
+                    <td>for button to show</td>
+                    <td>for button to edit</td>
+                    <td>for button to delete</td>
+                </tr>
+             <%end%>
+             </tbody>
+      </table>
+      </div>
+</div>

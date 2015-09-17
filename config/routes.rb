@@ -4,9 +4,18 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  resource :dashboards, only: :show
+  resources :dashboard, only: :show
   #get 'dashboard/analytic' => 'dashboard#analytic'
+  resources :edits, only: :index
+  resources :categories
+  resources :products
+  resources :users, only: [:index, :show, :create]
+  resources :addresses, only: [:index, :show, :create]
+  resources :orders, only: [:index, :show, :create]
+
   root 'dashboard#show'
+
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

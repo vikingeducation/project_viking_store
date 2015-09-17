@@ -7,7 +7,7 @@
             :user_num => User.number,
             :product_num => Product.number,
             :orders_num => Order.number,
-            :revenue_num => Order.total(10000)
+            :revenue_num => Order.total(10000).round
             }%>
         <%= render partial: "overall",
             :locals => {
@@ -15,7 +15,7 @@
             :user_num => User.number_in(30),
             :product_num => Product.number_in(30),
             :orders_num => Order.number_in(30),
-            :revenue_num => Order.total(30)
+            :revenue_num => Order.total(30).round
             }%>
         <%= render partial: "overall",
             :locals => {
@@ -23,7 +23,7 @@
             :user_num => User.number_in(7),
             :product_num => Product.number_in(7),
             :orders_num => Order.number_in(7),
-            :revenue_num => Order.total(7)
+            :revenue_num => Order.total(7).round
             }%>
     </div>
     <div class='col-md-6'>
@@ -116,23 +116,23 @@
             :quote => "overall data",
             :orders_num => Order.number,
             :revenue_num => Order.total(10000),
-            :avg_num => Order.total(10000)/Order.number,
-            :largest_num => Order.max(10000)
+            :avg_num => (Order.total(10000)/Order.number).round,
+            :largest_num => Order.max(10000).round
         }%>
         <%= render partial: "order",
             :locals => {
             :quote => "month data",
             :orders_num => Order.number_in(30),
             :revenue_num => Order.total(30),
-            :avg_num => Order.total(30)/Order.number_in(30),
-            :largest_num => Order.max(30)
+            :avg_num => (Order.total(30)/Order.number_in(30)).round,
+            :largest_num => Order.max(30).round
         }%>
         <%= render partial: "order",
             :locals => {
             :quote => "week data",
             :orders_num => Order.number_in(7),
             :revenue_num => Order.total(7),
-            :avg_num => Order.total(7)/Order.number_in(7),
-            :largest_num => Order.max(7)
+            :avg_num => (Order.total(7)/Order.number_in(7)).round,
+            :largest_num => Order.max(7).round
         }%>
 </div>
