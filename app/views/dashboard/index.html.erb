@@ -162,16 +162,16 @@
       </thead>
       <tbody>
         <tr>
-          <td>Number of Orders</td><td>100</td>
+          <td>Number of Orders</td><td><%= Order.count_since(7.days.ago) %></td>
         </tr>
         <tr>
-          <td>Total Revenue</td><td>$50,000</td>
+          <td>Total Revenue</td><td><%= number_to_currency(Order.revenue_since(7.days.ago)) %></td>
         </tr>
         <tr>
-          <td>Average Order Value</td><td>$100</td>
+          <td>Average Order Value</td><td><%= number_to_currency(Order.avg_revenue_since(7.days.ago)) %></td>
         </tr>
         <tr>
-          <td>Largest Order Value</td><td>$6000</td>
+          <td>Largest Order Value</td><td><%= number_to_currency(Order.with_max_revenue_since(7.days.ago).revenue) %></td>
         </tr>
       </tbody>
     </table>
@@ -185,16 +185,16 @@
       </thead>
       <tbody>
         <tr>
-          <td>Number of Orders</td><td>100</td>
+          <td>Number of Orders</td><td><%= Order.count_since(30.days.ago) %></td>
         </tr>
         <tr>
-          <td>Total Revenue</td><td>$50,000</td>
+          <td>Total Revenue</td><td><%= number_to_currency(Order.revenue_since(30.days.ago)) %></td>
         </tr>
         <tr>
-          <td>Average Order Value</td><td>$100</td>
+          <td>Average Order Value</td><td><%= number_to_currency(Order.avg_revenue_since(30.days.ago)) %></td>
         </tr>
         <tr>
-          <td>Largest Order Value</td><td>$6000</td>
+          <td>Largest Order Value</td><td><%= number_to_currency(Order.with_max_revenue_since(30.days.ago).revenue) %></td>
         </tr>
       </tbody>
     </table>
@@ -208,16 +208,16 @@
       </thead>
       <tbody>
         <tr>
-          <td>Number of Orders</td><td>100</td>
+          <td>Number of Orders</td><td><%= Order.count %></td>
         </tr>
         <tr>
-          <td>Total Revenue</td><td>$50,000</td>
+          <td>Total Revenue</td><td><%= number_to_currency(Order.revenue) %></td>
         </tr>
         <tr>
-          <td>Average Order Value</td><td>$100</td>
+          <td>Average Order Value</td><td><%= number_to_currency(Order.avg_revenue) %></td>
         </tr>
         <tr>
-          <td>Largest Order Value</td><td>$6000</td>
+          <td>Largest Order Value</td><td><%= number_to_currency(Order.with_max_revenue.revenue) %></td>
         </tr>
       </tbody>
     </table>

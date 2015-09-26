@@ -53,12 +53,57 @@ class Order < ActiveRecord::Base
       .to_f
   end
 
+  # Returns the average revenue for all orders
+  def self.avg_revenue
+    sql = 'AVG(order_contents.quantity * products.price) AS amount'
+    OrderContent.select(sql)
+      .joins(:product)
+      .joins(:order)
+      .limit(1)
+      .to_a
+      .first
+      .amount
+      .to_f
+  end
+
+  # Returns the average revenue for all orders
+  # with a checkout_date after the given date
+  def self.avg_revenue_since(date)
+    sql = 'AVG(order_contents.quantity * products.price) AS amount'
+    OrderContent.select(sql)
+      .joins(:product)
+      .joins(:order)
+      .where('orders.checkout_date > ?', date)
+      .limit(1)
+      .to_a
+      .first
+      .amount
+      .to_f
+  end
+
   # Returns the order with the highest revenue
   def self.with_max_revenue
     sql = 'orders.id AS order_id, SUM(order_contents.quantity * products.price) AS amount'
     order_id = OrderContent.select(sql)
       .joins(:product)
       .joins(:order)
+      .group('orders.id')
+      .limit(1)
+      .order('amount DESC')
+      .to_a
+      .first
+      .order_id
+    Order.find(order_id)
+  end
+
+  # Returns the order with the highest revenue
+  # with a checkout_date after the given date
+  def self.with_max_revenue_since(date)
+    sql = 'orders.id AS order_id, SUM(order_contents.quantity * products.price) AS amount'
+    order_id = OrderContent.select(sql)
+      .joins(:product)
+      .joins(:order)
+      .where('orders.checkout_date > ?', date)
       .group('orders.id')
       .limit(1)
       .order('amount DESC')
