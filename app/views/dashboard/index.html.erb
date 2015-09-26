@@ -1,0 +1,302 @@
+<h1>Viking Store Analytics Dashboard</h1>
+
+<div class="row">
+
+  <!-- Overall Platform -->
+  <div class="col-md-6">
+    <h2>Overall Platform</h2>
+
+    <h3>Last 7 Days</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th><th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Users</td><td>100</td>
+        </tr>
+        <tr>
+          <td>Orders</td><td>1000</td>
+        </tr>
+        <tr>
+          <td>Products</td><td>10</td>
+        </tr>
+        <tr>
+          <td>Revenue</td><td>$10,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Last 30 Days</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th><th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Users</td><td>100</td>
+        </tr>
+        <tr>
+          <td>Orders</td><td>1000</td>
+        </tr>
+        <tr>
+          <td>Products</td><td>10</td>
+        </tr>
+        <tr>
+          <td>Revenue</td><td>$10,000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Total</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th><th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Users</td><td><%= User.count %></td>
+        </tr>
+        <tr>
+          <td>Orders</td><td><%= Order.count %></td>
+        </tr>
+        <tr>
+          <td>Products</td><td><%= Product.count %></td>
+        </tr>
+        <tr>
+          <td>Revenue</td><td><%= number_to_currency(Order.revenue) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- User Demographics and Behavior -->
+  <div class="col-md-6">
+    <h2>User Demographics and Behavior</h2>
+
+    <h3>Top 3 States Users Live In (Billing)</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Item</td><td>Data</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>California</td><td>23</td>
+        </tr>
+        <tr>
+          <td>California</td><td>23</td>
+        </tr>
+        <tr>
+          <td>California</td><td>23</td>
+        </tr>
+      </tbody>
+    </table>
+
+  <h3>Top 3 Cities Users Live In (Billing)</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Item</td><td>Data</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Philly</td><td>23</td>
+        </tr>
+        <tr>
+          <td>Philly</td><td>23</td>
+        </tr>
+        <tr>
+          <td>Philly</td><td>23</td>
+        </tr>
+      </tbody>
+    </table>
+
+  <h3>Top Users With...</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Item</td><td>User</td><td>Quantity</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Highest Single Order Value</td><td>Joe Smith</td><td>$650</td>
+        </tr>
+        <tr>
+          <td>Highest Overall Value</td><td>Joe Smith</td><td>$650</td>
+        </tr>
+        <tr>
+          <td>Highest Average Order Value</td><td>Joe Smith</td><td>$650</td>
+        </tr>
+        <tr>
+          <td>Most Orders Placed</td><td>Joe Smith</td><td>12</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+
+  <!-- Order Statistics -->
+  <div class="col-md-6">
+    <h2>Order Statistics</h2>
+
+    <h3>Last 7 Days</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th><th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Number of Orders</td><td>100</td>
+        </tr>
+        <tr>
+          <td>Total Revenue</td><td>$50,000</td>
+        </tr>
+        <tr>
+          <td>Average Order Value</td><td>$100</td>
+        </tr>
+        <tr>
+          <td>Largest Order Value</td><td>$6000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Last 30 Days</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th><th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Number of Orders</td><td>100</td>
+        </tr>
+        <tr>
+          <td>Total Revenue</td><td>$50,000</td>
+        </tr>
+        <tr>
+          <td>Average Order Value</td><td>$100</td>
+        </tr>
+        <tr>
+          <td>Largest Order Value</td><td>$6000</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Total</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th><th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Number of Orders</td><td>100</td>
+        </tr>
+        <tr>
+          <td>Total Revenue</td><td>$50,000</td>
+        </tr>
+        <tr>
+          <td>Average Order Value</td><td>$100</td>
+        </tr>
+        <tr>
+          <td>Largest Order Value</td><td>$6000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Time Series Data -->
+  <div class="col-md-6">
+    <h2>Time Series Data</h2>
+
+    <h3>Orders by Day</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th><th>Quantity</th><th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Today</td><td>3</td><td>$500</td>
+        </tr>
+        <tr>
+          <td>Yesterday</td><td>5</td><td>$500</td>
+        </tr>
+        <tr>
+          <td>9/24</td><td>3</td><td>$300</td>
+        </tr>
+        <tr>
+          <td>9/24</td><td>3</td><td>$300</td>
+        </tr>
+        <tr>
+          <td>9/24</td><td>3</td><td>$300</td>
+        </tr>
+        <tr>
+          <td>9/24</td><td>3</td><td>$300</td>
+        </tr>
+        <tr>
+          <td>9/24</td><td>3</td><td>$300</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Orders by Week</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th><th>Quantity</th><th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
+        </tr>
+        <tr>
+          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
+        </tr>
+        <tr>
+          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
+        </tr>
+        <tr>
+          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
+        </tr>
+        <tr>
+          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
+        </tr>
+        <tr>
+          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
