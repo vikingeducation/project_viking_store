@@ -235,27 +235,14 @@
         </tr>
       </thead>
       <tbody>
+        <%
+        days = ['Today', 'Yesterday']
+        7.times do |i|
+        %>
         <tr>
-          <td>Today</td><td>3</td><td>$500</td>
+          <td><%= i > days.length - 1 ? i.days.ago.strftime('%m/%d') : days[i] %></td><td><%= Order.count_since(i.days.ago) %></td><td><%= Order.revenue_since(i.days.ago) %></td>
         </tr>
-        <tr>
-          <td>Yesterday</td><td>5</td><td>$500</td>
-        </tr>
-        <tr>
-          <td>9/24</td><td>3</td><td>$300</td>
-        </tr>
-        <tr>
-          <td>9/24</td><td>3</td><td>$300</td>
-        </tr>
-        <tr>
-          <td>9/24</td><td>3</td><td>$300</td>
-        </tr>
-        <tr>
-          <td>9/24</td><td>3</td><td>$300</td>
-        </tr>
-        <tr>
-          <td>9/24</td><td>3</td><td>$300</td>
-        </tr>
+        <% end %>
       </tbody>
     </table>
 
@@ -267,24 +254,13 @@
         </tr>
       </thead>
       <tbody>
+        <%
+        (1..7).each do |i|
+        %>
         <tr>
-          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
+          <td><%= i.weeks.ago.strftime('%m/%d') %></td><td><%= Order.count_since(i.weeks.ago) %></td><td><%= Order.revenue_since(i.weeks.ago) %></td>
         </tr>
-        <tr>
-          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
-        </tr>
-        <tr>
-          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
-        </tr>
-        <tr>
-          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
-        </tr>
-        <tr>
-          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
-        </tr>
-        <tr>
-          <td>Week of Monday, 21</td><td>3</td><td>$500</td>
-        </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
