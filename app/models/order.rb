@@ -19,12 +19,33 @@ class Order < ActiveRecord::Base
       .to_f
   end
 
+  # Returns the order count of orders
+  # with a checkout_date after the given date
+  def self.count_since(date)
+    Order.where('checkout_date > ?', date).count
+  end
+
   # Returns the total revenue for all orders
   def self.revenue
     sql = 'SUM(order_contents.quantity * products.price) AS revenue'
     OrderContent.select(sql)
       .joins(:product)
       .joins(:order)
+      .limit(1)
+      .to_a
+      .first
+      .revenue
+      .to_f
+  end
+
+  # Returns the total revenue for all orders
+  # with a checkout_date after the given date
+  def self.revenue_since(date)
+    sql = 'SUM(order_contents.quantity * products.price) AS revenue'
+    OrderContent.select(sql)
+      .joins(:product)
+      .joins(:order)
+      .where('orders.checkout_date > ?', date)
       .limit(1)
       .to_a
       .first

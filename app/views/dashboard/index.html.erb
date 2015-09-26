@@ -15,16 +15,16 @@
       </thead>
       <tbody>
         <tr>
-          <td>Users</td><td>100</td>
+          <td>Users</td><td><%= User.count_since(7.days.ago) %></td>
         </tr>
         <tr>
-          <td>Orders</td><td>1000</td>
+          <td>Orders</td><td><%= Order.count_since(7.days.ago) %></td>
         </tr>
         <tr>
-          <td>Products</td><td>10</td>
+          <td>Products</td><td><%= Product.count_since(7.days.ago) %></td>
         </tr>
         <tr>
-          <td>Revenue</td><td>$10,000</td>
+          <td>Revenue</td><td><%= number_to_currency(Order.revenue_since(7.days.ago)) %></td>
         </tr>
       </tbody>
     </table>
@@ -38,16 +38,16 @@
       </thead>
       <tbody>
         <tr>
-          <td>Users</td><td>100</td>
+          <td>Users</td><td><%= User.count_since(30.days.ago) %></td>
         </tr>
         <tr>
-          <td>Orders</td><td>1000</td>
+          <td>Orders</td><td><%= Order.count_since(30.days.ago) %></td>
         </tr>
         <tr>
-          <td>Products</td><td>10</td>
+          <td>Products</td><td><%= Product.count_since(30.days.ago) %></td>
         </tr>
         <tr>
-          <td>Revenue</td><td>$10,000</td>
+          <td>Revenue</td><td><%= number_to_currency(Order.revenue_since(30.days.ago)) %></td>
         </tr>
       </tbody>
     </table>
