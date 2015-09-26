@@ -7,7 +7,7 @@ class Order < ActiveRecord::Base
 
   # Returns the revenue for this order
   def revenue
-    sql = 'SUM(order_contents.quantity * products.price) AS revenue'
+    sql = 'SUM(order_contents.quantity * products.price) AS amount'
     OrderContent.select(sql)
       .joins(:product)
       .joins(:order)
@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
       .limit(1)
       .to_a
       .first
-      .revenue
+      .amount
       .to_f
   end
 
@@ -27,21 +27,21 @@ class Order < ActiveRecord::Base
 
   # Returns the total revenue for all orders
   def self.revenue
-    sql = 'SUM(order_contents.quantity * products.price) AS revenue'
+    sql = 'SUM(order_contents.quantity * products.price) AS amount'
     OrderContent.select(sql)
       .joins(:product)
       .joins(:order)
       .limit(1)
       .to_a
       .first
-      .revenue
+      .amount
       .to_f
   end
 
   # Returns the total revenue for all orders
   # with a checkout_date after the given date
   def self.revenue_since(date)
-    sql = 'SUM(order_contents.quantity * products.price) AS revenue'
+    sql = 'SUM(order_contents.quantity * products.price) AS amount'
     OrderContent.select(sql)
       .joins(:product)
       .joins(:order)
@@ -49,7 +49,22 @@ class Order < ActiveRecord::Base
       .limit(1)
       .to_a
       .first
-      .revenue
+      .amount
       .to_f
+  end
+
+  # Returns the order with the highest revenue
+  def self.with_max_revenue
+    sql = 'orders.id AS order_id, SUM(order_contents.quantity * products.price) AS amount'
+    order_id = OrderContent.select(sql)
+      .joins(:product)
+      .joins(:order)
+      .group('orders.id')
+      .limit(1)
+      .order('amount DESC')
+      .to_a
+      .first
+      .order_id
+    Order.find(order_id)
   end
 end
