@@ -1,5 +1,9 @@
 <h1>Viking Store Analytics Dashboard</h1>
 
+<header>
+  Results loaded in <%= Time.now - @before %> seconds
+</header>
+
 <div class="row">
 
   <!-- Overall Platform -->
@@ -240,7 +244,7 @@
         7.times do |i|
         %>
         <tr>
-          <td><%= i > days.length - 1 ? i.days.ago.strftime('%m/%d') : days[i] %></td><td><%= Order.count_since(i.days.ago) %></td><td><%= Order.revenue_since(i.days.ago) %></td>
+          <td><%= i > days.length - 1 ? i.days.ago.strftime('%m/%d') : days[i] %></td><td><%= Order.count_since(i.days.ago) %></td><td><%= number_to_currency(Order.revenue_since(i.days.ago)) %></td>
         </tr>
         <% end %>
       </tbody>
@@ -258,7 +262,7 @@
         (1..7).each do |i|
         %>
         <tr>
-          <td><%= i.weeks.ago.strftime('%m/%d') %></td><td><%= Order.count_since(i.weeks.ago) %></td><td><%= Order.revenue_since(i.weeks.ago) %></td>
+          <td><%= i.weeks.ago.strftime('%m/%d') %></td><td><%= Order.count_since(i.weeks.ago) %></td><td><%= number_to_currency(Order.revenue_since(i.weeks.ago)) %></td>
         </tr>
         <% end %>
       </tbody>

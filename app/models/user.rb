@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Returns the amount spent by this user
   def spent
     sql = 'users.id AS user_id, SUM(order_contents.quantity * products.price) AS amount'
-    OrderContent.select(sql)
+    result = OrderContent.select(sql)
       .joins(:product)
       .joins(:order)
       .joins('JOIN users ON users.id = orders.user_id')
@@ -17,14 +17,13 @@ class User < ActiveRecord::Base
       .order('amount DESC')
       .to_a
       .first
-      .amount
-      .to_f
+    result ? result.amount.to_f : 0
   end
 
   # Returns the average amount spent by this user
   def avg_spent
     sql = 'users.id AS user_id, AVG(order_contents.quantity * products.price) AS amount'
-    OrderContent.select(sql)
+    result = OrderContent.select(sql)
       .joins(:product)
       .joins(:order)
       .joins('JOIN users ON users.id = orders.user_id')
@@ -33,8 +32,7 @@ class User < ActiveRecord::Base
       .order('amount DESC')
       .to_a
       .first
-      .amount
-      .to_f
+    result ? result.amount.to_f : 0
   end
 
   # Returns a count of users
@@ -68,7 +66,7 @@ class User < ActiveRecord::Base
   # Returns user with the highest amount spent
   def self.with_max_spent
     sql = 'users.id AS user_id, SUM(order_contents.quantity * products.price) AS amount'
-    user_id = OrderContent.select(sql)
+    result = OrderContent.select(sql)
       .joins(:product)
       .joins(:order)
       .joins('JOIN users ON users.id = orders.user_id')
@@ -77,14 +75,13 @@ class User < ActiveRecord::Base
       .order('amount DESC')
       .to_a
       .first
-      .user_id
-    User.find(user_id)
+    User.find(result.user_id) if result
   end
 
   # Returns the user with highest average amount spent
   def self.with_max_avg_spent
     sql = 'users.id AS user_id, AVG(order_contents.quantity * products.price) AS amount'
-    user_id = OrderContent.select(sql)
+    result = OrderContent.select(sql)
       .joins(:product)
       .joins(:order)
       .joins('JOIN users ON users.id = orders.user_id')
@@ -93,28 +90,26 @@ class User < ActiveRecord::Base
       .order('amount DESC')
       .to_a
       .first
-      .user_id
-    User.find(user_id)
+    User.find(result.user_id) if result
   end
 
   # Returns the user with the most orders
   def self.with_max_orders
     sql = 'users.id AS user_id, COUNT(orders.user_id) AS num_orders'
-    user_id = User.select(sql)
+    result = User.select(sql)
       .joins('JOIN orders ON users.id = orders.user_id')
       .group('users.id')
       .limit(1)
       .order('num_orders DESC')
       .to_a
       .first
-      .user_id
-    User.find(user_id)
+    User.find(result.user_id) if result
   end
 
   # Returns the user with the most checked out orders
   def self.with_max_placed_orders
     sql = 'users.id AS user_id, COUNT(orders.user_id) AS num_orders'
-    user_id = User.select(sql)
+    result = User.select(sql)
       .joins('JOIN orders ON users.id = orders.user_id')
       .where('orders.checkout_date IS NOT NULL')
       .group('users.id')
@@ -122,7 +117,6 @@ class User < ActiveRecord::Base
       .order('num_orders DESC')
       .to_a
       .first
-      .user_id
-    User.find(user_id)
+    User.find(result.user_id) if result
   end
 end
