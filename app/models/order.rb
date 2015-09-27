@@ -87,7 +87,8 @@ class Order < ActiveRecord::Base
       .order('amount DESC')
       .to_a
       .first
-    Order.find(result.order_id) if result
+    order = Order.find(result.order_id) if result
+    order || Order.new
   end
 
   # Returns the order with the highest revenue
@@ -103,7 +104,8 @@ class Order < ActiveRecord::Base
       .order('amount DESC')
       .to_a
       .first
-    Order.find(result.order_id) if result
+    order = Order.find(result.order_id) if result
+    order || Order.new
   end
 end
 

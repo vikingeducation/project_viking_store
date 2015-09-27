@@ -10,10 +10,10 @@
     <%= render :partial => 'table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
-        ['Users', User.count_since(7.days.ago)],
-        ['Orders', Order.count_since(7.days.ago)],
-        ['Products', Product.count_since(7.days.ago)],
-        ['Revenue', number_to_currency(Order.revenue_since(7.days.ago))]
+        ['Users', @user_count_last_week],
+        ['Orders', @order_count_last_week],
+        ['Products', @product_count_last_week],
+        ['Revenue', number_to_currency(@order_revenue_last_week)]
       ]
     }} %>
 
@@ -22,10 +22,10 @@
     <%= render :partial => 'table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
-        ['Users', User.count_since(30.days.ago)],
-        ['Orders', Order.count_since(30.days.ago)],
-        ['Products', Product.count_since(30.days.ago)],
-        ['Revenue', number_to_currency(Order.revenue_since(30.days.ago))]
+        ['Users', @user_count_last_month],
+        ['Orders', @order_count_last_month],
+        ['Products', @product_count_last_month],
+        ['Revenue', number_to_currency(@order_revenue_last_month)]
       ]
     }} %>
 
@@ -33,10 +33,10 @@
     <%= render :partial => 'table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
-        ['Users', User.count],
-        ['Orders', Order.count],
-        ['Products', Product.count],
-        ['Revenue', number_to_currency(Order.revenue)]
+        ['Users', @user_count],
+        ['Orders', @order_count],
+        ['Products', @product_count],
+        ['Revenue', number_to_currency(@order_revenue)]
       ]
     }} %>
   </div>
@@ -58,19 +58,28 @@
     }} %>
 
     <h3>Top Users With...</h3>
-    <%
-    order_with_max_revenue = Order.with_max_revenue
-    user_with_max_spent = User.with_max_spent
-    user_with_max_avg_spent = User.with_max_avg_spent
-    user_with_max_placed_orders = User.with_max_placed_orders
-    %>
     <%= render :partial => 'table', :locals => {:table => {
       :headers => ['Item', 'User', 'Quantity'],
       :rows => [
-        ['Highest Single Order Value',  "#{order_with_max_revenue.user.first_name} #{order_with_max_revenue.user.last_name}", number_to_currency(order_with_max_revenue.user.spent)],
-        ['Highest Overall Value', "#{user_with_max_spent.first_name} #{user_with_max_spent.last_name}", number_to_currency(user_with_max_spent.spent)],
-        ['Highest Average Order Value', "#{user_with_max_avg_spent.first_name} #{user_with_max_avg_spent.last_name}", number_to_currency(user_with_max_avg_spent.avg_spent)],
-        ['Most Orders Placed', "#{user_with_max_placed_orders.first_name} #{user_with_max_placed_orders.last_name}", user_with_max_placed_orders.orders.length]
+        [
+          'Highest Single Order Value',
+          @order_with_max_revenue.user.name,
+          number_to_currency(@order_with_max_revenue.user.spent)
+        ],
+        [
+          'Highest Overall Value',
+          @user_with_max_spent.name,
+          number_to_currency(@user_with_max_spent.spent)
+        ],
+        [
+          'Highest Average Order Value',
+          @user_with_max_avg_spent.name,
+          number_to_currency(@user_with_max_avg_spent.avg_spent)
+        ],
+        ['Most Orders Placed',
+          @user_with_max_placed_orders.name,
+          @user_with_max_placed_orders.orders.length
+        ]
       ]
     }} %>
   </div>
@@ -86,10 +95,10 @@
     <%= render :partial => 'table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
-        ['Number of Orders', Order.count_since(7.days.ago)],
-        ['Total Revenue', number_to_currency(Order.revenue_since(7.days.ago))],
-        ['Average Order Value', number_to_currency(Order.avg_revenue_since(7.days.ago))],
-        ['Largest Order Value', number_to_currency(Order.with_max_revenue_since(7.days.ago).revenue)]
+        ['Number of Orders', @order_count_last_week],
+        ['Total Revenue', number_to_currency(@order_revenue_last_week)],
+        ['Average Order Value', number_to_currency(@order_avg_revenue_last_week)],
+        ['Largest Order Value', number_to_currency(@order_with_max_revenue_last_week.revenue)]
       ]
     }} %>
 
@@ -97,10 +106,10 @@
     <%= render :partial => 'table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
-        ['Number of Orders', Order.count_since(30.days.ago)],
-        ['Total Revenue', number_to_currency(Order.revenue_since(30.days.ago))],
-        ['Average Order Value', number_to_currency(Order.avg_revenue_since(30.days.ago))],
-        ['Largest Order Value', number_to_currency(Order.with_max_revenue_since(30.days.ago).revenue)]
+        ['Number of Orders', @order_count_last_month],
+        ['Total Revenue', number_to_currency(@order_revenue_last_month)],
+        ['Average Order Value', number_to_currency(@order_avg_revenue_last_month)],
+        ['Largest Order Value', number_to_currency(@order_with_max_revenue_last_month.revenue)]
       ]
     }} %>
 
@@ -108,10 +117,10 @@
     <%= render :partial => 'table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
-        ['Number of Orders', Order.count],
-        ['Total Revenue', number_to_currency(Order.revenue)],
-        ['Average Order Value', number_to_currency(Order.avg_revenue)],
-        ['Largest Order Value', number_to_currency(Order.with_max_revenue.revenue)]
+        ['Number of Orders', @order_count],
+        ['Total Revenue', number_to_currency(@order_revenue)],
+        ['Average Order Value', number_to_currency(@order_avg_revenue)],
+        ['Largest Order Value', number_to_currency(@order_with_max_revenue.revenue)]
       ]
     }} %>
   </div>
@@ -121,36 +130,15 @@
     <h2>Time Series Data</h2>
 
     <h3>Orders by Day</h3>
-    <%
-    rows = []
-    days = ['Today', 'Yesterday']
-    7.times do |i|
-      rows << [
-        i > days.length - 1 ? i.days.ago.strftime('%m/%d') : days[i],
-        Order.count_since(i.days.ago),
-        number_to_currency(Order.revenue_since(i.days.ago))
-      ]
-    end
-    %>
     <%= render :partial => 'table', :locals => {:table => {
       :headers => ['Date', 'Quantity', 'Value'],
-      :rows => rows
+      :rows => @orders_by_day.map {|i| i[2] = number_to_currency(i[2]); i}
     }} %>
 
     <h3>Orders by Week</h3>
-    <%
-    rows = []
-    (1..7).each do |i|
-      rows << [
-        i.weeks.ago.strftime('%m/%d'),
-        Order.count_since(i.weeks.ago),
-        number_to_currency(Order.revenue_since(i.weeks.ago))
-      ]
-    end
-    %>
     <%= render :partial => 'table', :locals => {:table => {
       :headers => ['Date', 'Quantity', 'Value'],
-      :rows => rows
+      :rows => @orders_by_week.map {|i| i[2] = number_to_currency(i[2]); i}
     }} %>
   </div>
 </div>

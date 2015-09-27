@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   has_many :addresses
   has_many :credit_cards
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   # Returns the amount spent by this user
   def spent
     sql = 'users.id AS user_id, SUM(order_contents.quantity * products.price) AS amount'
@@ -75,7 +79,8 @@ class User < ActiveRecord::Base
       .order('amount DESC')
       .to_a
       .first
-    User.find(result.user_id) if result
+    user = User.find(result.user_id) if result
+    user || User.new
   end
 
   # Returns the user with highest average amount spent
@@ -90,7 +95,8 @@ class User < ActiveRecord::Base
       .order('amount DESC')
       .to_a
       .first
-    User.find(result.user_id) if result
+    user = User.find(result.user_id) if result
+    user || User.new
   end
 
   # Returns the user with the most orders
@@ -103,7 +109,8 @@ class User < ActiveRecord::Base
       .order('num_orders DESC')
       .to_a
       .first
-    User.find(result.user_id) if result
+    user = User.find(result.user_id) if result
+    user || User.new
   end
 
   # Returns the user with the most checked out orders
@@ -117,6 +124,7 @@ class User < ActiveRecord::Base
       .order('num_orders DESC')
       .to_a
       .first
-    User.find(result.user_id) if result
+    user = User.find(result.user_id) if result
+    user || User.new
   end
 end
