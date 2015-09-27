@@ -1,0 +1,19 @@
+<ul class="nav nav-pills nav-stacked">
+  <%
+  [
+    ['Dashboard', '/'],
+    ['Addresses', '/addresses'],
+    ['Categories', '/categories'],
+    ['Orders', '/orders'],
+    ['Products', '/products'],
+    ['Users', '/users'],
+    ['Analytics', '/analytics']
+  ].each do |link|
+  text = link[0]
+  path = link[1]
+  %>
+  <li role="presentation">
+    <%= link_to(text, path) %>
+  </li>
+  <% end %>
+</ul>

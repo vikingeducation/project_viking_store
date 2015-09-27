@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root :to => 'admin#analytics'
+  root :to => 'admin#index'
+  get '/analytics', :to => 'admin#analytics'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
