@@ -1,0 +1,171 @@
+<h1>Viking Store Analytics Dashboard</h1>
+
+<div class="row">
+
+  <!-- Overall Platform -->
+  <div class="col-md-6">
+    <h2>Overall Platform</h2>
+
+    <h3>Last 7 Days</h3>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Users', User.count_since(7.days.ago)],
+        ['Orders', Order.count_since(7.days.ago)],
+        ['Products', Product.count_since(7.days.ago)],
+        ['Revenue', number_to_currency(Order.revenue_since(7.days.ago))]
+      ]
+    }} %>
+
+
+    <h3>Last 30 Days</h3>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Users', User.count_since(30.days.ago)],
+        ['Orders', Order.count_since(30.days.ago)],
+        ['Products', Product.count_since(30.days.ago)],
+        ['Revenue', number_to_currency(Order.revenue_since(30.days.ago))]
+      ]
+    }} %>
+
+    <h3>Total</h3>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Users', User.count],
+        ['Orders', Order.count],
+        ['Products', Product.count],
+        ['Revenue', number_to_currency(Order.revenue)]
+      ]
+    }} %>
+  </div>
+
+  <!-- User Demographics and Behavior -->
+  <div class="col-md-6">
+    <h2>User Demographics and Behavior</h2>
+
+    <h3>Top 3 States Users Live In (Billing)</h3>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => User.count_by_state[0..2].map {|i| [i.state_name, i.num_users]}
+    }} %>
+
+    <h3>Top 3 Cities Users Live In (Billing)</h3>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => User.count_by_city[0..2].map {|i| [i.city_name, i.num_users]}
+    }} %>
+
+    <h3>Top Users With...</h3>
+    <%
+    order_with_max_revenue = Order.with_max_revenue
+    user_with_max_spent = User.with_max_spent
+    user_with_max_avg_spent = User.with_max_avg_spent
+    user_with_max_placed_orders = User.with_max_placed_orders
+    %>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Item', 'User', 'Quantity'],
+      :rows => [
+        ['Highest Single Order Value',  "#{order_with_max_revenue.user.first_name} #{order_with_max_revenue.user.last_name}", number_to_currency(order_with_max_revenue.user.spent)],
+        ['Highest Overall Value', "#{user_with_max_spent.first_name} #{user_with_max_spent.last_name}", number_to_currency(user_with_max_spent.spent)],
+        ['Highest Average Order Value', "#{user_with_max_avg_spent.first_name} #{user_with_max_avg_spent.last_name}", number_to_currency(user_with_max_avg_spent.avg_spent)],
+        ['Most Orders Placed', "#{user_with_max_placed_orders.first_name} #{user_with_max_placed_orders.last_name}", user_with_max_placed_orders.orders.length]
+      ]
+    }} %>
+  </div>
+</div>
+
+<div class="row">
+
+  <!-- Order Statistics -->
+  <div class="col-md-6">
+    <h2>Order Statistics</h2>
+
+    <h3>Last 7 Days</h3>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Number of Orders', Order.count_since(7.days.ago)],
+        ['Total Revenue', number_to_currency(Order.revenue_since(7.days.ago))],
+        ['Average Order Value', number_to_currency(Order.avg_revenue_since(7.days.ago))],
+        ['Largest Order Value', number_to_currency(Order.with_max_revenue_since(7.days.ago).revenue)]
+      ]
+    }} %>
+
+    <h3>Last 30 Days</h3>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Number of Orders', Order.count_since(30.days.ago)],
+        ['Total Revenue', number_to_currency(Order.revenue_since(30.days.ago))],
+        ['Average Order Value', number_to_currency(Order.avg_revenue_since(30.days.ago))],
+        ['Largest Order Value', number_to_currency(Order.with_max_revenue_since(30.days.ago).revenue)]
+      ]
+    }} %>
+
+    <h3>Total</h3>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Number of Orders', Order.count],
+        ['Total Revenue', number_to_currency(Order.revenue)],
+        ['Average Order Value', number_to_currency(Order.avg_revenue)],
+        ['Largest Order Value', number_to_currency(Order.with_max_revenue.revenue)]
+      ]
+    }} %>
+  </div>
+
+  <!-- Time Series Data -->
+  <div class="col-md-6">
+    <h2>Time Series Data</h2>
+
+    <h3>Orders by Day</h3>
+    <%
+    rows = []
+    days = ['Today', 'Yesterday']
+    7.times do |i|
+      rows << [
+        i > days.length - 1 ? i.days.ago.strftime('%m/%d') : days[i],
+        Order.count_since(i.days.ago),
+        number_to_currency(Order.revenue_since(i.days.ago))
+      ]
+    end
+    %>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Date', 'Quantity', 'Value'],
+      :rows => rows
+    }} %>
+
+    <h3>Orders by Week</h3>
+    <%
+    rows = []
+    (1..7).each do |i|
+      rows << [
+        i.weeks.ago.strftime('%m/%d'),
+        Order.count_since(i.weeks.ago),
+        number_to_currency(Order.revenue_since(i.weeks.ago))
+      ]
+    end
+    %>
+    <%= render :partial => 'table', :locals => {:table => {
+      :headers => ['Date', 'Quantity', 'Value'],
+      :rows => rows
+    }} %>
+  </div>
+</div>
+
+<footer>
+  Results loaded in <%= Time.now - @before %> seconds
+</footer>
+
+
+
+
+
+
+
+
+
+
+
