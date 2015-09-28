@@ -1,0 +1,15 @@
+<%= render :partial => 'shared/table', :locals => {:table => {
+  :headers => ['Key', 'Value'],
+  :rows => category.attributes.keys.map {|a| [a, category.attributes[a]]}
+}} %>
+
+<div class="btn-group">
+  <%
+  [
+    link_to('Edit', edit_category_path(category.id), :class => 'btn btn-primary'),
+    link_to('Delete', category_path(category.id), :class => 'btn btn-danger', :data => {:confirm => 'Delete?'})
+  ].each do |link|
+  %>
+    <%= link %>
+  <% end %>
+</div>

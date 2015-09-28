@@ -1,0 +1,14 @@
+<header class="page-header">
+  <h1>Categories</h1>
+  <%= link_to('+ New Category', new_category_path, :class => 'btn btn-primary btn-lg') %>
+</header>
+
+<%= render :partial => 'shared/table', :locals => {:table => {
+  :headers => @categories.first.attributes.keys + ['show', 'edit', 'delete'],
+  :rows => @categories.map do |c|
+    row = c.attributes.keys.map {|a| c.attributes[a]}
+    row << link_to('show', category_path(c.id))
+    row << link_to('edit', edit_category_path(c.id))
+    row << link_to('delete', category_path(c.id), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+  end
+}} %>

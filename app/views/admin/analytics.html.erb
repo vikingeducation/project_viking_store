@@ -7,7 +7,7 @@
     <h2>Overall Platform</h2>
 
     <h3>Last 7 Days</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
         ['Users', @user_count_last_week],
@@ -19,7 +19,7 @@
 
 
     <h3>Last 30 Days</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
         ['Users', @user_count_last_month],
@@ -30,7 +30,7 @@
     }} %>
 
     <h3>Total</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
         ['Users', @user_count],
@@ -46,19 +46,19 @@
     <h2>User Demographics and Behavior</h2>
 
     <h3>Top 3 States Users Live In (Billing)</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => User.count_by_state[0..2].map {|i| [i.state_name, i.num_users]}
     }} %>
 
     <h3>Top 3 Cities Users Live In (Billing)</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => User.count_by_city[0..2].map {|i| [i.city_name, i.num_users]}
     }} %>
 
     <h3>Top Users With...</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Item', 'User', 'Quantity'],
       :rows => [
         [
@@ -92,7 +92,7 @@
     <h2>Order Statistics</h2>
 
     <h3>Last 7 Days</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
         ['Number of Orders', @order_count_last_week],
@@ -103,7 +103,7 @@
     }} %>
 
     <h3>Last 30 Days</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
         ['Number of Orders', @order_count_last_month],
@@ -114,7 +114,7 @@
     }} %>
 
     <h3>Total</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Item', 'Data'],
       :rows => [
         ['Number of Orders', @order_count],
@@ -130,13 +130,13 @@
     <h2>Time Series Data</h2>
 
     <h3>Orders by Day</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Date', 'Quantity', 'Value'],
       :rows => @orders_by_day.map {|i| i[2] = number_to_currency(i[2]); i}
     }} %>
 
     <h3>Orders by Week</h3>
-    <%= render :partial => 'table', :locals => {:table => {
+    <%= render :partial => 'shared/table', :locals => {:table => {
       :headers => ['Date', 'Quantity', 'Value'],
       :rows => @orders_by_week.map {|i| i[2] = number_to_currency(i[2]); i}
     }} %>

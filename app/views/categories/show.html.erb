@@ -1,0 +1,31 @@
+<header class="page-header">
+  <h1>
+    Category:
+    <small>
+      <%= @category.name %>
+    </small>
+  </h1>
+</header>
+
+<%= render @category %>
+
+<header class="page-header">
+  <h1>
+    Products for:
+    <small>
+      <%= @category.name %>
+    </small>
+  </h1>
+</header>
+
+<% if @category.products.present? %>
+  <%= render :partial => 'shared/table', :locals => {:table => {
+    :headers => @category.products.first.attributes.keys + ['show'],
+    :rows => @category.products.map do |p|
+      row = p.attributes.keys.map {|a| p.attributes[a]}
+      row << link_to('show', '#')
+    end
+  }} %>
+<% else %>
+  <p>None</p>
+<% end %>
