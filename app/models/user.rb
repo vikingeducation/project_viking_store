@@ -4,21 +4,32 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :addresses
   has_many :credit_cards
+  has_many :order_contents, :through => :orders, :source => :items
+  has_many :products, :through => :order_contents
 
+  SUM_QUANTITY_PRICES = 'SUM(order_contents.quantity * products.price) AS amount'
+
+  # --------------------------------
+  # Public Instance Methods
+  # --------------------------------
+
+  # Returns the full name of the user
   def name
     "#{first_name} #{last_name}"
   end
 
   # Returns the amount spent by this user
   def spent
-    sql = 'users.id AS user_id, SUM(order_contents.quantity * products.price) AS amount'
-    result = OrderContent.select(sql)
-      .joins(:product)
-      .joins(:order)
-      .joins('JOIN users ON users.id = orders.user_id')
+    sql = [
+      'users.id AS user_id',
+      SUM_QUANTITY_PRICES
+    ].join(',')
+
+    result = User.join_orders_products(sql)
       .group('users.id')
       .limit(1)
       .order('amount DESC')
+      .where('users.id = ?', id)
       .to_a
       .first
     result ? result.amount.to_f : 0
@@ -26,105 +37,124 @@ class User < ActiveRecord::Base
 
   # Returns the average amount spent by this user
   def avg_spent
-    sql = 'users.id AS user_id, AVG(order_contents.quantity * products.price) AS amount'
-    result = OrderContent.select(sql)
-      .joins(:product)
-      .joins(:order)
-      .joins('JOIN users ON users.id = orders.user_id')
-      .group('users.id')
-      .limit(1)
-      .order('amount DESC')
-      .to_a
-      .first
-    result ? result.amount.to_f : 0
+    num_orders = orders.length
+    num_orders == 0 ? 0 : spent / num_orders
   end
+
+  # --------------------------------
+  # Public Class Methods
+  # --------------------------------
 
   # Returns a count of users
   # with a created_at date after the given date
   def self.count_since(date)
-    User.where('created_at > ?', date).count
+    User.where('created_at >= ?', date.to_date).count
   end
 
   # Returns an array of counts of users
   # in each state
   def self.count_by_state
-    User.select('states.name AS state_name, COUNT(users.id) AS num_users')
-      .joins('JOIN addresses ON addresses.id = users.billing_id')
-      .joins('JOIN states ON states.id = addresses.state_id')
-      .group('states.name')
-      .order('num_users DESC')
+    User.count_by_location('state')
       .to_a
   end
 
   # Returns an array of counts of users
   # in each city
   def self.count_by_city
-    User.select('cities.name AS city_name, COUNT(users.id) AS num_users')
-      .joins('JOIN addresses ON addresses.id = users.billing_id')
-      .joins('JOIN cities ON cities.id = addresses.city_id')
-      .group('cities.name')
-      .order('num_users DESC')
+    User.count_by_location('city')
       .to_a
   end
 
   # Returns user with the highest amount spent
   def self.with_max_spent
-    sql = 'users.id AS user_id, SUM(order_contents.quantity * products.price) AS amount'
-    result = OrderContent.select(sql)
-      .joins(:product)
-      .joins(:order)
-      .joins('JOIN users ON users.id = orders.user_id')
+    sql = [
+      'users.id AS user_id',
+      SUM_QUANTITY_PRICES
+    ].join(',')
+
+    result = User.join_orders_products(sql)
       .group('users.id')
       .limit(1)
       .order('amount DESC')
       .to_a
       .first
-    user = User.find(result.user_id) if result
-    user || User.new
+    User.result_user_id_or_new(result)
   end
 
   # Returns the user with highest average amount spent
   def self.with_max_avg_spent
-    sql = 'users.id AS user_id, AVG(order_contents.quantity * products.price) AS amount'
-    result = OrderContent.select(sql)
-      .joins(:product)
-      .joins(:order)
-      .joins('JOIN users ON users.id = orders.user_id')
+    sql = [
+      'users.id AS user_id',
+      'AVG(order_contents.quantity * products.price) AS amount'
+      ].join(',')
+    result = User.join_orders_products(sql)
       .group('users.id')
       .limit(1)
       .order('amount DESC')
       .to_a
       .first
-    user = User.find(result.user_id) if result
-    user || User.new
+    User.result_user_id_or_new(result)
   end
 
   # Returns the user with the most orders
   def self.with_max_orders
-    sql = 'users.id AS user_id, COUNT(orders.user_id) AS num_orders'
-    result = User.select(sql)
-      .joins('JOIN orders ON users.id = orders.user_id')
-      .group('users.id')
-      .limit(1)
-      .order('num_orders DESC')
+    result = User.join_grouped_orders
       .to_a
       .first
-    user = User.find(result.user_id) if result
-    user || User.new
+    User.result_user_id_or_new(result)
   end
 
   # Returns the user with the most checked out orders
   def self.with_max_placed_orders
-    sql = 'users.id AS user_id, COUNT(orders.user_id) AS num_orders'
-    result = User.select(sql)
-      .joins('JOIN orders ON users.id = orders.user_id')
+    result = User.join_grouped_orders
       .where('orders.checkout_date IS NOT NULL')
+      .to_a
+      .first
+    User.result_user_id_or_new(result)
+  end
+
+
+  private
+
+  # --------------------------------
+  # Private Class Methods
+  # --------------------------------
+
+  # Wraps reusable find user by id or instantiate new user
+  def self.result_user_id_or_new(result)
+    user = User.find(result.user_id) if result
+    user || User.new
+  end
+
+  # Wraps reusable users join with orders grouped by user
+  def self.join_grouped_orders
+    sql = [
+      'users.id AS user_id',
+      'COUNT(orders.user_id) AS num_orders'
+    ].join(',')
+
+    User.select(sql)
+      .joins('JOIN orders ON users.id = orders.user_id')
       .group('users.id')
       .limit(1)
       .order('num_orders DESC')
-      .to_a
-      .first
-    user = User.find(result.user_id) if result
-    user || User.new
+  end
+
+  # Wraps reusable join on users, orders, order_contents and products
+  def self.join_orders_products(sql='*')
+    OrderContent.select(sql)
+      .joins(:product)
+      .joins(:order)
+      .joins('JOIN users ON users.id = orders.user_id')
+  end
+
+  def self.count_by_location(type)
+    singular = type.singularize
+    plural = type.pluralize
+    User.select("#{plural}.name AS #{singular}_name, COUNT(users.id) AS num_users")
+      .joins("JOIN addresses ON addresses.id = users.billing_id")
+      .joins("JOIN #{plural} ON #{plural}.id = addresses.#{singular}_id")
+      .group("#{plural}.name")
+      .order("num_users DESC")
   end
 end

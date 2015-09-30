@@ -55,21 +55,28 @@ class AdminController < ApplicationController
     # Orders by Day
     @orders_by_day = []
     days = ['Today', 'Yesterday']
+
+    @order_revenue_by_day = Order.revenue_by_day
+    @order_count_by_day = Order.count_by_day
+
     7.times do |i|
-      @orders_by_day << [
+        @orders_by_day << [
         i > days.length - 1 ? i.days.ago.strftime('%m/%d') : days[i],
-        Order.count_since(i.days.ago),
-        Order.revenue_since(i.days.ago)
+        @order_count_by_day[i].num_orders,
+        @order_revenue_by_day[i].amount
       ]
     end
 
     # Orders by Week
+    @order_revenue_by_week = Order.revenue_by_week
+    @order_count_by_week = Order.count_by_week
+
     @orders_by_week = []
-    (1..7).each do |i|
+    7.times do |i|
       @orders_by_week << [
-        i.weeks.ago.strftime('%m/%d'),
-        Order.count_since(i.weeks.ago),
-        Order.revenue_since(i.weeks.ago)
+        (i + 1).weeks.ago.strftime('%m/%d'),
+        @order_count_by_week[i].num_orders,
+        @order_revenue_by_week[i].amount
       ]
     end
   end

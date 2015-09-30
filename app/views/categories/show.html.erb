@@ -23,7 +23,7 @@
     :headers => @category.products.first.attributes.keys + ['show'],
     :rows => @category.products.map do |p|
       row = p.attributes.keys.map {|a| p.attributes[a]}
-      row << link_to('show', '#')
+      row << link_to('show', product_path(p.id))
     end
   }} %>
 <% else %>

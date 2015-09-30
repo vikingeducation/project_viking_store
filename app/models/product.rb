@@ -24,24 +24,55 @@ class Product < ActiveRecord::Base
   validates :category,
             :presence => true
 
+  # --------------------------------
+  # Public Instance Methods
+  # --------------------------------
 
+  # Returns all orders with this product
+  # without a checkout date
   def carts
-    orders.where('checkout_date IS NULL').to_a
+    carts_relation.to_a
   end
 
+  # Returns all orders with this product
+  # with a checkout date
   def placed_orders
-    orders.where('checkout_date IS NOT NULL').to_a
+    placed_orders_relation.to_a
   end
 
+  # Returns the number of units this product
+  # has sold
   def units_sold
     result = order_contents.select('SUM(quantity) AS sum_quantity')
-    .to_a
+      .where('order_id IN (?)', placed_orders_relation.ids)
+      .to_a
     result.first.sum_quantity || 0
   end
+
+  # --------------------------------
+  # Public Class Methods
+  # --------------------------------
 
   # Returns all the products
   # with a created_at date after the given date
   def self.count_since(date)
-    Product.where('created_at > ?', date).count
+    Product.where('created_at >= ?', date.to_date).count
+  end
+
+
+  private
+
+  # --------------------------------
+  # Private Instance Methods
+  # --------------------------------
+
+  # Returns the relation collection for carts
+  def carts_relation
+    orders.where('checkout_date IS NULL')
+  end
+
+  # Returns the relation collection for placed orders
+  def placed_orders_relation
+    orders.where('checkout_date IS NOT NULL')
   end
 end
