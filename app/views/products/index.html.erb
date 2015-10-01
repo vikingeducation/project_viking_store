@@ -5,16 +5,16 @@
 
 <%= render :partial => 'shared/table', :locals => {:table => {
   :headers => @products.first.attributes.keys + ['show', 'edit', 'delete'],
-  :rows => @products.map do |p|
-    row = p.attributes.keys.map do |a|
+  :rows => @products.map do |product|
+    row = product.attributes.keys.map do |a|
       if a == 'category_id'
-        link_to(p.category.name, category_path(p.category.id))
+        link_to(product.category.name, category_path(product.category.id))
       else
-        p.attributes[a]
+        product.attributes[a]
       end
     end
-    row << link_to('show', product_path(p.id))
-    row << link_to('edit', edit_product_path(p.id))
-    row << link_to('delete', product_path(p.id), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+    row << link_to('show', product_path(product.id))
+    row << link_to('edit', edit_product_path(product.id))
+    row << link_to('delete', product_path(product.id), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
   end
 }} %>

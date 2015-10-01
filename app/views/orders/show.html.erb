@@ -1,0 +1,10 @@
+<header class="page-header">
+  <h1>
+    Order for user:
+    <small>
+      <%= @order.user ? @order.user.name : 'None' %>
+    </small>
+  </h1>
+</header>
+
+<%= render @order %>

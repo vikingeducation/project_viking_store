@@ -1,0 +1,16 @@
+<%= render :partial => 'shared/table', :locals => {:table => {
+  :headers => ['Key', 'Value'],
+  :rows => address.attributes.keys.map do |a|
+    if a == 'user_id'
+      value = address.user ? link_to('user', user_path(address.user.id)) : 'No user'
+    else
+      value = address.attributes[a]
+    end
+    [a, value]
+  end
+}} %>
+
+<%= render :partial => 'shared/edit_delete_buttons', :locals => {
+  :edit_path => edit_address_path(address.id, :user_id => address.user_id),
+  :delete_path => address_path(address.id)
+} %>

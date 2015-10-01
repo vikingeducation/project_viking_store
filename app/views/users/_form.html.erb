@@ -1,0 +1,33 @@
+<%= render :partial => 'shared/errors', :locals => {:object => user} %>
+
+<%= form_for(user) do |f| %>
+<!--   <% if user.persisted? %>
+    <div class="form-group">
+      <%= f.label(:id) %>
+      <%= f.text_field(:id, :disabled => true, :class => 'form-control') %>
+    </div>
+  <% end %> -->
+  <div class="form-group">
+    <%= f.label(:first_name) %>
+    <%= f.text_field(:first_name, :class => 'form-control') %>
+  </div>
+  <div class="form-group">
+    <%= f.label(:last_name) %>
+    <%= f.text_field(:last_name, :class => 'form-control') %>
+  </div>
+  <div class="form-group">
+    <%= f.label(:email) %>
+    <%= f.text_field(:email, :class => 'form-control') %>
+  </div>
+  <% if user.addresses.present? %>
+    <div class="form-group">
+      <%= f.label(:billing_id, 'Billing Address') %>
+      <%= f.collection_select(:billing_id, user.addresses, :id, :street_address, {}, {:class => 'form-control'}) %>
+    </div>
+    <div class="form-group">
+      <%= f.label(:shipping_id, 'Shipping Address') %>
+      <%= f.collection_select(:shipping_id, user.addresses, :id, :street_address, {}, {:class => 'form-control'}) %>
+    </div>
+  <% end %>
+  <%= f.submit(:class => 'btn btn-primary') %>
+<% end %>

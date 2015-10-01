@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :categories
   resources :products
+  resources :users
+  resources :addresses
+  resources :orders
 
   get '/analytics', :to => 'admin#analytics'
   root :to => 'admin#index'

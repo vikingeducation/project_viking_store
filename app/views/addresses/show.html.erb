@@ -1,0 +1,10 @@
+<header class="page-header">
+  <h1>
+    Address for user:
+    <small>
+      <%= @address.user ? @address.user.name : 'None' %>
+    </small>
+  </h1>
+</header>
+
+<%= render @address %>

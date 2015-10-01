@@ -1,0 +1,42 @@
+<%= render :partial => 'shared/errors', :locals => {:object => address} %>
+
+<% if User.exists?(params[:user_id]) %>
+  <h2>
+    User:
+    <small>
+      <%= User.find(params[:user_id]).name %>
+    </small>
+  </h2>
+  <%= form_for(address, :url => "/addresses?user_id=#{params[:user_id]}") do |f| %>
+  <!--   <% if address.persisted? %>
+      <div class="form-group">
+        <%= f.label(:id) %>
+        <%= f.text_field(:id, :disable => true, :class => 'form-control') %>
+      </div>
+    <% end %> -->
+    <div class="form-group">
+      <%= f.label(:street_address) %>
+      <%= f.text_field(:street_address, :class => 'form-control') %>
+    </div>
+    <div class="form-group">
+      <%= f.label(:secondary_address) %>
+      <%= f.text_field(:secondary_address, :class => 'form-control') %>
+    </div>
+    <div class="form-group">
+      <%= f.label(:zip_code) %>
+      <%= f.text_field(:zip_code, :class => 'form-control') %>
+    </div>
+    <div class="form-group">
+      <%= f.label(:city_id) %>
+      <%= f.collection_select(:city_id, City.all, :id, :name, {}, {:class => 'form-control'}) %>
+    </div>
+    <div class="form-group">
+      <%= f.label(:state_id) %>
+      <%= f.collection_select(:state_id, State.all, :id, :name, {}, {:class => 'form-control'}) %>
+    </div>
+    <%= f.hidden_field(:user_id, :class => 'form-control', :value => params[:user_id]) %>
+    <%= f.submit(:class => 'btn btn-primary') %>
+  <% end %>
+<% else %>
+  <p>Cannot create address for that user</p>
+<% end %>

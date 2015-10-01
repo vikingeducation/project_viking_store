@@ -7,15 +7,54 @@ class User < ActiveRecord::Base
   has_many :order_contents, :through => :orders, :source => :items
   has_many :products, :through => :order_contents
 
+  validates :first_name,
+            :presence => true,
+            :length => {
+              :minimun => 1,
+              :maximum => 64
+            }
+
+  validates :last_name,
+            :presence => true,
+            :length => {
+              :minimun => 1,
+              :maximum => 64
+            }
+
+  validates :email,
+            :presence => true,
+            :length => {
+              :minimun => 1,
+              :maximum => 64
+            },
+            :format => /@/
+
+
+
+  before_destroy :destroy_dependents
+
   SUM_QUANTITY_PRICES = 'SUM(order_contents.quantity * products.price) AS amount'
 
   # --------------------------------
   # Public Instance Methods
   # --------------------------------
 
+  # Destroy any dependent rows
+  def destroy_dependents
+    cart_relation.destroy_all
+    credit_cards.destroy_all
+  end
+
   # Returns the full name of the user
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def cart
+    result = orders.where('checkout_date IS NULL')
+      .limit(1)
+      .to_a
+    result.length > 0 ? result.first : Order.new
   end
 
   # Returns the amount spent by this user
@@ -115,6 +154,15 @@ class User < ActiveRecord::Base
 
 
   private
+
+  # --------------------------------
+  # Private Instance Methods
+  # --------------------------------  
+
+  # Wraps reusable cart relation
+  def cart_relation
+    orders.where('checkout_date IS NULL')
+  end
 
   # --------------------------------
   # Private Class Methods

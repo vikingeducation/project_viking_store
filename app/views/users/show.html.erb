@@ -1,0 +1,70 @@
+<header class="page-header">
+  <h1>
+    User:
+    <small>
+      <%= @user.name %>
+    </small>
+  </h1>
+</header>
+
+<%= render @user %>
+
+<h2>Cart</h2>
+<% if @user.cart.persisted? %>
+  <%= render :partial => 'shared/table', :locals => {:table => {
+    :headers => ['Key', 'Value'],
+    :rows => @user.cart.attributes.keys.map do |a|
+      [a, @user.cart[a]]
+    end
+  }} %>
+  <%= link_to('Show Cart', order_path(@user.cart.id), :class => 'btn btn-primary') %>
+<% else %>
+  <p>No cart</p>
+<% end %>
+
+<!-- <h2>Orders</h2>
+<% if @user.orders.present? %>
+  <%= render :partial => 'shared/table', :locals => {:table => {
+    :headers => @user.orders.first.attributes.keys + ['show', 'edit', 'delete'],
+    :rows => @user.orders.map do |order|
+      row = order.attributes.keys.map do |a|
+        order[a]
+      end
+
+      row << link_to('show', order_path(order.id))
+      row << link_to('edit', edit_order_path(order.id))
+      row << link_to('delete', order_path(order.id), :method => :delete, :class => 'text-danger', :data => {:confirm => 'Delete?'})
+    end
+  }} %>
+<% else %>
+  <p>No orders</p>
+<% end %>
+<div class="btn-group">
+  <%= link_to('+ New Order', new_order_path, :class => 'btn btn-primary') %>
+</div> -->
+
+<h2>Addresses</h2>
+<% if @user.addresses.present? %>
+  <div class="btn-group">
+    <%= link_to('Addresses', addresses_path(:user_id => @user.id), :class => 'btn btn-primary') %>
+  </div>
+<% else %>
+  <p>No addresses</p>
+<% end %>
+<div class="btn-group">
+  <%= link_to('+ New Address', new_address_path(:user_id => @user.id), :class => 'btn btn-primary') %>
+</div>
+
+<h2>Credit Cards</h2>
+<% @user.credit_cards.each do |credit_card| %>
+  <%= render :partial => 'shared/table', :locals => {:table => {
+    :headers => ['Key', 'Value'],
+    :rows => credit_card.attributes.keys.map do |a|
+      [a, credit_card[a]]
+    end
+  }} %>
+<% end %>
+
+
+
+

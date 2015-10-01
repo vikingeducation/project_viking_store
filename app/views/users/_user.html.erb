@@ -1,9 +1,9 @@
 <%= render :partial => 'shared/table', :locals => {:table => {
   :headers => ['Key', 'Value'],
-  :rows => category.attributes.keys.map {|a| [a, category.attributes[a]]}
+  :rows => user.attributes.keys.map {|a| [a, user.attributes[a]]}
 }} %>
 
 <%= render :partial => 'shared/edit_delete_buttons', :locals => {
-  :edit_path => edit_category_path(category.id),
-  :delete_path => category_path(category.id)
+  :edit_path => edit_user_path(user.id),
+  :delete_path => user_path(user.id)
 } %>

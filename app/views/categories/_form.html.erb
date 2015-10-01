@@ -1,7 +1,7 @@
-<%= render :partial => 'shared/errors', :locals => {:object => @category} %>
+<%= render :partial => 'shared/errors', :locals => {:object => category} %>
 
 <%= form_for(category) do |f| %>
-<!--   <% if @category.persisted? %>
+<!--   <% if category.persisted? %>
     <div class="form-group">
       <%= f.label(:id) %>
       <%= f.text_field(:id, :disable => true, :class => 'form-control') %>
