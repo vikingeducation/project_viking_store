@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :products
   resources :users
   resources :addresses
-  resources :orders
+  # resources :orders
 
   get '/analytics', :to => 'admin#analytics'
   root :to => 'admin#index'
