@@ -4,8 +4,7 @@ ruby ENV["RBENV_VERSION"] || "2.2.0"
 gem 'rails_12factor', group: :production
 gem 'puma'
 
-gem 'sqlite3'
-gem 'hirb'
+gem 'hirb', :group => :development
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
@@ -33,7 +32,7 @@ gem 'spring',  '~> 1.3.6',      group: :development
 
 gem 'pry'
 
-gem 'faker'
+gem 'faker', :group => :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
