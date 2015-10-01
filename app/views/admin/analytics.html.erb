@@ -140,6 +140,18 @@
       :headers => ['Date', 'Quantity', 'Value'],
       :rows => @orders_by_week.map {|i| i[2] = number_to_currency(i[2]); i}
     }} %>
+
+    <h3>Orders by Month</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Date', 'Quantity', 'Value'],
+      :rows => @orders_by_month.map {|i| i[2] = number_to_currency(i[2]); i}
+    }} %>
+
+    <h3>Orders by Year</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Date', 'Quantity', 'Value'],
+      :rows => @orders_by_year.map {|i| i[2] = number_to_currency(i[2]); i}
+    }} %>
   </div>
 </div>
 

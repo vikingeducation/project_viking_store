@@ -7,10 +7,7 @@ class Order < ActiveRecord::Base
   belongs_to :credit_card
   has_many :categories, :through => :products
 
-  COALESCE_QUANTITY_PRICE = 'COALESCE(SUM(order_contents.quantity * products.price), 0) AS amount'
   SUM_QUANTITY_PRICE = 'SUM(order_contents.quantity * products.price) AS amount'
-  GENERATE_DAYS = "GENERATE_SERIES((SELECT DATE(MIN(checkout_date)) FROM orders), CURRENT_DATE, '1 DAY'::INTERVAL) day"
-  GENERATE_WEEKS = "GENERATE_SERIES((SELECT DATE(DATE_TRUNC('WEEK', MIN(checkout_date))) FROM orders), CURRENT_DATE, '1 WEEK'::INTERVAL) weeks"
 
   # --------------------------------
   # Public Instance Methods
@@ -33,7 +30,13 @@ class Order < ActiveRecord::Base
   # Returns all orders without a
   # checkout date
   def self.carts
-    Order.where('checkout_date IS NULL')
+    Order.carts_relation.to_a
+  end
+
+  # Returns all orders with a
+  # checkout date
+  def self.placed_orders
+    Order.placed_orders_relation.to_a
   end
 
   # Returns the order count of orders
@@ -93,68 +96,24 @@ class Order < ActiveRecord::Base
     Order.result_order_id_or_new(result)
   end
 
-  # Returns the revenue for every day since the
-  # first checkout date
-  def self.revenue_by_day
-    Order.join_days_revenue
-      .to_a
-  end
-
-  # Returns the revenue for a specific day
-  def self.revenue_for_day(date)
-    Order.join_days_revenue
-      .where('day = ?', date.to_date)
-      .to_a
-  end
-
-  # Returns the count for every day since the
-  # first checkout date
-  def self.count_by_day
-    Order.join_days_count
-      .to_a
-  end
-
-  # Returns the count for a specific day
-  def self.count_for_day(date)
-    Order.join_days_count
-      .where('day = ?', date.to_date)
-      .to_a
-  end
-
-  # Returns the revenue for every week since the
-  # week of the first checkout date
-  def self.revenue_by_week
-    Order.join_weeks_revenue
-      .to_a
-  end
-
-  # Returns the revenue for a specific week
-  def self.revenue_for_week(date)
-    Order.join_weeks_revenue
-      .where('weeks = ?', date.to_date.beginning_of_week)
-      .to_a
-  end
-
-  # Returns the count for every week since the
-  # week of the first checkout date
-  def self.count_by_week
-    Order.join_weeks_count
-      .to_a
-  end
-
-  # Returns the count for a specific week
-  def self.count_for_week(date)
-    Order.join_weeks_count
-      .where('weeks = ?', date.to_date.beginning_of_week)
-      .to_a
-  end
-
 
   private
 
   # --------------------------------
   # Private Class Methods
   # --------------------------------
+
+  # Wraps reusable query for all orders
+  # where checkout_date is not null
+  def self.carts_relation
+    Order.where('checkout_date IS NULL')
+  end
+
+  # Wraps reusable query for all orders
+  # where checkout_date is null
+  def self.placed_orders_relation
+    Order.where('checkout_date IS NOT NULL')
+  end
 
   # Wraps reusable find order by id or instantiate new order
   def self.result_order_id_or_new(result)
@@ -169,72 +128,59 @@ class Order < ActiveRecord::Base
       .joins(:order)
   end
 
-  # Wraps reusable join on day series and revenue by day
-  def self.join_days_revenue
+  # Wraps reusable time series generation SQL string
+  # with optional start and end dates
+  def self.generate_series(type, start_date=nil, end_date=nil)
+    do_select = start_date.nil?
+    start_date = start_date ? "DATE('#{start_date.to_date}')" : 'MIN(orders.checkout_date)'
+    start_date = "DATE_TRUNC('#{type.singularize.upcase}', #{start_date})" unless type == 'day'
+    start_date = do_select ? "(SELECT DATE(#{start_date}) FROM orders)" : start_date
+    end_date = end_date ? "'#{end_date.to_date}'" : "CURRENT_DATE"
+    "GENERATE_SERIES(#{start_date}, #{end_date}, '1 #{type.singularize.upcase}'::INTERVAL) #{type.pluralize}"
+  end
+
+  # Wraps reusable time series join date
+  # for multiple date interval types
+  def self.time_series_join_date(type)
+    type == 'day' ? 'DATE(orders.checkout_date)' : "DATE(DATE_TRUNC('#{type.singularize.upcase}', orders.checkout_date))"
+  end
+
+  # Wraps reusable time series revenue
+  # for multiple date interval types
+  # and optional date range
+  def self.join_time_series_revenue(type, start_date=nil, end_date=nil)
     select_statement = [
-      'DATE(day)',
-      COALESCE_QUANTITY_PRICE
+      "DATE(#{type.pluralize}) AS #{type.singularize}",
+      'COALESCE(SUM(order_contents.quantity * products.price), 0) AS amount'
     ].join(',')
 
-    from_statement = GENERATE_DAYS
+    from_statement = Order.generate_series(type, start_date, end_date)
 
     OrderContent.select(select_statement)
       .from(from_statement)
-      .joins('LEFT JOIN orders ON DATE(orders.checkout_date) = day')
+      .joins("LEFT JOIN orders ON #{Order.time_series_join_date(type)} = #{type.pluralize}")
       .joins('LEFT JOIN order_contents ON orders.id = order_contents.order_id')
       .joins('LEFT JOIN products ON products.id = order_contents.product_id')
-      .group('day')
-      .order('day DESC')
+      .group("#{type.pluralize}")
+      .order("#{type.pluralize} DESC")
   end
 
-  # Wraps reusable join on day series and count by day
-  def self.join_days_count
+  # Wraps reusable time series count
+  # for multiple date interval types
+  # and optional date range
+  def self.join_time_series_count(type, start_date=nil, end_date=nil)
     select_statement = [
-      'DATE(day)',
+      "DATE(#{type.pluralize}) AS #{type.singularize}",
       'COUNT(orders.*) AS num_orders'
     ].join(',')
 
-    from_statement = GENERATE_DAYS
+    from_statement = Order.generate_series(type, start_date, end_date)
 
     OrderContent.select(select_statement)
       .from(from_statement)
-      .joins('LEFT JOIN orders ON DATE(orders.checkout_date) = day')
-      .group('day')
-      .order('day DESC')
-  end
-
-  # Wraps reusable join on week series and revenue by week
-  def self.join_weeks_revenue
-    select_statement = [
-      'DATE(weeks) AS week',
-      COALESCE_QUANTITY_PRICE
-    ]
-
-    from_statement = GENERATE_WEEKS
-
-    OrderContent.select(select_statement)
-      .from(from_statement)
-      .joins("LEFT JOIN orders ON DATE(DATE_TRUNC('WEEK', orders.checkout_date)) = weeks")
-      .joins('LEFT JOIN order_contents ON orders.id = order_contents.order_id')
-      .joins('LEFT JOIN products ON products.id = order_contents.product_id')
-      .group('weeks')
-      .order('weeks DESC')
-  end
-
-  # Wraps reusable join on weeks series and count by week
-  def self.join_weeks_count
-    select_statement = [
-      'DATE(weeks) AS week',
-      'COALESCE(COUNT(orders.*), 0) AS num_orders'
-    ].join(',')
-
-    from_statement = GENERATE_WEEKS
-
-    OrderContent.select(select_statement)
-      .from(from_statement)
-      .joins("LEFT JOIN orders ON DATE(DATE_TRUNC('WEEK', orders.checkout_date)) = weeks")
-      .group('weeks')
-      .order('weeks DESC')
+      .joins("LEFT JOIN orders ON #{Order.time_series_join_date(type)} = #{type.pluralize}")
+      .group("#{type.pluralize}")
+      .order("#{type.pluralize} DESC")
   end
 
   # Wraps reusable query to find max revenue
@@ -243,12 +189,47 @@ class Order < ActiveRecord::Base
       'orders.id AS order_id',
       SUM_QUANTITY_PRICE
     ].join(',')
+
     Order.join_order_contents_products(sql)
       .group('orders.id')
       .limit(1)
       .order('amount DESC')
   end
 end
+
+attributes = ['revenue', 'count']
+time_intervals = ['day', 'week', 'month', 'year']
+
+attributes.each do |attribute|
+  time_intervals.each do |time_interval|
+    Order.class_eval %Q{
+      def self.#{attribute}_by_#{time_interval}
+        Order.join_time_series_#{attribute}('#{time_interval}')
+          .to_a
+      end
+
+      def self.#{attribute}_for_#{time_interval}(date)
+        Order.join_time_series_#{attribute}('#{time_interval}')
+          .where('#{time_interval}s = ?', date.to_date)
+          .to_a
+      end
+
+      def self.#{attribute}_for_#{time_interval}_range(start_date, end_date)
+        Order.join_time_series_#{attribute}('#{time_interval}', start_date, end_date)
+          .to_a
+      end
+    }
+  end
+end
+
+
+
+
+
+
+
+
+
 
 
 

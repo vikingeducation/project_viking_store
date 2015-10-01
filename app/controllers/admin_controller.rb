@@ -56,8 +56,8 @@ class AdminController < ApplicationController
     @orders_by_day = []
     days = ['Today', 'Yesterday']
 
-    @order_revenue_by_day = Order.revenue_by_day
-    @order_count_by_day = Order.count_by_day
+    @order_revenue_by_day = Order.revenue_for_day_range(6.days.ago, 0.days.ago)
+    @order_count_by_day = Order.count_for_day_range(6.days.ago, 0.days.ago)
 
     7.times do |i|
         @orders_by_day << [
@@ -68,16 +68,48 @@ class AdminController < ApplicationController
     end
 
     # Orders by Week
-    @order_revenue_by_week = Order.revenue_by_week
-    @order_count_by_week = Order.count_by_week
+    @order_revenue_by_week = Order.revenue_for_week_range(6.weeks.ago, 0.weeks.ago)
+    @order_count_by_week = Order.count_for_week_range(6.weeks.ago, 0.weeks.ago)
 
     @orders_by_week = []
     7.times do |i|
       @orders_by_week << [
-        (i + 1).weeks.ago.strftime('%m/%d'),
+        i.weeks.ago.beginning_of_week.strftime('%m/%d'),
         @order_count_by_week[i].num_orders,
         @order_revenue_by_week[i].amount
       ]
     end
+
+    # Orders by month
+    @order_revenue_by_month = Order.revenue_for_month_range(6.months.ago, 0.months.ago)
+    @order_count_by_month = Order.count_for_month_range(6.months.ago, 0.months.ago)
+
+    @orders_by_month = []
+    7.times do |i|
+        @orders_by_month << [
+            i.months.ago.beginning_of_month.strftime('%Y/%m'),
+            @order_count_by_month[i].num_orders,
+            @order_revenue_by_month[i].amount
+        ]
+    end
+
+    # Orders by year
+    @order_revenue_by_year = Order.revenue_for_year_range(6.years.ago, 0.years.ago)
+    @order_count_by_year = Order.count_for_year_range(6.years.ago, 0.years.ago)
+
+    @orders_by_year = []
+    7.times do |i|
+        @orders_by_year << [
+            i.years.ago.beginning_of_year.strftime('%Y'),
+            @order_count_by_year[i].num_orders,
+            @order_revenue_by_year[i].amount
+        ]
+    end
   end
 end
+
+
+
+
+
+
