@@ -17,7 +17,7 @@
       [a, @user.cart[a]]
     end
   }} %>
-  <%= link_to('Show Cart', order_path(@user.cart.id), :class => 'btn btn-primary') %>
+  <%= link_to('Show Cart', '#', :class => 'btn btn-primary') %>
 <% else %>
   <p>No cart</p>
 <% end %>
@@ -31,16 +31,16 @@
         order[a]
       end
 
-      row << link_to('show', order_path(order.id))
-      row << link_to('edit', edit_order_path(order.id))
-      row << link_to('delete', order_path(order.id), :method => :delete, :class => 'text-danger', :data => {:confirm => 'Delete?'})
+      row << link_to('show', '#')
+      row << link_to('edit', '#')
+      row << link_to('delete', '#', :method => :delete, :class => 'text-danger', :data => {:confirm => 'Delete?'})
     end
   }} %>
 <% else %>
   <p>No orders</p>
 <% end %>
 <div class="btn-group">
-  <%= link_to('+ New Order', new_order_path, :class => 'btn btn-primary') %>
+  <%= link_to('+ New Order', '#', :class => 'btn btn-primary') %>
 </div> -->
 
 <h2>Addresses</h2>

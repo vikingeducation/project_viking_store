@@ -4,7 +4,7 @@
 </header>
 
 <%= render :partial => 'shared/table', :locals => {:table => {
-  :headers => @users.first.attributes.keys + ['show', 'edit', 'delete'], # orders!!!!
+  :headers => @users.first.attributes.keys + ['show', 'edit', 'delete'],
   :rows => @users.map do |user|
     row = user.attributes.keys.map do |a|
       user.attributes[a]

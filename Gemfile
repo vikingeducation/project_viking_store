@@ -1,4 +1,8 @@
 source 'https://rubygems.org'
+ruby ENV["RBENV_VERSION"] || "2.2.0"
+
+gem 'rails_12factor', group: :production
+gem 'puma'
 
 gem 'sqlite3'
 gem 'hirb'
