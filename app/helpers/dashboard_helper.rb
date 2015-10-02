@@ -1,5 +1,21 @@
 module DashboardHelper
 
+  def present_data(data)
+
+    unless data.is_a?(Array)
+      [data]
+    else
+      data
+    end
+
+  end
+
+  def currency_if_float(input)
+
+    input.is_a?(BigDecimal) ? number_to_currency(input) : input
+
+  end
+
   def get_table_headers(table_title)
 
     case table_title

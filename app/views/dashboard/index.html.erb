@@ -6,14 +6,15 @@
     </div>
   </div>
 
-  <div class='row'>
+  <!-- forces row every odd panel -->
+  <% @data.each_with_index do |(panel, tables), index| %>
 
-    <% @data.each do |panel, tables| %>
+    <%= "<div class='row'>".html_safe if index.even? %>
 
       <%= render :partial => 'panel', :locals => { panel_title: panel, tables: tables } %>
 
-    <% end %>
+    <%= "</div>".html_safe if index.odd? %>
 
-  </div>
+  <% end %>
 
 </div>

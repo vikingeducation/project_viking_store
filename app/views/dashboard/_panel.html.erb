@@ -1,9 +1,9 @@
-<div class='col-md-6'>
+<div class='col-xs-6'>
 
   <div class='panel panel-default'>
     <h2 class='text-center'><%= panel_title %></h2>
 
-    <div class='panel-body'>
+    <div class='panel-body center-table'>
       <% tables.each do |table_title, values| %>
         <%= render :partial => 'table_section',
                    :locals => { 
