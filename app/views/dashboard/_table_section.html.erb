@@ -18,13 +18,8 @@
           <tr>
             <td><%= label %></td>
             
-            <% if data.is_a?(Array) %>
-              <% data.each do |cell| %>
-                <td><%= cell %></td>
-              <% end %>
-
-            <% else %>
-              <td><%= data %></td>
+            <% present_data(data).each do |cell| %>
+              <td><%= currency_if_float(cell) %></td>
             <% end %>
             
           </tr>
