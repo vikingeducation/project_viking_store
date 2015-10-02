@@ -40,3 +40,14 @@ gem 'faker'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development do
+  gem 'better_errors'
+end
+
+gem 'binding_of_caller'
+
+gem "twitter-bootstrap-rails"
+
+group :production do
+  gem 'rails_12factor'
+end
