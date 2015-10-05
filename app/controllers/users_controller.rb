@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     if @user.destroy
       flash[:success] = 'User deleted'
     else
-      flash.now[:error] = 'User not deleted'
+      flash[:error] = 'User not deleted, users with placed orders cannot be deleted'
     end
     redirect_to users_path
   end

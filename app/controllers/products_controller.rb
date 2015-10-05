@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
     if @product.destroy
       flash[:success] = 'Product deleted'
     else
-      flash[:error] = 'Product not deleted, may be present on placed orders'
+      flash[:error] = 'Product not deleted, products of placed orders cannot be deleted'
     end
     redirect_to products_path
   end
