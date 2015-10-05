@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
     if @order.destroy
       flash[:success] = 'Order deleted'
     else
-      flash.now[:error] = 'Order not deleted'
+      flash[:error] = 'Order not deleted, placed orders cannot be deleted'
     end
     redirect_to orders_path
   end

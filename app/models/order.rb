@@ -6,12 +6,22 @@ class Order < ActiveRecord::Base
   belongs_to :billing, :class_name => 'Address'
   belongs_to :credit_card
   has_many :categories, :through => :products
+  
+  before_destroy :dissociate
 
   SUM_QUANTITY_PRICE = 'SUM(order_contents.quantity * products.price) AS amount'
 
   # --------------------------------
   # Public Instance Methods
   # --------------------------------
+
+  def dissociate
+    if checkout_date
+      false
+    else
+      items.destroy_all
+    end
+  end
 
   # Returns the revenue for this order
   def revenue

@@ -16,4 +16,10 @@ class Category < ActiveRecord::Base
             :length => {
               :minimum => 4
             }
+
+  before_destroy :dissociate
+
+  def dissociate
+    products.update_all(:category_id => nil)
+  end
 end

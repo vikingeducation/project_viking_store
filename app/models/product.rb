@@ -24,9 +24,19 @@ class Product < ActiveRecord::Base
   validates :category,
             :presence => true
 
+  before_destroy :dissociate
+
   # --------------------------------
   # Public Instance Methods
   # --------------------------------
+
+  def dissociate
+    if placed_orders.present?
+      false
+    else
+      order_contents.destroy_all
+    end
+  end
 
   # Returns all orders with this product
   # without a checkout date

@@ -8,7 +8,7 @@
   :rows => @products.map do |product|
     row = product.attributes.keys.map do |a|
       if a == 'category_id'
-        link_to(product.category.name, category_path(product.category.id))
+        product.category ? link_to(product.category.name, category_path(product.category.id)) : 'None'
       else
         product.attributes[a]
       end

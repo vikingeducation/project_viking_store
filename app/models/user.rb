@@ -29,9 +29,7 @@ class User < ActiveRecord::Base
             },
             :format => /@/
 
-
-
-  before_destroy :destroy_dependents
+  before_destroy :dissociate
 
   SUM_QUANTITY_PRICES = 'SUM(order_contents.quantity * products.price) AS amount'
 
@@ -39,10 +37,15 @@ class User < ActiveRecord::Base
   # Public Instance Methods
   # --------------------------------
 
-  # Destroy any dependent rows
-  def destroy_dependents
-    cart_relation.destroy_all
-    credit_cards.destroy_all
+  # Dissociate the user from relations
+  def dissociate
+    if placed_orders.present?
+      false
+    else
+      addresses.destroy_all
+      orders.destroy_all
+      credit_cards.destroy_all
+    end
   end
 
   # Returns the full name of the user
@@ -50,11 +53,17 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  # Returns the user's cart
   def cart
-    result = orders.where('checkout_date IS NULL')
+    result = cart_relation
       .limit(1)
       .to_a
     result.length > 0 ? result.first : Order.new
+  end
+
+  # Returns the user's placed orders
+  def placed_orders
+    placed_orders_relation.to_a
   end
 
   # Returns the amount spent by this user
@@ -162,6 +171,11 @@ class User < ActiveRecord::Base
   # Wraps reusable cart relation
   def cart_relation
     orders.where('checkout_date IS NULL')
+  end
+
+  # Wraps reusable placed orders relation
+  def placed_orders_relation
+    orders.where('checkout_date IS NOT NULL')
   end
 
   # --------------------------------

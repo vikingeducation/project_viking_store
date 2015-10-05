@@ -39,7 +39,7 @@ class AddressesController < ApplicationController
     if @address.destroy
       flash[:success] = 'Address deleted'
     else
-      flash.now[:error] = 'Address not deleted'
+      flash[:error] = 'Address not deleted, may have placed orders'
     end
     redirect_to addresses_path
   end
