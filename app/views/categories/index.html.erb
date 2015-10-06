@@ -7,8 +7,8 @@
   :headers => @categories.first.attributes.keys + ['show', 'edit', 'delete'],
   :rows => @categories.map do |category|
     row = category.attributes.keys.map {|a| category.attributes[a]}
-    row << link_to('show', category_path(category.id))
-    row << link_to('edit', edit_category_path(category.id))
-    row << link_to('delete', category_path(category.id), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+    row << link_to('show', category_path(category))
+    row << link_to('edit', edit_category_path(category))
+    row << link_to('delete', category_path(category), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
   end
 }} %>

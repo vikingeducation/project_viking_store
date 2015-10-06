@@ -8,13 +8,13 @@
   :rows => @products.map do |product|
     row = product.attributes.keys.map do |a|
       if a == 'category_id'
-        product.category ? link_to(product.category.name, category_path(product.category.id)) : 'None'
+        product.category ? link_to(product.category.name, category_path(product.category)) : 'None'
       else
         product.attributes[a]
       end
     end
-    row << link_to('show', product_path(product.id))
-    row << link_to('edit', edit_product_path(product.id))
-    row << link_to('delete', product_path(product.id), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+    row << link_to('show', product_path(product))
+    row << link_to('edit', edit_product_path(product))
+    row << link_to('delete', product_path(product), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
   end
 }} %>

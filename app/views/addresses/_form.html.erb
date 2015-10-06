@@ -1,13 +1,16 @@
 <%= render :partial => 'shared/errors', :locals => {:object => address} %>
 
-<% if User.exists?(params[:user_id]) %>
+<%
+if User.exists?(params[:user_id])
+  user = User.find(params[:user_id])
+%>
   <h2>
     User:
     <small>
-      <%= User.find(params[:user_id]).name %>
+      <%= user.name %>
     </small>
   </h2>
-  <%= form_for(address, :url => "/addresses?user_id=#{params[:user_id]}") do |f| %>
+  <%= form_for(address, :url => url_for([user, address])) do |f| %>
   <!--   <% if address.persisted? %>
       <div class="form-group">
         <%= f.label(:id) %>
@@ -38,5 +41,5 @@
     <%= f.submit(:class => 'btn btn-primary') %>
   <% end %>
 <% else %>
-  <p>Cannot create address for that user</p>
+  <p class="text-danger">Cannot create address without an associated user</p>
 <% end %>

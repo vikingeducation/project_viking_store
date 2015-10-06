@@ -4,6 +4,6 @@
 }} %>
 
 <%= render :partial => 'shared/edit_delete_buttons', :locals => {
-  :edit_path => edit_user_path(user.id),
-  :delete_path => user_path(user.id)
+  :edit_path => edit_user_path(user),
+  :delete_path => user_path(user)
 } %>

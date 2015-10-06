@@ -1,4 +1,4 @@
-<% @addresses = @addresses.where('user_id = ?', params[:user_id]) if params[:user_id] %>
+path
 
 <header class="page-header">
   <h1>Addresses</h1>
@@ -12,14 +12,14 @@
     :rows => @addresses.map do |address|
       row = address.attributes.keys.map do |a|
         if a == 'user_id'
-          address.user ? link_to('user', user_path(address.user.id)) : 'No user'
+          address.user ? link_to('user', user_path(address.user)) : 'No user'
         else
           address.attributes[a]
         end
       end
-      row << link_to('show', address_path(address.id))
-      row << link_to('edit', edit_address_path(address.id, :user_id => address.user_id))
-      row << link_to('delete', address_path(address.id), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+      row << link_to('show', address_path(address))
+      row << link_to('edit', edit_user_address_path(user, address))
+      row << link_to('delete', address_path(address), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
     end
   }} %>
 <% end %>

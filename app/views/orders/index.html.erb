@@ -7,13 +7,13 @@
   :rows => @orders.map do |order|
     row = order.attributes.keys.map do |a|
       if a == 'user_id'
-        order.user ? link_to('user', user_path(order.user.id)) : 'No user'
+        order.user ? link_to('user', user_path(order.user)) : 'No user'
       else
         order.attributes[a]
       end
     end
-    row << link_to('show', order_path(order.id))
-    row << link_to('edit', edit_order_path(order.id))
-    row << link_to('delete', order_path(order.id), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+    row << link_to('show', order_path(order))
+    row << link_to('edit', edit_order_path(order))
+    row << link_to('delete', order_path(order), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
   end
 }} %>

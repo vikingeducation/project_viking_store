@@ -46,13 +46,13 @@
 <h2>Addresses</h2>
 <% if @user.addresses.present? %>
   <div class="btn-group">
-    <%= link_to('Addresses', addresses_path(:user_id => @user.id), :class => 'btn btn-primary') %>
+    <%= link_to('Addresses', user_addresses_path(@user), :class => 'btn btn-primary') %>
   </div>
 <% else %>
   <p>No addresses</p>
 <% end %>
 <div class="btn-group">
-  <%= link_to('+ New Address', new_address_path(:user_id => @user.id), :class => 'btn btn-primary') %>
+  <%= link_to('+ New Address', new_user_address_path(@user), :class => 'btn btn-primary') %>
 </div>
 
 <h2>Credit Cards</h2>

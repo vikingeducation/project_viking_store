@@ -3,7 +3,7 @@ class AddressesController < ApplicationController
   before_action :set_address, :except => [:index]
 
   def index
-    @addresses = Address.all
+    @addresses = params[:user_id] ? Address.where('user_id = ?', params[:user_id]) : Address.all
   end
 
   def show
