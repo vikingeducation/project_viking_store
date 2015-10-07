@@ -64,6 +64,8 @@ module DashboardHelper
 
   def time_series(interval)
 
+    # interval = 1, time series by day
+    # interval = 7, time series by week
     output = {}
 
     7.times do |i|

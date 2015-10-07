@@ -39,6 +39,7 @@ gem 'faker'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'hirb'
 
 group :development do
   gem 'better_errors'

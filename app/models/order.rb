@@ -1,10 +1,11 @@
 class Order < ActiveRecord::Base
 
+  # method that controls day ranges for start AND end
   def self.within_days(day_range = nil, last_day = DateTime.now)
     if day_range.nil?
-      where("checkout_date IS NOT NULL")
+      where("orders.checkout_date IS NOT NULL")
     else
-      where("checkout_date BETWEEN ? AND ?", last_day - day_range.days, last_day)
+      where("orders.checkout_date BETWEEN ? AND ?", last_day - day_range.days, last_day)
     end
   end
 
@@ -29,13 +30,9 @@ class Order < ActiveRecord::Base
 
 
 
-  # Pulls stats for a period of time.  Optional arguments for 1) the number of days
-  # to include in the range, and 2) the starting date from which to count backwards/
-  # Defaults to selecting all days in the database and using the current time as the
-  # Starting point.
-
-
-
+  # grabs stats for a period of time.
+  # can input number of days to include in the range, and the starting date to count backwards from
+  # defaults to selecting all days in the database and using the current time as the starting point
   def self.order_stats_with_range(number_of_days = nil, last_day = DateTime.now)
 
     base_query = Order.select("COUNT(DISTINCT orders.id) AS count,
@@ -46,9 +43,9 @@ class Order < ActiveRecord::Base
     filter_query = base_query.within_days(number_of_days, last_day).each.first
 
     {'Number of Orders' => filter_query.count,
-    'Total Revenue' => filter_query.revenue,
-    'Average Order Value' => filter_query.average,
-    'Largest Order Value' => Order.largest_order(number_of_days, last_day)
+     'Total Revenue' => filter_query.revenue,
+     'Average Order Value' => filter_query.average,
+     'Largest Order Value' => Order.largest_order(number_of_days, last_day)
     }
 
   end
@@ -56,18 +53,14 @@ class Order < ActiveRecord::Base
 
   def self.largest_order(number_of_days, start)
     base_query = Order.select("orders.id,
-                  SUM(products.price * order_contents.quantity) AS order_total").
-            join_with_products.
-            group("orders.id").
-            order("SUM(products.price * order_contents.quantity) DESC")
+                               SUM(products.price * order_contents.quantity) AS order_total").
+                       join_with_products.
+                       group("orders.id").
+                       order("SUM(products.price * order_contents.quantity) DESC")
 
-    if number_of_days.nil?
-      full_query = base_query.where("orders.checkout_date IS NOT NULL").first
-    else
-      full_query = base_query.where("orders.checkout_date BETWEEN ? AND ?", start - number_of_days.days, start).first
-    end
-
-
+    # largest value from beginning of time
+    full_query = base_query.within_days(number_of_days, start).first
+    
     if full_query.nil?
       max_order = nil
     else
