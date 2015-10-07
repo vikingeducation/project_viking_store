@@ -3,7 +3,7 @@
   <%= link_to('+ New User', new_user_path, :class => 'btn btn-primary btn-lg') %>
 </header>
 
-<% if @user.empty? %>
+<% if @users.empty? %>
   <p>No users found</p>
 <% else %>
   <%= render :partial => 'shared/table', :locals => {:table => {

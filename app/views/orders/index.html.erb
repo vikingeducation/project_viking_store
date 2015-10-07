@@ -1,5 +1,10 @@
 <header class="page-header">
   <h1>Orders</h1>
+  <small>
+    New orders can only be created from a
+    <%= link_to('user', users_path) %>
+    profile
+  </small>
 </header>
 
 <% if @orders.empty? %>
