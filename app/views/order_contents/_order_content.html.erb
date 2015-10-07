@@ -1,4 +1,4 @@
 <%= render :partial => 'shared/table', :locals => {:table => {
   :headers => ['Key', 'Value'],
-  :rows => category.attributes.keys.map {|a| [a, category.attributes[a]]}
+  :rows => order_content.attributes.keys.map {|a| [a, order_content.attributes[a]]}
 }} %>

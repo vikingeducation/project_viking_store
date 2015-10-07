@@ -16,6 +16,10 @@ class CreditCard < ActiveRecord::Base
     placed_orders_relation.to_a
   end
 
+  def last_four_digits
+    card_number[-4..-1]
+  end
+
 
   private
   def placed_orders_relation

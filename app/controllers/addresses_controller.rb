@@ -18,7 +18,7 @@ class AddressesController < ApplicationController
   def create
     if @address.update(address_params)
       flash[:success] = 'Address created'
-      redirect_to addresses_path
+      redirect_to address_path(@address)
     else
       flash.now[:error] = 'Address not created'
       render :new
@@ -28,7 +28,7 @@ class AddressesController < ApplicationController
   def update
     if @address.update(address_params)
       flash[:success] = 'Address updated'
-      redirect_to addresses_path
+      redirect_to address_path(@address)
     else
       flash.now[:error] = 'Address not updated'
       render :edit

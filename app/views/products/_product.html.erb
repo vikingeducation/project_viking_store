@@ -2,8 +2,3 @@
   :headers => ['Key', 'Value'],
   :rows => product.attributes.keys.map {|a| [a, product.attributes[a]]}
 }} %>
-
-<%= render :partial => 'shared/edit_delete_buttons', :locals => {
-  :edit_path => edit_product_path(product),
-  :delete_path => product_path(product)
-} %>

@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  resources :addresses
   resources :categories
   resources :products
+  resources :orders
+  resources :order_contents, :except => [:index, :show, :new, :edit]
   resources :users do
     resources :addresses
+    resources :orders
   end
-  resources :addresses
-  # resources :orders
 
   get '/analytics', :to => 'admin#analytics'
   root :to => 'admin#index'

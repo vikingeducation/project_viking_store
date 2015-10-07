@@ -1,31 +1,100 @@
 <%= render :partial => 'shared/errors', :locals => {:object => order} %>
 
-<%= form_for(order) do |f| %>
-<!--   <% if order.persisted? %>
+<%
+if User.exists?(params[:user_id])
+  user = User.find(params[:user_id])
+%>
+  <h2>
+    User:
+    <small>
+      <%= link_to(user.name, user_path(user)) %>
+    </small>
+  </h2>
+
+  <!-- Order Info -->
+  <%= form_for([order.user, order]) do |f| %>
+    <!-- <% if order.persisted? %>
+      <div class="form-group">
+        <%= f.label(:id) %>
+        <%= f.text_field(:id, :disable => true, :class => 'form-control') %>
+      </div>
+    <% end %> -->
+
+    <% if order.persisted? %>
+      <div class="form-group">
+        <div class="radio">
+          <label class="text-success">
+            <%= f.radio_button(:checkout_date, order.checkout_date || 0.days.ago) %>
+            Placed
+          </label>
+        </div>
+        <div class="radio">
+          <label class="text-danger">
+            <%= f.radio_button(:checkout_date, nil) %>
+            Unplaced
+          </label>
+        </div>
+      </div>
+    <% end %>
+    
     <div class="form-group">
-      <%= f.label(:id) %>
-      <%= f.text_field(:id, :disable => true, :class => 'form-control') %>
+      <%= f.label(:shipping_id) %>
+      <%= f.collection_select(:shipping_id, user.addresses, :id, :street_address, {}, {:class => 'form-control'}) %>
     </div>
-  <% end %> -->
-  <div class="form-group">
-    <%= f.label(:checkout_date) %>
-    <%= f.text_field(:checkout_date, :class => 'form-control') %>
-  </div>
-  <div class="form-group">
-    <%= f.label(:user_id) %>
-    <%= f.text_field(:user_id, :class => 'form-control') %>
-  </div>
-  <div class="form-group">
-    <%= f.label(:shipping_id) %>
-    <%= f.text_field(:shipping_id, :class => 'form-control') %>
-  </div>
-  <div class="form-group">
-    <%= f.label(:billing_id) %>
-    <%= f.text_field(:billing_id, :class => 'form-control') %>
-  </div>
-  <div class="form-group">
-    <%= f.label(:credit_card_id) %>
-    <%= f.text_field(:credit_card_id, :class => 'form-control') %>
-  </div>
-  <%= f.submit(:class => 'btn btn-primary') %>
+    <div class="form-group">
+      <%= f.label(:billing_id) %>
+      <%= f.collection_select(:billing_id, user.addresses, :id, :street_address, {}, {:class => 'form-control'}) %>
+    </div>
+    <div class="form-group">
+      <%= f.label(:credit_card_id) %>
+      <%= f.collection_select(:credit_card_id, user.credit_cards, :id, Proc.new{|cc| "(#{cc.brand}) ending with ...#{cc.last_four_digits}"}, {}, {:class => 'form-control'}) %>
+    </div>
+    <%= f.hidden_field(:user_id, :class => 'form-control') %>
+    <%= f.submit(:class => 'btn btn-primary', :value => order.persisted? ? 'Update Order Info' : 'Create Order') %>
+  <% end %>
+
+  <!-- Order Items -->
+  <h2>Order Items</h2>
+  <%= form_for([order.user, order]) do |f| %>
+    <%= f.fields_for(:items) do |ff| %>
+      <div class="form-group">
+        <%= ff.label(:product_id) %>
+        <%= ff.collection_select(:product_id, Product.order(:name), :id, Proc.new{|p| "#{p.sku} - #{p.name}"}, {}, {:class => 'form-control'}) %>
+        <%= ff.label(:quantity) %>
+        <%= ff.number_field(:quantity, :class => 'form-control') %>
+        <%= link_to('Delete Item', order_content_path(ff.object), :method => :delete, :class => 'text-danger', :data => {:confirm => 'Delete?'}) %>
+      </div>
+      <hr/>
+    <% end %>
+    <%= f.hidden_field(:user_id, :class => 'form-control') %>
+    <%= f.submit(:class => 'btn btn-primary', :value => 'Update Order Items') %>
+  <% end %>
+
+  <!-- Add Products -->
+  <h2>Add Products</h2>
+  <%= form_for([order.user, order]) do |f| %>
+    <%= f.fields_for(:items, order.items.build) do |ff| %>
+      <div class="form-group">
+        <%= ff.label(:product_id) %>
+        <%= ff.collection_select(:product_id, Product.order(:name), :id, Proc.new{|p| "#{p.sku} - #{p.name}"}, {:include_blank => true}, {:class => 'form-control'}) %>
+        <%= ff.label(:quantity) %>
+        <%= ff.number_field(:quantity, :class => 'form-control', :value => '') %>
+      </div>
+      <%= ff.hidden_field(:order_id, :value => order.id) %>
+      <hr/>
+    <% end %>
+    <%= f.hidden_field(:user_id, :class => 'form-control') %>
+    <%= f.submit(:class => 'btn btn-primary', :value => 'Add Products') %>
+  <% end %>
+<% else %>
+  <p class="text-danger">Cannot create order without an associated user</p>
 <% end %>
+
+
+
+
+
+
+
+
+

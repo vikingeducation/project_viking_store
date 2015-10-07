@@ -1,4 +1,6 @@
 <%= render :partial => 'shared/table', :locals => {:table => {
   :headers => ['Key', 'Value'],
-  :rows => category.attributes.keys.map {|a| [a, category.attributes[a]]}
+  :rows => credit_card.attributes.keys.map do |a|
+    [a, credit_card[a]]
+  end
 }} %>

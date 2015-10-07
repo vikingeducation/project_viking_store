@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
   def create
     if @category.update(category_params)
       flash[:success] = 'Category created'
-      redirect_to categories_path
+      redirect_to category_path(@category)
     else
       flash.now[:error] = 'Category not created'
       render :new
@@ -28,7 +28,7 @@ class CategoriesController < ApplicationController
   def update
     if @category.update(category_params)
       flash[:success] = 'Category updated'
-      redirect_to categories_path
+      redirect_to category_path(@category)
     else
       flash.now[:error] = 'Category not updated'
       render :edit

@@ -7,4 +7,50 @@
   </h1>
 </header>
 
+<h2>
+  Revenue:
+  <small class="text-success">
+    <%= number_to_currency(@order.revenue) %>
+  </small>
+</h2>
+
 <%= render @order %>
+
+<%= edit_delete = render :partial => 'shared/edit_delete_buttons', :locals => {
+  :resource => 'Order',
+  :edit_path => edit_user_order_path(@order.user, @order),
+  :delete_path => order_path(@order)
+} %>
+
+<h2>
+  Order Status:
+  <span class="<%= @order.checkout_date ? 'text-success' : 'text-danger' %>">
+    <%= @order.checkout_date ? 'Placed' : 'Unplaced' %>
+  </span>
+</h2>
+
+<h2>Shipping Address</h2>
+<%= render @order.shipping %>
+
+<h2>Billing Address</h2>
+<%= render @order.billing %>
+
+<h2>Credit Cards</h2>
+<% if @order.user.credit_cards.present? %>
+  <% @order.user.credit_cards.each do |credit_card| %>
+    <%= render credit_card %>
+  <% end %>
+<% else %>
+  <p>No credit cards</p>
+<% end %>
+
+<h2>Order Contents</h2>
+<% if @order.items.present? %>
+  <% @order.items.each do |item| %>
+    <%= render item %>
+  <% end %>
+<% else %>
+  <p>Order is empty</p>
+<% end %>
+
+<%= edit_delete %>

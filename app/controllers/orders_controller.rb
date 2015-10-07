@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   def create
     if @order.update(order_params)
       flash[:success] = 'Order created'
-      redirect_to orders_path
+      redirect_to edit_user_order_path(@order.user, @order)
     else
       flash.now[:error] = 'Order not created'
       render :new
@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
   def update
     if @order.update(order_params)
       flash[:success] = 'Order updated'
-      redirect_to orders_path
+      redirect_to edit_user_order_path(@order.user, @order)
     else
       flash.now[:error] = 'Order not updated'
       render :edit
@@ -56,7 +56,8 @@ class OrdersController < ApplicationController
       :user_id,
       :credit_card_id,
       :billing_id,
-      :shipping_id
+      :shipping_id,
+      :items_attributes => [:quantity, :order_id, :product_id, :id]
     )
   end
 end

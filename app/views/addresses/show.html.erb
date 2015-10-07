@@ -8,3 +8,9 @@
 </header>
 
 <%= render @address %>
+
+<%= render :partial => 'shared/edit_delete_buttons', :locals => {
+  :resource => 'Address',
+  :edit_path => edit_user_address_path(@address.user, @address),
+  :delete_path => address_path(@address)
+} %>

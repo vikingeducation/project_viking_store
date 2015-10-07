@@ -9,6 +9,12 @@
 
 <%= render @category %>
 
+<%= render :partial => 'shared/edit_delete_buttons', :locals => {
+  :resource => 'Category',
+  :edit_path => edit_category_path(@category),
+  :delete_path => category_path(@category)
+} %>
+
 <h2>Products</h2>
 <% if @category.products.present? %>
   <%= render :partial => 'shared/table', :locals => {:table => {

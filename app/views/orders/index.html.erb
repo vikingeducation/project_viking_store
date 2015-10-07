@@ -13,7 +13,7 @@
       end
     end
     row << link_to('show', order_path(order))
-    row << link_to('edit', edit_order_path(order))
+    row << link_to('edit', edit_user_order_path(order.user, order))
     row << link_to('delete', order_path(order), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
   end
 }} %>

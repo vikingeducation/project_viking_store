@@ -9,6 +9,12 @@
 
 <%= render @product %>
 
+<%= render :partial => 'shared/edit_delete_buttons', :locals => {
+  :resource => 'Product',
+  :edit_path => edit_product_path(@product),
+  :delete_path => product_path(@product)
+} %>
+
 <h2>Stats</h2>
 <%= render :partial => 'shared/table', :locals => {:table => {
   :headers => ['Key', 'Value'],

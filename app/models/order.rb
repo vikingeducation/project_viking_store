@@ -6,6 +6,10 @@ class Order < ActiveRecord::Base
   belongs_to :billing, :class_name => 'Address'
   belongs_to :credit_card
   has_many :categories, :through => :products
+
+  accepts_nested_attributes_for :items,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
   
   before_destroy :dissociate
 
