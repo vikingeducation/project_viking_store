@@ -19,7 +19,9 @@ if User.exists?(params[:user_id])
         :rows => [
           ['Order ID', order.id],
           ['User ID', user.id],
-          ['Checkout Date', order.checkout_date]
+          ['Checkout Date', order.checkout_date ? order.checkout_date : 'Unplaced'],
+          ['Number of Products', order.items.reduce(0) {|sum, i| i.quantity}],
+          ['Revenue', number_to_currency(order.revenue)]
         ]
       }} %>
     <% end %>
@@ -61,14 +63,16 @@ if User.exists?(params[:user_id])
   <h2>Order Items</h2>
   <%= form_for([order.user, order]) do |f| %>
     <%= f.fields_for(:items) do |ff| %>
-      <div class="form-group">
-        <%= ff.label(:product_id) %>
-        <%= ff.collection_select(:product_id, Product.order(:name), :id, Proc.new{|p| "#{p.sku} - #{p.name}"}, {}, {:class => 'form-control'}) %>
-        <%= ff.label(:quantity) %>
-        <%= ff.number_field(:quantity, :class => 'form-control') %>
-        <%= link_to('Delete Item', order_content_path(ff.object), :method => :delete, :class => 'text-danger', :data => {:confirm => 'Delete?'}) %>
-      </div>
-      <hr/>
+      <% if ff.object.persisted? %>
+        <div class="form-group">
+          <%= ff.label(:product_id) %>
+          <%= ff.collection_select(:product_id, Product.order(:name), :id, Proc.new{|p| "#{p.sku} - #{p.name}"}, {}, {:class => 'form-control'}) %>
+          <%= ff.label(:quantity) %>
+          <%= ff.number_field(:quantity, :class => 'form-control') %>
+          <%= link_to('Delete Item', order_content_path(ff.object), :method => :delete, :class => 'text-danger', :data => {:confirm => 'Delete?'}) %>
+        </div>
+        <hr/>
+      <% end %>
     <% end %>
     <%= f.hidden_field(:user_id, :class => 'form-control') %>
     <%= f.submit(:class => 'btn btn-primary', :value => 'Update Order Items') %>
@@ -77,16 +81,18 @@ if User.exists?(params[:user_id])
   <!-- Add Products -->
   <h2>Add Products</h2>
   <%= form_for([order.user, order]) do |f| %>
-    <%= f.fields_for(:items, order.items.build) do |ff| %>
-      <div class="form-group">
-        <%= ff.label(:product_id) %>
-        <%= ff.collection_select(:product_id, Product.order(:name), :id, Proc.new{|p| "#{p.sku} - #{p.name}"}, {:include_blank => true}, {:class => 'form-control'}) %>
-        <%= ff.label(:quantity) %>
-        <%= ff.number_field(:quantity, :class => 'form-control', :value => '') %>
-      </div>
-      <%= ff.hidden_field(:order_id, :value => order.id) %>
-      <hr/>
-    <% end %>
+
+      <%= f.fields_for(:items, order.items.build) do |ff| %>
+        <div class="form-group">
+          <%= ff.label(:product_id) %>
+          <%= ff.collection_select(:product_id, Product.order(:name), :id, Proc.new{|p| "#{p.sku} - #{p.name}"}, {:include_blank => true}, {:class => 'form-control'}) %>
+          <%= ff.label(:quantity) %>
+          <%= ff.number_field(:quantity, :class => 'form-control', :value => '') %>
+        </div>
+        <%= ff.hidden_field(:order_id, :value => order.id) %>
+        <hr/>
+      <% end %>
+
     <%= f.hidden_field(:user_id, :class => 'form-control') %>
     <%= f.submit(:class => 'btn btn-primary', :value => 'Add Products') %>
   <% end %>
