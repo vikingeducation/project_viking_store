@@ -3,12 +3,16 @@
   <%= link_to('+ New Category', new_category_path, :class => 'btn btn-primary btn-lg') %>
 </header>
 
-<%= render :partial => 'shared/table', :locals => {:table => {
-  :headers => @categories.first.attributes.keys + ['show', 'edit', 'delete'],
-  :rows => @categories.map do |category|
-    row = category.attributes.keys.map {|a| category.attributes[a]}
-    row << link_to('show', category_path(category))
-    row << link_to('edit', edit_category_path(category))
-    row << link_to('delete', category_path(category), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
-  end
-}} %>
+<% if @categories.empty? %>
+  <p>No categories found</p>
+<% else %>
+  <%= render :partial => 'shared/table', :locals => {:table => {
+    :headers => @categories.first.attributes.keys + ['show', 'edit', 'delete'],
+    :rows => @categories.map do |category|
+      row = category.attributes.keys.map {|a| category.attributes[a]}
+      row << link_to('show', category_path(category))
+      row << link_to('edit', edit_category_path(category))
+      row << link_to('delete', category_path(category), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+    end
+  }} %>
+<% end %>
