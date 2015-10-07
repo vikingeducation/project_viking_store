@@ -10,7 +10,6 @@
                     <th>Check_out(in cart when empty)</th>
                     <th>User ID</th>
                     <th>Show details</th>
-                    <th>Edit</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -18,10 +17,18 @@
             <%@orders.each do |order|%>
                 <tr>
                     <td><%= order.checkout_date%></td>
-                    <td><%= order.user_id%></td>
-                    <td>for button to show</td>
-                    <td>for button to edit</td>
-                    <td>for button to delete</td>
+                    <td><%= order.user.first_name%> <%= order.user.last_name%></td>
+                    <td>
+                    <%= link_to "Edit and Details", order_path(order),
+                         :class => "btn btn-default" %>
+                    </td>
+                    <td>
+                    <%= link_to "Delete", order,
+                        :class => "btn btn-danger",
+                        :data => {:confirm => 'Are you sure?',
+                        :method => :delete}
+                          %>
+                    </td>
                 </tr>
              <%end%>
              </tbody>

@@ -1,5 +1,25 @@
 class User < ActiveRecord::Base
 
+  has_many :addresses, dependent: :delete_all
+  has_many :orders, dependent: :delete_all
+  has_many :credit_cards, dependent: :delete_all
+  has_many :products, through: :order_contents
+
+  belongs_to :billing_address,
+              class_name: "Address",
+              :foreign_key => :billing_id
+
+  belongs_to :shipping_address,
+              class_name: "Address",
+              :foreign_key => :shipping_id
+
+  validates_format_of :email, :with => /@/
+  validates :email, presence: true
+
+  validates :first_name, :last_name,
+                  length: { maximum: 250 },
+                  presence: true
+
   def self.number
     return User.all.count
   end
@@ -87,7 +107,8 @@ class User < ActiveRecord::Base
       JOIN     products
       ON       order_contents.product_id = products.id
       GROUP BY Concat(users.first_name,' ', users.last_name)
-      ORDER BY (Sum(order_contents.quantity * products.price)/Count(orders)) DESC limit(1)
+      ORDER BY (Sum(order_contents.quantity * products.price)/Count(orders)) 
+      DESC limit(1)
       ")
 
   end

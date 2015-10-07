@@ -132,7 +132,7 @@
             :quote => "week data",
             :orders_num => Order.number_in(7),
             :revenue_num => Order.total(7),
-            :avg_num => (Order.total(7)/Order.number_in(7)).round,
+            :avg_num => (Order.total(30)/Order.number_in(30)).round,
             :largest_num => Order.max(7).round
         }%>
 </div>

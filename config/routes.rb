@@ -9,10 +9,10 @@ Rails.application.routes.draw do
   resources :edits, only: :index
   resources :categories
   resources :products
-  resources :users, only: [:index, :show, :create]
-  resources :addresses, only: [:index, :show, :create]
-  resources :orders, only: [:index, :show, :create]
-
+  resources :users
+  resources :addresses
+  resources :orders
+  resources :order_contents, only: :edit, :update, :new, :create
   root 'dashboard#show'
 
 

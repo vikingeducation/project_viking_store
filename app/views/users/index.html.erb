@@ -4,11 +4,17 @@
         <%= render partial: "/edits/editbar"%>
     </div>
     <div class = 'col-md-9'>
+    <%= link_to "Create A New One", new_user_path,
+                         :class => "btn btn-primary btn-lg"
+      %>
+      <hr>
       <table class="table">
             <thead>
                 <tr>
-                    <th>E-mail</th>
-                    <th>Billing_id</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Join in</th>
                     <th>Show details</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -17,11 +23,28 @@
             <tbody>
             <%@users.each do |user|%>
                 <tr>
-                    <td><%= user.email%></td>
-                    <td><%= user.billing_id%></td>
-                    <td>for button to show</td>
-                    <td>for button to edit</td>
-                    <td>for button to delete</td>
+                    <td><%= user.id%></td>
+                    <td><%= user.first_name%> <%= user.last_name%></td>
+                    <td>
+                    <%= user.billing_address.city.name if (user.billing_address != nil)
+                    %>
+                    </td>
+                    <td><%= user.created_at%></td>
+                    <td>
+                        <%= link_to "Details", user_path(user),
+                         :class => "btn btn-default" %>
+                    </td>
+                    <td>
+                        <%= link_to "Edit", edit_user_path(user),
+                         :class => "btn btn-default" %>
+                    </td>
+                    <td>
+                        <%= link_to "Delete", user,
+                         :class => "btn btn-danger",
+                         :data => {:confirm => 'Are you sure?',
+                          :method => :delete}
+                          %>
+                    </td>
                 </tr>
              <%end%>
              </tbody>

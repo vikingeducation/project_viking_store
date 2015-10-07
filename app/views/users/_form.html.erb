@@ -1,0 +1,31 @@
+<%= form_for user do |t|%>
+    <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>first name</td>
+                    <td><%= t.text_field :first_name%></td>
+                </tr>
+
+                <tr>
+                    <td>last_name</td>
+                    <td><%= t.text_field :last_name%></td>
+                </tr>
+
+                <tr>
+                    <td>email</td>
+                    <td><%= t.text_field :email%></td>
+                </tr>
+
+             </tbody>
+    </table>
+    <%= t.submit "Submit", :class => "btn btn-info" %>
+<%end%>

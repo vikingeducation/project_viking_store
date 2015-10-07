@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+    @cate = choices
   end
 
   def update
@@ -23,6 +24,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @cate = choices
   end
 
   def create
@@ -53,4 +55,16 @@ private
       :updated_at,
       )
   end
+
+  def choices
+    sample = []
+    num = 1
+    Category.all.each do |cate|
+      sample << ["#{cate.name} ( #{cate.id})", cate.id]
+      num += 1
+    end
+    return sample
+  end
+
+
 end

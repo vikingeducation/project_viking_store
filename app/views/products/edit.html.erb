@@ -34,7 +34,12 @@
 
                         <tr>
                             <td>category_id</td>
-                            <td><%= t.text_field :category_id%></td>
+                            <td>
+                                <div class="form-group">
+                                  <%= t.label :select_category %>
+                                  <%= t.select(:category_id, options_for_select(@cate), {}, {class: "form-control"}) %>
+                                </div>
+                            </td>
                         </tr>
 
                      </tbody>
