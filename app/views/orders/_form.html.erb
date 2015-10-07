@@ -55,47 +55,20 @@ if User.exists?(params[:user_id])
       <%= f.label(:credit_card_id) %>
       <%= f.collection_select(:credit_card_id, user.credit_cards, :id, Proc.new{|cc| "(#{cc.brand}) ending with ...#{cc.last_four_digits}"}, {}, {:class => 'form-control'}) %>
     </div>
-    <%= f.hidden_field(:user_id, :class => 'form-control') %>
+    <%= f.hidden_field(:user_id, :class => 'form-control', :value => user.id) %>
     <%= f.submit(:class => 'btn btn-primary', :value => order.persisted? ? 'Update Order Info' : 'Create Order') %>
   <% end %>
 
-  <!-- Order Items -->
-  <h2>Order Items</h2>
-  <%= form_for([order.user, order]) do |f| %>
-    <%= f.fields_for(:items) do |ff| %>
-      <% if ff.object.persisted? %>
-        <div class="form-group">
-          <%= ff.label(:product_id) %>
-          <%= ff.collection_select(:product_id, Product.order(:name), :id, Proc.new{|p| "#{p.sku} - #{p.name}"}, {}, {:class => 'form-control'}) %>
-          <%= ff.label(:quantity) %>
-          <%= ff.number_field(:quantity, :class => 'form-control') %>
-          <%= link_to('Delete Item', order_content_path(ff.object), :method => :delete, :class => 'text-danger', :data => {:confirm => 'Delete?'}) %>
-        </div>
-        <hr/>
-      <% end %>
-    <% end %>
-    <%= f.hidden_field(:user_id, :class => 'form-control') %>
-    <%= f.submit(:class => 'btn btn-primary', :value => 'Update Order Items') %>
+  <% if @order.persisted? %>
+    <!-- Order Items -->
+    <h2>Order Items</h2>
+    <%= render :partial => 'order_contents/edit_order_contents', :locals => {:order => order} %>
+
+    <!-- Add Products -->
+    <h2>Add Products</h2>
+    <%= render :partial => 'order_contents/add_products', :locals => {:order => order} %>
   <% end %>
 
-  <!-- Add Products -->
-  <h2>Add Products</h2>
-  <%= form_for([order.user, order]) do |f| %>
-
-      <%= f.fields_for(:items, order.items.build) do |ff| %>
-        <div class="form-group">
-          <%= ff.label(:product_id) %>
-          <%= ff.collection_select(:product_id, Product.order(:name), :id, Proc.new{|p| "#{p.sku} - #{p.name}"}, {:include_blank => true}, {:class => 'form-control'}) %>
-          <%= ff.label(:quantity) %>
-          <%= ff.number_field(:quantity, :class => 'form-control', :value => '') %>
-        </div>
-        <%= ff.hidden_field(:order_id, :value => order.id) %>
-        <hr/>
-      <% end %>
-
-    <%= f.hidden_field(:user_id, :class => 'form-control') %>
-    <%= f.submit(:class => 'btn btn-primary', :value => 'Add Products') %>
-  <% end %>
 <% else %>
   <p class="text-danger">Cannot create order without an associated user</p>
 <% end %>

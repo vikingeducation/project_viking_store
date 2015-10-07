@@ -1,0 +1,13 @@
+<%= form_tag(order_contents_path) do %>
+  <%= render :partial => 'shared/table', :locals => {:table => {
+    :headers => ['Product', 'Quantity'],
+    :rows => (0..4).to_a.map do |i|
+      [
+        collection_select("order_content[#{i}]", :product_id, Product.all, :id, Proc.new{|p| "#{p.sku} - #{p.name}"}, {}, {:class => 'form-control'}),
+        number_field_tag("order_content[#{i}][quantity]", nil, :class => 'form-control')
+      ]
+    end
+  }} %>
+  <%= hidden_field_tag('order_id', order.id) %>
+  <%= submit_tag('Add Products', :class => 'btn btn-primary') %>
+<% end %>

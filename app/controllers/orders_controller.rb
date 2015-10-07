@@ -56,8 +56,7 @@ class OrdersController < ApplicationController
       :user_id,
       :credit_card_id,
       :billing_id,
-      :shipping_id,
-      :items_attributes => [:quantity, :order_id, :product_id, :id]
+      :shipping_id
     )
   end
 end

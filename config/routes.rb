@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :products
   resources :orders
-  resources :order_contents, :only => [:destroy]
+  resources :order_contents, :only => [:create, :update, :destroy]
   resources :users do
     resources :addresses
     resources :orders
