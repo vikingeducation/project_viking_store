@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_order, :except => [:index]
 
   def index
-    @orders = Order.all
+    @orders = params[:user_id] ? Order.where('user_id = ?', params[:user_id]) : Order.all
   end
 
   def show

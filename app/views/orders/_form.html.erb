@@ -13,12 +13,16 @@ if User.exists?(params[:user_id])
 
   <!-- Order Info -->
   <%= form_for([order.user, order]) do |f| %>
-    <!-- <% if order.persisted? %>
-      <div class="form-group">
-        <%= f.label(:id) %>
-        <%= f.text_field(:id, :disable => true, :class => 'form-control') %>
-      </div>
-    <% end %> -->
+    <% if order.persisted? %>
+      <%= render :partial => 'shared/table', :locals => {:table => {
+        :headers => ['Key', 'Value'],
+        :rows => [
+          ['Order ID', order.id],
+          ['User ID', user.id],
+          ['Checkout Date', order.checkout_date]
+        ]
+      }} %>
+    <% end %>
 
     <% if order.persisted? %>
       <div class="form-group">

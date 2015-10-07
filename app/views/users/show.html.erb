@@ -30,18 +30,9 @@
 
 <h2>Orders</h2>
 <% if @user.orders.present? %>
-  <%= render :partial => 'shared/table', :locals => {:table => {
-    :headers => @user.orders.first.attributes.keys + ['show', 'edit', 'delete'],
-    :rows => @user.orders.map do |order|
-      row = order.attributes.keys.map do |a|
-        order[a]
-      end
-
-      row << link_to('show', user_order_path(@user, order))
-      row << link_to('edit', edit_user_order_path(@user, order))
-      row << link_to('delete', user_order_path(@user, order), :method => :delete, :class => 'text-danger', :data => {:confirm => 'Delete?'})
-    end
-  }} %>
+  <div class="btn-group">
+    <%= link_to('Orders', user_orders_path(@user), :class => 'btn btn-primary') %>
+  </div>
 <% else %>
   <p>No orders</p>
 <% end %>
