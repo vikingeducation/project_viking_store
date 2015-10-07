@@ -6,7 +6,8 @@
         <%= f.label :id, 'Category ID:' %>
       </div>
       <div class='col-xs-9'>
-        <%= f.text_field :id, value: '--', disabled: true %>
+        <% category.id = 'N/A' if category.id.nil? %>
+        <%= f.text_field :id, disabled: true %>
       </div>
     </div>
   </div>

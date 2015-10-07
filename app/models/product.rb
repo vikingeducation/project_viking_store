@@ -10,4 +10,16 @@ class Product < ActiveRecord::Base
 
   end
   
+  def self.generate_new_sku
+
+    new_sku = (Faker::Code.ean).to_i
+
+  end
+
+  def self.list_all_skus
+
+    Product.select(:sku).order(:sku)
+
+  end
+
 end

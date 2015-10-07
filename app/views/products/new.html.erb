@@ -1,0 +1,17 @@
+<section id='product-new'>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+      <h1 class='text-center'>New Product</h1>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <%= render :partial => 'product_form', :locals => { :product => @product, :button_label => 'Create', :available_categories => @available_categories } %>
+
+    </div>
+  </div>
+
+</section>

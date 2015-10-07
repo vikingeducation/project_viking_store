@@ -7,11 +7,9 @@
     <%= csrf_meta_tags %>
   </head>
 
-
   <body>
 
     <div class='container'>
-
 
       <div class='row'>
         <div class='col-xs-12'>
@@ -20,7 +18,6 @@
           </header>
         </div>
       </div>
-
 
       <div class='row'>
         <div class='col-xs-3'>
@@ -36,11 +33,11 @@
                   <li class='text-center'><%= link_to 'Users', '#' %></li>
                   <li class='text-center'><%= link_to 'Addresses', '#' %></li>
                   <li class='text-center'><%= link_to 'Orders', '#' %></li>
-                  <li class='text-center'><%= link_to 'Products', '#' %></li>
+                  <li class='text-center'><%= link_to 'Products', products_path %></li>
                   <li class='text-center'><%= link_to 'Categories', categories_path %></li>
 
                   <div class='dashboard-link'>
-                    <li class='text-center'><%= link_to 'Analytics Dashboard', '#' %></li>
+                    <li class='text-center'><%= link_to 'Analytics Dashboard', dashboard_path %></li>
                   </div>
 
                 </ul>
@@ -48,23 +45,19 @@
               </div>
             </div>
 
-
-
           </nav>
 
-        </div> <!-- column -->
-
+        </div>
 
         <div class='col-xs-9'>
 
           <%= bootstrap_flash %>
           <%= yield %>
 
-        </div> <!-- column -->
+        </div>
 
-
-      </div> <!-- row -->
-    </div> <!-- container -->
+      </div>
+    </div>
 
   </body>
 

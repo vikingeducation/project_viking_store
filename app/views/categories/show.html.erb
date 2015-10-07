@@ -33,13 +33,13 @@
 
       <div class='row'>
         <div class='col-xs-12'>
-          <%= link_to 'Edit Category', edit_categroy_path(@category.id) %>
+          <%= link_to 'Edit Category', edit_category_path(@category.id) %>
         </div>
       </div>
 
       <div class='row'>
         <div class='col-xs-12'>
-          <%= link_to 'Delete Category', category_path(@category.id) :method => :delete, :data => { :confirm => 'Delete category?' } %>
+          <%= link_to 'Delete Category', category_path(@category.id), :method => :delete, :data => { :confirm => 'Delete category?' } %>
         </div>
       </div>
 

@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   get 'dashboard' => 'dashboard#index'
 
   resources :categories
+  resources :products
 
 end

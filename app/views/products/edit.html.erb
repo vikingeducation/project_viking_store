@@ -1,0 +1,15 @@
+<section id='product-edit'>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+      <h1 class='text-center'><%= "Edit Product #{@product.id}" %></h1>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+      <%= render :partial => 'product_form', :locals => { :product => @product, :button_label => 'Update' } %>
+    </div>
+  </div>
+
+</section>
