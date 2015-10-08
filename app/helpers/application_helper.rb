@@ -6,6 +6,10 @@ module ApplicationHelper
     end
   end
 
+  def site_name
+    "Viking Store | Admin Dashboard"
+  end
+
   def pagination_limit
     100
   end

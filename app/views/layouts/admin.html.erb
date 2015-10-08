@@ -4,7 +4,9 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   
-    <title>Viking Store Admin</title>
+    <title><%= site_name %></title>
+
+    <%= render :partial => 'shared/meta' %>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
@@ -17,7 +19,7 @@
     
     <main id="main" class="container">
       <header class="page-header">
-        <h1>Viking Store | Admin Dashboard</h1>
+        <h1><%= site_name %></h1>
       </header>
       <%= render :partial => 'shared/flash' %>
       <div class="row">
