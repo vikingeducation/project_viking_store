@@ -7,16 +7,18 @@ if User.exists?(params[:user_id])
   <h2>
     User:
     <small>
-      <%= user.name %>
+      <%= link_to(user.name, user_path(user)) %>
     </small>
   </h2>
+  <p>
+      User ID: <%= user.id %>
+  </p>
   <%= form_for(address, :url => url_for([user, address])) do |f| %>
-  <!--   <% if address.persisted? %>
-      <div class="form-group">
-        <%= f.label(:id) %>
-        <%= f.text_field(:id, :disable => true, :class => 'form-control') %>
-      </div>
-    <% end %> -->
+    <% if address.persisted? %>
+      <p>
+        Address ID: <%= address.id %>
+      </p>
+    <% end %>
     <div class="form-group">
       <%= f.label(:street_address) %>
       <%= f.text_field(:street_address, :class => 'form-control') %>

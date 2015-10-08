@@ -53,7 +53,7 @@ if User.exists?(params[:user_id])
     </div>
     <div class="form-group">
       <%= f.label(:credit_card_id) %>
-      <%= f.collection_select(:credit_card_id, user.credit_cards, :id, Proc.new{|cc| "(#{cc.brand}) ending with ...#{cc.last_four_digits}"}, {}, {:class => 'form-control'}) %>
+      <%= f.collection_select(:credit_card_id, user.credit_cards, :id, Proc.new{|cc| cc.name}, {}, {:class => 'form-control'}) %>
     </div>
     <%= f.hidden_field(:user_id, :class => 'form-control', :value => user.id) %>
     <%= f.submit(:class => 'btn btn-primary', :value => order.persisted? ? 'Update Order Info' : 'Create Order') %>

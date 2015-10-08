@@ -7,15 +7,18 @@
   <p>No users found</p>
 <% else %>
   <%= render :partial => 'shared/table', :locals => {:table => {
-    :headers => @users.first.attributes.keys + ['show', 'edit', 'delete'],
+    :headers => ['ID', 'Name','Shipping Address', 'Orders', 'Email', 'Show', 'Edit', 'Delete'],
     :rows => @users.map do |user|
-      row = user.attributes.keys.map do |a|
-        user.attributes[a]
-      end
-      # row << link_to('orders', '#')
-      row << link_to('show', user_path(user))
-      row << link_to('edit', edit_user_path(user))
-      row << link_to('delete', user_path(user), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+      [
+        user.id,
+        user.name,
+        user.shipping ? link_to(user.shipping.full_address, address_path(user.shipping)) : '-',
+        user.orders.length > 0 ? link_to(user.orders.length, user_orders_path(user)) : '-',
+        user.email,
+        link_to('Show', user_path(user)),
+        link_to('Edit', edit_user_path(user)),
+        link_to('Delete', user_path(user), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+      ]
     end
   }} %>
 <% end %>

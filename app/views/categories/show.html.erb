@@ -18,10 +18,13 @@
 <h2>Products</h2>
 <% if @category.products.present? %>
   <%= render :partial => 'shared/table', :locals => {:table => {
-    :headers => @category.products.first.attributes.keys + ['show'],
-    :rows => @category.products.map do |category|
-      row = category.attributes.keys.map {|a| category.attributes[a]}
-      row << link_to('show', product_path(category))
+    :headers => ['ID', 'Name', 'Description'],
+    :rows => @category.products.map do |product|
+      [
+        product.id,
+        link_to(product.name, product_path(product)),
+        product.description
+      ]
     end
   }} %>
 <% else %>

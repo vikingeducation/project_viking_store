@@ -1,11 +1,14 @@
 <%= render :partial => 'shared/table', :locals => {:table => {
   :headers => ['Key', 'Value'],
-  :rows => address.attributes.keys.map do |a|
-    if a == 'user_id'
-      value = address.user ? link_to('user', user_path(address.user)) : 'No user'
-    else
-      value = address.attributes[a]
-    end
-    [a, value]
-  end
+  :rows => [
+    ['ID', address.id],
+    ['Street Address', address.street_address],
+    ['Secondary Address', address.secondary_address ? address.secondary_address : '-'],
+    ['Zip Code', address.zip_code],
+    ['City', address.city.name],
+    ['State', address.state.name],
+    ['User', address.user ? link_to(address.user.name, user_path(address.user)) : '-'],
+    ['Created At', address.created_at.to_formatted_s(:long)],
+    ['Updated At', address.updated_at.to_formatted_s(:long)]
+  ]
 }} %>

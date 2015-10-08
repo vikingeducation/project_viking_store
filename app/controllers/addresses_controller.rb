@@ -3,7 +3,14 @@ class AddressesController < ApplicationController
   before_action :set_address, :except => [:index]
 
   def index
-    @addresses = params[:user_id] ? Address.where('user_id = ?', params[:user_id]) : Address.all
+    if params[:user_id]
+      if User.exists?(params[:user_id])
+        @addresses = Address.where('user_id = ?', params[:user_id])
+      else
+        flash.now[:error] = 'Invalid user'
+      end
+    end
+    @addresses = Address.all unless @addresses
   end
 
   def show
@@ -18,7 +25,7 @@ class AddressesController < ApplicationController
   def create
     if @address.update(address_params)
       flash[:success] = 'Address created'
-      redirect_to address_path(@address)
+      redirect_to user_addresses_path(@address.user)
     else
       flash.now[:error] = 'Address not created'
       render :new

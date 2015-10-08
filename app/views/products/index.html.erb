@@ -7,18 +7,18 @@
   <p>No products found</p>
 <% else %>
   <%= render :partial => 'shared/table', :locals => {:table => {
-    :headers => @products.first.attributes.keys + ['show', 'edit', 'delete'],
+    :headers => ['ID', 'Category', 'Name', 'SKU', 'Price', 'Show', 'Edit', 'Delete'],
     :rows => @products.map do |product|
-      row = product.attributes.keys.map do |a|
-        if a == 'category_id'
-          product.category ? link_to(product.category.name, category_path(product.category)) : 'None'
-        else
-          product.attributes[a]
-        end
-      end
-      row << link_to('show', product_path(product))
-      row << link_to('edit', edit_product_path(product))
-      row << link_to('delete', product_path(product), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+      [
+        product.id,
+        link_to(product.category.name, category_path(product.category)),
+        product.name,
+        product.sku,
+        number_to_currency(product.price),
+        link_to('Show', product_path(product)),
+        link_to('Edit', edit_product_path(product)),
+        link_to('Delete', product_path(product), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})  
+      ]
     end
   }} %>
 <% end %>

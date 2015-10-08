@@ -20,6 +20,10 @@ class CreditCard < ActiveRecord::Base
     card_number[-4..-1]
   end
 
+  def name
+    "(#{brand}) ending with ...#{last_four_digits}"
+  end
+
 
   private
   def placed_orders_relation

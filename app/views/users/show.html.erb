@@ -17,13 +17,8 @@
 
 <h2>Cart</h2>
 <% if @user.cart.persisted? %>
-  <%= render :partial => 'shared/table', :locals => {:table => {
-    :headers => ['Key', 'Value'],
-    :rows => @user.cart.attributes.keys.map do |a|
-      [a, @user.cart[a]]
-    end
-  }} %>
-  <%= link_to('Show Cart', '#', :class => 'btn btn-primary') %>
+  <%= render @user.cart %>
+  <%= link_to('Show Cart', order_path(@user.cart), :class => 'btn btn-primary') %>
 <% else %>
   <p>No cart</p>
 <% end %>

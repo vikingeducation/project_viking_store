@@ -11,18 +11,18 @@
   <p>No addresses found</p>
 <% else %>
   <%= render :partial => 'shared/table', :locals => {:table => {
-    :headers => @addresses.first.attributes.keys + ['show', 'edit', 'delete'],
+    :headers => ['ID', 'User', 'Street Address', 'City', 'State', 'Show', 'Edit', 'Delete'],
     :rows => @addresses.map do |address|
-      row = address.attributes.keys.map do |a|
-        if a == 'user_id'
-          address.user ? link_to('user', user_path(address.user)) : 'No user'
-        else
-          address.attributes[a]
-        end
-      end
-      row << link_to('show', address_path(address))
-      row << link_to('edit', edit_user_address_path(address.user, address))
-      row << link_to('delete', address_path(address), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+      [
+        address.id,
+        address.user ? link_to(address.user.name, user_path(address.user)) : '-',
+        address.street_address,
+        address.city.name,
+        address.state.name,
+        link_to('Show', address_path(address)),
+        link_to('Edit', edit_user_address_path(address.user, address)),
+        link_to('Delete', address_path(address), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+      ]
     end
   }} %>
 <% end %>

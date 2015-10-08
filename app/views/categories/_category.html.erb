@@ -1,4 +1,10 @@
 <%= render :partial => 'shared/table', :locals => {:table => {
   :headers => ['Key', 'Value'],
-  :rows => category.attributes.keys.map {|a| [a, category.attributes[a]]}
+  :rows => [
+    ['ID', category.id],
+    ['Name', category.name],
+    ['Description', category.description],
+    ['Created At', category.created_at.to_formatted_s(:long)],
+    ['Updated At', category.updated_at.to_formatted_s(:long)]
+  ]
 }} %>

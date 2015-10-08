@@ -1,12 +1,11 @@
 <%= render :partial => 'shared/errors', :locals => {:object => product} %>
 
 <%= form_for(product) do |f| %>
-<!--   <% if product.persisted? %>
-    <div class="form-group">
-      <%= f.label(:id) %>
-      <%= f.text_field(:id, :disabled => true, :class => 'form-control') %>
-    </div>
-  <% end %> -->
+  <% if product.persisted? %>
+    <p>
+      Product ID: <%= product.id %>
+    </p>
+  <% end %>
   <div class="form-group">
     <%= f.label(:name) %>
     <%= f.text_field(:name, :class => 'form-control') %>

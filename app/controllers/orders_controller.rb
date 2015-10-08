@@ -3,7 +3,14 @@ class OrdersController < ApplicationController
   before_action :set_order, :except => [:index]
 
   def index
-    @orders = params[:user_id] ? Order.where('user_id = ?', params[:user_id]) : Order.all
+    if params[:user_id]
+      if User.exists?(params[:user_id])
+        @orders = Order.where('user_id = ?', params[:user_id])
+      else
+        flash.now[:error] = 'Invalid user'
+      end
+    end
+    @orders = Order.all unless @orders
   end
 
   def show

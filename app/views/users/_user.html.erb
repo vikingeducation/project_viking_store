@@ -1,4 +1,13 @@
 <%= render :partial => 'shared/table', :locals => {:table => {
   :headers => ['Key', 'Value'],
-  :rows => user.attributes.keys.map {|a| [a, user.attributes[a]]}
+  :rows => [
+    ['ID', user.id],
+    ['First Name', user.first_name],
+    ['Last Name', user.last_name],
+    ['Email', user.email],
+    ['Billing Address', user.billing ? link_to(user.billing.full_address, address_path(user.billing)) : '-'],
+    ['Shipping Address', user.shipping ? link_to(user.shipping.full_address, address_path(user.shipping)) : '-'],
+    ['Created At', user.created_at.to_formatted_s(:long)],
+    ['Updated At', user.updated_at.to_formatted_s(:long)]
+  ]
 }} %>

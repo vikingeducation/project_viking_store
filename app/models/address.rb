@@ -48,6 +48,10 @@ class Address < ActiveRecord::Base
     carts_relation.to_a
   end
 
+  def full_address
+    "#{street_address} - #{city.name}, #{state.name}"
+  end
+
 
   private
   def orders_relation
