@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
 
   protected
   def assert_id
-    redirect_to '/404.html' unless params[:controller].singularize.classify.constantize.exists?(params[:id])
+    unless params[:controller].singularize.classify.constantize.exists?(params[:id])
+      flash[:error] = "#{params[:controller].singularize.titleize} not found"
+      redirect_to url_for(
+        :controller => params[:controller],
+        :action => 'index'
+      )
+    end
   end
 end
