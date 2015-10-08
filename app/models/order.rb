@@ -16,8 +16,8 @@ class Order < ActiveRecord::Base
   validates :billing,
             :presence => true
 
-  validates :credit_card,
-            :presence => true
+  # validates :credit_card,
+  #           :presence => true
 
   before_save :one_cart_per_user
   before_destroy :dissociate

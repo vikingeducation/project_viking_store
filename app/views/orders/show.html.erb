@@ -30,10 +30,18 @@
 </h2>
 
 <h2>Shipping Address</h2>
-<%= render @order.shipping %>
+<% if @order.shipping %>
+  <%= render @order.shipping %>
+<% else %>
+  <p>No shipping address</p>
+<% end %>
 
 <h2>Billing Address</h2>
-<%= render @order.billing %>
+<% if @order.shipping %>
+  <%= render @order.billing %>
+<% else %>
+  <p>No billing address</p>
+<% end %>
 
 <h2>Credit Cards</h2>
 <% if @order.user.credit_cards.present? %>

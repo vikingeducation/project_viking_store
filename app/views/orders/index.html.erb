@@ -28,7 +28,7 @@
       [
         order.id,
         link_to(order.user.name, user_path(order.user)),
-        link_to(order.shipping.full_address, address_path(order.shipping)),
+        order.shipping ? link_to(order.shipping.full_address, address_path(order.shipping)) : '-',
         number_to_currency(order.revenue),
         %Q[<span class="#{order.checkout_date ? 'text-success' : 'text-danger'}">#{order.checkout_date ? 'Placed' : 'Unplaced'}</span>].html_safe,
         order.checkout_date ? order.checkout_date.to_formatted_s(:long) : '-',

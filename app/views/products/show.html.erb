@@ -22,6 +22,7 @@
     ['Orders', @product.orders.length],
     ['Shopping Carts', @product.carts.length],
     ['Placed Orders', @product.placed_orders.length],
-    ['Sold Units', @product.units_sold]
+    ['Sold Units', @product.units_sold],
+    ['Revenue', number_to_currency(@product.units_sold * @product.price)]
   ]
 }} %>
