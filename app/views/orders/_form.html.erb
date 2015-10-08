@@ -11,8 +11,14 @@ if User.exists?(params[:user_id])
     </small>
   </h2>
 
+  <% if order.new_record? %>
+    <div class="alert alert-info">
+      Create the order to enable adding and removing items
+    </div>
+  <% end %>
+
   <!-- Order Info -->
-  <%= form_for([order.user, order]) do |f| %>
+  <%= form_for(order, :url => url_for([user, order])) do |f| %>
     <% if order.persisted? %>
       <%= render :partial => 'shared/table', :locals => {:table => {
         :headers => ['Key', 'Value'],
@@ -26,22 +32,20 @@ if User.exists?(params[:user_id])
       }} %>
     <% end %>
 
-    <% if order.persisted? %>
-      <div class="form-group">
-        <div class="radio">
-          <label class="text-success">
-            <%= f.radio_button(:checkout_date, order.checkout_date || 0.days.ago) %>
-            Placed
-          </label>
-        </div>
-        <div class="radio">
-          <label class="text-danger">
-            <%= f.radio_button(:checkout_date, nil) %>
-            Unplaced
-          </label>
-        </div>
+    <div class="form-group">
+      <div class="radio">
+        <label class="text-success">
+          <%= f.radio_button(:checkout_date, order.checkout_date || 0.days.ago) %>
+          Placed
+        </label>
       </div>
-    <% end %>
+      <div class="radio">
+        <label class="text-danger">
+          <%= f.radio_button(:checkout_date, nil) %>
+          Unplaced
+        </label>
+      </div>
+    </div>
     
     <div class="form-group">
       <%= f.label(:shipping_id) %>

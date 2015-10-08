@@ -16,7 +16,10 @@ class OrderContentsController < ApplicationController
     if successes.any? {|i| i == true}
       flash[:success] = 'OrderContents created'
     else
-      flash[:error] = 'OrderContents not created'
+      flash[:error] = [
+        'OrderContents not created',
+        @order_content.errors.full_messages.join(', ')
+      ].join(': ')
     end
     redirect_to edit_user_order_path(@order.user, @order)
   end
@@ -26,14 +29,17 @@ class OrderContentsController < ApplicationController
     OrderContent.transaction do
       order_content_params_array.each do |attributes|
         @order_content = OrderContent.find(attributes[:id])
-        success = @order_content.update(attributes)
+        success = attributes[:quantity].to_i > 0 ? @order_content.update(attributes) : @order_content.destroy
         break unless success
       end
     end
     if success
       flash[:success] = 'OrderContents updated'
     else
-      flash[:error] = 'OrderContents not updated'
+      flash[:error] = [
+        'OrderContents not created',
+        @order_content.errors.full_messages.join(', ')
+      ].join(': ')
     end
     redirect_to edit_user_order_path(@order.user, @order)
   end
@@ -69,13 +75,19 @@ class OrderContentsController < ApplicationController
   end
 
   def order_content_params_array
-    order_content_params[:order_content].map do |key, value|
-      {
-        :id => value['id'],
-        :quantity => value['quantity'],
-        :product_id => value['product_id'],
-        :order_id => params['order_id']
-      }
+    products = {}
+    order_content_params[:order_content].each do |key, value|
+      if products[value['product_id']]
+        products[value['product_id']][:quantity] += value['quantity'].to_i
+      else
+        products[value['product_id']] = {
+          :id => value['id'],
+          :quantity => value['quantity'].to_i,
+          :product_id => value['product_id'],
+          :order_id => params['order_id']
+        }
+      end
     end
+    products.map {|key, value| value}
   end
 end

@@ -6,7 +6,20 @@ class Order < ActiveRecord::Base
   belongs_to :billing, :class_name => 'Address'
   belongs_to :credit_card
   has_many :categories, :through => :products
-  
+
+  validates :user,
+            :presence => true
+
+  validates :shipping,
+            :presence => true
+
+  validates :billing,
+            :presence => true
+
+  validates :credit_card,
+            :presence => true
+
+  before_save :one_cart_per_user
   before_destroy :dissociate
 
   SUM_QUANTITY_PRICE = 'SUM(order_contents.quantity * products.price) AS amount'
@@ -14,6 +27,13 @@ class Order < ActiveRecord::Base
   # --------------------------------
   # Public Instance Methods
   # --------------------------------
+
+  def one_cart_per_user
+    if user.has_cart? && checkout_date == nil && user.cart.id != id
+      errors.add(:base, 'A user can only have one shopping cart')
+      false
+    end
+  end
 
   def dissociate
     if checkout_date

@@ -1,8 +1,8 @@
 <header class="page-header">
   <h1>
-    Order for user:
+    <%= order_type = @order.checkout_date ? 'Order' : 'Shopping Cart' %> for user:
     <small>
-      <%= @order.user ? @order.user.name : 'None' %>
+      <%= @order.user ? link_to(@order.user.name, user_path(@order.user)) : '-' %>
     </small>
   </h1>
 </header>
@@ -17,13 +17,13 @@
 <%= render @order %>
 
 <%= edit_delete = render :partial => 'shared/edit_delete_buttons', :locals => {
-  :resource => 'Order',
+  :resource => order_type,
   :edit_path => edit_user_order_path(@order.user, @order),
   :delete_path => order_path(@order)
 } %>
 
 <h2>
-  Order Status:
+  Status:
   <span class="<%= @order.checkout_date ? 'text-success' : 'text-danger' %>">
     <%= @order.checkout_date ? 'Placed' : 'Unplaced' %>
   </span>
@@ -44,13 +44,13 @@
   <p>No credit cards</p>
 <% end %>
 
-<h2>Order Contents</h2>
+<h2><%= order_type %> Contents</h2>
 <% if @order.items.present? %>
   <% @order.items.each do |item| %>
     <%= render item %>
   <% end %>
 <% else %>
-  <p>Order is empty</p>
+  <p><%= order_type %> is empty</p>
 <% end %>
 
 <%= edit_delete %>

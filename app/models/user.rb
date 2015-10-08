@@ -89,6 +89,11 @@ class User < ActiveRecord::Base
     num_orders == 0 ? 0 : spent / num_orders
   end
 
+  # Returns true if a cart exists for this user
+  def has_cart?
+    cart.persisted?
+  end
+
   # --------------------------------
   # Public Class Methods
   # --------------------------------

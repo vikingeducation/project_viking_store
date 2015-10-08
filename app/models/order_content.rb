@@ -3,7 +3,8 @@ class OrderContent < ActiveRecord::Base
   belongs_to :product
 
   validates :quantity,
-            :presence => true
+            :presence => true,
+            :numericality => {:greater_than => 0}
 
   validates :order,
             :presence => true
