@@ -5,10 +5,22 @@
 
 <% if @categories.empty? %>
   <p>No categories found</p>
+<% elsif pagination_page_outside_range_for?(@categories) %>
+  <%= pagination_page_outside_range_link_for(@categories) %>
 <% else %>
+
+  <%= pagination = render :partial => 'shared/pagination', :locals => {
+    :resources => @categories,
+    :limit => pagination_limit,
+    :path => categories_path
+  } %>
+
   <%= render :partial => 'shared/table', :locals => {:table => {
     :headers => ['ID', 'Name', 'Show', 'Edit', 'Delete'],
-    :rows => @categories.map do |category|
+    :rows => @categories
+              .offset(pagination_offset)
+              .limit(pagination_limit)
+              .map do |category|
       [
         category.id,
         category.name,
@@ -18,4 +30,6 @@
       ]
     end
   }} %>
+
+  <%= pagination %>
 <% end %>

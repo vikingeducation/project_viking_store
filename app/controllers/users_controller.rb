@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def create
     if @user.update(user_params)
       flash[:success] = 'User created'
-      redirect_to users_path
+      redirect_to user_path(@user)
     else
       flash.now[:error] = 'User not created'
       render :new
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:success] = 'User updated'
-      redirect_to users_path
+      redirect_to user_path(@user)
     else
       flash.now[:error] = 'User not updated'
       render :edit

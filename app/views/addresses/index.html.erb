@@ -9,10 +9,22 @@
 
 <% if @addresses.empty? %>
   <p>No addresses found</p>
+<% elsif pagination_page_outside_range_for?(@addresses) %>
+  <%= pagination_page_outside_range_link_for(@addresses) %>
 <% else %>
+
+  <%= pagination = render :partial => 'shared/pagination', :locals => {
+    :resources => @addresses,
+    :limit => pagination_limit,
+    :path => addresses_path
+  } %>
+
   <%= render :partial => 'shared/table', :locals => {:table => {
     :headers => ['ID', 'User', 'Street Address', 'City', 'State', 'Show', 'Edit', 'Delete'],
-    :rows => @addresses.map do |address|
+    :rows => @addresses
+              .offset(pagination_offset)
+              .limit(pagination_limit)
+              .map do |address|
       [
         address.id,
         address.user ? link_to(address.user.name, user_path(address.user)) : '-',
@@ -25,4 +37,6 @@
       ]
     end
   }} %>
+
+  <%= pagination %>
 <% end %>

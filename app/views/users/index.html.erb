@@ -5,10 +5,22 @@
 
 <% if @users.empty? %>
   <p>No users found</p>
+<% elsif pagination_page_outside_range_for?(@users) %>
+  <%= pagination_page_outside_range_link_for(@users) %>
 <% else %>
+
+  <%= pagination = render :partial => 'shared/pagination', :locals => {
+    :resources => @users,
+    :limit => pagination_limit,
+    :path => users_path
+  } %>
+
   <%= render :partial => 'shared/table', :locals => {:table => {
     :headers => ['ID', 'Name','Shipping Address', 'Orders', 'Email', 'Show', 'Edit', 'Delete'],
-    :rows => @users.map do |user|
+    :rows => @users
+              .offset(pagination_offset)
+              .limit(pagination_limit)
+              .map do |user|
       [
         user.id,
         user.name,
@@ -21,4 +33,6 @@
       ]
     end
   }} %>
+
+  <%= pagination %>
 <% end %>

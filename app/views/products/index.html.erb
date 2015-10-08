@@ -5,10 +5,22 @@
 
 <% if @products.empty? %>
   <p>No products found</p>
+<% elsif pagination_page_outside_range_for?(@products) %>
+  <%= pagination_page_outside_range_link_for(@products) %>
 <% else %>
+  
+  <%= pagination = render :partial => 'shared/pagination', :locals => {
+    :resources => @products,
+    :limit => pagination_limit,
+    :path => products_path
+  } %>
+
   <%= render :partial => 'shared/table', :locals => {:table => {
     :headers => ['ID', 'Category', 'Name', 'SKU', 'Price', 'Show', 'Edit', 'Delete'],
-    :rows => @products.map do |product|
+    :rows => @products
+              .offset(pagination_offset)
+              .limit(pagination_limit)
+              .map do |product|
       [
         product.id,
         link_to(product.category.name, category_path(product.category)),
@@ -21,4 +33,6 @@
       ]
     end
   }} %>
+
+  <%= pagination %>
 <% end %>

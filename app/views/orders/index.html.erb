@@ -9,10 +9,22 @@
 
 <% if @orders.empty? %>
   <p>No orders found</p>
+<% elsif pagination_page_outside_range_for?(@orders) %>
+  <%= pagination_page_outside_range_link_for(@orders) %>
 <% else %>
+
+  <%= pagination = render :partial => 'shared/pagination', :locals => {
+    :resources => @orders,
+    :limit => pagination_limit,
+    :path => orders_path
+  } %>
+
   <%= render :partial => 'shared/table', :locals => {:table => {
     :headers => ['ID', 'User', 'Shipping Address', 'Revenue', 'Status', 'Checkout Date', 'Show', 'Edit', 'Delete'],
-    :rows => @orders.map do |order|
+    :rows => @orders
+              .offset(pagination_offset)
+              .limit(pagination_limit)
+              .map do |order|
       [
         order.id,
         link_to(order.user.name, user_path(order.user)),
@@ -26,4 +38,6 @@
       ]
     end
   }} %>
+
+  <%= pagination %>
 <% end %>
