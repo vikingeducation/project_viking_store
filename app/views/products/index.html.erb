@@ -23,7 +23,7 @@
               .map do |product|
       [
         product.id,
-        link_to(product.category.name, category_path(product.category)),
+        product.category ? link_to(product.category.name, category_path(product.category)) : '-',
         product.name,
         product.sku,
         number_to_currency(product.price),
