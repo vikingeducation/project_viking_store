@@ -1,5 +1,78 @@
 class User < ActiveRecord::Base
 
+  has_many :created_addresses, :class_name => 'Address', 
+                               :dependent => :destroy
+
+  belongs_to :default_billing_address, :class_name => 'Address', 
+                                       :foreign_key => :billing_id
+  belongs_to :default_shipping_address, :class_name => 'Address', 
+                                        :foreign_key => :shipping_id
+
+  has_many :credit_cards, :dependent => :destroy
+  has_many :orders
+  has_many :order_contents, :through => :orders
+  has_many :products, :through => :order_contents
+
+  # Portal Methods
+  def self.get_index_data
+
+    data = User.all
+    output = []
+
+    data.each do |user|
+      output << [
+                  user,
+                  user.get_user_city,
+                  user.get_user_state,
+                  user.get_order_count,
+                  user.get_last_order_date
+                ]
+    end
+
+    output
+
+  end
+
+  def get_user_city
+
+    self.default_billing_address.city.name
+
+  end
+
+  def get_user_state
+
+    self.default_billing_address.state.name
+
+  end
+
+  def get_order_count
+
+    self.orders.where("checkout_date IS NOT NULL").count
+
+  end
+
+  def get_last_order_date
+
+    if self.orders.maximum(:checkout_date).nil?
+      return 'n/a'
+    end
+
+    date = self.orders.maximum(:checkout_date)
+    date.to_date
+
+  end
+
+  def get_order_history
+    self.products.group("orders.id").select(
+                                            "orders.id,
+                                            orders.created_at,
+                                            SUM(order_contents.quantity * products.price) AS value,
+                                            (CASE WHEN orders.checkout_date IS NOT NULL THEN 'PLACED'
+                                              ELSE 'UNPLACED' END) AS status"
+                                            )
+  end
+
+  # Dashboard Methods
   def self.count_new_users(day_range = nil)
 
     if day_range.nil?

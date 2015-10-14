@@ -1,5 +1,24 @@
 class Order < ActiveRecord::Base
 
+  belongs_to :user
+
+  has_many :order_contents, :class_name => "OrderContent"
+  has_many :products, :through => :order_contents
+  has_many :categories, :through => :products
+
+  belongs_to :billing_address, :class_name => 'Address', 
+                               :foreign_key => :billing_id
+  belongs_to :shipping_address, :class_name => 'Address', 
+                                :foreign_key => :shipping_id
+
+  # Portal Methods
+  def order_value
+
+    self.products.sum("order_contents.quantity * products.price")
+
+  end
+
+  # Dashboard Methods
   # method that controls day ranges for start AND end
   def self.within_days(day_range = nil, last_day = DateTime.now)
     if day_range.nil?
