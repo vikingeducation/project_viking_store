@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 
-  validates :name, :presence =>true,
+  validates :name, :presence => true,
                    :length => { :in => 3..15 }
 
   def self.list_all_categories
