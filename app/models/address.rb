@@ -17,7 +17,7 @@ class Address < ActiveRecord::Base
 
   def print_address
 
-    "#{self.street_address}\n#{self.city.name}, #{self.state.name}"
+    "#{self.street_address}\n#{self.city.name}, #{self.state.name}" || "No saved address"
 
   end
 

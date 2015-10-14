@@ -62,6 +62,12 @@ class User < ActiveRecord::Base
 
   end
 
+  def get_cart
+
+    self.orders.where("checkout_date IS NULL").first
+
+  end
+
   def get_order_history
     self.products.group("orders.id").select(
                                             "orders.id,

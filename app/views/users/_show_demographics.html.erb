@@ -69,11 +69,11 @@
 <div class='row'>
 
   <div class='col-xs-12'>
-    <%= link_to "Edit Name Name's Information", '#' %>
+    <%= link_to "Edit #{user.first_name} #{user.last_name}'s Information", edit_user_path(user.id) %>
   </div>
 
   <div class='col-xs-12'>
-    <%= link_to "Delete Name Name", '#' %>
+    <%= link_to "Delete #{user.first_name} #{user.last_name}", user_path(user.id), :method => :delete, :data => { :confirm => 'Delete user?' } %>
   </div>
 
   <div class='col-xs-12'>
@@ -81,7 +81,9 @@
   </div>
 
   <div class='col-xs-12'>
-    <%= link_to "View Unplaced Order (Cart)", '#' %>
+    <%= "<p class=text-muted>".html_safe unless cart %>
+    <%= link_to_if cart, "View Unplaced Order (Cart)", 'order_path(cart)' %>
+    <%= "</p>".html_safe unless cart %>
   </div>
 
 </div>

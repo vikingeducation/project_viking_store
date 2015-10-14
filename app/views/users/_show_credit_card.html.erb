@@ -39,7 +39,7 @@
   </div>
 
   <div class='col-xs-9'>
-    <p><%= "####-####-####-" + credit_card.card_number.to_s %></p>
+    <p><%= credit_card.card_number.to_s %></p>
   </div>
 
 </div>
@@ -63,7 +63,7 @@
   </div>
 
   <div class='col-xs-9'>
-    <p><%= '###' %></p>
+    <p><%= credit_card.ccv.to_s %></p>
   </div>
 
 </div>
@@ -71,7 +71,7 @@
 <div class='row'>
 
   <div class='col-xs-12'>
-    <%= link_to "Remove Card", '#' %>
+    <%= link_to "Remove Card", credit_card_path(credit_card.id), :method => :delete, :data => { :confirm => 'Delete credit card?' } %>
   </div>
 
 </div>

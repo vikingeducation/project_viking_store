@@ -10,7 +10,8 @@
             :locals => {
                         :user => @user,
                         :default_billing => @default_billing,
-                        :default_shipping => @default_shipping
+                        :default_shipping => @default_shipping,
+                        :cart => @cart
                        },
             :layout => 'layouts/users/show_user_panel' %>
 
@@ -20,7 +21,7 @@
                         :user => @user,
                         :credit_card => @credit_card
                        },
-            :layout => 'layouts/users/show_user_panel' %>
+            :layout => 'layouts/users/show_user_panel' if @credit_card %>
 
       <!-- Admin Actions -->
       <%= render :partial => 'show_admin_actions',
