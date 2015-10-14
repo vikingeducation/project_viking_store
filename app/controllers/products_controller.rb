@@ -13,6 +13,8 @@ class ProductsController < ApplicationController
 
     @product = Product.find(params[:id])
     @available_categories = Category.list_all_categories
+    @times_ordered = @product.times_ordered
+    @prods_in_cart = @product.prods_in_cart
 
   end
 

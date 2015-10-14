@@ -1,5 +1,27 @@
 class Product < ActiveRecord::Base
 
+  belongs_to :category
+
+  has_many :order_contents, :class_name => "OrderContent"
+  has_many :orders, :through => :order_contents
+
+  validates :name, :price, :category, :sku, :presence => true
+  validates :price, :numericality => true, :length =>{ :in => 0..10_000 }
+
+  # portal
+  def times_ordered
+
+    self.orders.where("checkout_date IS NOT NULL").count
+
+  end
+
+  def prods_in_cart
+
+    self.orders.where("checkout_date IS NULL").count
+
+  end
+
+  # dashboard
   def self.count_new_products(day_range = nil)
 
     if day_range.nil?
