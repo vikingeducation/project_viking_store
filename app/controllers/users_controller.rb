@@ -35,6 +35,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       flash.now[:danger] = "User failed to be created - please try again."
+      @available_addresses = @user.created_addresses
       render :new
     end
 

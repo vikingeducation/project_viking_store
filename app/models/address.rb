@@ -16,7 +16,7 @@ class Address < ActiveRecord::Base
                             :foreign_key => :shipping_id
 
   # Portal Methods
-  def self.get_index_data
+  def self.get_index_data(user_id)
 
     if user_id.nil?
       addresses = Address.order(:id).all

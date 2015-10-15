@@ -18,6 +18,39 @@ class Order < ActiveRecord::Base
 
   end
 
+  def self.get_index_dat(user_id = nil)
+
+    orders = Order.order(:id).limit(100)
+
+    orders = orders.where(:user_id => user_id) if user_id
+
+    output = []
+    orders.each do |order|
+      output << {
+                  :relation => order,
+                  :user => order.user,
+                  :address => order.shipping_address,
+                  :quantity => order.count_total_quantity,
+                  :order_value => order.order_value,
+                  :status => order.order_status,
+                  :date_placed => order.checkout_date
+                }
+    end
+
+    output
+
+  end
+
+  def order_status
+
+    if self.checkout_date
+      'PLACED'
+    else
+      'UNPLACED'
+    end
+
+  end
+
   # Dashboard Methods
   # method that controls day ranges for start AND end
   def self.within_days(day_range = nil, last_day = DateTime.now)

@@ -5,7 +5,7 @@ module AddressesHelper
     if user
       link_to "Create a #{user.first_name} #{user.last_name} Address", new_address_path(:user_id => user.id), class: 'btn btn-success btn-lg btn block'
     else
-      render 'point_to_users_index'
+      render 'shared/point_to_users_index'
     end
 
   end
