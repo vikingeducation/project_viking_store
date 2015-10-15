@@ -10,6 +10,8 @@ class Order < ActiveRecord::Base
                                :foreign_key => :billing_id
   belongs_to :shipping_address, :class_name => 'Address', 
                                 :foreign_key => :shipping_id
+  belongs_to :billing_card, :class_name => 'CreditCard',
+                            :foreign_key => :billing_card_id
 
   # Portal Methods
   def order_value
@@ -40,20 +42,17 @@ class Order < ActiveRecord::Base
 
   def get_card_info
 
-    if self.user.credit_cards.empty?
-      return 'n/a'
-    else
-      self.user.credit_cards.first.card_number
-    end
+    self.billing_card.card_number if self.billing_card_id
 
   end
 
   def build_contents
 
-    order_contents = self.order_contents.all
+    order_contents = self.order_contents.all.order(:product_id)
 
     order_contents.map do |row|
       {
+        :relation => row,
         :product_id => row.product_id,
         :product_name => row.product.name,
         :quantity => row.quantity,
@@ -76,6 +75,16 @@ class Order < ActiveRecord::Base
       'PLACED'
     else
       'UNPLACED'
+    end
+
+  end
+
+  def update_checkout_date(new_status)
+
+    if new_status == 'PLACED' && self.checkout_date.nil?
+      DateTime.now
+    elsif new_status == 'UNPLACED'
+      nil
     end
 
   end

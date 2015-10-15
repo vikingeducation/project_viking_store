@@ -4,18 +4,20 @@
     <div class='col-xs-10 col-xs-offset-1'>
 
       <h1 class='text-center'>
-        New Order for @user.name
+        <%= "New Order for #{@user.first_name} #{@user.last_name}" %>
       </h1>
 
     </div>
   </div>
 
   <div class='row'>
-    <div class='col-xs-10 col-xs-offset-1'>
+    <div class='col-xs-12'>
 
       <%= render :partial => 'order_form',
                  :locals => {
                              :user => @user,
+                             :status => @status,
+                             :order => @order,
                              :available_addresses => @available_addresses,
                              :available_cards => @available_cards,
                              :button_label => 'Create Order in Shopping Cart'

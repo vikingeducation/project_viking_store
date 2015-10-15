@@ -1,0 +1,7 @@
+<tr>
+  <td><%= edit_order_content[:product_id] %></td>
+  <td><%= number_field_tag edit_order_content[:relation][:id], edit_order_content[:quantity], :min => 0, :step => 1 %></td>
+  <td><%= currency_if_float(edit_order_content[:price]) %></td>
+  <td><%= currency_if_float(edit_order_content[:total_price]) %></td>
+  <td><%= link_to 'remove', '#' %></td>
+</tr>

@@ -7,9 +7,9 @@
     <%= show_user_orders.status %>
   </td>
 
-  <td><%= link_to 'Show', '#' %></td>
-  <td><%= link_to 'Edit', '#' %></td>
-  <td><%= link_to 'Delete', '#',
+  <td><%= link_to 'Show', order_path(show_user_orders.id) %></td>
+  <td><%= link_to 'Edit', edit_order_path(show_user_orders.id) %></td>
+  <td><%= link_to 'Delete', order_path(show_user_orders.id),
             :method => :delete,
             :data => { :confirm => 'Delete order?' } %></td>
 </tr>

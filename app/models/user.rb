@@ -81,6 +81,18 @@ class User < ActiveRecord::Base
     
   end
 
+  def get_billing_string
+
+    self.default_billing_address.print_address if self.default_billing_address
+
+  end
+
+  def get_shipping_string
+
+    self.default_shipping_address.print_address if self.default_shipping_address
+
+  end
+
   # Dashboard Methods
   def self.count_new_users(day_range = nil)
 

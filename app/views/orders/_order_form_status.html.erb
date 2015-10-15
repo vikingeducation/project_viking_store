@@ -1,0 +1,25 @@
+<div class='row show-block'>
+  <div class='col-xs-12'>
+
+    <div class='form-group'>
+      <div class='row'>
+
+        <div class='col-xs-12'>
+          <h4><strong>Order Status:</strong></h4>
+        </div>
+
+        <div class='col-xs-12'>
+          <%= label_tag 'status', "PLACED", :class => "text-success" %>
+          <%= radio_button_tag 'status', "PLACED", status=='PLACED' %>
+        </div>
+
+        <div class='col-xs-12'>
+          <%= label_tag 'status', "UNPLACED", :class => "text-danger" %>
+          <%= radio_button_tag 'status', "UNPLACED", status=='UNPLACED' %>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
