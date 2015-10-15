@@ -4,9 +4,11 @@ class User < ActiveRecord::Base
                                :dependent => :destroy
 
   belongs_to :default_billing_address, :class_name => 'Address', 
-                                       :foreign_key => :billing_id
+                                       :foreign_key => :billing_id,
+                                       :dependent => :destroy
   belongs_to :default_shipping_address, :class_name => 'Address', 
-                                        :foreign_key => :shipping_id
+                                        :foreign_key => :shipping_id,
+                                        :dependent => :destroy
 
   has_many :credit_cards, :dependent => :destroy
   has_many :orders
@@ -16,7 +18,7 @@ class User < ActiveRecord::Base
   # Portal Methods
   def self.get_index_data
 
-    data = User.all
+    data = User.all.order(:id)
     output = []
 
     data.each do |user|
@@ -35,13 +37,13 @@ class User < ActiveRecord::Base
 
   def get_user_city
 
-    self.default_billing_address.city.name
+    self.default_billing_address.city.name if self.default_billing_address
 
   end
 
   def get_user_state
 
-    self.default_billing_address.state.name
+    self.default_billing_address.state.name if self.default_billing_address
 
   end
 
@@ -69,13 +71,14 @@ class User < ActiveRecord::Base
   end
 
   def get_order_history
-    self.products.group("orders.id").select(
-                                            "orders.id,
-                                            orders.created_at,
-                                            SUM(order_contents.quantity * products.price) AS value,
-                                            (CASE WHEN orders.checkout_date IS NOT NULL THEN 'PLACED'
-                                              ELSE 'UNPLACED' END) AS status"
-                                            )
+
+    self.products.group("orders.id").order("orders.checkout_date DESC").select(
+                "orders.id,
+                orders.created_at,
+                SUM(order_contents.quantity * products.price) AS value,
+                (CASE WHEN orders.checkout_date IS NOT NULL THEN 'PLACED' ELSE 'UNPLACED' END) AS status"
+                )
+    
   end
 
   # Dashboard Methods

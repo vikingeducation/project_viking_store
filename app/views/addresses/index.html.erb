@@ -1,15 +1,16 @@
-<section id='user-index'>
+<section id='address-index'>
 
   <div class='row'>
     <div class='col-xs-10 col-xs-offset-1'>
 
-      <h1 class='text-center'>Viking Store Users</h1>
+      <h1 class='text-center'>Addresses</h1>
 
-      <%= link_to 'Create a New User', new_user_path, class: 'btn btn-success btn-lg btn-block' %>
+      <p class='text-center'>
+        <em>Create new addresses from within <%= link_to 'User', users_path %> profiles.</em>
+      </p>
 
     </div>
   </div>
-
 
   <div class='row'>
     <div class='col-xs-10 col-xs-offset-1'>
@@ -19,12 +20,12 @@
         <thead class='bg-success'>
           <tr>
             <td>ID</td>
-            <td>Name</td>
-            <td>Joined</td>
+            <td>User</td>
+            <td>Address</td>
             <td>City</td>
             <td>State</td>
             <td>Orders</td>
-            <td>Last Order Date</td>
+            <td>Created</td>
             <td>SHOW</td>
             <td>EDIT</td>
             <td>DELETE</td>
@@ -32,7 +33,7 @@
         </thead>
 
         <tbody>
-          <%= render :partial => 'user', :collection => @users %>
+          <%= render :partial => 'address', :collection => @addresses %>
         </tbody>
 
 

@@ -15,9 +15,42 @@ class Address < ActiveRecord::Base
   has_many :shipped_orders, :class_name => 'Order', 
                             :foreign_key => :shipping_id
 
+  # Portal Methods
+  def self.get_index_data
+
+    data = Address.all.order(:id)
+    output = []
+
+    data.each do |address|
+      output << {
+                  :relation => address,
+                  :user => address.created_by_user,
+                  :city_name => address.city.name,
+                  :state_name => address.state.name,
+                  :order_count => address.get_order_count
+                }
+    end
+
+    output
+
+  end
+
+  def get_order_count
+
+    self.billed_orders.where("checkout_date IS NOT NULL").count
+
+  end
+
+
   def print_address
 
     "#{self.street_address}\n#{self.city.name}, #{self.state.name}" || "No saved address"
+
+  end
+
+  def id_and_address
+
+    "#{id} (#{street_address})"
 
   end
 
