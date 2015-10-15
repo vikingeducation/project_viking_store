@@ -18,10 +18,15 @@ class Address < ActiveRecord::Base
   # Portal Methods
   def self.get_index_data
 
-    data = Address.all.order(:id)
+    if user_id.nil?
+      addresses = Address.order(:id).all
+    else
+      addresses = Address.order(:id).where(:user_id => user_id)
+    end
+
     output = []
 
-    data.each do |address|
+    addresses.each do |address|
       output << {
                   :relation => address,
                   :user => address.created_by_user,

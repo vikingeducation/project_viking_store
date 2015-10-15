@@ -77,13 +77,11 @@
   </div>
 
   <div class='col-xs-12'>
-    <%= link_to "View Saved Addresses", '#' %>
+    <%= link_to "View Saved Addresses", addresses_path(:user_id => user.id) %>
   </div>
 
   <div class='col-xs-12'>
-    <%= "<p class=text-muted>".html_safe unless cart %>
-    <%= link_to_if cart, "View Unplaced Order (Cart)", 'order_path(cart)' %>
-    <%= "</p>".html_safe unless cart %>
+    <%= render partial: 'show_cart_on_demographics', :locals => { :cart => cart } %>
   </div>
 
 </div>
