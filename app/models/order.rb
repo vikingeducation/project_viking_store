@@ -18,26 +18,55 @@ class Order < ActiveRecord::Base
 
   end
 
-  def self.get_index_dat(user_id = nil)
+  def self.get_index_data(user_id = nil)
 
     orders = Order.order(:id).limit(100)
 
     orders = orders.where(:user_id => user_id) if user_id
 
-    output = []
-    orders.each do |order|
-      output << {
-                  :relation => order,
-                  :user => order.user,
-                  :address => order.shipping_address,
-                  :quantity => order.count_total_quantity,
-                  :order_value => order.order_value,
-                  :status => order.order_status,
-                  :date_placed => order.checkout_date
-                }
+    orders.map do |order|
+      {
+        :relation => order,
+        :user => order.user,
+        :address => order.shipping_address,
+        :quantity => order.count_total_quantity,
+        :order_value => order.order_value,
+        :status => order.order_status,
+        :date_placed => order.checkout_date
+      }
     end
 
-    output
+  end
+
+  def get_card_info
+
+    if self.user.credit_cards.empty?
+      return 'n/a'
+    else
+      self.user.credit_cards.first.card_number
+    end
+
+  end
+
+  def build_contents
+
+    order_contents = self.order_contents.all
+
+    order_contents.map do |row|
+      {
+        :product_id => row.product_id,
+        :product_name => row.product.name,
+        :quantity => row.quantity,
+        :price => row.product.price,
+        :total_price => row.quantity * row.product.price
+      }
+    end
+
+  end
+
+  def count_total_quantity
+
+    self.order_contents.sum(:quantity)
 
   end
 

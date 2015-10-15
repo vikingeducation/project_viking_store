@@ -7,9 +7,9 @@
   <td><%= address[:state_name] %></td>
   <td><%= address[:order_count] %></td>
   <td><%= address[:relation].created_at.to_date %></td>
-  <td><%= link_to 'show', address_path(address[:relation].id) %></td>
-  <td><%= link_to 'edit', edit_address_path(address[:relation].id) %></td>
-  <td><%= link_to 'delete', address_path(address[:relation].id),
+  <td><%= link_to 'Show', address_path(address[:relation].id) %></td>
+  <td><%= link_to 'Edit', edit_address_path(address[:relation].id) %></td>
+  <td><%= link_to 'Delete', address_path(address[:relation].id),
             :method => :delete,
             :data => { :confirm => 'Delete address?' } %></td>
             

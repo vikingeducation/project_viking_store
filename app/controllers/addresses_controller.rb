@@ -24,5 +24,37 @@ class AddressesController < ApplicationController
     @state = @address.state.name
 
   end
+
+  def new
+
+    @address = Address.new
+    @user = User.find(params[:user_id])
+    @cities = City.order(:name).all
+    @states = State.all
+
+  end
+
+  def create
+
+    @address = Address.new(address_params)
+    @user = User.find(@address.user_id)
+
+    if @address.save
+      flash[:success] = "Address created successfully!"
+      redirect_to addresses_path(:user_id => @user_id)
+    else
+      flash.now[:danger] = "Address failed to save - please try again."
+      @cities = City.order(:name).all
+      @states = State.all
+      render :new
+    end
+
+  end
+
+  def address_params
+
+    params.require(:address).permit(:street_address, :city_id, :state_id, :zip_code, :user_id)
+
+  end
   
 end

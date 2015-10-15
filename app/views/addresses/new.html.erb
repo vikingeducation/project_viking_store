@@ -1,0 +1,32 @@
+
+<section id='address-new'>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <h1 class='text-center'>
+        <%= "New Address for #{@user.first_name} #{@user.last_name}" %>
+      </h1>
+
+    </div>
+  </div>
+
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <%= render :partial => 'address_form',
+                 :locals => {
+                             :address => @address,
+                             :user => @user,
+                             :cities => @cities,
+                             :states => @states,
+                             :button_label => 'Create Address'
+                            },
+                 :layout => 'layouts/shared/show_panel' %>
+
+    </div>
+  </div>
+
+
+</section>

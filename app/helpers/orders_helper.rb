@@ -10,4 +10,14 @@ module OrdersHelper
 
   end
 
+  def show_order_title(order)
+
+    if @order.checkout_date
+      "Order #{@order.id}"
+    else
+      "Order #{@order.id} (Shopping Cart)"
+    end
+
+  end
+
 end

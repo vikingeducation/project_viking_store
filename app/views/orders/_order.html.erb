@@ -13,9 +13,9 @@
   </td>
 
   <td><%= order[:date_placed].to_date if order[:date_placed] %></td>
-  <td><%= link_to 'show', order_path(order[:relation].id) %></td>
-  <td><%= link_to 'edit', edit_order_path(order[:relation].id) %></td>
-  <td><%= link_to 'delete', order_path(order[:relation].id),
+  <td><%= link_to 'Show', order_path(order[:relation].id) %></td>
+  <td><%= link_to 'Edit', edit_order_path(order[:relation].id) %></td>
+  <td><%= link_to 'Delete', order_path(order[:relation].id),
             :method => :delete,
             :data => { :confirm => 'Delete order?' } %></td>
             

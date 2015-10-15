@@ -15,6 +15,10 @@ class Address < ActiveRecord::Base
   has_many :shipped_orders, :class_name => 'Order', 
                             :foreign_key => :shipping_id
 
+  validates :street_address, :city_id, :state_id, :zip_code, :user_id, :presence => true
+  validates :street_address, :length => { :maximum => 64 }
+  validates :zip_code, :length => { :in => 4..5 }
+
   # Portal Methods
   def self.get_index_data(user_id)
 
@@ -43,6 +47,16 @@ class Address < ActiveRecord::Base
   def get_order_count
 
     self.billed_orders.where("checkout_date IS NOT NULL").count
+
+  end
+
+  def address_hash
+
+    {
+      :street_address => self.street_address,
+      :city_name => self.city.name,
+      :state_name => self.state.name
+    }
 
   end
 

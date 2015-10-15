@@ -13,7 +13,7 @@
                         :default_shipping => @default_shipping,
                         :cart => @cart
                        },
-            :layout => 'layouts/users/show_user_panel' %>
+            :layout => 'layouts/shared/show_panel' %>
 
       <!-- Credit Card -->
       <%= render :partial => 'show_credit_card',
@@ -21,14 +21,14 @@
                         :user => @user,
                         :credit_card => @credit_card
                        },
-            :layout => 'layouts/users/show_user_panel' if @credit_card %>
+            :layout => 'layouts/shared/show_panel' if @credit_card %>
 
       <!-- Admin Actions -->
       <%= render :partial => 'show_admin_actions',
             :locals => {
                         :user => @user
                        },
-            :layout => 'layouts/users/show_user_panel' %>
+            :layout => 'layouts/shared/show_panel' %>
 
       <!-- Order History -->
       <%= render :partial => 'show_order_history',
@@ -36,7 +36,7 @@
                         :user => @user,
                         :user_orders => @user_orders
                        },
-            :layout => 'layouts/users/show_user_panel' %>
+            :layout => 'layouts/shared/show_panel' %>
 
     </div>
   </div>
