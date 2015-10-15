@@ -113,6 +113,11 @@ def generate_city
   City.create( :name => Faker::Address.city )
 end
 
+# selects user's credit cards for default billing
+def random_user_card(user_id)
+  User.find(user_id).credit_cards.sample.id
+end
+
 # This method selects one of a users several addresses for use setting shipping address and billing address.
 def random_user_address(user_id)
   Address.where("user_id = ?", user_id).sample[:id]
@@ -229,28 +234,36 @@ end
 
 # Create some CreditCard records for users who have an order.
 def generate_credit_cards_for_checked_out_orders
-  checked_out_orders = Order.all.select("DISTINCT user_id").
+  users_with_orders = Order.all.select("DISTINCT user_id").
                                 where("checkout_date IS NOT NULL")
 
-  checked_out_orders.each do |order|
-    card = CreditCard.new
-    card[:user_id] = order.user_id
+  users_with_orders.each do |user|
+    loop do
+      card = CreditCard.new
+      card[:user_id] = user.user_id
 
-    # last 4 digits only
-    card[:card_number] = Faker::Number.number(16)
-    card[:exp_month] = rand(12) + 1
+      # last 4 digits only
+      card[:card_number] = Faker::Number.number(16)
+      card[:exp_month] = rand(12) + 1
 
-    #so far, only good cards
-    card[:exp_year] = Time.now.year + rand(5)
-    card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
+      #so far, only good cards
+      card[:exp_year] = Time.now.year + rand(5)
+      card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
 
-    card.save
-
-    affiliated_orders = Order.where("user_id = ?", order.user_id).where("checkout_date IS NOT NULL")
-    affiliated_orders.each do |aff_ord|
-      aff_ord.credit_card_id = card.id
-      aff_ord.save
+      if CreditCard.where(:card_number => card.card_number).empty?
+        card.save
+        break
+      end
     end
+  end
+end
+
+def assign_credit_cards_to_orders
+  completed_orders = Order.where("checkout_date IS NOT NULL")
+
+  completed_orders.each do |order|
+    order[:billing_card_id] = random_user_card(order.user_id)
+    order.save
   end
 end
 
@@ -284,5 +297,6 @@ puts "Created users"
 (MULTIPLIER * 30).times { generate_order }
 puts "Created orders"
 generate_credit_cards_for_checked_out_orders
+assign_credit_cards_to_orders
 puts "Created credit card orders"
 puts "DONE!"
