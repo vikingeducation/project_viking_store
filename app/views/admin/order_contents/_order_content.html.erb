@@ -1,0 +1,11 @@
+<%= render :partial => 'shared/table', :locals => {:table => {
+  :headers => ['Key', 'Value'],
+  :rows => [
+    ['ID', order_content.id],
+    ['Order ID', link_to(order_content.order_id, admin_order_path(order_content.order))],
+    ['Product', link_to(order_content.product.name, admin_product_path(order_content.product))],
+    ['Quantity', order_content.quantity],
+    ['Created At', order_content.created_at.to_formatted_s(:long)],
+    ['Updated At', order_content.updated_at.to_formatted_s(:long)]
+  ]
+}} %>

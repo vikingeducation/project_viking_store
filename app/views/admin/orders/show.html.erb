@@ -1,0 +1,67 @@
+<header class="page-header">
+  <h1>
+    <%= order_type = @order.checkout_date ? 'Order' : 'Shopping Cart' %> for user:
+    <small>
+      <%= @order.user ? link_to(@order.user.name, admin_user_path(@order.user)) : '-' %>
+    </small>
+  </h1>
+</header>
+
+<h2>
+  Revenue:
+  <small class="text-success">
+    <%= number_to_currency(@order.revenue) %>
+  </small>
+</h2>
+
+<%= render @order %>
+
+<%= edit_delete = render :partial => 'shared/edit_delete_buttons', :locals => {
+  :resource => order_type,
+  :edit_path => edit_admin_user_order_path(@order.user, @order),
+  :delete_path => admin_order_path(@order)
+} %>
+
+<h2>
+  Status:
+  <span class="<%= @order.checkout_date ? 'text-success' : 'text-danger' %>">
+    <%= @order.checkout_date ? 'Placed' : 'Unplaced' %>
+  </span>
+</h2>
+
+<h2>Shipping Address</h2>
+<% if @order.shipping %>
+  <%= render @order.shipping %>
+<% else %>
+  <p>No shipping address</p>
+<% end %>
+
+<h2>Billing Address</h2>
+<% if @order.shipping %>
+  <%= render @order.billing %>
+<% else %>
+  <p>No billing address</p>
+<% end %>
+
+<h2>Credit Cards</h2>
+<% if @order.user.credit_cards.present? %>
+  <% @order.user.credit_cards.each do |credit_card| %>
+    <%= render credit_card %>
+  <% end %>
+<% else %>
+  <p>No credit cards</p>
+<% end %>
+
+<h2><%= order_type %> Contents</h2>
+<% if @order.items.present? %>
+  <% @order.items.each do |item| %>
+    <%= render item %>
+  <% end %>
+<% else %>
+  <p><%= order_type %> is empty</p>
+<% end %>
+
+<%= edit_delete %>
+
+
+

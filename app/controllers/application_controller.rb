@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
 
   protected
   def assert_id
-    unless params[:controller].singularize.classify.constantize.exists?(params[:id])
+    model = params[:controller].singularize
+      .classify
+      .constantize
+    unless model.exists?(params[:id])
       flash[:error] = "#{params[:controller].singularize.titleize} not found"
       redirect_to url_for(
         :controller => params[:controller],

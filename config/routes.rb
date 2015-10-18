@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
-  resources :addresses
-  resources :categories
-  resources :products
-  resources :orders
-  resources :order_contents, :only => [:create, :update, :destroy]
-  resources :users do
+  namespace :admin do
     resources :addresses
+    resources :categories
+    resources :products
     resources :orders
+    resources :order_contents, :only => [:create, :update, :destroy]
+    resources :users do
+      resources :addresses
+      resources :orders
+    end
+    resources :analytics, :only => [:index]
   end
-  resources :analytics, :only => [:index]
+  
   root :to => 'admin#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

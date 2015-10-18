@@ -1,0 +1,38 @@
+<header class="page-header">
+  <h1>Users</h1>
+  <%= link_to('+ New User', new_admin_user_path, :class => 'btn btn-primary btn-lg') %>
+</header>
+
+<% if @users.empty? %>
+  <p>No users found</p>
+<% elsif pagination_page_outside_range_for?(@users) %>
+  <%= pagination_page_outside_range_link_for(@users) %>
+<% else %>
+
+  <%= pagination = render :partial => 'shared/pagination', :locals => {
+    :resources => @users,
+    :limit => pagination_limit,
+    :path => admin_users_path
+  } %>
+
+  <%= render :partial => 'shared/table', :locals => {:table => {
+    :headers => ['ID', 'Name','Shipping Address', 'Orders', 'Email', 'Show', 'Edit', 'Delete'],
+    :rows => @users
+              .offset(pagination_offset)
+              .limit(pagination_limit)
+              .map do |user|
+      [
+        user.id,
+        user.name,
+        user.shipping ? link_to(user.shipping.full_address, admin_address_path(user.shipping)) : '-',
+        user.orders.length > 0 ? link_to(user.orders.length, admin_user_orders_path(user)) : '-',
+        user.email,
+        link_to('Show', admin_user_path(user)),
+        link_to('Edit', edit_admin_user_path(user)),
+        link_to('Delete', admin_user_path(user), :method => 'delete', :class => 'text-danger', :data => {:confirm => 'Delete?'})
+      ]
+    end
+  }} %>
+
+  <%= pagination %>
+<% end %>
