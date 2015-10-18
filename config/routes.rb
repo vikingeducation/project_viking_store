@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  # Admin Routes
   namespace :admin do
     resources :addresses
     resources :categories
@@ -12,7 +14,11 @@ Rails.application.routes.draw do
     resources :analytics, :only => [:index]
   end
   
-  root :to => 'admin#index'
+  # Public Routes
+  resources :products, :only => [:index]
+
+  # Root
+  root :to => 'products#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
