@@ -8,8 +8,7 @@ Rails.application.routes.draw do
     resources :addresses
     resources :orders
   end
-
-  get '/analytics', :to => 'admin#analytics'
+  resources :analytics, :only => [:index]
   root :to => 'admin#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
