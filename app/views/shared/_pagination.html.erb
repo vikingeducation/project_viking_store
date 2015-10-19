@@ -14,7 +14,7 @@
 
       <% if pagination_first_page? %>
         <li>
-          <a href="<%= path %>?page=<%= params[:page].to_i - 1 %>" aria-label="Previous">
+          <a href="<%= pagination_url(path, params[:page].to_i - 1) %>" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
@@ -22,7 +22,7 @@
 
       <% pagination_num_pages_for(resources).times do |i| %>
         <li<% if params[:page].to_i == i %> class="active"<% end %>>
-          <a href="<%= path %>?page=<%= i %>">
+          <a href="<%= pagination_url(path, i) %>">
             <%= i + 1 %>
           </a>
         </li>
@@ -30,7 +30,7 @@
 
       <% if pagination_last_page_for?(resources) %>
         <li>
-          <a href="<%= path %>?page=<%= params[:page].to_i + 1 %>" aria-label="Next">
+          <a href="<%= pagination_url(path, params[:page].to_i + 1) %>" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>

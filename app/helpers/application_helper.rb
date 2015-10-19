@@ -66,6 +66,12 @@ module ApplicationHelper
     params[:page] ? params[:page].to_i * pagination_limit : 0
   end
 
+  def pagination_url(path, page_number)
+    query_string = "page=#{page_number}"
+    delimiter = path.match(/\?/) ? '&' : '?'
+    "#{path}#{delimiter}#{query_string}"
+  end
+
   def pagination_first_page?
     params[:page].to_i > 0
   end

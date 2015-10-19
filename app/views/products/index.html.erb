@@ -1,5 +1,21 @@
 <h1>Products</h1>
 
+<%= form_tag(:products, :method => :get) do %>
+  <div class="form-group">
+    <%= select_tag(:category_id,
+      options_from_collection_for_select(
+        Category.all,
+        :id,
+        :name,
+      ),
+      :include_blank => true,
+      :prompt => "Category Filter: #{@category ? @category.name : 'None'}",
+      :class => 'form-control'
+    ) %>
+  </div>
+  <%= submit_tag('Filter by Category', :class => 'btn btn-primary') %>
+<% end %>
+
 <% if @products.empty? %>
 
   <p>No products found</p>
@@ -13,29 +29,36 @@
   <%= pagination = render :partial => 'shared/pagination', :locals => {
     :resources => @products,
     :limit => pagination_limit,
-    :path => products_path
+    :path => @category ? products_path(:category_id => params[:category_id]) : products_path
   } %>
 
-  <% @products
-      .offset(pagination_offset)
+  <% @products.offset(pagination_offset)
       .limit(pagination_limit)
-      .each do |product| %>
+      .each_slice(3) do |row| %>
 
-    <div class="product">
-      <h3 class="name">
-        <%= product.name %>
-      </h3>
-      <div class="image">
-        <div class="price">
-          <%= number_to_currency(product.price) %>
+    <div class="row">
+
+      <% row.each do |product| %>
+
+        <div class="product col-md-4">
+          <h3 class="name">
+            <%= product.name %>
+          </h3>
+          <div class="image">
+            <div class="price">
+              <%= number_to_currency(product.price) %>
+            </div>
+            <img src="http://placehold.it/256x256" alt="Image"/>
+          </div>
+          <div class="button">
+            <button class="btn btn-primary">
+              Add to Cart
+            </button>
+          </div>
         </div>
-        <img src="http://placehold.it/256x256" alt="Image"/>
-      </div>
-      <div class="button">
-        <button class="btn btn-primary">
-          Add to Cart
-        </button>
-      </div>
+
+      <% end %>
+
     </div>
 
   <% end %>
@@ -44,3 +67,5 @@
 <% end %>
 
 <%= render :partial => 'shared/footer' %>
+
+
