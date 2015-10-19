@@ -1,2 +1,2 @@
-module AnalyticsHelper
+module Admin::AnalyticsHelper
 end

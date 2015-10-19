@@ -1,2 +1,2 @@
-module OrderContentsHelper
+module Admin::OrderContentsHelper
 end

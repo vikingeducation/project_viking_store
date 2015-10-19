@@ -1,2 +1,2 @@
-module AddressesHelper
+module Admin::AddressesHelper
 end

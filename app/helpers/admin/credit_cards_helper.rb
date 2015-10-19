@@ -1,2 +1,2 @@
-module CreditCardsHelper
+module Admin::CreditCardsHelper
 end
