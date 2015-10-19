@@ -1,0 +1,32 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    
+    <!-- Toggle and Brand -->
+    <div class="navbar-header">
+      <button type="button"
+              class="navbar-toggle collapsed"
+              data-toggle="collapse"
+              data-target="#main-nav-menu"
+              aria-expanded="false"
+              >
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to(site_name, root_path, :class => 'navbar-brand') %>
+    </div>
+
+    <!-- Nav Menu -->
+    <div id="main-nav-menu" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to(fa('sign-in') + ' Sign In', '#') %>
+        </li>
+        <li>
+          <%= link_to(fa('shopping-cart') + ' Your Cart', '#') %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
