@@ -1,4 +1,7 @@
 module ApplicationHelper
+  # --------------------
+  # Error messages
+  # --------------------
   def error_messages_for(object, field=nil)
     errors = field ? object.errors[field] : object.errors.full_messages
     errors.each do |error|
@@ -6,12 +9,25 @@ module ApplicationHelper
     end
   end
 
+  # --------------------
+  # Site Variables
+  # --------------------
   def site_name
-    "Viking Store | Admin Dashboard"
+    "Viking Store"
   end
 
+  # --------------------
+  # Font Awesome
+  # --------------------
+  def fa(icon)
+    %Q[<i class="fa fa-#{icon}"></i>].html_safe
+  end
+
+  # --------------------
+  # Pagination
+  # --------------------
   def pagination_limit
-    100
+    controller.send(:_layout) == 'admin' ? 100 : 9
   end
 
   def pagination_range_start

@@ -19,7 +19,7 @@
     
     <main id="main" class="container">
       <header class="page-header">
-        <h1><%= site_name %></h1>
+        <h1><%= link_to(site_name, root_path) %> | Admin Dashboard</h1>
       </header>
       <%= render :partial => 'shared/flash' %>
       <div class="row">

@@ -1,1 +1,46 @@
 <h1>Products</h1>
+
+<% if @products.empty? %>
+
+  <p>No products found</p>
+
+<% elsif pagination_page_outside_range_for?(@products) %>
+
+  <%= pagination_page_outside_range_link_for(@products) %>
+
+<% else %>
+  
+  <%= pagination = render :partial => 'shared/pagination', :locals => {
+    :resources => @products,
+    :limit => pagination_limit,
+    :path => products_path
+  } %>
+
+  <% @products
+      .offset(pagination_offset)
+      .limit(pagination_limit)
+      .each do |product| %>
+
+    <div class="product">
+      <h3 class="name">
+        <%= product.name %>
+      </h3>
+      <div class="image">
+        <div class="price">
+          <%= number_to_currency(product.price) %>
+        </div>
+        <img src="http://placehold.it/256x256" alt="Image"/>
+      </div>
+      <div class="button">
+        <button class="btn btn-primary">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+
+  <% end %>
+
+  <%= pagination %>
+<% end %>
+
+<%= render :partial => 'shared/footer' %>
