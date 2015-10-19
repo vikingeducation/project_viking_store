@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
     resources :analytics, :only => [:index]
   end
+  get '/admin', :to => 'admin#index'
   
   # Public Routes
   resources :products, :only => [:index]
