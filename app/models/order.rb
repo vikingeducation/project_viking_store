@@ -57,16 +57,18 @@ class Order < ActiveRecord::Base
   # Public Class Methods
   # --------------------------------
 
+  # 
   # Returns all orders without a
   # checkout date
   def self.carts
-    Order.carts_relation.to_a
+    Order.where('checkout_date IS NULL')
   end
 
+  # 
   # Returns all orders with a
   # checkout date
   def self.placed_orders
-    Order.placed_orders_relation.to_a
+    Order.where('checkout_date IS NOT NULL')
   end
 
   # Returns the order count of orders
@@ -132,18 +134,6 @@ class Order < ActiveRecord::Base
   # --------------------------------
   # Private Class Methods
   # --------------------------------
-
-  # Wraps reusable query for all orders
-  # where checkout_date is not null
-  def self.carts_relation
-    Order.where('checkout_date IS NULL')
-  end
-
-  # Wraps reusable query for all orders
-  # where checkout_date is null
-  def self.placed_orders_relation
-    Order.where('checkout_date IS NOT NULL')
-  end
 
   # Wraps reusable find order by id or instantiate new order
   def self.result_order_id_or_new(result)

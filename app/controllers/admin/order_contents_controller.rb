@@ -3,6 +3,7 @@ class Admin::OrderContentsController < AdminController
                 :set_order
 
   def create
+    # put this in your model
     successes = []
     OrderContent.transaction do
       order_content_params_array.each do |attributes|
@@ -12,6 +13,8 @@ class Admin::OrderContentsController < AdminController
         break unless success
       end
     end
+
+    # if batch creation successful
     if successes.any? {|i| i == true}
       flash[:success] = 'OrderContents created'
     else
@@ -24,6 +27,7 @@ class Admin::OrderContentsController < AdminController
   end
 
   def update
+    # put in model
     success = false
     OrderContent.transaction do
       order_content_params_array.each do |attributes|
@@ -32,6 +36,8 @@ class Admin::OrderContentsController < AdminController
         break unless success
       end
     end
+
+    # if batch update successful
     if success
       flash[:success] = 'OrderContents updated'
     else
@@ -74,6 +80,7 @@ class Admin::OrderContentsController < AdminController
   end
 
   def order_content_params_array
+    # put in model
     products = {}
     order_content_params[:order_content].each do |key, value|
       if products[value['product_id']]

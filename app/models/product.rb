@@ -38,23 +38,25 @@ class Product < ActiveRecord::Base
     end
   end
 
+  # 
   # Returns all orders with this product
   # without a checkout date
   def carts
-    carts_relation.to_a
+    orders.where('checkout_date IS NULL')
   end
 
+  # 
   # Returns all orders with this product
   # with a checkout date
   def placed_orders
-    placed_orders_relation.to_a
+    orders.where('checkout_date IS NOT NULL')
   end
 
   # Returns the number of units this product
   # has sold
   def units_sold
     result = order_contents.select('SUM(quantity) AS sum_quantity')
-      .where('order_id IN (?)', placed_orders_relation.ids)
+      .where('order_id IN (?)', placed_orders.ids)
       .to_a
     result.first.sum_quantity || 0
   end
@@ -67,22 +69,5 @@ class Product < ActiveRecord::Base
   # with a created_at date after the given date
   def self.count_since(date)
     Product.where('created_at >= ?', date.to_date).count
-  end
-
-
-  private
-
-  # --------------------------------
-  # Private Instance Methods
-  # --------------------------------
-
-  # Returns the relation collection for carts
-  def carts_relation
-    orders.where('checkout_date IS NULL')
-  end
-
-  # Returns the relation collection for placed orders
-  def placed_orders_relation
-    orders.where('checkout_date IS NOT NULL')
   end
 end

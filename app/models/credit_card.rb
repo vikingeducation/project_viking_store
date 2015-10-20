@@ -12,8 +12,9 @@ class CreditCard < ActiveRecord::Base
     end
   end
 
+  # 
   def placed_orders
-    placed_orders_relation.to_a
+    orders.where('checkout_date IS NOT NULL')
   end
 
   def last_four_digits
@@ -22,11 +23,5 @@ class CreditCard < ActiveRecord::Base
 
   def name
     "(#{brand}) ending with ...#{last_four_digits}"
-  end
-
-
-  private
-  def placed_orders_relation
-    orders.where('checkout_date IS NOT NULL')
   end
 end

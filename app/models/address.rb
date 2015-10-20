@@ -36,33 +36,22 @@ class Address < ActiveRecord::Base
     end
   end
 
+  # 
   def orders
-    orders_relation.to_a
+    billing_orders.merge(shipping_orders)
   end
 
+  # 
   def placed_orders
-    placed_orders_relation.to_a
+    orders.where('checkout_date IS NOT NULL')
   end
 
+  # 
   def carts
-    carts_relation.to_a
+    orders.where('checkout_date IS NULL')
   end
 
   def full_address
     "#{street_address} - #{city.name}, #{state.name}"
-  end
-
-
-  private
-  def orders_relation
-    billing_orders.merge(shipping_orders)
-  end
-
-  def placed_orders_relation
-    orders_relation.where('checkout_date IS NOT NULL')
-  end
-
-  def carts_relation
-    orders_relation.where('checkout_date IS NULL')
   end
 end

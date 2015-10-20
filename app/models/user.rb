@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   # Public Instance Methods
   # --------------------------------
 
-  # Dissociate the user from relations
+  # Dissociate the user from dependents
   def dissociate
     if placed_orders.present?
       false
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
 
   # Returns the user's cart
   def cart
-    result = cart_relation
+    result = orders.where('checkout_date IS NULL')
       .limit(1)
       .to_a
     result.length > 0 ? result.first : Order.new
@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
 
   # Returns the user's placed orders
   def placed_orders
-    placed_orders_relation.to_a
+    orders.where('checkout_date IS NOT NULL')
   end
 
   # Returns the amount spent by this user
@@ -168,20 +168,6 @@ class User < ActiveRecord::Base
 
 
   private
-
-  # --------------------------------
-  # Private Instance Methods
-  # --------------------------------  
-
-  # Wraps reusable cart relation
-  def cart_relation
-    orders.where('checkout_date IS NULL')
-  end
-
-  # Wraps reusable placed orders relation
-  def placed_orders_relation
-    orders.where('checkout_date IS NOT NULL')
-  end
 
   # --------------------------------
   # Private Class Methods
