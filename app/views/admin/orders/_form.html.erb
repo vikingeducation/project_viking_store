@@ -18,7 +18,7 @@ if User.exists?(params[:user_id])
   <% end %>
 
   <!-- Order Info -->
-  <%= form_for(order, :url => url_for([:admin, user, order])) do |f| %>
+  <%= form_for([:admin, user, order]) do |f| %>
     <% if order.persisted? %>
       <%= render :partial => 'shared/table', :locals => {:table => {
         :headers => ['Key', 'Value'],

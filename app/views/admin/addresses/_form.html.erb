@@ -13,7 +13,7 @@ if User.exists?(params[:user_id])
   <p>
       User ID: <%= user.id %>
   </p>
-  <%= form_for(address, :url => url_for([:admin, user, address])) do |f| %>
+  <%= form_for([:admin, user, address]) do |f| %>
     <% if address.persisted? %>
       <p>
         Address ID: <%= address.id %>
