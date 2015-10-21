@@ -28,6 +28,10 @@ class Order < ActiveRecord::Base
   # Public Instance Methods
   # --------------------------------
 
+  # Before save callback
+  # returns false if this order is not placed,
+  # the associated user already has a cart,
+  # and this order's ID is the same as the user's cart ID
   def one_cart_per_user
     if user.has_cart? && checkout_date == nil && user.cart.id != id
       errors.add(:base, 'A user can only have one shopping cart')
@@ -35,12 +39,64 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Before destroy callback
+  # destroys dependent order_content rows
+  # returns false if checkout_date is not nil
   def dissociate
     if checkout_date
       false
     else
       items.destroy_all
     end
+  end
+
+  # Creates order_content rows for this order
+  # tries to save all order_contents in
+  # a transaction
+  # rescues error and appends message to
+  # order base errors
+  # returns false if transaction fails
+  def create_items(attrs)
+    success = true
+    begin
+      Order.transaction do
+        attrs.each do |a|
+          order_content = OrderContent.new(a)
+          order_content.save!
+        end
+      end
+    rescue ActiveRecord::RecordInvalid => e
+      errors[:base] << e
+      success = false
+    end
+    success
+  end
+
+  # Updates order_content rows for this order
+  # tries to update all order_contents in
+  # a transaction
+  # destroys the row if quantity is 0
+  # rescues error and appends message to
+  # order base errors
+  # returns false if transaction fails
+  def update_items(attrs)
+    success = true
+    begin
+      Order.transaction do
+        attrs.each do |a|
+          order_content = OrderContent.find(a[:id])
+          if a[:quantity].to_i > 0
+            order_content.update!(a)
+          else
+            order_content.destroy!
+          end
+        end
+      end
+    rescue ActiveRecord::RecordInvalid => e
+      errors[:base] << e
+      success = false
+    end
+    success
   end
 
   # Returns the revenue for this order
@@ -216,6 +272,10 @@ class Order < ActiveRecord::Base
       .order('amount DESC')
   end
 end
+
+# --------------------------------
+# Dynamic Time Series Methods
+# --------------------------------
 
 attributes = ['revenue', 'count']
 time_intervals = ['day', 'week', 'month', 'year']
