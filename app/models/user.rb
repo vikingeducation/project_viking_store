@@ -4,14 +4,12 @@ class User < ActiveRecord::Base
                                :dependent => :destroy
 
   belongs_to :default_billing_address, :class_name => 'Address', 
-                                       :foreign_key => :billing_id,
-                                       :dependent => :destroy
+                                       :foreign_key => :billing_id
   belongs_to :default_shipping_address, :class_name => 'Address', 
-                                        :foreign_key => :shipping_id,
-                                        :dependent => :destroy
+                                        :foreign_key => :shipping_id
 
   has_many :credit_cards, :dependent => :destroy
-  has_many :orders
+  has_many :orders, :dependent => :nullify
   has_many :order_contents, :through => :orders
   has_many :products, :through => :order_contents
 

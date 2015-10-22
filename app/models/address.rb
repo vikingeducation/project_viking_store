@@ -6,14 +6,18 @@ class Address < ActiveRecord::Base
                                :foreign_key => :user_id
 
   has_many :default_billing_users, :class_name => 'User',
-                                   :foreign_key => :billing_id
+                                   :foreign_key => :billing_id,
+                                   :dependent => :nullify
   has_many :default_shipping_users, :class_name => 'User', 
-                                    :foreign_key => :shipping_id
+                                    :foreign_key => :shipping_id,
+                                    :dependent => :nullify
 
   has_many :billed_orders, :class_name => 'Order', 
-                           :foreign_key => :billing_id
+                           :foreign_key => :billing_id,
+                           :dependent => :nullify
   has_many :shipped_orders, :class_name => 'Order', 
-                            :foreign_key => :shipping_id
+                            :foreign_key => :shipping_id,
+                            :dependent => :nullify
 
   validates :street_address, :city_id, :state_id, :zip_code, :user_id, :presence => true
   validates :street_address, :length => { :maximum => 64 }

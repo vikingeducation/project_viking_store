@@ -2,7 +2,8 @@ class Product < ActiveRecord::Base
 
   belongs_to :category
 
-  has_many :order_contents, :class_name => "OrderContent"
+  has_many :order_contents, :class_name => "OrderContent",
+                            :dependent => :destroy
   has_many :orders, :through => :order_contents
 
   validates :name, :price, :category, :sku, :presence => true
