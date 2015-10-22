@@ -1,7 +1,7 @@
 <tr>
   <td><%= order_content[:product_id] %></td>
-  <td><%= order_content[:product_name] %></td>
-  <td><%= link_to admin_product_path(order_content[:product_id]), product_path(order_content[:product_id]) %></td>
+  <td><%= link_to order_content[:product_name], admin_product_path(order_content[:product_id]) %></td>
+  <td><%= order_content[:quantity] %></td>
   <td><%= currency_if_float(order_content[:price]) %></td>
   <td><%= currency_if_float(order_content[:total_price]) %></td>
 </tr>

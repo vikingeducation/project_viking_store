@@ -1,4 +1,4 @@
-module DashboardHelper
+module Admin::DashboardHelper
 
   def present_data(data)
 

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'admin/dashboard#index'
+  root 'admin/products#index'
 
   namespace :admin do
     get 'dashboard' => 'dashboard#index'
