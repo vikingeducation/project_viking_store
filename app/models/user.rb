@@ -25,6 +25,17 @@ class User < ActiveRecord::Base
 
   end
 
+  def get_or_build_cart
+
+    if self.has_cart?
+      self.get_cart
+    else
+      # create a new object in memory
+      self.orders.build
+    end
+
+  end
+
   # Portal Methods
   def self.get_index_data
 
