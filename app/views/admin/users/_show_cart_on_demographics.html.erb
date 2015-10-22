@@ -1,0 +1,5 @@
+<% if cart %>
+  <%= link_to "View Unplaced Order (Cart)", admin_order_path(cart) %>
+<% else %>
+  <p class=text-muted>View Unplaced Order (Cart)</p>
+<% end %>

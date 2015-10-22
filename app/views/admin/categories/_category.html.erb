@@ -1,0 +1,7 @@
+<tr class='text-center'>
+  <td><%= category.id %></td>
+  <td><%= category.name %></td>
+  <td><%= link_to 'Show', admin_category_path(category.id) %></td>
+  <td><%= link_to 'Edit', edit_admin_category_path(category.id) %></td>
+  <td><%= link_to 'Delete', admin_category_path(category.id), :method => :delete, :data => { :confirm => 'Delete Category?' } %></td>
+</tr>

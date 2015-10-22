@@ -1,0 +1,22 @@
+<tr>
+
+  <td><%= order[:relation].id %></td>
+  <td><%= link_to "#{order[:user].id}", admin_user_path(order[:user].id) %></td>
+  <td><%= order[:address].street_address %></td>
+  <td><%= order[:address].city.name %></td>
+  <td><%= order[:address].state.name %></td>
+  <td><%= order[:quantity] %></td>
+  <td><%= currency_if_float(order[:order_value]) %></td>
+
+  <td <%= "class=text-danger" if order[:status] == 'UNPLACED' %> >
+    <%= order[:status] %>
+  </td>
+
+  <td><%= order[:date_placed].to_date if order[:date_placed] %></td>
+  <td><%= link_to 'Show', admin_order_path(order[:relation].id) %></td>
+  <td><%= link_to 'Edit', edit_admin_order_path(order[:relation].id) %></td>
+  <td><%= link_to 'Delete', admin_order_path(order[:relation].id),
+            :method => :delete,
+            :data => { :confirm => 'Delete order?' } %></td>
+            
+</tr>

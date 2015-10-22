@@ -1,0 +1,50 @@
+<div class='row'>
+
+  <div class='col-xs-12'>
+    <h3 class='text-center'><strong>Edit Order Contents</strong></h3>
+  </div>
+
+</div>
+
+<!-- Order Contents table -->
+<div class='row show-block'>
+  <div class='col-xs-12'>
+
+    <%= form_for [:admin, order] do |f| %>
+
+      <table class='table table-striped table-bordered table-condensed'>
+
+        <thead class='bg-success'>
+          <tr>
+            <td>ID</td>
+            <td>Quantity</td>
+            <td>Price</td>
+            <td>Total Price</td>
+            <td>REMOVE</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%= render :partial => 'edit_order_content',
+                :collection => order_contents %>
+        </tbody>
+
+      </table>
+
+      <!-- Submit -->
+      <div class='row'>
+
+        <div class='col-xs-10 col-xs-offset-1'>
+          <%= f.submit "#{button_label}", class: 'btn btn-success btn-lg btn-block' %>
+        </div>
+
+      </div>
+
+    <% end %>
+
+    <%= render :partial => 'order_delete_link',
+          :locals => { :order_id => order.id } unless order.id.nil? %>
+
+
+  </div>
+</div>

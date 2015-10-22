@@ -1,0 +1,9 @@
+<tr class='text-center'>
+  <td><%= product.id %></td>
+  <td><%= product.name %></td>
+  <td><%= currency_if_float(product.price) %></td>
+  <td><%= link_to @available_categories[product.category_id - 1], admin_category_path(product.category_id) %></td>
+  <td><%= link_to 'Show', admin_product_path(product.id) %></td>
+  <td><%= link_to 'Edit', edit_admin_product_path(product.id) %></td>
+  <td><%= link_to 'Delete', admin_product_path(product.id), :method => :delete, :data => { :confirm => 'Delete product?' } %></td>
+</tr>

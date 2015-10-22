@@ -1,0 +1,16 @@
+<tr>
+
+  <td><%= address[:relation].id %></td>
+  <td><%= link_to "#{address[:user].first_name} #{address[:user].last_name}", admin_user_path(address[:user].id) %></td>
+  <td><%= address[:relation].street_address %></td>
+  <td><%= address[:city_name] %></td>
+  <td><%= address[:state_name] %></td>
+  <td><%= address[:order_count] %></td>
+  <td><%= address[:relation].created_at.to_date %></td>
+  <td><%= link_to 'Show', admin_address_path(address[:relation].id) %></td>
+  <td><%= link_to 'Edit', edit_admin_address_path(address[:relation].id) %></td>
+  <td><%= link_to 'Delete', admin_address_path(address[:relation].id),
+            :method => :delete,
+            :data => { :confirm => 'Delete address?' } %></td>
+            
+</tr>

@@ -1,0 +1,77 @@
+<div class='row'>
+
+  <div class='col-xs-12'>
+    <h4 class='text-center'><strong>Credit Card Information</strong></h4>
+  </div>
+
+</div>
+
+<div class='row'>
+
+  <div class='col-xs-3'>
+    <p><strong>First Name:</strong></p>
+  </div>
+
+  <div class='col-xs-9'>
+    <p><%= user.first_name %></p>
+  </div>
+
+</div>
+
+<div class='row'>
+
+  <div class='col-xs-3'>
+    <p><strong>Last Name:</strong></p>
+  </div>
+
+  <div class='col-xs-9'>
+    <p><%= user.last_name %></p>
+  </div>
+
+</div>
+
+
+
+<div class='row'>
+
+  <div class='col-xs-3'>
+    <p><strong>Number:</strong></p>
+  </div>
+
+  <div class='col-xs-9'>
+    <p><%= credit_card.card_number.to_s %></p>
+  </div>
+
+</div>
+
+<div class='row'>
+
+  <div class='col-xs-3'>
+    <p><strong>Expiration:</strong></p>
+  </div>
+
+  <div class='col-xs-9'>
+    <p><%= "#{credit_card.exp_year}-#{credit_card.exp_month}-1".to_date.end_of_month %></p>
+  </div>
+
+</div>
+
+<div class='row'>
+
+  <div class='col-xs-3'>
+    <p><strong>CV2:</strong></p>
+  </div>
+
+  <div class='col-xs-9'>
+    <p><%= credit_card.ccv.to_s %></p>
+  </div>
+
+</div>
+
+<div class='row'>
+
+  <div class='col-xs-12'>
+    <%= link_to "Remove Card", admin_credit_card_path(credit_card.id), :method => :delete, :data => { :confirm => 'Delete credit card?' } %>
+  </div>
+
+</div>

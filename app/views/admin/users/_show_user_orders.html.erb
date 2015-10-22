@@ -1,0 +1,15 @@
+<tr>
+  <td><%= show_user_orders.id %></td>
+  <td><%= show_user_orders.created_at.to_date %></td>
+  <td><%= currency_if_float(show_user_orders.value) %></td>
+
+  <td <%= "class=text-danger" if show_user_orders.status == 'UNPLACED' %> >
+    <%= show_user_orders.status %>
+  </td>
+
+  <td><%= link_to 'Show', admin_order_path(show_user_orders.id) %></td>
+  <td><%= link_to 'Edit', edit_admin_order_path(show_user_orders.id) %></td>
+  <td><%= link_to 'Delete', admin_order_path(show_user_orders.id),
+            :method => :delete,
+            :data => { :confirm => 'Delete order?' } %></td>
+</tr>
