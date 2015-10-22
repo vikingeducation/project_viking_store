@@ -43,6 +43,8 @@ gem 'hirb'
 
 group :development do
   gem 'better_errors'
+
+  gem 'bullet'
 end
 
 gem 'binding_of_caller'
