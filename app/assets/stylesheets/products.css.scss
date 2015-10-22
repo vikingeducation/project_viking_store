@@ -1,3 +1,31 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#storefront-footer {
+  background-color: #333;
+  color: #FFF;
+  height: 170px;
+
+  .contact-title {
+    color: #F6B26B;
+  }
+}
+
+#products-index {
+  .jumbotron {
+    background-image: url("viking_ship_background_medium.jpg");
+    background-size: contain;
+    background-position: center;
+    height: 320px;
+  }
+
+  .sub-jumbo {
+    background-color: #333;
+    color: #FFF;
+  }
+
+  .products-index-header {
+    
+  }
+}

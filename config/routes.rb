@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  root 'admin/products#index'
+  root 'products#index'
+
+  resources :session, :only => [:new, :create, :destroy]
+  resources :products, :only => [:index]
+  resources :orders, :only => [:create, :update]
 
   namespace :admin do
     get 'dashboard' => 'dashboard#index'

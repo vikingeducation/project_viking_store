@@ -1,0 +1,73 @@
+<section id='products-index'>
+
+  <%# jumbotron %>
+  <div class='jumbotron'>
+
+    <div class="container">
+
+      <h1 class='text-center'>The Viking Store</h1>
+
+    </div> <!-- container -->
+
+  </div> <!-- jumbotron -->
+
+  <div class='sub-jumbo'>
+    <div class='container'>
+      <h2 class='text-center'>The Best Viking Gear on the Whole Web</h2>
+    </div>
+  </div>
+
+  <section class='products-index-panels'>
+
+    <div class='container'>
+
+      <div class='row products-index-header'>
+        <div class='col-xs-12 text-center'>
+          <h4><em>Choose from among our lineup of fine items below</em></h4>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-xs-10 col-xs-offset-1'>
+
+          <div class='row'>
+            <div class='col-xs-4 col-xs-offset-8'>
+
+              <form action="<%= products_path %>" method="GET">
+                <div class='form-group'>
+                  <div class='row'>
+                    <div class='col-xs-6'>
+
+                      <%= select_tag  :category_id,
+                                      options_from_collection_for_select( Category.all, 
+                                           :id,
+                                           :name,
+                                           params[:category_id]),
+                                      :include_blank => true,
+                                      :class => 'form-control'
+                      %>
+
+                    </div>
+                    <div class='col-xs-6'>
+                      <input type="submit" class='btn btn-default btn-block'>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+          <div class='row'>
+            <%= render @products, :locals => { :cart => @cart } %>
+          </div>
+
+        </div>
+      </div>
+
+    </div> <!-- content container -->
+
+  </section> <!-- end of producst-index-panels section -->
+
+
+</section> <!-- end of entire products-index section -->

@@ -9,6 +9,17 @@ class Product < ActiveRecord::Base
   validates :name, :price, :category, :sku, :presence => true
   validates :price, :numericality => true, :length =>{ :in => 0..10_000 }
 
+  # store methods
+  def self.filter_by(category = nil)
+
+    if category
+      where(:category_id => category.id)
+    else
+      all
+    end
+
+  end
+
   # portal
   def times_ordered
 

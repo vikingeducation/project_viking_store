@@ -13,6 +13,13 @@ class User < ActiveRecord::Base
   has_many :order_contents, :through => :orders
   has_many :products, :through => :order_contents
 
+  # store methods
+  def has_cart?
+    
+    self.orders.where('checkout_date IS NULL').empty?
+
+  end
+
   # Portal Methods
   def self.get_index_data
 
