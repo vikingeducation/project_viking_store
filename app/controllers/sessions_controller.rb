@@ -9,16 +9,18 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       sign_in user
+      merge_visitor_cart
       flash[:success] = "You have been signed in!"
+      redirect_to root_path
     else
-      flash.new[:error] = "You have failed to sign in - please try again."
+      flash.now[:error] = "You have failed to sign in - please try again."
+      render :new
     end
 
   end
 
   def destroy
 
-    user = current_user
     if sign_out
       flash[:success] = "You have signed out!"
       redirect_to root_path

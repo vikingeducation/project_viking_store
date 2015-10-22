@@ -13,10 +13,15 @@ class User < ActiveRecord::Base
   has_many :order_contents, :through => :orders
   has_many :products, :through => :order_contents
 
+  validates :first_name, :last_name, :email, :presence => true, :length => { :in => 1..64 }
+  validates :email, :format => { :with => /.+@.+/, :message => "format is invalid." }
+
+  validates_confirmation_of :email
+
   # store methods
   def has_cart?
     
-    self.orders.where('checkout_date IS NULL').empty?
+    !self.orders.where('checkout_date IS NULL').empty?
 
   end
 

@@ -14,6 +14,13 @@ class Order < ActiveRecord::Base
   belongs_to :billing_card, :class_name => 'CreditCard',
                             :foreign_key => :billing_card_id
 
+  # Store Methods
+  def update_quantity(product_id, amount)
+
+    self.order_contents.where(:product_id => product_id).first.increase_quantity(amount)
+
+  end
+
   # Portal Methods
   def order_value
 

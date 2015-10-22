@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
 
   def sign_out
 
-    session.delete(:current_user_id) && @current_user = nil
+    @current_user = nil
+    session.delete(:current_user_id)
 
   end
 
@@ -36,5 +37,45 @@ class ApplicationController < ActionController::Base
 
   end
   helper_method :signed_in_user?
+
+  def merge_visitor_cart
+
+    if current_user.has_cart?
+      cart = current_user.get_cart
+    else
+      cart = current_user.orders.build
+    end
+
+    # run through session[:visitor_cart] and add qty based on id's
+    if session[:visitor_cart]
+      session[:visitor_cart].each do |add_id, add_quantity|
+
+        if product_exists?(cart, add_id.to_i)
+          cart.update_quantity(add_id.to_i, add_quantity)
+          #cart.order_contents.where(:product_id => add_id.to_i).first.increase_quantity(add_quantity)
+        else
+          product = Product.find(add_id)
+          cart.products << product
+        end
+
+        cart.save!
+
+      end
+
+      session.delete(:visitor_cart)
+
+    end
+
+  end
+
+  private
+
+  def product_exists?(order, product_id)
+
+    # pluck returns an array of attribute values type-casted to match the plucked column names
+    # e.g. [1, 2, 3] for product_id
+    order.products.pluck(:product_id).include?(product_id)
+
+  end
 
 end
