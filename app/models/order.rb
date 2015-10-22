@@ -16,6 +16,8 @@ class Order < ActiveRecord::Base
   validates :billing,
             :presence => true
 
+  # Allow without CC until
+  # CC creation implemented
   # validates :credit_card,
   #           :presence => true
 
@@ -107,6 +109,10 @@ class Order < ActiveRecord::Base
       .to_a
       .first
     result ? result.amount.to_f : 0
+  end
+
+  def to_temp(session)
+    # change to TempOrder
   end
 
   # --------------------------------

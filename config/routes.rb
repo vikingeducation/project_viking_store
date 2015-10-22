@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   get '/admin', :to => 'admin#index'
   
   # Public Routes
+  resources :carts, :only => [:show, :edit, :create, :update]
   resources :products, :only => [:index]
+  
+  resource :session, :only => [:new, :create, :destroy]
 
   # Root
   root :to => 'products#index'

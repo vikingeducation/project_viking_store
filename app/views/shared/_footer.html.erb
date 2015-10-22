@@ -1,6 +1,7 @@
 <footer class="footer">
   <div class="pull-right">
     <%= link_to(fa('sign-in') + ' Admin Login', admin_path) %>
+    <%= link_to(fa('sign-out') + 'Sign Out', session_path, :method => :delete) %>
   </div>
 
   <div class="title">

@@ -5,6 +5,31 @@ class ApplicationController < ActionController::Base
 
   before_action :assert_id, :only => [:show, :edit, :update, :destroy]
 
+  def sign_in(user)
+    session[:current_user_id] = user.id
+  end
+
+  def sign_out
+    session.delete(:current_user_id)
+    current_user = nil
+    session[:current_user_id].nil? && current_user.nil?
+  end
+
+  def current_user
+    return nil unless session[:current_user_id]
+    @current_user ||= User.find(session[:current_user_id])
+  end
+
+  def current_user=(user)
+    @current_user = user
+  end
+  helper_method :current_user
+
+  def signed_in_user?
+    !!current_user
+  end
+  helper_method :signed_in_user?
+
 
   protected
   def assert_id
