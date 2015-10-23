@@ -1,5 +1,5 @@
 <%= form_tag('/carts') do %>
-  <%= hidden_field_tag('order_id', current_user ? order.id : '') %>
+  <%= hidden_field_tag('order_id', current_user ? current_user.cart.id : '') %>
   <%= hidden_field_tag('order_content[0][product_id]', product.id) %>
   <%= hidden_field_tag('order_content[0][quantity]', 1) %>
   <%= submit_tag('Add to Cart', :class => 'btn btn-primary') %>

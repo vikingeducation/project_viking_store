@@ -58,7 +58,12 @@ class User < ActiveRecord::Base
     result = orders.where('checkout_date IS NULL')
       .limit(1)
       .to_a
-    result.length > 0 ? result.first : Order.new
+    if result.present?
+      result.first
+    else
+      order = orders.build(:shipping => shipping, :billing => billing)
+      order
+    end
   end
 
   # Returns the user's placed orders

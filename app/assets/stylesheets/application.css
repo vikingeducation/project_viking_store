@@ -16,6 +16,7 @@
 
 #main {
   margin-bottom: 64px;
+  min-height: 512px;
 }
 
 #main-footer {
