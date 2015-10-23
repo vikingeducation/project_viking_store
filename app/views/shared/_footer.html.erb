@@ -1,36 +1,32 @@
-<footer class="footer">
+<footer id="main-footer">
+      
   <div class="pull-right">
     <%= link_to(fa('sign-in') + ' Admin Login', admin_path) %>
     <%= link_to(fa('sign-out') + 'Sign Out', session_path, :method => :delete) %>
   </div>
 
-  <div class="title">
+  <div class="contact-info center-block">
     <h2>CONTACT</h2>
+    <ul class="list-group">
+      <%
+      [
+        [fa('phone-square'), '1 - 800 - AXE - GEAR', 'tel:1-000-000-0000'],
+        [fa('envelope'), 'mail@vikingstore.com', 'mailto:mail@vikingstore.com'],
+        [fa('github-square'), 'Bideo Wego on Github', 'https://github.com/BideoWego'],
+        [fa('gamepad'), 'More by Bideo Wego', 'http://bideowego.com']
+      ].each do |list_item|
+        icon = list_item[0]
+        text = list_item[1]
+        href = list_item[2]
+      %>
+
+      <li class="list-group-item">
+        <%= icon %>
+        <%= link_to(text, href) %>
+      </li>
+
+      <% end %>
+    </ul>
   </div>
-  <div class="contact">
-    <div class="info">
-      <%= fa('phone-square') %>
-      <a href="tel:1-000-000-0000">
-        1 - 800 - AXE - GEAR
-      </a>
-    </div>
-    <div class="info">
-      <%= fa('envelope') %>
-      <a href="mailto:mail@vikingstore.com">
-        mail@vikingstore.com
-      </a>
-    </div>
-    <div class="info">
-      <%= fa('github-square') %>
-      <a href="https://github.com/BideoWego">
-        Bideo Wego on Github
-      </a>
-    </div>
-    <div class="info">
-      <%= fa('gamepad') %>
-      <a href="http://bideowego.com">
-        More by Bideo Wego
-      </a>
-    </div>
-  </div>
+
 </footer>
