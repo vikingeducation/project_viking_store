@@ -8,16 +8,10 @@
 
 <div class="container">
   <section>
-    <%= render 'table' %>
+    
+    <% @panels.each do |panel| %>
+      <%= render partial: 'panel', locals: { panel: panel } %>
+    <% end %>
 
-    <%= render 'table' %>
-
-    <%= render 'table' %>
-
-    <%= render 'table' %>
-
-    <%= render 'table' %>
-
-    <%= render 'table' %>
   </section>
 </div>
