@@ -28,7 +28,8 @@ gem 'faker'
 gem 'bootstrap-sass'
 
 group :development, :test do
-  gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
+  gem 'hirb'
+  gem 'pry-rails'
   gem 'pry-byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views

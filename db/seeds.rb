@@ -47,6 +47,7 @@ def generate_product
   p[:description] = Faker::Lorem.sentence
   p[:sku]         = Faker::Code.ean
   p[:price]       = random_price
+  p[:created_at]  = creation_date
   p.save
 end
 

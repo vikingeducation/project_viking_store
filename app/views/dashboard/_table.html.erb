@@ -1,19 +1,23 @@
 <div class="panel panel-default">
-  <div class="panel-heading"><%= t[:title] %></div>
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t[:title] %></h3>
+  </div>
 
   <table class="table">
     <thead>
       <tr>
-        <th>Item</th>
-        <th>Data</th>
+        <% t[:headers].each do |header| %>
+          <th><%= header %></th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
 
       <% t[:rows].each do |row| %>
         <tr>
-          <td><%= row[0] %></td>
-          <td><%= row[1] %></td>
+          <% row.each do |value| %>
+            <td><%= value %></td>
+          <% end %>
         </tr>
       <% end %>
 
