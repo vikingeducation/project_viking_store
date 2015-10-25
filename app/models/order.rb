@@ -53,7 +53,7 @@ class Order < ActiveRecord::Base
 
 
   def self.average_order_value(period = nil)
-    avg = Order.select("AVG(totals.order_value) as order_avg").
+    avg = Order.select("ROUND(AVG(totals.order_value),2) as order_avg").
                 joins("JOIN (#{Order.order_totals.to_sql}) totals ON totals.id = orders.id")
     if period
       avg = avg.checkout_date_rage(period)
@@ -70,6 +70,31 @@ class Order < ActiveRecord::Base
     end
     max.to_a.first.order_max
     
+  end
+
+
+  def self.orders_by_day(days)
+    Order.orders_by_time_period(:day, days)
+  end
+
+
+  def self.orders_by_week(weeks)
+    Order.orders_by_time_period(:week, weeks)
+  end
+
+
+  private
+
+
+  def self.orders_by_time_period(time_period, limit)
+    totals = Order.select("*").joins("JOIN (#{Order.order_totals.to_sql}) t ON t.id = orders.id")
+
+    Order.select("DATE(intervals) AS #{time_period}, COALESCE(COUNT(totals.*), 0) AS num_orders, 
+                                     COALESCE(SUM(totals.order_value), 0) AS revenue").
+          from("GENERATE_SERIES(( SELECT DATE(DATE_TRUNC('#{time_period}', MIN(checkout_date))) FROM orders),
+                CURRENT_DATE, '1 #{time_period}'::INTERVAL) intervals").
+          joins("LEFT JOIN (#{totals.to_sql}) totals ON DATE(totals.checkout_date) = intervals").
+          group("intervals").order("intervals DESC").limit(limit)
   end
 
 

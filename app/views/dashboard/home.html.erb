@@ -9,10 +9,26 @@
 <div class="container">
   <section>
     
-    <% @panels.each do |panel| %>
+    <% @top_panels.each do |panel| %>
       <%= render partial: 'panel', locals: { panel: panel } %>
     <% end %>
 
   </section>
 
+  <section>
+    
+    <% @bottom_panels.each do |panel| %>
+      <%= render partial: 'panel', locals: { panel: panel } %>
+    <% end %>
+
+  </section>
+
+</div>
+
+<div class="container">
+  <footer>
+    
+    <div class="col-md-4 col-md-offset-8 well well-sm">Query time: <%= @benchmark %> seconds.</div>
+
+  </footer>
 </div>

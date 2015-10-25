@@ -1,8 +1,16 @@
 class Dashboard
 
-  def build_panels
-    [overall_platform_panel, behavior_demographics_panel, order_statistics_panel]
+  def top_panels
+    [ overall_platform_panel, behavior_demographics_panel ]
   end
+
+
+  def bottom_panels
+    [ order_statistics_panel, time_series_panel ]
+  end
+
+
+  private
 
 
   def overall_platform_panel
@@ -28,7 +36,12 @@ class Dashboard
   end
 
 
-  private
+  def time_series_panel
+    panel = {}
+    panel[:title] = "Time Series Data"
+    panel[:tables] = [orders_by_day, orders_by_week]
+    panel
+  end
 
 
   # Overall Platform Tables
@@ -156,6 +169,39 @@ class Dashboard
     table[:rows] << ["Total Revenue", Order.total_revenue(7)]
     table[:rows] << ["Average Order Value", Order.average_order_value(7)]
     table[:rows] << ["Largest Order Value", Order.largest_order_value(7)]
+    table
+  end
+
+
+  #Time Series Data
+  def orders_by_day
+    table = {}
+    table[:title] = "Orders by day"
+    table[:headers] = ["Date", "Quantity", "Revenue"]
+    table[:rows] = []
+    Order.orders_by_day(7).each do |interval|
+      case interval.day
+      when DateTime.now.to_date
+        date = "Today"
+      when DateTime.now.to_date - 1
+        date = "Yesterday"
+      else
+        date = interval.day
+      end
+      table[:rows] << [date, interval.num_orders, interval.revenue]
+    end
+    table
+  end
+
+
+  def orders_by_week
+    table = {}
+    table[:title] = "Orders by week"
+    table[:headers] = ["Date", "Quantity", "Revenue"]
+    table[:rows] = []
+    Order.orders_by_week(7).each do |interval|
+      table[:rows] << [interval.week, interval.num_orders, interval.revenue]
+    end
     table
   end
 
