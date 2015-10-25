@@ -1,0 +1,215 @@
+<%= render :partial => 'shared/errors', :locals => {:object => user} %>
+
+<div class="row">
+  <%= form_for(user) do |user_fields| %>
+      <div class="col-md-6">
+        <% if user.new_record? %>
+
+          <!-- Billing -->
+          <%= user_fields.fields_for(:billing) do |billing_fields| %>
+            <h2>Billing Address</h2>
+
+              <div class="form-group">
+                <%= billing_fields.label(:street_address) %>
+                <%= billing_fields.text_field(:street_address, :class => 'form-control') %>
+              </div>
+
+              <div class="form-group">
+                <%= billing_fields.label(:secondary_address) %>
+                <%= billing_fields.text_field(:secondary_address, :class => 'form-control') %>
+              </div>
+
+              <div class="form-group">
+                <%= billing_fields.label(:city_id) %>
+                <%= billing_fields.collection_select(
+                  :city_id,
+                  City.all,
+                  :id,
+                  :name,
+                  {},
+                  {:class => 'form-control'}
+                ) %>
+              </div>
+
+              <div class="form-group">
+                <%= billing_fields.label(:state_id) %>
+                <%= billing_fields.collection_select(
+                  :state_id,
+                  State.all,
+                  :id,
+                  :name,
+                  {},
+                  {:class => 'form-control'}
+                ) %>
+
+                <%= billing_fields.label(:zip_code) %>
+                <%= billing_fields.text_field(:zip_code, :class => 'form-control') %>
+              </div>
+
+              <%= billing_fields.hidden_field(:user_id, :value => user.id) %>
+          <% end %>
+
+          <!-- Shipping -->
+          <%= user_fields.fields_for(:shipping) do |shipping_fields| %>
+            <h2>Shipping Address</h2>
+
+              <div class="form-group">
+                <%= shipping_fields.label(:street_address) %>
+                <%= shipping_fields.text_field(:street_address, :class => 'form-control') %>
+              </div>
+
+              <div class="form-group">
+                <%= shipping_fields.label(:secondary_address) %>
+                <%= shipping_fields.text_field(:secondary_address, :class => 'form-control') %>
+              </div>
+
+              <div class="form-group">
+                <%= shipping_fields.label(:city_id) %>
+                <%= shipping_fields.collection_select(
+                  :city_id,
+                  City.all,
+                  :id,
+                  :name,
+                  {},
+                  {:class => 'form-control'}
+                ) %>
+              </div>
+
+              <div class="form-group">
+                <%= shipping_fields.label(:state_id) %>
+                <%= shipping_fields.collection_select(
+                  :state_id,
+                  State.all,
+                  :id,
+                  :name,
+                  {},
+                  {:class => 'form-control'}
+                ) %>
+
+                <%= shipping_fields.label(:zip_code) %>
+                <%= shipping_fields.text_field(:zip_code, :class => 'form-control') %>
+              </div>
+
+              <%= shipping_fields.hidden_field(:user_id, :value => user.id) %>
+          <% end %>
+
+        <!-- Addresses -->
+        <% else %>
+
+          <h2>Billing Address</h2>
+          <div class="form-group">
+            <%= user_fields.collection_select(
+              :billing_id,
+              user.addresses,
+              :id,
+              :street_address,
+              {},
+              {:class => 'form-control'}
+            ) %>
+          </div>
+
+          <h2>Shipping Address</h2>
+          <div class="form-group">
+            <%= user_fields.collection_select(
+              :shipping_id,
+              user.addresses,
+              :id,
+              :street_address,
+              {},
+              {:class => 'form-control'}
+            ) %>
+          </div>
+
+          <%= user_fields.fields_for(:addresses) do |address_fields| %>
+            <h2>
+              Address
+              <%= address_fields.options[:child_index] + 1 %>
+              <% if address_fields.object.id == user.billing.id %>
+                <span class="text-info">
+                  (Billing)
+                </span>
+              <% end %>
+              <% if address_fields.object.id == user.shipping.id %>
+                <span class="text-info">
+                  (Shipping)
+                </span>
+              <% end %>
+            </h2>
+
+            <div class="form-group">
+              <%= address_fields.label(:street_address) %>
+              <%= address_fields.text_field(:street_address, :class => 'form-control') %>
+            </div>
+
+            <div class="form-group">
+              <%= address_fields.label(:secondary_address) %>
+              <%= address_fields.text_field(:secondary_address, :class => 'form-control') %>
+            </div>
+
+            <div class="form-group">
+              <%= address_fields.label(:city_id) %>
+              <%= address_fields.collection_select(
+                :city_id,
+                City.all,
+                :id,
+                :name,
+                {:include_blank => true},
+                {:class => 'form-control'}
+              ) %>
+            </div>
+
+            <div class="form-group">
+              <%= address_fields.label(:state_id) %>
+              <%= address_fields.collection_select(
+                :state_id,
+                State.all,
+                :id,
+                :name,
+                {:include_blank => true},
+                {:class => 'form-control'}
+              ) %>
+
+              <%= address_fields.label(:zip_code) %>
+              <%= address_fields.text_field(:zip_code, :class => 'form-control') %>
+            </div>
+
+            <% if address_fields.object.persisted? && address_fields.object.placed_orders.empty? %>
+              <%= address_fields.label(:_destroy, 'Delete?', :class => 'text-danger') %>
+              <%= address_fields.check_box(:_destroy) %>
+            <% end %>
+
+            <%= address_fields.hidden_field(:user_id, :value => user.id) %>
+
+          <% end %>
+        <% end %>
+      </div>
+
+    <!-- User -->
+    <div class="col-md-6">
+      <h2>Account Information</h2>
+      
+      <div class="form-group">
+        <%= user_fields.label(:email) %>
+        <%= user_fields.email_field(:email, :class => 'form-control') %>
+      </div>
+
+      <div class="form-group">
+        <%= user_fields.label(:first_name) %>
+        <%= user_fields.text_field(:first_name, :class => 'form-control') %>
+      </div>
+      <div class="form-group">
+        <%= user_fields.label(:last_name) %>
+        <%= user_fields.text_field(:last_name, :class => 'form-control') %>
+      </div>
+
+      <%= user_fields.submit(current_user ? 'Update Profile' : 'Sign Up', :class => 'btn btn-primary btn-lg') %>
+
+      <% if user.persisted? %>
+        <%= link_to('Delete Account', user_path(user), :method => :delete, :class => 'btn btn-danger btn-lg', :data => {:confirm => 'Delete?'}) %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+
+

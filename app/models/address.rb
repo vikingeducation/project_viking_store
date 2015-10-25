@@ -1,7 +1,9 @@
 class Address < ActiveRecord::Base
   belongs_to :city
   belongs_to :state
-  belongs_to :user
+  belongs_to :user, :inverse_of => :billing
+  belongs_to :user, :inverse_of => :shipping
+  belongs_to :user, :inverse_of => :addresses
   has_many :billing_orders, :class_name => 'Order', :foreign_key => :billing_id
   has_many :shipping_orders, :class_name => 'Order', :foreign_key => :shipping_id
 

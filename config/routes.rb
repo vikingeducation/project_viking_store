@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # Public Routes
   resources :carts, :only => [:show, :edit, :create, :update]
   resources :products, :only => [:index]
+  resources :users, :except => [:index, :show]
   
   resource :session, :only => [:new, :create, :destroy]
 

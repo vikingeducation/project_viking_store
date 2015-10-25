@@ -22,7 +22,10 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <% if current_user %>
-            <%= link_to(fa('sign-out') + 'Sign Out', session_path, :method => :delete) %>
+            <%= link_to(fa('user') + ' Edit Profile', edit_user_path(current_user)) %>
+        </li>
+        <li>
+            <%= link_to(fa('sign-out') + ' Sign Out', session_path, :method => :delete) %>
           <% else %>
             <%= link_to(fa('sign-in') + ' Sign In', new_session_path) %>
           <% end %>

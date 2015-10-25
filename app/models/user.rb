@@ -1,11 +1,23 @@
 class User < ActiveRecord::Base
-  has_one :billing, :class_name => 'Address'
-  has_one :shipping, :class_name => 'Address'
+  has_one :billing, :class_name => 'Address', :inverse_of => :user
+  has_one :shipping, :class_name => 'Address', :inverse_of => :user
   has_many :orders
-  has_many :addresses
+  has_many :addresses, :inverse_of => :user
   has_many :credit_cards
   has_many :order_contents, :through => :orders, :source => :items
   has_many :products, :through => :order_contents
+
+  accepts_nested_attributes_for :billing,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
+
+  accepts_nested_attributes_for :shipping,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
+
+  accepts_nested_attributes_for :addresses,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
 
   validates :first_name,
             :presence => true,
