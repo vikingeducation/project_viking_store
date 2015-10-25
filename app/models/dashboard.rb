@@ -1,7 +1,7 @@
 class Dashboard
 
   def build_panels
-    [overall_platform_panel, behavior_demographics_panel]
+    [overall_platform_panel, behavior_demographics_panel, order_statistics_panel]
   end
 
 
@@ -17,6 +17,13 @@ class Dashboard
     panel = {}
     panel[:title] = "User Demographics and Behavior"
     panel[:tables] = [top_three_states, top_three_cities, top_users]
+    panel
+  end
+
+  def order_statistics_panel
+    panel = {}
+    panel[:title] = "Order Statistics"
+    panel[:tables] = [orders_last_seven, orders_last_thirty, orders_total]
     panel
   end
 
@@ -111,5 +118,46 @@ class Dashboard
 
     table
   end
+
+
+  #Order Statistics
+  def orders_total
+    table = {}
+    table[:title] = "Total"
+    table[:headers] = ["Item", "Data"]
+    table[:rows] = []
+    table[:rows] << ["Numer of Orders", Order.submitted_count]
+    table[:rows] << ["Total Revenue", Order.total_revenue]
+    table[:rows] << ["Average Order Value", Order.average_order_value]
+    table[:rows] << ["Largest Order Value", Order.largest_order_value]
+    table
+  end
+
+
+  def orders_last_thirty
+    table = {}
+    table[:title] = "Last 30 Days"
+    table[:headers] = ["Item", "Data"]
+    table[:rows] = []
+    table[:rows] << ["Numer of Orders", Order.submitted_count(30)]
+    table[:rows] << ["Total Revenue", Order.total_revenue(30)]
+    table[:rows] << ["Average Order Value", Order.average_order_value(30)]
+    table[:rows] << ["Largest Order Value", Order.largest_order_value(30)]
+    table
+  end
+
+
+  def orders_last_seven
+    table = {}
+    table[:title] = "Last 7 Days"
+    table[:headers] = ["Item", "Data"]
+    table[:rows] = []
+    table[:rows] << ["Numer of Orders", Order.submitted_count(7)]
+    table[:rows] << ["Total Revenue", Order.total_revenue(7)]
+    table[:rows] << ["Average Order Value", Order.average_order_value(7)]
+    table[:rows] << ["Largest Order Value", Order.largest_order_value(7)]
+    table
+  end
+
   
 end

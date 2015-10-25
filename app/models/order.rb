@@ -3,8 +3,7 @@ class Order < ActiveRecord::Base
   def self.submitted_count(period = nil)
     submitted = Order.submitted
     if period 
-      submitted = submitted.where( "checkout_date BETWEEN :start AND :finish",
-                          { start: DateTime.now - period, finish: DateTime.now } )
+      submitted = submitted.checkout_date_rage(period)
     end
     submitted.count
   end
@@ -13,8 +12,7 @@ class Order < ActiveRecord::Base
   def self.total_revenue(period = nil)
     total = Order.select("SUM(products.price) AS t").join_with_products.submitted
     if period
-      total = total.where( "checkout_date BETWEEN :start AND :finish",
-                          { start: DateTime.now - period, finish: DateTime.now } )
+      total = total.checkout_date_rage(period)
     end
     total.to_a.first.t
   end
@@ -51,6 +49,33 @@ class Order < ActiveRecord::Base
               group("orders.user_id").order("ocount DESC").limit(1)
     User.select("users.first_name, users.last_name, ocount AS value").
          joins("JOIN (#{o.to_sql}) o ON o.user_id = users.id").first
+  end
+
+
+  def self.average_order_value(period = nil)
+    avg = Order.select("AVG(totals.order_value) as order_avg").
+                joins("JOIN (#{Order.order_totals.to_sql}) totals ON totals.id = orders.id")
+    if period
+      avg = avg.checkout_date_rage(period)
+    end
+    avg.to_a.first.order_avg
+  end
+
+
+  def self.largest_order_value(period = nil)
+    max = Order.select("MAX(totals.order_value) as order_max").
+                joins("JOIN (#{Order.order_totals.to_sql}) totals ON totals.id = orders.id")
+    if period
+      max = max.checkout_date_rage(period)
+    end
+    max.to_a.first.order_max
+    
+  end
+
+
+  def self.checkout_date_rage(period)
+    where( "checkout_date BETWEEN :start AND :finish",
+         { start: DateTime.now - period, finish: DateTime.now } )
   end
 
 
