@@ -39,4 +39,8 @@ class ApplicationController < ActionController::Base
       )
     end
   end
+
+  def restrict_to_signed_in
+    redirect_to root_path, :flash => {:error => 'You must sign in to do that'} unless current_user
+  end
 end

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :users, :except => [:index, :show]
   
   resource :cart, :only => [:edit, :create, :update, :destroy]
+  resource :order, :only => [:new, :create, :destroy]
   resource :session, :only => [:new, :create, :destroy]
 
   # Root
