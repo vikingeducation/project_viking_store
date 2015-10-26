@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       sign_in user
-      merge_visitor_cart
       flash[:success] = "You have been signed in!"
       redirect_to root_path
     else

@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
     session[:current_user_id] = user.id
     @current_user = user
+    merge_visiter_cart
 
   end
 
@@ -38,18 +39,18 @@ class ApplicationController < ActionController::Base
   end
   helper_method :signed_in_user?
 
-  def merge_visitor_cart
+  def merge_visiter_cart
 
     cart = current_user.get_or_build_cart
 
-    if session[:visitor_cart]
+    if session[:visiter_cart]
 
-      session[:visitor_cart].each do |add_id, add_quantity|
+      session[:visiter_cart].each do |add_id, add_quantity|
         update_quantity(cart, add_id.to_i, add_quantity)
         cart.save!
       end
 
-      session.delete(:visitor_cart)
+      session.delete(:visiter_cart)
     end
     
   end
@@ -82,19 +83,22 @@ class ApplicationController < ActionController::Base
   def update_quantity(cart, product_id, add_quantity)
 
     if product_exists?(cart, product_id)
+      # order model
       cart.update_quantity(product_id, add_quantity)
     else
+      # adds product to cart if product_id is not already in cart
       product = Product.find(product_id)
       cart.products << product
     end
 
   end
 
+  # check if product_id exists in cart
   def product_exists?(order, product_id)
 
     # pluck returns an array of attribute values type-casted to match the plucked column names
     # e.g. [1, 2, 3] for product_id
-    order.products.pluck(:product_id).include?(product_id)
+    order.products.pluck(:product_id).include?(product_id.to_i)
 
   end
 

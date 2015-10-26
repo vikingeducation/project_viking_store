@@ -1,0 +1,123 @@
+<div class='container'>
+
+  <h1 class='text-center'>Checkout</h1>
+
+  <%= form_for [current_user, @order] do |order_fields| %>
+
+    <div class='row'>
+
+      <div class='col-md-6'>
+        <h3 class='text-center'>Shipping + Billing</h3>
+
+        <div class='form-group'>
+          <%= order_fields.label :shipping_id, 'Shipping Address' %>
+          <%= order_fields.collection_select :shipping_id, @order.user.created_addresses, :id, :street_address, {}, class: 'form-control' %>
+        </div>
+
+        <div class='form-group'>
+          <%= order_fields.label :billing_id, 'Billing Address' %>
+          <%= order_fields.collection_select :billing_id, @order.user.created_addresses, :id, :street_address, {}, class: 'form-control' %>
+        </div>
+
+        <%= link_to 'Edit Saved Addresses', edit_user_path(current_user) %>
+
+          <%= order_fields.fields_for :user do |user_fields| %>
+            <%= user_fields.fields_for :credit_cards do |cc_fields| %>
+
+              <div class='form-group'>
+                <%= cc_fields.label :card_number, 'Credit Card Number' %>
+                <%= cc_fields.text_field :card_number, class: 'form-control' %>
+              </div>
+
+              <div class='row'>
+                <div class='col-sm-6'>
+                  <%= cc_fields.label :exp_year, 'Expiration' %>
+                  <%= cc_fields.text_field :exp_year, class: 'form-control' %>
+                </div>
+                <div class='col-sm-6'>
+                  <%= cc_fields.label :exp_month, 'CVV' %>
+                  <%= cc_fields.text_field :exp_month, class: 'form-control' %>
+                </div>
+              </div>
+
+          <% end %>
+        <% end %>
+
+        <%= link_to 'Delete Card', '#' %>
+
+      </div> <!-- LEFT column -->
+
+      <div class='col-md-6'>
+        <h3 class='text-center'>Review + Complete</h3>
+
+        <table class='table table-striped table-bordered table-condensed'>
+
+          <thead class='bg-success'>
+            <tr>
+              <td>Product</td>
+              <td>Quantity</td>
+              <td>Price</td>
+              <td>Total Price</td>
+            </tr>
+          </thead>
+
+          <tbody>
+            <%= render :partial => 'checkout_contents', collection: @order.order_contents, as: :content_row %>
+          </tbody>
+
+        </table>
+
+        <div class='row'>
+          <div class='col-sm-6'>
+            <%= link_to 'Edit Order', edit_user_order_path(current_user, @order) %>
+            <br>
+            <%= link_to 'Delete Order', user_order_path(current_user, @order), :method => 'DELETE' %>
+          </div>
+
+          <div class='col-sm-6'>
+            <div class='row text-muted'>
+              <div class='col-xs-6'>
+                <p>Shipping:</p>
+              </div>
+              <div class='col-xs-6'>
+                <p><%= number_to_currency(@shipping_charge) %></p>
+              </div>
+            </div>
+            <div class='row text-muted'>
+              <div class='col-xs-6'>
+                <p>Tax:</p>
+              </div>
+              <div class='col-xs-6'>
+                <p><%= number_to_currency(@tax) %></p>
+              </div>
+            </div>
+            <div class='row'>
+              <strong>
+                <div class='col-xs-6'>
+                  <p>TOTAL:</p>
+                </div>
+                <div class='col-xs-6'>
+                  <p><%= number_to_currency(@order.order_value) %></p>
+                </div>
+              </strong>
+            </div>
+          </div>
+
+        </div>
+
+        <div class='row'> <!-- button -->
+          <div class='col-xs-12'>
+            <h3 class='text-center'>Place Your Order</h3>
+
+            <%= order_fields.submit 'Place Order!', class: 'btn btn-success btn-lg btn-block' %>
+          </div>
+        </div> <!-- button -->
+
+
+      </div> <!-- RIGHT column -->
+
+    </div>
+
+  <% end %>
+
+</div>

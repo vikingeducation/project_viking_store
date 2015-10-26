@@ -1,0 +1,23 @@
+<div class='row product-panel'>
+  <div class='col-xs-3'>
+
+    <div>
+      <a href="#">
+        <img src="#" height='96' width='96'>
+      </a>
+    </div>
+
+  </div>
+
+  <div class='col-xs-7'>
+
+    <h4 class=""><%= content_fields.object.product.name %></h4>
+    <h5 class='text-muted'><%= content_fields.object.product.category.name %></h5>
+
+  </div>
+
+  <div class='col-xs-2'>
+    <h4><%= number_to_currency(content_fields.object.product.price) %></h4>
+  </div>
+
+</div>

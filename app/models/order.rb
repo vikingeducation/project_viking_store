@@ -4,6 +4,11 @@ class Order < ActiveRecord::Base
 
   has_many :order_contents, :class_name => "OrderContent",
                             :dependent => :destroy
+
+  accepts_nested_attributes_for :order_contents,
+                                :reject_if => proc { |attributes| attributes['quantity'].to_i < 0 },
+                                :allow_destroy => true
+  
   has_many :products, :through => :order_contents
   has_many :categories, :through => :products
 
@@ -17,6 +22,7 @@ class Order < ActiveRecord::Base
   # Store Methods
   def update_quantity(product_id, amount)
 
+    # order_content model
     self.order_contents.where(:product_id => product_id).first.increase_quantity(amount)
 
   end
@@ -30,7 +36,7 @@ class Order < ActiveRecord::Base
 
   def self.get_index_data(user_id = nil)
 
-    orders = Order.order(:id).limit(100)
+    orders = Order.order("id DESC").limit(50)
 
     orders = orders.where(:user_id => user_id) if user_id
 

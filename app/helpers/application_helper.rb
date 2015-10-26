@@ -10,16 +10,31 @@ module ApplicationHelper
 
   end
 
+  def cart_link
+
+    if signed_in_user?
+      user = current_user
+      cart = current_user.get_cart || 'cart'
+    else
+      user, cart = 'visiter', 'cart'
+    end
+
+    edit_user_order_path(user, cart)
+
+  end
+
+=begin
   def current_user_cart
 
-    if current_user
+    if current_user && current_user.has_cart?
       # user model
-      current_user.get_or_build_cart 
+      current_user.get_cart
     else
       0
     end
 
   end
+=end
 
   def render_error(resource, field_sym = nil)
 

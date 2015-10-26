@@ -9,6 +9,7 @@
         <div class='form-group'>
           <%= user_fields.label :email, 'Email Address' %>
           <%= user_fields.text_field :email, class: 'form-control' %>
+          <%= render_error(user_fields.object, :email) %>
         </div>
       </div>
     </div>
@@ -18,24 +19,7 @@
         <div class='form-group'>
           <%= user_fields.label :email_confirmation, 'Confirm Email' %>
           <%= user_fields.text_field :email_confirmation, class: 'form-control' %>
-        </div>
-      </div>
-    </div>
-
-    <div class='row'>
-      <div class='col-xs-12'>
-        <div class='form-group'>
-          <%# user_fields.label :password, 'Password' %>
-          <%# user_fields.text_field :password, class: 'form-control' %>
-        </div>
-      </div>
-    </div>
-
-    <div class='row'>
-      <div class='col-xs-12'>
-        <div class='form-group'>
-          <%# user_fields.label :password_confirmation, 'Confirm Password' %>
-          <%# user_fields.text_field :password_confirmation, class: 'form-control' %>
+          <%= render_error(user_fields.object, :email_confirmation) %>
         </div>
       </div>
     </div>
@@ -45,6 +29,7 @@
         <div class='form-group'>
           <%= user_fields.label :first_name, 'First Name' %>
           <%= user_fields.text_field :first_name, class: 'form-control' %>
+          <%= render_error(user_fields.object, :first_name) %>
         </div>
       </div>
     </div>
@@ -54,15 +39,7 @@
         <div class='form-group'>
           <%= user_fields.label :last_name, 'Last Name' %>
           <%= user_fields.text_field :last_name, class: 'form-control' %>
-        </div>
-      </div>
-    </div>
-
-    <div class='row'>
-      <div class='col-xs-12'>
-        <div class='form-group'>
-          <%# user_fields.label :telephone, 'Telephone Number (optional)' %>
-          <%# user_fields.text_field :telephone, class: 'form-control' %>
+          <%= render_error(user_fields.object, :last_name) %>
         </div>
       </div>
     </div>

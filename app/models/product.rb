@@ -12,11 +12,7 @@ class Product < ActiveRecord::Base
   # store methods
   def self.filter_by(category = nil)
 
-    if category
-      where(:category_id => category.id)
-    else
-      all
-    end
+    category ? where(:category_id => category.id) : all
 
   end
 

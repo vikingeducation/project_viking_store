@@ -2,12 +2,13 @@ Rails.application.routes.draw do
 
   root 'products#index'
 
-  resources :sessions, :only => [:new, :create, :destroy]
+  resource :session, :only => [:new, :create, :destroy]
   resources :products, :only => [:index]
-  resources :orders, :only => [:create, :edit, :update]
-
-  resources :users, :only => [:new, :create] do
-    resources :addresses, :only => [:new, :create]
+  
+  resources :users, :only => [:new, :create, :edit, :update, :destroy] do
+    resources :addresses, :only => [:new, :create, :edit, :update]
+    resources :orders, :only => [:show, :create, :edit, :update]
+    get 'orders/:id/checkout' => 'orders#checkout', as: :checkout
   end
 
   namespace :admin do

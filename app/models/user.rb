@@ -3,12 +3,17 @@ class User < ActiveRecord::Base
   has_many :created_addresses, :class_name => 'Address', 
                                :dependent => :destroy
 
+  accepts_nested_attributes_for :created_addresses,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
+
   belongs_to :default_billing_address, :class_name => 'Address', 
                                        :foreign_key => :billing_id
   belongs_to :default_shipping_address, :class_name => 'Address', 
                                         :foreign_key => :shipping_id
 
   has_many :credit_cards, :dependent => :destroy
+                                
   has_many :orders, :dependent => :nullify
   has_many :order_contents, :through => :orders
   has_many :products, :through => :order_contents
@@ -31,7 +36,7 @@ class User < ActiveRecord::Base
       self.get_cart
     else
       # create a new object in memory
-      self.orders.build
+      Order.new
     end
 
   end
