@@ -59,7 +59,7 @@
 <% if @order.items.present? %>
   <div class="pull-right">
     <%= form_tag(order_path) do %>
-      <%= link_to('Delete Order', '/order', :method => :delete, :class => 'btn btn-danger btn-lg') %>
+      <%= link_to('Delete Order', '/order', :method => :delete, :class => 'btn btn-danger btn-lg', :data => {:confirm => 'Delete?'}) %>
 
       <%= hidden_field_tag('order[checkout_date]', 0.days.ago) %>
       <%= submit_tag('Place Order', :class => 'btn btn-primary btn-lg') %>

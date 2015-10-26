@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :restrict_to_signed_in, :except => [:new, :create]
   before_action :set_user
 
   def new
