@@ -3,7 +3,7 @@ class TempOrder
   validates_with TempOrderValidator
 
   attr_accessor :session,
-                :items
+                :items # necessary to mimic Order validations
 
   def initialize(session)
     @session = session
@@ -24,12 +24,30 @@ class TempOrder
   def update_items(attrs)
     @items = attrs
     is_valid = valid?
-    @session[:cart] = @items if is_valid
+    @session[:cart] = @items.select {|item| item[:quantity] > 0} if is_valid
     is_valid
   end
 
-  def destroy
-    # destroy individual item
+  def to_order
+    order = Order.new
+    TempOrder.session_to_attributes(@session).each do |item|
+      order.items << OrderContent.new(item)
+    end
+    order
+  end
+
+  def destroy_item(product_id)
+    @session[:cart].select! do |item|
+      item['product_id'].to_i != product_id.to_i
+    end
+  end
+
+  def persisted?
+    false
+  end
+
+  def new_record?
+    true
   end
 
   def self.merge(session, order)

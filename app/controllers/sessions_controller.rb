@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
 
   protected
   def assert_id
-    # empty override since session has no ID
+    # empty override since has no ID
     # no need to validate it
   end
 
