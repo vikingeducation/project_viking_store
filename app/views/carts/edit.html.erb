@@ -1,7 +1,12 @@
 <h1>Edit Cart</h1>
 
 <% if @cart.items.empty? %>
-  <p>Cart is empty</p>
+  <p>
+    Cart is empty.
+    Put some
+    <%= link_to('products', root_path) %>
+    in it!
+  </p>
 <% else %>
   <%= form_tag('/cart', :method => :put) do %>
     <%= render :partial => 'shared/table', :locals => {:table => {
