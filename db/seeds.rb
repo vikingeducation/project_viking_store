@@ -19,7 +19,7 @@ City.destroy_all
 puts "Old records destroyed"
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
-MULTIPLIER = 10
+MULTIPLIER = 20
 
 
 
@@ -61,7 +61,11 @@ end
 
 # Generate some City records. Your Address model could have also included "city" as a string instead of a foreign key.
 def generate_city
+  begin
   City.create( :name => Faker::Address.city )
+  rescue
+    retry
+  end
 end
 
 # This method selects one of a users several addresses for use setting shipping address and billing address.

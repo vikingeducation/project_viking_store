@@ -90,10 +90,11 @@ class Order < ActiveRecord::Base
     totals = Order.select("*").joins("JOIN (#{Order.order_totals.to_sql}) t ON t.id = orders.id")
 
     Order.select("DATE(intervals) AS #{time_period}, COALESCE(COUNT(totals.*), 0) AS num_orders, 
-                                     COALESCE(SUM(totals.order_value), 0) AS revenue").
+                  COALESCE(SUM(totals.order_value), 0) AS revenue").
           from("GENERATE_SERIES(( SELECT DATE(DATE_TRUNC('#{time_period}', MIN(checkout_date))) FROM orders),
                 CURRENT_DATE, '1 #{time_period}'::INTERVAL) intervals").
-          joins("LEFT JOIN (#{totals.to_sql}) totals ON DATE(totals.checkout_date) = intervals").
+          joins("LEFT JOIN (#{totals.to_sql}) totals ON DATE(DATE_TRUNC('#{time_period}', 
+                 totals.checkout_date)) = intervals").
           group("intervals").order("intervals DESC").limit(limit)
   end
 

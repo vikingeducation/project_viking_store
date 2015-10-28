@@ -1,5 +1,7 @@
 class Dashboard
 
+  include ActionView::Helpers::NumberHelper
+
   def top_panels
     [ overall_platform_panel, behavior_demographics_panel ]
   end
@@ -53,7 +55,7 @@ class Dashboard
     table[:rows] << ["Users", User.total_signups]
     table[:rows] << ["Orders", Order.submitted_count]
     table[:rows] << ["Products", Product.total_listed]
-    table[:rows] << ["Revenue", Order.total_revenue]
+    table[:rows] << ["Revenue", number_to_currency(Order.total_revenue)]
     table
   end
 
@@ -66,7 +68,7 @@ class Dashboard
     table[:rows] << ["New Users", User.total_signups(30)]
     table[:rows] << ["Orders", Order.submitted_count(30)]
     table[:rows] << ["New Products", Product.total_listed(30)]
-    table[:rows] << ["Revenue", Order.total_revenue(30)]
+    table[:rows] << ["Revenue", number_to_currency(Order.total_revenue(30))]
     table
   end
 
@@ -79,7 +81,7 @@ class Dashboard
     table[:rows] << ["New Users", User.total_signups(7)]
     table[:rows] << ["Orders", Order.submitted_count(7)]
     table[:rows] << ["New Products", Product.total_listed(7)]
-    table[:rows] << ["Revenue", Order.total_revenue(7)]
+    table[:rows] << ["Revenue", number_to_currency(Order.total_revenue(7))]
     table
   end
 
@@ -121,11 +123,11 @@ class Dashboard
     most = Order.most_orders_placed
 
     table[:rows] << [ "Highest Single Order Value", "#{single.first_name} #{single.last_name}",
-                      "#{single.value}" ]
+                      "#{number_to_currency(single.value)}" ]
     table[:rows] << [ "Highest Lifetime Value", "#{lifetime.first_name} #{lifetime.last_name}",
-                      "#{lifetime.value}" ]
+                      "#{number_to_currency(lifetime.value)}" ]
     table[:rows] << [ "Highest Average Order Value", "#{average.first_name} #{average.last_name}",
-                      "#{average.value}" ]
+                      "#{number_to_currency(average.value)}" ]
     table[:rows] << [ "Most Orders Placed", "#{most.first_name} #{most.last_name}",
                       "#{most.value}" ]
 
@@ -140,9 +142,9 @@ class Dashboard
     table[:headers] = ["Item", "Data"]
     table[:rows] = []
     table[:rows] << ["Numer of Orders", Order.submitted_count]
-    table[:rows] << ["Total Revenue", Order.total_revenue]
-    table[:rows] << ["Average Order Value", Order.average_order_value]
-    table[:rows] << ["Largest Order Value", Order.largest_order_value]
+    table[:rows] << ["Total Revenue", number_to_currency(Order.total_revenue)]
+    table[:rows] << ["Average Order Value", number_to_currency(Order.average_order_value)]
+    table[:rows] << ["Largest Order Value", number_to_currency(Order.largest_order_value)]
     table
   end
 
@@ -153,9 +155,9 @@ class Dashboard
     table[:headers] = ["Item", "Data"]
     table[:rows] = []
     table[:rows] << ["Numer of Orders", Order.submitted_count(30)]
-    table[:rows] << ["Total Revenue", Order.total_revenue(30)]
-    table[:rows] << ["Average Order Value", Order.average_order_value(30)]
-    table[:rows] << ["Largest Order Value", Order.largest_order_value(30)]
+    table[:rows] << ["Total Revenue", number_to_currency(Order.total_revenue(30))]
+    table[:rows] << ["Average Order Value", number_to_currency(Order.average_order_value(30))]
+    table[:rows] << ["Largest Order Value", number_to_currency(Order.largest_order_value(30))]
     table
   end
 
@@ -166,9 +168,9 @@ class Dashboard
     table[:headers] = ["Item", "Data"]
     table[:rows] = []
     table[:rows] << ["Numer of Orders", Order.submitted_count(7)]
-    table[:rows] << ["Total Revenue", Order.total_revenue(7)]
-    table[:rows] << ["Average Order Value", Order.average_order_value(7)]
-    table[:rows] << ["Largest Order Value", Order.largest_order_value(7)]
+    table[:rows] << ["Total Revenue", number_to_currency(Order.total_revenue(7))]
+    table[:rows] << ["Average Order Value", number_to_currency(Order.average_order_value(7))]
+    table[:rows] << ["Largest Order Value", number_to_currency(Order.largest_order_value(7))]
     table
   end
 
@@ -177,7 +179,7 @@ class Dashboard
   def orders_by_day
     table = {}
     table[:title] = "Orders by day"
-    table[:headers] = ["Date", "Quantity", "Revenue"]
+    table[:headers] = ["Day", "Quantity", "Revenue"]
     table[:rows] = []
     Order.orders_by_day(7).each do |interval|
       case interval.day
@@ -188,7 +190,7 @@ class Dashboard
       else
         date = interval.day
       end
-      table[:rows] << [date, interval.num_orders, interval.revenue]
+      table[:rows] << [date, interval.num_orders, number_to_currency(interval.revenue)]
     end
     table
   end
@@ -197,10 +199,10 @@ class Dashboard
   def orders_by_week
     table = {}
     table[:title] = "Orders by week"
-    table[:headers] = ["Date", "Quantity", "Revenue"]
+    table[:headers] = ["Week", "Quantity", "Revenue"]
     table[:rows] = []
     Order.orders_by_week(7).each do |interval|
-      table[:rows] << [interval.week, interval.num_orders, interval.revenue]
+      table[:rows] << [interval.week, interval.num_orders, number_to_currency(interval.revenue)]
     end
     table
   end

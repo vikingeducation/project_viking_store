@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'dashboard#home'
 
+  namespace :admin do
+    root 'base#home'
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
