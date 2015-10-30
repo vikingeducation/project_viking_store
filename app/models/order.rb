@@ -1,9 +1,10 @@
 class Order < ActiveRecord::Base
 
   belongs_to :user
+  accepts_nested_attributes_for :user
 
-  has_many :order_contents, :class_name => "OrderContent",
-                            :dependent => :destroy
+  has_many :order_contents, :class_name => 'OrderContents'
+  # possible ruby version has issues with delete_all when destroying under has_many association, rip orphans
 
   accepts_nested_attributes_for :order_contents,
                                 :reject_if => proc { |attributes| attributes['quantity'].to_i < 0 },
@@ -18,6 +19,9 @@ class Order < ActiveRecord::Base
                                 :foreign_key => :shipping_id
   belongs_to :billing_card, :class_name => 'CreditCard',
                             :foreign_key => :billing_card_id
+  accepts_nested_attributes_for :billing_card,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
 
   # Store Methods
   def update_quantity(product_id, amount)

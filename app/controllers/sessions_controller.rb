@@ -8,9 +8,9 @@ class SessionsController < ApplicationController
 
     user = User.find_by_email(params[:email])
     if user
-      sign_in user
+      sign_in(user)
       flash[:success] = "You have been signed in!"
-      redirect_to root_path
+      redirect_to root_url
     else
       flash.now[:error] = "You have failed to sign in - please try again."
       render :new

@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
       self.get_cart
     else
       # create a new object in memory
-      Order.new
+      self.orders.build
     end
 
   end

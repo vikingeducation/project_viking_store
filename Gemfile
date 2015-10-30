@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',  '~> 1.3.6',      group: :development
 
-gem 'pry'
+gem 'pry-byebug'
 
 gem 'faker'
 # Use ActiveModel has_secure_password
@@ -45,6 +45,8 @@ group :development do
   gem 'better_errors'
 
   gem 'bullet'
+
+  gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
 end
 
 gem 'binding_of_caller'

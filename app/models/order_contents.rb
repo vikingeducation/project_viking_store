@@ -1,4 +1,4 @@
-class OrderContent < ActiveRecord::Base
+class OrderContents < ActiveRecord::Base
   belongs_to :order
   belongs_to :product
 

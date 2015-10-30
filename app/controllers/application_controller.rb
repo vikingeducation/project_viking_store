@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
     session[:current_user_id] = user.id
     @current_user = user
-    merge_visiter_cart
+    merge_visitor_cart
 
   end
 
@@ -39,18 +39,18 @@ class ApplicationController < ActionController::Base
   end
   helper_method :signed_in_user?
 
-  def merge_visiter_cart
+  def merge_visitor_cart
 
     cart = current_user.get_or_build_cart
 
-    if session[:visiter_cart]
+    if session[:visitor_cart]
 
-      session[:visiter_cart].each do |add_id, add_quantity|
+      session[:visitor_cart].each do |add_id, add_quantity|
         update_quantity(cart, add_id.to_i, add_quantity)
         cart.save!
       end
 
-      session.delete(:visiter_cart)
+      session.delete(:visitor_cart)
     end
     
   end
@@ -87,8 +87,9 @@ class ApplicationController < ActionController::Base
       cart.update_quantity(product_id, add_quantity)
     else
       # adds product to cart if product_id is not already in cart
-      product = Product.find(product_id)
-      cart.products << product
+      # cart.save for merging_visitor_cart
+      cart.save
+      cart.order_contents.create(:product_id => product_id)
     end
 
   end
