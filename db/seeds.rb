@@ -9,7 +9,7 @@ puts "Destroying old records"
 User.destroy_all
 Address.destroy_all
 Order.destroy_all
-OrderContent.destroy_all
+OrderContents.destroy_all
 Category.destroy_all
 CreditCard.destroy_all
 Product.destroy_all
