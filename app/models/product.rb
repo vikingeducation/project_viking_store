@@ -53,4 +53,5 @@ class Product < ActiveRecord::Base
     errors.add(:category_id, "is invalid") unless Category.exists?(self.category_id)
   end
 
+
 end
