@@ -46,12 +46,21 @@ class Admin::CategoriesController < AdminController
 
 
   def destroy
-    category = Category.find(params[:id])
-    products = Product.where("category_id = #{category.id}")
-    category.destroy
-    products.update_all(category_id: nil)
-    flash[:warning] = "Category deleted."
-    redirect_to admin_categories_path
+    begin
+      category = Category.find(params[:id])
+      products = Product.where("category_id = #{category.id}")
+      if category.destroy
+        products.update_all(category_id: nil)
+        flash[:warning] = "Category deleted."
+        redirect_to admin_categories_path
+      else
+        flash[:danger] = "Oops, something went wrong."
+        redirect_to :back
+      end
+    rescue
+      flash[:danger] = "Oops, something went wrong."
+      redirect_to :back
+    end
   end
 
 
