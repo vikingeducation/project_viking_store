@@ -5,6 +5,12 @@ class Admin::CategoriesController < AdminController
   end
 
 
+  def show
+    @category = Category.find(params[:id])
+    @products = Product.where("category_id = #{@category.id}")
+  end
+
+
   def new
     @category = Category.new
   end
@@ -16,7 +22,7 @@ class Admin::CategoriesController < AdminController
       flash[:success] = "New category created!"
       redirect_to admin_categories_path
     else
-      flash[:danger] = "Oops, something went wrong!"
+      flash.now[:danger] = "Oops, something went wrong!"
       render :new
     end
   end
