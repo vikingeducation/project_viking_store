@@ -1,36 +1,33 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-      <div class="panel-btns pull-right">
-        <%= link_to 'Add a New Category', new_admin_category_path , class: "btn btn-primary"  %>
-      </div>
-    <h4>Product Categories</h4>
+<div class="panel-heading">
+    <div class="panel-btns pull-right">
+      <%= link_to 'Add a New Category', new_admin_category_path , class: "btn btn-primary"  %>
+    </div>
+  <h4>Product Categories</h4>
 </div>
 
 
 
-  <table class="table">
-    <thead>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @categories.each do |category| %>
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Show</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <td><%= category.id %></td>
+        <td><%= category.name %></td>
+        <td><%= link_to 'Show', '#' %></td>
+        <td><%= link_to 'Edit', '#' %></td>
+        <td><%= link_to 'Delete', '#' %></td>
       </tr>
-    </thead>
-    <tbody>
+    <% end %>
 
-      <% @categories.each do |category| %>
-        <tr>
-          <td><%= category.id %></td>
-          <td><%= category.name %></td>
-          <td><%= link_to 'Show', '#' %></td>
-          <td><%= link_to 'Edit', '#' %></td>
-          <td><%= link_to 'Delete', '#' %></td>
-        </tr>
-      <% end %>
-
-    </tbody>
-  </table>
-
-</div>
+  </tbody>
+</table>

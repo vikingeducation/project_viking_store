@@ -11,18 +11,47 @@
 // override for the 'Home' navigation link
 .navbar-brand {
   font-size: inherit;
-  }
+}
 
-// apply styles to HTML elements
-// to make views framework-neutral
 main {
   @extend .container;
-  // background-color: #eee;
-  // padding-bottom: 80px;
-  // width: 100%;
-  // margin-top: 51px; // accommodate the navbar
-  }
+}
+
 section, footer {
   @extend .row;
   margin-top: 20px;
+}
+
+form {
+  
+  .field {
+    @extend .form-group;
+    }
+
+  input[type=text], textarea, input[type=email], input[type=search], input[type=password] {
+    @extend .form-control;
+    }
+
+  label {
+    @extend .control-label;
   }
+
+  input[type=submit] {
+    @extend .btn;
+    @extend .btn-primary;
+  }
+
+  .field_with_errors {
+    @extend .control-group;
+    @extend .has-error;
+  }
+
+  .error-explanation {
+    color: #a94442;
+    ul {
+      margin-top: 5px;
+    }
+  }
+
+}
+

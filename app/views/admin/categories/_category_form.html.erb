@@ -1,16 +1,42 @@
-<p>
-  Category ID: 
-  <%= category.persisted? ? category.id : "N/A" %>
-</p>
+<div class="form-padding">
+  <p>
+    <strong>
+      Category ID: 
+      <%= category.persisted? ? category.id : "N/A" %>
+    </strong>
+  </p>
 
-<%= form_for( [:admin, category] ) do |f| %>
-    
-    <%= f.label :name %>
-    <%= f.text_field :name  %>
+  <%= form_for( [:admin, category] ) do |f| %>
+      
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name  %>
 
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+        <div class="error-explanation">
+          <ul>
+            <% category.errors.full_messages_for(:name).each do |error| %>
+              <li><%= error %></li>
+            <% end %>
+          </ul>
+        </div>
 
-    <%= f.submit %>
+      </div>
 
-<% end %>
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+
+        <div class="error-explanation">
+          <ul>
+            <% category.errors.full_messages_for(:description).each do |error| %>
+              <li><%= error %></li>
+            <% end %>
+          </ul>
+        </div>
+
+      </div>
+
+      <%= f.submit %>
+
+  <% end %>
+</div>

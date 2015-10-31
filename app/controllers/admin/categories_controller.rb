@@ -13,10 +13,10 @@ class Admin::CategoriesController < AdminController
   def create
     @category = Category.new(category_params)
     if @category.save
-      flash[:success] = "New category create!"
+      flash[:success] = "New category created!"
       redirect_to admin_categories_path
     else
-      flash[:warning] = "Oops, something went wrong!"
+      flash[:danger] = "Oops, something went wrong!"
       render :new
     end
   end
