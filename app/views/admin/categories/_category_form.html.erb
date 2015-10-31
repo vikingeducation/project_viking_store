@@ -36,7 +36,13 @@
 
       </div>
 
-      <%= f.submit %>
+      <% if category.persisted? %>
+        <div class="pull-right">
+          <%= link_to 'Delete Category', "#"  %>
+        </div>
+      <% end %>
 
+      <%= f.submit %>
+      
   <% end %>
 </div>

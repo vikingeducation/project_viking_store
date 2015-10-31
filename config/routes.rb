@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/dashboard' => 'dashboard#home'
 
   namespace :admin do
-    resources :categories, only: [:index, :new, :create, :show]
+    resources :categories
   end
 
   # Example of regular route:

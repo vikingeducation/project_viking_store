@@ -1,13 +1,13 @@
 class Admin::CategoriesController < AdminController
 
   def index
-    @categories = Category.all
+    @categories = Category.all.order("name ASC")
   end
 
 
   def show
     @category = Category.find(params[:id])
-    @products = Product.where("category_id = #{@category.id}")
+    @products = Product.where("category_id = #{@category.id}").order("name ASC")
   end
 
 
@@ -22,8 +22,25 @@ class Admin::CategoriesController < AdminController
       flash[:success] = "New category created!"
       redirect_to admin_categories_path
     else
-      flash.now[:danger] = "Oops, something went wrong!"
+      flash.now[:danger] = "Oops, something went wrong."
       render :new
+    end
+  end
+
+
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+
+  def update
+    @category = Category.find(params[:id])
+    if @category.update(category_params)
+      flash[:success] = "Category Updated."
+      redirect_to admin_categories_path
+    else
+      flash.now[:danger] = "Oops, something went wrong."
+      render :edit
     end
   end
 
