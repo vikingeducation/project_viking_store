@@ -3,11 +3,11 @@
   <h4>Navigation Options</h4>
   
   <div class="list-group">
-    <%= link_to 'Users', '#', class: "list-group-item"  %>
-    <%= link_to 'Addresses', '#', class: "list-group-item"  %>
-    <%= link_to 'Orders', '#', class: "list-group-item"  %>
-    <%= link_to 'Products', admin_products_path, class: "list-group-item"  %>
-    <%= link_to 'Categories', admin_categories_path, class: "list-group-item"  %>
+    <%= nav_link 'Users', '#', class: "list-group-item"  %>
+    <%= nav_link 'Addresses', '#', class: "list-group-item"  %>
+    <%= nav_link 'Orders', '#', class: "list-group-item"  %>
+    <%= nav_link 'Products', admin_products_path, class: "list-group-item"  %>
+    <%= nav_link 'Categories', admin_categories_path, class: "list-group-item"  %>
   </div>
 
   <%= link_to 'Analytics Dashboard', dashboard_path  %>
