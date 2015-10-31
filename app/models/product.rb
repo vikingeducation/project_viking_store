@@ -1,5 +1,10 @@
 class Product < ActiveRecord::Base
 
+  validates :name, :price, presence: true
+  validates :price, numericality: { less_than: 10001, greater_than: 0 }
+  validate :validate_category_id
+
+
   def self.total_listed(period = nil)
     total = Product.select("COUNT(*) AS t")
     if period
@@ -21,7 +26,7 @@ class Product < ActiveRecord::Base
 
   def self.with_category_names
     join_with_categories.select("products.name AS name, categories.name AS category,
-                                         products.*")
+                                 products.*")
   end
 
 
@@ -33,6 +38,19 @@ class Product < ActiveRecord::Base
   def order_stats
     s = Product.all_products_order_stats.where("products.id = #{id}").first
     {carts: (s.total_orders - s.completed_orders), orders: s.completed_orders}
+  end
+
+
+  def price=(price_str)
+    write_attribute(:price, price_str.tr('$ ,', ''))
+  end
+
+
+  private
+
+
+  def validate_category_id
+    errors.add(:category_id, "is invalid") unless Category.exists?(self.category_id)
   end
 
 end

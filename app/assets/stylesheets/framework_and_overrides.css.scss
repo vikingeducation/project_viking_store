@@ -28,7 +28,8 @@ form {
     @extend .form-group;
     }
 
-  input[type=text], textarea, input[type=email], input[type=search], input[type=password] {
+  input[type=text], textarea, input[type=email], input[type=search], 
+  input[type=password], select {
     @extend .form-control;
     }
 
