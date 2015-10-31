@@ -38,7 +38,7 @@
 
       <% if category.persisted? %>
         <div class="pull-right">
-          <%= link_to 'Delete Category', "#"  %>
+          <%= link_to 'Delete Category', admin_category_path(category.id), method: :delete, data: { confirm: "Are you sure?" }  %>
         </div>
       <% end %>
 

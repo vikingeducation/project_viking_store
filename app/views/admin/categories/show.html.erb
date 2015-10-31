@@ -19,7 +19,7 @@
   </div>
 
   <%= link_to 'Edit Category', edit_admin_category_path(@category.id) %><br>
-  <%= link_to 'Delete Category', '#' %>
+  <%= link_to 'Delete Category', admin_category_path(@category.id), method: :delete, data: { confirm: "Are you sure?" } %>
   <hr>
 
   <h4>Products in <%= @category.name %></h4>
