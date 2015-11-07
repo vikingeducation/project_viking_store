@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'products#index'
     resources :users
+    resources :credit_cards
     resources :categories
     resources :products
   end

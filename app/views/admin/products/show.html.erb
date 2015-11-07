@@ -20,6 +20,11 @@
   </div>
 
   <div class="row">
+    <div class="col-md-2"><strong>Price</strong></div>
+    <div class="col-md-10"><%= number_to_currency(@product.price) %></div>
+  </div>  
+
+  <div class="row">
     <div class="col-md-2"><strong>Description</strong></div>
     <div class="col-md-10"><%= @product.description %></div>
   </div>

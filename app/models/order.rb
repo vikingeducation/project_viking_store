@@ -7,6 +7,10 @@ class Order < ActiveRecord::Base
 
   validate :new_cart_allowed
 
+  def value
+    products.sum(:price)
+  end
+
   def self.submitted_count(period = nil)
     submitted = Order.submitted
     if period 

@@ -1,0 +1,29 @@
+<!-- id, order_date, order_value, status, show, edit, delete -->
+<h4>Order History</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Order Date</th>
+      <th>Order Value</th>
+      <th>Status</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% orders.each do |order| %>
+      <tr class="<%= 'warning' unless order.checkout_date? %>">
+        <td><%= order.id %></td>
+        <td><%= order.checkout_date? ? order.checkout_date.strftime('%Y-%m-%d') : '-' %></td>
+        <td><%= number_to_currency(order.value) %></td>
+        <td><%= order.checkout_date? ? "PLACED" : "UNPLACED" %></td>
+        <td> <%= link_to "Show", "#"  %></td>
+        <td> <%= link_to "Edit", "#"  %></td>
+        <td> <%= link_to "Delete", "#"  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
