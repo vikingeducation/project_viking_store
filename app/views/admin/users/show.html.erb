@@ -80,7 +80,11 @@
 
   <hr>
 
-  <%= render partial: 'order_history', locals: {orders: @user.orders} %>
+  <% unless @user.orders.empty? %>
+    <%= render partial: 'order_history', locals: {orders: @user.orders} %>  
+  <% else %>
+    No Order History
+  <% end %>  
 
 </div>
 

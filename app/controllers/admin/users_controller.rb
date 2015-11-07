@@ -44,6 +44,18 @@ class Admin::UsersController < AdminController
   end
 
 
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:warning] = "User deleted."
+      redirect_to admin_users_path
+    else
+      flash[:danger] = "User could not be deleted!"
+      redirect_to :back
+    end
+  end
+
+
   private
 
 

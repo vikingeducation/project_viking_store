@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   extend DumpModels
 
+  before_destroy :destroy_cart
+  
   has_many :addresses, dependent: :destroy
   has_many :orders, dependent: :nullify
   has_many :credit_cards, dependent: :destroy
@@ -10,6 +12,7 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, :email, length: { in: 1..64 }
   validates :email, format: { with: /@/, message: "must contain @"}
+
 
   def display_address
     if addr = default_shipping_address
@@ -64,6 +67,14 @@ class User < ActiveRecord::Base
   end
 
 
+  private
+
+
+  def destroy_cart
+    if cart = orders.cart.first
+      cart.destroy
+    end
+  end
 
 
 end
