@@ -30,7 +30,7 @@
 
       <div class="row">
         <div class="col-sm-12">
-          <%= link_to 'Remove Card', '#' %>
+          <%= link_to 'Remove Card', admin_credit_card_path(card), method: :delete, data: { confirm: "Are you sure?" }  %>
         </div>
       </div>      
       

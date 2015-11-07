@@ -72,7 +72,11 @@
 
   <hr>
 
-  <%= render partial: 'credit_card', locals: {card: @user.credit_cards.first} %>
+  <% unless @user.credit_cards.empty? %>
+    <%= render partial: 'credit_card', locals: {card: @user.credit_cards.first} %>
+  <% else %>
+    No Saved Credit Cards  
+  <% end %>
 
   <hr>
 
