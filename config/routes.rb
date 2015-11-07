@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/dashboard' => 'dashboard#home'
 
   namespace :admin do
+    root 'products#index'
     resources :categories
     resources :products
   end

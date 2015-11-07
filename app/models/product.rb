@@ -1,7 +1,13 @@
 class Product < ActiveRecord::Base
 
-  validates :name, :price, presence: true
+  belongs_to :category
+
+  has_many :order_contents, dependent: :destroy
+  has_many :orders, through: :order_contents
+
+  validates :name, :price, :sku, presence: true
   validates :price, numericality: { less_than: 10001, greater_than: 0 }
+  validates :sku, length: { is: 13 }
   validate :validate_category_id
 
 
@@ -15,29 +21,12 @@ class Product < ActiveRecord::Base
   end
 
 
-  def self.all_products_order_stats
-    joins("LEFT OUTER JOIN order_contents ON order_contents.product_id = products.id").
-    joins("LEFT OUTER JOIN orders ON order_contents.order_id = orders.id").
-    select("COUNT(orders.checkout_date) AS completed_orders, COUNT(orders.id) AS total_orders,
-            products.id").
-    group("products.id")
-  end
-
-
-  def self.with_category_names
-    join_with_categories.select("products.name AS name, categories.name AS category,
-                                 products.*")
-  end
-
-
-  def self.join_with_categories
-    joins("LEFT OUTER JOIN categories ON products.category_id = categories.id")
-  end
-
   # instance methods
   def order_stats
-    s = Product.all_products_order_stats.where("products.id = #{id}").first
-    {carts: (s.total_orders - s.completed_orders), orders: s.completed_orders}
+    o = orders
+    carts = o.where("checkout_date IS NULL").count
+    completed_orders = ( o.count - carts )
+    {carts: carts, orders: completed_orders}
   end
 
 
@@ -52,6 +41,5 @@ class Product < ActiveRecord::Base
   def validate_category_id
     errors.add(:category_id, "is invalid") unless Category.exists?(self.category_id)
   end
-
 
 end

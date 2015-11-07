@@ -7,7 +7,7 @@ class Admin::CategoriesController < AdminController
 
   def show
     @category = Category.find(params[:id])
-    @products = Product.where("category_id = #{@category.id}").order("name ASC")
+    @products = @category.products
   end
 
 
@@ -48,9 +48,7 @@ class Admin::CategoriesController < AdminController
   def destroy
     begin
       category = Category.find(params[:id])
-      products = Product.where("category_id = #{category.id}")
       if category.destroy
-        products.update_all(category_id: nil)
         flash[:warning] = "Category deleted."
         redirect_to admin_categories_path
       else

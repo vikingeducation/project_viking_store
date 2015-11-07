@@ -28,7 +28,7 @@
         <td><%= number_to_currency(product.price) %></td>
         <td>
           <% if product.category_id %>
-            <%= link_to product.category, admin_category_path(product.category_id) %>
+            <%= link_to product.category.name, admin_category_path(product.category_id) %>
           <% else %>
             No Category
           <% end %>
