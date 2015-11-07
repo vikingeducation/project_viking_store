@@ -5,6 +5,8 @@ class Order < ActiveRecord::Base
   has_many :products, through: :order_contents
   has_many :categories, through: :products
 
+  validate :new_cart_allowed
+
   def self.submitted_count(period = nil)
     submitted = Order.submitted
     if period 
@@ -91,6 +93,13 @@ class Order < ActiveRecord::Base
   private
 
 
+  def new_cart_allowed
+    if User.find(self.user_id).orders.where("checkout_date IS NULL").exists?
+      errors.add(:checkout_date, "can't be blank, cart already exists.")
+    end
+  end
+
+
   def self.orders_by_time_period(time_period, limit)
     totals = Order.select("*").joins("JOIN (#{Order.order_totals.to_sql}) t ON t.id = orders.id")
 
@@ -121,6 +130,11 @@ class Order < ActiveRecord::Base
   end
 
 
+  def self.cart
+    where("checkout_date IS NULL")
+  end
+
+
   def self.join_with_products
     join_with_order_contents.join_order_contents_with_products
   end
@@ -134,5 +148,7 @@ class Order < ActiveRecord::Base
   def self.join_order_contents_with_products
     joins("JOIN products ON order_contents.product_id = products.id")
   end
+
+
 
 end

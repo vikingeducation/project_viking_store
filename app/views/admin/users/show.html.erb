@@ -1,0 +1,79 @@
+<div class="panel-heading">
+  <h4>User <%= @user.id %>: <%= @user.first_name %> <%= @user.last_name %></h4>
+</div>
+
+<div class="panel-body">
+  <div class="row">
+
+    <div class="col-md-6 col-md-push-6 text-center">
+      <div class="well">
+        <strong>Admin Actions for <%= @user.first_name %> <%= @user.last_name %></strong><br>
+        <%= link_to 'Create Order', '#', class: "btn btn-primary btn-sm"  %>
+        <%= link_to 'Create Address', '#', class: "btn btn-primary btn-sm"  %>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-md-pull-6">
+      
+      <div class="row">
+        <div class="col-sm-3"><strong>First Name</strong></div>
+        <div class="col-sm-9"><%= @user.first_name %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>Last Name</strong></div>
+        <div class="col-sm-9"><%= @user.last_name %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>Email</strong></div>
+        <div class="col-sm-9"><%= mail_to @user.email %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>Phone</strong></div>
+        <div class="col-sm-9"><%= @user.phone? ? @user.phone : 'None' %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <strong>Defaault Billing Address</strong><br>
+          <%= render_address(@user.default_billing_address) %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <strong>Defaault Shipping Address</strong><br>
+          <%= render_address(@user.default_shipping_address) %>
+        </div>
+      </div>      
+
+      <div class="row">
+        <div class="col-sm-12">
+          <%= link_to "Edit #{@user.first_name} #{@user.last_name}'s information", edit_admin_user_path(@user.id) %><br>
+          <%= link_to "Delete #{@user.first_name} #{@user.last_name}", admin_user_path(@user.id), method: :delete, data: { confirm: "Are you sure?" } %><br>
+          <%= link_to 'View Saved Addresses', '#'  %><br>
+          <% if !@user.orders.cart.empty? %>
+            <%= link_to 'View Unplaced Order (Cart)', '#'  %>
+          <% else %>
+            <span class="link-disabled">View Unplaced Order (Cart)</span>
+          <% end %>
+        </div>
+      </div>         
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  <%= render partial: 'credit_card', locals: {card: @user.credit_cards.first} %>
+
+  <hr>
+
+</div>
+
+
+
+</div>

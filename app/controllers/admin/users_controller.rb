@@ -5,6 +5,11 @@ class Admin::UsersController < AdminController
   end
 
 
+  def show
+    @user = User.find(params[:id])
+  end
+
+
   def new
     @user = User.new
   end
@@ -14,7 +19,7 @@ class Admin::UsersController < AdminController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "New User Created!"
-      redirect_to admin_users_path
+      redirect_to admin_user_path(@user)
     else
       flash.now[:danger] = "Oops, something went wrong!"
       render :new
@@ -31,7 +36,7 @@ class Admin::UsersController < AdminController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:info] = "User Updated."
-      redirect_to admin_users_path
+      redirect_to admin_user_path(@user)
     else
       flash.now[:danger] = "Oops, something went wrong!"
       render :edit
