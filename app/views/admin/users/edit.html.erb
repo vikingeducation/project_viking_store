@@ -1,0 +1,5 @@
+<div class="panel-heading">
+  <h4>Edit User <%= @user.id %>: <%= @user.first_name %> <%= @user.last_name %></h4>
+</div>
+
+<%= render partial: "user_form", locals: { user: @user } %>

@@ -8,6 +8,30 @@ class User < ActiveRecord::Base
   belongs_to :default_billing_address, foreign_key: :billing_id, class_name: "Address"
   belongs_to :default_shipping_address, foreign_key: :shipping_id, class_name: "Address"
 
+  validates :first_name, :last_name, :email, length: { in: 1..64 }
+  validates :email, format: { with: /@/, message: "must contain @"}
+
+  def display_address
+    if addr = default_shipping_address
+      {city: addr.city.name, state: addr.state.name}
+    elsif addr = default_billing_address
+      {city: addr.city.name, state: addr.state.name}
+    elsif addr = addresses.first
+      {city: addr.city.name, state: addr.state.name}
+    else
+      {city: "-", state: "-"}
+    end
+  end
+
+
+  def last_order_date
+    if orders.submitted.any?
+      orders.order("checkout_date DESC").
+      submitted.limit(1).first.checkout_date
+    end
+  end
+
+
   def self.total_signups(period = nil)
     total = User.select("COUNT(*) AS t")
     if period
