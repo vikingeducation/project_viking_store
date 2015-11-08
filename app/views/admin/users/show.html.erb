@@ -57,7 +57,7 @@
         <div class="col-sm-12">
           <%= link_to "Edit #{@user.first_name} #{@user.last_name}'s information", edit_admin_user_path(@user.id) %><br>
           <%= link_to "Delete #{@user.first_name} #{@user.last_name}", admin_user_path(@user.id), method: :delete, data: { confirm: "Are you sure?" } %><br>
-          <%= link_to 'View Saved Addresses', '#'  %><br>
+          <%= link_to 'View Saved Addresses', admin_addresses_path(user_id: @user.id)  %><br>
           <% if !@user.orders.cart.empty? %>
             <%= link_to 'View Unplaced Order (Cart)', '#'  %>
           <% else %>

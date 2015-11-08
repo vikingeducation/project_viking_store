@@ -4,6 +4,8 @@ class Order < ActiveRecord::Base
   has_many :order_contents, dependent: :destroy
   has_many :products, through: :order_contents
   has_many :categories, through: :products
+  belongs_to :billing_address, foreign_key: :billing_id, class_name: "Address"
+  belongs_to :shipping_address, foreign_key: :shipping_id, class_name: "Address"
 
   validate :new_cart_allowed
 
