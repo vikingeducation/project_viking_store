@@ -41,15 +41,27 @@
 
       <div class="row">
         <div class="col-sm-12">
-          <strong>Defaault Billing Address</strong><br>
-          <%= render_address(@user.default_billing_address) %>
+          <strong>Default Billing Address</strong><br>
+          <% if @user.default_billing_address %>
+            <%= link_to(admin_address_path(@user.default_billing_address)) do %>
+              <%= render_address(@user.default_billing_address) %>
+            <% end %>
+          <% else %>
+            <%= render_address(@user.default_billing_address) %>    
+          <% end %>
         </div>
       </div>
 
       <div class="row">
         <div class="col-sm-12">
-          <strong>Defaault Shipping Address</strong><br>
-          <%= render_address(@user.default_shipping_address) %>
+          <strong>Default Shipping Address</strong><br>
+          <% if @user.default_shipping_address %>
+            <%= link_to(admin_address_path(@user.default_shipping_address)) do %>
+              <%= render_address(@user.default_shipping_address) %>
+            <% end %>
+          <% else %>
+            <%= render_address(@user.default_shipping_address) %>    
+          <% end %>
         </div>
       </div>      
 

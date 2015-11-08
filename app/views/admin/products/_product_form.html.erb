@@ -24,21 +24,18 @@
         <%= f.label :description %>
         <%= f.text_area :description %>
         <%= render partial: 'admin/form_error', locals: {errors: product.errors.full_messages_for(:description)} %>
-
       </div>
 
       <div class="form-group">
         <%= f.label :price %>
         <%= f.text_field :price %>
         <%= render partial: 'admin/form_error', locals: {errors: product.errors.full_messages_for(:price)} %>
-
       </div>
 
       <div class="form-group">
         <%= f.label :category_id, "Category" %>
         <%= f.collection_select(:category_id, Category.all, :id, :name, prompt: true) %>
         <%= render partial: 'admin/form_error', locals: {errors: product.errors.full_messages_for(:category_id)} %>
-
       </div>            
 
       <% if product.persisted? %>
