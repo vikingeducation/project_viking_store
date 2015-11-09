@@ -11,7 +11,7 @@ class Order < ActiveRecord::Base
   validate :new_cart_allowed
 
   def value
-    products.sum(:price)
+    order_contents.inject(0) { |sum, c| sum + (c.product.price * c.quantity) }
   end
 
   def product_quantity(product_id)
