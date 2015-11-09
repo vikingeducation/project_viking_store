@@ -20,9 +20,9 @@
         <td><%= order.checkout_date? ? order.checkout_date.strftime('%Y-%m-%d') : '-' %></td>
         <td><%= number_to_currency(order.value) %></td>
         <td><%= order.checkout_date? ? "PLACED" : "UNPLACED" %></td>
-        <td> <%= link_to "Show", "#"  %></td>
-        <td> <%= link_to "Edit", "#"  %></td>
-        <td> <%= link_to "Delete", "#"  %></td>
+        <td><%= link_to 'Show', admin_order_path(order.id) %></td>
+        <td><%= link_to 'Edit', edit_admin_order_path(order.id) %></td>
+        <td><%= link_to 'Delete', admin_order_path(order.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
       </tr>
     <% end %>
   </tbody>

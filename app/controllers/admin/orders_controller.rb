@@ -12,6 +12,11 @@ class Admin::OrdersController < AdminController
   end
 
 
+  def show
+    @order = Order.find(params[:id])
+  end
+
+
   private
 
 

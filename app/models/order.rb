@@ -6,11 +6,16 @@ class Order < ActiveRecord::Base
   has_many :categories, through: :products
   belongs_to :billing_address, foreign_key: :billing_id, class_name: "Address"
   belongs_to :shipping_address, foreign_key: :shipping_id, class_name: "Address"
+  belongs_to :credit_card
 
   validate :new_cart_allowed
 
   def value
     products.sum(:price)
+  end
+
+  def product_quantity(product_id)
+    order_contents.select(:quantity).where("product_id = :id", id: product_id).first.quantity
   end
 
   def self.submitted_count(period = nil)

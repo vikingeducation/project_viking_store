@@ -1,0 +1,123 @@
+<div class="panel-heading">
+  <div class="pull-right panel-btns">
+    <%= link_to "Edit Order", edit_admin_order_path(@order), class: "btn btn-primary"  %>
+    <%= link_to "Delete Order", admin_order_path(@order), class: "btn btn-default", method: :delete, data: {confirm: "Are you sure?"}  %>
+  </div>
+  <h4>Order <%= @order.id %><%= " (Shopping Cart)" if !@order.checkout_date %></h4>
+</div>
+
+<div class="panel-body">
+  <div class="text-center">
+    <h4>Logistical Information</h4>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6">
+
+      <h4>Basic Information</h4>
+      <% if @order.user_id %>
+        <div class="row">
+          <div class="col-sm-4"><strong>Customer ID</strong></div>
+          <div class="col-sm-8"><%= @order.user.id %></div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4"><strong>Customer</strong></div>
+          <div class="col-sm-8">
+            <%= link_to "#{@order.user.first_name} #{@order.user.last_name} 
+                         (click to view user)", admin_user_path(@order.user) %>
+          </div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-sm-14">No Customer Associated (User Deleted).</div>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="col-sm-4"><strong>Date Placed</strong></div>
+        <div class="col-sm-8">
+          <% if @order.checkout_date %>
+            <%= @order.checkout_date.strftime('%Y-%m-%d') %>
+          <% else %>
+            -
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4"><strong># Products</strong></div>
+        <div class="col-sm-8"><%= @order.products.count %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4"><strong>Order Value</strong></div>
+        <div class="col-sm-8"><%= number_to_currency(@order.value) %></div>
+      </div>
+
+      <h4>Order Status</h4>
+      <h4>
+        <% if @order.checkout_date? %>
+          <span class="order-placed">PLACED</span>
+        <% else %>
+          <span class="order-unplaced">UNPLACED</span>
+        <% end %>
+      </h4>
+
+    </div>
+
+    <% if @order.checkout_date %>
+      <div class="col-md-6">
+        <h4>Shipping Address</h4>
+        <div class="row">
+          <div class="col-sm-4"><strong>Street</strong></div>
+          <div class="col-sm-8"><%= @order.shipping_address.street_address %></div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4"><strong>City</strong></div>
+          <div class="col-sm-8"><%= @order.shipping_address.state.name %></div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4"><strong>State</strong></div>
+          <div class="col-sm-8"><%= @order.shipping_address.city.name %></div>
+        </div>
+
+        <h4>Billing Address</h4>
+        <div class="row">
+          <div class="col-sm-4"><strong>Street</strong></div>
+          <div class="col-sm-8"><%= @order.billing_address.street_address %></div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4"><strong>City</strong></div>
+          <div class="col-sm-8"><%= @order.billing_address.state.name %></div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4"><strong>State</strong></div>
+          <div class="col-sm-8"><%= @order.billing_address.city.name %></div>
+        </div>
+
+        <h4>Billing Card</h4>
+        <div class="row">
+          <div class="col-sm-4"><strong>Last 4 Digits</strong></div>
+          <div class="col-sm-8"><%= @order.credit_card.card_number[-4..-1] %></div>
+        </div>                
+      </div>
+    <% end %>
+
+  </div>
+
+  <hr>
+
+  <% if @order.products %>
+    <%= render partial: "order_contents", locals: { products: @order.products,
+                                                    order: @order } %>
+  <% else %>
+    No Products in Order.
+  <% end %>
+
+</div>
