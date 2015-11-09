@@ -100,7 +100,8 @@ class Order < ActiveRecord::Base
 
 
   def new_cart_allowed
-    if User.find(self.user_id).orders.where("checkout_date IS NULL").exists?
+    if User.find(self.user_id).orders.where("checkout_date IS NULL").exists? &&
+       checkout_date.nil?
       errors.add(:checkout_date, "can't be blank, cart already exists.")
     end
   end

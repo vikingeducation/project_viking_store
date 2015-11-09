@@ -176,7 +176,7 @@ def generate_order
     if has_cart?(user.id)
       o[:checkout_date] = placement_date(user)
     end
-
+    
     o.save
     generate_contents(o[:id])
   end
