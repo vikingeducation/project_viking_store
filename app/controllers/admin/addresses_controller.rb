@@ -57,6 +57,18 @@ class Admin::AddressesController < AdminController
   end
 
 
+  def destroy
+    @address = Address.find(params[:id])
+    if @address.destroy
+      flash[:warning] = "Address for #{@address.user.first_name} Deleted!"
+      redirect_to admin_addresses_path
+    else
+      flash[:danger] = "Oops, something went wrong!"
+      redirect_to :back
+    end
+  end
+
+
   private
 
 

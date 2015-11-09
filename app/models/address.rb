@@ -1,10 +1,14 @@
 class Address < ActiveRecord::Base
+  before_destroy :remove_default
+
   belongs_to :user
   belongs_to :city
   belongs_to :state
   accepts_nested_attributes_for :city
-  has_many :billed_orders, foreign_key: :billing_id, class_name: "Order"
-  has_many :shipped_orders, foreign_key: :shipping_id, class_name: "Order"
+  has_many :billed_orders, foreign_key: :billing_id, class_name: "Order", 
+                           dependent: :nullify
+  has_many :shipped_orders, foreign_key: :shipping_id, class_name: "Order", 
+                            dependent: :nullify
 
   validates_associated :city
   validates :street_address, :zip_code, length: { in: 1..64 }
@@ -28,6 +32,12 @@ class Address < ActiveRecord::Base
 
   def validate_user_id
     errors.add(:user_id, "is invalid") unless User.exists?(self.user_id)
+  end
+
+
+  def remove_default
+    user.default_shipping_address = nil if user.default_shipping_address == self
+    user.default_billing_address = nil if user.default_billing_address == self
   end
 
 end
