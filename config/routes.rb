@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :credit_cards
     resources :categories
     resources :products
+    resources :orders
   end
 
   # Example of regular route:
