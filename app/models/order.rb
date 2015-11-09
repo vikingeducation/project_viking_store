@@ -2,21 +2,22 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
   has_many :order_contents, dependent: :destroy
-  has_many :products, through: :order_contents
+  has_many :products, -> { select("products.*, order_contents.quantity AS quantity,
+                                   (order_contents.quantity * products.price) AS total_price") }, 
+                      through: :order_contents
   has_many :categories, through: :products
   belongs_to :billing_address, foreign_key: :billing_id, class_name: "Address"
   belongs_to :shipping_address, foreign_key: :shipping_id, class_name: "Address"
   belongs_to :credit_card
 
+  validates :shipping_id, :billing_id, :credit_card_id, presence: true
   validate :new_cart_allowed
+  validate :users_details
 
   def value
-    order_contents.inject(0) { |sum, c| sum + (c.product.price * c.quantity) }
+    products.inject(0) { |sum, p| sum += p.total_price }
   end
 
-  def product_quantity(product_id)
-    order_contents.select(:quantity).where("product_id = :id", id: product_id).first.quantity
-  end
 
   def self.submitted_count(period = nil)
     submitted = Order.submitted
@@ -87,7 +88,6 @@ class Order < ActiveRecord::Base
       max = max.checkout_date_rage(period)
     end
     max.to_a.first.order_max
-    
   end
 
 
@@ -107,8 +107,15 @@ class Order < ActiveRecord::Base
   def new_cart_allowed
     if User.find(self.user_id).orders.where("checkout_date IS NULL").exists? &&
        checkout_date.nil?
-      errors.add(:checkout_date, "can't be blank, cart already exists.")
+      errors.add(:new_cart, "can't be created, only one allowed per user!")
     end
+  end
+
+
+  def users_details
+    errors.add(:billing_id, "is invalid") unless user.address_ids.include?(self.billing_id)
+    errors.add(:shipping_id, "is invalid") unless user.address_ids.include?(self.shipping_id)
+    errors.add(:credit_card_id, "is invalid") unless user.credit_card_ids.include?(self.credit_card_id)
   end
 
 

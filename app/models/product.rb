@@ -11,17 +11,6 @@ class Product < ActiveRecord::Base
   validate :validate_category_id
 
 
-  def self.total_listed(period = nil)
-    total = Product.select("COUNT(*) AS t")
-    if period
-      total = total.where( "created_at BETWEEN :start AND :finish",
-                          { start: DateTime.now - period, finish: DateTime.now } )
-    end
-    total.to_a.first.t
-  end
-
-
-  # instance methods
   def order_stats
     o = orders
     carts = o.where("checkout_date IS NULL").count
@@ -32,6 +21,16 @@ class Product < ActiveRecord::Base
 
   def price=(price_str)
     write_attribute(:price, price_str.tr('$ ,', ''))
+  end  
+
+
+  def self.total_listed(period = nil)
+    total = Product.select("COUNT(*) AS t")
+    if period
+      total = total.where( "created_at BETWEEN :start AND :finish",
+                          { start: DateTime.now - period, finish: DateTime.now } )
+    end
+    total.to_a.first.t
   end
 
 

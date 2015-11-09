@@ -48,7 +48,7 @@
 
       <div class="row">
         <div class="col-sm-4"><strong># Products</strong></div>
-        <div class="col-sm-8"><%= @order.products.count %></div>
+        <div class="col-sm-8"><%= @order.products.count(:all) %></div>
       </div>
 
       <div class="row">
@@ -114,8 +114,7 @@
   <hr>
 
   <% if @order.products %>
-    <%= render partial: "order_contents", locals: { products: @order.products,
-                                                    order: @order } %>
+    <%= render partial: "order_contents", locals: { products: @order.products } %>
   <% else %>
     No Products in Order.
   <% end %>

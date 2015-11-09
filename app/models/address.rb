@@ -14,6 +14,7 @@ class Address < ActiveRecord::Base
   validates :street_address, :zip_code, length: { in: 1..64 }
   validate :validate_state_id
   validate :user_id
+  
 
   def orders_count
     Order.select("COUNT(*) as num_orders").

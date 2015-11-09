@@ -11,8 +11,8 @@
           <strong>Admin Actions for <%= @user.first_name %> <%= @user.last_name %></strong>
         </div>
         <div class="panel-body">
-          <%= link_to 'Create Order', '#', class: "btn btn-primary btn-sm"  %>
-          <%= link_to 'Create Address', '#', class: "btn btn-primary btn-sm"  %>
+          <%= link_to 'Create Order', new_admin_order_path(user_id: @user), class: "btn btn-primary btn-sm"  %>
+          <%= link_to 'Create Address', new_admin_address_path(user_id: @user), class: "btn btn-primary btn-sm"  %>
         </div>
       </div>
     </div>

@@ -17,13 +17,33 @@ class Admin::OrdersController < AdminController
   end
 
 
+  def new
+    if user = valid_user
+      @order = user.orders.new
+    else
+      flash[:danger] = "Order cannot be created without valid User!"
+      redirect_to admin_orders_path
+    end
+  end
+
+
+  def create
+    @order = Order.new(order_params)
+    if @order.save
+      flash[:success] = "New Order Created!"
+      redirect_to admin_order_path(@order)
+    else
+      flash.now[:danger] = "Oops, something went wrong!"
+      render :new
+    end
+  end
+
+
   private
 
 
-  def valid_user
-    if params.has_key?(:user_id) && User.exists?(params[:user_id])
-      User.find(params[:user_id])
-    end
+  def order_params
+    params.require(:order).permit(:shipping_id, :billing_id, :credit_card_id, :user_id)
   end
 
 end
