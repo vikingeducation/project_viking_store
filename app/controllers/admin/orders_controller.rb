@@ -39,11 +39,29 @@ class Admin::OrdersController < AdminController
   end
 
 
+  def edit
+    @order = Order.find(params[:id])
+  end
+
+
+  def update
+    @order = Order.find(params[:id])
+    if @order.update(order_params) 
+      flash[:success] = "Order Updated!"
+      redirect_to admin_order_path(@order)
+    else
+      flash.now[:danger] = "Oops, something went wrong!"
+      render :edit
+    end
+  end  
+
+
   private
 
 
   def order_params
-    params.require(:order).permit(:shipping_id, :billing_id, :credit_card_id, :user_id)
+    params.require(:order).permit(:shipping_id, :billing_id, :credit_card_id, 
+                                  :user_id, :toggle)
   end
 
 end

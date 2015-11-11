@@ -4,8 +4,14 @@
 
 .order-placed {
   color: green;
+  font-weight: bold;
 } 
 
 .order-unplaced {
   color: red;
+  font-weight: bold
+}
+
+.order-section {
+  margin-bottom: 25px;
 }

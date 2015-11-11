@@ -24,11 +24,11 @@
       </div>
     </div>
 
-    <%= f.fields_for :city do |city_form| %>
+    <%= f.fields_for :city do |city_fields| %>
       <div class="form-group">
-        <%= city_form.label :name, "City", class: "col-sm-2" %>
+        <%= city_fields.label :name, "City", class: "col-sm-2" %>
         <div class="col-sm-10">
-          <%= city_form.text_field :name %>
+          <%= city_fields.text_field :name %>
           <%= render partial: 'admin/form_error', locals: {errors: address.errors.full_messages_for(:city)} %>
         </div>
       </div>

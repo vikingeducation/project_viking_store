@@ -36,18 +36,27 @@
       <% @orders.each do |order| %>
         <tr class="<%= 'active' unless order.checkout_date? %>">
           <td><%= order.id %></td>
-          <td>
-            <% if params[:user_id] %>
-              <%= link_to order.user.id, admin_user_path(order.user) %>
-            <% elsif order.user_id.nil? %>
-              -
-            <% else %>
-              <%= link_to order.user.id, 
-                          admin_orders_path(user_id: order.user.id) %>
-            <% end %>
-          </td>
-          <td><%= order.shipping_address.city.name %></td>
-          <td><%= order.shipping_address.state.name %></td>
+          <!-- Handle Deleted Users -->
+          <% if !order.user_id.nil? %>
+
+            <td>
+              <% if params[:user_id] %>
+                <%= link_to order.user.id, admin_user_path(order.user) %>
+              <% else %>
+                <%= link_to order.user.id, 
+                            admin_orders_path(user_id: order.user.id) %>
+              <% end %>
+            </td>
+            <td><%= order.shipping_address.city.name %></td>
+            <td><%= order.shipping_address.state.name %></td>
+
+          <% else %>
+
+            <td>-</td>
+            <td>¯\_(ツ)_/¯</td>
+            <td>-</td>
+
+          <% end %>
           <td><%= number_to_currency(order.value) %></td>
           <td class="<%= 'order-unplaced' unless order.checkout_date? %>"><%= order.checkout_date? ? "PLACED" : "UNPLACED" %></td>
           <td class="text-nowrap"><%= order.checkout_date? ? order.checkout_date.strftime('%Y-%m-%d') : '-' %></td>

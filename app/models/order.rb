@@ -1,4 +1,5 @@
 class Order < ActiveRecord::Base
+  attr_accessor :toggle
 
   belongs_to :user
   has_many :order_contents, dependent: :destroy
@@ -11,8 +12,10 @@ class Order < ActiveRecord::Base
   belongs_to :credit_card
 
   validates :shipping_id, :billing_id, :credit_card_id, presence: true
-  validate :new_cart_allowed
   validate :users_details
+
+  before_update :toggle_order_status?
+
 
   def value
     products.inject(0) { |sum, p| sum += p.total_price }
@@ -104,11 +107,22 @@ class Order < ActiveRecord::Base
   private
 
 
-  def new_cart_allowed
-    if User.find(self.user_id).orders.where("checkout_date IS NULL").exists? &&
-       checkout_date.nil?
-      errors.add(:new_cart, "can't be created, only one allowed per user!")
-    end
+  def toggle_order_status?
+    if toggle == "placed" && checkout_date.nil?
+      self.checkout_date = DateTime.now
+    elsif toggle == "unplaced" 
+      if new_cart_allowed?
+        self.checkout_date = nil
+      else
+        errors.add(:base, "This user already has one unplaced order!")
+        false
+      end
+    end 
+  end
+
+
+  def new_cart_allowed?
+    !User.find(self.user_id).orders.where("checkout_date IS NULL").exists?
   end
 
 
