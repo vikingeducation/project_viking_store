@@ -2,7 +2,7 @@ class OrderContent < ActiveRecord::Base
   belongs_to :order
   belongs_to :product
 
-  after_validation :combine_products
+  before_create :combine_products
   after_update :remove_zero_quantity
 
 
