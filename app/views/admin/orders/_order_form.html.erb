@@ -1,9 +1,9 @@
-<div class="panel-body">
+  <div class="panel-body">
 
-  <div class="row">
-    <div class="col-md-6">
-      
-      <%= form_for( [:admin, order] ) do |f| %>
+  <%= form_for( [:admin, order] ) do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+        
         <div class="order-section">
           <h4>Basic Information</h4>
           <div class="row form-extra">
@@ -83,9 +83,12 @@
           <%= f.submit "Update Order Information" %>
         <% end %>
 
-      <% end %>
-
     </div>
-
-    <%= render partial: 'order_contents_form', locals: {order: order}  %>
   </div>
+<% end %>
+
+<hr>
+
+<%= render partial: 'order_contents_form', locals: {order: order}  %>
+
+</div>

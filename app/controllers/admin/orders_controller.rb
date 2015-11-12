@@ -61,7 +61,8 @@ class Admin::OrdersController < AdminController
 
   def order_params
     params.require(:order).permit(:shipping_id, :billing_id, :credit_card_id, 
-                                  :user_id, :toggle)
+                                  :user_id, :toggle, order_contents_attributes: 
+                                  [:quantity, :product_id, :id, :_destroy])
   end
 
 end
