@@ -86,9 +86,10 @@
     </div>
   </div>
 <% end %>
-
+<% if order.persisted? %>
 <hr>
 
 <%= render partial: 'order_contents_form', locals: {order: order}  %>
+<% end %>
 
 </div>

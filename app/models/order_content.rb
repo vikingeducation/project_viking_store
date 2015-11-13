@@ -3,8 +3,9 @@ class OrderContent < ActiveRecord::Base
   belongs_to :product
 
   before_create :combine_products
-  after_update :remove_zero_quantity
+  after_save :remove_zero_quantity
 
+  validate :product_exists
 
   private
 
@@ -21,6 +22,11 @@ class OrderContent < ActiveRecord::Base
       existing.destroy_all
       self.quantity += total_quantity
     end
+  end
+
+
+  def product_exists
+    errors.add(:product_id, "is invalid") unless Product.exists?(self.product_id)
   end
 
 end

@@ -31,7 +31,7 @@ class Admin::OrdersController < AdminController
     @order = Order.new(order_params)
     if @order.save
       flash[:success] = "New Order Created!"
-      redirect_to admin_order_path(@order)
+      redirect_to edit_admin_order_path(@order)
     else
       flash.now[:danger] = "Oops, something went wrong!"
       render :new
@@ -41,6 +41,7 @@ class Admin::OrdersController < AdminController
 
   def edit
     @order = Order.find(params[:id])
+    build_blank_order_contents
   end
 
 
@@ -51,9 +52,22 @@ class Admin::OrdersController < AdminController
       redirect_to admin_order_path(@order)
     else
       flash.now[:danger] = "Oops, something went wrong!"
+      build_blank_order_contents
       render :edit
     end
   end  
+
+
+  def destroy
+    @order = Order.find(params[:id])
+    if @order.destroy
+      flash[:warning] = "Order ##{@order.id} Deleted!"
+      redirect_to admin_orders_path
+    else
+      flash[:danger] = "Oops, something went wrong!"
+      redirect_to :back
+    end
+  end
 
 
   private
@@ -63,6 +77,14 @@ class Admin::OrdersController < AdminController
     params.require(:order).permit(:shipping_id, :billing_id, :credit_card_id, 
                                   :user_id, :toggle, order_contents_attributes: 
                                   [:quantity, :product_id, :id, :_destroy])
+  end
+
+
+  def build_blank_order_contents
+    unsaved_count = @order.order_contents.select(&:new_record?).size
+    (5 - unsaved_count).times do
+      @order.order_contents.build
+    end
   end
 
 end

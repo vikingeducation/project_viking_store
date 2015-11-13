@@ -17,29 +17,9 @@ class Order < ActiveRecord::Base
 
   validates :shipping_id, :billing_id, :credit_card_id, presence: true
   validate :users_details
+  validates_associated :order_contents
 
   before_update :toggle_order_status?
-  
-
-
-  # def combine_products
-  #   p_ids = order_contents.pluck(:product_id)
-
-  #   if p_ids.uniq!
-
-  #     p_ids.uniq.each do |p_id|
-  #       if (p_ids.select { |n| p_id = n}).length > 1
-  #         duplicates = order_contents.where("product_id = ?", p_id)
-  #         total_quantity = duplicates.pluck(:quantity).sum
-  #         combined = order_contents.build(product_id: p_id,
-  #                                         quantity: total_quantity)
-  #         duplicates.destroy
-  #         combined.save
-  #       end 
-  #     end
-
-  #   end
-  # end
 
 
   def value
