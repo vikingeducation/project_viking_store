@@ -1,7 +1,6 @@
 class Order < ActiveRecord::Base
   attr_accessor :toggle
 
-
   belongs_to :user
   has_many :order_contents, dependent: :destroy
   has_many :products, -> { select("products.*, order_contents.quantity AS quantity,
@@ -15,7 +14,7 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :order_contents, allow_destroy: true,
   reject_if: proc { |attributes| attributes['product_id'].blank? }
 
-  validates :shipping_id, :billing_id, :credit_card_id, presence: true
+  validates :shipping_id, :billing_id, presence: true
   validate :users_details
   validates_associated :order_contents
 
@@ -134,7 +133,6 @@ class Order < ActiveRecord::Base
   def users_details
     errors.add(:billing_id, "is invalid") unless user.address_ids.include?(self.billing_id)
     errors.add(:shipping_id, "is invalid") unless user.address_ids.include?(self.shipping_id)
-    errors.add(:credit_card_id, "is invalid") unless user.credit_card_ids.include?(self.credit_card_id)
   end
 
 
