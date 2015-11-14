@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  attr_accessor :toggle
+  attr_accessor :status
 
   belongs_to :user
   has_many :order_contents, dependent: :destroy
@@ -16,6 +16,7 @@ class Order < ActiveRecord::Base
 
   validates :shipping_id, :billing_id, presence: true
   validate :users_details
+  validate :payment_details, if: "status == 'placed'"
   validates_associated :order_contents
 
   before_update :toggle_order_status?
@@ -49,6 +50,8 @@ class Order < ActiveRecord::Base
               select("orders.user_id, order_value").order("order_value DESC").limit(1)
     User.select("users.first_name, users.last_name, order_value AS value").
          joins("JOIN (#{o.to_sql}) o ON o.user_id = users.id").first
+
+
   end
 
 
@@ -111,11 +114,13 @@ class Order < ActiveRecord::Base
   private
 
 
+  # status of placed or unplaced is sent everytime order is updated.
+  # here we check if it can be changed.
   def toggle_order_status?
-    if toggle == "placed" && checkout_date.nil?
+    if status == "placed" && checkout_date.nil?
       self.checkout_date = DateTime.now
-    elsif toggle == "unplaced" 
-      if new_cart_allowed?
+    elsif status == "unplaced" 
+      if self.checkout_date.nil? || new_cart_allowed? 
         self.checkout_date = nil
       else
         errors.add(:base, "This user already has one unplaced order!")
@@ -136,6 +141,12 @@ class Order < ActiveRecord::Base
   end
 
 
+  def payment_details
+    errors.add(:credit_card_id, "in invalid") unless user.credit_card_ids.include?(self.credit_card_id)
+  end
+
+
+  # analytics methods
   def self.orders_by_time_period(time_period, limit)
     totals = Order.select("*").joins("JOIN (#{Order.order_totals.to_sql}) t ON t.id = orders.id")
 

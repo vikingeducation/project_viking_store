@@ -1,11 +1,12 @@
   <div class="panel-body">
 
   <%= form_for( [:admin, order] ) do |f| %>
+    <%= f.hidden_field :user_id, value: order.user.id %>
+    <div class="order-section"><h4>Basic Information</h4></div>
+
     <div class="row">
       <div class="col-md-6">
-        
         <div class="order-section">
-          <h4>Basic Information</h4>
           <div class="row form-extra">
             <div class="col-sm-4"><strong>Customer ID</strong></div>
             <div class="col-sm-8"><%= order.user.id %></div>
@@ -35,25 +36,26 @@
             <h4>Order Status</h4>
             <div class="radio">
               <%= label_tag do %>
-              <%= radio_button_tag 'order[toggle]', 'placed', 
-              (order.toggle == 'placed' || !order.checkout_date.nil?) %>
+              <%= radio_button_tag 'order[status]', 'placed', 
+              (order.status == 'placed' || !order.checkout_date.nil?) %>
               <span class="order-placed">PLACED</span>            
               <% end %>
             </div>
             <div class="radio">
               <%= label_tag do %>
-              <%= radio_button_tag 'order[toggle]', 'unplaced', 
-              (order.toggle == 'unplaced' || order.checkout_date.nil?) %>
+              <%= radio_button_tag 'order[status]', 'unplaced', 
+              (order.status == 'unplaced' || order.checkout_date.nil?) %>
               <span class="order-unplaced">NOT PLACED</span>            
               <% end %>
             </div>
             <p class="help-block">Only one unplaced order allowed!</p>
             <%= render partial: 'admin/form_error', locals: {errors: order.errors.full_messages_for(:base)} %>
           </div>
-        <% end %>      
+        <% end %>
+      </div> 
+     
 
-        <%= f.hidden_field :user_id, value: order.user.id %>
-
+      <div class="col-md-6">
         <div class="form-group">
           <%= f.label :shipping_id, "Shipping Address" %>
           <%= f.collection_select(:shipping_id, order.user.addresses, :id, :street_address, {:selected => order.user.shipping_id}) %>
@@ -71,25 +73,30 @@
           <%= f.collection_select(:credit_card_id, order.user.credit_cards, :id, :display_card_number) %>
           <%= render partial: 'admin/form_error', locals: {errors: order.errors.full_messages_for(:credit_card_id)} %>
         </div>
-
-        <% if !order.persisted? %>
-          <div class="form-extra note-text">You can add products on the next screen, once Order has been created.</div>        
-          <%= f.submit "Create Order in Shopping Cart" %>
-        <% else %>
-          <div class="pull-right">
-            <%= link_to "Delete Order", admin_order_path(order), method: :delete,
-                data: { confirm: "Are you sure?" }  %>
-          </div>
-          <%= f.submit "Update Order Information" %>
-        <% end %>
-
+      </div>
     </div>
-  </div>
+
+    <div class="row">
+      <div class="col-md-12">
+      <% if !order.persisted? %>
+        <div class="form-extra note-text">You can add products on the next screen, once Order has been created.</div>        
+        <%= f.submit "Create Order in Shopping Cart" %>
+      <% else %>
+        <div class="pull-right">
+          <%= link_to "Delete Order", admin_order_path(order), method: :delete,
+              data: { confirm: "Are you sure?" }  %>
+        </div>
+        <%= f.submit "Update Order Information" %>
+      <% end %>
+      </div>
+    </div>
+
 <% end %>
 <% if order.persisted? %>
-<hr>
 
-<%= render partial: 'order_contents_form', locals: {order: order}  %>
+  <hr>
+  <%= render partial: 'order_contents_form', locals: {order: order}  %>
+
 <% end %>
 
 </div>
