@@ -32,7 +32,7 @@ class Admin::AddressesController < AdminController
     @address = Address.new(address_params)
     if @address.save
       flash[:success] = "New Address for #{@address.user.first_name} Created!"
-      redirect_to admin_address_path(@address)
+      redirect_to admin_user_address_path(@address.user, @address)
     else
       flash.now[:danger] = "Oops, something went wrong!"
       render :new
@@ -49,7 +49,7 @@ class Admin::AddressesController < AdminController
     @address = Address.find(params[:id])
     if @address.update(address_params)
       flash[:info] = "Address for #{@address.user.first_name} Updated!"
-      redirect_to admin_address_path(@address)
+      redirect_to admin_user_address_path(@address.user, @address)
     else
       flash.now[:danger] = "Oops, something went wrong!"
       render :edit

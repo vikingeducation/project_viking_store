@@ -3,7 +3,7 @@
 
     <div class="panel-btns pull-right">
       <%= link_to "Create New Address For #{@user.first_name}", 
-          new_admin_address_path(user_id: @user) , class: "btn btn-primary"  %>
+          new_admin_user_address_path(user_id: @user) , class: "btn btn-primary"  %>
     </div>
     <h4><%= @user.first_name %> <%= @user.last_name %>'s Addresses</h4>
 
@@ -42,7 +42,7 @@
               <%= link_to address.user.first_name, admin_user_path(address.user) %>
             <% else %>
               <%= link_to address.user.first_name, 
-                          admin_addresses_path(user_id: address.user.id) %>
+                          admin_user_addresses_path(address.user) %>
             <% end %>
           </td>
           <td><%= address.street_address %></td>
@@ -50,9 +50,9 @@
           <td><%= address.state.name %></td>
           <td><%= address.orders_count %></td>
           <td class="text-nowrap"><%= address.created_at.strftime('%Y-%m-%d') %></td>
-          <td><%= link_to 'Show', admin_address_path(address.id) %></td>
-          <td><%= link_to 'Edit', edit_admin_address_path(address.id) %></td>
-          <td><%= link_to 'Delete', admin_address_path(address.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+          <td><%= link_to 'Show', admin_user_address_path(address.user.id, address.id) %></td>
+          <td><%= link_to 'Edit', edit_admin_user_address_path(address.user.id, address.id) %></td>
+          <td><%= link_to 'Delete', admin_user_address_path(address.user.id, address.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
         </tr>
       <% end %>
 

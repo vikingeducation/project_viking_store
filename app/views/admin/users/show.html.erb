@@ -12,7 +12,7 @@
         </div>
         <div class="panel-body">
           <%= link_to 'Create Order', new_admin_order_path(user_id: @user), class: "btn btn-primary btn-sm"  %>
-          <%= link_to 'Create Address', new_admin_address_path(user_id: @user), class: "btn btn-primary btn-sm"  %>
+          <%= link_to 'Create Address', new_admin_user_address_path(user_id: @user), class: "btn btn-primary btn-sm"  %>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="col-sm-12">
           <strong>Default Billing Address</strong><br>
           <% if @user.default_billing_address %>
-            <%= link_to(admin_address_path(@user.default_billing_address)) do %>
+            <%= link_to(admin_user_address_path(@user, @user.default_billing_address)) do %>
               <%= render_address(@user.default_billing_address) %>
             <% end %>
           <% else %>
@@ -56,7 +56,7 @@
         <div class="col-sm-12">
           <strong>Default Shipping Address</strong><br>
           <% if @user.default_shipping_address %>
-            <%= link_to(admin_address_path(@user.default_shipping_address)) do %>
+            <%= link_to(admin_user_address_path(@user, @user.default_shipping_address)) do %>
               <%= render_address(@user.default_shipping_address) %>
             <% end %>
           <% else %>

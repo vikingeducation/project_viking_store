@@ -2,7 +2,7 @@ class Address < ActiveRecord::Base
   before_destroy :remove_default
 
   belongs_to :user
-  belongs_to :city
+  belongs_to :city, autosave: true
   belongs_to :state
   accepts_nested_attributes_for :city
   has_many :billed_orders, foreign_key: :billing_id, class_name: "Order", 
@@ -20,6 +20,16 @@ class Address < ActiveRecord::Base
     Order.select("COUNT(*) as num_orders").
     where( "shipping_id = :ship OR billing_id = :bill", { ship: id, bill: id } ).
     to_a.first.num_orders
+  end
+
+
+  def autosave_associated_records_for_city
+    if new_city = City.find_by_name(city.name)
+      self.city = new_city
+    else
+      city.save!
+      self.city = city
+    end
   end
 
 

@@ -10,8 +10,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'products#index'
-    resources :users
-    resources :addresses
+    get '/addresses' => 'addresses#index'
+    resources :addresses, only: [:create, :update]
+    resources :users do
+      resources :addresses
+    end
     resources :credit_cards
     resources :categories
     resources :products
