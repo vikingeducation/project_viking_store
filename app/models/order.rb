@@ -3,8 +3,7 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
   has_many :order_contents, dependent: :destroy
-  has_many :products, -> { select("products.*, order_contents.quantity AS quantity,
-                                   (order_contents.quantity * products.price) AS total_price") }, 
+  has_many :products, -> { select("products.*, order_contents.quantity AS quantity") }, 
                       through: :order_contents
   has_many :categories, through: :products
   belongs_to :billing_address, foreign_key: :billing_id, class_name: "Address"
@@ -12,7 +11,7 @@ class Order < ActiveRecord::Base
   belongs_to :credit_card
 
   accepts_nested_attributes_for :order_contents, allow_destroy: true,
-  reject_if: proc { |attributes| attributes['product_id'].blank? }
+                                 reject_if: proc { |attributes| attributes['product_id'].blank? }
 
   validates :shipping_id, :billing_id, presence: true
   validate :users_details
@@ -23,7 +22,7 @@ class Order < ActiveRecord::Base
 
 
   def value
-    products.inject(0) { |sum, p| sum += p.total_price }
+    products.sum("quantity * price")
   end
 
 

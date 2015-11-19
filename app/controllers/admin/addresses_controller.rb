@@ -5,9 +5,9 @@ class Admin::AddressesController < AdminController
       @addresses = @user.addresses
     elsif params[:user_id] # user_id there but invalid
       flash[:danger] = "Invalid User!"
-      @addresses = Address.all
+      @addresses = Address.all.includes(:user, :city, :state)
     else
-      @addresses = Address.all
+      @addresses = Address.all.includes(:user, :city, :state)
     end
   end
 

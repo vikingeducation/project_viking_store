@@ -17,7 +17,7 @@
         <td><%= link_to product.name, admin_product_path(product) %></td>
         <td><%= quantity = product.quantity %></td>
         <td><%= number_to_currency(product.price) %></td>
-        <td><%= number_to_currency(product.total_price) %></td>
+        <td><%= number_to_currency(product.price * quantity) %></td>
     <% end %>
   </tbody>
 </table>

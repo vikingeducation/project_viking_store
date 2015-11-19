@@ -34,7 +34,7 @@
         <td><%= address[:state] %></td>
         <% if user.orders.any? %>
           <td>
-            <%= link_to user.orders.count, '#' %>
+            <%= link_to user.orders.count, admin_orders_path(user_id: user) %>
           </td>
           <td class="text-nowrap">
             <%= user.last_order_date ? user.last_order_date.strftime('%Y-%m-%d') : '-' %>

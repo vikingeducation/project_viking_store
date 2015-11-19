@@ -2,12 +2,12 @@ class Admin::OrdersController < AdminController
 
   def index
     if @user = valid_user
-      @orders = @user.orders
+      @orders = @user.orders.includes(shipping_address: [:city, :state])
     elsif params[:user_id] # user_id there but invalid
       flash[:danger] = "Invalid User!"
-      @orders = Order.all.order(:user_id)
+      @orders = Order.all.order(:user_id).eager_load(shipping_address: [:city, :state])
     else
-      @orders = Order.all.order(:user_id)
+      @orders = Order.all.order(:user_id).eager_load(shipping_address: [:city, :state])
     end
   end
 
@@ -81,6 +81,10 @@ class Admin::OrdersController < AdminController
 
 
   def build_blank_order_contents
+    # When adding new products to an order, we only want to display 5 blank
+    # fields.  If there's an error on submit (bad product id for instance)
+    # this method makes sure that extra blank fields aren't built by checking
+    # for unsaved order_contents.
     unsaved_count = @order.order_contents.select(&:new_record?).size
     (5 - unsaved_count).times do
       @order.order_contents.build
