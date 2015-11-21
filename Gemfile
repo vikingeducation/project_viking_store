@@ -34,7 +34,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
 
-  gem 'rack-mini-profiler'
+  #gem 'rack-mini-profiler'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

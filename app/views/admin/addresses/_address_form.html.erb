@@ -20,7 +20,7 @@
       <%= f.label :street_address, class: "col-sm-2" %>
       <div class="col-sm-10">
         <%= f.text_field :street_address %>
-        <%= render partial: 'admin/form_error', locals: {errors: address.errors.full_messages_for(:street_address)} %>
+        <%= render partial: 'admin/shared/form_error', locals: {errors: address.errors.full_messages_for(:street_address)} %>
       </div>
     </div>
 
@@ -29,7 +29,7 @@
         <%= city_fields.label :name, "City", class: "col-sm-2" %>
         <div class="col-sm-10">
           <%= city_fields.text_field :name %>
-          <%= render partial: 'admin/form_error', locals: {errors: address.errors.full_messages_for(:city)} %>
+          <%= render partial: 'admin/shared/form_error', locals: {errors: address.errors.full_messages_for(:city)} %>
         </div>
       </div>
     <% end %>
@@ -38,7 +38,7 @@
       <%= f.label :state, class: "col-sm-2" %>
       <div class="col-sm-10">
         <%= f.collection_select(:state_id, State.all, :id, :name, prompt: true) %>
-        <%= render partial: 'admin/form_error', locals: {errors: address.errors.full_messages_for(:state_id)} %>
+        <%= render partial: 'admin/shared/form_error', locals: {errors: address.errors.full_messages_for(:state_id)} %>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
       <%= f.label :zip_code, class: "col-sm-2" %>
       <div class="col-sm-10">
         <%= f.text_field :zip_code %>
-        <%= render partial: 'admin/form_error', locals: {errors: address.errors.full_messages_for(:zip_code)} %>
+        <%= render partial: 'admin/shared/form_error', locals: {errors: address.errors.full_messages_for(:zip_code)} %>
       </div>
     </div>
 

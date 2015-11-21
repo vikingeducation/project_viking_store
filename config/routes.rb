@@ -6,12 +6,15 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
+  root 'products#index'
+
+  resources :products 
+
   get '/dashboard' => 'dashboard#home'
 
   namespace :admin do
-    root 'products#index'
-    get '/addresses' => 'addresses#index'
-    resources :addresses, only: [:create, :update]
+    root 'orders#index'
+    resources :addresses, only: [:index, :create, :update]
     resources :users do
       resources :addresses
     end
