@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-right">
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to '#' do %>
+            <%= image_tag "placeholder.png", size: "40x40", alt: "View Cart" %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to 'Your Cart', '#'  %>
+          <br>
+          <%= link_to 'Sign In', '#'  %>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="navbar-header">
+      <%= link_to 'Viking Store', root_path, class: "navbar-brand"  %>
+    </div>
+
+  </div>
+</nav>

@@ -8,10 +8,27 @@
 //   margin: 0 auto;
 //   }
 
-// override for the 'Home' navigation link
-.navbar-brand {
-  font-size: inherit;
+.navbar {
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid #000;
 }
+
+.navbar-nav {
+  padding: 5px 50px 5px;
+  height: 50px;
+  li a {
+    padding-left: 5px;
+    padding-right: 5px;
+    line-height: 0px;
+    display: initial;
+  }
+}
+
+.navbar-brand {
+  font-size: 1.75em;
+}
+
 
 main {
   @extend .container;
