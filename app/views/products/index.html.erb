@@ -6,6 +6,19 @@
 
 <div class="container">
   <div class="row">
+    <div class="col-md-4 col-md-offset-8 text-right category-filter">
+      <%= form_tag('/products', method: :get, class: 'form-inline') do |f| %>
+        <div class="form-group">
+          <%= label_tag 'category', 'Categories', class: 'sr-only' %>
+          <%= select_tag "category", options_from_collection_for_select(@categories, "id", "name", @category.nil? ? '' : @category.id), include_blank: "All Categories" %>
+        </div>
+          <%= submit_tag 'Apply Filter', name: nil %>
+      <% end %>
+        
+    </div>
+  </div>
+
+  <div class="row">
     <%= render @products %>
   </div>
 </div>
