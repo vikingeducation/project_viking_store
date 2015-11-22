@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   resources :products, only: [:index]
   resources :orders, only: [:new, :create, :edit, :update]
 
+  resource :session, only: [:new, :create, :destroy]
+  post 'signin', to: "session#create"
+  get 'signin', to: "session#new"
+  delete 'signout', to: "session#destroy" 
+
   get '/dashboard' => 'dashboard#home'
 
   namespace :admin do
