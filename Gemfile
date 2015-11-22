@@ -27,6 +27,10 @@ gem 'faker'
 # Boostrap stuff
 gem 'bootstrap-sass'
 
+# Pagination
+gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
+
 group :development, :test do
   gem 'hirb'
   gem 'pry-rails'

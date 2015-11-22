@@ -6,9 +6,9 @@ class ProductsController < ApplicationController
     @cart.order_contents.build
 
     if @category = Category.find_by_id(params[:category])
-      @products = @category.products
+      @products = @category.products.paginate(:page => params[:page])
     else
-      @products = Product.all.order(:name)
+      @products = Product.all.paginate(:page => params[:page])
     end
    
     #@test = session[:cart]

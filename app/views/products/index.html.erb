@@ -21,4 +21,10 @@
   <div class="row">
     <%= render @products, order: @cart %>
   </div>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
 </div>
