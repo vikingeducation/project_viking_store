@@ -1,0 +1,59 @@
+/* line 5, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin/orders.css.scss */
+.order-placed {
+  color: green;
+  font-weight: bold;
+}
+
+/* line 10, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin/orders.css.scss */
+.order-unplaced {
+  color: red;
+  font-weight: bold;
+}
+
+/* line 15, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin/orders.css.scss */
+.order-section {
+  margin-bottom: 25px;
+}
+/* line 5, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin/users.css.scss */
+.panel-body div .row {
+  margin-bottom: 7px;
+}
+
+/* line 9, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin/users.css.scss */
+.link-disabled {
+  color: #888;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+/* line 18, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin.css.scss */
+.panel-btns {
+  margin-top: 4px;
+}
+
+/* line 22, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin.css.scss */
+.panel-padding {
+  margin: 15px;
+}
+
+/* line 26, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin.css.scss */
+.form-extra {
+  margin-bottom: 10px;
+}
+
+/* line 30, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin.css.scss */
+.note-text {
+  color: #888;
+}

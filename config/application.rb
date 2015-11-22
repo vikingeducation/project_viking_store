@@ -28,5 +28,6 @@ module SolutionVikingStore
     # config.i18n.default_locale = :de
     config.autoload_paths << Rails.root.join('lib')
     config.assets.precompile += %w( admin.css public.css )
+    #config.assets.debug = false
   end
 end

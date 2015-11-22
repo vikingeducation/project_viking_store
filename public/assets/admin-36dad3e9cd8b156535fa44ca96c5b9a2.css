@@ -1,0 +1,19 @@
+/* line 1, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin.css.scss */
+.panel-btns {
+  margin-top: 4px;
+}
+
+/* line 5, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin.css.scss */
+.panel-padding {
+  margin: 15px;
+}
+
+/* line 9, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin.css.scss */
+.form-extra {
+  margin-bottom: 10px;
+}
+
+/* line 13, /Users/justin/Desktop/workspace/viking/project_viking_store/app/assets/stylesheets/admin.css.scss */
+.note-text {
+  color: #888;
+}
