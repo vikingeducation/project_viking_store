@@ -1,16 +1,22 @@
 <div class="col-md-4">
   <div class="product-container">
-    <div class="banner-box">
-      <h3><%= product.name %></h3>
-    </div>
-    <div class="img-container">
-      <%= image_tag "placeholder.png", alt: product.name %>
-      <div class="price">
-        <%= number_to_currency(product.price) %>
+    <%= form_for(order) do |order_form| %>
+      <%= order_form.fields_for :order_contents do |order_contents_form| %>
+        <%= order_contents_form.hidden_field :product_id, value: product.id %>
+        <%= order_contents_form.hidden_field :quantity %>
+      <% end %>
+      <div class="banner-box">
+        <h3><%= product.name %></h3>
       </div>
-    </div>
-    <div class="banner-box">
-      <%= link_to "Add to Cart", "#", class: "btn btn-primary"  %>
-    </div>
+      <div class="img-container">
+        <%= image_tag "placeholder.png", alt: product.name %>
+        <div class="price">
+          <%= number_to_currency(product.price) %>
+        </div>
+      </div>
+      <div class="banner-box">
+        <%= order_form.submit "Add to Cart" %>
+      </div>
+    <% end %>
   </div>
 </div>

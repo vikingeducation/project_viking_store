@@ -8,7 +8,8 @@ Rails.application.routes.draw do
 
   root 'products#index'
 
-  resources :products 
+  resources :products, only: [:index]
+  resources :orders, only: [:new, :create, :edit, :update]
 
   get '/dashboard' => 'dashboard#home'
 
