@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   def sign_in(user)
     session[:current_user_id] = user.id
     current_user= user
-    merge_cart if session[:cart]
   end
 
 
@@ -34,22 +33,5 @@ class ApplicationController < ActionController::Base
   end
   helper_method :signed_in_user?
 
-
-  def merge_cart
-    user = current_user
-    if user.cart
-      @cart = user.cart
-    else
-      @cart = Order.new
-    end
-
-    session[:cart].each do |product_id, quantity|
-      @cart.order_contents.build(product_id: product_id, quantity: quantity)
-    end
-    
-    if @cart.save
-      session.delete(:cart)
-    end
-  end
 
 end

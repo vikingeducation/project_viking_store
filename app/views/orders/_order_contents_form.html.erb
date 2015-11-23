@@ -1,4 +1,4 @@
-<%= form_for(cart, url: shopping_cart_path) do |order_form| %>
+<%= form_for(cart, url: shopping_cart_path, method: :patch) do |order_form| %>
   <%= order_form.hidden_field :id %>
   <% cart.order_contents.each do |order_item| %>
     <div class="col-md-6 col-md-offset-1">

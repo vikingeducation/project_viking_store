@@ -1,21 +1,10 @@
 <div class="col-md-4">
   <div class="product-container">
-    <%= form_for(order) do |order_form| %>
-      <%= order_form.hidden_field :id %>
+    <%= form_for(product, url: shopping_cart_path, method: :post) do |p| %>
+      <%= hidden_field_tag :category, params[:category] %>
       
-      <% order.order_contents.select(&:persisted?).each do |order_item| %>
-        <%= order_form.fields_for :order_contents, order_item do |order_contents_form| %>
-          <%= order_contents_form.hidden_field :product_id %>
-          <%= order_contents_form.hidden_field :quantity %>
-        <% end %>
-      <% end %>
+      <%= p.hidden_field :id %>
 
-      <% new_item = order.order_contents.select(&:new_record?) %>
-      <%= order_form.fields_for :order_contents, new_item do |order_contents_form| %>
-        <%= order_contents_form.hidden_field :product_id, value: product.id %>
-        <%= order_contents_form.hidden_field :quantity, value: "1" %>
-      <% end %>
-      
       <div class="banner-box">
         <h3><%= product.name %></h3>
       </div>
@@ -26,7 +15,7 @@
         </div>
       </div>
       <div class="banner-box">
-        <%= order_form.submit "Add to Cart" %>
+        <%= p.submit "Add to Cart" %>
       </div>
     <% end %>
   </div>
