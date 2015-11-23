@@ -2,9 +2,8 @@ class ProductsController < ApplicationController
 
   def index
     @categories = Category.joins(:products).distinct
-    @cart = Order.new
-    @cart.order_contents.build
-
+    build_cart
+    
     if @category = Category.find_by_id(params[:category])
       @products = @category.products.paginate(:page => params[:page])
     else
@@ -16,6 +15,16 @@ class ProductsController < ApplicationController
 
 
   private
+
+  def build_cart
+    user = current_user
+    if user && user.cart
+      @cart = user.cart
+    else
+      @cart = Order.new
+    end
+    @cart.order_contents.build
+  end
 
 
 end

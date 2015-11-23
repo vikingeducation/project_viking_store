@@ -1,0 +1,72 @@
+<%= form_for(cart, url: shopping_cart_path) do |order_form| %>
+  <%= order_form.hidden_field :id %>
+  <% cart.order_contents.each do |order_item| %>
+    <div class="col-md-6 col-md-offset-1">
+      <div class="order-item">
+        <div class="row">
+          <div class="col-xs-10">
+            <div class="media">
+              <div class="media-left">
+                <%= image_tag "placeholder.png", alt: order_item.product.name %>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading"><%= order_item.product.name %></h4>
+                <%= order_item.product.category.name %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-2">
+            <%= number_to_currency(order_item.product.price) %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="order-item">
+        <%= order_form.fields_for :order_contents, order_item do |order_contents_form| %>
+          <%= order_contents_form.hidden_field :product_id %>
+
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= order_contents_form.label :quantity %>
+                <%= order_contents_form.text_field :quantity %>
+              </div>
+            </div>
+            <div class="col-xs-6 text-right">
+              <div class="form-group">
+                <label class="control-label">Total Price</label>
+                <p class="form-control-static">
+                <%= number_to_currency(order_item.product.price * order_item.quantity) %>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="form-group">
+                <%= order_contents_form.check_box :_destroy %>
+                <%= order_contents_form.label :_destroy, "Remove Item" %>
+              </div>
+            </div>
+          </div>
+        
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+
+  <div class="col-md-6 col-md-offset-1">
+    <div class="order-item order-total text-center">
+      <h4>TOTAL</h4>
+      <h3><%= number_to_currency(cart.value) %></h3>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <%= order_form.submit "Update Cart", class: "btn-default" %>
+  </div>
+<% end %>

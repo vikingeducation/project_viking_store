@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   root 'products#index'
 
   resources :products, only: [:index]
-  resources :orders, only: [:new, :create, :edit, :update]
+  resources :orders, only: [:create, :update]
+  get 'shopping_cart', to: "orders#edit"
+  patch 'shopping_cart', to: "orders#update"
+  post 'shopping_cart', to: "orders#update"
 
   resource :session, only: [:new, :create, :destroy]
   post 'signin', to: "session#create"

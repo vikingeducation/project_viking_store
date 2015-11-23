@@ -1,0 +1,23 @@
+<div class="container">
+
+  <% if @cart %>
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1>Shopping Cart Contents</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= render partial: 'order_contents_form', locals: {cart: @cart} %>
+  </div>
+
+<% else %>
+  
+  <div class="col-md-12 text-center">
+    <h3>No Items In Cart.</h3>
+  </div>
+
+<% end %>
+
+</div>

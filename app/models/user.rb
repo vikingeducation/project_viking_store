@@ -27,6 +27,13 @@ class User < ActiveRecord::Base
   end
 
 
+  def cart
+    if orders.any?
+      orders.cart
+    end
+  end
+
+
   def last_order_date
     if orders.submitted.any?
       orders.order("checkout_date DESC").

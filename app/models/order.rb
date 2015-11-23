@@ -13,8 +13,7 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :order_contents, allow_destroy: true,
                                  reject_if: proc { |attributes| attributes['product_id'].blank? }
 
-  validates :shipping_id, :billing_id, presence: true
-  validate :users_details
+  validate :users_details, if: "status == 'placed'"
   validate :payment_details, if: "status == 'placed'"
   validates_associated :order_contents
 
@@ -177,7 +176,7 @@ class Order < ActiveRecord::Base
 
 
   def self.cart
-    where("checkout_date IS NULL")
+    where("checkout_date IS NULL").first
   end
 
 
