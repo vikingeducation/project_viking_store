@@ -49,8 +49,8 @@
           <% else %>
             <td>-</td>
           <% end %>
-          <td><%= order.shipping_address.city.name.nil? ? '-' : order.shipping_address.city.name %></td>
-          <td><%= order.shipping_address.state.name.nil? ? '-' : order.shipping_address.state.name %></td>
+          <td><%= order.shipping_address.nil? ? '-' : order.shipping_address.city.name %></td>
+          <td><%= order.shipping_address.nil? ? '-' : order.shipping_address.state.name %></td>
           <td><%= number_to_currency(order.value) %></td>
           <td class="<%= 'order-unplaced' unless order.checkout_date? %>"><%= order.checkout_date? ? "PLACED" : "UNPLACED" %></td>
           <td class="text-nowrap"><%= order.checkout_date? ? order.checkout_date.strftime('%Y-%m-%d') : '-' %></td>
