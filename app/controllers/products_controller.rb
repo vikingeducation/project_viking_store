@@ -9,8 +9,6 @@ class ProductsController < ApplicationController
       @products = Product.all.paginate(:page => params[:page])
     end
    
-    #@test = session[:cart]
   end
-
 
 end

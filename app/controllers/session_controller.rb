@@ -5,12 +5,13 @@ class SessionController < ApplicationController
 
 
   def create
+    store_location
     user = User.find_by_email(params[:session][:email])
     if user
       sign_in user
       merge_cart if session[:cart]
       flash[:success] = "Welcome back, #{user.first_name.capitalize}!"
-      redirect_to root_path
+      redirect_back_or(root_path)
     else
       flash.now[:danger] = "Sorry, we couldn't sign you in!"
       render :new
@@ -24,7 +25,7 @@ class SessionController < ApplicationController
       redirect_to root_path
     else
       flash[:error] = "You can't leave, she won't let you."
-      redirect_to root_path
+      redirect_to :back
     end
   end
 
@@ -39,6 +40,7 @@ class SessionController < ApplicationController
   # When a user signs in we need to merge the session[:cart] with any existing
   # cart or create a cart for the user.
   def merge_cart
+    # Ask user?
     user = current_user
     if user.cart
       @cart = user.cart
@@ -54,5 +56,6 @@ class SessionController < ApplicationController
       session.delete(:cart)
     end
   end
+
 
 end

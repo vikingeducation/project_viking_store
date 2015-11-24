@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :require_login, only: [:checkout]
 
   # Create action is only triggered by adding product to cart from index
   # Check if the user is signed in and then if we need to create a cart
@@ -50,6 +51,11 @@ class OrdersController < ApplicationController
   end
 
 
+  def checkout
+    
+  end
+
+
   private
 
   # Unpack session[:cart] into order object to render edit/shopping_cart form
@@ -81,6 +87,7 @@ class OrdersController < ApplicationController
         end
         remove_item?(param)
       end
+
     elsif params.key?(:product) && Product.find_by_id(product_params[:id])
       @session_cart[product_params[:id]] += 1
     end

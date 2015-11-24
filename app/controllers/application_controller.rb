@@ -34,4 +34,35 @@ class ApplicationController < ActionController::Base
   helper_method :signed_in_user?
 
 
+  def require_login
+    unless signed_in_user?
+      store_location       
+      flash[:danger] = "You need to sign in/register!"
+      redirect_to signin_path
+    end
+  end
+
+
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+  
+
+  def store_location
+    session[:forwarding_url] = request.fullpath if request.get?
+  end
+
+
+  def cart_size
+    user = current_user
+    if user && user.cart && user.cart.products.any?
+      user.cart.order_contents.size
+    elsif session[:cart]
+      session[:cart].size
+    end
+  end
+  helper_method :cart_size
+
+
 end

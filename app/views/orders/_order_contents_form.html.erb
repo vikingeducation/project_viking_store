@@ -61,12 +61,14 @@
   <% end %>
 
   <div class="col-md-6 col-md-offset-1">
-    <div class="order-item order-total text-center">
-      <h4>TOTAL</h4>
-      <h3><%= number_to_currency(cart.value) %></h3>
+    <div class="order-total text-center">
+      <h4>TOTAL: <%= number_to_currency(cart.value) %></h4>
     </div>
   </div>
   <div class="col-md-4">
-    <%= order_form.submit "Update Cart", class: "btn-default" %>
+    <div class="order-btn text-center">
+      <%= order_form.submit "Update Cart", class: "btn-default" %>
+      <%= link_to "Checkout", checkout_path, class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>

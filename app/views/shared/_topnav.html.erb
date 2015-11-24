@@ -4,7 +4,10 @@
       
       <%= link_to shopping_cart_path, class: "btn btn-default navbar-btn" do %>
         <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-        Shopping Cart
+        Shopping Cart 
+        <% if cart_size %>
+          <span class="badge"><%= cart_size %></span>
+        <% end %>
       <% end %>
 
       <% if signed_in_user? %>

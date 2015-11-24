@@ -16,8 +16,17 @@
 }
 
 .order-total {
+  @extend .order-item;
   background-color: #fe9;
   margin-bottom: 15px;
+}
+
+.order-btn {
+  @extend .order-item;
+  line-height: 110px;
+  h4 {
+    line-height: 110px;
+  }
 }
 
 

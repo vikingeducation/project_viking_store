@@ -21,7 +21,15 @@ class Order < ActiveRecord::Base
 
 
   def value
-    products.sum("quantity * price")
+    if persisted?
+      products.sum("quantity * price")
+    else
+      # Needed for order objects made from session carts
+      # products association doesn't exist.
+      order_contents.inject(0) do |value, order_item| 
+        value += (order_item.product.price * order_item.quantity)
+      end
+    end
   end
 
 
