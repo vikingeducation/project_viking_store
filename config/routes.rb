@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'shopping_cart', to: "orders#edit"
   patch 'shopping_cart', to: "orders#update"
   post 'shopping_cart', to: "orders#create"
+  post 'merge_shopping_cart', to: 'orders#merge_or_discard_cart'
   get 'checkout', to: "orders#checkout"
 
   resource :session, only: [:new, :create, :destroy]

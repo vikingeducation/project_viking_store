@@ -2,7 +2,8 @@
   <div class="container">
     <div class="navbar-right">
       
-      <%= link_to shopping_cart_path, class: "btn btn-default navbar-btn" do %>
+      <% cart_color = highlight_cart? ? "btn-warning" : "btn-default" %>
+      <%= link_to shopping_cart_path, class: "btn #{cart_color} navbar-btn" do %>
         <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
         Shopping Cart 
         <% if cart_size %>

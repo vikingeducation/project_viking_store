@@ -80,13 +80,13 @@
       <div class="col-md-12">
       <% if !order.persisted? %>
         <div class="form-extra note-text">You can add products on the next screen, once Order has been created.</div>        
-        <%= f.submit "Create Order in Shopping Cart" %>
+        <%= f.submit "Create Order in Shopping Cart", class: "btn btn-primary"  %>
       <% else %>
         <div class="pull-right">
           <%= link_to "Delete Order", admin_order_path(order), method: :delete,
               data: { confirm: "Are you sure?" }  %>
         </div>
-        <%= f.submit "Update Order Information" %>
+        <%= f.submit "Update Order Information", class: "btn btn-primary"  %>
       <% end %>
       </div>
     </div>

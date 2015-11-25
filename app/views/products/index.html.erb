@@ -12,7 +12,7 @@
           <%= label_tag 'category', 'Categories', class: 'sr-only' %>
           <%= select_tag "category", options_from_collection_for_select(@categories, "id", "name", @category.nil? ? '' : @category.id), include_blank: "All Categories" %>
         </div>
-          <%= submit_tag 'Apply Filter', name: nil %>
+          <%= submit_tag 'Apply Filter', name: nil, class: "btn btn-primary"  %>
       <% end %>
         
     </div>

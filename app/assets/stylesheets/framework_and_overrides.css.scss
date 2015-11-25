@@ -32,11 +32,6 @@ form {
     @extend .control-label;
   }
 
-  input[type=submit] {
-    @extend .btn;
-    @extend .btn-primary;
-  }
-
   .field_with_errors {
     @extend .has-error;
   }
@@ -48,4 +43,8 @@ form {
     }
   }
   
+}
+
+.merge-order {
+  @extend .bg-warning;
 }

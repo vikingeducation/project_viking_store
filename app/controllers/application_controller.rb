@@ -53,16 +53,29 @@ class ApplicationController < ActionController::Base
     session[:forwarding_url] = request.fullpath if request.get?
   end
 
-
+  # These methods determine the item count and color of the 
+  # Shopping cart button in the navbar.
   def cart_size
     user = current_user
-    if user && user.cart && user.cart.products.any?
-      user.cart.order_contents.size
-    elsif session[:cart]
+    if session[:cart]
       session[:cart].size
+    elsif items_in_cart?(user)
+      user.cart.order_contents.size
     end
   end
   helper_method :cart_size
+
+
+  def items_in_cart?(user)
+    user && user.cart && user.cart.products.any?
+  end
+
+
+  def highlight_cart?
+    user = current_user
+    items_in_cart?(user) && session[:cart]
+  end
+  helper_method :highlight_cart?
 
 
 end

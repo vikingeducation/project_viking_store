@@ -8,27 +8,22 @@
   }
 }
 
+.merge-order {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #bbb;
+}
+
 .order-item {
   border: 1px solid #bbb;
   margin-top: 15px;
   height: 110px;
-  padding: 10px;
+
 }
 
 .order-total {
-  @extend .order-item;
-  background-color: #fe9;
   margin-bottom: 15px;
 }
-
-.order-btn {
-  @extend .order-item;
-  line-height: 110px;
-  h4 {
-    line-height: 110px;
-  }
-}
-
 
 
 .form-group {
