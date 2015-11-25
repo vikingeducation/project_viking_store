@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
       merge_carts_prompt
       build_cart_from_session
     elsif @user && session[:cart]
-      merge_carts
+      merge
     elsif session[:cart]
       build_cart_from_session
     elsif items_in_cart?(@user)
