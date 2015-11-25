@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 
   def cart
     if orders.any?
-      orders.cart
+      orders.cart.first
     end
   end
 
@@ -78,9 +78,7 @@ class User < ActiveRecord::Base
 
 
   def destroy_cart
-    if cart = orders.cart.first
-      cart.destroy
-    end
+    cart.destroy if cart
   end
 
 

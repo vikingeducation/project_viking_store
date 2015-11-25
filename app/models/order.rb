@@ -184,7 +184,7 @@ class Order < ActiveRecord::Base
 
 
   def self.cart
-    where("checkout_date IS NULL").first
+    where("checkout_date IS NULL")
   end
 
 
