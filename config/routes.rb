@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   root 'products#index'
   resources :products, only: [:index]
 
+  resources :users, except: [:index]
+
   get 'shopping_cart', to: "orders#edit"
   patch 'shopping_cart', to: "orders#update"
   post 'shopping_cart', to: "orders#create"

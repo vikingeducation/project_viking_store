@@ -2,10 +2,10 @@ class OrdersController < ApplicationController
   before_action :require_login, only: [:checkout]
   before_action :force_merge, only: [:checkout]
 
-  # Create action is only triggered by adding product to cart from index
-  # Check if the user is signed in and then if we need to create a cart
-  # If no user, use session cart
 
+  # Create action is only triggered by adding product to cart from index
+  # Handles merge cart by assuming we always want to add to the session cart
+  # even if user is signed in, until the session cart has been deleted 
   def create
     @user = current_user
     if @user && !session[:cart]
@@ -16,12 +16,13 @@ class OrdersController < ApplicationController
       else
         flash[:danger] = "Oops, something went wrong!"
       end
-    else session[:cart]
+    else
       update_session_cart
       flash[:info] = "Shopping cart updated"
     end
     redirect_to products_path(category: params[:category])
   end
+
 
   # Edit page renders form using @cart.  We have to run a few checks on the 
   # user to avoid setting @cart when there isn't one or its empty
@@ -44,6 +45,8 @@ class OrdersController < ApplicationController
   end
 
 
+  # Similar to create, we only send updates to the saved cart if there isn't
+  # a session cart.  This is to handle the merge cart case.
   def update
     @user = current_user
     if @user && !session[:cart]
@@ -53,7 +56,7 @@ class OrdersController < ApplicationController
       else
         flash[:danger] = "Oops, something went wrong!"
       end
-    else session[:cart]
+    else
       update_session_cart
       flash[:info] = "Shopping Cart Updated."
     end    
@@ -74,7 +77,7 @@ class OrdersController < ApplicationController
       merge
     when "discard_saved"
       flash[:info] = "Saved shopping cart discarded."
-      @user.cart.destroy
+      @user.destroy_cart
       merge
     when "discard_current"
       flash[:info] = "Current shopping cart discarded, here is your saved cart."
@@ -86,11 +89,6 @@ class OrdersController < ApplicationController
 
   private
 
-  # Build a sort of preview of the saved cart, presense of the variable
-  # causes the prompt to render on the edit page.
-  def merge_carts_prompt
-    @saved_cart_preview = @user.cart.products.take(3)
-  end
 
   # Unpack session[:cart] into order object to render edit/shopping_cart form
   def build_cart_from_session
@@ -99,6 +97,7 @@ class OrdersController < ApplicationController
       @cart.order_contents.build(product_id: p_id, quantity: q)
     end
   end
+
 
   # Load and save session cart
   def update_session_cart
@@ -110,6 +109,7 @@ class OrdersController < ApplicationController
     session[:cart] = @session_cart
     session.delete(:cart) if @session_cart.empty?
   end
+
 
   # Update session cart, different methods for (nested) order contents
   # from shopping cart screen vs products added from home page.
@@ -126,6 +126,7 @@ class OrdersController < ApplicationController
       @session_cart[product_params[:id]] += 1
     end
   end
+
 
   # Handle removing product from session if quantity 0 or _destroy is checked.
   def remove_item?(param)
@@ -151,6 +152,14 @@ class OrdersController < ApplicationController
       session.delete(:cart)
     end
   end
+
+
+  # Build a sort of preview of the saved cart, presense of the variable
+  # causes the prompt to render on the edit page.
+  def merge_carts_prompt
+    @saved_cart_preview = @user.cart.products.take(3)
+  end
+
 
   # We need to force the user to make a choice about their cart before
   # checking out.

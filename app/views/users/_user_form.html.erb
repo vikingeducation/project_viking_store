@@ -1,0 +1,163 @@
+<%= form_for(user) do |user_form| %>
+
+  <div class="col-md-6">
+    <div class="row">
+
+      <% user.addresses.each do |address| %>
+        <div class="col-md-12">
+          <div class="user-form-panel">
+            <%= user_form.fields_for :addresses, address do |address_form| %>
+              <h3 class="text-center">Saved Address <%= (address_form.index) + 1 %> <%= "(Optional)" if address.new_record? %></h3>
+
+              <div class="form-group">
+                <%= address_form.label :street_address %>
+                <%= address_form.text_field :street_address %>
+                <%= render partial: 'shared/form_error', locals: {errors: address.errors.full_messages_for(:street_address)} %>
+              </div>
+
+              <div class="form-group">
+                <%= address_form.label :secondary_address, "Apt / Suite / Other" %>
+                <%= address_form.text_field :secondary_address %>
+                <%= render partial: 'shared/form_error', locals: {errors: address.errors.full_messages_for(:secondary_address)} %>
+              </div>
+
+              <div class="form-group">
+                <%= address_form.fields_for :city, include_id: false do |city_form| %>
+                  <%= city_form.label :name, "City" %>
+                  <%= city_form.text_field :name %>
+                  <%= render partial: 'shared/form_error', locals: {errors: address.city.errors.full_messages_for(:name)} %>
+                  <% end %>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-6">
+                  
+                  <div class="form-group">
+                    <%= address_form.label :state %>
+                    <%= address_form.collection_select(:state_id, State.all, :id, :name, prompt: true) %>
+                    <%= render partial: 'shared/form_error', locals: {errors: address.errors.full_messages_for(:state_id)} %>
+                  </div>                    
+
+                </div>
+                <div class="col-xs-6">
+
+                  <div class="form-group">
+                    <%= address_form.label :zip_code %>
+                    <%= address_form.text_field :zip_code %>
+                    <%= render partial: 'shared/form_error', locals: {errors: address.errors.full_messages_for(:zip_code)} %>
+                  </div>                    
+
+                </div>
+              </div>
+
+              <div class="radio">
+                <%= label_tag do %>
+                  <% selected = (user.shipping_id == address.id if address.persisted?) %>
+                  <%= radio_button_tag :default_shipping, address_form.options[:child_index], selected %>
+                  Default Shippping Address
+                <% end %>
+                <%= render partial: 'shared/form_error', locals: {errors: user.errors.full_messages_for(:base)} %>
+              </div>
+
+              <div class="radio">
+                <%= label_tag do %>
+                  <% selected = (user.billing_id == address.id if address.persisted?)  %>
+                  <%= radio_button_tag :default_billing, address_form.options[:child_index], selected %>
+                  Default Billing Address
+                <% end %>
+                <%= render partial: 'shared/form_error', locals: {errors: user.errors.full_messages_for(:base)} %>
+              </div>
+
+              <% if address.persisted? %>
+                <hr>
+                <div class="checkbox">  
+                  <%= label_tag do %>
+                    <%= address_form.check_box :_destroy %>
+                    <span class="delete">Delete Address</span>
+                  <% end %>
+                </div>
+              <% end %>
+
+            <% end %>  
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="row">
+
+      <div class="col-md-12">
+        <div class="user-form-panel">
+
+          <h3 class="text-center">Account Information</h3>
+          
+          <div class="form-group">
+            <%= user_form.label :email, "Email Address" %>
+            <%= user_form.email_field :email %>
+            <%= render partial: 'shared/form_error', locals: {errors: user.errors.full_messages_for(:email)} %>
+          </div>
+
+          <div class="form-group">
+            <%= user_form.label :email_confirmation %>
+            <%= user_form.email_field :email_confirmation, {value: user.email} %>
+            <%= render partial: 'shared/form_error', locals: {errors: user.errors.full_messages_for(:email_confirmation)} %>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag :password %>
+            <%= text_field_tag :password %>
+            <%= render partial: 'shared/form_error', locals: {errors: user.errors.full_messages_for(:password)} %>
+          </div> 
+
+          <div class="form-group">
+            <%= label_tag :confirm_password %>
+            <%= text_field_tag :confirm_password %>
+            <%= render partial: 'shared/form_error', locals: {errors: user.errors.full_messages_for(:confirm_password)} %>
+          </div>
+
+          <div class="form-group">
+            <%= user_form.label :first_name %>
+            <%= user_form.text_field :first_name %>
+            <%= render partial: 'shared/form_error', locals: {errors: user.errors.full_messages_for(:first_name)} %>
+          </div>  
+
+          <div class="form-group">
+            <%= user_form.label :last_name %>
+            <%= user_form.text_field :last_name %>
+            <%= render partial: 'shared/form_error', locals: {errors: user.errors.full_messages_for(:last_name)} %>
+          </div>  
+
+          <div class="form-group">
+            <%= user_form.label :phone, "Phone Number (optional)" %>
+            <%= user_form.text_field :phone, {placeholder: "555-867-5309"} %>
+            <%= render partial: 'shared/form_error', locals: {errors: user.errors.full_messages_for(:phone)} %>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="user-form-panel text-center">
+          
+          <% if user.persisted? %>
+            <h1>Update Profile</h1>
+            <%= user_form.submit "Update", class: "btn btn-primary btn-lg" %>
+            <p>
+              <%= link_to "Delete my account", user, method: :delete, data: {confirm: "Are you sure?"}  %>
+            </p>
+          <% else %>
+            <h1>Complete Signup</h1>
+            <%= user_form.submit "Sign Up!", class: "btn btn-primary btn-lg" %>
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<% end %>
+  

@@ -111,10 +111,12 @@ def generate_user
   last_name = Faker::Name.last_name
 
   u = User.new
-  u[:first_name]  = first_name
-  u[:last_name]   = last_name
-  u[:email]       = Faker::Internet.email("#{first_name} #{last_name}")
-  u[:created_at]  = creation_date
+  email = Faker::Internet.email("#{first_name} #{last_name}")
+  u[:first_name]        = first_name
+  u[:last_name]         = last_name
+  u[:email]             = email
+  u.email_confirmation  = email
+  u[:created_at]        = creation_date
   u.save
 
   # Create affilliated addresses and select billing and shipping addresses.

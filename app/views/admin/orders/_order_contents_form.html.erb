@@ -70,7 +70,7 @@
                 <% if new_item.errors.any? %>
                 <tr>
                   <td colspan="2">
-                    <%= render partial: 'admin/shared/form_error', locals: {errors: new_item.errors.full_messages_for(:product_id)} %>
+                    <%= render partial: 'shared/form_error', locals: {errors: new_item.errors.full_messages_for(:product_id)} %>
                   </td>
                 </tr>
                 <% end %>

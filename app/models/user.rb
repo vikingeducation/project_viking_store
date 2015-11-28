@@ -11,8 +11,14 @@ class User < ActiveRecord::Base
   belongs_to :default_shipping_address, foreign_key: :shipping_id, class_name: "Address"
 
   validates :first_name, :last_name, :email, length: { in: 1..64 }
-  validates :email, format: { with: /@/, message: "must contain @"}
+  validates :email, format: { with: /@/, message: "must contain @"},
+                    confirmation: true
+  validates :email_confirmation, presence: true
 
+  accepts_nested_attributes_for :addresses, allow_destroy: true,
+                                            reject_if: :blank_address
+  validates_associated :addresses
+  
 
   def display_address
     if addr = default_shipping_address
@@ -74,11 +80,19 @@ class User < ActiveRecord::Base
   end
 
 
-  private
-
-
   def destroy_cart
     cart.destroy if cart
+  end
+  
+
+  # Normally :all_blank could be used but the city throws a monkey wrench
+  # It seems multi level reject_if doesn't work.
+  def blank_address(attributes)
+    attributes['street_address'].blank? &&
+    attributes['secondary_address'].blank? &&
+    attributes['city_attributes']['name'].blank? &&
+    attributes['state_id'].blank? &&
+    attributes['zip_code'].blank?
   end
 
 
