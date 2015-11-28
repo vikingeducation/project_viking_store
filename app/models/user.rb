@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, :email, length: { in: 1..64 }
   validates :email, format: { with: /@/, message: "must contain @"},
-                    confirmation: true
+                    confirmation: true,
+                    uniqueness: true
   validates :email_confirmation, presence: true
 
   accepts_nested_attributes_for :addresses, allow_destroy: true,
@@ -83,7 +84,7 @@ class User < ActiveRecord::Base
   def destroy_cart
     cart.destroy if cart
   end
-  
+
 
   # Normally :all_blank could be used but the city throws a monkey wrench
   # It seems multi level reject_if doesn't work.

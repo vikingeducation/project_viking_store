@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       update_default_addresses
+      sign_in(@user)
       flash[:success] = "Welcome to the Viking Store, #{@user.first_name.capitalize}"
       redirect_to root_path
     else
