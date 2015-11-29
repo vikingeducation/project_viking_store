@@ -1,0 +1,65 @@
+<div class="panel-heading">
+  <% if @user %>
+
+    <div class="panel-btns pull-right">
+      <%= link_to "Create New Order For #{@user.first_name}", 
+          new_admin_order_path(user_id: @user) , class: "btn btn-primary"  %>
+    </div>
+    <h4><%= @user.first_name %> <%= @user.last_name %>'s Orders</h4>
+
+  <% else %>  
+
+    <h4>Orders</h4>
+    <em>Create new orders from within <%= link_to "User", admin_users_path %> profiles</em>
+
+  <% end %>
+</div>
+
+<div class="panel-body">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>UserID</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Total Value</th>
+        <th>Status</th>
+        <th>Date Placed</th>
+        <th>Show</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @orders.each do |order| %>
+        <tr class="<%= 'active' unless order.checkout_date? %>">
+          <td><%= order.id %></td>
+          <!-- Handle Deleted Users -->
+          <% if !order.user_id.nil? %>
+            <td>
+              <% if params[:user_id] %>
+                <%= link_to order.user_id, admin_user_path(order.user_id) %>
+              <% else %>
+                <%= link_to order.user_id, 
+                            admin_orders_path(user_id: order.user_id) %>
+              <% end %>
+            </td>
+          <% else %>
+            <td>-</td>
+          <% end %>
+          <td><%= order.shipping_address.nil? ? '-' : order.shipping_address.city.name %></td>
+          <td><%= order.shipping_address.nil? ? '-' : order.shipping_address.state.name %></td>
+          <td><%= number_to_currency(order.value) %></td>
+          <td class="<%= 'order-unplaced' unless order.checkout_date? %>"><%= order.checkout_date? ? "PLACED" : "UNPLACED" %></td>
+          <td class="text-nowrap"><%= order.checkout_date? ? order.checkout_date.strftime('%Y-%m-%d') : '-' %></td>
+          <td><%= link_to 'Show', admin_order_path(order.id) %></td>
+          <td><%= link_to 'Edit', edit_admin_order_path(order.id) %></td>
+          <td><%= link_to 'Delete', admin_order_path(order.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Viking Store Dashboard</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<main>
+
+  <section>
+
+    <div class="text-center">
+      <h1>Viking Store Admin Portal</h1>
+    </div>
+
+  </section>
+
+  <section>
+    
+    <aside class="col-sm-3">
+      <%= render "admin/shared/sidenav" %>
+    </aside>
+
+    <div class="col-sm-9">
+      <%= render "shared/flash" %>
+
+      <div class="panel panel-default">
+        <%= yield %>
+      </div>
+
+      <div><%= debug(params) %></div>
+    </div>
+
+
+
+  </section>
+
+</main>
+
+</body>
+</html>
+

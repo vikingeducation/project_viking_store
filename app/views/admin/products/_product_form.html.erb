@@ -1,0 +1,50 @@
+<div class="panel-padding">
+  <p>
+    <strong>
+      Product ID: 
+      <%= product.persisted? ? product.id : "N/A" %>
+    </strong>
+  </p>
+
+  <%= form_for( [:admin, product] ) do |f| %>
+      
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name  %>
+        <%= render partial: 'shared/form_error', locals: {errors: product.errors.full_messages_for(:name)} %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :sku %>
+        <%= f.text_field :sku  %>
+        <%= render partial: 'shared/form_error', locals: {errors: product.errors.full_messages_for(:sku)} %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+        <%= render partial: 'shared/form_error', locals: {errors: product.errors.full_messages_for(:description)} %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :price %>
+        <%= f.text_field :price %>
+        <%= render partial: 'shared/form_error', locals: {errors: product.errors.full_messages_for(:price)} %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :category_id, "Category" %>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, prompt: true) %>
+        <%= render partial: 'shared/form_error', locals: {errors: product.errors.full_messages_for(:category_id)} %>
+      </div>            
+
+      <% if product.persisted? %>
+        <div class="pull-right">
+          <%= link_to 'Delete Product', admin_product_path(product.id), method: :delete, data: { confirm: "Are you sure?" }  %>
+        </div>
+      <% end %>
+
+      <%= f.submit class: "btn btn-primary"  %>
+      
+  <% end %>
+</div>

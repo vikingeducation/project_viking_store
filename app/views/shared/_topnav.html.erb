@@ -1,0 +1,28 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-right">
+      
+      <% cart_color = highlight_cart? ? "btn-warning" : "btn-primary" %>
+      <%= link_to shopping_cart_path, class: "btn #{cart_color} navbar-btn" do %>
+        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+        Shopping Cart 
+        <% if cart_size %>
+          <span class="badge"><%= cart_size %></span>
+        <% end %>
+      <% end %>
+
+      <% if signed_in_user? %>
+        <%= link_to "Profile", edit_user_path(current_user), class: "btn btn-default navbar-btn" %>
+        <%= link_to "Sign Out", signout_path, method: :delete, class: "btn btn-default navbar-btn " %>
+      <% else %>
+        <%= link_to "Sign In", signin_path, class: "btn btn-default navbar-btn"  %>
+      <% end %>
+
+    </div>
+    
+    <div class="navbar-header">
+      <%= link_to 'Viking Store', root_path, class: "navbar-brand"  %>
+    </div>
+
+  </div>
+</nav>

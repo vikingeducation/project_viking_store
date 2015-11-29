@@ -1,0 +1,15 @@
+<div class="text-center">
+  
+  <h4>Navigation Options</h4>
+  
+  <div class="list-group">
+    <%= nav_link 'Users', admin_users_path, class: "list-group-item"  %>
+    <%= nav_link 'Addresses', admin_addresses_path, class: "list-group-item"  %>
+    <%= nav_link 'Orders', admin_orders_path, class: "list-group-item"  %>
+    <%= nav_link 'Products', admin_products_path, class: "list-group-item"  %>
+    <%= nav_link 'Categories', admin_categories_path, class: "list-group-item"  %>
+  </div>
+
+  <%= link_to 'Analytics Dashboard', dashboard_path  %>
+
+</div>

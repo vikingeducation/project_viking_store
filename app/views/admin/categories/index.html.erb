@@ -1,0 +1,33 @@
+<div class="panel-heading">
+    <div class="panel-btns pull-right">
+      <%= link_to 'Add a New Category', new_admin_category_path , class: "btn btn-primary"  %>
+    </div>
+  <h4>Product Categories</h4>
+</div>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.id %></td>
+        <td><%= category.name %></td>
+        <td><%= link_to 'Show', admin_category_path(category.id) %></td>
+        <td><%= link_to 'Edit', edit_admin_category_path(category.id) %></td>
+        <td><%= link_to 'Delete', admin_category_path(category.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>

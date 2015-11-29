@@ -1,0 +1,32 @@
+<div class="panel-padding">
+  <p>
+    <strong>
+      Category ID: 
+      <%= category.persisted? ? category.id : "N/A" %>
+    </strong>
+  </p>
+
+  <%= form_for( [:admin, category] ) do |f| %>
+      
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name  %>
+        <%= render partial: 'shared/form_error', locals: {errors: category.errors.full_messages_for(:name)} %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+        <%= render partial: 'shared/form_error', locals: {errors: category.errors.full_messages_for(:description)} %>
+      </div>
+
+      <% if category.persisted? %>
+        <div class="pull-right">
+          <%= link_to 'Delete Category', admin_category_path(category.id), method: :delete, data: { confirm: "Are you sure?" }  %>
+        </div>
+      <% end %>
+
+      <%= f.submit class: "btn btn-primary" %>
+      
+  <% end %>
+</div>

@@ -1,0 +1,105 @@
+<div class="panel-heading">
+  <h4>User <%= @user.id %>: <%= @user.first_name %> <%= @user.last_name %></h4>
+</div>
+
+<div class="panel-body">
+  <div class="row">
+
+    <div class="col-md-6 col-md-push-6 text-center">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <strong>Admin Actions for <%= @user.first_name %> <%= @user.last_name %></strong>
+        </div>
+        <div class="panel-body">
+          <%= link_to 'Create Order', new_admin_order_path(user_id: @user), class: "btn btn-primary btn-sm"  %>
+          <%= link_to 'Create Address', new_admin_user_address_path(user_id: @user), class: "btn btn-primary btn-sm"  %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-md-pull-6">
+      
+      <div class="row">
+        <div class="col-sm-3"><strong>First Name</strong></div>
+        <div class="col-sm-9"><%= @user.first_name %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>Last Name</strong></div>
+        <div class="col-sm-9"><%= @user.last_name %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>Email</strong></div>
+        <div class="col-sm-9"><%= mail_to @user.email %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>Phone</strong></div>
+        <div class="col-sm-9"><%= @user.phone? ? @user.phone : 'None' %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <strong>Default Billing Address</strong><br>
+          <% if @user.default_billing_address %>
+            <%= link_to(admin_user_address_path(@user, @user.default_billing_address)) do %>
+              <%= render_address(@user.default_billing_address) %>
+            <% end %>
+          <% else %>
+            <%= render_address(@user.default_billing_address) %>    
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <strong>Default Shipping Address</strong><br>
+          <% if @user.default_shipping_address %>
+            <%= link_to(admin_user_address_path(@user, @user.default_shipping_address)) do %>
+              <%= render_address(@user.default_shipping_address) %>
+            <% end %>
+          <% else %>
+            <%= render_address(@user.default_shipping_address) %>    
+          <% end %>
+        </div>
+      </div>      
+
+      <div class="row">
+        <div class="col-sm-12">
+          <%= link_to "Edit #{@user.first_name} #{@user.last_name}'s information", edit_admin_user_path(@user.id) %><br>
+          <%= link_to "Delete #{@user.first_name} #{@user.last_name}", admin_user_path(@user.id), method: :delete, data: { confirm: "Are you sure?" } %><br>
+          <%= link_to 'View Saved Addresses', admin_addresses_path(user_id: @user.id)  %><br>
+          <% if !!@user.cart %>
+            <%= link_to 'View Unplaced Order (Cart)', admin_order_path(@user.cart)  %>
+          <% else %>
+            <span class="link-disabled">View Unplaced Order (Cart)</span>
+          <% end %>
+        </div>
+      </div>         
+
+    </div>
+
+  </div>
+
+  <hr>
+
+  <% unless @user.credit_cards.empty? %>
+    <%= render partial: 'credit_card', locals: {card: @user.credit_cards.first} %>
+  <% else %>
+    No Saved Credit Cards  
+  <% end %>
+
+  <hr>
+
+  <% unless @user.orders.empty? %>
+    <%= render partial: 'order_history', locals: {orders: @user.orders} %>  
+  <% else %>
+    No Order History
+  <% end %>  
+
+</div>
+
+
+
+</div>

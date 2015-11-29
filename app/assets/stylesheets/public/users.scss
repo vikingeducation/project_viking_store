@@ -1,0 +1,14 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-form-panel {
+  border: 1px solid #bbb;
+  padding: 0 10px 10px 10px;
+  margin-bottom: 15px;
+}
+
+.delete {
+  color: red;
+  font-weight: bold;
+}

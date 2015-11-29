@@ -1,0 +1,31 @@
+// Place all the styles related to the Orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.media-left {
+  img {
+    height: 90px;
+  }
+}
+
+.merge-order {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #bbb;
+}
+
+.order-item {
+  border: 1px solid #bbb;
+  margin-top: 15px;
+  height: 110px;
+
+}
+
+.order-total {
+  margin-bottom: 15px;
+}
+
+
+.form-group {
+  margin-bottom: 5px; 
+}

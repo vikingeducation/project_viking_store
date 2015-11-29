@@ -1,0 +1,55 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1>Sign Up or Sign In</h1>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3><em>I do NOT have an account..</em></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="session-form text-center">
+            <%= link_to "Sign Up", new_user_path, class: "btn btn-primary"  %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3><em>I have an account..</em></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="session-form">
+            <%= form_for :session, url: signin_path do |f| %>
+              <div class="form-group">
+                <%= f.label :email, 'Email Address' %>
+                <%= f.email_field :email %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password %>
+                <%= f.password_field :password %>
+              </div>
+
+                <%= f.submit "Sign In", class: "btn btn-primary"  %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

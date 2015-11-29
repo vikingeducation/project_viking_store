@@ -1,0 +1,39 @@
+  <div class="row">
+
+    <div class="col-md-6">
+      <h4>Credit Card Information</h4>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>First Name</strong></div>
+        <div class="col-sm-9"><%= card.user.first_name %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>Last Name</strong></div>
+        <div class="col-sm-9"><%= card.user.last_name %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>Number</strong></div>
+        <div class="col-sm-9"><%= card.card_number %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>Expiration</strong></div>
+        <div class="col-sm-9"><%= card.exp_year %>-<%= card.exp_month %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"><strong>CCV</strong></div>
+        <div class="col-sm-9"><%= card.ccv? ? card.ccv : 'None' %></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <%= link_to 'Remove Card', admin_credit_card_path(card), method: :delete, data: { confirm: "Are you sure?" }  %>
+        </div>
+      </div>      
+      
+    </div>
+
+</div>

@@ -1,0 +1,43 @@
+<div class="panel-heading">
+    <div class="panel-btns pull-right">
+      <%= link_to 'Add a New Product', new_admin_product_path , class: "btn btn-primary"  %>
+    </div>
+  <h4>Products</h4>
+</div>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Show</th>      
+      <th>Edit</th>
+      <th>Delete</th>      
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= product.name %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td>
+          <% if product.category_id %>
+            <%= link_to product.category.name, admin_category_path(product.category_id) %>
+          <% else %>
+            No Category
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', admin_product_path(product.id) %></td>
+        <td><%= link_to 'Edit', edit_admin_product_path(product.id) %></td>
+        <td><%= link_to 'Delete', admin_product_path(product.id), method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>

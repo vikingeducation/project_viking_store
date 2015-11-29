@@ -1,0 +1,54 @@
+<div class="panel-heading">
+  <h4>Category <%= @category.id %>: <%= @category.name %></h4>
+</div>
+
+<div class="panel-padding">
+  <div class="row">
+    <div class="col-md-2"><strong>Category ID:</strong></div>
+    <div class="col-md-10"><%= @category.id %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"><strong>Name:</strong></div>
+    <div class="col-md-10"><%= @category.name %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"><strong>Description:</strong></div>
+    <div class="col-md-10"><%= @category.description %></div>
+  </div>
+
+  <%= link_to 'Edit Category', edit_admin_category_path(@category.id) %><br>
+  <%= link_to 'Delete Category', admin_category_path(@category.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  <hr>
+
+  <h4>Products in <%= @category.name %></h4>
+
+  <% if !@products.empty? %>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= product.id %></td>
+            <td><%= link_to product.name, admin_product_path(product.id) %></td>
+          </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+
+  <% else %>
+
+    None
+
+  <% end %>
+
+</div>

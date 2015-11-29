@@ -19,7 +19,7 @@ City.destroy_all
 puts "Old records destroyed"
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
-MULTIPLIER = 10
+MULTIPLIER = 20
 
 
 
@@ -47,6 +47,7 @@ def generate_product
   p[:description] = Faker::Lorem.sentence
   p[:sku]         = Faker::Code.ean
   p[:price]       = random_price
+  p[:created_at]  = creation_date
   p.save
 end
 
@@ -60,7 +61,11 @@ end
 
 # Generate some City records. Your Address model could have also included "city" as a string instead of a foreign key.
 def generate_city
+  begin
   City.create( :name => Faker::Address.city )
+  rescue
+    retry
+  end
 end
 
 # This method selects one of a users several addresses for use setting shipping address and billing address.
@@ -106,10 +111,12 @@ def generate_user
   last_name = Faker::Name.last_name
 
   u = User.new
-  u[:first_name]  = first_name
-  u[:last_name]   = last_name
-  u[:email]       = Faker::Internet.email("#{first_name} #{last_name}")
-  u[:created_at]  = creation_date
+  email = Faker::Internet.email("#{first_name} #{last_name}")
+  u[:first_name]        = first_name
+  u[:last_name]         = last_name
+  u[:email]             = email
+  u.email_confirmation  = email
+  u[:created_at]        = creation_date
   u.save
 
   # Create affilliated addresses and select billing and shipping addresses.
@@ -171,7 +178,7 @@ def generate_order
     if has_cart?(user.id)
       o[:checkout_date] = placement_date(user)
     end
-
+    
     o.save
     generate_contents(o[:id])
   end

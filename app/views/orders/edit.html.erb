@@ -1,0 +1,28 @@
+  <% if @saved_cart_preview %>
+    <%= render partial: 'merge', locals: { saved_cart_preview: @saved_cart_preview } %>
+  <% end %>
+
+<div class="container">
+
+  <% if @cart %>
+
+
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1 text-center">
+      <h1>Shopping Cart Contents</h1>
+      <hr>
+    </div>
+  </div>
+
+
+  <%= render partial: 'order_contents_form', locals: {cart: @cart} %>
+
+<% else %>
+  
+  <div class="col-md-12 text-center">
+    <h3>No Items In Cart.</h3>
+  </div>
+
+<% end %>
+
+</div>

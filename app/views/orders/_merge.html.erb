@@ -1,0 +1,38 @@
+<div class="merge-order">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+      
+          <div class="col-xs-5 col-xs-offset-1">
+            <h4>You had a saved shopping cart!</h4>
+            Some of its items...
+            <ul>
+            <% saved_cart_preview.each do |product| %>
+              <li><%= product.name %></li>
+            <% end %>
+            </ul>
+          </div>
+
+          <div class="col-xs-6">
+            <%= form_tag('/merge_shopping_cart') do %>
+                
+                <div class="form-group form-group-sm">
+                  <%= label_tag "merge", "What would you like to do?" %>
+                    <%= select_tag "merge", options_for_select(
+                      [["Combine shopping carts", "combine"],
+                       ["Discard saved shopping cart", "discard_saved"],
+                       ["Discard current shopping cart", "discard_current"]]) %>
+                </div>
+
+                <span class='help-block'>Please select before checking out</span>
+                <%= submit_tag 'Save Carts', class: 'btn btn-default btn-sm' %>
+
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

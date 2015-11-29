@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SolutionVikingStore</title>
+  <title>Viking Store Dashboard</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'public', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <%= render 'shared/topnav' %>
+  <%= render "shared/flash" %>
+  
+  <%= yield %>
+
+  <%= render 'shared/footer' %>
 
 </body>
 </html>

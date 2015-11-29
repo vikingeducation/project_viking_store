@@ -1,0 +1,36 @@
+<div class="container">
+  <section>
+    <div class="text-center">
+      <h1>Viking Store Analytics Dashboard</h1>
+    </div>
+  </section>
+</div>
+
+<div class="container">
+  <section>
+    
+    <% @top_panels.each do |panel| %>
+      <%= render partial: 'panel', locals: { panel: panel } %>
+    <% end %>
+
+  </section>
+
+  <section>
+    
+    <% @bottom_panels.each do |panel| %>
+      <%= render partial: 'panel', locals: { panel: panel } %>
+    <% end %>
+
+  </section>
+
+</div>
+
+<div class="container">
+  <footer>
+    
+    <div class="col-md-3 col-md-offset-9 well well-sm">
+      <div class="text-center">Query time: <%= @benchmark %> seconds.</div>
+    </div> 
+
+  </footer>
+</div>

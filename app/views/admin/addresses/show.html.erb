@@ -1,0 +1,40 @@
+<div class="panel-heading">
+  <h4><%= @address.user.first_name %> <%= @address.user.last_name %>'s Address</h4>
+</div>
+
+<div class="panel-padding">
+  <div class="row">
+    <div class="col-md-2"><strong>Owner ID</strong></div>
+    <div class="col-md-10"><%= @address.user.id %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"><strong>Owner Name</strong></div>
+    <div class="col-md-10"><%= @address.user.first_name %> 
+    <%= @address.user.last_name %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"><strong>Street</strong></div>
+    <div class="col-md-10"><%= @address.street_address %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"><strong>City</strong></div>
+    <div class="col-md-10"><%= @address.city.name %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"><strong>State</strong></div>
+    <div class="col-md-10"><%= @address.state.name %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"><strong>Zip</strong></div>
+    <div class="col-md-10"><%= @address.zip_code %></div>
+  </div>
+
+  <%= link_to 'Edit Address', edit_admin_user_address_path(@address.user, @address) %><br>
+  <%= link_to 'Delete Address', admin_user_address_path(@address.user, @address), method: :delete, data: { confirm: "Are you sure?" } %>
+
+</div>

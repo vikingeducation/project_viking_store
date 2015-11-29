@@ -1,0 +1,153 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1>Checkout</h1>
+    </div>
+  </div>
+
+  <%= form_tag url: checkout_path, method: :post do %>
+    <%= fields_for @cart do |order_form| %>
+      <%= order_form.hidden_field :status, value: "placed" %>
+    
+      <div class="row">
+        <div class="col-md-6">
+          <div class="public-panel">
+            <h3 class="text-center">Shipping &amp; Billing</h3>
+
+            <div class="form-group">
+              <%= order_form.label :shipping_id, "Shipping Address" %>
+              <%= order_form.collection_select( :shipping_id,
+                                                @user.addresses,
+                                                :id,
+                                                :street_address,
+                                                { prompt: "Select Address",
+                                                  selected: @user.shipping_id || @cart.shipping_id } )  %>
+              <%= render partial: 'shared/form_error', locals: {errors: @cart.errors.full_messages_for(:shipping_id)} %>
+            </div>
+
+            <div class="form-group">
+              <%= order_form.label :billing_id, "Billing Address" %>
+              <%= order_form.collection_select( :billing_id,
+                                                @user.addresses,
+                                                :id,
+                                                :street_address,
+                                                { prompt: "Select Address",
+                                                  selected: @user.billing_id || @cart.billing_id } )  %>
+              <%= render partial: 'shared/form_error', locals: {errors: @cart.errors.full_messages_for(:billing_id)} %>
+            </div>
+
+            <p>
+              <%= link_to "Edit Saved Addresses", edit_user_path(@user)  %>
+            </p>
+
+            <hr>
+
+            <%= fields_for @card do |card_form| %>
+              <%= card_form.hidden_field :id, value: @card.id %>
+              
+              <div class="form-group">
+                <%= card_form.label :card_number, "Credit Card Number" %>
+                <%= card_form.text_field :card_number %>
+                <%= render partial: 'shared/form_error', locals: {errors: @card.errors.full_messages_for(:card_number)} %>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <%= card_form.label :exp_month, "Exp Month" %>
+                    <%= card_form.text_field :exp_month, placeholder: "01" %>
+                    <%= render partial: 'shared/form_error', locals: {errors: @card.errors.full_messages_for(:exp_month)} %>
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <%= card_form.label :exp_year, "Exp Year" %>
+                    <%= card_form.text_field :exp_year, placeholder: "2020" %>
+                    <%= render partial: 'shared/form_error', locals: {errors: @card.errors.full_messages_for(:exp_year)} %>
+                  </div>
+                </div>
+
+                <div class="col-xs-4">
+                  <div class="form-group">
+                    <%= card_form.label :ccv, "CCV" %>
+                    <%= card_form.text_field :ccv %>
+                    <%= render partial: 'shared/form_error', locals: {errors: @card.errors.full_messages_for(:ccv)} %>
+                  </div>
+                </div>                                
+              </div>
+
+              <% if @card.persisted? %>
+                <p><%= link_to "Delete Card", credit_card_path(@card), method: :delete, data: {confirm: "Are you sure?"}  %></p>
+              <% end %>
+
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row">
+
+            <div class="col-md-12">
+              <div class="public-panel">
+                <h3 class="text-center">Review &amp; Complete</h3>
+
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th class="text-right">Total Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @cart.products.each do |product| %>
+                      <tr>
+                        <td><%= product.name %></td>
+                        <td><%= quantity = product.quantity %></td>
+                        <td><%= number_to_currency(product.price) %></td>
+                        <td class="text-right"><%= number_to_currency(product.price * quantity) %></td>
+                    <% end %>
+                  </tbody>
+                </table>
+
+                <div class="row">
+                  <div class="col-xs-4">
+                    <%= link_to "Edit Order", shopping_cart_path %><br>
+                    <%= link_to "Delete Order", shopping_cart_path, method: :delete, data: { confirm: "Are you sure?" } %>
+                  </div>
+                  <div class="col-xs-5 text-right">
+                    Shippping:<br>
+                    Tax:
+
+                    <p><h4>Total:</h4></p>
+                  </div>
+                  <div class="col-xs-3 text-right">
+                    <%= number_to_currency(@cart.value / 20) %><br>
+                    <%= number_to_currency(@cart.value / 30) %>
+
+                    <p><h4><%= number_to_currency(@cart.value) %></h4></p>
+                  </div>
+                </div>  
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="public-panel text-center">
+                <h3>Place Your Order</h3>
+
+                <%= submit_tag "Place Order!", class: "btn btn-primary btn-lg" %>
+              </div>
+            </div>
+
+          </div>
+        </div><!--md-6 col-->
+
+      </div><!-- main row -->
+
+    <% end %>
+  <% end %>
+
+</div>
+

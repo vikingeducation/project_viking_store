@@ -1,0 +1,5 @@
+<div class="panel-heading">
+  <h4>New Order for <%= @order.user.first_name %> <%= @order.user.last_name %></h4>
+</div>
+
+<%= render partial: "order_form", locals: { order: @order } %>
