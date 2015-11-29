@@ -1,7 +1,9 @@
 class CreditCard < ActiveRecord::Base
+
   belongs_to :user
   has_many :orders
 
+  validates :card_number, :exp_month, :exp_year, :ccv, presence: true
   validate :valid_card_number
 
 
@@ -14,8 +16,11 @@ class CreditCard < ActiveRecord::Base
 
 
   def valid_card_number
-    unless (Math.log10(card_number.to_i).to_i + 1) == 16
-      errors.add(:card_number, "is invalid")
+    if !card_number.nil? && !@card_number.blank?
+      card_number.tr!(' -/', '')
+      unless (Math.log10(card_number.to_i).to_i + 1) == 16
+        errors.add(:card_number, "is invalid")
+      end
     end
   end
 end

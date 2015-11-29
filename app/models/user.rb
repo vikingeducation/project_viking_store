@@ -19,6 +19,12 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :addresses, allow_destroy: true,
                                             reject_if: :blank_address
   validates_associated :addresses
+
+  accepts_nested_attributes_for :credit_cards, allow_destroy: true
+  validates_associated :credit_cards
+
+  accepts_nested_attributes_for :orders
+  validates_associated :orders
   
 
   def display_address

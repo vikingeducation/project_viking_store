@@ -130,6 +130,7 @@ class UsersController < ApplicationController
                                      :_destroy, 
                                      city_attributes: 
                                      [  :name  ] ] )
-  end  
+  end
+
 
 end

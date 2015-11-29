@@ -11,11 +11,15 @@ Rails.application.routes.draw do
 
   resources :users, except: [:index]
 
+  resources :credit_cards, only: [:destroy]
+
   get 'shopping_cart', to: "orders#edit"
-  patch 'shopping_cart', to: "orders#update"
   post 'shopping_cart', to: "orders#create"
+  patch 'shopping_cart', to: "orders#update"
+  delete 'shopping_cart', to: "orders#destroy"
   post 'merge_shopping_cart', to: 'orders#merge_or_discard_cart'
   get 'checkout', to: "orders#checkout"
+  post 'checkout', to: "orders#place_order"
 
   resource :session, only: [:new, :create, :destroy]
   post 'signin', to: "session#create"

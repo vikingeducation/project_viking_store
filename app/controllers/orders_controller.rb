@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :require_login, only: [:checkout]
-  before_action :force_merge, only: [:checkout]
+  before_action :require_login, only: [:checkout, :place_order]
+  before_action :force_merge, only: [:checkout, :place_order]
 
 
   # Create action is only triggered by adding product to cart from index
@@ -64,8 +64,49 @@ class OrdersController < ApplicationController
   end
 
 
+  def destroy
+    @user = current_user
+    if @user.cart.destroy
+      flash[:warning] = "Shopping cart deleted"
+      redirect_to root_path
+    else
+      flash[:danger] = "Oops, something went wrong!"
+      redirect_to root_path
+    end
+  end
+
+
   def checkout
-    
+    @user = current_user
+    @card = @user.credit_cards.first || @user.credit_cards.new
+    @cart = @user.cart
+    unless items_in_cart?(@user)
+      flash[:danger] = "Oops, something went wrong"
+      redirect_to root_path
+    end
+  end
+
+
+  def place_order
+    @user = current_user
+    @card = @user.credit_cards.first || @user.credit_cards.new
+    @cart = @user.cart
+
+    @cart.update(order_params) # Needed to set error state
+
+    if @card.update(card_params)
+      @cart.credit_card = @card
+      if @cart.update(order_params)
+        flash[:success] = "Thank you, come again!"
+        redirect_to root_path
+      else
+        flash.now[:danger] = "Oops, something went wrong!"
+        render :checkout
+      end
+    else
+      flash.now[:danger] = "Oops, something went wrong!"
+      render :checkout
+    end
   end
 
 
@@ -181,6 +222,15 @@ class OrdersController < ApplicationController
   def product_params
     params.require(:product).permit(:id)
   end
+
+
+  def card_params
+    params.require(:credit_card).permit( :card_number,
+                                         :exp_month,
+                                         :exp_year,
+                                         :ccv,
+                                         :id )   
+  end   
 
 
 end
