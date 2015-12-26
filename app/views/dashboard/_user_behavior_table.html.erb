@@ -13,9 +13,9 @@
         <td><%= "#{stat[:result].first_name} #{stat[:result].last_name}" %></td>
         <td class="text-right">
           <% if stat[:currency] %>
-            <%= number_to_currency stat[:result].amount %>
+            <%= number_to_currency stat[:result].amount, precision: 0 %>
           <% else %>
-            <%= number_to_human stat[:result].amount %>
+            <%= number_to_human stat[:result].amount, precision: 0 %>
           <% end %>
         </td>
       </tr>

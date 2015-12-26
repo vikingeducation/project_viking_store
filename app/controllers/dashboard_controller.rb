@@ -10,9 +10,9 @@ class DashboardController < ApplicationController
     @top_cities = User.select("c.name, COUNT(*) as count").joins(user_city_join).group("c.id").order("count DESC").limit(3)
     @behavior_stats = [
       {criteria: 'Highest Single Order Value', result: get_highest_order_user, currency: true},
-      {criteria: 'Highest Lifetime Value', result: get_highest_lifetime_user, currency: true}#,
-      # {criteria: 'Highest Average Order Value', result: get_highest_avg_order_user, currency: true},
-      # {criteria: 'Most Orders Placed' result: get_most_orders_user, currency: false}
+      {criteria: 'Highest Lifetime Value', result: get_highest_lifetime_user, currency: true},
+      {criteria: 'Highest Average Order Value', result: get_highest_avg_order_user, currency: true},
+      {criteria: 'Most Orders Placed', result: get_most_orders_user, currency: false}
     ]
   end
 
@@ -52,6 +52,14 @@ class DashboardController < ApplicationController
 
   def get_highest_lifetime_user
     User.select("users.first_name, users.last_name, SUM(p.price * oc.quantity) as amount").joins(user_products_join).where(order_completed).group("users.id").order("amount DESC").limit(1)[0]
+  end
+
+  def get_highest_avg_order_user
+    User.select("users.first_name, users.last_name, AVG(p.price * oc.quantity) as amount").joins(user_products_join).group("o.id, users.id").where(order_completed).order("amount DESC").limit(1)[0]
+  end
+
+  def get_most_orders_user
+    User.select("users.first_name, users.last_name, COUNT(o.id) as amount").joins("JOIN orders o on o.user_id = users.id").group("users.id").where(order_completed).order("amount DESC").limit(1)[0]
   end
 
   def order_completed
