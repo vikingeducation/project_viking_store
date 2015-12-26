@@ -1,6 +1,8 @@
 <div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="text-center">Overall Platform</h2>
+  </div>
   <div class="panel-body">
-    <h2 class="text-center">1. Overall Platform</h2>
 
     <h3>Last 7 Days</h3>
     <%= render partial: 'overall_platform_table', locals: {num_users: 100, num_orders: 150, num_products: 10, total_revenue: 50000, new_flag: true} %>

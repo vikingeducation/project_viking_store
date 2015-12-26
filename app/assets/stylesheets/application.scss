@@ -1,2 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.panel-heading h2 {
+  margin-top: 10px;
+  font-size: 2em;
+}
+
+.panel-body h3 {
+  @extend .text-muted;
+  font-size: 1.5em;
+}

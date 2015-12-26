@@ -1,6 +1,8 @@
 <div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="text-center">Order Statistics</h2>
+  </div>
   <div class="panel-body">
-    <h2 class="text-center">3. Order Statistics</h2>
 
     <h3>Last 7 Days</h3>
     <%= render partial: 'order_stats_table', locals: {num_orders: 100, total_revenue: 50000, avg_order_value: 150, max_order_value: 600} %>

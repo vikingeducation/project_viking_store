@@ -1,6 +1,8 @@
 <div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="text-center">Time Series Data</h2>
+  </div>
   <div class="panel-body">
-    <h2 class="text-center">4. Time Series Data</h2>
 
     <h3>Orders by Day</h3>
     <%= render partial: 'time_series_table', locals: {date_arr: [['Today', 3, 650], ['Yesterday', 5, 500], ['8/22', 3, 300], ['8/21', 1, 300], ['8/20', 3, 300], ['8/19', 3, 300], ['8/18', 3, 300]] } %>
