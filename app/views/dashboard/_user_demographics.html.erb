@@ -12,7 +12,7 @@
     <%= render partial: 'user_dem_location_table', locals: {locations: @top_cities} %>
 
     <h3>Total</h3>
-    <%= render partial: 'user_behavior_table', locals: {stats: [['Highest Single Order Value', 'Joe Smith', 650], ['Highest Lifetime Value', 'Jane Cook', 1500], ['Highest Average Order Value', 'Jimmy Buffett', 300], ['Most Orders Placed', 'Jill Juno', 12]]} %>
+    <%= render partial: 'user_behavior_table', locals: {stats: @behavior_stats} %>
 
   </div> <!-- panel body -->
 </div> <!-- panel -->
