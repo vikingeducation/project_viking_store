@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2 class="text-center">2. User Demographics and Behavior</h2>
+
+    <h3>Top 3 States Users Live In (billing)</h3>
+    <%= render partial: 'user_dem_location_table', locals: {locations: [['California', 23], ['Texas', 10], ['Oregon', 3]]} %>
+
+    <h3>Top 3 Cities Users Live In (billing)</h3>
+    <%= render partial: 'user_dem_location_table', locals: {locations: [['Los Angeles', 23], ['San Francisco', 10], ['Austin', 3]]} %>
+
+    <h3>Total</h3>
+    <%= render partial: 'user_behavior_table', locals: {stats: [['Highest Single Order Value', 'Joe Smith', 650], ['Highest Lifetime Value', 'Jane Cook', 1500], ['Highest Average Order Value', 'Jimmy Buffett', 300], ['Most Orders Placed', 'Jill Juno', 12]]} %>
+
+  </div> <!-- panel body -->
+</div> <!-- panel -->

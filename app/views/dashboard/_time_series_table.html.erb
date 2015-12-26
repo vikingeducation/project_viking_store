@@ -1,0 +1,18 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr class="info">
+      <th class="text-center">Date</th>
+      <th class="text-center">Quantity</th>
+      <th class="text-center">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% date_arr.each do |date| %>
+      <tr>
+        <td><%= date.first %></td>
+        <td><%= date[1] %></td>
+        <td class="text-right"><%= number_to_currency date.last %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

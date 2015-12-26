@@ -1,0 +1,16 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr class="info">
+      <th class="text-center">Location</th>
+      <th class="text-center">Number of Users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% locations.each do |location| %>
+      <tr>
+        <td><%= location.first %></td>
+        <td class="text-right"><%= number_to_human location.last %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
