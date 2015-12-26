@@ -8,19 +8,19 @@
   <tbody>
     <tr>
       <td><%= 'New ' if new_flag %>Users</td>
-      <td class="text-right"><%= number_to_human num_users %></td>
+      <td class="text-right"><%= number_to_human stats[:num_users] %></td>
     </tr>
     <tr>
       <td>Orders</td>
-      <td class="text-right"><%= number_to_human num_orders %></td>
+      <td class="text-right"><%= number_to_human stats[:num_orders] %></td>
     </tr>
     <tr>
       <td><%= 'New ' if new_flag %>Products</td>
-      <td class="text-right"><%= number_to_human num_products %></td>
+      <td class="text-right"><%= number_to_human stats[:num_products] %></td>
     </tr>
     <tr>
       <td>Revenue</td>
-      <td class="text-right"><%= number_to_currency total_revenue, precision: 0 %></td>
+      <td class="text-right"><%= number_to_currency stats[:total_revenue], precision: 0 %></td>
     </tr>
   </tbody>
 </table>
