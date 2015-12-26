@@ -8,8 +8,8 @@
   <tbody>
     <% locations.each do |location| %>
       <tr>
-        <td><%= location.first %></td>
-        <td class="text-right"><%= number_to_human location.last %></td>
+        <td><%= location.name %></td>
+        <td class="text-right"><%= number_to_human location.count %></td>
       </tr>
     <% end %>
   </tbody>
