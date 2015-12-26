@@ -14,6 +14,9 @@ class DashboardController < ApplicationController
       {criteria: 'Highest Average Order Value', result: get_highest_avg_order_user, currency: true},
       {criteria: 'Most Orders Placed', result: get_most_orders_user, currency: false}
     ]
+
+    # Panel 3: Order Statistics
+    # @order_stats_7_days = get_order_stats(7)
   end
 
   private
@@ -22,18 +25,34 @@ class DashboardController < ApplicationController
     if days_ago
       {
         num_users: User.days_ago(days_ago).count,
-        num_orders: Order.days_ago(days_ago).count,
+        num_orders: Order.days_ago(days_ago).completed.count,
         num_products: Product.days_ago(days_ago).count,
         total_revenue: get_revenue(days_ago)
       }
     else
       {
         num_users: User.all.count,
-        num_orders: Order.all.count,
+        num_orders: Order.completed.count,
         num_products: Product.all.count,
         total_revenue: get_revenue
       }
     end
+  end
+
+  def get_order_stats(days_ago = nil)
+    # if days_ago
+    #   {
+    #     num_orders: Order.days_ago(days_ago).completed.count,
+    #     total_revenue: get_revenue(days_ago),
+    #     avg_order_value: get_avg_order(days_ago)
+    #   }
+    # else
+    #   {
+    #     num_orders: Order.completed.count,
+    #     total_revenue: get_revenue(days_ago),
+    #     avg_order_value: get_avg_order
+    #   }
+    # end
   end
 
   def get_revenue(days_ago = nil)
@@ -46,8 +65,18 @@ class DashboardController < ApplicationController
     relation[0].revenue
   end
 
+  def get_avg_order(days_ago = nil)
+    select_revenue = "SUM(p.price * oc.quantity) as revenue"
+    if days_ago
+      relation = Order.select(select_revenue).joins(order_product_join).days_ago(days_ago).completed.group("order.id")
+    else
+      relation = Order.select(select_revenue).joins(order_product_join).completed.group("order.id")
+    end
+    relation[0].revenue
+  end
+
   def get_highest_order_user
-    User.select("users.first_name, users.last_name, MAX(p.price * oc.quantity) as amount").joins(user_products_join).group("o.id, users.id").where(order_completed).order("amount DESC").limit(1)[0]
+    User.select("users.first_name, users.last_name, SUM(p.price * oc.quantity) as amount").joins(user_products_join).group("o.id, users.id").where(order_completed).order("amount DESC").limit(1)[0]
   end
 
   def get_highest_lifetime_user
@@ -55,7 +84,21 @@ class DashboardController < ApplicationController
   end
 
   def get_highest_avg_order_user
-    User.select("users.first_name, users.last_name, AVG(p.price * oc.quantity) as amount").joins(user_products_join).group("o.id, users.id").where(order_completed).order("amount DESC").limit(1)[0]
+    query = "
+      SELECT first_name, last_name, AVG(order_total) as amount
+      FROM (
+        SELECT o.user_id, u.first_name, u.last_name, SUM(p.price * oc.quantity) as order_total
+        FROM users u
+          JOIN orders o ON o.user_id = u.id
+          JOIN order_contents oc ON oc.order_id = o.id
+          JOIN products p ON p.id = oc.product_id
+        WHERE o.checkout_date IS NOT NULL
+        GROUP BY o.id, u.id) as totals
+      GROUP BY user_id, first_name, last_name
+      ORDER BY amount DESC
+      LIMIT 1"
+
+    User.find_by_sql(query)[0]
   end
 
   def get_most_orders_user
