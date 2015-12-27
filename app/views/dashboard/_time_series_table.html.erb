@@ -7,11 +7,19 @@
     </tr>
   </thead>
   <tbody>
-    <% date_arr.each do |date| %>
+    <% orders_by_time.each do |order| %>
       <tr>
-        <td><%= date.first %></td>
-        <td><%= date[1] %></td>
-        <td class="text-right"><%= number_to_currency date.last %></td>
+        <td>
+          <% if order.date.today? %>
+            Today
+          <% elsif order.date == Date.yesterday %>
+            Yesterday
+          <% else %>
+            <%= order.date.stamp('12/22') %>
+          <% end %>
+        </td>
+        <td><%= order.quantity %></td>
+        <td class="text-right"><%= number_to_currency order.value %></td>
       </tr>
     <% end %>
   </tbody>

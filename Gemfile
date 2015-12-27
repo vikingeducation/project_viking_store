@@ -14,6 +14,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'thin'
 gem 'faker'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'stamp'
 
 group :development, :test do
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'

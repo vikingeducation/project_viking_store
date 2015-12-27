@@ -27,6 +27,9 @@ class DashboardController < ApplicationController
     @order_stats_7_days = get_order_stats(7)
     @order_stats_30_days = get_order_stats(30)
     @order_stats_total = get_order_stats
+
+    # Panel 4: Time Series Data
+    @orders_by_day = get_orders_by_day
   end
 
   private
@@ -65,6 +68,12 @@ class DashboardController < ApplicationController
         max_order_value: get_aggregation_order('MAX')
       }
     end
+  end
+
+  def get_orders_by_day
+     # AND o.checkout_date >= ?
+    query = "SELECT date(o.checkout_date) as date, COUNT(o.id) as quantity, SUM(oc.quantity * p.price) as value FROM orders o JOIN order_contents oc ON oc.order_id = o.id JOIN products p ON p.id = oc.product_id WHERE o.checkout_date >= ? GROUP BY date ORDER BY date DESC LIMIT 7"
+    Order.find_by_sql([query, 7.days.ago])
   end
 
   def get_revenue(days_ago = nil)
