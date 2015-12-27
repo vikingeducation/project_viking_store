@@ -8,19 +8,19 @@
   <tbody>
     <tr>
       <td>Number of Orders</td>
-      <td class="text-right"><%= number_to_human num_orders %></td>
+      <td class="text-right"><%= number_to_human stats[:num_orders] %></td>
     </tr>
     <tr>
       <td>Total Revenue</td>
-      <td class="text-right"><%= number_to_currency total_revenue, precision: 0 %></td>
+      <td class="text-right"><%= number_to_currency stats[:total_revenue], precision: 0 %></td>
     </tr>
     <tr>
       <td>Average Order Value</td>
-      <td class="text-right"><%= number_to_currency avg_order_value, precision: 0 %></td>
+      <td class="text-right"><%= number_to_currency stats[:avg_order_value], precision: 0 %></td>
     </tr>
     <tr>
       <td>Largest Order Value</td>
-      <td class="text-right"><%= number_to_currency max_order_value, precision: 0 %></td>
+      <td class="text-right"><%= number_to_currency stats[:max_order_value], precision: 0 %></td>
     </tr>
   </tbody>
 </table>
