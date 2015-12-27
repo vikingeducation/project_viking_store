@@ -5,13 +5,37 @@ class Order < ActiveRecord::Base
 
   def self.get_orders_by_time(time_frame)
     if time_frame == 'day'
-      date_field = "date(o.checkout_date)"
+      date_field = "o.checkout_date"
+      begin_day = 0
+      days_ago = 7
+      increment = 1
     elsif time_frame == 'week'
       date_field = "date_trunc('week', o.checkout_date)"
+      begin_day = 6
+      days_ago = 56
+      increment = 7
     end
 
-    query = "SELECT #{date_field} as date, COUNT(o.id) as quantity, SUM(oc.quantity * p.price) as value FROM orders o JOIN order_contents oc ON oc.order_id = o.id JOIN products p ON p.id = oc.product_id WHERE o.checkout_date IS NOT NULL GROUP BY date ORDER BY date DESC LIMIT 7"
-    Order.find_by_sql(query)
+    date_series = "
+      SELECT current_date - s.a as date
+      FROM generate_series(#{begin_day},#{days_ago},#{increment}) as s(a)"
+
+    actual_data_series = "
+      SELECT date(#{date_field}) as date, COUNT(o.id) as quantity, SUM(oc.quantity * p.price) as value
+      FROM orders o
+        JOIN order_contents oc ON oc.order_id = o.id
+        JOIN products p ON p.id = oc.product_id
+      WHERE date(o.checkout_date) >= date(?)
+      GROUP BY date
+      ORDER BY date DESC
+      LIMIT 7"
+
+    query = "
+      SELECT e.date, COALESCE(a.quantity, 0) as quantity, COALESCE(a.value, 0) as value
+      FROM (#{date_series}) e
+        LEFT JOIN (#{actual_data_series}) a ON a.date = e.date;"
+
+    Order.find_by_sql([query, days_ago.days.ago])
   end
 
   def self.get_order_stats(days_ago = nil)
