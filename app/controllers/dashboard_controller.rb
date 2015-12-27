@@ -6,8 +6,8 @@ class DashboardController < ApplicationController
     @overall_total = get_overall_stats
 
     # Panel 2: User Demographics and Behavior
-    @top_states = User.select("s.name, COUNT(*) as count").joins(user_state_join).group("s.id").order("count DESC").limit(3)
-    @top_cities = User.select("c.name, COUNT(*) as count").joins(user_city_join).group("c.id").order("count DESC").limit(3)
+    @top_states = State.top_3_by_users
+    @top_cities = City.top_3_by_users
     @behavior_stats = [
       {criteria: 'Highest Single Order Value',
         result: get_highest_order_user,
@@ -140,11 +140,4 @@ class DashboardController < ApplicationController
     "JOIN order_contents oc ON oc.order_id = orders.id JOIN products p ON p.id = oc.product_id"
   end
 
-  def user_state_join
-    "JOIN addresses a ON a.id = users.billing_id JOIN states s ON s.id = a.state_id"
-  end
-
-  def user_city_join
-    "JOIN addresses a ON a.id = users.billing_id JOIN cities c ON c.id = a.city_id"
-  end
 end

@@ -19,7 +19,7 @@ City.destroy_all
 puts "Old records destroyed"
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
-MULTIPLIER = 10
+MULTIPLIER = 20
 
 
 
