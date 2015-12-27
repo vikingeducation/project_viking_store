@@ -29,7 +29,8 @@ class DashboardController < ApplicationController
     @order_stats_total = get_order_stats
 
     # Panel 4: Time Series Data
-    @orders_by_day = get_orders_by_day
+    @orders_by_day = get_orders_by_time('day')
+    @orders_by_week = get_orders_by_time('week')
   end
 
   private
@@ -70,10 +71,15 @@ class DashboardController < ApplicationController
     end
   end
 
-  def get_orders_by_day
-     # AND o.checkout_date >= ?
-    query = "SELECT date(o.checkout_date) as date, COUNT(o.id) as quantity, SUM(oc.quantity * p.price) as value FROM orders o JOIN order_contents oc ON oc.order_id = o.id JOIN products p ON p.id = oc.product_id WHERE o.checkout_date >= ? GROUP BY date ORDER BY date DESC LIMIT 7"
-    Order.find_by_sql([query, 7.days.ago])
+  def get_orders_by_time(time_frame)
+    if time_frame == 'day'
+      date_field = "date(o.checkout_date)"
+    elsif time_frame == 'week'
+      date_field = "date_trunc('week', o.checkout_date)"
+    end
+
+    query = "SELECT #{date_field} as date, COUNT(o.id) as quantity, SUM(oc.quantity * p.price) as value FROM orders o JOIN order_contents oc ON oc.order_id = o.id JOIN products p ON p.id = oc.product_id WHERE o.checkout_date IS NOT NULL GROUP BY date ORDER BY date DESC LIMIT 7"
+    Order.find_by_sql(query)
   end
 
   def get_revenue(days_ago = nil)

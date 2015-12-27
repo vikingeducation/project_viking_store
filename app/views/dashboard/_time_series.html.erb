@@ -9,7 +9,7 @@
 
 
     <h3>Orders by Week</h3>
-    <%# render partial: 'time_series_table', locals: {date_arr: [['8/22', 3, 650], ['8/15', 5, 500], ['8/8', 3, 300], ['8/1', 1, 300], ['7/25', 3, 300], ['7/18', 3, 300], ['7/11', 3, 300]] } %>
+    <%= render partial: 'time_series_table', locals: {orders_by_time: @orders_by_week } %>
 
   </div> <!-- panel body -->
 </div> <!-- panel -->
