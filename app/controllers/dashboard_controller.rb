@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
 
     # Panel 2: User Demographics and Behavior
     @top_states = State.top_3_summary
-    @top_cities = City.top_3_by_users
+    @top_cities = City.top_3_summary
     @behavior_stats = get_behavior_stats
 
     # Panel 3: Order Statistics

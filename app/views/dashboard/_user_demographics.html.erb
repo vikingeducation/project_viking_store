@@ -9,7 +9,7 @@
     <%= render partial: 'user_dem_location_table', locals: {locations: @top_states} %>
 
     <h3>Top 3 Cities Users Live In (billing)</h3>
-    <%# render partial: 'user_dem_location_table', locals: {locations: @top_cities} %>
+    <%= render partial: 'user_dem_location_table', locals: {locations: @top_cities} %>
 
     <h3>Total</h3>
     <%= render partial: 'user_behavior_table', locals: {stats: @behavior_stats} %>
