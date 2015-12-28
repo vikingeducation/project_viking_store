@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   def index
     # Panel 1: Overall Platform
     @overall_7_days = get_overall_stats(7)
-    @overall_30_days = get_overall_stats(730)
+    @overall_30_days = get_overall_stats(30)
     @overall_total = get_overall_stats
 
     # Panel 2: User Demographics and Behavior
@@ -24,20 +24,34 @@ class DashboardController < ApplicationController
 
   def get_overall_stats(days_ago = nil)
     if days_ago
+      days_ago == 7 ? change_start = 14 : change_start = 60
       {
-        num_users: User.days_ago(days_ago).count,
-        num_orders: Order.days_ago(days_ago).completed.count,
-        num_products: Product.days_ago(days_ago).count,
-        total_revenue: Order.get_revenue(days_ago)
+        current: period_values(days_ago, 0),
+        previous: period_values(change_start, days_ago + 1)
       }
     else
       {
-        num_users: User.all.count,
-        num_orders: Order.completed.count,
-        num_products: Product.all.count,
-        total_revenue: Order.get_revenue
+          num_users: User.all.count,
+          num_orders: Order.completed.count,
+          num_products: Product.all.count,
+          total_revenue: Order.get_revenue
       }
     end
+  end
+
+  def period_values(start_day, end_day)
+    if end_day == 0
+      revenue = Order.get_revenue(start_day)
+    else
+      revenue = Order.get_revenue(start_day) - Order.get_revenue(end_day - 1)
+    end
+
+    {
+      num_users: User.day_range(start_day,end_day).count,
+      num_orders: Order.day_range(start_day,end_day).count,
+      num_products: Product.day_range(start_day,end_day).count,
+      total_revenue: revenue
+    }
   end
 
   def get_behavior_stats

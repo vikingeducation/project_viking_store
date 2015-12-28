@@ -5,14 +5,14 @@
   <div class="panel-body">
 
     <h3>Last 7 Days</h3>
-    <%= render partial: 'overall_platform_table', locals: {stats: @overall_7_days, new_flag: true} %>
+    <%= render partial: 'overall_platform_table', locals: {stats: @overall_7_days} %>
 
 
     <h3>Last 30 Days</h3>
-    <%= render partial: 'overall_platform_table', locals: {stats: @overall_30_days, new_flag: true} %>
+    <%= render partial: 'overall_platform_table', locals: {stats: @overall_30_days} %>
 
     <h3>Total</h3>
-    <%= render partial: 'overall_platform_table', locals: {stats: @overall_total, new_flag: false} %>
+    <%= render partial: 'overall_platform_totals_table', locals: {stats: @overall_total} %>
 
   </div> <!-- panel body -->
 </div> <!-- panel -->
