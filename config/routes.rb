@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'admin' => 'admin#index'
   get 'dashboard' => 'dashboard#index'
 
@@ -6,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :categories
+    resources :products
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
