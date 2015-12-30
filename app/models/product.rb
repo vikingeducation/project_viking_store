@@ -1,5 +1,7 @@
 class Product < ActiveRecord::Base
   belongs_to :category
+  validates :name, :price, :category_id, presence: true
+  validates :price, numericality: {less_than_or_equal_to: 10000, greater_than: 0}
 
   scope :days_ago, -> (days_past = 7) { where("created_at > ?", days_past.days.ago) }
   scope :day_range, -> (start_day, end_day) {where("created_at >= ? AND created_at <= ?", start_day.days.ago, end_day.days.ago)}
