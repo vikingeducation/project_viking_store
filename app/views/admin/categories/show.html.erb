@@ -1,0 +1,40 @@
+<h2 class="text-center">Category <%= @category.id %>:  <%= @category.name %></h2>
+<br>
+
+<table class="table borderless">
+  <tr>
+    <td><h4>Category ID:</h4></td>
+    <td><%= @category.id %></td>
+  </tr>
+  <tr>
+    <td><h4>Name:</h4></td>
+    <td><%= @category.name %></td>
+  </tr>
+</table>
+
+<p>
+  <%= link_to 'Edit Category', edit_admin_category_path(@category) %>
+</p>
+<p>
+  <%= link_to 'Delete Category', edit_admin_category_path(@category) %>
+</p>
+
+<br>
+<h4>Products in <%= @category.name %></h4>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= link_to product.name, "#" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
