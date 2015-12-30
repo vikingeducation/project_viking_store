@@ -10,6 +10,5 @@ class Product < ActiveRecord::Base
 
   def carts_in
     Order.select("DISTINCT orders.id").joins("JOIN order_contents oc ON oc.order_id = orders.id JOIN products p ON oc.product_id = p.id").where("p.id = ? AND orders.checkout_date IS NULL", id).count
-
   end
 end

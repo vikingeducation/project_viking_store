@@ -2,36 +2,29 @@
 <br>
 
 <h3>Product Information</h3>
-<table class="table borderless">
-  <tr>
-    <td><strong>Product ID:</strong></td>
-    <td><%= @product.id %></td>
-  </tr>
-  <tr>
-    <td><strong>Name:</strong></td>
-    <td><%= @product.name %></td>
-  </tr>
-  <tr>
-    <td><strong>Price:</strong></td>
-    <td><%= @product.price %></td>
-  </tr>
-  <tr>
-    <td><strong>Category:</strong></td>
-    <td><%= @category.name %></td>
-  </tr>
-</table>
+
+<dl class="dl-horizontal">
+  <dt>Product ID:</dt>
+  <dd><%= @product.id %></dd>
+
+  <dt>Name:</dt>
+  <dd><%= @product.name %></dd>
+
+  <dt>Price:</dt>
+  <dd><%= @product.price %></dd>
+
+  <dt>Category:</dt>
+  <dd><%= @category.name %></dd>
+</dl>
 
 <h3>Product Statistics</h3>
-<table class="table borderless">
-  <tr>
-    <td><strong>Times Ordered:</strong></td>
-    <td><%= @product.times_ordered %></td>
-  </tr>
-  <tr>
-    <td><strong>Carts In:</strong></td>
-    <td><%= @product.carts_in %></td>
-  </tr>
-</table>
+<dl class="dl-horizontal">
+  <dt>Times Ordered:</dt>
+  <dd><%= @product.times_ordered %></dd>
+
+  <dt>Carts In:</dt>
+  <dd><%= @product.carts_in %></dd>
+</dl>
 
 <p>
   <%= link_to 'Edit Product', edit_admin_product_path(@product) %>

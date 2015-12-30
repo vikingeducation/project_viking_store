@@ -1,16 +1,13 @@
 <h2 class="text-center">Category <%= @category.id %>:  <%= @category.name %></h2>
 <br>
 
-<table class="table borderless">
-  <tr>
-    <td><strong>Category ID:</strong></td>
-    <td><%= @category.id %></td>
-  </tr>
-  <tr>
-    <td><strong>Name:</strong></td>
-    <td><%= @category.name %></td>
-  </tr>
-</table>
+<dl class="dl-horizontal">
+  <dt>Category ID:</dt>
+  <dd><%= @category.id %></dd>
+
+  <dt>Name:</dt>
+  <dd><%= @category.name %></dd>
+</dl>
 
 <p>
   <%= link_to 'Edit Category', edit_admin_category_path(@category) %>
