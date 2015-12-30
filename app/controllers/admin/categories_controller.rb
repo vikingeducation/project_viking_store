@@ -38,7 +38,7 @@ class Admin::CategoriesController < ApplicationController
     if @category.destroy
       redirect_to admin_categories_url, notice: 'Category successfully deleted.'
     else
-      redirect_to admin_categories_url, alert: 'Unable to delete category.'
+      redirect_to :back, alert: 'Unable to delete category.'
     end
   end
 
