@@ -1,4 +1,5 @@
 class City < ActiveRecord::Base
+  has_many :addresses
 
   def self.top_3_summary
     user_name_query = "SELECT user_name FROM (#{top_user}) uc WHERE uc.id = top.id"
