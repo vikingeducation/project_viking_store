@@ -46,7 +46,7 @@ class Admin::CategoriesController < ApplicationController
 
   def set_category
     @category = Category.find(params[:id])
-    @products = Product.where(category_id: params[:id])
+    @products = @category.products
   end
 
   def category_params

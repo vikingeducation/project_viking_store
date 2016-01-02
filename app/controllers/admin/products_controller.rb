@@ -8,7 +8,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def show
-    @category = Category.find(@product.category_id)
+    @category = @product.category
   end
 
   def new

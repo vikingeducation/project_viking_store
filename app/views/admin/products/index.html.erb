@@ -23,7 +23,7 @@
           <tr>
             <td><%= product.id %></td>
             <td><%= product.name %></td>
-            <td><%= link_to Category.find(product.category_id).name, admin_category_path(Category.find(product.category_id)) %></td>
+            <td><%= link_to product.category.name, admin_category_path(product.category) %></td>
             <td><%= link_to 'show', admin_product_path(product) %></td>
             <td><%= link_to 'edit', edit_admin_product_path(product) %></td>
             <td><%= link_to 'delete', admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %></td>
