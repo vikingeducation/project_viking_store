@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :addresses
+  has_many :credit_cards
+
   belongs_to :shipping_address, foreign_key: :shipping_id, class_name: 'Address'
   belongs_to :billing_address, foreign_key: :billing_id, class_name: 'Address'
 
