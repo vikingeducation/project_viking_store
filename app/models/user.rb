@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
-  has_many :addresses
-  has_many :credit_cards
-  has_many :orders
+  has_many :addresses, dependent: :destroy
+  has_many :credit_cards, dependent: :destroy
+  has_many :orders, dependent: :nullify
+  has_many :products, through: :orders
 
-  belongs_to :shipping_address, foreign_key: :shipping_id, class_name: 'Address'
-  belongs_to :billing_address, foreign_key: :billing_id, class_name: 'Address'
+  belongs_to :default_shipping_address, foreign_key: :shipping_id, class_name: 'Address'
+  belongs_to :default_billing_address, foreign_key: :billing_id, class_name: 'Address'
 
   scope :day_range, -> (start_day, end_day) {where("created_at >= ? AND created_at <= ?", start_day.days.ago, end_day.days.ago)}
 

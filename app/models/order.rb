@@ -4,8 +4,9 @@ class Order < ActiveRecord::Base
   belongs_to :shipping_address, foreign_key: :shipping_id, class_name: 'Address'
   belongs_to :billing_address, foreign_key: :billing_id, class_name: 'Address'
 
-  has_many :order_contents
+  has_many :order_contents, dependent: :destroy
   has_many :products, through: :order_contents
+  has_many :categories, through: :products
 
   scope :days_ago, -> (days_past = 7) { where("checkout_date >= ?", days_past.days.ago) }
   scope :day_range, -> (start_day, end_day) {where("checkout_date >= ? AND checkout_date <= ?", start_day.days.ago, end_day.days.ago)}

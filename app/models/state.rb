@@ -1,5 +1,5 @@
 class State < ActiveRecord::Base
-  has_many :addresses
+  has_many :addresses, dependent: :nullify
 
   def self.top_3_summary
     user_name_query = "SELECT user_name FROM (#{top_user}) us WHERE us.id = top.id"
