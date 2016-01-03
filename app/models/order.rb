@@ -12,6 +12,7 @@ class Order < ActiveRecord::Base
   scope :day_range, -> (start_day, end_day) {where("checkout_date >= ? AND checkout_date <= ?", start_day.days.ago, end_day.days.ago)}
 
   scope :completed, -> { where("checkout_date IS NOT NULL")}
+  scope :carts, -> { where("checkout_date IS NULL") }
 
   def self.get_orders_by_time(time_frame)
     if time_frame == 'day'

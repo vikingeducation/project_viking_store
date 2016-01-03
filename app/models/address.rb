@@ -8,4 +8,8 @@ class Address < ActiveRecord::Base
 
   has_many :ship_to_orders, foreign_key: :shipping_id, class_name: 'Order', dependent: :nullify
   has_many :bill_to_orders, foreign_key: :billing_id, class_name: 'Order', dependent: :nullify
+
+  def city_state_zip
+    "#{city.name}, #{state.name}  #{zip_code}"
+  end
 end
