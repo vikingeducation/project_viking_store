@@ -9,7 +9,13 @@ class User < ActiveRecord::Base
 
   scope :day_range, -> (start_day, end_day) {where("created_at >= ? AND created_at <= ?", start_day.days.ago, end_day.days.ago)}
 
-  private
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  def last_order
+    self.orders.completed.order("checkout_date DESC").limit(1).first
+  end
 
   # Join clause to join users with order_totals table
   def self.user_order_totals_join(days_ago = nil)
