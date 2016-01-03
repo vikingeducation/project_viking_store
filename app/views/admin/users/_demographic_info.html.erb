@@ -1,0 +1,41 @@
+<h3 class="text-center">Demographic Information</h3>
+
+<dl class="dl-horizontal">
+  <dt>First Name:</dt>
+  <dd><%= @user.first_name %></dd>
+
+  <dt>Last Name:</dt>
+  <dd><%= @user.last_name %></dd>
+
+  <dt>Email:</dt>
+  <dd><%= mail_to @user.email %></dd>
+
+  <dt>Telephone:</dt>
+  <dd></dd>
+  <br>
+
+  <dt>Default Billing Address:</dt>
+  <dd><%= @user.default_billing_address.street_address %></dd>
+  <% if @user.default_billing_address.secondary_address %>
+    <dd><%= @user.default_billing_address.secondary_address %></dd>
+  <% end %>
+  <dd><%= @user.default_billing_address.city_state_zip %></dd>
+  <br>
+  <dt>Default Shipping Address:</dt>
+  <dd><%= @user.default_shipping_address.street_address %></dd>
+  <% if @user.default_shipping_address.secondary_address %>
+    <dd><%= @user.default_shipping_address.secondary_address %></dd>
+  <% end %>
+  <dd><%= @user.default_shipping_address.city_state_zip %></dd>
+</dl>
+
+<%= link_to "Edit #{@user.name}'s Information", edit_admin_user_path(@user) %><br>
+<%= link_to "Delete #{@user.name}", admin_user_path(@user), method: :delete, data: { confirm: 'Are you sure?' } %><br>
+<%= link_to "View Saved Addresses", "#" %><br>
+
+<% if @user.orders.carts %>
+  <%= link_to "View Unplaced Order (Cart)", "#" %>
+<% else %>
+  View Unplaced Order (Cart)
+<% end %>
+<br>

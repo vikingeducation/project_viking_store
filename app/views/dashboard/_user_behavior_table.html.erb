@@ -1,0 +1,24 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr class="info">
+      <th class="text-center">Criteria</th>
+      <th class="text-center">Customer</th>
+      <th class="text-center">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% stats.each do |stat| %>
+      <tr>
+        <td><%= stat[:criteria] %></td>
+        <td><%= "#{stat[:result].first_name} #{stat[:result].last_name}" %></td>
+        <td class="text-right">
+          <% if stat[:currency] %>
+            <%= number_to_currency stat[:result].amount, precision: 0 %>
+          <% else %>
+            <%= number_to_human stat[:result].amount, precision: 0 %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

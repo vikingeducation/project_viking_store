@@ -1,0 +1,26 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr class="info">
+      <th class="text-center">Date</th>
+      <th class="text-center">Quantity</th>
+      <th class="text-center">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% orders_by_time.each do |order| %>
+      <tr>
+        <td>
+          <% if order.date.today? %>
+            Today
+          <% elsif order.date == Date.yesterday %>
+            Yesterday
+          <% else %>
+            <%= order.date.stamp('12/22') %>
+          <% end %>
+        </td>
+        <td><%= order.quantity %></td>
+        <td class="text-right"><%= number_to_currency order.value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

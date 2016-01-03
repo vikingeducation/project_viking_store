@@ -1,0 +1,26 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr class="info">
+      <th class="text-center">Item</th>
+      <th class="text-center">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Number of Orders</td>
+      <td class="text-right"><%= number_to_human stats[:num_orders] %></td>
+    </tr>
+    <tr>
+      <td>Total Revenue</td>
+      <td class="text-right"><%= number_to_currency stats[:total_revenue], precision: 0 %></td>
+    </tr>
+    <tr>
+      <td>Average Order Value</td>
+      <td class="text-right"><%= number_to_currency stats[:avg_order_value], precision: 0 %></td>
+    </tr>
+    <tr>
+      <td>Largest Order Value</td>
+      <td class="text-right"><%= number_to_currency stats[:max_order_value], precision: 0 %></td>
+    </tr>
+  </tbody>
+</table>

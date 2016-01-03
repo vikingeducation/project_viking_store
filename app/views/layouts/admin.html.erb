@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Viking Store Admin Portal</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="text-center">Viking Store Admin Portal</h1>
+    <br>
+
+    <div class="row">
+
+      <div class="col-sm-3">
+        <%= render 'layouts/admin_navbar' %>
+      </div>
+
+      <div class="col-sm-9">
+        <%= render 'layouts/messages' %>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <%= yield %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

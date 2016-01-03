@@ -1,0 +1,20 @@
+<h3 class="text-center">Credit Card Information</h3>
+
+<% @user.credit_cards.each do |card| %>
+  <dl class="dl-horizontal">
+    <dt>Nickname:</dt>
+    <dd><%= card.nickname %></dd>
+
+    <dt>Number:</dt>
+    <dd><%= card.card_number %></dd>
+
+    <dt>Expiration:</dt>
+    <dd><%= card.expiration %></dd>
+
+    <dt>CCV:</dt>
+    <dd><%= card.ccv %></dd>
+
+    <%# link_to 'Remove Card', admin_credit_card_path(card), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <dd><%= link_to 'Remove Card', "#", method: :delete, data: { confirm: 'Are you sure?' } %></dd>
+  </dl>
+<% end %>

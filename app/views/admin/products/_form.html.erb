@@ -1,0 +1,41 @@
+<%= form_for [:admin, @product], html: {class: "form-horizontal"} do |f| %>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">ID</label>
+    <div class="col-sm-8">
+      <%= f.text_field :id, class: "form-control", disabled: true, placeholder: "N/A" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <%= field_with_errors(@product, :name) %>
+    <div class="col-sm-8">
+      <%= f.text_field :name, class: "form-control", placeholder: "enter the product name here" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price, class: "col-sm-2 control-label" %>
+    <%= field_with_errors(@product, :price) %>
+    <div class="col-sm-8">
+      <%= f.number_field :price, class: "form-control", placeholder: "9.99" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :category_id, class: "col-sm-2 control-label" %>
+    <%= field_with_errors(@product, :category_id) %>
+    <div class="col-sm-8">
+      <%= f.collection_select :category_id, @categories, :id, :name, {prompt: "select a category"}, {class: "form-control"} %>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <%= f.submit class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+  </div>
+  <br>
+<% end %>

@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="text-center">Time Series Data</h2>
+  </div>
+  <div class="panel-body">
+
+    <h3>Orders by Day</h3>
+    <%= render partial: 'time_series_table', locals: {orders_by_time: @orders_by_day } %>
+
+
+    <h3>Orders by Week</h3>
+    <%= render partial: 'time_series_table', locals: {orders_by_time: @orders_by_week } %>
+
+  </div> <!-- panel body -->
+</div> <!-- panel -->

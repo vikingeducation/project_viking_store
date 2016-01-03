@@ -1,0 +1,31 @@
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr class="info">
+      <th class="text-center">Item</th>
+      <th class="text-center">Current Period</th>
+      <th class="text-center">Change From Last Period</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>New Users</td>
+      <td class="text-right"><%= number_to_human stats[:current][:num_users] %></td>
+      <td class="text-right"><%= number_to_human(stats[:current][:num_users] - stats[:previous][:num_users]) %></td>
+    </tr>
+    <tr>
+      <td>Orders</td>
+      <td class="text-right"><%= number_to_human stats[:current][:num_orders] %></td>
+      <td class="text-right"><%= number_to_human(stats[:current][:num_orders] - stats[:previous][:num_orders]) %></td>
+    </tr>
+    <tr>
+      <td>New Products</td>
+      <td class="text-right"><%= number_to_human stats[:current][:num_products] %></td>
+      <td class="text-right"><%= number_to_human(stats[:current][:num_products] - stats[:previous][:num_products]) %></td>
+    </tr>
+    <tr>
+      <td>Revenue</td>
+      <td class="text-right"><%= number_to_currency(stats[:current][:total_revenue], precision: 0) %></td>
+      <td class="text-right"><%= number_to_currency(stats[:current][:total_revenue] - stats[:previous][:total_revenue], precision: 0) %></td>
+    </tr>
+  </tbody>
+</table>

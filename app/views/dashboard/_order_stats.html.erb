@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="text-center">Order Statistics</h2>
+  </div>
+  <div class="panel-body">
+
+    <h3>Last 7 Days</h3>
+    <%= render partial: 'order_stats_table', locals: {stats: @order_stats_7_days} %>
+
+    <h3>Last 30 Days</h3>
+    <%= render partial: 'order_stats_table', locals: {stats: @order_stats_30_days} %>
+
+    <h3>Total</h3>
+    <%= render partial: 'order_stats_table', locals: {stats: @order_stats_total} %>
+
+  </div> <!-- panel body -->
+</div> <!-- panel -->

@@ -1,0 +1,8 @@
+<h2 class="text-center">Edit Category <%= @category.id %>:  <%= @category.name %></h2>
+<br>
+
+<%= render 'form' %>
+
+<p class="text-center">
+  <%= link_to 'Delete', admin_category_path(@category), method: :delete, data: { confirm: 'Are you sure?' } %>
+</p>

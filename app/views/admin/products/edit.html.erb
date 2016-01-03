@@ -1,0 +1,8 @@
+<h2 class="text-center">Edit Product <%= @product.id %></h2>
+<br>
+
+<%= render 'form' %>
+
+<p class="text-center">
+  <%= link_to 'Delete', admin_product_path(@product), method: :delete, data: { confirm: 'Are you sure?' } %>
+</p>
