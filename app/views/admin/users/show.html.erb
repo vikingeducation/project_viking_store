@@ -1,0 +1,44 @@
+<section id='admin-user-show'>
+
+  <div class='row'>
+    <div class='col-xs-12'>
+
+      <h1 class='text-center'><%= "User #{@user.id}: #{@user.first_name} #{@user.last_name}" %></h1>
+
+    <!-- User Demographics -->
+      <%= render :partial => 'show_demographics',
+            :locals => {
+                        :user => @user,
+                        :default_billing => @default_billing,
+                        :default_shipping => @default_shipping,
+                        :cart => @cart
+                       },
+            :layout => 'layouts/shared/show_panel' %>
+
+      <!-- Credit Card -->
+      <%= render :partial => 'show_credit_card',
+            :locals => {
+                        :user => @user,
+                        :credit_card => @credit_card
+                       },
+            :layout => 'layouts/shared/show_panel' if @credit_card %>
+
+      <!-- Admin Actions -->
+      <%= render :partial => 'show_admin_actions',
+            :locals => {
+                        :user => @user
+                       },
+            :layout => 'layouts/shared/show_panel' %>
+
+      <!-- Order History -->
+      <%= render :partial => 'show_order_history',
+            :locals => {
+                        :user => @user,
+                        :user_orders => @user_orders
+                       },
+            :layout => 'layouts/shared/show_panel' %>
+
+    </div>
+  </div>
+
+</section>

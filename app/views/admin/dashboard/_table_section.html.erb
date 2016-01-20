@@ -1,0 +1,33 @@
+
+  <div class='col-xs-12'>
+
+    <h4><%= table_title %></h4>
+
+    <table class='table table-striped table-bordered table-condensed'>
+      <thead class='bg-success'>
+        <tr>
+          <% table_headers.each do |header| %>
+            <td><%= header %></td>
+          <% end %>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <% table_data.each do |label, data| %>
+          <tr>
+            <td><%= label %></td>
+            
+            <% present_data(data).each do |cell| %>
+              <td><%= currency_if_float(cell) %></td>
+            <% end %>
+            
+          </tr>
+        <% end %>
+
+      </tbody>
+
+    </table>
+
+  </div>
+

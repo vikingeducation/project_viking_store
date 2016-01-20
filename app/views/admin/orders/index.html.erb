@@ -1,0 +1,52 @@
+<section id='admin-order-index'>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <h1 class='text-center'>
+        <%= "#{@filtered_user.first_name} #{@filtered_user.last_name}'s " if @filtered_user %>Orders
+      </h1>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-xs-6 col-xs-offset-3'>
+
+      <%= order_create(@filtered_user) %>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-xs-12'>
+
+      <table class='table table-striped table-bordered table-condensed text-center'>
+
+        <thead class='bg-success'>
+          <tr>
+            <td>ID</td>
+            <td>User ID</td>
+            <td>Address</td>
+            <td>City</td>
+            <td>State</td>
+            <td>Quantity</td>
+            <td>Total Value</td>
+            <td>Status</td>
+            <td>Date Placed</td>
+            <td>SHOW</td>
+            <td>EDIT</td>
+            <td>DELETE</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%= render :partial => 'order', :collection => @orders %>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+</section>

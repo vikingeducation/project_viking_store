@@ -1,0 +1,32 @@
+<section id='admin-order-show'>
+
+  <div class='row'>
+    <div class='col-xs-12'>
+      <h1 class='text-center'><%= show_order_title(@order) %></h1>
+
+      <%= render :partial => 'show_logistics',
+                 :locals => {
+                              :order => @order,
+                              :user => @user,
+                              :card => @card,
+                              :shipping_address => @shipping_address,
+                              :billing_address => @billing_address
+                            },
+                 :layout => 'layouts/shared/show_panel' %>
+
+
+      <!-- Order Contents -->
+      <%= render :partial => 'show_contents',
+                 :locals => {
+                              :order => @order,
+                              :order_contents => @order_contents
+                            },
+                 :layout => 'layouts/shared/show_panel' if @order_contents %>
+
+
+
+
+    </div>
+  </div>
+
+</section>

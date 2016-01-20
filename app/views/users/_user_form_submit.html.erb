@@ -1,0 +1,22 @@
+
+<div class='panel panel-default'>
+
+  <div class='panel-body'>
+
+    <h2 class='text-center'><%= edit_button_title %></h2>
+
+    <div class='row'>
+      <div class='col-xs-8 col-xs-offset-2'>
+        <%= user_fields.submit edit_button_text, class: 'btn btn-success btn-block' %>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-xs-12 text-center'>
+        <%= link_to 'Delete My Account', current_user, method: 'delete', :data => { confirm: "Delete User?" } if current_user %>
+      </div>
+    </div>
+
+  </div> <!-- panel-body -->
+
+</div>

@@ -9,7 +9,7 @@ puts "Destroying old records"
 User.destroy_all
 Address.destroy_all
 Order.destroy_all
-OrderContent.destroy_all
+OrderContents.destroy_all
 Category.destroy_all
 CreditCard.destroy_all
 Product.destroy_all
@@ -51,16 +51,71 @@ def generate_product
 end
 
 # A list of states.
-STATES = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+STATES = [["AL", "Alabama"],
+          ["AK", "Alaska"], 
+          ["AZ", "Arizona"], 
+          ["AR", "Arkansas"], 
+          ["CA", "California"], 
+          ["CO", "Colorado"], 
+          ["CT", "Connecticut"], 
+          ["DE", "Delaware"], 
+          ["FL", "Florida"], 
+          ["GA", "Georgia"], 
+          ["HI", "Hawaii"], 
+          ["ID", "Idaho"], 
+          ["IL", "Illinois"], 
+          ["IN", "Indiana"], 
+          ["IA", "Iowa"], 
+          ["KS", "Kansas"], 
+          ["KY", "Kentucky"], 
+          ["LA", "Louisiana"], 
+          ["ME", "Maine"], 
+          ["MD", "Maryland"], 
+          ["MA", "Massachusetts"], 
+          ["MI", "Michigan"], 
+          ["MN", "Minnesota"], 
+          ["MS", "Mississippi"], 
+          ["MO", "Missouri"], 
+          ["MT", "Montana"], 
+          ["NE", "Nebraska"], 
+          ["NV", "Nevada"], 
+          ["NH", "New Hampshire"], 
+          ["NJ", "New Jersey"], 
+          ["NM", "New Mexico"], 
+          ["NY", "New York"], 
+          ["NC", "North Carolina"], 
+          ["ND", "North Dakota"], 
+          ["OH", "Ohio"], 
+          ["OK", "Oklahoma"], 
+          ["OR", "Oregon"], 
+          ["PA", "Pennsylvania"], 
+          ["RI", "Rhode Island"], 
+          ["SC", "South Carolina"], 
+          ["SD", "South Dakota"], 
+          ["TN", "Tennessee"], 
+          ["TX", "Texas"], 
+          ["UT", "Utah"], 
+          ["VT", "Vermont"], 
+          ["VA", "Virginia"], 
+          ["WA", "Washington"], 
+          ["WV", "West Virginia"], 
+          ["WI", "Wisconsin"], 
+          ["WY", "Wyoming"]
+        ]
 
 def generate_state(state)
-  state = State.new({:name => state})
+  state = State.new({:name => state[0]})
   state.save
 end
 
 # Generate some City records. Your Address model could have also included "city" as a string instead of a foreign key.
 def generate_city
   City.create( :name => Faker::Address.city )
+end
+
+# selects user's credit cards for default billing
+def random_user_card(user_id)
+  User.find(user_id).credit_cards.sample.id
 end
 
 # This method selects one of a users several addresses for use setting shipping address and billing address.
@@ -134,7 +189,7 @@ def generate_contents(order_id)
     # [:order_id, :product_id]
     if OrderContent.where(:product_id => c.product_id,
                           :order_id => c.order_id).empty?
-      c.save
+      c.save!
     end
   end
 end
@@ -168,39 +223,47 @@ def generate_order
 
     # first generated order is a shopping cart
     # all since then are placed orders with checkout dates
-    if has_cart?(user.id)
+    if user.orders.where("checkout_date IS NULL").count > 1
       o[:checkout_date] = placement_date(user)
     end
 
-    o.save
+    o.save!
     generate_contents(o[:id])
   end
 end
 
 # Create some CreditCard records for users who have an order.
 def generate_credit_cards_for_checked_out_orders
-  checked_out_orders = Order.all.select("DISTINCT user_id").
+  users_with_orders = Order.all.select("DISTINCT user_id").
                                 where("checkout_date IS NOT NULL")
 
-  checked_out_orders.each do |order|
-    card = CreditCard.new
-    card[:user_id] = order.user_id
+  users_with_orders.each do |user|
+    loop do
+      card = CreditCard.new
+      card[:user_id] = user.user_id
 
-    # last 4 digits only
-    card[:card_number] = Faker::Number.number(16)
-    card[:exp_month] = rand(12) + 1
+      # last 4 digits only
+      card[:card_number] = Faker::Number.number(16)
+      card[:exp_month] = rand(12) + 1
 
-    #so far, only good cards
-    card[:exp_year] = Time.now.year + rand(5)
-    card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
+      #so far, only good cards
+      card[:exp_year] = Time.now.year + rand(5)
+      card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
 
-    card.save
-
-    affiliated_orders = Order.where("user_id = ?", order.user_id).where("checkout_date IS NOT NULL")
-    affiliated_orders.each do |aff_ord|
-      aff_ord.credit_card_id = card.id
-      aff_ord.save
+      if CreditCard.where(:card_number => card.card_number).empty?
+        card.save
+        break
+      end
     end
+  end
+end
+
+def assign_credit_cards_to_orders
+  completed_orders = Order.where("checkout_date IS NOT NULL")
+
+  completed_orders.each do |order|
+    order[:billing_card_id] = random_user_card(order.user_id)
+    order.save
   end
 end
 
@@ -234,5 +297,6 @@ puts "Created users"
 (MULTIPLIER * 30).times { generate_order }
 puts "Created orders"
 generate_credit_cards_for_checked_out_orders
+assign_credit_cards_to_orders
 puts "Created credit card orders"
 puts "DONE!"

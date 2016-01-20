@@ -1,0 +1,28 @@
+// Place all the styles related to the Orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#admin-order-index {
+  .btn {
+    margin-top: 15px;
+    margin-bottom: 25px;
+  }
+}
+
+#admin-order-show {
+  .show-block {
+    margin-bottom: 20px;
+  }
+
+  .status-text {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+#admin-order-new, #admin-order-edit {
+  .show-block {
+    margin-bottom: 20px;
+  }
+}

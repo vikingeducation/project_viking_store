@@ -1,0 +1,105 @@
+<%= form_for [:admin, address] do |f| %>
+
+  <%= f.hidden_field :user_id, :value => user.id %>
+
+  <!-- Owner ID-->
+  <div class='row'>
+
+    <div class='col-xs-3'>
+      <p><strong>Owner ID:</strong></p>
+    </div>
+
+    <div class='col-xs-9'>
+      <p><%= user.id %></p>
+    </div>
+
+  </div>
+
+  <!-- Owner Name -->
+  <div class='row'>
+
+    <div class='col-xs-3'>
+      <p><strong>Owner Name:</strong></p>
+    </div>
+
+    <div class='col-xs-9'>
+      <%= link_to "#{user.first_name} #{user.last_name}", admin_user_path(user.id) %>
+    </div>
+
+  </div>
+
+  <!-- Street -->
+  <div class='form-group'>
+    <div class='row'>
+
+      <div class='col-xs-3'>
+        <%= f.label :street_address, 'Street:' %>
+      </div>
+
+      <div class='col-xs-9'>
+        <%= f.text_field :street_address %>
+        <%= render_error(address,:street_address) %>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- City -->
+  <div class='form-group'>
+    <div class='row'>
+
+      <div class='col-xs-3'>
+        <%= f.label :city_id, 'City:' %>
+      </div>
+
+      <div class='col-xs-9'>
+        <%= f.collection_select :city_id, cities, :id, :name %>
+        <%= render_error(address,:city_id) %>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- State -->
+  <div class='form-group'>
+    <div class='row'>
+
+      <div class='col-xs-3'>
+        <%= f.label :state_id, 'State:' %>
+      </div>
+
+      <div class='col-xs-9'>
+        <%= f.collection_select :state_id, states, :id, :name %>
+        <%= render_error(address,:state_id) %>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ZIP Code -->
+  <div class='form-group'>
+    <div class='row'>
+
+      <div class='col-xs-3'>
+        <%= f.label :zip_code, 'ZIP:' %>
+      </div>
+
+      <div class='col-xs-9'>
+        <%= f.text_field :zip_code %>
+        <%= render_error(address,:zip_code) %>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Submit -->
+  <div class='row'>
+
+    <div class='col-xs-10 col-xs-offset-1'>
+      <%= f.submit "#{button_label}", class: 'btn btn-success btn-lg btn-block' %>
+    </div>
+
+  </div>
+
+
+<% end %>

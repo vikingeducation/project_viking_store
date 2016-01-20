@@ -1,0 +1,86 @@
+<%= user_fields.fields_for :created_addresses do |address_fields| %>
+
+  <div class='panel panel-default'>
+
+    <div class='panel-body'>
+
+      <h4 class='text-center'>Saved Address (optional)</h4>
+
+      <div class='row'>
+        <div class='col-xs-12'>
+          <div class='form-group'>
+            <%= address_fields.label :street_address, 'Street Address' %>
+            <%= address_fields.text_field :street_address, class: 'form-control' %>
+            <%= render_error(address_fields.object,:street_address) %>
+          </div>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-xs-12'>
+          <div class='form-group'>
+            <%= address_fields.label :city_id, 'City' %>
+            <%= address_fields.collection_select :city_id, City.all, :id, :name, { :include_blank => true }, class: 'form-control' %>
+            <%= render_error(address_fields.object, :city_id) %>
+          </div>
+        </div>
+      </div>
+
+      <div class='row'>
+
+        <div class='col-xs-6'>
+          <div class='form-group'>
+            <%= address_fields.label :state_id, 'State' %>
+            <%= address_fields.collection_select :state_id, State.all, :id, :name, { :include_blank => true }, { class: 'form-control' } %>
+            <%= render_error(address_fields.object,:state_id) %>
+          </div>
+        </div>
+
+        <div class='col-xs-6'>
+          <div class='form-group'>
+            <%= address_fields.label :zip_code, 'ZIP Code' %>
+            <%= address_fields.text_field :zip_code, class: 'form-control' %>
+            <%= render_error(address_fields.object,:zip_code) %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class='row'>
+        <div class='col-xs-12'>
+          <div class='form-group'>
+            <%= user_fields.radio_button :shipping_id, address_fields.object.id  %>
+            <%= user_fields.label :shipping_id, 'Default Shipping Address' %>
+            <%= render_error(user_fields.object,:shipping_id) %>
+          </div>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-xs-12'>
+          <div class='form-group'>
+            <%= user_fields.radio_button :billing_id, address_fields.object.id %>
+            <%= user_fields.label :billing_id, 'Default Billing Address' %>
+            <%= render_error(user_fields.object,:billing_id) %>
+          </div>
+        </div>
+      </div>
+
+      <% if current_user %>
+        <div class='row'>
+          <div class='col-xs-12'>
+            <div class='form-group text-danger'>
+              <% if address_fields.object.persisted? %>
+                <%= address_fields.check_box :_destroy %>
+                <%= address_fields.label :_destroy, "Delete Address" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div> <!-- panel-body -->
+
+  </div>
+
+<% end %>

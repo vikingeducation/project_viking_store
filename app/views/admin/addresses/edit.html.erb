@@ -1,0 +1,42 @@
+<section id='admin-address-edit'>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <h1 class='text-center'>
+        <%= "Edit #{@user.first_name} #{@user.last_name}'s Address" %>
+      </h1>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <%= render :partial => 'address_form',
+            :locals => {
+                        :address => @address,
+                        :user => @user,
+                        :cities => @cities,
+                        :states => @states,
+                        :button_label => "Update Address"
+                       },
+            :layout => 'layouts/shared/show_panel' %>
+
+
+      <!-- Delete Address -->
+      <div class='row'>
+
+        <div class='col-xs-12 text-center'>
+          <%= link_to "Delete Address", admin_address_path(@address.id),
+                      :method => :delete,
+                      :data => { :confirm => 'Delete address?' } %>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+</section>

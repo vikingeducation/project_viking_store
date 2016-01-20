@@ -1,0 +1,58 @@
+<section id='admin-order-edit'>
+
+  <div class='row'>
+    <div class='col-xs-10 col-xs-offset-1'>
+
+      <h1 class='text-center'>
+        <%= "Edit Order #{@order.id}" %>
+      </h1>
+
+    </div>
+  </div>
+
+  <!-- Basic Information Form -->
+  <div class='row'>
+    <div class='col-xs-12'>
+
+      <%= render :partial => 'order_form',
+                 :locals => {
+                             :status => @status,
+                             :order => @order,
+                             :user => @user,
+                             :available_addresses => @available_addresses,
+                             :available_cards => @available_cards,
+                             :button_label => 'Update Order Information'
+                            },
+                 :layout => 'layouts/shared/show_panel' %>
+
+    </div>
+  </div>
+
+  <!-- Order Contents -->
+  <div class='row'>
+    <div class='col-xs-12'>
+
+      <%= render :partial => 'edit_order_contents',
+                 :locals => {
+                             :order => @order,
+                             :order_contents => @order_contents,
+                             :button_label => 'Update Order Contents'
+                            },
+                 :layout => 'layouts/shared/show_panel' %>
+
+    </div>
+  </div>
+
+  <!-- Add Products -->
+  <div class='row'>
+    <div class='col-xs-12'>
+      <%= render :partial => 'edit_add_products',
+                 :locals => {
+                              :order => @order,
+                              :button_label => 'Add Products'
+                            },
+                 :layout => 'layouts/shared/show_panel' %>
+    </div>
+  </div>
+
+</section>

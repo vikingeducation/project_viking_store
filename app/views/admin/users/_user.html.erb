@@ -1,0 +1,16 @@
+<tr>
+  <td><%= user[0].id %></td>
+  <td><%= "#{user[0].first_name} #{user[0].last_name}" %></td>
+  <td><%= user[0].created_at.to_date %></td>
+
+  <td><%= user[1] %></td>
+  <td><%= user[2] %></td>
+  <td><%= link_to user[3], admin_orders_path(:user_id => user[0].id) %></td>
+  <td><%= user[4] %></td>
+
+  <td><%= link_to 'Show', admin_user_path(user[0].id) %></td>
+  <td><%= link_to 'Edit', edit_admin_user_path(user[0].id) %></td>
+  <td><%= link_to 'Delete', admin_user_path(user[0].id),
+            :method => :delete,
+            :data => { :confirm => 'Delete user?' } %></td>
+</tr>

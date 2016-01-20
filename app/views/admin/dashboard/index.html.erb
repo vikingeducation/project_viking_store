@@ -1,0 +1,22 @@
+<div class='container'>
+
+  <div class='row'>
+    <div class='col-xs-12'>
+      <header id='dashboard-header'>
+        <h1 class='text-center'>Viking Store Analytics Dashboard</h1>
+      </header>
+    </div>
+  </div>
+
+  <!-- forces row every odd panel -->
+  <% @data.each_with_index do |(panel, tables), index| %>
+
+    <%= "<div class='row'>".html_safe if index.even? %>
+
+      <%= render :partial => 'panel', :locals => { panel_title: panel, tables: tables } %>
+
+    <%= "</div>".html_safe if index.odd? %>
+
+  <% end %>
+
+</div>

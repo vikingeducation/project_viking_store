@@ -1,0 +1,141 @@
+<div class='row'>
+
+  <div class='col-xs-12'>
+    <h3 class='text-center'><strong>Logistical Information</strong></h3>
+  </div>
+
+</div>
+
+<div class='row show-block'>
+  <div class='col-xs-12'>
+
+    <div class='row'>
+      <div class='col-xs-12'>
+        <h4><strong>Basic Information</strong></h4>
+      </div>
+    </div>
+
+    <div class='row'>
+
+      <div class='col-xs-3'>
+        <p><strong>Customer ID:</strong></p>
+      </div>
+
+      <div class='col-xs-9'>
+        <p><%= user.id %></p>
+      </div>
+
+    </div>
+
+    <div class='row'>
+
+      <div class='col-xs-3'>
+        <p><strong>Customer:</strong></p>
+      </div>
+
+      <div class='col-xs-9'>
+        <%= link_to "#{user.first_name} #{user.last_name} (click to view user)", admin_user_path(user.id) %>
+      </div>
+
+    </div>
+
+    <div class='row'>
+
+      <div class='col-xs-3'>
+        <p><strong>Date Placed:</strong></p>
+      </div>
+
+      <div class='col-xs-9'>
+        <p><%= order.checkout_date.to_date if order.checkout_date %></p>
+      </div>
+
+    </div>
+
+    <div class='row'>
+
+      <div class='col-xs-12'>
+        <%= link_to 'Edit Customer Profile', edit_admin_user_path(user.id) %>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+<%= form_for [:admin, order] do |f| %>
+
+  <%= f.hidden_field :user_id, :value => user.id %>
+
+    <!-- Order Status -->
+    <%= render :partial => 'order_form_status',
+               :locals => { :status => @status } if @status %>
+
+    <div class='row show-block'>
+      <div class='col-xs-12'>
+
+      <!-- Shipping Address -->
+      <div class='form-group'>
+        <div class='row'>
+
+          <div class='col-xs-12'>
+            <%= f.label :shipping_id, 'Shipping Address:' %>
+          </div>
+
+          <div class='col-xs-12'>
+            <%= render_user_addresses(f, available_addresses, :shipping_id) %>
+            <%= render_error(order,:shipping_id) %>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Billing Address -->
+      <div class='form-group'>
+        <div class='row'>
+
+          <div class='col-xs-12'>
+            <%= f.label :billing_id, 'Billing Address:' %>
+          </div>
+
+          <div class='col-xs-12'>
+            <%= render_user_addresses(f, available_addresses, :billing_id) %>
+            <%= render_error(order,:billing_id) %>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Billing Card -->
+      <div class='form-group'>
+        <div class='row'>
+
+          <div class='col-xs-12'>
+            <%= f.label :billing_card_id, 'Billing Card:' %>
+          </div>
+
+          <div class='col-xs-12'>
+            <%= render_user_cards(f, available_cards, :billing_card_id) %>
+            <%= render_error(order,:billing_card_id) %>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class='row'>
+
+        <div class='col-xs-10 col-xs-offset-1'>
+          <%= f.submit "#{button_label}", class: 'btn btn-success btn-lg btn-block' %>
+        </div>
+
+      </div>
+
+      <%= render 'order_add_products_warning' if order.id.nil? %>
+
+      <%= render :partial => 'order_delete_link', :locals => { :order_id => order.id } unless order.id.nil? %>
+
+    </div>
+  </div>
+
+<% end %>
