@@ -10,17 +10,17 @@
     <tr>
       <td>Highest Single Order Value</td>
       <td><%= data[0][0].first_name %> <%= data[0][0].last_name %></td>
-      <td><%= data[0][0].value %></td>
+      <td><%= number_to_currency(data[0][0].value) %></td>
     </tr>
     <tr>
       <td>Highest Lifetime Value</td>
       <td><%= data[1][0].first_name %> <%= data[1][0].last_name %></td>
-      <td><%= data[1][0].value %></td>
+      <td><%= number_to_currency(data[1][0].value) %></td>
     </tr>
     <tr>
       <td>Highest Average Order Value</td>
       <td><%= data[2][0].first_name %> <%= data[2][0].last_name %></td>
-      <td><%= data[2][0].value %></td>
+      <td><%= number_to_currency(data[2][0].value) %></td>
     </tr>
     <tr>
       <td>Most Orders Placed</td>

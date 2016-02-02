@@ -4,7 +4,7 @@ class OrderContent < ActiveRecord::Base
     if days.nil?
       self.joins("JOIN products ON product_id = products.id").sum("products.price * order_contents.quantity")
     else
-      self.joins("JOIN products ON product_id = products.id").where("order_contents.created_at > CURRENT_DATE - interval '#{days} day' ").sum("products.price * order_contents.quantity")
+      self.joins("JOIN products ON product_id = products.id").joins("JOIN orders ON orders.id = order_contents.order_id").where("orders.checkout_date > CURRENT_DATE - interval '#{days} day' ").sum("products.price * order_contents.quantity")
     end
   end
 
