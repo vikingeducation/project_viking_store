@@ -2,6 +2,7 @@
 <br>
 
 <div class="row">
+  <div class="row">
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -170,7 +171,8 @@
       </div>
     </div>
   </div>
-
+</div>
+<div class="row">
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -188,20 +190,47 @@
           </thead>
           <tbody>
             <tr>
-              <td>New Users</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>Orders</td>
-              <td>150</td>
-            </tr>
-            <tr>
-              <td>New Products</td>
-              <td>10</td>
+              <td>Number of Orders</td>
+              <td><%= Order.new_orders(7).count %></td>
             </tr>
             <tr>
               <td>Total Revenue</td>
-              <td>$5000</td>
+              <td><%= number_to_currency(Order.new_orders(7).total_revenue) %></td>
+            </tr>
+            <tr>
+              <td>Average Order Value</td>
+              <td><%= Order.average_value_since(7) %></td>
+            </tr>
+            <tr>
+              <td>Largest Order Value</td>
+              <td><%= number_to_currency(Order.largest_value) %></td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>Total</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Number of Orders</td>
+              <td><%= Order.processed.count %></td>
+            </tr>
+            <tr>
+              <td>Total Revenue</td>
+              <td><%= number_to_currency(Order.total_revenue) %></td>
+            </tr>
+            <tr>
+              <td>Average Order Value</td>
+              <td><%= number_to_currency(Order.average_value) %></td>
+            </tr>
+            <tr>
+              <td>Largest Order Value</td>
+              <td><%= number_to_currency(Order.largest_value) %></td>
             </tr>
           </tbody>
         </table>
@@ -246,4 +275,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
