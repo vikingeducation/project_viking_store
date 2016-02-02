@@ -3,28 +3,22 @@
 
     <div class="col-xs-6">
       <h1>Last 7 Days</h1>
-      <%= render partial: 'two_columns', locals: {data: @weekly} %>
+      <%= render partial: 'totals', locals: {data: @weekly} %>
 
       <h1>Last 30 Days</h1>
-      <%= render partial: 'two_columns', locals: {data: @monthly} %>
+      <%= render partial: 'totals', locals: {data: @monthly} %>
 
       <h1>Total</h1>
-      <%= render partial: 'two_columns', locals: {data: @total} %>
+      <%= render partial: 'totals', locals: {data: @total} %>
     </div>
 
     <div class="col-xs-6">
-      <table class="table">
-        <thead>
-        <tr>
-        <th>Item</th>
-        <th>Data</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-    </div>
+      <h1>Top 3 States Users Live In</h1>
+      <%= render partial: 'states', locals: {data: @states_list} %>
 
+      <h1>Top 3 Cities Users Live In</h1>
+      <%= render partial: 'states', locals: {data: @cities_list} %>
+    </div>
   </div>
   <div class="row">
     <div class="col-xs-6">
