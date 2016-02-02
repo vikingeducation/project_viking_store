@@ -1,3 +1,5 @@
+
+
 class User < ActiveRecord::Base
 
   def self.total_users
@@ -22,6 +24,15 @@ class User < ActiveRecord::Base
 
   def self.join_billing_city
     User.joins( "JOIN addresses ON users.billing_id = addresses.id JOIN cities ON addresses.city_id = cities.id" )
+  end
+
+  def self.highest_lifetime_value
+    User.joins( "JOIN orders ON orders.user_id = users.id 
+      JOIN order_contents ON orders.id = order_contents.order_id
+      JOIN products ON order_contents.product_id = products.id" )
+    .select( "users.name, SUM( products.price * order_contents.quantity ) ")
+    .group( users.name ).order("total_revenue DESC"  )
+    .limit(1)
   end
 
 end
