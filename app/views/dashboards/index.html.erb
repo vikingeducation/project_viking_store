@@ -20,9 +20,9 @@
       <%= render partial: 'states', locals: {data: @cities_list} %>
 
       <h1>Top Users With...</h1>
-      <% @biggest_order.each do |data| %>
-        <%= render partial: 'top', locals: {data: data} %>
-      <% end %>
+
+        <%= render partial: 'top', locals: {data: @biggest_order } %>
+
     </div>
   </div>
   <div class="row">
