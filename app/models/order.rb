@@ -27,6 +27,14 @@ class Order < ActiveRecord::Base
       )
   end
 
+  def self.largest_order
+    join_with_products.select( "orders.id, MAX( products.price * order_contents.quantity ) AS largest_order ").group( "orders.id" ).order("largest_order DESC").limit(1)
+  end
+
+  def self.average_order
+    join_with_products.select( "AVG( products.price * order_contents.quantity ) AS average_order")
+  end
+
   def self.join_with_products
     Order.joins(
       "JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id"

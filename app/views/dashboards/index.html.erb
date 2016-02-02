@@ -140,6 +140,11 @@
         <h3>Top User With...</h3>
         <table class='table'>
           <tr>
+            <td>Item</td>
+            <td>User</td>
+            <td>Quantity</td>
+          </tr>
+          <tr>
             <td>Highest Single Order</td>
             <td><%="#{@user_highest_single_order[0].first_name} #{@user_highest_single_order[0].last_name}" %></td>
             <td><%= number_to_currency(@user_highest_single_order[0].highest) %></td>
@@ -159,11 +164,6 @@
             <td><%= "#{@user_most_orders[0].first_name} #{@user_most_orders[0].last_name}" %></td>
             <td><%=@user_most_orders[0].most_orders%></td>
           </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
         </table>
       </div>
     </div>
@@ -176,27 +176,27 @@
 
     <div class="row">
       <div class='col-md-12'>
-        <h3>Last 7 Days</h3>
+        <h3>Total</h3>
         <table class='table'>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Item</td>
+            <td>Data</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Number of Orders</td>
+            <td><%= @num_total_orders %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Total Revenue</td>
+            <td><%= number_to_currency(@total_revenue) %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Average Order Value</td>
+            <td><%= number_to_currency(@average_order_value) %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Largest Order Value</td>
+            <td><%= number_to_currency(@highest_single_order) %></td>
           </tr>
         </table>
       </div>
@@ -230,7 +230,7 @@
     </div>
     <div class= "row">
       <div class='col-md-12'>
-        <h3>Total</h3>
+        <h3>Last 7 Days</h3>
         <table class='table'>
           <tr>
             <td></td>

@@ -23,5 +23,14 @@ class DashboardsController < ApplicationController
     @user_highest_average_value = User.highest_average_value
     @user_most_orders = User.user_most_orders
 
+    @average_order_value = Order.largest_order[0].largest_order
+    @highest_single_order = Order.average_order[0].average_order
+
   end
 end
+
+# There is a table for total order stats
+# field: Number of orders
+# field: Revenue generated
+# field: Average order value
+# field: Largest order value
