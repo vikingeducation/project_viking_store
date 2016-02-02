@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :dashboards, only: [:index]
 
+  root 'dashboards#index'
   get '/dashboard' => 'dashboards#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
