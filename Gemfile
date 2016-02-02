@@ -31,6 +31,14 @@ gem 'faker'
 
 gem 'bootstrap-sass'
 
+
+group :development, :test do
+  gem 'pry-byebug'
+  gem 'better_errors'
+end
+
+gem 'binding_of_caller'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -8,18 +8,15 @@
       </tr>
     </thead>
     <tbody>
+
+    <% @data_hash.each do |key, value| %>
       <tr>
-        <td>Mark</td>
-        <td>Otto</td>
+        <td><%= key %></td>
+        <td><%= value %></td>
       </tr>
-      <tr>
-        <td>Jacob</td>
-        <td>Thornton</td>
-      </tr>
-      <tr>
-        <td>Larry</td>
-        <td>the Bird</td>
-      </tr>
+
+    <% end %>
+
     </tbody>
   </table>
 
