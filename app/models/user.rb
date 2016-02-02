@@ -8,8 +8,13 @@ class User < ActiveRecord::Base
     User.all.count
   end
 
-  # def top_user_states
-  #   Address.select("state_id").where("id IN (User.billing_id) ").group(state_id).count
-  # end
-  #want to return a table of state counts desc, top 3
+  def self.top_user_states
+    User.select("COUNT(states.name), states.name").joins("JOIN addresses ON users.billing_id = addresses.id").joins("JOIN states ON addresses.state_id = states.id").group("states.name").order("COUNT(states.name) DESC").limit(3)
+  end
+
+  def self.top_user_cities
+    User.select("COUNT(cities.name), cities.name").joins("JOIN addresses ON users.billing_id = addresses.id").joins("JOIN cities ON addresses.city_id = cities.id").group("cities.name").order("COUNT(cities.name) DESC").limit(3)
+  end
+ 
+
 end
