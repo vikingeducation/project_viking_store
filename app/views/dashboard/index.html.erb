@@ -37,6 +37,34 @@
           </tbody>
         </table>
 
+        <h4>Last 30 Days</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>item</th>
+              <th>data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Users</td>
+              <td><%= User.new_users(30).count %></td>
+            </tr>
+            <tr>
+              <td>Orders</td>
+              <td><%= Order.new_orders(30).count %></td>
+            </tr>
+            <tr>
+              <td>Products</td>
+              <td><%= Product.new_products(30).count %></td>
+            </tr>
+            <tr>
+              <td>Total Revenue</td>
+              <td><%= number_to_currency(Order.new_orders(30).total_revenue) %></td>
+            </tr>
+          </tbody>
+        </table>
+
         <h4>Total</h4>
         <table class="table table-bordered">
           <thead>
@@ -86,8 +114,8 @@
           </thead>
           <tbody>
             <tr>
-              <td>New Users</td>
-              <td>100</td>
+              <td>TOOP 3 STATES</td>
+              <td><%= p Order.state_demo%></td>
             </tr>
             <tr>
               <td>Orders</td>
