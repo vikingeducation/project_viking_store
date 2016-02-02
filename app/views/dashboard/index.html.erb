@@ -1,0 +1,185 @@
+<h1 class='text-center'>Viking Store Analytics Dashboard</h1>
+<br>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2>1. Overall Platform</h2>
+      </div>
+
+      <div class="panel-body">
+        <h4>Last 7 Days</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>item</th>
+              <th>data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Users</td>
+              <td><%= User.new_users(7).count %></td>
+            </tr>
+            <tr>
+              <td>Orders</td>
+              <td><%= Order.new_orders(7).count %></td>
+            </tr>
+            <tr>
+              <td>Products</td>
+              <td><%= Product.new_products(7).count %></td>
+            </tr>
+            <tr>
+              <td>Total Revenue</td>
+              <td><%= number_to_currency(Order.new_orders(7).total_revenue) %></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Total</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>item</th>
+              <th>data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Users</td>
+              <td><%= User.all.count %></td>
+            </tr>
+            <tr>
+              <td>Orders</td>
+              <td><%= Order.processed.count %></td>
+            </tr>
+            <tr>
+              <td>Products</td>
+              <td><%= Product.all.count %></td>
+            </tr>
+            <tr>
+              <td>Total Revenue</td>
+              <td><%= number_to_currency(Order.total_revenue) %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2>2. User Demographics and Behavior</h2>
+      </div>
+
+      <div class="panel-body">
+        <h4>Last 7 Days</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>item</th>
+              <th>data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>New Users</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>Orders</td>
+              <td>150</td>
+            </tr>
+            <tr>
+              <td>New Products</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>Total Revenue</td>
+              <td>$5000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2>3. Order Statistics</h2>
+      </div>
+
+      <div class="panel-body">
+        <h4>Last 7 Days</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>item</th>
+              <th>data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>New Users</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>Orders</td>
+              <td>150</td>
+            </tr>
+            <tr>
+              <td>New Products</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>Total Revenue</td>
+              <td>$5000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2>4. Time Series Data</h2>
+      </div>
+
+      <div class="panel-body">
+        <h4>Last 7 Days</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>item</th>
+              <th>data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>New Users</td>
+              <td>100</td>
+            </tr>
+            <tr>
+              <td>Orders</td>
+              <td>150</td>
+            </tr>
+            <tr>
+              <td>New Products</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>Total Revenue</td>
+              <td>$5000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
