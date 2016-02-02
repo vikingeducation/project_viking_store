@@ -18,7 +18,36 @@ class DashboardController < ApplicationController
       "Products" => Product.total,
       "Revenue" => Order.revenue_total
     }
-    top_three_states_query = User.top_three_states
+
+    # Top 3 States
+    states_query = State.top_three_states
+    @three_states = {}
+
+    states_query.each do |state| 
+      @three_states[state.name] = state.state_count
+    end
+
+    # Top 3 Cities
+    cities_query = City.top_three_cities
+    @three_cities = {}
+
+    cities_query.each do |city| 
+      @three_cities[city.name] = city.city_count
+    end
+
+    # Top User With...
+    highest_single_order = User.highest_single_order
+    highest_lifetime = User.highest_lifetime
+
+    @data = [
+      ["Item", "User", "Quantity"],
+      ["Highest Single Order Value", highest_single_order.first.user, highest_single_order.first.order_value],
+      ["Highest Lifetime Value", highest_lifetime.first.user, highest_lifetime.first.lifetime_total]
+
+    ]
+
+
+
   end
 
   def get

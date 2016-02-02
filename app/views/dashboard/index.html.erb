@@ -9,21 +9,27 @@
         <h4 class='text-center'>1. Overall Platform</h4>
 
         <h5>Last 7 days</h5>
-        <%= render partial: 'table', locals: {data_hash: @seven_days} %>
+        <%= render partial: 'basic_table', locals: {data_hash: @seven_days} %>
 
         <h5>Last 30 days</h5>
-        <%= render partial: 'table', locals: {data_hash: @thirty_days} %>
+        <%= render partial: 'basic_table', locals: {data_hash: @thirty_days} %>
 
         <h5>Totals</h5>
-        <%= render partial: 'table', locals: {data_hash: @totals} %>
+        <%= render partial: 'basic_table', locals: {data_hash: @totals} %>
       </div>
 
     <div class='col-xs-6 panel panel-default'>
         <h4 class='text-center'>2. User Demographics and Behavior</h4>
 
-        <% 3.times do %>
-          <%= render partial: 'table', locals: {data_hash: @seven_days}  %>
-        <% end %>
+        <h5>Top 3 States</h5>
+        <%= render partial: 'basic_table', locals: {data_hash: @three_states}  %>
+
+        <h5>Top 3 Cities</h5>
+        <%= render partial: 'basic_table', locals: {data_hash: @three_cities}  %>
+
+        <h5>Top User With...</h5>
+        <%= render partial: 'dynamic_table', locals: { data: @data } %>
+
 
     </div>
   </div> <!-- row -->
@@ -34,7 +40,7 @@
         <h4 class='text-center'>3. Order Statistics</h4>
 
         <% 3.times do %>
-          <%= render partial: 'table', locals: {data_hash: @seven_days}  %>
+          <%= render partial: 'basic_table', locals: {data_hash: @seven_days}  %>
         <% end %>
     </div>
 
@@ -42,7 +48,7 @@
         <h4 class='text-center'>4. Time Series Data</h4>
 
         <% 3.times do %>
-          <%= render partial: 'table', locals: {data_hash: @seven_days}  %>
+          <%= render partial: 'basic_table', locals: {data_hash: @seven_days}  %>
         <% end %>
 
     </div>
@@ -50,4 +56,3 @@
   </div> <!-- row -->
 
 </div> <!-- container -->
-binding.pry

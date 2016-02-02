@@ -13,7 +13,33 @@ class User < ActiveRecord::Base
     User.all.count
   end
 
-  def self.top_three_states
-    User.select("s.name, COUNT(*)").joins("AS u JOIN addresses a ON u.billing_id=a.id").joins("JOIN states s ON a.state_id=s.id").group("s.name").order("COUNT(*) DESC").limit(3)
+
+  def self.highest_single_order
+    User.select("SUM(oc.quantity * p.price) AS order_value, 
+      concat(u.first_name, ' ', u.last_name) AS user")
+        .joins("AS u JOIN orders o ON o.user_id = u.id")
+        .joins("JOIN order_contents oc ON o.id = oc.order_id")
+        .joins("JOIN products p ON p.id = oc.product_id")
+        .where("o.checkout_date IS NOT null")
+        .group("u.id, o.id")
+        .order("order_value DESC")
+        .limit(1)
   end
+
+
+  def self.highest_lifetime
+    User.select("SUM(oc.quantity * p.price) AS lifetime_total, 
+       concat(u.first_name, ' ', u.last_name) AS user")
+        .joins("AS u JOIN orders o ON o.user_id = u.id")
+        .joins("JOIN order_contents oc ON o.id = oc.order_id")
+        .joins("JOIN products p ON p.id = oc.product_id")
+        .where("o.checkout_date IS NOT null")
+        .group("u.id")
+        .order("lifetime_total DESC")
+        .limit(1)   
+  end
+
+
+
+
 end
