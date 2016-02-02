@@ -63,6 +63,12 @@ class DashboardController < ApplicationController
       "Largest Order Value" => Order.largest_order(30).first.largest_order
     }
 
+    @order_totals = {
+      "Number of Orders" => Order.orders_total,
+      "Total Revenue" => Order.revenue_total,
+      "Average Order Value" => Order.average_total,
+      "Largest Order Value" => Order.largest_total
+    }
 
   end
 

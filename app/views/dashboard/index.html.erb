@@ -40,11 +40,13 @@
         <h4 class='text-center'>3. Order Statistics</h4>
 
         <h5>Last 7 days</h5>
-          <%= render partial: 'basic_table', locals: {data_hash: @order_seven_days} %>
+        <%= render partial: 'basic_table', locals: {data_hash: @order_seven_days} %>
 
         <h5>Last 30 days</h5>
-          <%= render partial: 'basic_table', locals: {data_hash: @order_thirty_days} %>
+        <%= render partial: 'basic_table', locals: {data_hash: @order_thirty_days} %>
 
+        <h5>Total</h5>
+        <%= render partial: 'basic_table', locals: {data_hash: @order_totals} %>
 
     </div>
 

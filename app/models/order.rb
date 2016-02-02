@@ -43,6 +43,20 @@ class Order < ActiveRecord::Base
          .limit(1)
   end
 
+  def self.average_total
+    Order.joins("AS o JOIN users u on u.id = o.user_id")
+         .joins("JOIN order_contents oc ON oc.order_id = o.id")
+         .joins("JOIN products p ON p.id = oc.product_id")
+         .where("o.checkout_date IS NOT NULL")
+         .average("(oc.quantity * p.price)")
+  end
+
+  def self.largest_total
+    Order.joins("AS o JOIN order_contents oc ON oc.order_id = o.id")
+         .joins("JOIN products p ON p.id = oc.product_id")
+         .where("o.checkout_date IS NOT NULL")
+         .maximum("oc.quantity * p.price")
+  end
 
 
 end
