@@ -15,6 +15,7 @@ Category	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/category
 ChangeOrderContentsModelName	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150722160520_change_order_contents_model_name.rb	/^class ChangeOrderContentsModelName < ActiveRecord::Migration$/;"	c
 ChangeTableNameBack	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150722163056_change_table_name_back.rb	/^class ChangeTableNameBack < ActiveRecord::Migration$/;"	c
 City	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/city.rb	/^class City < ActiveRecord::Base$/;"	c
+ClassMethods	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/concerns/recentable.rb	/^  module ClassMethods$/;"	m	class:Recentable
 CreateAddresses	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034526_create_addresses.rb	/^class CreateAddresses < ActiveRecord::Migration$/;"	c
 CreateCategories	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034537_create_categories.rb	/^class CreateCategories < ActiveRecord::Migration$/;"	c
 CreateCities	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034542_create_cities.rb	/^class CreateCities < ActiveRecord::Migration$/;"	c
@@ -32,12 +33,12 @@ MakeProductSkuAString	/Users/kitlangton/Viking/Unit9/project_viking_store/db/mig
 Order	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^class Order < ActiveRecord::Base$/;"	c
 OrderContent	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order_content.rb	/^class OrderContent < ActiveRecord::Base$/;"	c
 Product	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/product.rb	/^class Product < ActiveRecord::Base$/;"	c
+Recentable	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/concerns/recentable.rb	/^module Recentable$/;"	m
 RemoveNullConstraintFromProductCategoryId	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150722170327_remove_null_constraint_from_product_category_id.rb	/^class RemoveNullConstraintFromProductCategoryId < ActiveRecord::Migration$/;"	c
 SolutionVikingStore	/Users/kitlangton/Viking/Unit9/project_viking_store/config/application.rb	/^module SolutionVikingStore$/;"	m
 State	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/state.rb	/^class State < ActiveRecord::Base$/;"	c
 User	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^class User < ActiveRecord::Base$/;"	c
 average_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.average_value$/;"	F	class:Order
-average_value_since	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.average_value_since(num_days)$/;"	F	class:Order
 change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034526_create_addresses.rb	/^  def change$/;"	f	class:CreateAddresses
 change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034537_create_categories.rb	/^  def change$/;"	f	class:CreateCategories
 change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034542_create_cities.rb	/^  def change$/;"	f	class:CreateCities
@@ -74,14 +75,13 @@ highest_order_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/mode
 index	/Users/kitlangton/Viking/Unit9/project_viking_store/app/controllers/dashboard_controller.rb	/^  def index$/;"	f	class:DashboardController
 largest_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.largest_value$/;"	F	class:Order
 midnight_tonight	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def midnight_tonight$/;"	f
-new_orders	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.new_orders(num_days)$/;"	F	class:Order
-new_products	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/product.rb	/^  def self.new_products(num_days)$/;"	F	class:Product
-new_users	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.new_users(num_days)$/;"	F	class:User
 order_totals	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.order_totals$/;"	F	class:Order
 placement_date	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def placement_date(user)$/;"	f
 processed	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.processed$/;"	F	class:Order
 random_price	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def random_price$/;"	f
 random_user_address	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def random_user_address(user_id)$/;"	f
+recent	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/concerns/recentable.rb	/^    def recent(num_days = 7)$/;"	f	class:Recentable.ClassMethods
+recent	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.recent(num_days = 7)$/;"	F	class:Order
 top_cities	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.top_cities$/;"	F	class:User
 top_states	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.top_states$/;"	F	class:Order
 top_states	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.top_states$/;"	F	class:User

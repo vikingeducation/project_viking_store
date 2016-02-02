@@ -1,12 +1,8 @@
 class User < ActiveRecord::Base
-
+  include Recentable
 
   def full_name
     first_name + " " + last_name
-  end
-
-  def self.new_users(num_days)
-    User.where("created_at >= ? ", num_days.days.ago)
   end
 
   def self.top_states

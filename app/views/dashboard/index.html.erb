@@ -3,277 +3,307 @@
 
 <div class="row">
   <div class="row">
-  <div class="col-sm-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2>1. Overall Platform</h2>
-      </div>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class='panel-title'>1. Overall Platform</h2>
+        </div>
 
-      <div class="panel-body">
-        <h4>Last 7 Days</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Users</td>
-              <td><%= User.new_users(7).count %></td>
-            </tr>
-            <tr>
-              <td>Orders</td>
-              <td><%= Order.new_orders(7).count %></td>
-            </tr>
-            <tr>
-              <td>Products</td>
-              <td><%= Product.new_products(7).count %></td>
-            </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td><%= number_to_currency(Order.new_orders(7).total_revenue) %></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h4>Last 30 Days</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Users</td>
-              <td><%= User.new_users(30).count %></td>
-            </tr>
-            <tr>
-              <td>Orders</td>
-              <td><%= Order.new_orders(30).count %></td>
-            </tr>
-            <tr>
-              <td>Products</td>
-              <td><%= Product.new_products(30).count %></td>
-            </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td><%= number_to_currency(Order.new_orders(30).total_revenue) %></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h4>Total</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Users</td>
-              <td><%= User.all.count %></td>
-            </tr>
-            <tr>
-              <td>Orders</td>
-              <td><%= Order.processed.count %></td>
-            </tr>
-            <tr>
-              <td>Products</td>
-              <td><%= Product.all.count %></td>
-            </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td><%= number_to_currency(Order.total_revenue) %></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="col-sm-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2>2. User Demographics and Behavior</h2>
-      </div>
-
-      <div class="panel-body">
-        <h4>Top 3 States Users Live In (Billing)</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% User.top_states.each do |state, count| %>
+        <div class="panel-body">
+          <h4>Last 7 Days</h4>
+          <table class="table table-striped">
+            <thead>
               <tr>
-                <td><%= state %></td>
-                <td><%= count %></td>
+                <th>Item</th>
+                <th>Data</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
-
-        <h4>Top 3 Cities Users Live In (Billing)</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% User.top_cities.each do |city, count| %>
+            </thead>
+            <tbody>
               <tr>
-                <td><%= city %></td>
-                <td><%= count %></td>
+                <td>Users</td>
+                <td><%= User.recent(7).count %></td>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+              <tr>
+                <td>Orders</td>
+                <td><%= Order.recent(7).count %></td>
+              </tr>
+              <tr>
+                <td>Products</td>
+                <td><%= Product.recent(7).count %></td>
+              </tr>
+              <tr>
+                <td>Total Revenue</td>
+                <td><%= number_to_currency(Order.recent(7).total_revenue) %></td>
+              </tr>
+            </tbody>
+          </table>
 
-        <h4>Top Users With...</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-              <th>Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Higest Single Order Value</td>
-              <td><%= @highest_order_value.full_name %></td>
-              <td><%= number_to_currency(@highest_order_value.sum) %></td>
-            </tr>
-            <tr>
-              <td>Highest Lifetime Order Value</td>
-              <td><%= @highest_lifetime_order_value.full_name %></td>
-              <td><%= number_to_currency(@highest_lifetime_order_value.sum) %></td>
-            </tr>
-            <tr>
-              <td>Average Lifetime Order Value</td>
-              <td><%= @highest_average_order_value .full_name %></td>
-              <td><%= number_to_currency(@highest_average_order_value.avg) %></td>
-            </tr>
-          </tbody>
-        </table>
+          <h4>Last 30 Days</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Users</td>
+                <td><%= User.recent(30).count %></td>
+              </tr>
+              <tr>
+                <td>Orders</td>
+                <td><%= Order.recent(30).count %></td>
+              </tr>
+              <tr>
+                <td>Products</td>
+                <td><%= Product.recent(30).count %></td>
+              </tr>
+              <tr>
+                <td>Total Revenue</td>
+                <td><%= number_to_currency(Order.recent(30).total_revenue) %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Total</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Users</td>
+                <td><%= User.all.count %></td>
+              </tr>
+              <tr>
+                <td>Orders</td>
+                <td><%= Order.processed.count %></td>
+              </tr>
+              <tr>
+                <td>Products</td>
+                <td><%= Product.all.count %></td>
+              </tr>
+              <tr>
+                <td>Total Revenue</td>
+                <td><%= number_to_currency(Order.total_revenue) %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class='panel-title'>2. User Demographics and Behavior</h2>
+        </div>
+
+        <div class="panel-body">
+          <h4>Top 3 States Users Live In (Billing)</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% User.top_states.each do |state, count| %>
+                <tr>
+                  <td><%= state %></td>
+                  <td><%= count %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <h4>Top 3 Cities Users Live In (Billing)</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% User.top_cities.each do |city, count| %>
+                <tr>
+                  <td><%= city %></td>
+                  <td><%= count %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <h4>Top Users With...</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Higest Single Order Value</td>
+                <td><%= @highest_order_value.full_name %></td>
+                <td><%= number_to_currency(@highest_order_value.sum) %></td>
+              </tr>
+              <tr>
+                <td>Highest Lifetime Order Value</td>
+                <td><%= @highest_lifetime_order_value.full_name %></td>
+                <td><%= number_to_currency(@highest_lifetime_order_value.sum) %></td>
+              </tr>
+              <tr>
+                <td>Average Lifetime Order Value</td>
+                <td><%= @highest_average_order_value .full_name %></td>
+                <td><%= number_to_currency(@highest_average_order_value.avg) %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2>3. Order Statistics</h2>
-      </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class='panel-title'>3. Order Statistics</h2>
+        </div>
 
-      <div class="panel-body">
-        <h4>Last 7 Days</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Number of Orders</td>
-              <td><%= Order.new_orders(7).count %></td>
-            </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td><%= number_to_currency(Order.new_orders(7).total_revenue) %></td>
-            </tr>
-            <tr>
-              <td>Average Order Value</td>
-              <td><%= Order.average_value_since(7) %></td>
-            </tr>
-            <tr>
-              <td>Largest Order Value</td>
-              <td><%= number_to_currency(Order.largest_value) %></td>
-            </tr>
-          </tbody>
-        </table>
-        <h4>Total</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Number of Orders</td>
-              <td><%= Order.processed.count %></td>
-            </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td><%= number_to_currency(Order.total_revenue) %></td>
-            </tr>
-            <tr>
-              <td>Average Order Value</td>
-              <td><%= number_to_currency(Order.average_value) %></td>
-            </tr>
-            <tr>
-              <td>Largest Order Value</td>
-              <td><%= number_to_currency(Order.largest_value) %></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="panel-body">
+          <h4>Last 7 Days</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Number of Orders</td>
+                <td><%= Order.recent(7).count %></td>
+              </tr>
+              <tr>
+                <td>Total Revenue</td>
+                <td><%= number_to_currency(Order.recent(7).total_revenue) %></td>
+              </tr>
+              <tr>
+                <td>Average Order Value</td>
+                <td><%= number_to_currency(Order.recent(7).average_value) %></td>
+              </tr>
+              <tr>
+                <td>Largest Order Value</td>
+                <td><%= number_to_currency(Order.recent(7).largest_value) %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Last 30 Days</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Number of Orders</td>
+                <td><%= Order.recent(30).count %></td>
+              </tr>
+              <tr>
+                <td>Total Revenue</td>
+                <td><%= number_to_currency(Order.recent(30).total_revenue) %></td>
+              </tr>
+              <tr>
+                <td>Average Order Value</td>
+                <td><%= number_to_currency(Order.recent(30).average_value) %></td>
+              </tr>
+              <tr>
+                <td>Largest Order Value</td>
+                <td><%= number_to_currency(Order.recent(30).largest_value) %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Total</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Number of Orders</td>
+                <td><%= Order.processed.count %></td>
+              </tr>
+              <tr>
+                <td>Total Revenue</td>
+                <td><%= number_to_currency(Order.total_revenue) %></td>
+              </tr>
+              <tr>
+                <td>Average Order Value</td>
+                <td><%= number_to_currency(Order.average_value) %></td>
+              </tr>
+              <tr>
+                <td>Largest Order Value</td>
+                <td><%= number_to_currency(Order.largest_value) %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class='panel-title'>4. Time Series Data</h2>
+        </div>
+
+        <div class="panel-body">
+          <h4>Last 7 Days</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>New Users</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>Orders</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td>New Products</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>Total Revenue</td>
+                <td>$5000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="col-sm-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2>4. Time Series Data</h2>
-      </div>
-
-      <div class="panel-body">
-        <h4>Last 7 Days</h4>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>New Users</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>Orders</td>
-              <td>150</td>
-            </tr>
-            <tr>
-              <td>New Products</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td>$5000</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
 </div>
