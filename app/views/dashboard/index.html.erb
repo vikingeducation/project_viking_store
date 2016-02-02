@@ -1,2 +1,52 @@
-<h1> The Viking Store Analytics Dashboard </h1>
+<h1 class='text-center'> The Viking Store Analytics Dashboard </h1>
 
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2 class='text-center'>1. Overall Platform</h2>
+      <h3>Last 7 Days</h3>
+      <table class='table'>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+
+        <tr>
+          <td>New Users</td>
+          <td><%= @users.new_users_since(Time.now - 7.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Orders</td>
+          <td><%= @orders.new_orders_since(Time.now - 7.days) %></td>
+        </tr>
+
+        <tr>
+          <td>New Products</td>
+          <td><%= @products.new_products_since(Time.now - 7.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Revenue</td>
+          <td><%= @order_contents.revenue_since(Time.now - 7.days) %></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class='col-sm-6'>
+      <h2 class='text-center'>2. User Demographics and Behavior</h2>
+    </div>
+  </div>
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-sm-6'>
+      <h2 class='text-center'>3. Order Statistics</h2>
+    </div>
+
+    <div class='col-sm-6'>
+      <h2 class='text-center'>4. Time Series Data</h2>
+    </div>
+  </div>
+</div>
