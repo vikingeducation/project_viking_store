@@ -1,8 +1,11 @@
 Project: Viking Store Admin
 ========================
 
+Julia
+
+
 ##To Get Going On This Assignment
-- run `rake db:create`
+- run `rake db:create` (you might need to do `bundle exec rake db:create`)
 - run `rake db:migrate`
 - run `rake db:seed`
 

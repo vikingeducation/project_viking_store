@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228223038) do
+ActiveRecord::Schema.define(version: 20150728230632) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "addresses", force: true do |t|
     t.string   "street_address",    null: false
@@ -37,20 +40,21 @@ ActiveRecord::Schema.define(version: 20150228223038) do
     t.datetime "updated_at"
   end
 
-  add_index "cities", ["name"], name: "index_cities_on_name", unique: true
+  add_index "cities", ["name"], name: "index_cities_on_name", unique: true, using: :btree
 
   create_table "credit_cards", force: true do |t|
     t.string   "nickname",    default: "My Credit Card"
-    t.integer  "card_number",                            null: false
+    t.string   "card_number",                            null: false
     t.integer  "exp_month",                              null: false
     t.integer  "exp_year",                               null: false
     t.string   "brand",       default: "VISA",           null: false
     t.integer  "user_id",                                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ccv"
   end
 
-  add_index "credit_cards", ["card_number"], name: "index_credit_cards_on_card_number", unique: true
+  add_index "credit_cards", ["card_number"], name: "index_credit_cards_on_card_number", unique: true, using: :btree
 
   create_table "order_contents", force: true do |t|
     t.integer  "order_id",               null: false
@@ -60,29 +64,30 @@ ActiveRecord::Schema.define(version: 20150228223038) do
     t.datetime "updated_at"
   end
 
-  add_index "order_contents", ["order_id", "product_id"], name: "index_order_contents_on_order_id_and_product_id", unique: true
+  add_index "order_contents", ["order_id", "product_id"], name: "index_order_contents_on_order_id_and_product_id", unique: true, using: :btree
 
   create_table "orders", force: true do |t|
     t.datetime "checkout_date"
-    t.integer  "user_id",       null: false
+    t.integer  "user_id",        null: false
     t.integer  "shipping_id"
     t.integer  "billing_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "credit_card_id"
   end
 
   create_table "products", force: true do |t|
     t.string   "name",                                null: false
-    t.decimal  "sku",                                 null: false
+    t.string   "sku",                                 null: false
     t.text     "description"
     t.decimal  "price",       precision: 8, scale: 2, null: false
-    t.integer  "category_id",                         null: false
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "products", ["name"], name: "index_products_on_name"
-  add_index "products", ["sku"], name: "index_products_on_sku", unique: true
+  add_index "products", ["name"], name: "index_products_on_name", using: :btree
+  add_index "products", ["sku"], name: "index_products_on_sku", unique: true, using: :btree
 
   create_table "states", force: true do |t|
     t.string   "name",       null: false
@@ -90,7 +95,7 @@ ActiveRecord::Schema.define(version: 20150228223038) do
     t.datetime "updated_at"
   end
 
-  add_index "states", ["name"], name: "index_states_on_name", unique: true
+  add_index "states", ["name"], name: "index_states_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name",  null: false
@@ -102,6 +107,6 @@ ActiveRecord::Schema.define(version: 20150228223038) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
