@@ -1,20 +1,3 @@
-GIT
-  remote: git://github.com/nixme/jazz_hands.git
-  revision: 5e4b48f145883ecb14b55bf04eacc28ac9662676
-  branch: bring-your-own-debugger
-  specs:
-    jazz_hands (0.5.2)
-      awesome_print (~> 1.2)
-      coolline (>= 0.4.2)
-      hirb (~> 0.7.1)
-      pry (~> 0.9.12)
-      pry-doc (~> 0.4.6)
-      pry-git (~> 0.2.3)
-      pry-rails (~> 0.3.2)
-      pry-remote (>= 0.1.7)
-      pry-stack_explorer (~> 0.4.9)
-      railties (>= 3.0, < 5.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -57,7 +40,6 @@ GEM
     autoprefixer-rails (6.3.1)
       execjs
       json
-    awesome_print (1.6.1)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -81,23 +63,14 @@ GEM
     coffee-script-source (1.10.0)
     columnize (0.9.0)
     concurrent-ruby (1.0.0)
-    coolline (0.5.0)
-      unicode_utils (~> 1.4)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
-    diff-lcs (1.2.5)
-    diffy (3.1.0)
     erubis (2.7.0)
     execjs (2.6.0)
     faker (1.6.1)
       i18n (~> 0.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    grit (2.5.0)
-      diff-lcs (~> 1.1)
-      mime-types (~> 1.15)
-      posix-spawn (~> 0.3.6)
-    hirb (0.7.3)
     i18n (0.7.0)
     jbuilder (2.4.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -119,7 +92,6 @@ GEM
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pg (0.18.4)
-    posix-spawn (0.3.11)
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -127,21 +99,6 @@ GEM
     pry-byebug (1.3.2)
       byebug (~> 2.7)
       pry (~> 0.9.12)
-    pry-doc (0.4.6)
-      pry (>= 0.9)
-      yard (>= 0.8)
-    pry-git (0.2.3)
-      diffy
-      grit
-      pry (>= 0.9.8)
-    pry-rails (0.3.4)
-      pry (>= 0.9.10)
-    pry-remote (0.1.8)
-      pry (~> 0.9)
-      slop (~> 3.0)
-    pry-stack_explorer (0.4.9.2)
-      binding_of_caller (>= 0.7)
-      pry (>= 0.9.11)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -198,12 +155,10 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicode_utils (1.4.0)
     web-console (3.1.1)
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
-    yard (0.8.7.6)
 
 PLATFORMS
   ruby
@@ -215,7 +170,6 @@ DEPENDENCIES
   bootstrap-sass (= 3.3.6)
   coffee-rails (= 4.1.1)
   faker (= 1.6.1)
-  jazz_hands (= 0.5.2)!
   jbuilder (= 2.4.0)
   jquery-rails (= 4.1.0)
   pg (= 0.18.4)

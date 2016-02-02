@@ -1,7 +1,8 @@
 Project: Viking Store Admin
 ========================
 
-Josh Masland
+[Jeffrey Gisin](https://github.com/jgisin/project_viking_store.git)
+[Thomas Lo](https://github.com/thomasjinlo/assignment_viking_store)
 
 ##To Get Going On This Assignment
 - run `rake db:create`
