@@ -31,10 +31,151 @@
           <td><%= @order_contents.revenue_since(Time.now - 7.days) %></td>
         </tr>
       </table>
+
+      <h3>Last 30 Days</h3>
+      <table class='table'>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+
+        <tr>
+          <td>New Users</td>
+          <td><%= @users.new_users_since(Time.now - 30.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Orders</td>
+          <td><%= @orders.new_orders_since(Time.now - 30.days) %></td>
+        </tr>
+
+        <tr>
+          <td>New Products</td>
+          <td><%= @products.new_products_since(Time.now - 30.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Revenue</td>
+          <td><%= @order_contents.revenue_since(Time.now - 30.days) %></td>
+        </tr>
+      </table>
+
+      <h3>Total</h3>
+      <table class='table'>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+
+        <tr>
+          <td>Users</td>
+          <td><%= @users.total_users %></td>
+        </tr>
+
+        <tr>
+          <td>Orders</td>
+          <td><%= @orders.total_orders %></td>
+        </tr>
+
+        <tr>
+          <td>Products</td>
+          <td><%= @products.total_products %></td>
+        </tr>
+
+        <tr>
+          <td>Revenue</td>
+          <td><%= @order_contents.total_revenue %></td>
+        </tr>
+      </table>
+
     </div>
 
     <div class='col-sm-6'>
       <h2 class='text-center'>2. User Demographics and Behavior</h2>
+        <h3>Top 3 States Users Live In (Billing)</h3>
+      <table class='table'>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+
+        <tr>
+          <td>New Users</td>
+          <td><%= @users.new_users_since(Time.now - 7.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Orders</td>
+          <td><%= @orders.new_orders_since(Time.now - 7.days) %></td>
+        </tr>
+
+        <tr>
+          <td>New Products</td>
+          <td><%= @products.new_products_since(Time.now - 7.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Revenue</td>
+          <td><%= @order_contents.revenue_since(Time.now - 7.days) %></td>
+        </tr>
+      </table>
+
+      <h3>Top 3 Cities Users Live In (billing)</h3>
+      <table class='table'>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+
+        <tr>
+          <td>New Users</td>
+          <td><%= @users.new_users_since(Time.now - 30.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Orders</td>
+          <td><%= @orders.new_orders_since(Time.now - 30.days) %></td>
+        </tr>
+
+        <tr>
+          <td>New Products</td>
+          <td><%= @products.new_products_since(Time.now - 30.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Revenue</td>
+          <td><%= @order_contents.revenue_since(Time.now - 30.days) %></td>
+        </tr>
+      </table>
+
+      <h3>Top User With..</h3>
+      <table class='table'>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+
+        <tr>
+          <td>Users</td>
+          <td><%= @users.total_users %></td>
+        </tr>
+
+        <tr>
+          <td>Orders</td>
+          <td><%= @orders.total_orders %></td>
+        </tr>
+
+        <tr>
+          <td>Products</td>
+          <td><%= @products.total_products %></td>
+        </tr>
+
+        <tr>
+          <td>Revenue</td>
+          <td><%= @order_contents.total_revenue %></td>
+        </tr>
+      </table>
+
     </div>
   </div>
 </div>
