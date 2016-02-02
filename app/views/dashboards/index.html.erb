@@ -6,7 +6,7 @@
 
     <div class="row">
       <div class='col-md-12'>
-        <h3>Last 7 Days</h3>
+        <h3>Total</h3>
         <table class='table'>
           <tr>
             <td>Item</td>
@@ -18,11 +18,11 @@
           </tr>
           <tr>
             <td>Orders</td>
-            <td><%= @num_total_products %></td>
+            <td><%= @num_total_orders %></td>
           </tr>
           <tr>
             <td>Products</td>
-            <td><%= @num_total_orders %></td>
+            <td><%= @num_total_products %></td>
           </tr>
           <tr>
             <td>Revenue</td>
@@ -36,24 +36,24 @@
         <h3>Last 30 Days</h3>
         <table class='table'>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Item</td>
+            <td>Data</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>New Users</td>
+            <td><%= @users_30 %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Orders</td>
+            <td><%= @orders_30 %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Products</td>
+            <td><%= @products_30 %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Revenue</td>
+            <td>$<%= @revenue_30 %></td>
           </tr>
         </table>
       </div>
