@@ -7,7 +7,7 @@ class DashboardsController < ApplicationController
     @states_list = User.top_states
     @cities_list = User.top_cities
 
-    @biggest_order = OrderContent.biggest_order
+    @biggest_order = [OrderContent.biggest_order, OrderContent.biggest_lifetime, OrderContent.average_order, OrderContent.most_orders][[object]]
   end
 
 end

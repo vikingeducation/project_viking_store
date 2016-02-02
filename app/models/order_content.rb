@@ -20,4 +20,8 @@ class OrderContent < ActiveRecord::Base
     self.select("AVG(products.price * order_contents.quantity) AS avg, orders.id, users.first_name, users.last_name").joins("JOIN orders ON order_id = orders.id").joins("JOIN products ON product_id = products.id").joins("JOIN users ON user_id = users.id").group("orders.id, users.first_name, users.last_name").order("avg DESC").limit(1)
   end
 
+  def self.most_orders
+     self.select("COUNT(orders.id) AS count, users.id, users.first_name, users.last_name").joins("JOIN orders ON order_id = orders.id").joins("JOIN products ON product_id = products.id").joins("JOIN users ON user_id = users.id").group("users.id, users.first_name, users.last_name").order("count DESC").limit(1)
+  end
+
 end
