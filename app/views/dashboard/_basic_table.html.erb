@@ -12,7 +12,13 @@
     <% data_hash.each do |key, value| %>
       <tr>
         <td><%= key %></td>
-        <td><%= value %></td>
+
+        <% if value.is_a? BigDecimal %>
+          <td><%= number_to_currency(value) %></td>
+        <% else %>
+          <td><%= value %></td>
+        <% end %>
+
       </tr>
 
     <% end %>

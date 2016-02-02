@@ -16,7 +16,13 @@
     <% data[1..-1].each do |row| %>
         <tr>
         <% row.each do |column| %>
-          <td><%= column %></td>
+        
+          <% if column.is_a? BigDecimal %>
+            <td><%= number_to_currency(column) %></td>
+          <% else %>
+            <td><%= column %></td>
+          <% end %>
+
         <% end %>
         </tr>
     <% end %>
