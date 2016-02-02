@@ -70,6 +70,25 @@ class DashboardController < ApplicationController
       "Largest Order Value" => Order.largest_total
     }
 
+    daily_timeseries = Order.daily_timeseries_orders
+    @daily_timeseries_data = [
+      ["Date", "Quantity", "Value"]
+    ]
+    daily_timeseries.each do |day|
+      @daily_timeseries_data << [day.day, day.num_orders, day.daily_sum]
+    end
+
+
+
+    weekly_timeseries = Order.weekly_timeseries_orders
+    @weekly_timeseries_data = [
+      ["Date", "Quantity", "Value"]
+    ]
+    weekly_timeseries.each do |week|
+      @weekly_timeseries_data << [week.week, week.num_orders, week.weekly_sum]
+    end
+
+
   end
 
   def get

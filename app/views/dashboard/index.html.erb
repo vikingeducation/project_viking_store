@@ -53,9 +53,12 @@
     <div class='col-xs-6 panel panel-default'>
         <h4 class='text-center'>4. Time Series Data</h4>
 
-        <% 3.times do %>
-          <%= render partial: 'basic_table', locals: {data_hash: @overall_seven_days}  %>
-        <% end %>
+        <h5>Orders By Day</h5>
+          <%= render partial: 'dynamic_table', locals: {data: @daily_timeseries_data}  %>
+
+
+        <h5>Orders By Week</h5>
+          <%= render partial: 'dynamic_table', locals: {data: @weekly_timeseries_data}  %>
 
     </div>
   </div>

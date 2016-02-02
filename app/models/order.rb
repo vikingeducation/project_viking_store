@@ -59,4 +59,40 @@ class Order < ActiveRecord::Base
   end
 
 
+
+  def self.daily_timeseries_orders
+    Order.find_by_sql("
+      SELECT
+        DATE(days) AS day,
+        SUM(oc.quantity * p.price) AS daily_sum,
+        COUNT(o.*) AS num_orders
+        FROM GENERATE_SERIES((
+          SELECT DATE(MIN(checkout_date)) FROM orders
+        ), CURRENT_DATE, '1 DAY'::INTERVAL) days
+        LEFT JOIN orders o ON DATE(o.checkout_date) = days
+        LEFT JOIN order_contents oc ON oc.order_id = o.id
+        LEFT JOIN products p ON p.id = oc.product_id
+        GROUP BY days
+        ORDER BY days DESC LIMIT 7;")
+  end
+
+
+  def self.weekly_timeseries_orders
+    Order.find_by_sql("
+      SELECT
+      DATE(weeks) AS week,
+      SUM(oc.quantity * p.price) AS weekly_sum,
+      COUNT(o.*) AS num_orders
+      FROM GENERATE_SERIES((
+        SELECT DATE(DATE_TRUNC('WEEK', MIN(checkout_date))) FROM orders)
+      , CURRENT_DATE, '1 WEEK'::INTERVAL) weeks
+      LEFT JOIN orders o ON DATE(DATE_TRUNC('WEEK', o.checkout_date)) = weeks
+      LEFT JOIN order_contents oc ON oc.order_id = o.id
+      LEFT JOIN products p ON p.id = oc.product_id
+      GROUP BY weeks
+      ORDER BY weeks DESC LIMIT 7;")
+  end
+
+
+
 end
