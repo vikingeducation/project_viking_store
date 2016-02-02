@@ -34,4 +34,11 @@ class Order < ActiveRecord::Base
   def self.order_totals
     Order.processed.select("orders.*, SUM(price * quantity) AS order_total").joins("JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id").group("orders.id")
   end
+
+
+  def self.orders_by_day
+     # Order.select("SUM(order_total), COUNT(*)").from(Order.order_totals, :orders).where(checkout_date: (num_days.days.ago.beginning_of_day..num_days.days.ago.end_of_day))
+
+     Order.select("DATE(checkout_date),SUM(order_total), COUNT(*)").from(Order.order_totals, :orders).group("DATE(checkout_date)")
+  end
 end
