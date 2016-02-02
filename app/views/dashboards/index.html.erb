@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-xs-6">
+      <h1>Last 7 Days</h1>
+      <%= render partial: 'two_columns', locals: {data: @weekly} %>
+
+      <h1>Last 30 Days</h1>
+      <%= render partial: 'two_columns', locals: {data: @monthly} %>
+
+      <h1>Total</h1>
+      <%= render partial: 'two_columns', locals: {data: @total} %>
+    </div>
+
+    <div class="col-xs-6">
+      <table class="table">
+        <thead>
+        <tr>
+        <th>Item</th>
+        <th>Data</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <table class="table">
+        <thead>
+        <tr>
+        <th>Item</th>
+        <th>Data</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-xs-6">
+      <table class="table">
+        <thead>
+        <tr>
+        <th>Item</th>
+        <th>Data</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
