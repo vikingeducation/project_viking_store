@@ -30,6 +30,18 @@ class User < ActiveRecord::Base
     join_user_product.select( "users.first_name, users.last_name, SUM( products.price * order_contents.quantity ) AS total_revenue ").group( "users.first_name, users.last_name" ).order("total_revenue DESC").limit(1)
   end
 
+  def self.highest_single_order
+    join_user_product.select( "users.first_name, users.last_name, MAX( products.price * order_contents.quantity ) AS highest ").group( "users.first_name, users.last_name" ).order("highest DESC").limit(1)
+  end
+
+  def self.highest_average_value
+    join_user_product.select( "users.first_name, users.last_name, AVG( products.price * order_contents.quantity ) AS highest ").group( "users.first_name, users.last_name" ).order("highest DESC").limit(1)
+  end
+
+  def self.user_most_orders
+    User.joins("JOIN orders ON orders.user_id = users.id").select( "users.first_name, users.last_name, COUNT(*) AS most_orders ").group( "users.first_name, users.last_name" ).order("most_orders DESC").limit(1)
+  end
+
   def self.join_user_product
     User.joins("JOIN orders ON orders.user_id = users.id
       JOIN order_contents ON orders.id = order_contents.order_id

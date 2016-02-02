@@ -53,7 +53,7 @@
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>$<%= @revenue_30 %></td>
+            <td><%= number_to_currency(@revenue_30) %></td>
           </tr>
         </table>
       </div>
@@ -80,7 +80,7 @@
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>$<%= @revenue_7 %></td>
+            <td><%= number_to_currency(@revenue_7) %></td>
           </tr>
         </table>
       </div>
@@ -140,24 +140,24 @@
         <h3>Top User With...</h3>
         <table class='table'>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Highest Single Order</td>
+            <td><%="#{@user_highest_single_order[0].first_name} #{@user_highest_single_order[0].last_name}" %></td>
+            <td><%= number_to_currency(@user_highest_single_order[0].highest) %></td>
           </tr>
           <tr>
             <td>Highest Lifetime Value</td>
             <td><%= "#{@user_highest_lifetime_value[0].first_name} #{@user_highest_lifetime_value[0].last_name}" %></td>
-            <td><%= "#{@user_highest_lifetime_value[0].total_revenue}" %></td>
+            <td><%= number_to_currency(@user_highest_lifetime_value[0].total_revenue) %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Highest Average Value</td>
+            <td><%= "#{@user_highest_average_value[0].first_name} #{@user_highest_average_value[0].last_name}" %></td>
+            <td><%= number_to_currency(@user_highest_average_value[0].highest) %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Most Orders</td>
+            <td><%= "#{@user_most_orders[0].first_name} #{@user_most_orders[0].last_name}" %></td>
+            <td><%=@user_most_orders[0].most_orders%></td>
           </tr>
           <tr>
             <td></td>

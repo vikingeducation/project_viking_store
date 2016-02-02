@@ -18,16 +18,10 @@ class DashboardsController < ApplicationController
     @top_states = User.top_states
     @top_cities = User.top_cities
 
-    # @user_highest_single_order
+    @user_highest_single_order = User.highest_single_order
     @user_highest_lifetime_value = User.highest_lifetime_value
-    # @user_highest_avergae_value
-    # @user_most_orders
+    @user_highest_average_value = User.highest_average_value
+    @user_most_orders = User.user_most_orders
 
   end
 end
-
-# There is a table for "Last 30 Days" data in Panel 1
-# Field: New users who signed up
-# Field: Orders placed
-# Field: New Products added to the listing
-# Field: Revenue during the period
