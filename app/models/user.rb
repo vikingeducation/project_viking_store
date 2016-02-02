@@ -27,12 +27,13 @@ class User < ActiveRecord::Base
   end
 
   def self.highest_lifetime_value
-    User.joins( "JOIN orders ON orders.user_id = users.id 
+    join_user_product.select( "users.first_name, users.last_name, SUM( products.price * order_contents.quantity ) AS total_revenue ").group( "users.first_name, users.last_name" ).order("total_revenue DESC").limit(1)
+  end
+
+  def self.join_user_product
+    User.joins("JOIN orders ON orders.user_id = users.id
       JOIN order_contents ON orders.id = order_contents.order_id
-      JOIN products ON order_contents.product_id = products.id" )
-    .select( "users.name, SUM( products.price * order_contents.quantity ) ")
-    .group( users.name ).order("total_revenue DESC"  )
-    .limit(1)
+      JOIN products ON order_contents.product_id = products.id")
   end
 
 end
