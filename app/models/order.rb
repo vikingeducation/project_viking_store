@@ -1,8 +1,8 @@
 class Order < ActiveRecord::Base
   has_many :order_contents
 
-  def self.new_orders(num_days)
-    Order.processed.where("orders.created_at <= ? ", num_days.days.ago)
+  def self.recent(num_days = 7)
+    Order.processed.where("orders.checkout_date >= ? ", num_days.days.ago.beginning_of_day)
   end
 
   def self.total_revenue
@@ -23,16 +23,12 @@ class Order < ActiveRecord::Base
       .count
   end
 
-  def self.average_value_since(num_days)
-    Order.find_by_sql("SELECT AVG(totals.order_total) FROM (#{order_totals.to_sql}) AS totals WHERE order_totals.created_at <= ?", num_days.days.ago).first.avg
-  end
-
   def self.average_value
-    Order.find_by_sql("SELECT AVG(totals.order_total) FROM (#{order_totals.to_sql}) AS totals").first.avg
+    Order.select("order_total").from(Order.order_totals, :orders).average("order_total")
   end
 
   def self.largest_value
-    Order.find_by_sql("SELECT MAX(totals.order_total) FROM (#{order_totals.to_sql}) AS totals").first.max
+    Order.select("order_total").from(Order.order_totals, :orders).maximum("order_total")
   end
 
   def self.order_totals
