@@ -18,3 +18,10 @@
 # ignore database
 solution_viking_store_development
 solution_viking_store_test
+
+# Ignore database.yml
+/config/database.yml
+
+# Ignore gemfile, gemfile.lock
+Gemfile
+Gemfile.lock
