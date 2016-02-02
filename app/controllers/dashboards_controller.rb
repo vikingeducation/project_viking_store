@@ -18,10 +18,10 @@ class DashboardsController < ApplicationController
     @top_states = User.top_states
     @top_cities = User.top_cities
 
-    @user_highest_single_order
-    @user_highest_lifetime_value
-    @user_highest_avergae_value
-    @user_most_orders
+    # @user_highest_single_order
+    @user_highest_lifetime_value = User.highest_lifetime_value
+    # @user_highest_avergae_value
+    # @user_most_orders
 
   end
 end

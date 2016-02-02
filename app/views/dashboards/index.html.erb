@@ -26,7 +26,7 @@
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>$<%= @total_revenue %></td>
+            <td><%= number_to_currency(@total_revenue) %></td>
           </tr>
         </table>
       </div>
@@ -142,12 +142,12 @@
           <tr>
             <td></td>
             <td></td>
-            <td>@user_highest_single_order</td>
+            <td></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Highest Lifetime Value</td>
+            <td><%= "#{@user_highest_lifetime_value[0].first_name} #{@user_highest_lifetime_value[0].last_name}" %></td>
+            <td><%= "#{@user_highest_lifetime_value[0].total_revenue}" %></td>
           </tr>
           <tr>
             <td></td>
