@@ -20,4 +20,15 @@ class User < ActiveRecord::Base
   def self.highest_order_value
     User.select("users.*, SUM(price * quantity)").joins("JOIN orders ON user_id = users.id JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id").group("users.id, order_id").order("SUM(price * quantity) DESC")
   end
+
+  def self.highest_lifetime_order_value
+    User.select("users.*, SUM(price * quantity)").joins("JOIN orders ON user_id = users.id JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id").group("users.id").order("SUM(price * quantity) DESC")
+  end
+
+  def self.highest_average_order_value
+    subquery = User.select("users.*, SUM(price * quantity) AS order_sum").joins("JOIN orders ON user_id = users.id JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id").group("users.id, order_id").order("SUM(price * quantity) DESC").to_sql
+
+     User.select("users.*, AVG(order_values.order_sum)").joins("JOIN (#{subquery}) AS order_values ON order_values.id = users.id").group("users.id").order("avg DESC")
+  end
+
 end

@@ -155,6 +155,16 @@
               <td><%= @highest_order_value.full_name %></td>
               <td><%= number_to_currency(@highest_order_value.sum) %></td>
             </tr>
+            <tr>
+              <td>Highest Lifetime Order Value</td>
+              <td><%= @highest_lifetime_order_value.full_name %></td>
+              <td><%= number_to_currency(@highest_lifetime_order_value.sum) %></td>
+            </tr>
+            <tr>
+              <td>Average Lifetime Order Value</td>
+              <td><%= @highest_average_order_value .full_name %></td>
+              <td><%= number_to_currency(@highest_average_order_value.avg) %></td>
+            </tr>
           </tbody>
         </table>
       </div>
