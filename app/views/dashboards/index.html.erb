@@ -263,44 +263,44 @@
         <h3>Orders by day</h3>
         <table class='table'>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Date</td>
+            <td>Quantity</td>
+            <td>Value</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Today</td>
+            <td><%=@num_orders_last_week[0] %></td>
+            <td><%= number_to_currency(@revenue_last_week[0]) %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Yesterday</td>
+            <td><%=@num_orders_last_week[1] %></td>
+            <td><%= number_to_currency(@revenue_last_week[1]) %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><%= @dates_last_week[2] %> </td>
+            <td><%=@num_orders_last_week[2] %></td>
+            <td><%= number_to_currency(@revenue_last_week[2]) %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><%= @dates_last_week[3] %> </td>
+            <td><%=@num_orders_last_week[3] %></td>
+            <td><%= number_to_currency(@revenue_last_week[3]) %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><%= @dates_last_week[4] %> </td>
+            <td><%=@num_orders_last_week[4] %></td>
+            <td><%= number_to_currency(@revenue_last_week[4]) %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><%= @dates_last_week[5] %> </td>
+            <td><%=@num_orders_last_week[5] %></td>
+            <td><%= number_to_currency(@revenue_last_week[5]) %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><%= @dates_last_week[6] %> </td>
+            <td><%=@num_orders_last_week[6] %></td>
+            <td><%=number_to_currency(@revenue_last_week[6]) %></td>
           </tr>
         </table>
       </div>

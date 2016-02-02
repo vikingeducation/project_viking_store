@@ -31,6 +31,28 @@ class DashboardsController < ApplicationController
 
     @average_order_value_30 = Order.largest_order_last_n_days(30)[0].largest_order
     @highest_single_order_30 = Order.average_order_last_n_days(30)[0].average_order
+
+
+    ####### last week 
+
+    @revenue_last_week = {}
+    @num_orders_last_week = {}
+    @dates_last_week = {}
+
+
+    (0..6).each do |days_ago|
+      @revenue_last_week[  days_ago ] = Order.revenue_n_days_ago( days_ago )
+      @num_orders_last_week[  days_ago ] = Order.num_orders_n_days_ago( days_ago )
+      @dates_last_week[  days_ago ] = ( DateTime.now - days_ago ).to_s[0..9]
+    end
+
+
+
+    #######
+
+
+
+
   end
 end
 

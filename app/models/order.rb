@@ -27,6 +27,28 @@ class Order < ActiveRecord::Base
       )
   end
 
+
+  def self.str_orders_submitted_n_days_ago( n )    # n == 0 implies today
+    "checkout_date IS NOT NULL AND DATE_TRUNC('day', checkout_date) = DATE_TRUNC( 'day', CURRENT_DATE - #{n} ) "
+  end
+
+  def self.revenue_n_days_ago( n )  # n == 0 implies today
+      join_with_products
+      .where(
+      str_orders_submitted_n_days_ago( n )
+      ).sum(
+      "products.price * order_contents.quantity"
+      )
+  end
+
+  def self.num_orders_n_days_ago( n )  # n == 0 implies today
+      join_with_products
+      .where(
+      str_orders_submitted_n_days_ago( n )
+      ).count
+  end
+
+
   def self.largest_order
     join_with_products.select( "orders.id, MAX( products.price * order_contents.quantity ) AS largest_order ").group( "orders.id" ).order("largest_order DESC").limit(1)
   end
