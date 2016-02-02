@@ -23,17 +23,16 @@ class DashboardsController < ApplicationController
     @user_highest_average_value = User.highest_average_value
     @user_most_orders = User.user_most_orders
 
-    @average_order_value = Order.largest_order[0].largest_order
-    @highest_single_order = Order.average_order[0].average_order
+    @highest_single_order = Order.largest_order[0].largest_order
+    @average_order_value = Order.average_order[0].average_order
 
-    @average_order_value_7 = Order.largest_order_last_n_days(7)[0].largest_order
-    @highest_single_order_7 = Order.average_order_last_n_days(7)[0].average_order
+    @highest_single_order_7 = Order.largest_order_last_n_days(7)[0].largest_order
+    @average_order_value_7 =  Order.average_order_last_n_days(7)[0].average_order
 
-    @average_order_value_30 = Order.largest_order_last_n_days(30)[0].largest_order
-    @highest_single_order_30 = Order.average_order_last_n_days(30)[0].average_order
+    @average_order_value_30 = @highest_single_order_30 = Order.largest_order_last_n_days(30)[0].largest_order
+    @average_order_value_30 = Order.average_order_last_n_days(30)[0].average_order
 
-
-    ####### last week 
+    ####### last week
 
     @revenue_last_week = {}
     @num_orders_last_week = {}
@@ -50,8 +49,8 @@ class DashboardsController < ApplicationController
 
     #######
 
-
-
+    @num_orders_past_n_weeks = Order.num_orders_past_n_weeks(7)
+    @revenue_past_n_weeks = Order.revenue_past_n_weeks(7)
 
   end
 end

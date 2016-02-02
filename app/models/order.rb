@@ -48,6 +48,37 @@ class Order < ActiveRecord::Base
       ).count
   end
 
+  def self.str_orders_submitted_n_weeks_ago( n )
+    "checkout_date IS NOT NULL AND DATE_TRUNC('week', checkout_date) = DATE_TRUNC( 'week', CURRENT_DATE - 7 * #{n} ) "
+  end
+
+  def self.num_orders_n_weeks_ago( n )
+    join_with_products
+    .where( str_orders_submitted_n_weeks_ago( n ))
+    .count
+  end
+
+  def self.num_orders_past_n_weeks(n)
+    order_arr = []
+    (0...n).each do |num|
+      order_arr[num] = num_orders_n_weeks_ago( num )
+    end
+    order_arr
+  end
+
+  def self.revenue_n_weeks_ago( n )
+    join_with_products
+    .where( str_orders_submitted_n_weeks_ago( n ))
+    .sum( "products.price * order_contents.quantity" )
+  end
+
+  def self.revenue_past_n_weeks(n)
+    rev_arr = []
+    (0...n).each do |num|
+      rev_arr[num] = revenue_n_weeks_ago( num )
+    end
+    rev_arr
+  end
 
   def self.largest_order
     join_with_products.select( "orders.id, MAX( products.price * order_contents.quantity ) AS largest_order ").group( "orders.id" ).order("largest_order DESC").limit(1)

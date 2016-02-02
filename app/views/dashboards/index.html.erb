@@ -310,45 +310,28 @@
         <h3>Orders by week</h3>
         <table class='table'>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Date</td>
+            <td>Quantity</td>
+            <td>Value</td>
           </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+
+          <% (0...7).each do |num| %>
+
+          <% case num %>
+          <% when 0 %>
+          <%   week_str = "This Week"%>
+          <% when 1 %>
+          <%   week_str = "Last Week" %>
+          <% else %>
+          <%  week_str = "#{num} Weeks Ago" %>
+          <% end %>
+            <tr>
+              <td><%= week_str %></td>
+              <td><%= @num_orders_past_n_weeks[num] %></td>
+              <td><%= number_to_currency(@revenue_past_n_weeks[num]) %></td>
+            </tr>
+          <% end %>
+
         </table>
       </div>
     </div>
