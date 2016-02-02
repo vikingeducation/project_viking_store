@@ -1,23 +1,13 @@
 class DashboardController < ApplicationController
 
   def index
-    @overall_seven_days = {
-      "New Users" => User.new_users(7),
-      "Orders" =>  Order.count_recent(7),
-      "Products" => Product.new_products(7),
-      "Revenue" => Order.revenue_recent(7) }
-    @overall_thirty_days = {
-      "New Users" => User.new_users(30),
-      "Orders" =>  Order.count_recent(30),
-      "Products" => Product.new_products(30),
-      "Revenue" => Order.revenue_recent(30)
-    }
-    @overall_totals = {
-      "Users" => User.total,
-      "Orders" => Order.orders_total,
-      "Products" => Product.total,
-      "Revenue" => Order.revenue_total
-    }
+
+    begin_time = Time.now
+    puts "Begin time: #{begin_time}"
+
+    a = AnalyticsHelper.new
+
+    a.panel_one
 
     # Top 3 States
     states_query = State.top_three_states
@@ -87,6 +77,10 @@ class DashboardController < ApplicationController
     weekly_timeseries.each do |week|
       @weekly_timeseries_data << [week.week, week.num_orders, week.weekly_sum]
     end
+
+
+    end_time = Time.now
+    puts "Time taken is #{end_time - begin_time}."
 
 
   end

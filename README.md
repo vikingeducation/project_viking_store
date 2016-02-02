@@ -3,8 +3,8 @@ Project: Viking Store Admin
 
 Julia + Andrew
 
-
-- order with no checkout_date is a cart
+Load time with multiplier = 10: Time taken is 0.108385478.
+Load time with multiplier = 50: Time taken is 0.369374212.
 
 
 ##To Get Going On This Assignment
