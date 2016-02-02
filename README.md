@@ -1,7 +1,10 @@
 Project: Viking Store Admin
 ========================
 
-Julia
+Julia + Andrew
+
+
+- order with no checkout_date is a cart
 
 
 ##To Get Going On This Assignment
