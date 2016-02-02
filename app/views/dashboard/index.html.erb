@@ -275,31 +275,43 @@
         </div>
 
         <div class="panel-body">
-          <h4>Last 7 Days</h4>
+          <h4>Orders By Day</h4>
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Item</th>
-                <th>Data</th>
+                <th>Date</th>
+                <th>Quantity</th>
+                <th>Value</th>
               </tr>
             </thead>
             <tbody>
+              <% @orders_by_day.each do |day_data| %>
+                <tr>
+                  <td><%= day_data.day == Date.today ? "Today" : "#{day_data.day.month}/#{day_data.day.day}" %></td>
+                  <td><%= day_data.quantity %></td>
+                  <td><%= number_to_currency(day_data.sum) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <h4>Orders By Week</h4>
+          <table class="table table-striped">
+            <thead>
               <tr>
-                <td>New Users</td>
-                <td>100</td>
+                <th>Date</th>
+                <th>Quantity</th>
+                <th>Value</th>
               </tr>
-              <tr>
-                <td>Orders</td>
-                <td>150</td>
-              </tr>
-              <tr>
-                <td>New Products</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>Total Revenue</td>
-                <td>$5000</td>
-              </tr>
+            </thead>
+            <tbody>
+              <% @orders_by_week.each do |week_data| %>
+                <tr>
+                  <td><%= "#{week_data.week.beginning_of_week.month}/#{week_data.week.beginning_of_week.day}" %></td>
+                  <td><%= week_data.quantity %></td>
+                  <td><%= number_to_currency(week_data.sum) %></td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         </div>

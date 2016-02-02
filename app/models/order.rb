@@ -35,10 +35,25 @@ class Order < ActiveRecord::Base
     Order.processed.select("orders.*, SUM(price * quantity) AS order_total").joins("JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id").group("orders.id")
   end
 
-
   def self.orders_by_day
-     # Order.select("SUM(order_total), COUNT(*)").from(Order.order_totals, :orders).where(checkout_date: (num_days.days.ago.beginning_of_day..num_days.days.ago.end_of_day))
+    Order.join_days.select("day, COALESCE(SUM(order_total), 0) as sum, COUNT(order_total) as quantity").
+      from(Order.order_totals, :orders).
+      group("day").
+      order("day DESC")
+  end
 
-     Order.select("DATE(checkout_date),SUM(order_total), COUNT(*)").from(Order.order_totals, :orders).group("DATE(checkout_date)")
+  def self.orders_by_week
+    Order.join_weeks.select("week, COALESCE(SUM(order_total), 0) as SUM, COUNT(order_total) as quantity").
+      from(Order.order_totals, :orders).
+      group("week").
+      order("week DESC")
+  end
+
+  def self.join_days
+    Order.joins "RIGHT JOIN GENERATE_SERIES((SELECT DATE(MIN(checkout_date)) FROM orders), CURRENT_DATE, '1 DAY'::INTERVAL) day ON DATE(orders.checkout_date) = day"
+  end
+
+  def self.join_weeks
+    Order.joins "RIGHT JOIN GENERATE_SERIES((SELECT DATE(DATE_TRUNC('WEEK', MIN(checkout_date))) FROM orders), CURRENT_DATE, '1 WEEK'::INTERVAL) week ON DATE(DATE_TRUNC('WEEK', orders.checkout_date)) = week"
   end
 end

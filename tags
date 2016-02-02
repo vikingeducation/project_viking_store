@@ -73,9 +73,13 @@ highest_average_order_value	/Users/kitlangton/Viking/Unit9/project_viking_store/
 highest_lifetime_order_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.highest_lifetime_order_value$/;"	F	class:User
 highest_order_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.highest_order_value$/;"	F	class:User
 index	/Users/kitlangton/Viking/Unit9/project_viking_store/app/controllers/dashboard_controller.rb	/^  def index$/;"	f	class:DashboardController
+join_days	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.join_days$/;"	F	class:Order
+join_weeks	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.join_weeks$/;"	F	class:Order
 largest_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.largest_value$/;"	F	class:Order
 midnight_tonight	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def midnight_tonight$/;"	f
 order_totals	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.order_totals$/;"	F	class:Order
+orders_by_day	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.orders_by_day$/;"	F	class:Order
+orders_by_week	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.orders_by_week$/;"	F	class:Order
 placement_date	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def placement_date(user)$/;"	f
 processed	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.processed$/;"	F	class:Order
 random_price	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def random_price$/;"	f
