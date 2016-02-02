@@ -206,24 +206,24 @@
         <h3>Last 30 Days</h3>
         <table class='table'>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Item</td>
+            <td>Data</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Number of Orders</td>
+            <td><%=  @orders_30 %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Total Revenue</td>
+            <td><%= number_to_currency( @revenue_30 )%></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Average Order Value</td>
+            <td><%= number_to_currency( @average_order_value_30 )%></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Largest Order Value</td>
+            <td><%= number_to_currency( @highest_single_order_30 )%></td>
           </tr>
         </table>
       </div>
@@ -233,25 +233,24 @@
         <h3>Last 7 Days</h3>
         <table class='table'>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Item</td>
+            <td>Data</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Number of Orders</td>
+            <td><%=  @orders_7%></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Total Revenue</td>
+            <td><%= number_to_currency( @revenue_7 )%></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Average Order Value</td>
+            <td><%= number_to_currency( @average_order_value_7 )%></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-          </tr>
+            <td>Largest Order Value</td>
+            <td><%= number_to_currency( @highest_single_order_7 )%></td>          </tr>
         </table>
       </div>
     </div>

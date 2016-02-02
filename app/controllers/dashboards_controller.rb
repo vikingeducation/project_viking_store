@@ -26,6 +26,11 @@ class DashboardsController < ApplicationController
     @average_order_value = Order.largest_order[0].largest_order
     @highest_single_order = Order.average_order[0].average_order
 
+    @average_order_value_7 = Order.largest_order_last_n_days(7)[0].largest_order
+    @highest_single_order_7 = Order.average_order_last_n_days(7)[0].average_order
+
+    @average_order_value_30 = Order.largest_order_last_n_days(30)[0].largest_order
+    @highest_single_order_30 = Order.average_order_last_n_days(30)[0].average_order
   end
 end
 

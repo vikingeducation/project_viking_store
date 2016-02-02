@@ -31,8 +31,19 @@ class Order < ActiveRecord::Base
     join_with_products.select( "orders.id, MAX( products.price * order_contents.quantity ) AS largest_order ").group( "orders.id" ).order("largest_order DESC").limit(1)
   end
 
+  def self.largest_order_last_n_days( n )
+    join_with_products.select( "orders.id, MAX( products.price * order_contents.quantity ) AS largest_order ")
+    .where( str_orders_submitted_in_last_n_days( n ))
+    .group( "orders.id" ).order("largest_order DESC").limit(1)
+  end
+
   def self.average_order
     join_with_products.select( "AVG( products.price * order_contents.quantity ) AS average_order")
+  end
+
+  def self.average_order_last_n_days( n )
+    join_with_products.select( "AVG( products.price * order_contents.quantity ) AS average_order")
+    .where( str_orders_submitted_in_last_n_days( n ))
   end
 
   def self.join_with_products
