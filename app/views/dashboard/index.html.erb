@@ -41,6 +41,11 @@
 
         <h5>Last 7 days</h5>
           <%= render partial: 'basic_table', locals: {data_hash: @order_seven_days} %>
+
+        <h5>Last 30 days</h5>
+          <%= render partial: 'basic_table', locals: {data_hash: @order_thirty_days} %>
+
+
     </div>
 
     <div class='col-xs-6 panel panel-default'>

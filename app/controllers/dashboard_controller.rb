@@ -2,15 +2,15 @@ class DashboardController < ApplicationController
 
   def index
     @overall_seven_days = {
-      "New Users" => User.last_seven_days,
-      "Orders" =>  Order.last_seven_days,
-      "Products" => Product.last_seven_days,
-      "Revenue" => Order.revenue_last_seven_days }
+      "New Users" => User.new_users(7),
+      "Orders" =>  Order.count_recent(7),
+      "Products" => Product.new_products(7),
+      "Revenue" => Order.revenue_recent(7) }
     @overall_thirty_days = {
-      "New Users" => User.last_thirty_days,
-      "Orders" =>  Order.last_thirty_days,
-      "Products" => Product.last_thirty_days,
-      "Revenue" => Order.revenue_last_thirty_days
+      "New Users" => User.new_users(30),
+      "Orders" =>  Order.count_recent(30),
+      "Products" => Product.new_products(30),
+      "Revenue" => Order.revenue_recent(30)
     }
     @overall_totals = {
       "Users" => User.total,
@@ -50,7 +50,17 @@ class DashboardController < ApplicationController
     ]
 
     @order_seven_days = {
-      "Number of Orders" => @overall_seven_days["Orders"]
+      "Number of Orders" => @overall_seven_days["Orders"],
+      "Total Revenue" => @overall_seven_days["Revenue"],
+      "Average Order Value" => Order.average_order(7),
+      "Largest Order Value" => Order.largest_order(7).first.largest_order
+    }
+
+    @order_thirty_days = {
+      "Number of Orders" => @overall_thirty_days["Orders"],
+      "Total Revenue" => @overall_thirty_days["Revenue"],
+      "Average Order Value" => Order.average_order(30),
+      "Largest Order Value" => Order.largest_order(30).first.largest_order
     }
 
 

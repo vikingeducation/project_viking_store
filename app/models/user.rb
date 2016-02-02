@@ -1,13 +1,10 @@
 class User < ActiveRecord::Base
 
-  # TODO: refactor these methods to take n days
-  def self.last_seven_days
-    User.all.where("created_at BETWEEN (NOW() - INTERVAL '7 days') AND NOW()").count
+
+  def self.new_users(n)
+    User.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
   end
 
-  def self.last_thirty_days
-    User.all.where("created_at BETWEEN (NOW() - INTERVAL '30 days') AND NOW()").count
-  end
 
   def self.total
     User.all.count
