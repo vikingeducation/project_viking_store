@@ -3,7 +3,7 @@ class Product < ActiveRecord::Base
     Product.count()
   end
 
-  def self.total_products_30
-    Product.where("created_at > ( CURRENT_DATE - 30 )").count
+  def self.total_products_in_last_n_days( n )
+    Product.where("created_at > ( CURRENT_DATE - #{n} )").count
   end
 end

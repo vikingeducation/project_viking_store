@@ -5,10 +5,10 @@ class DashboardsController < ApplicationController
     @num_total_orders = Order.total_orders_submitted
     @total_revenue = Order.total_revenue_generated
 
-    @users_30 = User.new_users_30
-    @orders_30 = Order.orders_submitted_30
-    @products_30 = Product.total_products_30
-    @revenue_30 = Order.revenue_30
+    @users_30 = User.new_users_in_last_n_days( 30 )
+    @orders_30 = Order.num_orders_submitted_in_last_n_days( 30 )
+    @products_30 = Product.total_products_in_last_n_days( 30 )
+    @revenue_30 = Order.revenue_n_days( 30 )
   end
 end
 

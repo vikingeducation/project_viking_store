@@ -11,13 +11,17 @@ class Order < ActiveRecord::Base
       )
   end
 
-  def self.orders_submitted_30
-    Order.where("created_at > ( CURRENT_DATE - 30 ) AND checkout_date IS NOT NULL").count
+  def self.num_orders_submitted_in_last_n_days( n )
+    Order.where( str_orders_submitted_in_last_n_days( n )).count()
   end
 
-  def self.revenue_30
+  def self.str_orders_submitted_in_last_n_days( n )
+    "checkout_date IS NOT NULL AND checkout_date > ( CURRENT_DATE - #{n} ) "
+  end
+
+  def self.revenue_n_days( n )
     join_with_products.where(
-      "orders.created_at > ( CURRENT_DATE - 30 ) AND orders.checkout_date IS NOT NULL"
+      str_orders_submitted_in_last_n_days( n )
       ).sum(
       "products.price * order_contents.quantity"
       )

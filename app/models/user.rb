@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
     User.count()
   end
 
-  def self.new_users_30
-    User.where("created_at > ( CURRENT_DATE - 30 )").count
+  def self.new_users_in_last_n_days( n )
+    User.where("created_at > ( CURRENT_DATE - #{n} )").count
   end
 
 end
