@@ -54,6 +54,7 @@ change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/2015072822
 change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150728230632_make_product_sku_a_string.rb	/^  def change$/;"	f	class:MakeProductSkuAString
 creation_date	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def creation_date$/;"	f
 down	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150228223038_burn_checked_out_with_fire.rb	/^  def down$/;"	f	class:BurnCheckedOutWithFire
+full_name	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def full_name$/;"	f	class:User
 generate_address	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_address(user_id)$/;"	f
 generate_addresses_for_user	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_addresses_for_user(user_id)$/;"	f
 generate_category	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_category$/;"	f
@@ -65,6 +66,7 @@ generate_product	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb
 generate_state	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_state(state)$/;"	f
 generate_user	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_user$/;"	f
 has_cart?	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def has_cart?(user_id)$/;"	f
+highest_order_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.highest_order_value$/;"	F	class:User
 index	/Users/kitlangton/Viking/Unit9/project_viking_store/app/controllers/dashboard_controller.rb	/^  def index$/;"	f	class:DashboardController
 midnight_tonight	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def midnight_tonight$/;"	f
 new_orders	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.new_orders(num_days)$/;"	F	class:Order
@@ -74,6 +76,9 @@ placement_date	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/
 processed	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.processed$/;"	F	class:Order
 random_price	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def random_price$/;"	f
 random_user_address	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def random_user_address(user_id)$/;"	f
+top_cities	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.top_cities$/;"	F	class:User
+top_states	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.top_states$/;"	F	class:Order
+top_states	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.top_states$/;"	F	class:User
 total_revenue	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.total_revenue$/;"	F	class:Order
 total_revenue	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order_content.rb	/^  def self.total_revenue$/;"	F	class:OrderContent
 up	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150228223038_burn_checked_out_with_fire.rb	/^  def up$/;"	f	class:BurnCheckedOutWithFire

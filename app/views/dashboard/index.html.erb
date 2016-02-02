@@ -10,11 +10,11 @@
 
       <div class="panel-body">
         <h4>Last 7 Days</h4>
-        <table class="table table-bordered">
+        <table class="table table-striped">
           <thead>
             <tr>
-              <th>item</th>
-              <th>data</th>
+              <th>Item</th>
+              <th>Data</th>
             </tr>
           </thead>
           <tbody>
@@ -38,11 +38,11 @@
         </table>
 
         <h4>Last 30 Days</h4>
-        <table class="table table-bordered">
+        <table class="table table-striped">
           <thead>
             <tr>
-              <th>item</th>
-              <th>data</th>
+              <th>Item</th>
+              <th>Data</th>
             </tr>
           </thead>
           <tbody>
@@ -66,11 +66,11 @@
         </table>
 
         <h4>Total</h4>
-        <table class="table table-bordered">
+        <table class="table table-striped">
           <thead>
             <tr>
-              <th>item</th>
-              <th>data</th>
+              <th>Item</th>
+              <th>Data</th>
             </tr>
           </thead>
           <tbody>
@@ -104,30 +104,56 @@
       </div>
 
       <div class="panel-body">
-        <h4>Last 7 Days</h4>
-        <table class="table table-bordered">
+        <h4>Top 3 States Users Live In (Billing)</h4>
+        <table class="table table-striped">
           <thead>
             <tr>
-              <th>item</th>
-              <th>data</th>
+              <th>Item</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% User.top_states.each do |state, count| %>
+              <tr>
+                <td><%= state %></td>
+                <td><%= count %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <h4>Top 3 Cities Users Live In (Billing)</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% User.top_cities.each do |city, count| %>
+              <tr>
+                <td><%= city %></td>
+                <td><%= count %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <h4>Top Users With...</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Data</th>
+              <th>Quantity</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>TOOP 3 STATES</td>
-              <td><%= p Order.state_demo%></td>
-            </tr>
-            <tr>
-              <td>Orders</td>
-              <td>150</td>
-            </tr>
-            <tr>
-              <td>New Products</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td>$5000</td>
+              <td>Higest Single Order Value</td>
+              <td><%= @highest_order_value.full_name %></td>
+              <td><%= number_to_currency(@highest_order_value.sum) %></td>
             </tr>
           </tbody>
         </table>
@@ -143,11 +169,11 @@
 
       <div class="panel-body">
         <h4>Last 7 Days</h4>
-        <table class="table table-bordered">
+        <table class="table table-striped">
           <thead>
             <tr>
-              <th>item</th>
-              <th>data</th>
+              <th>Item</th>
+              <th>Data</th>
             </tr>
           </thead>
           <tbody>
@@ -181,11 +207,11 @@
 
       <div class="panel-body">
         <h4>Last 7 Days</h4>
-        <table class="table table-bordered">
+        <table class="table table-striped">
           <thead>
             <tr>
-              <th>item</th>
-              <th>data</th>
+              <th>Item</th>
+              <th>Data</th>
             </tr>
           </thead>
           <tbody>

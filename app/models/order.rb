@@ -13,8 +13,8 @@ class Order < ActiveRecord::Base
     Order.where("checkout_date IS NOT NULL")
   end
 
-  def self.state_demo
-     Order.processed.select("name, count(*) AS max_state").joins("JOIN addresses on addresses.id = orders.shipping_id JOIN states ON states.id = addresses.state_id").group(:name).order("max_state DESC").limit(3)
+  def self.top_states
+    Order.processed.select("states.name").joins("JOIN addresses ON addresses.id = orders.billing_id JOIN states ON states.id = addresses.state_id").group("states.name").order("COUNT(states.name) DESC").limit(3).count
   end
 
 end
