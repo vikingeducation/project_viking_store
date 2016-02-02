@@ -9,6 +9,14 @@ class DashboardsController < ApplicationController
     @orders_30 = Order.num_orders_submitted_in_last_n_days( 30 )
     @products_30 = Product.total_products_in_last_n_days( 30 )
     @revenue_30 = Order.revenue_n_days( 30 )
+
+    @users_7 = User.new_users_in_last_n_days( 7 )
+    @orders_7 = Order.num_orders_submitted_in_last_n_days( 7 )
+    @products_7 = Product.total_products_in_last_n_days( 7 )
+    @revenue_7 = Order.revenue_n_days( 7 )
+
+    @top_states = User.top_states
+    @top_cities = User.top_cities
   end
 end
 

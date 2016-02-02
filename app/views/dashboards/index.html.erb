@@ -60,27 +60,27 @@
     </div>
     <div class= "row">
       <div class='col-md-12'>
-        <h3>Total</h3>
+        <h3>Last 7 Days</h3>
         <table class='table'>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Item</td>
+            <td>Data</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>New Users</td>
+            <td><%= @users_7 %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Orders</td>
+            <td><%= @orders_7 %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Products</td>
+            <td><%= @products_7 %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Revenue</td>
+            <td>$<%= @revenue_7 %></td>
           </tr>
         </table>
       </div>
@@ -94,20 +94,20 @@
         <h3>Top 3 States Users Live In (billing)</h3>
         <table class='table'>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Item</td>
+            <td>Data</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td><%= @top_states[0].name %></td>
+            <td><%= @top_states[0].state_count %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td><%= @top_states[1].name %></td>
+            <td><%= @top_states[1].state_count %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td><%= @top_states[2].name %></td>
+            <td><%= @top_states[2].state_count %></td>
           </tr>
         </table>
       </div>
@@ -117,20 +117,20 @@
         <h3>Top 3 Cities Users Live In (billing)</h3>
         <table class='table'>
           <tr>
-            <td></td>
-            <td></td>
+            <td>Item</td>
+            <td>Data</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td><%= @top_cities[0].name %></td>
+            <td><%= @top_cities[0].city_count %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td><%= @top_cities[1].name %></td>
+            <td><%= @top_cities[1].city_count %></td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td><%= @top_cities[2].name %></td>
+            <td><%= @top_cities[2].city_count %></td>
           </tr>
         </table>
       </div>
