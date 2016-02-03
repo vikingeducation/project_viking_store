@@ -5,10 +5,10 @@ class Order < ActiveRecord::Base
 
   def self.total_revenue_generated
     join_with_products.where(
-      "orders.checkout_date IS NOT NULL"
-      ).sum(
-      "products.price * order_contents.quantity"
-      )
+    "orders.checkout_date IS NOT NULL"
+    ).sum(
+    "products.price * order_contents.quantity"
+    )
   end
 
   def self.num_orders_submitted_in_last_n_days( n )
@@ -21,31 +21,30 @@ class Order < ActiveRecord::Base
 
   def self.revenue_n_days( n )
     join_with_products.where(
-      str_orders_submitted_in_last_n_days( n )
-      ).sum(
-      "products.price * order_contents.quantity"
-      )
+    str_orders_submitted_in_last_n_days( n )
+    ).sum(
+    "products.price * order_contents.quantity"
+    )
   end
-
 
   def self.str_orders_submitted_n_days_ago( n )    # n == 0 implies today
     "checkout_date IS NOT NULL AND DATE_TRUNC('day', checkout_date) = DATE_TRUNC( 'day', CURRENT_DATE - #{n} ) "
   end
 
   def self.revenue_n_days_ago( n )  # n == 0 implies today
-      join_with_products
-      .where(
-      str_orders_submitted_n_days_ago( n )
-      ).sum(
-      "products.price * order_contents.quantity"
-      )
+    join_with_products
+    .where(
+    str_orders_submitted_n_days_ago( n )
+    ).sum(
+    "products.price * order_contents.quantity"
+    )
   end
 
   def self.num_orders_n_days_ago( n )  # n == 0 implies today
-      join_with_products
-      .where(
-      str_orders_submitted_n_days_ago( n )
-      ).count
+    join_with_products
+    .where(
+    str_orders_submitted_n_days_ago( n )
+    ).count
   end
 
   def self.str_orders_submitted_n_weeks_ago( n )
@@ -87,7 +86,6 @@ class Order < ActiveRecord::Base
     end
     rev_arr
   end
-
 
   def self.revenue_past_n_weeks(n)
     rev_arr = []
