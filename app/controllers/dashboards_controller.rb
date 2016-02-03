@@ -18,10 +18,10 @@ class DashboardsController < ApplicationController
     @top_states = User.top_states
     @top_cities = User.top_cities
 
-    @user_highest_single_order = User.highest_single_order
-    @user_highest_lifetime_value = User.highest_lifetime_value
-    @user_highest_average_value = User.highest_average_value
-    @user_most_orders = User.user_most_orders
+    @user_highest_single_order = User.highest_single_order[0]
+    @user_highest_lifetime_value = User.highest_lifetime_value[0]
+    @user_highest_average_value = User.highest_average_value[0]
+    @user_most_orders = User.user_most_orders[0]
 
     @highest_single_order = Order.largest_order[0].largest_order
     @average_order_value = Order.average_order[0].average_order
@@ -34,15 +34,8 @@ class DashboardsController < ApplicationController
 
     ####### last week
 
-    @revenue_last_week = {}
-    @num_orders_last_week = {}
-    @dates_last_week = {}
-
-
-    
     @num_orders_past_n_days = Order.num_orders_past_n_days(7)
     @revenue_past_n_days = Order.revenue_past_n_days(7)
-    # @dates_last_week[  days_ago ] = ( DateTime.now - days_ago ).to_s[0..9]
 
     #######  last 7 weeks
 

@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class='col-md-6'>
-    <h2>1. Overall Platform</h2>
+    <h2>Overall Platform</h2>
 
     <div class="row">
       <div class='col-md-12'>
@@ -29,18 +29,22 @@
             <td>Item</td>
             <td>Data</td>
           </tr>
+          
           <tr>
             <td>New Users</td>
             <td><%= @users_7 %></td>
           </tr>
+
           <tr>
             <td>Orders</td>
             <td><%= @orders_7 %></td>
           </tr>
+
           <tr>
             <td>Products</td>
             <td><%= @products_7 %></td>
           </tr>
+
           <tr>
             <td>Revenue</td>
             <td><%= number_to_currency(@revenue_7) %></td>
@@ -50,28 +54,24 @@
     </div>
   </div>
   <div class='col-md-6'>
-    <h2>2. User Demographics and Behavior</h2>
+    <h2>User Demographics and Behavior</h2>
 
     <div class="row">
       <div class='col-md-12'>
         <h3>Top 3 States Users Live In (billing)</h3>
         <table class='table'>
+
           <tr>
             <td>Item</td>
             <td>Data</td>
           </tr>
-          <tr>
-            <td><%= @top_states[0].name %></td>
-            <td><%= @top_states[0].state_count %></td>
-          </tr>
-          <tr>
-            <td><%= @top_states[1].name %></td>
-            <td><%= @top_states[1].state_count %></td>
-          </tr>
-          <tr>
-            <td><%= @top_states[2].name %></td>
-            <td><%= @top_states[2].state_count %></td>
-          </tr>
+
+          <% (0..2).each do |i| %>
+            <tr>
+              <td><%= @top_states[i].name %></td>
+              <td><%= @top_states[i].state_count %></td>
+            </tr>
+          <% end %>
         </table>
       </div>
     </div>
@@ -79,22 +79,19 @@
       <div class='col-md-12'>
         <h3>Top 3 Cities Users Live In (billing)</h3>
         <table class='table'>
+
           <tr>
             <td>Item</td>
             <td>Data</td>
           </tr>
-          <tr>
-            <td><%= @top_cities[0].name %></td>
-            <td><%= @top_cities[0].city_count %></td>
-          </tr>
-          <tr>
-            <td><%= @top_cities[1].name %></td>
-            <td><%= @top_cities[1].city_count %></td>
-          </tr>
-          <tr>
-            <td><%= @top_cities[2].name %></td>
-            <td><%= @top_cities[2].city_count %></td>
-          </tr>
+
+          <% (0..2).each do |i| %>
+            <tr>
+              <td><%= @top_cities[i].name %></td>
+              <td><%= @top_cities[i].city_count %></td>
+            </tr>
+          <% end %>
+
         </table>
       </div>
     </div>
@@ -107,26 +104,43 @@
             <td>User</td>
             <td>Quantity</td>
           </tr>
+
           <tr>
             <td>Highest Single Order</td>
-            <td><%="#{@user_highest_single_order[0].first_name} #{@user_highest_single_order[0].last_name}" %></td>
-            <td><%= number_to_currency(@user_highest_single_order[0].highest) %></td>
+            <td>
+              <%= "#{@user_highest_single_order.first_name}
+                    #{@user_highest_single_order.last_name}" %>
+            </td>
+            <td><%= number_to_currency(@user_highest_single_order.highest) %></td>
           </tr>
+
           <tr>
             <td>Highest Lifetime Value</td>
-            <td><%= "#{@user_highest_lifetime_value[0].first_name} #{@user_highest_lifetime_value[0].last_name}" %></td>
-            <td><%= number_to_currency(@user_highest_lifetime_value[0].total_revenue) %></td>
+            <td>
+              <%= "#{@user_highest_lifetime_value.first_name}
+                    #{@user_highest_lifetime_value.last_name}" %>
+            </td>
+            <td><%= number_to_currency(@user_highest_lifetime_value.total_revenue) %></td>
           </tr>
+
           <tr>
             <td>Highest Average Value</td>
-            <td><%= "#{@user_highest_average_value[0].first_name} #{@user_highest_average_value[0].last_name}" %></td>
-            <td><%= number_to_currency(@user_highest_average_value[0].highest) %></td>
+            <td>
+              <%= "#{@user_highest_average_value.first_name}
+                    #{@user_highest_average_value.last_name}" %>
+            </td>
+            <td><%= number_to_currency(@user_highest_average_value.highest) %></td>
           </tr>
+
           <tr>
             <td>Most Orders</td>
-            <td><%= "#{@user_most_orders[0].first_name} #{@user_most_orders[0].last_name}" %></td>
-            <td><%=@user_most_orders[0].most_orders%></td>
+            <td>
+              <%= "#{@user_most_orders.first_name}
+                    #{@user_most_orders.last_name}" %>
+            </td>
+            <td><%=@user_most_orders.most_orders%></td>
           </tr>
+
         </table>
       </div>
     </div>
@@ -135,7 +149,7 @@
 
 <div class="row">
   <div class='col-md-6'>
-    <h2>3. Order Statistics</h2>
+    <h2>Order Statistics</h2>
 
     <div class="row">
       <div class='col-md-12'>
@@ -219,7 +233,7 @@
     </div>
   </div>
   <div class='col-md-6'>
-    <h2>4. Time Series Data</h2>
+    <h2>Time Series Data</h2>
 
     <div class="row">
       <div class='col-md-12'>
@@ -231,17 +245,8 @@
             <td>Value</td>
           </tr>
           <% (0...7).each do |num| %>
-
-          <% case num %>
-          <% when 0 %>
-          <%   day_str = "Today"%>
-          <% when 1 %>
-          <%   day_str = "Yesterday" %>
-          <% else %>
-          <%  day_str = ( DateTime.now - num ).to_s[0..9] %>
-          <% end %>
             <tr>
-              <td><%= day_str %></td>
+              <td><%= day_str(num) %></td>
               <td><%= @num_orders_past_n_days[num] %></td>
               <td><%= number_to_currency(@revenue_past_n_days[num]) %></td>
             </tr>
@@ -261,17 +266,8 @@
           </tr>
 
           <% (0...7).each do |num| %>
-
-          <% case num %>
-          <% when 0 %>
-          <%   week_str = "This Week"%>
-          <% when 1 %>
-          <%   week_str = "Last Week" %>
-          <% else %>
-          <%  week_str = "#{num} Weeks Ago" %>
-          <% end %>
             <tr>
-              <td><%= week_str %></td>
+              <td><%= week_str(num) %></td>
               <td><%= @num_orders_past_n_weeks[num] %></td>
               <td><%= number_to_currency(@revenue_past_n_weeks[num]) %></td>
             </tr>
