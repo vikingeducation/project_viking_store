@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col col-xs-12">
-    <h1 class="page-header text-center">Product Categories</h1> 
-  </div>  
+    <h1 class="page-header text-center">Product Categories</h1>
+  </div>
 </div>
 <div class="row">
   <div class="col col-xs-12">
@@ -16,7 +16,7 @@
           <th>SHOW</th>
           <th>EDIT</th>
           <th>DELETE</th>
-        </tr>  
+        </tr>
       </thead>
       <tbody>
         <%@categories.each do |category|%>
@@ -25,10 +25,10 @@
           <td><%=category.name%></td>
           <td><%=link_to 'Show', category_path(category.id)%></td>
           <td><%=link_to 'Edit', edit_category_path(category.id)%></td>
-          <td><%=link_to 'Delete', category, method: :delete%></td>
+          <td><%=link_to 'Delete', category, method: "delete" %></td>
         </tr>
         <%end%>
-      <tbody> 
-    </table>     
+      <tbody>
+    </table>
   </div>
-</div>  
+</div>

@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h2><%= "Category #{@category.id}: #{@category.name}" %></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4><%= "Category ID: #{@category.id}" %></h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4><%= "Category Name: #{@category.name}" %></h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to "Edit Category", edit_category_path(@category.id) %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to "Delete Category", category_path(@category.id), method: "delete" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-4">
+    <table class="table table-striped">
+      <thead>
+        <th>ID</th>
+        <th>Name</th>
+      </thead>
+      <tbody>
+        <% @products.each do |p| %>
+        <tr>
+          <td><%= p.product_id %></td>
+          <td><%= p.product_name %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
