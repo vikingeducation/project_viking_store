@@ -118,35 +118,40 @@
             <td><%= city.name %></td>
             <td><%= city.count %></td>
           </tr>
-          <%end%>
+        <%end%>
 
-        </table>
+      </table>
 
       <h3>Top User With..</h3>
       <table class='table'>
         <tr>
           <th>Item</th>
-          <th>Data</th>
+          <th>User</th>
+          <th>Quantity</th>
         </tr>
 
         <tr>
-          <td>Users</td>
-          <td><%= @users.total_users %></td>
+          <td>Highest Single Order Value</td>
+          <td><%= @users.highest_single_order_value.full_name %></td>
+          <td><%= @users.highest_single_order_value.sum %></td>
         </tr>
 
         <tr>
-          <td>Orders</td>
-          <td><%= @orders.total_orders %></td>
+          <td>Highest Lifetime Value</td>
+          <td><%= @users.highest_lifetime_value.full_name %></td>
+          <td><%= @users.highest_lifetime_value.sum %></td>
         </tr>
 
         <tr>
-          <td>Products</td>
-          <td><%= @products.total_products %></td>
+          <td>Highest Average Order Value</td>
+          <td><%= @users.highest_average_order_value.first_name %> <%= @users.highest_average_order_value.last_name %></td>
+          <td><%= @users.highest_average_order_value.average %></td>
         </tr>
 
         <tr>
-          <td>Revenue</td>
-          <td><%= @order_contents.total_revenue %></td>
+          <td>Most Orders Placed</td>
+          <td><%= @users.most_orders.first_name %> <%= @users.most_orders.last_name %></td>
+          <td><%= @users.most_orders.orders %></td>
         </tr>
       </table>
 
