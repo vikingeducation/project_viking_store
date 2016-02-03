@@ -8,19 +8,19 @@
   <tbody>
     <tr>
       <td>Total Users</td>
-      <td><%= data[2] %></td>
+      <td><%= data[:user_total] %></td>
     </tr>
     <tr>
       <td>Total Orders</td>
-      <td><%= data[0] %></td>
+      <td><%= data[:ord_total] %></td>
     </tr>
     <tr>
       <td>Products listed</td>
-      <td><%= data[1] %></td>
+      <td><%= data[:prod_total] %></td>
     </tr>
     <tr>
       <td>Total Revenue</td>
-      <td><%= number_to_currency(data[3]) %></td>
+      <td><%= number_to_currency(data[:rev_total]) %></td>
     </tr>
   </tbody>
 </table>
