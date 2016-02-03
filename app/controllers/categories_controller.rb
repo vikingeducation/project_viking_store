@@ -46,7 +46,7 @@ class CategoriesController < ApplicationController
       redirect_to categories_path
     else
       flash.now[:error] = "Error! Category wasn't deleted!"
-      render :edit
+      render :show
     end
   end
 

@@ -23,6 +23,31 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def edit
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      flash[:success] = "You've Sucessfully Updated the Product!"
+      redirect_to product_path(@product)
+    else
+      flash.now[:error] = "Error! Product wasn't updated!"
+      render :edit
+    end
+  end
+
+  def destroy
+     @product = Product.find(params[:id])
+    if @product.destroy
+      flash[:success] = "You've Sucessfully Deleted the Product!"
+      redirect_to products_path
+    else
+      flash.now[:error] = "Error! Product wasn't deleted!"
+      render :show
+    end
+  end
 
   private
 

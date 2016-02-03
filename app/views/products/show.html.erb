@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h2><%= "Product #{@product.id}: #{@product.name}" %></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4><%= "Product ID: #{@product.id}" %></h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4><%= "Product Name: #{@product.name}" %></h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4><%= "Product Description: #{@product.description}" %></h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4><%= "Product SKU: #{@product.sku}" %></h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4><%= "Product Price: #{@product.price}" %></h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4><%= "Product Category: #{@product.category_id}" %></h4>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to "Edit Product", edit_product_path(@product.id) %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to "Delete Product", product_path(@product.id), method: "delete" %>
+  </div>
+</div>
