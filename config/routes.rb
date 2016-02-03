@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   get 'categories/new'
 
-  resources :categories
-  resources :products
+  namespace :admin do
+    resources :categories
+    resources :products
+  end
 
   root 'dashboard#index'
   get '/dashboard' => 'dashboard#index'

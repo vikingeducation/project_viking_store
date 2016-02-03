@@ -35,7 +35,7 @@
       <div class="panel-body">
         <%= flash_messages %>
 
-        <%= link_to "Add a New Category", new_category_path, class: "btn btn-primary btn-lg btn-block"%>
+        <%= link_to "Add a New Category", new_admin_category_path, class: "btn btn-primary btn-lg btn-block"%>
         <br>
         <table class="table table-striped">
           <thead>
@@ -50,9 +50,9 @@
             <tr>
               <td><%= category.id %></td>
               <td><%= category.name %></td>
-              <td><%= link_to "Show", category %></td>
-              <td><%= link_to "Edit", edit_category_path(category) %></td>
-              <td><%= link_to "Delete", category, method: :delete %></td>
+              <td><%= link_to "Show", [:admin, category] %></td>
+              <td><%= link_to "Edit", edit_admin_category_path(category) %></td>
+              <td><%= link_to "Delete", [:admin, category], method: :delete %></td>
             </tr>
           <% end %>
           </tbody>

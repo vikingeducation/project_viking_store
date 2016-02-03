@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3">
     <%= flash_messages %>
-    <%= form_for @category do |f| %>
+    <%= form_for [:admin, @category] do |f| %>
       <div class="form-group">
         <%= f.label :id, "ID" %>
         <%= f.text_field :id, class: 'form-control', placeholder: "N/A", disabled: true %>
@@ -15,6 +15,6 @@
       <%= f.submit class: 'btn btn-primary btn-block' %>
     <% end %>
     <br>
-    <%= link_to "Delete", @category, method: :delete, class: 'btn btn-danger btn-block' %>
+    <%= link_to "Delete", [ :admin, @category ], method: :delete, class: 'btn btn-danger btn-block' %>
   </div>
 </div>
