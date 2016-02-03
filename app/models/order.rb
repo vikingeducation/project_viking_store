@@ -42,6 +42,7 @@ class Order < ActiveRecord::Base
       order("day DESC")
   end
 
+ #Joins orders table by week (empty rows where no orders on week)
   def self.orders_by_week
     Order.join_weeks.select("week, COALESCE(SUM(order_total), 0) as SUM, COUNT(order_total) as quantity").
       from(Order.order_totals, :orders).
