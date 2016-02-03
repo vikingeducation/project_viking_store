@@ -19,7 +19,7 @@ City.destroy_all
 puts "Old records destroyed"
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
-MULTIPLIER = 50
+MULTIPLIER = 10
 
 
 
@@ -216,7 +216,7 @@ srand(42)
 STATES.each { |state| generate_state state }
 puts "Created states"
 
-(MULTIPLIER).times { generate_city }
+(MULTIPLIER * 10).times { generate_city }
 puts "Created cities"
 
 # Create categories and products
