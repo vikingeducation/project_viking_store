@@ -1,11 +1,15 @@
+<% content_for :resource_name do %>
+  Categories
+<% end %>
+
 <h1 class="text-center">Category <%= @category.id %>: <%= @category.name %></h1>
 
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3">
     <h3>ID: <%= @category.id %></h3>
     <h3>Name: <%= @category.name %></h3>
-    <%= link_to "Edit", edit_category_path(@category), class: 'btn btn-default' %>
-    <%= link_to "Delete", @category, method: :delete, class: 'btn btn-default btn-danger' %>
+    <%= link_to "Edit", edit_admin_category_path(@category), class: 'btn btn-default' %>
+    <%= link_to "Delete", admin_category_path(@category), method: :delete, class: 'btn btn-default btn-danger' %>
     <h3>Products in <%= @category.name %></h3>
     <table class="table table-striped">
       <thead>
@@ -15,7 +19,7 @@
       <% @category.products.each do |product| %>
         <tr>
           <td><%= product.id %></td>
-          <td><%= link_to product.name, product %></td>
+          <td><%= link_to product.name, admin_product_path(product) %></td>
         </tr>
       <% end %>
     </table>

@@ -1,0 +1,43 @@
+<% content_for :content do %>
+  <h1 class="text-center">Viking Store Admin Portal</h1>
+
+  <hr>
+
+  <div class='row'>
+
+    <div class='col-md-3'>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Navigation Options</h3>
+        </div>
+        <div class="panel-body">
+          <ul class="nav nav-pills nav-stacked">
+            <li role="presentation"><%= link_to "Users", admin_path %></li>
+            <li role="presentation"><%= link_to "Addresses", admin_path %></li>
+            <li role="presentation"><%= link_to "Orders", admin_path %></li>
+            <li role="presentation"><%= link_to "Products", admin_path %></li>
+            <li role="presentation" <%= active_for_pill('categories')%>><%= link_to "Categories", admin_path %></li>
+            <hr>
+            <li role="presentation"><%= link_to "Analytics Dashboard", admin_path %></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class='col-md-9'>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <%= yield(:resource_name) %>
+          </div>
+        </div>
+        <div class="panel-body">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= render template: "layouts/application" %>

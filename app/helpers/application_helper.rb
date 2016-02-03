@@ -14,4 +14,11 @@ module ApplicationHelper
     nil
   end
 
+
+  def active_for_pill(name)
+    if controller.controller_name == name && controller.action_name == 'index'
+      "class='active'".html_safe
+    end
+  end
+
 end
