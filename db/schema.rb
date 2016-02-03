@@ -17,25 +17,25 @@ ActiveRecord::Schema.define(version: 20150728230632) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: true do |t|
-    t.string   "street_address",    null: false
-    t.string   "secondary_address"
-    t.integer  "zip_code",          null: false
-    t.integer  "city_id",           null: false
-    t.integer  "state_id",          null: false
-    t.integer  "user_id",           null: false
+    t.string   "street_address",    limit: nil, null: false
+    t.string   "secondary_address", limit: nil
+    t.integer  "zip_code",                      null: false
+    t.integer  "city_id",                       null: false
+    t.integer  "state_id",                      null: false
+    t.integer  "user_id",                       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "categories", force: true do |t|
-    t.string   "name",        null: false
+    t.string   "name",        limit: nil, null: false
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "cities", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",       limit: nil, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,12 +43,12 @@ ActiveRecord::Schema.define(version: 20150728230632) do
   add_index "cities", ["name"], name: "index_cities_on_name", unique: true, using: :btree
 
   create_table "credit_cards", force: true do |t|
-    t.string   "nickname",    default: "My Credit Card"
-    t.string   "card_number",                            null: false
-    t.integer  "exp_month",                              null: false
-    t.integer  "exp_year",                               null: false
-    t.string   "brand",       default: "VISA",           null: false
-    t.integer  "user_id",                                null: false
+    t.string   "nickname",    limit: nil, default: "My Credit Card"
+    t.string   "card_number", limit: nil,                            null: false
+    t.integer  "exp_month",                                          null: false
+    t.integer  "exp_year",                                           null: false
+    t.string   "brand",       limit: nil, default: "VISA",           null: false
+    t.integer  "user_id",                                            null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ccv"
@@ -77,10 +77,10 @@ ActiveRecord::Schema.define(version: 20150728230632) do
   end
 
   create_table "products", force: true do |t|
-    t.string   "name",                                null: false
-    t.string   "sku",                                 null: false
+    t.string   "name",        limit: nil,                         null: false
+    t.string   "sku",         limit: nil,                         null: false
     t.text     "description"
-    t.decimal  "price",       precision: 8, scale: 2, null: false
+    t.decimal  "price",                   precision: 8, scale: 2, null: false
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20150728230632) do
   add_index "products", ["sku"], name: "index_products_on_sku", unique: true, using: :btree
 
   create_table "states", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",       limit: nil, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -98,9 +98,9 @@ ActiveRecord::Schema.define(version: 20150728230632) do
   add_index "states", ["name"], name: "index_states_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "first_name",  null: false
-    t.string   "last_name",   null: false
-    t.string   "email",       null: false
+    t.string   "first_name",  limit: nil, null: false
+    t.string   "last_name",   limit: nil, null: false
+    t.string   "email",       limit: nil, null: false
     t.integer  "billing_id"
     t.integer  "shipping_id"
     t.datetime "created_at"
