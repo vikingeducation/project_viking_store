@@ -22,7 +22,7 @@ class State < ActiveRecord::Base
   end
 
   def self.top_state_shipped(n)
-    State.select("s.name AS state, COUNT(*)")
+    State.select("s.name AS state, COUNT(*) AS order_count")
       .joins("AS s JOIN addresses a ON s.id = a.state_id")
       .joins("JOIN users u ON u.billing_id = a.id")
       .joins("JOIN orders o ON o.user_id=u.id")

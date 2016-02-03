@@ -68,6 +68,8 @@
         <h4 class='text-center'>5. Advanced</h4>
         <h5>Top Users In Top 3 States</h5>
         <%= render partial: 'dynamic_table', locals: {data: @top_users_by_state} %>
+        <h5>Top States with Orders</h5>
+        <%= render partial: 'dynamic_table', locals: {data: @top_states} %>
       </div>
     </div>
   </div>

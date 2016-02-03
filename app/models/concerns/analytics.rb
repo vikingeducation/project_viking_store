@@ -102,7 +102,12 @@ module Analytics
       @top_users_by_state << [user.state, user.user, user.spent]
     end
 
-    
+    # top_states_seven = State.top_state_shipped(7)
+    # top_states_thirty = State.top_state_shipped(7)
+    # @top_states = [
+    #   ["Time Interval", "State", "Number of Orders"],
+    #   ["Past 7 Days", top_states_seven.state, top_states_seven.order_count]
+    # ]
 
   end
 end
