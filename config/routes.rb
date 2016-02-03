@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'categories/new'
 
   resources :categories
+  resources :products
+
   root 'dashboard#index'
   get '/dashboard' => 'dashboard#index'
   get '/dashboard/orders_by_day' => 'dashboard#orders_by_day'

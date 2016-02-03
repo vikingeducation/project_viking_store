@@ -1,0 +1,20 @@
+<h1 class="text-center">Edit Category</h1>
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <%= flash_messages %>
+    <%= form_for @category do |f| %>
+      <div class="form-group">
+        <%= f.label :id, "ID" %>
+        <%= f.text_field :id, class: 'form-control', placeholder: "N/A", disabled: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <%= f.submit class: 'btn btn-primary btn-block' %>
+    <% end %>
+    <br>
+    <%= link_to "Delete", @category, method: :delete, class: 'btn btn-danger btn-block' %>
+  </div>
+</div>

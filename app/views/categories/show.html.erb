@@ -4,5 +4,20 @@
   <div class="col-sm-6 col-sm-offset-3">
     <h3>ID: <%= @category.id %></h3>
     <h3>Name: <%= @category.name %></h3>
+    <%= link_to "Edit", edit_category_path(@category), class: 'btn btn-default' %>
+    <%= link_to "Delete", @category, method: :delete, class: 'btn btn-default btn-danger' %>
+    <h3>Products in <%= @category.name %></h3>
+    <table class="table table-striped">
+      <thead>
+        <th>ID</th>
+        <th>Name</th>
+      </thead>
+      <% @category.products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= link_to product.name, product %></td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>

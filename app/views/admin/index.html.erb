@@ -1,5 +1,7 @@
 <h1 class="text-center">Viking Store Admin Portal</h1>
 
+<hr>
+
 <div class='row'>
 
   <div class='col-md-3'>
@@ -49,8 +51,8 @@
               <td><%= category.id %></td>
               <td><%= category.name %></td>
               <td><%= link_to "Show", category %></td>
-              <td><%= link_to "Edit" %></td>
-              <td><%= link_to "Delete" %></td>
+              <td><%= link_to "Edit", edit_category_path(category) %></td>
+              <td><%= link_to "Delete", category, method: :delete %></td>
             </tr>
           <% end %>
           </tbody>
