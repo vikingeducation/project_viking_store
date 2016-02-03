@@ -31,7 +31,8 @@
         </div>
       </div>
       <div class="panel-body">
-        <!-- <div class="alert alert&#45;success" role="alert">Success</div> -->
+        <%= flash_messages %>
+
         <%= link_to "Add a New Category", new_category_path, class: "btn btn-primary btn-lg btn-block"%>
         <br>
         <table class="table table-striped">
@@ -47,7 +48,7 @@
             <tr>
               <td><%= category.id %></td>
               <td><%= category.name %></td>
-              <td><%= link_to "Show" %></td>
+              <td><%= link_to "Show", category %></td>
               <td><%= link_to "Edit" %></td>
               <td><%= link_to "Delete" %></td>
             </tr>
