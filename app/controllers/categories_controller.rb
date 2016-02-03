@@ -4,9 +4,19 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
-
   def new
     @category = Category.new
+  end
+
+  def create
+    @category = Category.new(category_params)
+    if @category.save
+      flash[:success] = "You've Sucessfully Created a Category!"
+      redirect_to category_path(@category)
+    else
+      flash.now[:error] = "Error! Category wasn't created!"
+      render :new
+    end
   end
 
   def show
@@ -24,12 +34,20 @@ class CategoriesController < ApplicationController
       flash[:success] = "You've Sucessfully Updated the Category!"
       redirect_to category_path(@category)
     else
-      flash.now[:error] = "Error! Category wasn't be updated!"
+      flash.now[:error] = "Error! Category wasn't updated!"
       render :edit
     end
   end
 
-  def destory
+  def destroy
+     @category = Category.find(params[:id])
+    if @category.destroy
+      flash[:success] = "You've Sucessfully Deleted the Category!"
+      redirect_to categories_path
+    else
+      flash.now[:error] = "Error! Category wasn't deleted!"
+      render :edit
+    end
   end
 
   private

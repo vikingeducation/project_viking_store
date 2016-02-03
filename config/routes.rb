@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :categories
+  resources :products
+  
   root 'dashboard#index'
   get '/dashboard' => 'dashboard#index'
   # The priority is based upon order of creation: first created -> highest priority.
