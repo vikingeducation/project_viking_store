@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   include Analytics
+  layout "admin"
 
   def index
     begin_time = Time.now

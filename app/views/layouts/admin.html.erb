@@ -8,11 +8,17 @@
 </head>
 <body data-no-turbolink>
 
-  <% flash.each do |type, message| %>
-    <div>
-    <strong><%= type.titleize %>! <%= message %></strong>
-    </div>
-  <% end %> 
+
+
+    <% flash.each do |type, message| %>
+      <div class="alert alert-success">
+        <div>
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= type.titleize %>! <%= message %></strong>
+        </div>
+        </div>
+    <% end %> 
+
 
 
   <h1 class='text-center page-header'>Viking Store Admin Portal</h1>
@@ -35,12 +41,14 @@
       <!-- page content -->
       <div class="col-xs-8 col-xs-offset-1">
 
-      <%= yield %>
+        <%= yield %>
 
-      </div>
-    </div>
+      </div> <!-- column -->
+
+    </div> <!-- row -->
 
 
   </div> <!-- container -->
+  
 </body>
 </html>

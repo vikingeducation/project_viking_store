@@ -1,0 +1,44 @@
+<h1 class="text-center">Category <%= @category.id%>: <%= @category.name %></h1>
+
+<div class="well">
+
+<h5>categoryegory ID: <%= @category.id %></h5>
+<h5>Name: <%= @category.name %></h5>
+<h5>Description: <%= @category.description %></h5>
+
+
+<%= link_to "Edit Category", edit_category_path(@category) %>
+<br />
+<%= link_to "Delete Category", category_path(@category), method: :delete %>
+
+
+</div> <!-- well -->
+
+<!-- Products table -->
+
+<h3>Products in <%= @category.name %></h3>
+<div class="panel panel-default">
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <!-- TODO: add actual product link -->
+        <td><%= link_to product.name %></td> 
+
+      </tr>
+
+    <% end %>
+
+    </tbody>
+  </table>
+
+</div> <!-- products -->
