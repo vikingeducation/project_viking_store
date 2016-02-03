@@ -1,0 +1,20 @@
+<% content_for :resource_name do %>
+  Categories
+<% end %>
+
+<h1 class="text-center">Category <%= @product.id %>: <%= @product.name %></h1>
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <h2>Product Information</h2>
+    <h3>ID: <%= @product.id %></h3>
+    <h3>Name: <%= @product.name %></h3>
+    <h3>Price: <%= @product.price %></h3>
+    <h3>Category: <%= @product.category.try(:name) %></h3>
+
+    <h2>Product Statistics</h2>
+
+    <%= link_to "Edit", edit_admin_product_path(@product), class: 'btn btn-default' %>
+    <%= link_to "Delete", admin_product_path(@product), method: :delete, class: 'btn btn-default btn-danger' %>
+  </div>
+</div>

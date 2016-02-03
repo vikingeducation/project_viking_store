@@ -16,8 +16,8 @@
             <li role="presentation"><%= link_to "Users", admin_path %></li>
             <li role="presentation"><%= link_to "Addresses", admin_path %></li>
             <li role="presentation"><%= link_to "Orders", admin_path %></li>
-            <li role="presentation"><%= link_to "Products", admin_path %></li>
-            <li role="presentation" <%= active_for_pill('categories')%>><%= link_to "Categories", admin_path %></li>
+            <li role="presentation" <%= active_for_pill('products') %>><%= link_to "Products", admin_products_path %></li>
+            <li role="presentation" <%= active_for_pill('categories') %>><%= link_to "Categories", admin_categories_path %></li>
             <hr>
             <li role="presentation"><%= link_to "Analytics Dashboard", admin_path %></li>
           </ul>
