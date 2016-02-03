@@ -1,0 +1,12 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+    <%= "#{title}" %>
+  </div>
+  <div class="panel-body">
+    <% panel.each do |table| %>
+
+      <%= render partial: "table", locals: { title: table[:title], table: table[:table] } %>
+
+    <% end %>
+  </div>
+</div>
