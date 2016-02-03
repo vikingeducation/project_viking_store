@@ -39,15 +39,12 @@ class DashboardsController < ApplicationController
     @dates_last_week = {}
 
 
-    (0..6).each do |days_ago|
-      @revenue_last_week[  days_ago ] = Order.revenue_n_days_ago( days_ago )
-      @num_orders_last_week[  days_ago ] = Order.num_orders_n_days_ago( days_ago )
-      @dates_last_week[  days_ago ] = ( DateTime.now - days_ago ).to_s[0..9]
-    end
+    
+    @num_orders_past_n_days = Order.num_orders_past_n_days(7)
+    @revenue_past_n_days = Order.revenue_past_n_days(7)
+    # @dates_last_week[  days_ago ] = ( DateTime.now - days_ago ).to_s[0..9]
 
-
-
-    #######
+    #######  last 7 weeks
 
     @num_orders_past_n_weeks = Order.num_orders_past_n_weeks(7)
     @revenue_past_n_weeks = Order.revenue_past_n_weeks(7)

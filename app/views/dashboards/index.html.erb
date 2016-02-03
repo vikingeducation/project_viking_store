@@ -6,8 +6,7 @@
 
     <div class="row">
       <div class='col-md-12'>
-
-        <%  descriptions = [ 'Item', 'Total Users', 'Orders', 'Products'] %>
+        <%  descriptions = [ 'Item', 'Total Users', 'Orders', 'Products', 'Revenue'] %>
         <%  values = [ 'Data',   @num_total_users, @num_total_orders,  @num_total_products, number_to_currency(@total_revenue)] %>
 
         <%=  render :partial => "table", :locals => { title: "Total", descriptions: descriptions, values: values }%>
@@ -16,29 +15,10 @@
     </div>
     <div class= "row">
       <div class='col-md-12'>
-        <h3>Last 30 Days</h3>
-        <table class='table'>
-          <tr>
-            <td>Item</td>
-            <td>Data</td>
-          </tr>
-          <tr>
-            <td>New Users</td>
-            <td><%= @users_30 %></td>
-          </tr>
-          <tr>
-            <td>Orders</td>
-            <td><%= @orders_30 %></td>
-          </tr>
-          <tr>
-            <td>Products</td>
-            <td><%= @products_30 %></td>
-          </tr>
-          <tr>
-            <td>Revenue</td>
-            <td><%= number_to_currency(@revenue_30) %></td>
-          </tr>
-        </table>
+        <%  descriptions = [ 'Item', 'New Users', 'Orders', 'Products', 'Revenue'] %>
+        <%  values = [ 'Data',   @users_30, @orders_30,  @products_30, number_to_currency(@revenue_30)] %>
+
+        <%=  render :partial => "table", :locals => { title: "Last 30 Days", descriptions: descriptions, values: values }%>
       </div>
     </div>
     <div class= "row">
@@ -250,41 +230,23 @@
             <td>Quantity</td>
             <td>Value</td>
           </tr>
-          <tr>
-            <td>Today</td>
-            <td><%=@num_orders_last_week[0] %></td>
-            <td><%= number_to_currency(@revenue_last_week[0]) %></td>
-          </tr>
-          <tr>
-            <td>Yesterday</td>
-            <td><%=@num_orders_last_week[1] %></td>
-            <td><%= number_to_currency(@revenue_last_week[1]) %></td>
-          </tr>
-          <tr>
-            <td><%= @dates_last_week[2] %> </td>
-            <td><%=@num_orders_last_week[2] %></td>
-            <td><%= number_to_currency(@revenue_last_week[2]) %></td>
-          </tr>
-          <tr>
-            <td><%= @dates_last_week[3] %> </td>
-            <td><%=@num_orders_last_week[3] %></td>
-            <td><%= number_to_currency(@revenue_last_week[3]) %></td>
-          </tr>
-          <tr>
-            <td><%= @dates_last_week[4] %> </td>
-            <td><%=@num_orders_last_week[4] %></td>
-            <td><%= number_to_currency(@revenue_last_week[4]) %></td>
-          </tr>
-          <tr>
-            <td><%= @dates_last_week[5] %> </td>
-            <td><%=@num_orders_last_week[5] %></td>
-            <td><%= number_to_currency(@revenue_last_week[5]) %></td>
-          </tr>
-          <tr>
-            <td><%= @dates_last_week[6] %> </td>
-            <td><%=@num_orders_last_week[6] %></td>
-            <td><%=number_to_currency(@revenue_last_week[6]) %></td>
-          </tr>
+          <% (0...7).each do |num| %>
+
+          <% case num %>
+          <% when 0 %>
+          <%   day_str = "Today"%>
+          <% when 1 %>
+          <%   day_str = "Yesterday" %>
+          <% else %>
+          <%  day_str = ( DateTime.now - num ).to_s[0..9] %>
+          <% end %>
+            <tr>
+              <td><%= day_str %></td>
+              <td><%= @num_orders_past_n_days[num] %></td>
+              <td><%= number_to_currency(@revenue_past_n_days[num]) %></td>
+            </tr>
+
+          <% end %>
         </table>
       </div>
     </div>

@@ -58,6 +58,14 @@ class Order < ActiveRecord::Base
     .count
   end
 
+  def self.num_orders_past_n_days(n)
+    order_arr = []
+    (0...n).each do |num|
+      order_arr[num] = num_orders_n_days_ago( num )
+    end
+    order_arr
+  end
+
   def self.num_orders_past_n_weeks(n)
     order_arr = []
     (0...n).each do |num|
@@ -71,6 +79,15 @@ class Order < ActiveRecord::Base
     .where( str_orders_submitted_n_weeks_ago( n ))
     .sum( "products.price * order_contents.quantity" )
   end
+
+  def self.revenue_past_n_days(n)
+    rev_arr = []
+    (0...n).each do |num|
+      rev_arr[num] = revenue_n_days_ago( num )
+    end
+    rev_arr
+  end
+
 
   def self.revenue_past_n_weeks(n)
     rev_arr = []
