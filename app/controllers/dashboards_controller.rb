@@ -1,4 +1,5 @@
 class DashboardsController < ApplicationController
+  
   def index
     @weekly = {ord_total: Order.total(7), prod_total: Product.total(7), user_total: User.total(7), rev_total: OrderContent.revenue(7)}
     @monthly = {ord_total: Order.total(30), prod_total: Product.total(30), user_total: User.total(30), rev_total: OrderContent.revenue(30)}
@@ -22,6 +23,10 @@ class DashboardsController < ApplicationController
     7.times do |idx|
       @weeks << Order.order_by_week(idx)
     end
+  end
+
+  def new
+    @users = User.all
   end
 
 end
