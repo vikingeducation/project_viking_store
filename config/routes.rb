@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'dashboard#index'
   get '/dashboard' => 'dashboard#index'
+  get '/dashboard/orders_by_day' => 'dashboard#orders_by_day'
+  get '/dashboard/orders_by_week' => 'dashboard#orders_by_week'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
