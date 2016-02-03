@@ -1,8 +1,7 @@
 <% content_for :resource_name, "Categories" %>
 <h1 class="text-center">Edit Category</h1>
-
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-sm-12">
     <%= flash_messages %>
     <%= form_for [:admin, @category] do |f| %>
       <div class="form-group">
@@ -19,3 +18,4 @@
     <%= link_to "Delete", [ :admin, @category ], method: :delete, class: 'btn btn-danger btn-block' %>
   </div>
 </div>
+<br>
