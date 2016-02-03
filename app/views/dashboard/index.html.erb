@@ -1,0 +1,74 @@
+<h1 class='text-center page-header'>Viking Store Analytics Dashboard</h1>
+
+
+
+
+<div class='row'>
+  <div class='col-xs-5 panel panel-default'>
+
+      <h4 class='text-center'>1. Overall Platform</h4>
+
+      <h5>Last 7 days</h5>
+      <%= render partial: 'basic_table', locals: {data_hash: @overall_seven_days} %>
+
+      <h5>Last 30 days</h5>
+      <%= render partial: 'basic_table', locals: {data_hash: @overall_thirty_days} %>
+
+      <h5>Totals</h5>
+      <%= render partial: 'basic_table', locals: {data_hash: @overall_totals} %>
+    </div>
+
+  <div class='col-xs-5 col-xs-offset-2 panel panel-default'>
+      <h4 class='text-center'>2. User Demographics and Behavior</h4>
+
+      <h5>Top 3 States Users Live In</h5>
+      <%= render partial: 'basic_table', locals: {data_hash: @three_states}  %>
+
+      <h5>Top 3 Cities Users Live In</h5>
+      <%= render partial: 'basic_table', locals: {data_hash: @three_cities}  %>
+
+      <h5>Top User With...</h5>
+      <%= render partial: 'dynamic_table', locals: { data: @data } %>
+
+
+  </div>
+</div> <!-- row -->
+
+
+<div class='row'>
+  <div class='col-xs-5 panel panel-default'>
+      <h4 class='text-center'>3. Order Statistics</h4>
+
+      <h5>Last 7 days</h5>
+      <%= render partial: 'basic_table', locals: {data_hash: @order_seven_days} %>
+
+      <h5>Last 30 days</h5>
+      <%= render partial: 'basic_table', locals: {data_hash: @order_thirty_days} %>
+
+      <h5>Total</h5>
+      <%= render partial: 'basic_table', locals: {data_hash: @order_totals} %>
+
+  </div>
+
+  <div class='col-xs-5 col-xs-offset-2 panel panel-default'>
+      <h4 class='text-center'>4. Time Series Data</h4>
+
+      <h5>Orders By Day</h5>
+        <%= render partial: 'dynamic_table', locals: {data: @daily_timeseries_data}  %>
+
+
+      <h5>Orders By Week</h5>
+        <%= render partial: 'dynamic_table', locals: {data: @weekly_timeseries_data}  %>
+
+  </div>
+</div>
+
+  <div class='row'>
+    <div class='col-xs-12 panel panel-default'>
+      <h4 class='text-center'>5. Advanced</h4>
+      <h5>Top Users In Top 3 States</h5>
+      <%= render partial: 'dynamic_table', locals: {data: @top_users_by_state} %>
+    </div>
+  </div>
+</div>
+

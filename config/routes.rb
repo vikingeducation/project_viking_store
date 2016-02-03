@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
-  root 'dashboards#index'
+
+
+  root 'dashboard#index'
+
+  # TODO: switch to resources :admin do
+  # when we have admin controller, model, etc.
+
+  scope "/admin" do
+    resources :dashboard, only: [:index, :get]
+    resources :categories
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
