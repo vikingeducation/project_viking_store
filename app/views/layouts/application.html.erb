@@ -9,7 +9,20 @@
 <body>
 
   <div class="container">
-    <%= yield %>
+    <div class="row">
+      <div class="col col-xs-12">
+        <h1 class="page-header text-center">Viking Store Admin Portal</h1> 
+      </div>  
+    </div> 
+
+    <div class="row">
+      <div class="col-xs-3">
+        <%= render partial: 'shared/navbar'%>
+      </div>
+      <div class="col-xs-9">
+        <%= yield %>
+      </div>
+    </div>  
   </div>
 
 </body>
