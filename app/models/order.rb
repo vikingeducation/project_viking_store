@@ -14,12 +14,13 @@ class Order < ActiveRecord::Base
 
 
   def self.orders_total
-    Order.all.count
+    Order.all.where("orders.checkout_date IS NOT NULL").count
   end
 
   def self.revenue_total
     Order.joins("AS o JOIN order_contents oc ON o.id = oc.order_id")
          .joins("JOIN products p ON p.id = oc.product_id")
+         .where("o.checkout_date IS NOT NULL")
          .sum("oc.quantity * p.price")
   end
 
