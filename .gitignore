@@ -7,6 +7,8 @@
 # Ignore bundler config.
 /.bundle
 
+/db/schema.rb
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
@@ -19,9 +21,3 @@
 solution_viking_store_development
 solution_viking_store_test
 
-# Ignore database.yml
-/config/database.yml
-
-# Ignore gemfile, gemfile.lock
-Gemfile
-Gemfile.lock

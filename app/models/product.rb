@@ -1,10 +1,13 @@
 class Product < ActiveRecord::Base
-  def self.new_products_since(start_date)
-    products = Product.where("created_at > '#{start_date}'").count
-  end
 
-  def self.total_products
-    Product.all.count
+
+  def self.total(days=nil)
+    if days.nil?
+      self.all.count
+    else
+      self.all.where("created_at > CURRENT_DATE - interval '#{days} day' ").count
+    end
+
   end
 
 end

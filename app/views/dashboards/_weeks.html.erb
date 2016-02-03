@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+  <tr>
+  <th>Date</th>
+  <th>Quantity</th>
+  <th>Value</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% data.each_with_index do |weeks, index| %>
+      <tr>
+        <td><%= (Date.today - index*7).strftime("%m/%d") %></td>
+        <td><%= weeks[0].total %></td>
+        <td><%= number_to_currency(weeks[0].value) %></td>
+      </tr>
+    <% end %>
+    
+  </tbody>
+</table>

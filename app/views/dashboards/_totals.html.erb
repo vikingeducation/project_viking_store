@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+  <tr>
+  <th>Item</th>
+  <th>Data</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Total Users</td>
+      <td><%= data[:user_total] %></td>
+    </tr>
+    <tr>
+      <td>Total Orders</td>
+      <td><%= data[:ord_total] %></td>
+    </tr>
+    <tr>
+      <td>Products listed</td>
+      <td><%= data[:prod_total] %></td>
+    </tr>
+    <tr>
+      <td>Total Revenue</td>
+      <td><%= number_to_currency(data[:rev_total]) %></td>
+    </tr>
+  </tbody>
+</table>

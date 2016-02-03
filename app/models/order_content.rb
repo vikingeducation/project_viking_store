@@ -1,42 +1,43 @@
 class OrderContent < ActiveRecord::Base
 
-  def self.revenue_since(start_date)
-    total_revenue = 0
 
-    orders = Order.where("created_at > '#{start_date}'")
-
-    orders.each do |order|
-      product_table = OrderContent.select("product_id", "quantity").where("order_id = '#{order.id}'")
-
-      # SUM(product_table.quantity * p)
-
-      product_table.each do |product|
-        price = Product.select("price").where("id = #{product.product_id}").to_a[0].price
-        total_revenue += product.quantity * price
-      end
+  def self.revenue(days=nil)
+    if days.nil?
+      self.joins("JOIN products ON product_id = products.id").sum("products.price * order_contents.quantity")
+    else
+      self.joins("JOIN products ON product_id = products.id").joins("JOIN orders ON orders.id = order_contents.order_id").where("orders.checkout_date > CURRENT_DATE - interval '#{days} day' ").sum("products.price * order_contents.quantity")
     end
-
-    total_revenue
   end
 
-  def self.total_revenue
-    total_revenue = 0
-
-    orders = Order.all
-
-    orders.each do |order|
-      product_table = OrderContent.select("product_id", "quantity").where("order_id = '#{order.id}'")
-
-      # SUM(product_table.quantity * p)
-
-      product_table.each do |product|
-        price = Product.select("price").where("id = #{product.product_id}").to_a[0].price
-        total_revenue += product.quantity * price
-      end
+  def self.biggest_order(days=nil)
+    if days.nil?
+      self.select("SUM(products.price * order_contents.quantity) AS value, orders.id, users.first_name, users.last_name").joins("JOIN orders ON order_id = orders.id").joins("JOIN products ON product_id = products.id").joins("JOIN users ON user_id = users.id").group("orders.id, users.first_name, users.last_name").order("value DESC").limit(1)
+    else
+      self.select("SUM(products.price * order_contents.quantity) AS value, orders.id, users.first_name, users.last_name").joins("JOIN orders ON order_id = orders.id").joins("JOIN products ON product_id = products.id").joins("JOIN users ON user_id = users.id").where("orders.checkout_date > CURRENT_DATE - #{days}").group("orders.id, users.first_name, users.last_name").order("value DESC").limit(1)
     end
-
-    total_revenue
   end
-  
+
+  def self.biggest_lifetime
+    self.select("SUM(products.price * order_contents.quantity) AS value, users.id, users.first_name, users.last_name").joins("JOIN orders ON order_id = orders.id").joins("JOIN products ON product_id = products.id").joins("JOIN users ON user_id = users.id").group("users.id, users.first_name, users.last_name").order("value DESC").limit(1)
+  end
+
+  def self.average_order
+    self.select("AVG(products.price * order_contents.quantity) AS value, orders.id, users.first_name, users.last_name").joins("JOIN orders ON order_id = orders.id").joins("JOIN products ON product_id = products.id").joins("JOIN users ON user_id = users.id").group("orders.id, users.first_name, users.last_name").order("value DESC").limit(1)
+  end
+
+  def self.most_orders
+     self.select("COUNT(orders.id) AS value, users.id, users.first_name, users.last_name").joins("JOIN orders ON order_id = orders.id").joins("JOIN products ON product_id = products.id").joins("JOIN users ON user_id = users.id").group("users.id, users.first_name, users.last_name").order("value DESC").limit(1)
+  end
+
+  def self.average_orders(days=nil)
+    if days.nil?
+      subquery = self.select("SUM(products.price * order_contents.quantity) AS sum, orders.id").joins("JOIN products ON product_id = products.id").joins("JOIN orders ON order_id = orders.id").group("orders.id")
+      from(subquery).select("AVG(sum)")
+    else
+      subquery = self.select("SUM(products.price * order_contents.quantity) AS sum, orders.id").joins("JOIN products ON product_id = products.id").joins("JOIN orders ON order_id = orders.id").where("orders.checkout_date > CURRENT_DATE - #{days}").group("orders.id")
+      from(subquery).select("AVG(sum)")
+    end
+  end
+
 
 end

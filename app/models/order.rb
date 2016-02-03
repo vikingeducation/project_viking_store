@@ -1,37 +1,25 @@
 class Order < ActiveRecord::Base
-  def self.new_orders_since(start_date)
-    Order.where("created_at > '#{start_date}'").count
+
+
+  def self.total(days=nil)
+    if days.nil?
+      self.all.count
+    else
+      self.all.where("checkout_date > CURRENT_DATE - interval '#{days} day' ").count
+    end
   end
 
-  def self.total_orders
-    Order.all.count
+  def self.order_by_day(days)
+    subquery = self.select("COUNT(orders.id) AS ord, SUM(products.price * order_contents.quantity) AS val, orders.checkout_date").joins("JOIN order_contents ON order_id = orders.id").joins("JOIN products ON order_contents.product_id = products.id").where("checkout_date IS NOT NULL AND checkout_date BETWEEN CURRENT_DATE - #{days} AND CURRENT_DATE - #{days-1}").group("orders.checkout_date")
+    from(subquery).select("SUM(ord) as total, SUM(val) as value")
   end
 
-   def self.order_value_avg_since(start_date)
-  Order.select("AVG(quantity * price) AS average").joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON order_contents.product_id = products.id").where("orders.created_at > '#{start_date}'").to_a[0].average.round(2)
+  def self.order_by_week(weeks)
+    subquery = self.select("COUNT(orders.id) AS ord, SUM(products.price * order_contents.quantity) AS val, orders.checkout_date").joins("JOIN order_contents ON order_id = orders.id").joins("JOIN products ON order_contents.product_id = products.id").where("checkout_date IS NOT NULL AND checkout_date BETWEEN CURRENT_DATE - interval '#{weeks} weeks' AND CURRENT_DATE - interval '#{weeks-1} weeks' ").group("orders.checkout_date")
+    from(subquery).select("SUM(ord) as total, SUM(val) as value")
   end
 
-  def self.order_value_max_since(start_date)
-    Order.select("MAX(quantity * price) AS maximum").joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON order_contents.product_id = products.id").where("orders.created_at > '#{start_date}'").group("orders.id").to_a[0].maximum.round(2)
-  end
-  
-  def self.order_value_avg
-    Order.select("AVG(quantity * price) AS average").joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON order_contents.product_id = products.id").to_a[0].average.round(2)
-  end
 
-  def self.order_value_max
-    Order.select("MAX(quantity * price) AS maximum").joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON order_contents.product_id = products.id").group("orders.id").to_a[0].maximum.round(2)
-  end
-
-  def self.order_by_day_count(start_date)
-    Order.where("created_at BETWEEN start_date AND start_date-1.day").count
-  end
-
-  def self.order_by_week_count(start_date)
-    Order.where("created_at BETWEEN start_date AND start_date-7.day").count
-  end
-
- 
 end
 
 
