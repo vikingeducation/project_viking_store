@@ -154,7 +154,7 @@
           <td><%= @users.most_orders.orders %></td>
         </tr>
       </table>
-
+      
     </div>
   </div>
 </div>
@@ -163,10 +163,96 @@
   <div class='row'>
     <div class='col-sm-6'>
       <h2 class='text-center'>3. Order Statistics</h2>
+      <h3>Last 7 Days</h3>
+      <table class='table'>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+        <tr>
+          <td>Orders</td>
+          <td><%= @orders.new_orders_since(Time.now - 7.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Total Revenue</td>
+          <td><%= @order_contents.revenue_since(Time.now - 7.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Ave Order Value</td>
+          <td><%= @orders.order_value_avg_since(Time.now - 7.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Largest Order Value</td>
+          <td><%= @orders.order_value_max_since(Time.now - 7.days) %></td>
+        </tr>
+
+      </table>
+      <h3>Last 30 Days</h3>
+      <table class='table'>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+        <tr>
+          <td>Orders</td>
+          <td><%= @orders.new_orders_since(Time.now - 30.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Revenue</td>
+          <td><%= @order_contents.revenue_since(Time.now - 30.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Ave Order Value</td>
+          <td><%= @orders.order_value_avg_since(Time.now - 30.days) %></td>
+        </tr>
+
+        <tr>
+          <td>Largest Order Value</td>
+          <td><%= @orders.order_value_max_since(Time.now - 30.days) %></td>
+        </tr>
+      </table>
+       <h3>Total</h3>
+      <table class='table'>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+        <tr>
+          <td>Number of Orders</td>
+          <td><%= @orders.total_orders %></td>
+        </tr>
+        <tr>
+          <td>Total Revenue</td>
+          <td><%= @order_contents.total_revenue %></td>
+        </tr>
+
+        <tr>
+          <td>Ave Order Value</td>
+          <td><%= @orders.order_value_avg %></td>
+        </tr>
+
+        <tr>
+          <td>Largest Order Value</td>
+          <td><%= @orders.order_value_max %></td>
+        </tr>
+      </table>
+
     </div>
+
 
     <div class='col-sm-6'>
       <h2 class='text-center'>4. Time Series Data</h2>
+      <h3>Orders by Day</h3>
+      <table class='table'>
+      </table>
+      <h3>Orders by Week</h3>
+      <table class='table'>
+      </table>
     </div>
   </div>
 </div>
