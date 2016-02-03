@@ -1,23 +1,10 @@
 class DashboardController < ApplicationController
-  include Analytics
-
   def index
-    begin_time = Time.now
-    puts "Begin time: #{begin_time}"
+    @highest_order_value = User.highest_order_value.first
+    @highest_lifetime_order_value = User.highest_lifetime_order_value.first
+    @highest_average_order_value = User.highest_average_order_value.first
 
-    panel_one
-    panel_two
-    panel_three
-    panel_four
-    panel_five
-
-    end_time = Time.now
-    puts "Time taken is #{end_time - begin_time}."
+    @orders_by_day = Order.orders_by_day.limit(7)
+    @orders_by_week = Order.orders_by_week.limit(7)
   end
-
-  def get
-  end
-
-
-
 end

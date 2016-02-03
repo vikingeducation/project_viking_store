@@ -1,99 +1,60 @@
 class Order < ActiveRecord::Base
+  has_many :order_contents
 
-  def self.count_recent(n)
-    Order.all.where("checkout_date BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
+  def self.recent(num_days = 7)
+    Order.processed.where("orders.checkout_date >= ? ", num_days.days.ago.beginning_of_day)
   end
 
-
-  def self.revenue_recent(n)
-    Order.joins("AS o JOIN order_contents oc ON o.id = oc.order_id")
-         .joins("JOIN products p ON p.id = oc.product_id")
-         .where("o.checkout_date BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()")
-         .sum("oc.quantity * p.price")
+  def self.total_revenue
+    Order.processed.joins("JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id ").sum("quantity * price").to_f
   end
 
-
-  def self.orders_total
-    Order.all.where("orders.checkout_date IS NOT NULL").count
+  def self.processed
+    Order.where("checkout_date IS NOT NULL")
   end
 
-  def self.revenue_total
-    Order.joins("AS o JOIN order_contents oc ON o.id = oc.order_id")
-         .joins("JOIN products p ON p.id = oc.product_id")
-         .where("o.checkout_date IS NOT NULL")
-         .sum("oc.quantity * p.price")
+  def self.top_states
+    Order.processed.select("states.name").
+      joins("JOIN addresses ON addresses.id = orders.billing_id").
+      joins("JOIN states ON states.id = addresses.state_id").
+      group("states.name").
+      order("COUNT(states.name) DESC").
+      limit(3)
+      .count
   end
 
-
-  def self.average_order(n)
-    Order.joins("AS o JOIN users u on u.id = o.user_id")
-         .joins("JOIN order_contents oc ON oc.order_id = o.id")
-         .joins("JOIN products p ON p.id = oc.product_id")
-         .where("o.checkout_date BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()")
-         .average("(oc.quantity * p.price)")
+  def self.average_value
+    Order.select("order_total").from(Order.order_totals, :orders).average("order_total")
   end
 
-
-  def self.largest_order(n)
-    Order.select("SUM(oc.quantity * p.price) AS largest_order")
-         .joins("AS o JOIN order_contents oc ON oc.order_id = o.id")
-         .joins("JOIN products p ON p.id = oc.product_id")
-         .where("o.checkout_date BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()")
-         .group("o.id")
-         .order("largest_order DESC")
-         .limit(1)
+  def self.largest_value
+    Order.select("order_total").from(Order.order_totals, :orders).maximum("order_total")
   end
 
-  def self.average_total
-    Order.joins("AS o JOIN users u on u.id = o.user_id")
-         .joins("JOIN order_contents oc ON oc.order_id = o.id")
-         .joins("JOIN products p ON p.id = oc.product_id")
-         .where("o.checkout_date IS NOT NULL")
-         .average("(oc.quantity * p.price)")
+  def self.order_totals
+    Order.processed.select("orders.*, SUM(price * quantity) AS order_total").joins("JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id").group("orders.id")
   end
 
-  def self.largest_total
-    Order.joins("AS o JOIN order_contents oc ON oc.order_id = o.id")
-         .joins("JOIN products p ON p.id = oc.product_id")
-         .where("o.checkout_date IS NOT NULL")
-         .maximum("oc.quantity * p.price")
+  def self.orders_by_day
+    Order.join_days.select("day, COALESCE(SUM(order_total), 0) as sum, COUNT(order_total) as quantity").
+      from(Order.order_totals, :orders).
+      group("day").
+      order("day DESC")
   end
 
-
-
-  def self.daily_timeseries_orders
-    Order.find_by_sql("
-      SELECT
-        DATE(days) AS day,
-        SUM(oc.quantity * p.price) AS daily_sum,
-        COUNT(o.*) AS num_orders
-        FROM GENERATE_SERIES((
-          SELECT DATE(MIN(checkout_date)) FROM orders
-        ), CURRENT_DATE, '1 DAY'::INTERVAL) days
-        LEFT JOIN orders o ON DATE(o.checkout_date) = days
-        LEFT JOIN order_contents oc ON oc.order_id = o.id
-        LEFT JOIN products p ON p.id = oc.product_id
-        GROUP BY days
-        ORDER BY days DESC LIMIT 7;")
+ #Joins orders table by week (empty rows where no orders on week)
+  def self.orders_by_week
+    Order.join_weeks.select("week, COALESCE(SUM(order_total), 0) as SUM, COUNT(order_total) as quantity").
+      from(Order.order_totals, :orders).
+      group("week").
+      order("week DESC")
   end
 
-
-  def self.weekly_timeseries_orders
-    Order.find_by_sql("
-      SELECT
-      DATE(weeks) AS week,
-      SUM(oc.quantity * p.price) AS weekly_sum,
-      COUNT(o.*) AS num_orders
-      FROM GENERATE_SERIES((
-        SELECT DATE(DATE_TRUNC('WEEK', MIN(checkout_date))) FROM orders)
-      , CURRENT_DATE, '1 WEEK'::INTERVAL) weeks
-      LEFT JOIN orders o ON DATE(DATE_TRUNC('WEEK', o.checkout_date)) = weeks
-      LEFT JOIN order_contents oc ON oc.order_id = o.id
-      LEFT JOIN products p ON p.id = oc.product_id
-      GROUP BY weeks
-      ORDER BY weeks DESC LIMIT 7;")
+  def self.join_days
+    Order.joins "RIGHT JOIN GENERATE_SERIES((SELECT DATE(MIN(checkout_date)) FROM orders), CURRENT_DATE, '1 DAY'::INTERVAL) day ON DATE(orders.checkout_date) = day"
   end
 
-
-
+  def self.join_weeks
+    Order.joins "RIGHT JOIN GENERATE_SERIES((SELECT DATE(DATE_TRUNC('WEEK', MIN(checkout_date))) FROM orders), CURRENT_DATE, '1 WEEK'::INTERVAL) week ON DATE(DATE_TRUNC('WEEK', orders.checkout_date)) = week"
+  end
 end

@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
 
 
   root 'dashboard#index'
   resources :dashboard, only: [:index, :get]
 
+=======
+  root 'dashboard#index'
+  get '/dashboard' => 'dashboard#index'
+>>>>>>> 6fd7c8526df8366f58d7aae5f9a55b84bef6ae7a
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
