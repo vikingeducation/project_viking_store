@@ -39,6 +39,7 @@ class Order < ActiveRecord::Base
     Order.join_days.select("day, COALESCE(SUM(order_total), 0) as sum, COUNT(order_total) as quantity").
       from(Order.order_totals, :orders).
       group("day").
+      where("day < ?", Date.today + 1).
       order("day DESC")
   end
 
