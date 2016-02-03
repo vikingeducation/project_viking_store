@@ -6,30 +6,13 @@
 
     <div class="row">
       <div class='col-md-12'>
-        <h3>Total</h3>
-        <table class='table'>
-          <tr>
-            <td>Item</td>
-            <td>Data</td>
-          </tr>
-          <tr>
-            <td>Total Users</td>
-            <td><%= @num_total_users %></td>
-          </tr>
-          <tr>
-            <td>Orders</td>
-            <td><%= @num_total_orders %></td>
-          </tr>
-          <tr>
-            <td>Products</td>
-            <td><%= @num_total_products %></td>
-          </tr>
-          <tr>
-            <td>Revenue</td>
-            <td><%= number_to_currency(@total_revenue) %></td>
-          </tr>
-        </table>
-      </div>
+
+        <%  descriptions = [ 'Item', 'Total Users', 'Orders', 'Products'] %>
+        <%  values = [ 'Data',   @num_total_users, @num_total_orders,  @num_total_products, number_to_currency(@total_revenue)] %>
+
+        <%=  render :partial => "table", :locals => { title: "Total", descriptions: descriptions, values: values }%>
+
+     </div>
     </div>
     <div class= "row">
       <div class='col-md-12'>
