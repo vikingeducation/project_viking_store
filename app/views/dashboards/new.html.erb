@@ -32,6 +32,7 @@
             <td>Edit</td>
             <td>Delete</td>
           </tr>
+<<<<<<< HEAD
           <% @users.each do |user| %>
             <tr>
               <td><%=user.id%></td>
@@ -40,6 +41,25 @@
 
             </tr>
           <%end%>
+=======
+          
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= user.name %></td>
+              <td><%= user.joined.strftime("%Y-%m-%d") %></td>
+              <td><%= user.city %></td>
+              <td><%= user.state %></td>
+              <td><%= user.orders %></td>
+              <td>
+                <% unless @last_date[user.id][0].nil? %>
+                  <%= @last_date[user.id][0].date.strftime("%Y-%m-%d") %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+    
+>>>>>>> b9f118943be41dec7064101c2b45638a98421fa5
         </table>
       </div>
     </div>

@@ -10,4 +10,6 @@ module DashboardsHelper
   def total(query)
    query.count
   end
+
+  
 end
