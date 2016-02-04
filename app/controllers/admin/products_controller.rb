@@ -27,11 +27,21 @@ class Admin::ProductsController < AdminController
 
   def update
     @product = Product.find(params[:id])
-    @product.update(product_params)
+    if @product.update(product_params)
+      redirect_to admin_product_path(@product), notice: "Product Updated!"
+    else
+      flash.now[:alert] = "Failed to update product."
+      render :edit
+    end
   end
 
   def destroy
     @product = Product.find(params[:id])
+    if @product.destroy
+      redirect_to admin_products_path, notice: "Product Destroyed!"
+    else
+      redirect_to admin_product_path(@product), alert: "Failed to destroy product."
+    end
   end
 
   private
