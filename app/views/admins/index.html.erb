@@ -1,0 +1,62 @@
+
+
+<h2 class="text-center">Viking Store Admin Portal</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3 text-center">
+      <h5>Navigation Options</h5>
+      <p></p>
+      <ul class="nav nav-pills nav-stacked">
+        <li>Users</li>
+        <li>Addresses</li>
+        <li>Orders</li>
+        <li>Products</li>
+        <li>Categories</li>
+      </ul>
+
+      <p></p>
+
+      <footer>
+        Analytics Dashboard
+      </footer>
+    </div>
+    <div class="col-sm-9">
+      <h3 class="text-center">Viking Store Users</h3>
+      <button class='btn btn-primary'>Create A New User</button>
+
+      <table class='table table-striped table-bordered'>
+        <th>
+          <td>ID</td>
+          <td>Name</td>
+          <td>Joined</td>
+          <td>City</td>
+          <td>State</td>
+          <td>Orders</td>
+          <td>Last Order Date</td>
+          <td>Show</td>
+          <td>Edit</td>
+          <td>Delete</td>
+        </th>
+        
+        <% @users.all.each do |user| %>
+          <tr>
+            <td><%= user.billing_id %></td>
+            <td><%= user.first_name %> <%= user.last_name %></td>
+            <td><%= user.created_at %></td>
+            <td><%= @user_city[user.id] %></td>
+            <td><%= @user_state[user.id] %></td>
+            <td><%= orders %></td>
+            <td><%= link_to "show", root_path %></td>
+            <td><%= link_to "edit", root_path %></td>
+            <td><%= link_to "delete", root_path %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+
+

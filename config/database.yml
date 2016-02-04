@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: project_viking_store_dev
+
+test:
+  <<: *default
+  database: project_viking_store_test
+
+production:
+  <<: *default
+  database: project_viking_store

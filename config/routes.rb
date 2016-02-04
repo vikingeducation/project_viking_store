@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  root to: 'dashboard#index'
-  resources :dashboard
+
+  resources :dashboards, only: [:index]
+
+  root 'dashboards#index'
+  get '/dashboard' => 'dashboards#index'
+  get '/admin' => 'admins#index'
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
