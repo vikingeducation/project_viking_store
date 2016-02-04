@@ -26,7 +26,7 @@ class DashboardsController < ApplicationController
   end
 
   def new
-    @users = User.all
+    @users = User.all.limit(9)
   end
 
 end

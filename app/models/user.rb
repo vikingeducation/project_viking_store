@@ -17,5 +17,12 @@ class User < ActiveRecord::Base
     self.select("COUNT(*) AS user_count, cities.name").joins("JOIN addresses ON addresses.user_id = users.id").joins("JOIN cities ON cities.id = addresses.city_id").group("cities.name").order("user_count DESC").limit(3)
   end
 
+  def self.user_address
+    self.select("cities.name, states.name").
+    joins("JOIN addresses ON addresses.user_id = users.id").
+    joins("JOIN cities ON addresses.city_id = cities.id").
+    joins("JOIN states ON addresses.state_id = states.id")
+  end
+
 
 end
