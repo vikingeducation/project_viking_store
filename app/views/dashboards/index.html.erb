@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">
+      <h2>Overall Platform</h2>
+      <h4>Last 7 Days</h4>
+      <%= render partial: 'totals', locals: {data: @weekly} %>
+
+      <h4>Last 30 Days</h4>
+      <%= render partial: 'totals', locals: {data: @monthly} %>
+
+      <h4>Total</h4>
+      <%= render partial: 'totals', locals: {data: @total} %>
+    </div>
+
+    <div class="col-xs-6">
+      <h2>User Demographics and Behavior</h2>
+      <h4>Top 3 States Users Live In</h4>
+      <%= render partial: 'states', locals: {data: @states_list} %>
+
+      <h4>Top 3 Cities Users Live In</h4>
+      <%= render partial: 'states', locals: {data: @cities_list} %>
+
+      <h4>Top Users With...</h4>
+        <%= render partial: 'top', locals: {data: @biggest_order } %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-6">
+      <h2>Order Statistics</h2>
+      <h4>Last 7 Days</h4>
+      <%= render partial: 'stats', locals: {data: @weekly_stats} %>
+
+      <h4>Last 30 Days</h4>
+      <%= render partial: 'stats', locals: {data: @monthly_stats} %>
+
+      <h4>Total</h4>
+      <%= render partial: 'stats', locals: {data: @total_stats} %> 
+    </div>
+
+    <div class="col-xs-6">
+      <h2>Time Series Data</h2>
+      <h4>Orders by day</h4>
+      <%= render partial: 'series', locals: {data: @days} %>
+
+      <h4>Orders by week</h4>
+      <%= render partial: 'weeks', locals: {data: @weeks} %>
+    </div>
+  </div>
+</div>
