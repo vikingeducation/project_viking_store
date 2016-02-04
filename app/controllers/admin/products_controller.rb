@@ -16,7 +16,7 @@ class Admin::ProductsController < AdminController
     if @product.save
       redirect_to admin_product_path(@product), notice: "Product Created!"
     else
-      flash.now[:notice] = "Failed to create product."
+      flash.now[:alert] = "Failed to create product."
       render :new
     end
   end
