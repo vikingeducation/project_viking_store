@@ -1,0 +1,46 @@
+<div class = 'container'>
+
+    <div class='col-md-3'>
+        <%= render partial: "/edits/editbar"%>
+    </div>
+
+    <div class = 'col-md-9'>
+    <%= link_to "Create A New One", new_category_path,
+                         :class => "btn btn-primary btn-lg" %>
+      <hr>
+      <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Show details</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            <%@cates.each do |cate|%>
+                <tr>
+                    <td><%= cate.name%></td>
+                    <td><%= cate.description%></td>
+                    <td>
+                        <%= link_to "Details", category_path(cate),
+                         :class => "btn btn-default" %>
+                    </td>
+                    <td>
+                        <%= link_to "Edit", edit_category_path(cate),
+                         :class => "btn btn-default" %>
+                    </td>
+                    <td>
+                        <%= link_to "Delete", cate,
+                         :class => "btn btn-danger",
+                         :data => {:confirm => 'Are you sure?',
+                          :method => :delete} %>
+                    </td>
+                </tr>
+             <%end%>
+             </tbody>
+      </table>
+      </div>
+
+</div>

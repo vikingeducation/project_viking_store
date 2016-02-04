@@ -1,0 +1,41 @@
+<div class = 'container'>
+
+    <div class='col-md-3'>
+        <%= render partial: "/edits/editbar"%>
+    </div>
+    <div class = 'col-md-9'>
+    <%= link_to "Create A New One", new_address_path,
+                         :class => "btn btn-primary btn-lg"
+                         %>
+      <hr>
+      <table class="table">
+            <thead>
+                <tr>
+                    <th>Street Address</th>
+                    <th>Address Holder</th>
+                    <th>Detail and Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            <%@addr.each do |adr|%>
+                <tr>
+                    <td><%= adr.street_address%></td>
+                    <td><%= adr.user.first_name%> <%= adr.user.last_name%></td>
+                    <td>
+                        <%= link_to "Edit", edit_address_path(adr),
+                         :class => "btn btn-default" %>
+                    </td>
+                    <td>
+                        <%= link_to "Delete", adr,
+                         :class => "btn btn-danger",
+                         :data => {:confirm => 'Are you sure?',
+                          :method => :delete}
+                          %>
+                    </td>
+                </tr>
+             <%end%>
+             </tbody>
+      </table>
+      </div>
+</div>

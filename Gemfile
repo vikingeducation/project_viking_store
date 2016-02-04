@@ -33,10 +33,22 @@ gem 'faker'
 
 # Use unicorn as the app server
 # gem 'unicorn'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development, :test do
+  # Note: Need to pull this fork directly because
+  # the original uses pry-debugger which doesn't work
+  # with Ruby 2
+  gem 'guard-rspec'
+  gem 'rspec-rails'
+  gem 'jazz_hands', github: 'jkrmr/jazz_hands'
+  gem 'pry-byebug'
+  gem "better_errors"
+  gem "binding_of_caller"
+end

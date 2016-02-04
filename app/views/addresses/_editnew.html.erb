@@ -1,0 +1,53 @@
+<%= form_for user do |t|%>
+    <table class="table">
+
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>street_address</td>
+                    <td><%= t.text_field :street_address%></td>
+                </tr>
+
+                <tr>
+                    <td>secondary_address</td>
+                    <td><%= t.text_field :secondary_address%></td>
+                </tr>
+
+                <tr>
+                    <td>zip code</td>
+                    <td><%= t.text_field :zip_code%></td>
+                </tr>
+
+                <tr>
+                    <td>city id</td>
+                    <td><%= t.text_field :city_id%></td>
+                </tr>
+
+                <tr>
+                    <td>user id</td>
+                    <td>
+                    <%= t.text_field :user_id, :value => user_id
+                     #if (user_id != nil) (:readonly => "readonly") 
+                        %></td>
+                </tr>
+
+                <tr>
+                        <td>category_id</td>
+                        <td>
+                             <div class="form-group">
+                                  <%= t.select(:state_id, options_for_select(states), {}, {class: "form-control"}) %>
+                             </div>
+                        </td>
+               </tr>
+
+             </tbody>
+    </table>
+    <%= t.submit "Submit", :class => "btn btn-info" %>
+<%end%>

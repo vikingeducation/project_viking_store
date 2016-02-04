@@ -1,0 +1,138 @@
+<div class = 'container'>
+    <div class='col-md-6'>
+        <h2>Overall Platform</h2>
+        <%= render partial: "overall",
+            :locals => {
+            :quote => "overall data",
+            :user_num => User.number,
+            :product_num => Product.number,
+            :orders_num => Order.number,
+            :revenue_num => Order.total(10000).round
+            }%>
+        <%= render partial: "overall",
+            :locals => {
+            :quote => "30 days data",
+            :user_num => User.number_in(30),
+            :product_num => Product.number_in(30),
+            :orders_num => Order.number_in(30),
+            :revenue_num => Order.total(30).round
+            }%>
+        <%= render partial: "overall",
+            :locals => {
+            :quote => "one week data",
+            :user_num => User.number_in(7),
+            :product_num => Product.number_in(7),
+            :orders_num => Order.number_in(7),
+            :revenue_num => Order.total(7).round
+            }%>
+    </div>
+    <div class='col-md-6'>
+        <h2>User Demographics and Behavior</h2>
+
+        <h3>States users live in</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>State</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @top_3.each do |t|%>
+                <tr>
+                    <td><%= t['name']%></td>
+                    <td><%= t['count']%></td>
+                </tr>
+                <%end%>
+            </tbody>
+        </table>
+
+        <h3>Cities users live in</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @ctop_3.each do |t|%>
+                <tr>
+                    <td><%= t['name']%></td>
+                    <td><%= t['count']%></td>
+                </tr>
+                <%end%>
+            </tbody>
+        </table>
+
+        <h3>Valueble buyers</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Prize</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @top_1_buyer.each do |t|%>
+                <tr>
+                    <td>Highest single order value</td>
+                    <td><%= t['name']%></td>
+                    <td><%= t['value']%></td>
+                </tr>
+                <%end%>
+                <% @top_o_buyer.each do |t|%>
+                <tr>
+                    <td>Highest overall order value</td>
+                    <td><%= t['name']%></td>
+                    <td><%= t['overall']%></td>
+                </tr>
+                <%end%>
+                 <% @top_a_buyer.each do |t|%>
+                <tr>
+                    <td>Highest average order value</td>
+                    <td><%= t['name']%></td>
+                    <td><%= t['avg']%></td>
+                </tr>
+                <%end%>
+                <% @top_m_buyer.each do |t|%>
+                <tr>
+                    <td>Highest times order value</td>
+                    <td><%= t['name']%></td>
+                    <td><%= t['number']%></td>
+                </tr>
+                <%end%>
+            </tbody>
+        </table>
+    </div>
+    <div class = 'col-md-12'>
+    <br>
+    </div>
+    <div class='col-md-6 float-left'>
+        <h2>Order Statistics</h2>
+        <%= render partial: "order",
+            :locals => {
+            :quote => "overall data",
+            :orders_num => Order.number,
+            :revenue_num => Order.total(10000),
+            :avg_num => (Order.total(10000)/Order.number).round,
+            :largest_num => Order.max(10000).round
+        }%>
+        <%= render partial: "order",
+            :locals => {
+            :quote => "month data",
+            :orders_num => Order.number_in(30),
+            :revenue_num => Order.total(30),
+            :avg_num => (Order.total(30)/Order.number_in(30)).round,
+            :largest_num => Order.max(30).round
+        }%>
+        <%= render partial: "order",
+            :locals => {
+            :quote => "week data",
+            :orders_num => Order.number_in(7),
+            :revenue_num => Order.total(7),
+            :avg_num => (Order.total(30)/Order.number_in(30)).round,
+            :largest_num => Order.max(7).round
+        }%>
+</div>

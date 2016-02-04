@@ -1,0 +1,53 @@
+<div class = 'container'>
+    <div class = 'col-md-9'>
+      <table class="table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>name</td>
+                    <td><%= @product.name%></td>
+                </tr>
+
+                <tr>
+                    <td>sku</td>
+                    <td><%= @product.sku%></td>
+                </tr>
+
+                <tr>
+                    <td>description</td>
+                    <td><%= @product.description%></td>
+                </tr>
+
+                <tr>
+                    <td>price</td>
+                    <td><%= @product.price%></td>
+                </tr>
+
+                <tr>
+                    <td>category_id</td>
+                    <td><%= @product.category_id%></td>
+                </tr>
+
+               <tr>
+                    <td>created_at</td>
+                    <td><%= @product.created_at%></td>
+                </tr>
+
+                <tr>
+                    <td>updated_at</td>
+                    <td><%= @product.updated_at%></td>
+                </tr>
+
+
+             </tbody>
+
+      </table>
+        <%= link_to "OK and return",products_path(@product) , :class => "btn btn-info" %>
+    </div>
+</div>
