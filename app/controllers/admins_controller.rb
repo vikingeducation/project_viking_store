@@ -1,6 +1,9 @@
 class AdminsController < ApplicationController
   def index
-    @user_state = User.join_billing_state.to_a
-    @user_city = User.join_billing_city.to_a
+    @users = User.all
+
+
+    @user_state = User.join_billing_state
+    @user_city = User.join_billing_city
   end
 end

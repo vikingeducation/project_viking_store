@@ -39,13 +39,17 @@
           <td>Delete</td>
         </th>
         
-        <% User.all.each do |user| %>
+        <% @users.all.each do |user| %>
           <tr>
             <td><%= user.billing_id %></td>
             <td><%= user.first_name %> <%= user.last_name %></td>
             <td><%= user.created_at %></td>
             <td><%= @user_city[user.id] %></td>
             <td><%= @user_state[user.id] %></td>
+            <td><%= orders %></td>
+            <td><%= link_to "show", root_path %></td>
+            <td><%= link_to "edit", root_path %></td>
+            <td><%= link_to "delete", root_path %></td>
           </tr>
         <% end %>
       </table>
