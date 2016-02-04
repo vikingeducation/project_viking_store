@@ -31,15 +31,14 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
-    # [["beauty", 1], "Travel", 2]]
-    @categories = Category.all.name
   end
 
 
   def update
+    @product = Product.find(params[:id])
     if @product.update(whitelisted_product_params)
-      flash[:success] = "'#{product.name}' successfully updated"
-      redirect_to products_path
+      flash[:success] = "'#{@product.name}' successfully updated"
+      redirect_to product_path(@product)
     else
       render :edit
     end
@@ -49,9 +48,9 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])    
     if @product.destroy
-      flash[:success] = "'#{product.name}' successfully deleted"
+      flash[:success] = "'#{@product.name}' successfully deleted"
     else
-      flash[:error] = "Unable to delete '#{product.name}'" 
+      flash[:error] = "Unable to delete '#{@product.name}'" 
     end
     redirect_to products_path
   end

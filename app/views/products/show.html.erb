@@ -4,10 +4,10 @@
 
   <h3>Product Information</h3>
 
-  <h5>Product ID: <%= @product.id %></h5>
-  <h5>Name: <%= @product.name %></h5>
-  <h5>Price: <%= number_to_currency(@product.price) %></h5>
-  <h5>Category: <%= category_name(@product) %></h5> 
+  <h5><strong>Product ID:</strong> <%= @product.id %></h5>
+  <h5><strong>Name:</strong> <%= @product.name %></h5>
+  <h5><strong>Price:</strong> <%= number_to_currency(@product.price) %></h5>
+  <h5><strong>Category:</strong> <%= category_name(@product) %></h5> 
 
 
 </div> <!-- well -->
@@ -18,9 +18,9 @@
   <h5>Carts In: <%= @number_of_carts%></h5>
 
 
-  <%= link_to "Edit Product", edit_product_path(@product) %>
+  <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary btn-lg btn-block"%>
   <br />
-  <%= link_to "Delete Product", product_path(@product), method: :delete %>
+  <%= link_to "Delete Product", product_path(@product), method: :delete, class: "btn btn-danger btn-lg btn-block", data: { confirm: "Are you sure you want to delete?"} %>
 
 </div>
 
