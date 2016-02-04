@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   scope "/admin" do
     resources :dashboard, only: [:index, :get]
     resources :categories
+    resources :products
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

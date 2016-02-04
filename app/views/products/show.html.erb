@@ -1,0 +1,26 @@
+<h1 class="text-center">Product <%= @product.id%></h1>
+
+<div class="well">
+
+  <h3>Product Information</h3>
+
+  <h5>Product ID: <%= @product.id %></h5>
+  <h5>Name: <%= @product.name %></h5>
+  <h5>Price: <%= number_to_currency(@product.price) %></h5>
+  <h5>Category: <%= category_name(@product) %></h5> 
+
+
+</div> <!-- well -->
+
+<div>
+  <h3>Product Statistics</h3>
+  <h5>Times Ordered: <%= @times_ordered%></h5>
+  <h5>Carts In: <%= @number_of_carts%></h5>
+
+
+  <%= link_to "Edit Product", edit_product_path(@product) %>
+  <br />
+  <%= link_to "Delete Product", product_path(@product), method: :delete %>
+
+</div>
+
