@@ -1,6 +1,9 @@
 class Product < ActiveRecord::Base
 
   validates :name, :price, :sku, presence: true
+  validates :price, numericality: true, inclusion: 1..10_000
+  validates :sku, uniqueness: true
+
 
   def self.new_products(n)
     Product.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
@@ -19,14 +22,6 @@ class Product < ActiveRecord::Base
            .where("orders.checkout_date IS NOT NULL AND products.id = #{product_id}")
            .count("order_contents.product_id")
   end
-
-#   SELECT count(oc.product_id) FROM products p
-# JOIN order_contents oc ON oc.product_id = p.id
-# JOIN orders o ON o.id = oc.order_id
-# WHERE o.checkout_date IS NOT NULL
-# AND p.id = 7;
-
-
 
 
   def self.number_of_carts(product_id)
