@@ -1,27 +1,43 @@
 <div class="row">
   <div class="col col-xs-12">
-    <h1 class="page-header text-center">Viking Store Users</h1> 
-  </div>  
-</div>  
-
-<div class="row">
-  <div class="col col-xs-3">
+    <h1 class="page-header text-center">All Users</h1>
   </div>
-  <div class="col col-xs-9">
-    <table class="table table-striped">
+</div>
+<div class="row">
+  <div class="col col-xs-12">
+    <a class="btn btn-success btn-block" href=<%=new_user_path%> role="button">
+        Add User User
+    </a>
+    <br>
+    <table class="table table-striped table-hover table-bordered">
       <thead>
         <tr>
           <th>ID</th>
           <th>Name</th>
           <th>Joined</th>
-          <th>City></th>
-          <th>State</th>
-          <th>Orders</th>
-          <th>Order-Date</th>
+          <th>City</th>
+          <th>State</th> 
+          <th>ORDERS</th>
+          <th>SHOW</th>
           <th>EDIT</th>
           <th>DELETE</th>
-        </tr>  
+        </tr>
       </thead>
-    </table>     
+      <tbody>
+        <%@users.each do |user|%>
+        <tr>
+          <td><%=user.id%></td>
+          <td><%=user.first_name%> <%=user.last_name%></td>
+          <td><%=user.created_at%></td>
+          <td> </td>
+          <td> </td>
+          <td><%=link_to 'Order', "#"%></td>
+          <td><%=link_to 'Show', user_path(user.id)%></td>
+          <td><%=link_to 'Edit', edit_user_path(user.id)%></td>
+          <td><%=link_to 'Delete', user, method: "delete" %></td>
+        </tr>
+        <%end%>
+      <tbody>
+    </table>
   </div>
-</div>  
+</div>

@@ -1,6 +1,13 @@
 class User < ActiveRecord::Base
   include Recentable
 
+  def self.get_all_cities_and_states
+    User.select("c.name AS city, s.name AS state")
+      .joins("AS c JOIN products AS p ON c.id=p.category_id")
+      .where("c.id=#{cat_id}")
+      .order("p.id")
+  end
+
   def full_name
     first_name + " " + last_name
   end
