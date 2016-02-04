@@ -21,7 +21,7 @@
           <td><%= ( link_to product.category.name, admin_category_path(product.category) ) if product.category %></td>
           <td><%= link_to "Show", [:admin, product] %></td>
           <td><%= link_to "Edit", edit_admin_product_path(product) %></td>
-          <td><%= link_to "Delete", [:admin, product], method: :delete %></td>
+          <td><%= link_to "Delete", [:admin, product], method: :delete, data: { confirm: "Are you sure?"} %></td>
         </tr>
       <% end %>
     </tbody>

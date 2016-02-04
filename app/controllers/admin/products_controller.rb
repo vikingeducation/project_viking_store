@@ -40,7 +40,7 @@ class Admin::ProductsController < AdminController
     if @product.destroy
       redirect_to admin_products_path, notice: "Product Destroyed!"
     else
-      redirect_to admin_product_path(@product), alert: "Failed to destroy product."
+      redirect_to :back, alert: "Failed to Delete Product."
     end
   end
 
