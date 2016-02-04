@@ -1,0 +1,12 @@
+
+
+<h3><%=  title  %></h3>
+<table class='table'>
+  
+  <% descriptions.each_with_index do | d, i |  %>
+    <tr>
+      <td><%= descriptions[i] %></td>
+      <td><%= values[i] %></td>
+    </tr>
+  <%  end %>
+</table>
