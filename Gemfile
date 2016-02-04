@@ -31,6 +31,8 @@ gem 'faker'
 
 gem 'bootstrap-sass'
 
+gem 'will_paginate', '~> 3.0.6'
+
 
 group :development, :test do
   gem 'pry-byebug'
