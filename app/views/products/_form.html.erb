@@ -37,7 +37,7 @@
 
   <div class="form-group">
     <%= f.label :category %>
-    <%= f.select :category_id, Category.all.collect {|c| [c.name, c.id] }, class: "form-control" %>
+    <%= f.select :category_id, Category.all.collect {|c| [c.name, c.id] }, {}, {class: "form-control"} %>
   </div>
 
   <div class="form-group">
