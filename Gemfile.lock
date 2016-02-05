@@ -67,6 +67,7 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-select-rails (1.6.3)
     builder (3.2.2)
     byebug (2.7.0)
       columnize (~> 0.3)
@@ -213,6 +214,7 @@ DEPENDENCIES
   better_errors (= 2.1.1)
   binding_of_caller (= 0.7.2)
   bootstrap-sass (= 3.3.6)
+  bootstrap-select-rails
   coffee-rails (= 4.1.1)
   faker (= 1.6.1)
   jazz_hands (= 0.5.2)!
