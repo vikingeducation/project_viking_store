@@ -1,6 +1,10 @@
 
 
 class User < ActiveRecord::Base
+  has_many  :addresses
+  has_many  :orders
+  belongs_to :user
+
 
   def self.total_users
     User.count()
@@ -55,5 +59,7 @@ class User < ActiveRecord::Base
       JOIN order_contents ON orders.id = order_contents.order_id
       JOIN products ON order_contents.product_id = products.id")
   end
+
+
 
 end

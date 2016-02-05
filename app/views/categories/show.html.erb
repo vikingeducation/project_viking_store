@@ -1,0 +1,25 @@
+<div class="col-sm-9">
+  <h3 class="text-center">Category <%= @category.id%>:   <%=@category.name %></h3>
+  <h6>Category ID:<%= @category.id %></h6>
+  <h6>Name: <%= @category.name %></h6>
+
+  <div class="links-header">
+      <td><%= link_to "edit category", edit_category_path(@category) %></td>
+      <td><%= link_to "delete category",  category_path(@category), method: :delete, data: {confirm: "Really delete the article?"} %></td>
+  </div>
+  <h6>Products in <%= @category.name %>:</h6>
+  <table class='table table-striped table-bordered'>
+    <th>
+      <td>ID</td>
+      <td>Name</td>
+    </th>
+    
+    <% @products.all.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%=  "#{product.name}"%></td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>

@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   get '/admin' => 'users#index'
   # namespace :admin do
     # root 'users#index'
-  resources :users
+  resources :users,  only: [:index]
+  resources :categories
   # end
   #############
 
