@@ -1,10 +1,31 @@
 class User < ActiveRecord::Base
 
+  has_many :addresses, dependent: :destroy
+  has_many :orders
+  has_one :credit_card, dependent: :destroy
+
+  has_many :order_contents, :through => :orders
+  has_many :products, :through => :order_contents, source: :product
+
+  validates :first_name, length: { in: 1..64 }
+  validates :last_name, length: { in: 1..64 }
+  validates :email, email: true
+
+  def full_name
+    "#{self.first_name}, #{self.last_name}"
+  end
 
   def self.new_users(n)
     User.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
   end
 
+  def billing_address
+    self.addresses.find(self.billing_id)
+  end
+
+  def shipping_address
+    self.addresses.find(self.shipping_id)
+  end
 
   def self.total
     User.all.count

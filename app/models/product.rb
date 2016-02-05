@@ -1,5 +1,11 @@
 class Product < ActiveRecord::Base
 
+  has_many :order_contents, dependent: :destroy
+
+  has_many :orders, :through => :order_contents
+
+  belongs_to :category
+
   validates :name, :price, :sku, presence: true
   validates :price, numericality: true, inclusion: 1..10_000
   validates :sku, uniqueness: true

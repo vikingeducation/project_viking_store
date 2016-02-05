@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index, :get]
     resources :categories
     resources :products
+    resources :users
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

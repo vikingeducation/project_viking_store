@@ -7,15 +7,15 @@
   <h5><strong>Product ID:</strong> <%= @product.id %></h5>
   <h5><strong>Name:</strong> <%= @product.name %></h5>
   <h5><strong>Price:</strong> <%= number_to_currency(@product.price) %></h5>
-  <h5><strong>Category:</strong> <%= category_name(@product) %></h5> 
+  <h5><strong>Category:</strong> <%= category_name(@product) %></h5>
 
 
 </div> <!-- well -->
 
 <div>
   <h3>Product Statistics</h3>
-  <h5>Times Ordered: <%= @times_ordered%></h5>
-  <h5>Carts In: <%= @number_of_carts%></h5>
+  <h5>Times Ordered: <span class="badge"><%= @times_ordered%></span></h5>
+  <h5>Carts In: <span class="badge"><%= @number_of_carts%></span> </h5>
 
 
   <%= link_to "Edit Product", edit_product_path(@product), class: "btn btn-primary btn-lg btn-block"%>
@@ -23,4 +23,3 @@
   <%= link_to "Delete Product", product_path(@product), method: :delete, class: "btn btn-danger btn-lg btn-block", data: { confirm: "Are you sure you want to delete?"} %>
 
 </div>
-

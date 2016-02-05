@@ -1,9 +1,24 @@
 class Order < ActiveRecord::Base
 
+  belongs_to :user
+
+  has_many :order_contents, dependent: :destroy
+
+  has_many :products, :through => :order_contents, source: :product
+
+  has_many :categories, :through => :products, source: :category
+
+  def order_value(id)
+    Order.select("SUM(order_contents.quantity * products.price) AS value, orders.id").joins("JOIN order_contents ON order_contents.order_id = orders.id").joins("JOIN products ON order_contents.product_id = products.id").where("order_contents.order_id = #{id}").group("orders.id")[0]
+  end
+
+  def self.most_recent
+    Order.select("checkout_date").where("checkout_date IS NOT NULL").order("checkout_date DESC").limit(1)[0]
+  end
+
   def self.count_recent(n)
     Order.all.where("checkout_date BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
   end
-
 
   def self.revenue_recent(n)
     Order.joins("AS o JOIN order_contents oc ON o.id = oc.order_id")

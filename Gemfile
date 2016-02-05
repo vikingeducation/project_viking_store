@@ -27,7 +27,11 @@ gem 'spring',  '~> 1.3.6',      group: :development
 
 gem 'pry'
 
+gem 'email_validator'
+
 gem 'faker'
+
+gem 'hirb'
 
 gem 'bootstrap-sass'
 
