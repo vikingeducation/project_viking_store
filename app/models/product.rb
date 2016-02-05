@@ -6,6 +6,7 @@ class Product < ActiveRecord::Base
   validates :category_id, presence: true
 
 
+
   def self.new_products(n)
     Product.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
   end

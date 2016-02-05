@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_many :addresses
+
 
   def self.new_users(n)
     User.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count

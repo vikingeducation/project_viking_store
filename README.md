@@ -8,12 +8,12 @@ Load time with multiplier = 50: Time taken is 0.369374212.
 
 ASSOCIATIONS:
 ADDRESS = many-to-one with users, an address can only have one user
-CATEGORY = many-to-many with products, many products in the same category
+CATEGORY = one-to-many with products, many products in the same category
 CITY = one-to-many with addresses, city can be part of many addresses
 CREDIT CARD = many-to-one with users, one credit card per user
 ORDER = many-to-many with users, one-to-many with order_contents, one-to-one with address(shipping) and address (billing)
 ORDER_CONTENTS (join table for orders and products - has product quantity too), many-to-one with orders
-PRODUCT = many-to-many with categories
+PRODUCT = many-to-one with categories, product can only have one category
 STATE = one-to-many with addresses, state can be part of many addresses
 USER = one-to-many with addresses, many-to-many with orders
 
