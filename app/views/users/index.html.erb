@@ -1,0 +1,51 @@
+<h1 class="text-center">Viking Store Users</h1>
+
+<br />
+<%= link_to "Create a New User", new_user_path, class: "btn btn-primary btn-lg btn-block" %>
+<br />
+
+<div class="panel panel-default">
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Joined</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Orders</th>
+        <th>Last Order Date</th>
+        <th>Show</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.first_name%> <% user.last_name %></td>
+        <td><%= user.created_at.strftime("%Y-%m-%d") %></td>
+        <td><%= user.default_billing_address.city.name %></td>
+        <td><%= user.default_billing_address.state.name %></td>
+        <td><%= link_to "#{user.orders.checked_out.count}" %></td>
+
+        <% if user.orders.most_recent_order.first %>
+          <td><%= user.orders.most_recent_order.first.checkout_date.strftime("%Y-%m-%d") %></td>
+        <% else %> <td>N/A</td>
+        <% end %>
+
+        <td><%= link_to "show", user_path(user) %></td>
+        <td><%= link_to "edit", edit_user_path(user) %></td>
+        <td><%= link_to "delete", user_path(user), method: :delete, data: { confirm: "Are you sure you want to delete?" }  %></td>
+
+      </tr>
+
+    <% end %>
+
+    </tbody>
+  </table>
+
+</div>

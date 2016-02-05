@@ -28,7 +28,7 @@
     </thead>
     <tbody>
 
-    <% @products.each do |product| %>
+    <% @category.products.each do |product| %>
       <tr>
         <td><%= product.id %></td>
         <td><%= link_to product.name, product_path(product) %></td> 

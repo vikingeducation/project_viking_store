@@ -1,0 +1,27 @@
+<h1 class="text-center">User <%= @user.id %>: <%= @user.first_name %> <%= @user.last_name %></h1>
+
+
+<div class="well">
+
+<h3>Demographic Information</h3>
+
+<h5><strong>First Name:</strong> <%= @user.first_name %></h5>
+<h5><strong>Last Name:</strong> <%= @user.last_name %></h5>
+<h5><strong>Email:</strong> <%= @user.email %></h5>
+
+<h5><strong>Telephone:</strong>555-555-5555</h5>
+<h5><strong>Default Billing Address:</strong> <%= full_billing(@user) %></h5>
+<h5><strong>Default Shipping Address:</strong> <%= full_shipping(@user) %></h5>
+
+
+<%= link_to "Edit #{@user.first_name} #{@user.last_name}'s Information", edit_user_path(@user)%>
+<br />
+<%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+<br />
+<!-- TODO: add link to addresses and cart/order -->
+<%= link_to "View Saved Addresses"%> 
+<br />
+<%= link_to "View Unplaced Order (Cart)"%> 
+
+
+</div> <!-- well -->

@@ -7,6 +7,21 @@ class Order < ActiveRecord::Base
   has_many :categories, through: :products
 
 
+  def self.checked_out
+    where("checkout_date IS NOT NULL")
+  end
+
+  def self.most_recent_order
+    where("checkout_date IS NOT NULL")
+    .order("checkout_date DESC")
+    .limit(1)
+  end
+
+  def self.cart
+    where("checkout_date IS NULL")
+  end
+
+
   def self.count_recent(n)
     Order.all.where("checkout_date BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
   end
