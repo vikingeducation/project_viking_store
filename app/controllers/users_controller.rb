@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.create(whitelisted_user_params)
     if @user.save
       flash[:success] = "'#{@user.first_name} #{@user.last_name}' successfully created"
-      redirect_to users_path
+      redirect_to user_path(@user)
     else
       render :new
     end

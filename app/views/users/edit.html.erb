@@ -17,6 +17,10 @@
     <%= f.select :default_shipping_address, all_addresses(@user), {}, {class: "form-control"} %>
   </div>
 
+  <div class="form-group">
+    <%= link_to "View Saved Addresses" %>
+  </div>
+
 
   <div class="form-group">
     <%= f.submit "Update #{@user.first_name} #{@user.last_name}", class: "btn btn-primary btn-lg btn-block" %>
