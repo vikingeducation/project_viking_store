@@ -1,4 +1,9 @@
 class Address < ActiveRecord::Base
+
+  belongs_to :user
+  
+
+
   def self.get_all_for_user(n)
     Address.select("addresses.*, c.name AS city, s.name AS state")
       .joins("JOIN users u ON addresses.user_id=u.id")

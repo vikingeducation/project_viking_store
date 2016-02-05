@@ -1,6 +1,14 @@
 class User < ActiveRecord::Base
   include Recentable
 
+  has_many :addresses
+  has_many :orders
+
+  belongs_to :default_billing_address, class_name: "Address", foreign_key: :billing_id
+  belongs_to :default_shipping_address, class_name: "Address", foreign_key: :shipping_id
+
+  has_many :products, through: :orders
+
   validates :first_name, :last_name, presence: true, length: { maximum: 64 }
 
   def self.get_all_with_billing_location

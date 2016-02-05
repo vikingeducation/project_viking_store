@@ -1,5 +1,11 @@
 class Order < ActiveRecord::Base
+
+  belongs_to :user
+
   has_many :order_contents
+  has_many :products, through: :order_contents
+
+  has_many :categories, through: :order_contents
 
   def self.recent(num_days = 7)
     Order.processed.where("orders.checkout_date >= ? ", num_days.days.ago.beginning_of_day)
