@@ -1,0 +1,30 @@
+<%= form_for @product do |f| %>
+  <p>
+    <%= f.label "Product ID" %>
+    <% if @product.id.nil? %>
+      <span>N/A</span>
+    <% else %>
+      <%= @product.id %>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.label :sku %>
+    <%= f.text_field :sku %>
+  </p>
+  <p>
+    <%= f.label :categories %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, {}, data: { width: '80%' } %> 
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

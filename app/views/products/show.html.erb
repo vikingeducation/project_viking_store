@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row text-center">
+    <h1>product <%= @product.id %></h1>
+  </div>  
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="row">
+        <h3>Product Information</h3>
+        <p>product ID: <%= @product.id %></p>
+        <p>Name: <%= @product.name %></p>
+        <p>Price: <%= @product.price %></p>
+        <p>Category: <%= @product_category[0].name %></p>
+  
+      </div>
+      <div class="row">
+        <h3>Product Statistics</h3>
+        <p>Times Ordered: <%= @product_orders[0].num_orders %></p>
+        <p>Carts In: <%= @product_carts[0].cart_orders %></p>
+        <p><%= link_to "Edit product", edit_product_path(@product) %></p>
+        <p><%= link_to "Delete product", @product, method: :delete, data: {confirm: "Are you sure?"} %></p>
+      </div>
+    </div>
+  </div>
+
+</div>
