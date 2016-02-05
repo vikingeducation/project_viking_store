@@ -1,0 +1,20 @@
+<%= form_for @category do |f| %>
+  <p>
+    <%= f.label "Category ID:" %>
+    <% if @category.id.nil? %>
+      <span>N/A</span>
+    <% else %>
+      <%= @category.id %>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>

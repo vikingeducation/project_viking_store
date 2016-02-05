@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row text-center">
+    <h1>Category <%= @category.id %>: <%= @category.name %></h1>
+  </div>  
+  <div class="row">
+    <div class="col-xs-4">
+      <div class="row">
+        <p>Category ID: <%= @category.id %></p>
+        <p>Name: <%= @category.name %></p>
+        <p><%= link_to "Edit Category", edit_category_path(@category) %></p>
+        <p><%= link_to "Delete Category", @category, method: :delete, data: {confirm: "Are you sure?"} %></p>
+      </div>
+      <div class="row">
+        <p>Products in <%= @category.name %></p>
+        <table class="table table-striped">
+          <tr>
+            <td>ID</td>
+            <td>Name</td>
+          </tr>
+          <% @category_products.each do |product| %>
+            <tr>
+              <td><%= product.id %></td>
+              <td><%= link_to product.name %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

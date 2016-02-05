@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row text-center">
+    <h1>Viking Store Admin Portal</h1>
+  </div>
+  <div class="row">
+
+    <div class="col-xs-2">
+      <h4>Navigation Options</h4>
+      <div><a href="#">Users</a></div>
+      <div><a href="#">Addresses</a></div>
+      <div><a href="#">Orders</a></div>
+      <div><a href="#">Products</a></div>
+      <div><a href="#">Categories</a></div>
+    </div>
+
+    <div class="col-xs-10">
+      <div class="text-center"><h2>Viking Store Users</h2></div>
+      <div class="col-xs-offset-3 col-xs-6">
+        <%= link_to "Create Category", new_category_path, class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+      <div class="col-xs-12 text-center">
+        <table class="table table-striped">
+          <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Show</td>
+            <td>Edit</td>
+            <td>Delete</td>
+          </tr>
+          
+          <% @categories.each do |category| %>
+            <tr>
+              <td><%= category.id %></td>
+              <td><%= category.name %></td>
+              <td><%= link_to "SHOW", category %></td>
+              <td><%= link_to "EDIT", edit_category_path(category) %></td>
+              <td><%= link_to "DELETE", category, method: :delete, data: {confirm: "Are you sure?"} %></td>
+            </tr>
+          <% end %>
+    
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
