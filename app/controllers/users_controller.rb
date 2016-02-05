@@ -52,8 +52,6 @@ class UsersController < ApplicationController
 
 
 
-
-
   private
 
   def whitelisted_user_params

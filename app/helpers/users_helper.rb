@@ -18,4 +18,15 @@ module UsersHelper
   end
 
 
+  def all_addresses(user)
+    dropdown = []
+    if user.addresses
+      user.addresses.each do |address|
+       dropdown << "#{address.street_address}#{address.secondary_address}, #{address.city.name}, #{address.state.name}"
+      end
+    end
+    dropdown   
+  end
+
+
 end
