@@ -5,6 +5,8 @@ class Product < ActiveRecord::Base
   validates :sku, uniqueness: true
   validates :category_id, presence: true
 
+  belongs_to :category
+  has_many :orders, through: :order_contents
 
 
   def self.new_products(n)

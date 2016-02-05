@@ -1,5 +1,8 @@
 class Order < ActiveRecord::Base
 
+  belongs_to :users
+  has_many :products, through: :order_products
+
   def self.count_recent(n)
     Order.all.where("checkout_date BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
   end
