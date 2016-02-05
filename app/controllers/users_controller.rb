@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def index
-    @users = User.get_all_with_billing_location
+    #@users = User.get_all_with_billing_location
+    @users = User.all
   end
 
   def new
@@ -20,14 +21,25 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @billing = User.get_billing_address(@user.id)
-    @shipping = User.get_shipping_address(@user.id)
-    @credit_card = User.get_credit_card(@user.id)
-    @orders = User.get_orders(@user.id)
+    @billing = @user.default_billing_address
+    @shipping = @user.default_shipping_address
+    @credit_card = @user.credit_card
+    @orders = @user.orders
   end
 
   def edit
     @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:success] = "You've Sucessfully Updated the User!"
+      redirect_to user_path(@user)
+    else
+      flash.now[:error] = "Error! User wasn't updated!"
+      render :edit
+    end
   end
 
   def destroy

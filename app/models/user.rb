@@ -9,7 +9,11 @@ class User < ActiveRecord::Base
 
   has_many :products, through: :orders
 
+  has_one :credit_card
+
   validates :first_name, :last_name, presence: true, length: { maximum: 64 }
+
+  validates :email, presence: true, format: { with: /@/, message: "Needs an @!!!"}
 
   def self.get_all_with_billing_location
     User.select("users.*, c.name AS c_name, s.name AS s_name")

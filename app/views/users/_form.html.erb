@@ -4,42 +4,45 @@
   <% end %>
 </ul>
 
-<table class="table">
-  <tbody>
-    <%= form_for @user do |f| %>
-      <tr>
-        <td><%= f.label :first_name %></td>
-        <td><%= f.text_field :first_name, class: "form-control" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :last_name %></td>
-        <td><%= f.text_field :last_name, class: "form-control" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :email %></td>
-        <td><%= f.text_field :email, class: "form-control" %></td>
-      </tr>
-      <tr>
-        <td><%= f.label :billing_id, "Billing Address" %></td>
-        <% if @user.id %>
-          <td><%= f.collection_select :billing_id, Address.get_all_for_user(@user.id), :id, :street_address, class: "form-control"%></td>
-        <% else %>
-          <td><%= f.collection_select :billing_id, Address.all, :id, :street_address, {}, {class: "form-control", disabled: "disabled"}%></td>
-        <% end %>
-      <tr>
+<%= form_for @user do |f| %>
+  <table class="table">
+    <tbody>
         <tr>
-          <td><%= f.label :shipping_id, "Shipping Address" %></td>
+          <td><%= f.label :first_name %></td>
+          <td><%= f.text_field :first_name, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :last_name %></td>
+          <td><%= f.text_field :last_name, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :email %></td>
+          <td><%= f.text_field :email, class: "form-control" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :billing_id, "Billing Address" %></td>
           <% if @user.id %>
             <td><%= f.collection_select :billing_id, Address.get_all_for_user(@user.id), :id, :street_address, class: "form-control"%></td>
           <% else %>
-            <td><%= f.collection_select :shipping_id, Address.all, :id, :street_address, {}, {class: "form-control", disabled: "disabled"}%></td>
+            <td><%= f.collection_select :billing_id, Address.all, :id, :street_address, {}, {class: "form-control", disabled: "disabled"}%></td>
           <% end %>
+        </tr>
         <tr>
-      <tr>
-        <td></td>
-        <td><%= f.submit class: "btn btn-block btn-primary"%></td>
-      </tr>
-    <% end %>
-  </tbody>
-
-<table>
+          <td><%= f.label :shipping_id, "Shipping Address" %></td>
+          <% if @user.id %>
+            <td>
+              <%= f.collection_select :billing_id, Address.get_all_for_user(@user.id), :id, :street_address, class: "form-control"%>
+            </td>
+          <% else %>
+            <td>
+              <%= f.collection_select :shipping_id, Address.all, :id, :street_address, {}, {class: "form-control", disabled: "disabled"}%>
+            </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= f.submit class: "btn btn-block btn-primary"%></td>
+        </tr>
+    </tbody>
+  </table>
+<% end %>

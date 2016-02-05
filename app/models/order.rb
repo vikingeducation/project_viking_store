@@ -7,6 +7,10 @@ class Order < ActiveRecord::Base
 
   has_many :categories, through: :order_contents
 
+  def value
+    products.sum("quantity * price")
+  end
+
   def self.recent(num_days = 7)
     Order.processed.where("orders.checkout_date >= ? ", num_days.days.ago.beginning_of_day)
   end
