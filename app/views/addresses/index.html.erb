@@ -27,7 +27,11 @@
         <td><%= a.street_address %></td>
         <td><%= a.city.name %></td>
         <td><%= a.state.name %></td>
-        <td><%= %></td>
+        <td><%= a.billed_orders.count + a.shipped_orders.count %></td>
+        <td><%= a.created_at.to_date %></td>
+        <td><%= link_to "Show", address_path(a.id) %></td>
+        <td><%= link_to "Edit", edit_address_path(a.id) %></td>
+        <td><%= link_to "Delete", address_path(a.id), method: "delete", data: {confirm: "Are you sure?"}%></td>
       </tr>
       <% end %>
     </tbody>

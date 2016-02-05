@@ -10,7 +10,7 @@
       <% model.attributes.each_pair do |attrib, value| %>
         <tr>
           <td><%= "#{model.class.to_s} #{attrib}:"%></td>
-          <td><%=  "#{value}" %></td>
+          <td><%= (attrib == "created_at" || attrib == "updated_at") ? "#{value.to_date}" : "#{value}" %></td>
         </tr>
       <% end %>
       </table>
