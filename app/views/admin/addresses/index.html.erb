@@ -4,16 +4,16 @@
 
     <div class="col-sm-9">
       <h3 class="text-center">Viking Store Addresses</h3>
-      <a class='btn btn-primary btn-block' role='button' href=<%=new_admin_user_address_path %> >Create A New Address</a>
+      <a class='btn btn-primary btn-block' role='button' href=<%=new_admin_user_address_path %> >Create A New <%= @user.full_name %> Address</a>
 
       <table class='table table-striped table-bordered'>
         <th>
           <td>ID</td>
-          <td>Street Address</td>
-          <td>Secondary Address</td>
+          <td>User</td>
+          <td>Address</td>
           <td>City</td>
           <td>State</td>
-          <td>Zip Code</td>
+          <td>Orders</td>
           <td>Show</td>
           <td>Edit</td>
           <td>Delete</td>
@@ -23,11 +23,11 @@
           <tr>
             <td></td>
             <td><%= address.id %></td>
+            <td><%= address.user.full_name %></td>
             <td><%= address.street_address %></td>
-            <td><%= address.secondary_address %></td>
             <td><%= address.city.name %></td>
             <td><%= address.state.name %></td>
-            <td><%= address.zip_code %></td>
+            <td><%= address.shipped_orders.count %></td>
             <td><%= link_to "show", admin_user_address_path(address.user_id, address.id) %></td>
             <td><%= link_to "edit", edit_admin_user_address_path(address.user_id, address.id) %></td>
             <td><%= link_to "delete", admin_user_address_path(address.user_id, address.id), method: :delete %></td>

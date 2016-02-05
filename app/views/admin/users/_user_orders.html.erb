@@ -15,7 +15,6 @@
 
   <% @user.orders.all.each do |order| %>
     <tr>
-      <td></td>
       <td><%= order.id %></td>
       <td><%= order.user_id %></td>
       <td><%= order.shipping_address.street_address %></td>

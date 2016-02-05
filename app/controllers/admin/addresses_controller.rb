@@ -6,8 +6,27 @@ class Admin::AddressesController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
     @address = Address.new
+  end
+
+  def create
+
+  end
+
+  def show
+
+  end
+
+  def edit
+
+  end
+
+  def update
+
+  end
+
+  def destroy
+
   end
 
 end
