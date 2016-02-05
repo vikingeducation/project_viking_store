@@ -25,8 +25,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',  '~> 1.3.6',      group: :development
 
-gem 'pry'
-
 gem 'faker'
 
 gem 'bootstrap-sass'
@@ -35,6 +33,7 @@ gem 'will_paginate', '~> 3.0.6'
 
 
 group :development, :test do
+  gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
   gem 'pry-byebug'
   gem 'better_errors'
 end
