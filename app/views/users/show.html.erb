@@ -22,11 +22,11 @@
       </tr>
       <tr>
         <td><%= "Default Billing Address:"%></td>
-        <td><%=  "#{@billing[0].street}, #{@billing[0].c_name}, #{@billing[0].s_name}" %></td>
+        <td><%=  "#{@billing[0].street}, #{@billing[0].c_name}, #{@billing[0].s_name}" if @billing[0]%></td>
       </tr>
       <tr>
         <td><%= "Default Shipping Address:"%></td>
-        <td><%=  "#{@shipping[0].street}, #{@shipping[0].c_name}, #{@shipping[0].s_name}" %></td>
+        <td><%=  "#{@shipping[0].street}, #{@shipping[0].c_name}, #{@shipping[0].s_name}" if @shipping[0]%></td>
       </tr>
     </table>
   </div>

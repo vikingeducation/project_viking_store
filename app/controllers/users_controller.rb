@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "You've Sucessfully Created a User!"
-      redirect_to user_path(@user)
+      redirect_to user_path(@user.id)
     else
       flash.now[:error] = "Error! User wasn't created!"
       render :new
@@ -30,6 +30,21 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:success] = "You've Sucessfully Deleted a User!"
+      redirect_to users_path
+    else
+      flash.now[:error] = "Error! User wasn't deleted!"
+      render :show
+    end
+  end
 
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :billing_id, :shipping_id)
+  end
 
 end

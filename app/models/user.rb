@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   include Recentable
 
+  validates :first_name, :last_name, presence: true, length: { maximum: 64 }
+
   def self.get_all_with_billing_location
     User.select("users.*, c.name AS c_name, s.name AS s_name")
       .joins("JOIN addresses a ON users.billing_id=a.id")
