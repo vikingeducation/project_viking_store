@@ -5,5 +5,7 @@
     <%= render partial: "form" %>
 
     <br>
+
+    <%= link_to "Delete this User Account", user_path(@user), method: "delete", data: {confirm: "Are you sure?"} %>
   </div>
 </div>

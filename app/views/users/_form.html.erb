@@ -20,22 +20,22 @@
           <td><%= f.text_field :email, class: "form-control" %></td>
         </tr>
         <tr>
-          <td><%= f.label :billing_id, "Billing Address" %></td>
+          <td><%= f.label :billing_id, " Default Billing Address" %></td>
           <% if @user.id %>
-            <td><%= f.collection_select :billing_id, Address.get_all_for_user(@user.id), :id, :street_address, class: "form-control"%></td>
+            <td><%= f.collection_select :billing_id, @user.addresses, :id, :street_address, class: "form-control"%></td>
           <% else %>
-            <td><%= f.collection_select :billing_id, Address.all, :id, :street_address, {}, {class: "form-control", disabled: "disabled"}%></td>
+            <td><%= f.collection_select :billing_id, @user.addresses, :id, :street_address, {}, {class: "form-control", disabled: "disabled"}%></td>
           <% end %>
         </tr>
         <tr>
-          <td><%= f.label :shipping_id, "Shipping Address" %></td>
+          <td><%= f.label :shipping_id, "Default Shipping Address" %></td>
           <% if @user.id %>
             <td>
-              <%= f.collection_select :billing_id, Address.get_all_for_user(@user.id), :id, :street_address, class: "form-control"%>
+              <%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, class: "form-control"%>
             </td>
           <% else %>
             <td>
-              <%= f.collection_select :shipping_id, Address.all, :id, :street_address, {}, {class: "form-control", disabled: "disabled"}%>
+              <%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, {}, {class: "form-control", disabled: "disabled"}%>
             </td>
           <% end %>
         </tr>
