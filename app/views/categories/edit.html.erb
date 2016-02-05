@@ -1,0 +1,17 @@
+
+<div class="col-sm-9">
+  <h3 class="text-center">New Category</h3>
+
+  <%= form_for(@category) do |f| %>
+    <p>
+      <%= f.label "Category ID: #{@label_id}" %><br/>
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </p>
+
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
+
+</div>
