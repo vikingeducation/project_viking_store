@@ -10,9 +10,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user.User.create(whitelisted_user_params)
+    @user = User.create(whitelisted_user_params)
     if @user.save
-      flash[:success] = "'#{user.firstname} #{user.lastname} successfully created"
+      flash[:success] = "'#{@user.first_name} #{@user.last_name}' successfully created"
       redirect_to users_path
     else
       render :new
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(whitelisted_user_params)
-      flash[:success] = "'#{user.firstname} #{user.lastname} successfully updated"
+      flash[:success] = "'#{@user.first_name} #{@user.last_name}' successfully updated"
       redirect_to user_path(@user)
     else
       render :edit
@@ -41,9 +41,9 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      flash[:success] = "'#{user.firstname} #{user.lastname} successfully deleted"
+      flash[:success] = "'#{@user.first_name} #{@user.last_name}' successfully deleted"
     else
-      flash[:error] = "Unable to delete '#{user.firstname} #{user.lastname}"
+      flash[:error] = "Unable to delete '#{@user.first_name} #{@user.last_name}'"
     end
     redirect_to users_path
   end
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
   private
 
   def whitelisted_user_params
-    params.require(:user).permit(:first_name, :last_name, :email)
+    params.require(:user).permit(:first_name, :last_name, :email, :telephone)
   end
 
 end

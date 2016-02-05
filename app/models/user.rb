@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
              class_name: "Address",
              :foreign_key => :shipping_id
 
+  
+  validates :first_name, :last_name, :email, presence: true, length: { in: 1..64 }
+  validates :email, presence: true, uniqueness: true
+
 
   def self.new_users(n)
     User.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
