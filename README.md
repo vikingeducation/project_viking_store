@@ -13,7 +13,9 @@ Julia + Andrew + Jeff
 Load time with multiplier = 10: Time taken is 0.108385478.
 Load time with multiplier = 50: Time taken is 0.369374212.
 
+===================
 ASSOCIATIONS:
+===================
 ADDRESS = many-to-one with users, an address can only have one user
 CATEGORY = one-to-many with products, many products in the same category
 CITY = one-to-many with addresses, city can be part of many addresses
@@ -34,14 +36,14 @@ a = Address.first
 # User Associations
 u.addresses
 u.orders
-u.products      # bonus - got it
+u.product
 u.default_billing_address_id
 u.default_shipping_address_id
 
 # Order Associations
 o.user
 o.products
-o.categories    # bonus
+o.categories
 
 # Product Associations
 p.orders
@@ -49,12 +51,24 @@ p.category
 
 # Category Associations
 ct.products
-ct.orders        # bonus
+ct.orders
 
 # Address Associations
 a.user
 
-
+===================
+DEPENDENCIES
+===================
+What happens when you delete a(n)...
+ADDRESS = nothing, users/states/cities should stick around
+CATEGORY = all associated products' category_id's should be null
+CITY = can you even delete a city, or just an address?
+CREDIT CARD = nothing, users/orders should remain
+ORDER = should remove rows in order_contents join table?
+ORDER_CONTENTS = n/a
+PRODUCT = nothing, category should remain
+STATE = nothing
+USER = destroy credit card, addresses/orders/products should stay
 
 
 Link to solution info on the seeding of this lives [here](https://gist.github.com/betweenparentheses/0b6b325ceaaea76a521d)
