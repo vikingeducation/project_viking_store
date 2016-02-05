@@ -1,4 +1,23 @@
 class Order < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :credit_card
+  
+  belongs_to :shipping_address,
+              class_name: 'Address',
+              foreign_key: :shipping_id
+
+  belongs_to :billing_address,
+              class_name: 'Address',
+              foreign_key: :billing_id
+
+
+  has_many :order_contents
+  has_many :products, 
+            through: :order_contents
+
+  validates :user, :credit_card,
+            presence: true
+
   def self.total_orders_submitted
     Order.where( "checkout_date IS NOT NULL" ).count()
   end
@@ -118,6 +137,26 @@ class Order < ActiveRecord::Base
     Order.joins(
       "JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id"
       )
+  end
+
+  def status
+    if date_placed
+      return "Placed"
+    else
+      return "Unplaced"
+    end
+  end
+
+  def date_placed
+    (checkout_date && id) ? checkout_date.strftime("%Y-%m-%d") : nil
+  end
+
+  def quantity
+    order_contents.sum(:quantity)
+  end
+
+  def value
+    products.sum("quantity * price")
   end
 
 end

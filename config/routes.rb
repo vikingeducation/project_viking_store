@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
 
   resources :dashboards, only: [:index]
+  root 'dashboard#index'
 
-  root 'dashboards#index'
-  get '/dashboard' => 'dashboards#index'
-  get '/admin' => 'admins#index'
+  namespace :admin do
+    root 'dashboard#index'
+    resources :categories
+    resources :products
+    resources :addresses, only: [:index]
+    resources :orders, only: [:index]
+    resources :purchases, only: [:create, :update, :destroy]
+    resources :users do
+      resources :addresses
+      resources :orders
+      resources :credit_cards, only: [:destroy]
+    end
+  end
 
 
 

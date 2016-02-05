@@ -7,7 +7,7 @@
     <div class="row">
       <div class='col-md-12'>
         <%  descriptions = [ 'Item', 'Total Users', 'Orders', 'Products', 'Revenue'] %>
-        <%  values = [ 'Data',   @num_total_users, @num_total_orders,  @num_total_products, number_to_currency(@total_revenue)] %>
+        <%  values = [ 'Data', User.count, Order.count, Product.count, number_to_currency(@total_revenue)] %>
 
         <%=  render :partial => "table", :locals => { title: "Total", descriptions: descriptions, values: values }%>
 

@@ -1,10 +1,23 @@
-
-
 class User < ActiveRecord::Base
 
-  def self.total_users
-    User.count()
-  end
+  belongs_to :default_billing_address,
+              class_name: "Address",
+              :foreign_key => :billing_id
+
+  belongs_to :default_shipping_address,
+              class_name: "Address",
+              :foreign_key => :shipping_id
+
+  has_many :orders
+  has_many :credit_cards
+  has_many :addresses
+
+  validates :first_name, :last_name, :email,
+              presence: true,
+              length: { in: 1..64 }
+
+  validates :email, uniqueness: true
+
 
   def self.new_users_in_last_n_days( n )
     User.where("created_at > ( CURRENT_DATE - #{n} )").count
@@ -56,4 +69,13 @@ class User < ActiveRecord::Base
       JOIN products ON order_contents.product_id = products.id")
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def recent_checkout_date
+    orders.where.not(checkout_date: nil).
+          order("checkout_date DESC")
+          .first || "n/a"
+  end
 end
