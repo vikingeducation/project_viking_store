@@ -1,26 +1,35 @@
 class UsersController < ApplicationController
-   def index
+  def index
     @users = User.all
   end
 
   def new
-    @user = Category.new
+    @user = User.new
   end
 
   def create
-    @user = Category.new(user_params)
+    @user = User.new(user_params)
     if @user.save
-      flash[:success] = "You've Sucessfully Created a Category!"
-      redirect_to category_path(@category)
+      flash[:success] = "You've Sucessfully Created a User!"
+      redirect_to user_path(@user)
     else
-      flash.now[:error] = "Error! Category wasn't created!"
+      flash.now[:error] = "Error! User wasn't created!"
       render :new
     end
   end
 
   def show
-    @category = Category.find(params[:id])
-    @products = Category.get_all_products(params[:id])
+    @user = User.find(params[:id])
+    @billing = User.get_billing_address(@user.id)
+    @shipping = User.get_shipping_address(@user.id)
+    @credit_card = User.get_credit_card(@user.id)
+    @orders = User.get_orders(@user.id)
   end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+
 
 end

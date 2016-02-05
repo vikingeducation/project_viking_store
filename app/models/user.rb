@@ -1,6 +1,37 @@
 class User < ActiveRecord::Base
   include Recentable
 
+  def self.get_billing_address(n)
+    User.select("a.street_address AS street, c.name AS c_name, s.name AS s_name, a.zip_code AS zip")
+      .joins("JOIN addresses a ON users.billing_id=a.id")
+      .joins("JOIN cities c ON a.id=c.id")
+      .joins("JOIN states s ON a.id=s.id")
+      .where("users.id=#{n}")
+  end
+
+  def self.get_shipping_address(n)
+    User.select("a.street_address AS street, c.name AS c_name, s.name AS s_name, a.zip_code AS zip")
+      .joins("JOIN addresses a ON users.shipping_id=a.id")
+      .joins("JOIN cities c ON a.id=c.id")
+      .joins("JOIN states s ON a.id=s.id")
+      .where("users.id=#{n}")
+  end
+
+  def self.get_credit_card(n)
+    User.select("credit_cards.*")
+      .joins("JOIN credit_cards ON users.id=user_id")
+      .where("users.id=#{n}")
+  end
+
+  def self.get_orders(n)
+    User.select("o.*, SUM(p.price * oc.quantity) AS value")
+      .joins("JOIN orders o ON users.id=o.id")
+      .joins("JOIN order_contents oc ON o.id=oc.order_id")
+      .joins("JOIN products p ON oc.product_id=p.id")
+      .where("users.id=#{n}")
+      .group("o.id")
+  end
+
   def self.get_all_cities_and_states
     User.select("c.name AS city, s.name AS state")
       .joins("AS c JOIN products AS p ON c.id=p.category_id")

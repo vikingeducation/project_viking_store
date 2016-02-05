@@ -2,9 +2,10 @@ Rails.application.routes.draw do
   resources :categories
   resources :products
   resources :users
-
+  resources :credit_cards, only: [:destroy]
   root 'dashboard#index'
   get '/dashboard' => 'dashboard#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

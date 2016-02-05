@@ -1,31 +1,113 @@
-<%= render partial: 'shared/show', locals: { model: @user } %>
-
-
 <div class="row">
-  <div class="col-xs-2">
-    <%= link_to "Edit #{@category.class}", edit_category_path(@category.id) %>
-  </div>
-  <div class="col-xs-2">
-    <%= link_to "Delete #{@category.class}", category_path(@category.id), method: "delete" %>
+  <div class="col-xs-12">
+    <h2><%= "User #{@user.id}: #{@user.first_name} #{@user.last_name}" %></h2>
   </div>
 </div>
 
-<br>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped table-bordered col-xs-12">
+      <h3>Demographic Information</h3>
+      <tr>
+        <td><%= "First Name:"%></td>
+        <td><%=  "#{@user.first_name}" %></td>
+      </tr>
+      <tr>
+        <td><%= "Last Name:"%></td>
+        <td><%=  "#{@user.last_name}" %></td>
+      </tr>
+      <tr>
+        <td><%= "Email:"%></td>
+        <td><%=  "#{@user.email}" %></td>
+      </tr>
+      <tr>
+        <td><%= "Default Billing Address:"%></td>
+        <td><%=  "#{@billing[0].street}, #{@billing[0].c_name}, #{@billing[0].s_name}" %></td>
+      </tr>
+      <tr>
+        <td><%= "Default Shipping Address:"%></td>
+        <td><%=  "#{@shipping[0].street}, #{@shipping[0].c_name}, #{@shipping[0].s_name}" %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-xs-2">
+    <%= link_to "Edit #{@user.class}", edit_user_path(@user.id) %>
+  </div>
+  <div class="col-xs-2">
+    <%= link_to "Delete #{@user.class}", user_path(@user.id), method: "delete" %>
+  </div>
+</div>
 
+<% if @credit_card[0] %>
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table table-striped table-bordered">
+        <h3>Credit Card Information</h3>
+        <tr>
+          <td><%= "Nickname:"%></td>
+          <td><%=  "#{@credit_card[0].nickname}" if @credit_card[0].nickname %></td>
+        </tr>
+        <tr>
+          <td><%= "Number:"%></td>
+          <td><%=  "#{@credit_card[0].card_number}" if @credit_card[0].card_number %></td>
+        </tr>
+        <tr>
+          <td><%= "Expiration Date:"%></td>
+          <td><%=  "#{@credit_card[0].exp_month}/#{@credit_card[0].exp_year}" if @credit_card[0].exp_month %></td>
+        </tr>
+        <tr>
+          <td><%= "CV2:"%></td>
+          <td><%=  "#{@credit_card[0].ccv}" if @credit_card[0].ccv %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-2">
+      <%= link_to "Remove Card", credit_card_path(@credit_card[0].id), method: "delete", data: {confirm: "Are you sure you want to delete this credit card?"} %>
+    </div>
+  </div>
+<% end %>
 
 <div class="row">
-  <div class="col-xs-4">
-    <table class="table table-striped table-bordered">
+  <div class="col-xs-12">
+    <h3><%= "Admin Actions for #{@user.first_name} #{@user.last_name}" %></h3>
+  </div>
+  <div class="col-xs-10" style="margin: 10px;">
+    <%= link_to "Create Order", "#", class: "btn btn-primary"%>
+  </div>
+  <div class="col-xs-10" style="margin: 10px;">
+    <%= link_to "Create Address", "#", class: "btn btn-primary centered"%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h3><%= "Order History" %></h3>
+  </div>
+
+  <div class="col-xs-12">
+    <table class="table table-striped">
       <thead>
-        <th>ID</th>
-        <th>Name</th>
+        <tr>
+          <th>ID</th>
+          <th>Order Date</th>
+          <th>Order Value</th>
+          <th>Status</th>
+          <th>Show</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
       </thead>
       <tbody>
-        <% @products.each do |p| %>
-        <tr>
-          <td><%= p.product_id %></td>
-          <td><%= p.product_name %></td>
-        </tr>
+        <% @orders.each do |o| %>
+          <tr>
+            <td><%= o.id %></td>
+            <td><%= o.checkout_date %></td>
+            <td><%= number_to_currency(o.value) %></td>
+            <td><%= o.checkout_date ? "PLACED" : "UNPLACED"%></td>
+            <td><%= link_to "Show", "#" %></td>
+            <td><%= link_to "Edit", "#" %></td>
+            <td><%= link_to "Delete", "#" %></td>
+          </tr>
         <% end %>
       </tbody>
     </table>
