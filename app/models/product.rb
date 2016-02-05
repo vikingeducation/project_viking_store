@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
   validates :name, :price, :sku, presence: true
   validates :price, numericality: true, inclusion: 1..10_000
   validates :sku, uniqueness: true
+  validates :category_id, presence: true
 
 
   def self.new_products(n)
