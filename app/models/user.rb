@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  has_one :billing, :class_name => 'Address', :inverse_of => :user
-  has_one :shipping, :class_name => 'Address', :inverse_of => :user
+  has_many :addresses
+  belongs_to :billing, :class_name => 'Address', :foreign_key => :billing_id
+  belongs_to :shipping, :class_name => 'Address', :foreign_key => :shipping_id
   has_many :orders
-  has_many :addresses, :inverse_of => :user
   has_many :credit_cards
   has_many :order_contents, :through => :orders, :source => :items
   has_many :products, :through => :order_contents
