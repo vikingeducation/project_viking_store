@@ -10,6 +10,13 @@ class Product < ActiveRecord::Base
   has_many :orders, through: :order_contents
 
 
+
+  def self.single_order_value
+    sum("quantity * price")
+  end
+
+
+
   def self.new_products(n)
     Product.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
   end
