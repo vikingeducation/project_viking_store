@@ -1,0 +1,280 @@
+<h1>Viking Store Analytics Dashboard</h1>
+
+<div class="row">
+  <div class='col-md-6'>
+    <h2>Overall Platform</h2>
+
+    <div class="row">
+      <div class='col-md-12'>
+        <%  descriptions = [ 'Item', 'Total Users', 'Orders', 'Products', 'Revenue'] %>
+        <%  values = [ 'Data',   @num_total_users, @num_total_orders,  @num_total_products, number_to_currency(@total_revenue)] %>
+
+        <%=  render :partial => "table", :locals => { title: "Total", descriptions: descriptions, values: values }%>
+
+     </div>
+    </div>
+    <div class= "row">
+      <div class='col-md-12'>
+        <%  descriptions = [ 'Item', 'New Users', 'Orders', 'Products', 'Revenue'] %>
+        <%  values = [ 'Data',   @users_30, @orders_30,  @products_30, number_to_currency(@revenue_30)] %>
+
+        <%=  render :partial => "table", :locals => { title: "Last 30 Days", descriptions: descriptions, values: values }%>
+      </div>
+    </div>
+    <div class= "row">
+      <div class='col-md-12'>
+        <h3>Last 7 Days</h3>
+        <table class='table'>
+          <tr>
+            <td>Item</td>
+            <td>Data</td>
+          </tr>
+          
+          <tr>
+            <td>New Users</td>
+            <td><%= @users_7 %></td>
+          </tr>
+
+          <tr>
+            <td>Orders</td>
+            <td><%= @orders_7 %></td>
+          </tr>
+
+          <tr>
+            <td>Products</td>
+            <td><%= @products_7 %></td>
+          </tr>
+
+          <tr>
+            <td>Revenue</td>
+            <td><%= number_to_currency(@revenue_7) %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-6'>
+    <h2>User Demographics and Behavior</h2>
+
+    <div class="row">
+      <div class='col-md-12'>
+        <h3>Top 3 States Users Live In (billing)</h3>
+        <table class='table'>
+
+          <tr>
+            <td>Item</td>
+            <td>Data</td>
+          </tr>
+
+          <% (0..2).each do |i| %>
+            <tr>
+              <td><%= @top_states[i].name %></td>
+              <td><%= @top_states[i].state_count %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div class= "row">
+      <div class='col-md-12'>
+        <h3>Top 3 Cities Users Live In (billing)</h3>
+        <table class='table'>
+
+          <tr>
+            <td>Item</td>
+            <td>Data</td>
+          </tr>
+
+          <% (0..2).each do |i| %>
+            <tr>
+              <td><%= @top_cities[i].name %></td>
+              <td><%= @top_cities[i].city_count %></td>
+            </tr>
+          <% end %>
+
+        </table>
+      </div>
+    </div>
+    <div class= "row">
+      <div class='col-md-12'>
+        <h3>Top User With...</h3>
+        <table class='table'>
+          <tr>
+            <td>Item</td>
+            <td>User</td>
+            <td>Quantity</td>
+          </tr>
+
+          <tr>
+            <td>Highest Single Order</td>
+            <td>
+              <%= "#{@user_highest_single_order.first_name}
+                    #{@user_highest_single_order.last_name}" %>
+            </td>
+            <td><%= number_to_currency(@user_highest_single_order.highest) %></td>
+          </tr>
+
+          <tr>
+            <td>Highest Lifetime Value</td>
+            <td>
+              <%= "#{@user_highest_lifetime_value.first_name}
+                    #{@user_highest_lifetime_value.last_name}" %>
+            </td>
+            <td><%= number_to_currency(@user_highest_lifetime_value.total_revenue) %></td>
+          </tr>
+
+          <tr>
+            <td>Highest Average Value</td>
+            <td>
+              <%= "#{@user_highest_average_value.first_name}
+                    #{@user_highest_average_value.last_name}" %>
+            </td>
+            <td><%= number_to_currency(@user_highest_average_value.highest) %></td>
+          </tr>
+
+          <tr>
+            <td>Most Orders</td>
+            <td>
+              <%= "#{@user_most_orders.first_name}
+                    #{@user_most_orders.last_name}" %>
+            </td>
+            <td><%=@user_most_orders.most_orders%></td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class='col-md-6'>
+    <h2>Order Statistics</h2>
+
+    <div class="row">
+      <div class='col-md-12'>
+        <h3>Total</h3>
+        <table class='table'>
+          <tr>
+            <td>Item</td>
+            <td>Data</td>
+          </tr>
+          <tr>
+            <td>Number of Orders</td>
+            <td><%= @num_total_orders %></td>
+          </tr>
+          <tr>
+            <td>Total Revenue</td>
+            <td><%= number_to_currency(@total_revenue) %></td>
+          </tr>
+          <tr>
+            <td>Average Order Value</td>
+            <td><%= number_to_currency(@average_order_value) %></td>
+          </tr>
+          <tr>
+            <td>Largest Order Value</td>
+            <td><%= number_to_currency(@highest_single_order) %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class= "row">
+      <div class='col-md-12'>
+        <h3>Last 30 Days</h3>
+        <table class='table'>
+          <tr>
+            <td>Item</td>
+            <td>Data</td>
+          </tr>
+          <tr>
+            <td>Number of Orders</td>
+            <td><%=  @orders_30 %></td>
+          </tr>
+          <tr>
+            <td>Total Revenue</td>
+            <td><%= number_to_currency( @revenue_30 )%></td>
+          </tr>
+          <tr>
+            <td>Average Order Value</td>
+            <td><%= number_to_currency( @average_order_value_30 )%></td>
+          </tr>
+          <tr>
+            <td>Largest Order Value</td>
+            <td><%= number_to_currency( @highest_single_order_30 )%></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class= "row">
+      <div class='col-md-12'>
+        <h3>Last 7 Days</h3>
+        <table class='table'>
+          <tr>
+            <td>Item</td>
+            <td>Data</td>
+          </tr>
+          <tr>
+            <td>Number of Orders</td>
+            <td><%=  @orders_7%></td>
+          </tr>
+          <tr>
+            <td>Total Revenue</td>
+            <td><%= number_to_currency( @revenue_7 )%></td>
+          </tr>
+          <tr>
+            <td>Average Order Value</td>
+            <td><%= number_to_currency( @average_order_value_7 )%></td>
+          </tr>
+          <tr>
+            <td>Largest Order Value</td>
+            <td><%= number_to_currency( @highest_single_order_7 )%></td>          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-6'>
+    <h2>Time Series Data</h2>
+
+    <div class="row">
+      <div class='col-md-12'>
+        <h3>Orders by day</h3>
+        <table class='table'>
+          <tr>
+            <td>Date</td>
+            <td>Quantity</td>
+            <td>Value</td>
+          </tr>
+          <% (0...7).each do |num| %>
+            <tr>
+              <td><%= day_str(num) %></td>
+              <td><%= @num_orders_past_n_days[num] %></td>
+              <td><%= number_to_currency(@revenue_past_n_days[num]) %></td>
+            </tr>
+
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div class= "row">
+      <div class='col-md-12'>
+        <h3>Orders by week</h3>
+        <table class='table'>
+          <tr>
+            <td>Date</td>
+            <td>Quantity</td>
+            <td>Value</td>
+          </tr>
+
+          <% (0...7).each do |num| %>
+            <tr>
+              <td><%= week_str(num) %></td>
+              <td><%= @num_orders_past_n_weeks[num] %></td>
+              <td><%= number_to_currency(@revenue_past_n_weeks[num]) %></td>
+            </tr>
+          <% end %>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,42 @@
 Rails.application.routes.draw do
+
+  resources :dashboards, only: [:index]
+
+  root 'dashboards#index'
+  get '/dashboard' => 'dashboards#index'
+  get '/admin' => 'users#index'
+  # namespace :admin do
+    # root 'users#index'
+  resources :users,  only: [:index]
+  resources :categories
+  # end
+  #############
+
+  # start admin portal
+  # create controller for users delete admins
+
+  # namespace :admin do
+  #   root 'users#index'   
+  #   resources :categories     #   ? resource  resources ?
+  #   resources :products
+  #   resources :users
+  #   resources :addresses
+  #   resources :orders
+  # end
+
+  # refactor and complete view
+  # navbar goes in admin layout
+  # db code goes in models/user
+
+  # add resource for category
+  # create controller for category
+  # write view/model, model code goes in model/category
+
+  # etc., etc. for other resources
+
+  ####################
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
