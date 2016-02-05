@@ -1,6 +1,14 @@
 class User < ActiveRecord::Base
   include Recentable
 
+  def self.get_all_with_billing_location
+    User.select("users.*, c.name AS c_name, s.name AS s_name")
+      .joins("JOIN addresses a ON users.billing_id=a.id")
+      .joins("JOIN cities c ON city_id=c.id")
+      .joins("JOIN states s ON state_id=s.id")
+      .order("users.id")
+  end
+
   def self.get_billing_address(n)
     User.select("a.street_address AS street, c.name AS c_name, s.name AS s_name, a.zip_code AS zip")
       .joins("JOIN addresses a ON users.billing_id=a.id")
@@ -30,6 +38,7 @@ class User < ActiveRecord::Base
       .joins("JOIN products p ON oc.product_id=p.id")
       .where("users.id=#{n}")
       .group("o.id")
+      .order("o.id")
   end
 
   def self.get_all_cities_and_states
