@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   include Recentable
   belongs_to :category, inverse_of: :products
   has_many :order_contents
+  has_many :orders, through: :order_contents
   validates :name, :sku, :price, :category_id, presence: true
   validates :price, numericality: { greater_than: 0, less_than: 10000 }
   validates :category, presence: true

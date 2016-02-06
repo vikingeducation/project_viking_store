@@ -1,0 +1,11 @@
+<% content_for :resource_name, "Addresses" %>
+
+<h1 class="text-center">New Address</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+
+    <%= render partial: "form", locals: { address: @address } %>
+
+  </div>
+</div>

@@ -12,9 +12,19 @@ gem 'jbuilder', '2.4.0'
 gem 'sdoc', '0.4.1', group: :doc
 gem 'spring', '1.6.2', group: :development
 gem 'faker', '1.6.1'
-gem 'binding_of_caller', '0.7.2'
-gem 'better_errors', '2.1.1'
-gem 'jazz_hands', '0.5.2', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
-gem 'pry-byebug', '1.3.2'
-gem 'web-console', '3.1.1'
 gem 'autoprefixer-rails', '6.3.1'
+
+group :development, :test do
+  gem 'binding_of_caller', '0.7.2'
+  gem 'better_errors', '2.1.1'
+  gem 'jazz_hands', '0.5.2', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
+  gem 'pry-byebug', '1.3.2'
+  gem 'web-console', '3.1.1'
+end
+
+group :production do
+  gem 'delayed_task'
+  gem 'rails_12factor'
+  gem 'pg'
+  ruby '2.3.0'
+end

@@ -1,0 +1,9 @@
+<% content_for :resource_name,  "Orders" %>
+
+<h1 class="text-center">New Order</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= render partial: "form", locals: { order: @order } %>
+  </div>
+</div>

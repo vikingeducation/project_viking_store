@@ -1,0 +1,32 @@
+<h2>Demographic Information</h2>
+
+<%= form_for [:admin,user] do |f| %>
+  <div class="form-group">
+    <%= f.label :id, "ID" %>
+    <%= f.text_field :id, class: 'form-control', placeholder: "N/A", disabled: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :billing_id %>
+    <%= f.collection_select :billing_id, user.addresses, :id, :street_address, {}, class: 'selectpicker', data: { width: '100%' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :shipping_id %>
+    <%= f.collection_select :shipping_id, user.addresses, :id, :street_address, {}, class: 'selectpicker', data: { width: '100%' } %>
+  </div>
+
+  <%= f.submit class: 'btn btn-primary btn-block' %>
+<% end %>

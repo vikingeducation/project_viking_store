@@ -1,0 +1,24 @@
+<% content_for :resource_name, "Orders" %>
+
+<%= link_to "Add a New Order", new_admin_order_path, class: "btn btn-primary btn-lg btn-block"%>
+
+<% content_for :table do %>
+  <table class="table table-striped">
+    <thead>
+      <th>ID</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= link_to "Show", [:admin, order] %></td>
+          <td><%= link_to "Edit", edit_admin_order_path(order) %></td>
+          <td><%= link_to "Delete", [:admin, order], method: :delete, data: { confirm: "Are you sure?"} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
