@@ -5,7 +5,7 @@ class Order < ActiveRecord::Base
   has_many :order_contents
   has_many :products, through: :order_contents
 
-  has_many :categories, through: :order_contents
+  has_many :categories, through: :order_contents, source: :product
 
   def value
     products.sum("quantity * price")
