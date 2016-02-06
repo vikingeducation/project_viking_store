@@ -1,5 +1,12 @@
 class OrderContent < ActiveRecord::Base
 
+  belongs_to :product
+  belongs_to :order
+
+  def total
+    quantity * product.price
+  end
+
   def self.revenue(days=nil)
     if days.nil?
       self.joins("JOIN products ON product_id = products.id").sum("products.price * order_contents.quantity")

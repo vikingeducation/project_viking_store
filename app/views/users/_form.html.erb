@@ -1,0 +1,29 @@
+<%= form_for @user do |f| %>
+  <p>
+    <%= f.label "First Name" %>
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label "Last Name" %>
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label "Email:" %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <% if @user.persisted? %>
+      <%= f.label :default_billing_address %>
+      <%= f.collection_select :billing_id, @user.addresses, :id, :street_address, {}, data: { width: '80%' } %>
+    <% end %>
+  </p>
+  <p>
+    <% if @user.persisted? %>
+      <%= f.label :default_shipping_address %>
+      <%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, {}, data: { width: '80%' } %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row text-center">
+    <h1>Viking Store Admin Portal</h1>
+  </div>
+  <div class="row">
+
+    <div class="col-xs-2">
+      <h4>Navigation Options</h4>
+      <div><a href="#">Users</a></div>
+      <div><a href="#">Addresses</a></div>
+      <div><a href="#">Orders</a></div>
+      <div><a href="#">Products</a></div>
+      <div><a href="#">Categories</a></div>
+    </div>
+
+    <div class="col-xs-10">
+      <div class="text-center"><h2>Viking Store Users</h2></div>
+      <div class="col-xs-offset-3 col-xs-6">
+        <%= link_to "Create User", new_user_path, class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+      <div class="col-xs-12 text-center">
+        <div class="table-responsive scrollable-table">
+          <table class="table table-striped">
+            <tr>
+              <td>ID</td>
+              <td>Name</td>
+              <td>Joined</td>
+              <td>City</td>
+              <td>State</td>
+              <td>Orders</td>
+              <td>Last Order Date</td>
+              <td>Show</td>
+              <td>Edit</td>
+              <td>Delete</td>
+            </tr>
+            <tr>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= user.id %></td>
+                  <td><%= user.first_name %> <%= user.last_name %></td>
+                  <td><%= user.created_at.strftime("%y-%m-%d") %></td>
+
+                  <% unless user.addresses.empty? %>
+                    <td><%= user.default_shipping_city.name %></td>
+                    <td><%= user.default_shipping_state.name %></td>
+                  <% else %>
+                    <td></td>
+                    <td></td>
+                  <% end %>
+                  <td><%= user.orders.length %></td>
+                  <td>
+                    <% unless @last_date[user.id][0].nil? %>
+                      <%= @last_date[user.id][0].date.strftime("%Y-%m-%d") %>
+                    <% end %>
+                  </td>
+                  <td><%= link_to "Show", user %></td>
+                  <td><%= link_to "Edit", edit_user_path(user) %></td>
+                  <td><%= link_to "Delete", user, method: :delete, data: {confirm: "Are you sure?"} %></td>
+                </tr>
+              <% end %>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

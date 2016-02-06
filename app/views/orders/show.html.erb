@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row text-center">
+    <h1>Order <%= @order.id %></h1>
+  </div>
+  <div class="row text-center">
+    <h2>Logistical Information</h2>
+  </div>
+  <div class="row">
+    <h4>Basic Information</h4>
+    <p>
+      Customer ID: <%= @user.id %>
+    </p>
+    <p>
+      Customer: <%= link_to "View #{@user.first_name}", user_path(@user) %>
+    </p>
+    <p>
+      Date Placed: <%= @order.created_at %>
+    </p>
+    <p>
+      # Products: <%= @order.products.length %>
+    </p>
+    <p>
+      Order Value: <%= @order.total_value %>
+    </p>
+    <p>
+      <%= link_to "Edit Customer Profile", edit_user_path(@user) %>
+    </p>
+  </div>
+
+  <div class="row">
+    <h4>Shipping Address</h4>
+    <p>Street <%= @order.shipping_add.street_address %></p>
+    <p>City <%= @order.shipping_add.city.name %></p>
+    <p>State <%= @order.shipping_add.state.name %></p>
+  </div>
+  <br>
+  <div class="row">
+    <h4>Billing Address</h4>
+    <p>Street <%= @order.billing_add.street_address %></p>
+    <p>City <%= @order.billing_add.city.name %></p>
+    <p>State <%= @order.billing_add.state.name %></p>
+  </div>
+  <br>
+  <div class="row">
+    <h4>Billing Card</h4>
+    <p>Last 4 Digits <%= @order.last_four %></p>
+  </div>
+
+
+  <div class="row table-container">
+    <h2 class="text-center">Order Contents</h2>
+    <table class="table table-striped">
+      <tr>
+        <td>ProductID</td>
+        <td>Product</td>
+        <td>Quantity</td>
+        <td>Price</td>
+        <td>Total Price</td>
+      </tr>
+      <% @order.order_contents.each do |order| %>
+        <tr>
+          <td><%= order.product.id %></td>
+          <td><%= order.product.name %></td>
+          <td><%= order.quantity %></td>
+          <td><%= order.product.price %></td>
+          <td><%= order.total %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

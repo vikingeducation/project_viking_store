@@ -1,2 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.scrollable-table {
+  max-height: 500px;
+  overflow-y: scroll;
+}

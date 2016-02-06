@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row text-center">
+    <h1>Viking Store Admin Portal</h1>
+  </div>
+  <div class="row">
+
+    <div class="col-xs-2">
+      <h4>Navigation Options</h4>
+      <div><a href="#">Users</a></div>
+      <div><a href="#">Addresses</a></div>
+      <div><a href="#">Orders</a></div>
+      <div><a href="#">Products</a></div>
+      <div><a href="#">Categories</a></div>
+    </div>
+
+    <div class="col-xs-10">
+      <% if defined?(@user) %>
+        <div class="text-center">
+          <h2><%= @user.first_name %> <%= @user.last_name %>'s Address</h2>
+          <%= link_to "Create #{@user.first_name} #{@user.last_name}'s Address", new_user_address_path(@user), class: "btn btn-primary btn-lg" %>
+        </div>
+      <% else %>
+        <div class="text-center">
+          <h2>Addresses</h2>
+        </div>
+        <div class="col-xs-offset-3 col-xs-6">
+          Create a new addresses from within
+          <%= link_to "User" %>
+          profiles
+        </div>
+      <% end %>
+      <div class="col-xs-12 text-center">
+        <div class="scrollable-table">
+          <table class="table table-striped">
+            <tr>
+              <td>ID</td>
+              <td>User</td>
+              <td>Address</td>
+              <td>City</td>
+              <td>State</td>
+              <td>Orders</td>
+              <td>Created</td>
+              <td>SHOW</td>
+              <td>EDIT</td>
+              <td>DELETE</td>
+            </tr>
+            
+            <% @addresses.each do |address| %>
+              <tr>
+                <td><%= address.id %></td>
+                <td><%= address.user.first_name %></td>
+                <td><%= address.street_address %></td>
+                <td><%= address.city.name %></td>
+                <td><%= address.state.name %></td>
+                <td><%= address.orders.length %></td>
+                <td><%= address.created_at.strftime("%y-%m-%d") %></td>
+                <td><%= link_to "SHOW", user_address_path(address.user, address) %></td>
+                <td><%= link_to "EDIT", edit_user_address_path(address.user, address) %></td>
+                <td><%= link_to "DELETE", user_address_path(address.user, address), method: :delete, data: {confirm: "Are you sure?"} %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+
+        <div class
+      </div>
+    </div>
+  </div>
+</div>

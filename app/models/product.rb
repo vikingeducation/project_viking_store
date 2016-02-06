@@ -1,4 +1,12 @@
 class Product < ActiveRecord::Base
+
+  has_many :order_contents
+  has_many :orders, through: :order_contents,
+            source: :order
+  belongs_to :category
+
+
+
   validates :price, :name, :category_id,
             :presence => true
 
