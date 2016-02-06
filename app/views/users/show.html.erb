@@ -37,7 +37,7 @@
     <%= link_to "Delete User", user_path(@user.id), method: "delete", data: {confirm: "Are you sure?"} %>
   </div>
   <div class="col-xs-12">
-    <%= link_to "View Saved Addresses",  "#" %>
+    <%= link_to "View Saved Addresses",  addresses_path(this_user: @user.id) %>
   </div>
   <div class="col-xs-12">
     <%= link_to "View Unplaced Order (Cart)",  "#" %>

@@ -1,7 +1,14 @@
 <div class="row">
   <div class="col col-xs-12">
-    <h1 class="page-header text-center">All Addresses</h1>
-    <h3 class="text-center">Create new addresses from within <%= link_to "User", users_path %> profiles</h3>
+    <% if @this_user != 0 %>
+      <h1 class="page-header text-center">
+        <%= "#{@this_user.first_name} #{@this_user.last_name}'s Addresses"%>
+      </h1>
+      <%= link_to "Create an Address for #{@this_user.first_name} #{@this_user.last_name}", new_address_path(user_id: "#{@this_user.id}"), class: "btn btn-block btn-primary"%>
+    <% else %>
+      <h1 class="page-header text-center">All Addresses</h1>
+      <h3 class="text-center">Create new addresses from within <%= link_to "User", users_path %> profiles</h3>
+    <% end %>
   </div>
 </div>
 
@@ -23,14 +30,14 @@
       <% @addresses.each do |a| %>
       <tr>
         <td><%= a.id %></td>
-        <td><%= "#{a.user.first_name} #{a.user.last_name}" %></td>
+        <td><%= link_to "#{a.user.first_name} #{a.user.last_name}", user_path(a.user_id) %></td>
         <td><%= a.street_address %></td>
         <td><%= a.city.name %></td>
         <td><%= a.state.name %></td>
         <td><%= a.billed_orders.count + a.shipped_orders.count %></td>
         <td><%= a.created_at.to_date %></td>
         <td><%= link_to "Show", address_path(a.id) %></td>
-        <td><%= link_to "Edit", edit_address_path(a.id) %></td>
+        <td><%= link_to "Edit", edit_address_path(a.id, this_user: "#{a.user_id}") %></td>
         <td><%= link_to "Delete", address_path(a.id), method: "delete", data: {confirm: "Are you sure?"}%></td>
       </tr>
       <% end %>
