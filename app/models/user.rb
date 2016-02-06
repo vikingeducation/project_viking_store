@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
               presence: true,
               length: { in: 1..64 }
 
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true,
+                    format: { with: /@/ }
 
 
   def self.new_users_in_last_n_days( n )
