@@ -1,29 +1,23 @@
+<p>Owner ID: <%= @user.id %></p>
+<p>Owner Name: <%= link_to "#{@user.full_name} (click to view user)", admin_user_path(@user) %></p>
+
 <%= form_for [:admin, @user, @address] do |f| %>
 
-  <%= f.label :first_name, 'First Name' %>
-  <%= f.text_field :first_name %>
+  <%= f.label :street_address, 'Street' %>
+  <%= f.text_field :street_address %>
   </br>
-  <%= f.label :last_name, 'Last Name' %>
-  <%= f.text_field :last_name %>
+  <%= f.label :city, 'City' %>
+  <%= f.text_field :city %>
   </br>
-  <%= f.label :email, 'Email' %>
-  <%= f.text_field :email %>
+  <%= f.label :state, 'State' %>
+  <%= f.text_field :state %>
   </br>
-  <%= f.label :billing_id, 'Default Billing Address' %>
-  <% if @user.addresses.empty? %>
-    <%= f.text_field :billing_address %>
-  <% else %>
-    <%= f.collection_select(:billing_id, @user.addresses, :id, :street_address) %>
-  <% end %>
-  </br>
-  <%= f.label :shipping_id, 'Default Shipping Address' %>
-  <% if @user.addresses.empty? %>
-    <%= f.text_field :shipping_address %>
-  <% else %>
-    <%= f.collection_select(:shipping_id, @user.addresses, :id, :street_address) %>
-  <% end %>
+  <%= f.label :zip_code, 'Zip Code' %>
+  <%= f.text_field :zip_code %>
   </br>
   <%= f.submit %>
-  <a class='btn btn-primary btn-block' role='button' href=<%= admin_user_path, method: :delete %> >Delete User</a>
+  <% unless @address.id.nil? %>
+    <a class='btn btn-primary btn-block' role='button' href=<%= admin_user_addresses_path(@user.id) %> method='delete' >Delete Address</a>
+  <% end %>
 
 <% end %>

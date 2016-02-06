@@ -13,3 +13,6 @@ Josh Masland
 
 John Kosmicke
 Link to solution info on the seeding of this lives [here](https://gist.github.cozm/betweenparentheses/0b6b325ceaaea76a521d)
+
+Kelsey James
+Worked with John using his admin page on Feb 3
