@@ -1,0 +1,81 @@
+<% if @order.checkout_date.nil? %>
+  <h1>Shopping Cart Order <%= @order.id %></h1>
+<% else %>
+  <h1>Order <%= @order.id %></h1>
+<% end %>
+<div class="col-xs-8 panel panel-default">
+
+  <h1 class="text-center"><u>Logistical Information</u></h1>
+
+  <h3>Basic Information</h3>
+
+    <h5><strong>Customer ID:    </strong> <span class = "badge"><%= @order.user.id %></span></h5>
+    <h5><strong>Customer:</strong> <%= link_to "#{@order.user.full_name} (click to view user)", user_path(@order.user.id) %></h5>
+    <h5><strong>Date Placed:</strong> <%= @order.created_at %></h5>
+    <h5><strong># of Products:</strong> <%= @order.products.count %></h5>
+    <h5><strong>Order Value:</strong> <%= number_to_currency(@order.order_value(@order.id).value) %></h5>
+    <br />
+    <%= link_to "Edit Customer Profile", edit_user_path(@order.user.id), class: "btn btn-primary btn-lg btn-block"%>
+  </div>
+
+  <div class="col-xs-8 panel panel-default">
+    <h3>Order Status</h3>
+    <% if @order.checkout_date.nil? %>
+      <h1 style = "color: purple;">Unplaced</h1>
+    <% else %>
+      <h1 style = "color: green;">Placed</h1>
+    <% end %>
+  </div>
+
+  <div class = "col-xs-8 panel panel-default">
+    <h3>Shipping Address</h3>
+      <h5><strong>Street:</strong> <%= @order.shipping_address.street_address %></h5>
+      <h5><strong>City:</strong> <%= @order.shipping_address.city.name %></h5>
+      <h5><strong>State:</strong> <%= @order.shipping_address.state.name %></h5>
+  </div>
+
+  <div class = "col-xs-8 panel panel-default">
+    <h3>Billing Address</h3>
+      <h5><strong>Street:</strong> <%= @order.billing_address.street_address %></h5>
+      <h5><strong>City:</strong> <%= @order.billing_address.city.name %></h5>
+      <h5><strong>State:</strong> <%= @order.billing_address.state.name %></h5>
+  </div>
+
+  <div class = "col-xs-8 panel panel-default">
+    <h3>Billing Card</h3>
+      <h5><strong>Last 4 Digits:</strong> <%= @order.user.credit_card ? @order.user.credit_card.card_number[-4..-1] : "N/A" %></h5>
+  </div>
+  <div class = "col-xs-8 panel panel-default">
+    <%= link_to "Edit Order", edit_order_path(@order), class: "btn btn-primary btn-lg btn-block" %><br />
+    <%= link_to "Delete Order", order_path(@order), method: :delete, class: "btn btn-danger btn-lg btn-block", data: { confirm: "Are you sure you want to delete?"} %>
+  </div>
+
+  <div class = "col-xs-8 panel panel-default">
+    <h1 class = "text-center"> Order Contents </h1>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ProductID</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <% @order.products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= link_to product.name, product_path(product) %></td>
+        <td><%= product.product_in_order(@order.id).quantity %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= number_to_currency(product.product_in_order(@order.id).quantity * product.price) %></td>
+
+      </tr>
+
+    <% end %>
+
+    </tbody>
+  </table>
+</div>

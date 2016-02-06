@@ -8,6 +8,14 @@ class Order < ActiveRecord::Base
 
   has_many :categories, :through => :products, source: :category
 
+  def shipping_address
+    Address.find(self.shipping_id)
+  end
+
+  def billing_address
+    Address.find(self.billing_id)
+  end
+
   def order_value(id)
     Order.select("SUM(order_contents.quantity * products.price) AS value, orders.id").joins("JOIN order_contents ON order_contents.order_id = orders.id").joins("JOIN products ON order_contents.product_id = products.id").where("order_contents.order_id = #{id}").group("orders.id")[0]
   end

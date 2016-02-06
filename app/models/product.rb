@@ -20,6 +20,10 @@ class Product < ActiveRecord::Base
     Product.select("name").distinct.count
   end
 
+  def product_in_order(order_id)
+    self.order_contents.where(:order_id => order_id)[0]
+  end
+
 
   def self.times_ordered(product_id)
     # products to order_contents to orders, make sure checkout date is not null

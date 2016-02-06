@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :orders
   has_one :credit_card, dependent: :destroy
 
+
   has_many :order_contents, :through => :orders
   has_many :products, :through => :order_contents, source: :product
 
@@ -12,12 +13,10 @@ class User < ActiveRecord::Base
   validates :email, email: true
 
   def full_name
-    "#{self.first_name}, #{self.last_name}"
+    "#{self.first_name} #{self.last_name}"
   end
 
-  def self.new_users(n)
-    User.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
-  end
+
 
   def billing_address
     self.addresses.find(self.billing_id)
@@ -31,6 +30,9 @@ class User < ActiveRecord::Base
     User.all.count
   end
 
+  def self.new_users(n)
+    User.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
+  end
 
   def self.highest_single_order
     User.select("SUM(oc.quantity * p.price) AS order_value,
