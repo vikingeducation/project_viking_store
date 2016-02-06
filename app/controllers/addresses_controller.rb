@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+  layout "admin"
 
   def index
     @addresses = Address.all
