@@ -23,6 +23,7 @@ class AddressesController < ApplicationController
     @address = Address.find(params[:id])
   end
 
+
   def edit
     @address = Address.find(params[:id])
   end
