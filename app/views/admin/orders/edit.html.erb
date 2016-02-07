@@ -38,8 +38,17 @@
     <%= form_for [:admin,@order] do |f| %>
       <h4>Order Status</h4>
       <div class="form-group">
-        <%= f.radio_button(:order_status, "PLACED") %>
-        <%= f.radio_button(:order_status, "UNPLACED", { checked: true }) %>
+
+
+        <p>
+          <%= radio_button(:order, :checkout_date, DateTime.now) %>
+          <%= f.label :placed, "PLACED", class: "placed-order" %>
+        </p>
+
+        <p>
+          <%= radio_button(:order, :checkout_date, nil, { checked: true }) %>
+          <%= f.label :unplaced, "UNPLACED", class: "unplaced-order" %>
+        </p>
       </div>
 
       <h4>Billing Address</h4>
@@ -59,6 +68,63 @@
         <%= f.label :credit_card_id %>
         <%= f.collection_select :credit_card_id, [@order.user.credit_card], :id, :nickname, {}, class: 'selectpicker', data: { width: '100%' } %>
       </div>
+
+      <%= f.submit class: 'btn btn-primary btn-block' %>
+    <% end %>
+
+    <h4><%= link_to "Delete Order" %></h4>
+
+    <hr>
+
+    <h3>Edit Order Contents</h3>
+
+    <%= form_for [:admin,@order] do |f| %>
+      <table class="table table-striped">
+        <thead>
+          <th>ProductID</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total Price</th>
+        </thead>
+        <tbody>
+          <% @order.products.each do |product| %>
+            <tr>
+              <% quantity = product.order_contents.where(order_id: @order.id)[0][:quantity] %>
+              <td><%= product.id %></td>
+              <td><%= product.name %></td>
+              <td><%= number_field :product, :quantity, { value: quantity } %></td>
+              <!-- TODO get quantity updates to work -->
+              <td><%= number_to_currency(product.price) %></td>
+              <td><%= number_to_currency(product.price * quantity) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= f.submit class: 'btn btn-primary btn-block' %>
+    <% end %>
+
+    <hr>
+
+    <h3>Add Products to Order</h3>
+
+    <%= form_for [:admin,@order] do |f| %>
+      <table class="table table-striped">
+        <thead>
+          <th>ProductID</th>
+          <th>Quantity</th>
+        </thead>
+        <tbody>
+          <% 5.times do |product| %>
+            <tr>
+              <td><%= number_field :order, :id %></td>
+              <td><%= number_field :product, :quantity %></td>
+              <!-- TODO adding products to orders -->
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
       <%= f.submit class: 'btn btn-primary btn-block' %>
     <% end %>

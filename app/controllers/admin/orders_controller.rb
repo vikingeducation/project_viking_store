@@ -33,6 +33,8 @@ class Admin::OrdersController < AdminController
   def update
     @order = Order.find(params[:id])
     if @order.update(order_params)
+      # TODO get updating quantities to work
+      # TODO get adding products to orders to work
       redirect_to admin_order_path(@order), notice: "Order Updated!"
     else
       flash.now[:alert] = "Failed to update order."

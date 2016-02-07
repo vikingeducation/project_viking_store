@@ -54,6 +54,8 @@
         <%= f.collection_select :credit_card_id, [@order.user.credit_card], :id, :nickname, {}, class: 'selectpicker', data: { width: '100%' } %>
       </div>
 
+      <%= hidden_field(:order, :user_id) %>
+
       <%= f.submit class: 'btn btn-primary btn-block' %>
     <% end %>
   </div>

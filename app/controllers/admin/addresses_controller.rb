@@ -14,6 +14,7 @@ class Admin::AddressesController < AdminController
   end
 
   def create
+    # TODO adding new cities from form
     @address = Address.new( address_params )
     if @address.save
       redirect_to admin_addresses_path, notice: "Address Created"
