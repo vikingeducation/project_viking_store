@@ -10,8 +10,10 @@ Rails.application.routes.draw do
     resources :dashboard, only: [:index, :get]
     resources :categories
     resources :products
-    resources :users
-    resources :addresses
+    resources :addresses, only: [:index]
+    resources :users do
+      resources :addresses
+    end
   end
 
 

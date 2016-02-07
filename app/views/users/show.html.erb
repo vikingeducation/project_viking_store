@@ -19,7 +19,7 @@
   <%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
   <br />
   <!-- TODO: add link to addresses and cart/order -->
-  <%= link_to "View Saved Addresses", addresses_path(@user.addresses)%> 
+  <%= link_to "View Saved Addresses", addresses_path(@user.address)%> 
   <br />
   <% if @user.orders.cart %>
     <%= link_to "View Unplaced Order (Cart)"%> 

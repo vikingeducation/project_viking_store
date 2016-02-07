@@ -2,7 +2,17 @@ class AddressesController < ApplicationController
   layout "admin"
 
   def index
-    @addresses = Address.all
+    if params[:user_id]
+      if User.exists?(params[:user_id])
+        @user = User.find(params[:user_id])
+        @addresses = Address.where(user_id: @user.id)
+      else
+        flash[:error] = "Invalid user id"
+        redirect_to admin_addresses_path
+      end
+    else
+      @addresses = Address.all
+    end
   end
 
   def new

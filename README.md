@@ -72,3 +72,21 @@ USER = destroy credit card, addresses/orders/products should stay
 
 
 Link to solution info on the seeding of this lives [here](https://gist.github.com/betweenparentheses/0b6b325ceaaea76a521d)
+
+
+
+
+class Address
+  after_create :make_or_save_city
+
+  def make_or_save_city
+
+  end
+
+  def city_name=(name)
+    city = City.find_or_create_by(name: name)
+    self.city = city
+    self.save!
+  end
+
+end
