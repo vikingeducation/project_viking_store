@@ -4,6 +4,64 @@
 
 <div class="row">
   <div class="col-sm-12">
-    <%= render partial: "form", locals: { order: @order } %>
+    <h2>Logistical Information</h2>
+    <br>
+
+    <h3>Basic Information</h3>
+    <table class="table table-striped special-table">
+      <tbody>
+        <tr>
+          <td><strong>Customer ID</strong></td>
+          <td><%= @order.user_id %></td>
+        </tr>
+
+        <tr>
+          <td><strong>Customer</strong></td>
+          <td><%= @order.user.full_name %></td>
+        </tr>
+
+        <tr>
+          <td><strong>Date Placed</strong></td>
+          <td>N/A</td>
+        </tr>
+
+        <tr>
+          <td><strong>Total Value</strong></td>
+          <td><%= @order.value %></td>
+        </tr>
+      </tbody>
+    </table>
+    <p><%= link_to "Edit Customer Profile", edit_admin_user_path(@order.user_id) %></p>
+
+    <hr>
+
+    <%= form_for [:admin,@order] do |f| %>
+      <h4>Order Status</h4>
+      <div class="form-group">
+        <%= f.radio_button(:order_status, "PLACED") %>
+        <%= f.radio_button(:order_status, "UNPLACED", { checked: true }) %>
+      </div>
+
+      <h4>Billing Address</h4>
+      <div class="form-group">
+        <%= f.label :billing_id %>
+        <%= f.collection_select :billing_id, @order.user.addresses, :id, :street_address, {}, class: 'selectpicker', data: { width: '100%' } %>
+      </div>
+
+      <h4>Shipping Address</h4>
+      <div class="form-group">
+        <%= f.label :shipping_id %>
+        <%= f.collection_select :shipping_id, @order.user.addresses, :id, :street_address, {}, class: 'selectpicker', data: { width: '100%' } %>
+      </div>
+
+      <h4>Payment Card</h4>
+      <div class="form-group">
+        <%= f.label :credit_card_id %>
+        <%= f.collection_select :credit_card_id, [@order.user.credit_card], :id, :nickname, {}, class: 'selectpicker', data: { width: '100%' } %>
+      </div>
+
+      <%= f.submit class: 'btn btn-primary btn-block' %>
+    <% end %>
+
   </div>
 </div>

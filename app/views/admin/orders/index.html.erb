@@ -1,11 +1,22 @@
 <% content_for :resource_name, "Orders" %>
 
-<%= link_to "Add a New Order", new_admin_order_path, class: "btn btn-primary btn-lg btn-block"%>
+<% if @user_id.nil? %>
+  <h4 class="text-center">Create New Orders for Particular Users at the <strong><%= link_to "User Index", admin_users_path %></strong></h4>
+<% else %>
+  <%= link_to "Add a New Order", new_admin_order_path(user_id: @user_id), class: "btn btn-primary btn-lg btn-block"%>
+<% end %>
 
 <% content_for :table do %>
   <table class="table table-striped">
     <thead>
       <th>ID</th>
+      <th>User ID</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Total Value</th>
+      <th>Status</th>
+      <th>Date Placed</th>
       <th>Show</th>
       <th>Edit</th>
       <th>Delete</th>
@@ -14,6 +25,15 @@
       <% @orders.each do |order| %>
         <tr>
           <td><%= order.id %></td>
+          <td><%= link_to order.user.id, admin_user_path(order.user.id) %></td>
+          <td><%= order.shipping_address.street_address %></td>
+          <td><%= order.shipping_address.city.name %></td>
+          <td><%= order.shipping_address.state.name %></td>
+          <td><%= number_to_currency(order.value) %></td>
+          <td class='<%= order.placed? ? "placed" : "unplaced" %>-order'>
+            <%= order.placed? ? "PLACED" : "UNPLACED" %>
+          </td>
+          <td><%= order.checkout_date %></td>
           <td><%= link_to "Show", [:admin, order] %></td>
           <td><%= link_to "Edit", edit_admin_order_path(order) %></td>
           <td><%= link_to "Delete", [:admin, order], method: :delete, data: { confirm: "Are you sure?"} %></td>

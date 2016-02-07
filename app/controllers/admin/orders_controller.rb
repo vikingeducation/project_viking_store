@@ -1,6 +1,11 @@
-class Admin::OrdersController < ApplicationController
+class Admin::OrdersController < AdminController
   def index
-    @orders = Order.all
+    @user_id = params[:user_id]
+    if @user_id
+      @orders = Order.all.where( user_id: @user_id )
+    else
+      @orders = Order.all
+    end
   end
 
   def show
@@ -8,13 +13,13 @@ class Admin::OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.new
+    @order = Order.new(user_id: params[:user_id])
   end
 
   def create
     @order = Order.new(order_params)
     if @order.save
-      redirect_to admin_order_path(@order), notice: "Order Created!"
+      redirect_to edit_admin_order_path(@order), notice: "Order Created! Now add something to it..."
     else
       flash.now[:alert] = "Failed to create order."
       render :new
