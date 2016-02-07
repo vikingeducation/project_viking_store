@@ -8,7 +8,7 @@ class AddressesController < ApplicationController
         @addresses = Address.where(user_id: @user.id)
       else
         flash[:error] = "Invalid user id"
-        redirect_to admin_addresses_path
+        redirect_to addresses_path
       end
     else
       @addresses = Address.all

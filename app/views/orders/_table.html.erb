@@ -6,9 +6,13 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Order Date</th>
-        <th>Order Value</th>
+        <th>User ID</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Total Value</th>
         <th>Status</th>
+        <th>Date Placed</th>
         <th>Show</th>
         <th>Edit</th>
         <th>Delete</th>
@@ -16,12 +20,16 @@
     </thead>
     <tbody>
 
-    <% @user.orders.each do |order| %>
+    <% @orders.each do |order| %>
       <tr>
         <td><%= order.id %></td>
-        <td><%= order.checkout_date.strftime("%Y-%m-%d") if order.checkout_date %></td> 
+        <td><%= order.user ? (link_to order.user.id, user_orders_path(order.user)) : "N/A" %></td>
+        <td><%= order.billing_address.nil? ? "N/A" : order.billing_address.street_address %></td>
+        <td><%= order.billing_address.nil? ? "N/A" : order.billing_address.city.name %></td>
+        <td><%= order.billing_address.nil? ? "N/A" : order.billing_address.state.name %></td>
         <td><%= number_to_currency(order.products.single_order_value) %></td>
         <td><%= order.checkout_date ? "PLACED" : "UNPLACED" %></td>
+        <td><%= order.checkout_date.strftime("%Y-%m-%d") if order.checkout_date %></td> 
         <!-- TODO: finish links to orders -->
         <td><%= link_to "show" %></td>
         <td><%= link_to "edit" %></td>

@@ -11,8 +11,10 @@ Rails.application.routes.draw do
     resources :categories
     resources :products
     resources :addresses, only: [:index]
+    resources :orders, only: [:index]
     resources :users do
       resources :addresses
+      resources :orders
     end
   end
 
