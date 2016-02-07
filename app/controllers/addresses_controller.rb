@@ -20,7 +20,8 @@ class AddressesController < ApplicationController
   end
 
   def create
-    @address = Address.create(whitelisted_address_params)
+    @user = User.find(params[:user_id])
+    @address = Address.new(whitelisted_address_params)
     if @address.save
       flash[:success] = "Address successfully created"
       redirect_to user_address_path(@address.user, @address)
