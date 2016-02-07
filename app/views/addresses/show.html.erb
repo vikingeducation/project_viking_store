@@ -37,9 +37,9 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <%= link_to "Edit #{@address.class}", edit_address_path(@address.id) %>
+    <%= link_to "Edit #{@address.class}", edit_address_path(@address.id, user_id: "#{@address.user_id}") %>
   </div>
   <div class="col-xs-12">
-    <%= link_to "Delete #{@address.class}", address_path(@address.id), method: "delete" %>
+    <%= link_to "Delete #{@address.class}", address_path(@address.id, user_id: "#{@address.user_id}"), method: "delete" , data: {confirm: "Are you sure?"}%>
   </div>
 </div>
