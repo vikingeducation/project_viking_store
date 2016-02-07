@@ -26,6 +26,7 @@ class AddressesController < ApplicationController
       flash[:success] = "Address successfully created"
       redirect_to user_address_path(@address.user, @address)
     else
+      flash[:error] = "Address was not created"
       render :new
     end
   end

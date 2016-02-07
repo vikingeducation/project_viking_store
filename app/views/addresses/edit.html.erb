@@ -7,12 +7,18 @@
     <%= link_to "#{@address.user.first_name} #{@address.user.last_name} (click to view)", user_path(@address.user)  %>
   </h5>
 
-  <%= form_for @address do |f| %>
+  <%= form_for [:user, @address], {url: {action: :update}} do |f| %>
 
     <div class="form-group">
       <%= f.label :street_address %>
       <%= field_with_errors(@address, :street_address) %>
       <%= f.text_field :street_address, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :secondary_address %>
+      <%= field_with_errors(@address, :secondary_address) %>
+      <%= f.text_field :secondary_address, class: "form-control" %>
     </div>
 
     <div class="form-group">
@@ -33,13 +39,15 @@
       <%= field_with_errors(@address, :zip_code) %>
       <%= f.text_field :zip_code, class: "form-control" %>
     </div>  
+
+    <%= f.hidden_field :user_id, value: @address.user.id %>
         
 
-  <%= f.submit "Save", class: "btn btn-primary btn-lg btn-block" %>
-  <br />
-  <div class="text-center">
-    <%= link_to "Delete Address", user_address_path(@address.user, @address), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
-  </div>
+    <%= f.submit "Save", class: "btn btn-primary btn-lg btn-block" %>
+    <br />
+    <div class="text-center">
+      <%= link_to "Delete Address", user_address_path(@address.user, @address), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+    </div>
 
 
   <% end %>

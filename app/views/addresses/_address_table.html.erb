@@ -30,7 +30,7 @@
         <td><%= address.street_address %></td>
         <td><%= address.city.name%></td>
         <td><%= address.state.name%></td>
-        <td><%= address.user.orders.count if address.user %></td>
+        <td><%= num_orders(address) if address.user %></td>
         <td><%= address.created_at.strftime("%Y-%m-%d") %></td>
         <% if address.user %>
             <td><%= link_to "show", user_address_path(address.user, address) %></td>
