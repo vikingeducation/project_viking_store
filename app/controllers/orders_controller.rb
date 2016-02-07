@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     if params[:user_id]
       if User.exists?(params[:user_id])
         @user = User.find(params[:user_id])
-        @orders = Order.all
+        @orders = Order.where(user_id: @user.id)
       else
         flash[:error] = "Invalid user id"
         redirect_to orders_path
@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(whitelisted_order_params)
+    @order.checkout_date ||= Time.now
     if @order.save
       flash[:success] = "Order successfully created"
       redirect_to user_order_path(@order.user, @order)
@@ -33,10 +34,13 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    @user = @order.user
   end
 
   def update
     @order = Order.find(params[:id])
+    @user = @order.user
+    @order.checkout_date ||= Time.now if params[:order][:checked_out]
     if @order.update(whitelisted_order_params)
       flash[:success] = "Order successfully updated"
       redirect_to user_order_path(@order.user, @order)
@@ -48,7 +52,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @user = Order.user
+    @user = @order.user
   end
 
 

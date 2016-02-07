@@ -1,5 +1,13 @@
+<% if params[:user_id] %>
+  <h1 class="text-center">Orders for User <%= @user.id %>: <%= @user.first_name %> <%= @user.last_name %></h1>
+
+<% else %>
+
 <h1 class="text-center">All Orders</h1>
 
 <h5 class="text-center">Create new orders from within <%= link_to "User", users_path %> profiles</h1>
 
+<% end %>
+
 <%= render partial: "table" %>
+

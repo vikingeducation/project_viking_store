@@ -15,6 +15,10 @@ class Order < ActiveRecord::Base
              class_name: "Address"
 
 
+  def quantity
+    order_contents.sum(:quantity)
+  end
+
   def self.checked_out
     where("checkout_date IS NOT NULL")
   end

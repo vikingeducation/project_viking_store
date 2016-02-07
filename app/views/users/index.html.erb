@@ -30,7 +30,7 @@
         <td><%= user.created_at.strftime("%Y-%m-%d") %></td>
         <td><%= user.default_billing_address.city.name %></td>
         <td><%= user.default_billing_address.state.name %></td>
-        <td><%= link_to "#{user.orders.checked_out.count}" %></td>
+        <td><%= link_to "#{user.orders.checked_out.count}", user_orders_path(user) %></td>
 
         <% if user.orders.most_recent_order.first %>
           <td><%= user.orders.most_recent_order.first.checkout_date.strftime("%Y-%m-%d") %></td>
