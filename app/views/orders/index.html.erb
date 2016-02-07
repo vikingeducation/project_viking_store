@@ -1,7 +1,14 @@
 <div class="row">
   <div class="col col-xs-12">
-    <h1 class="page-header text-center">All Orders</h1>
-    <h3 class="text-center">Create new orders from within <%= link_to "Users", users_path %> profiles</h3>
+    <% if @user != 0 %>
+      <h1 class="page-header text-center">
+        <%= "#{@user.first_name} #{@user.last_name}'s Orders"%>
+      </h1>
+      <%= link_to "Create an Order for #{@user.first_name} #{@user.last_name}", new_order_path(user_id: "#{@user.id}"), class: "btn btn-block btn-primary"%>
+    <% else %>
+      <h1 class="page-header text-center">All Orders</h1>
+      <h3 class="text-center">Create new orders from within <%= link_to "Users", users_path %> profiles</h3>
+    <% end %>
     <br>
   </div>
 </div>
