@@ -14,4 +14,6 @@ Load time with multiplier = 50: Time taken is 0.369374212.
 
 - take a look around the schema file to see how models were created
 
-Link to solution info on the seeding of this lives [here](https://gist.github.com/betweenparentheses/0b6b325ceaaea76a521d)
+Link to solution info on the seeding of this lives [here](https://gist.github.com/betweenparentheses/0b6b325ceaaea76a521d).
+
+Link to Heroku Deployment [here](https://viking-store-strychemi.herokuapp.com/).
