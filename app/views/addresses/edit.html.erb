@@ -38,7 +38,7 @@
   <%= f.submit "Save", class: "btn btn-primary btn-lg btn-block" %>
   <br />
   <div class="text-center">
-    <%= link_to "Delete Address", address_path(@address), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+    <%= link_to "Delete Address", user_address_path(@address.user, @address), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
   </div>
 
 

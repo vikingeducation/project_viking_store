@@ -16,14 +16,14 @@ class AddressesController < ApplicationController
   end
 
   def new
-    @address = Address.new
+    @address = Address.new(user_id: params[:user_id])
   end
 
   def create
     @address = Address.create(whitelisted_address_params)
     if @address.save
       flash[:success] = "Address successfully created"
-      redirect_to address_path(@address)
+      redirect_to user_address_path(@address.user, @address)
     else
       render :new
     end
@@ -31,6 +31,7 @@ class AddressesController < ApplicationController
 
   def show
     @address = Address.find(params[:id])
+    @user = @address.user
   end
 
 
@@ -42,7 +43,7 @@ class AddressesController < ApplicationController
     @address = Address.find(params[:id])
     if @address.update(whitelisted_address_params)
       flash[:success] = "Address successfully updated"
-      redirect_to address_path(@address)
+      redirect_to user_address_path(@address.user, @address)
     else
       render :edit
     end
@@ -62,7 +63,7 @@ class AddressesController < ApplicationController
 
 
   def whitelisted_address_params
-    params.require(:address).permit(:street_address, :secondary_address, :zip_code)
+    params.require(:address).permit(:street_address, :secondary_address, :city_id, :state_id, :user_id, :zip_code)
   end
 
 
