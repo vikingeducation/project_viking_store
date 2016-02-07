@@ -13,16 +13,5 @@ class Address < ActiveRecord::Base
   belongs_to :city
   belongs_to :state
 
-  # after_create :make_or_save_city
-  #
-  # def make_or_save_city
-  #
-  # end
-
-  # Virtual attribute
-  # def city_name=(name)
-  #   city = City.find_or_create_by( name: name )
-  #   self.city = city
-  #   self.save!
-  # end
+  accepts_nested_attributes_for :city
 end

@@ -90,19 +90,24 @@
         <tbody>
           <% @order.products.each do |product| %>
             <tr>
-              <% quantity = product.order_contents.where(order_id: @order.id)[0][:quantity] %>
+              <% product_order_contents = product.order_contents.where(order_id: @order.id) %>
               <td><%= product.id %></td>
               <td><%= product.name %></td>
-              <td><%= number_field :product, :quantity, { value: quantity } %></td>
-              <!-- TODO get quantity updates to work -->
+              <%= f.fields_for :order_contents, product_order_contents do |oc_fields| %>
+                <td>
+                  <%= oc_fields.number_field :quantity %>
+                </td>
+                <%= oc_fields.hidden_field :order_id, value: @order.id %>
+                <%= oc_fields.hidden_field :product_id, value: product.id %>
+              <% end %>
               <td><%= number_to_currency(product.price) %></td>
-              <td><%= number_to_currency(product.price * quantity) %></td>
+              <td><%= number_to_currency(product.price * product_order_contents[0].quantity) %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
 
-      <%= f.submit class: 'btn btn-primary btn-block' %>
+      <%= f.submit "Update Order Contents", class: 'btn btn-primary btn-block' %>
     <% end %>
 
     <hr>
@@ -118,8 +123,12 @@
         <tbody>
           <% 5.times do |product| %>
             <tr>
-              <td><%= number_field :order, :id %></td>
-              <td><%= number_field :product, :quantity %></td>
+              <%= f.fields_for :order_contents, OrderContent.new do |oc_fields| %>
+                <td><%= oc_fields.number_field :product_id %></td>
+                <td><%= oc_fields.number_field :quantity %></td>
+                <%= oc_fields.hidden_field :order_id, value: @order.id %>
+              <% end %>
+
               <!-- TODO adding products to orders -->
             </tr>
           <% end %>

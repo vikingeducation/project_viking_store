@@ -18,6 +18,7 @@ class Admin::OrdersController < AdminController
 
   def create
     @order = Order.new(order_params)
+    update_contents(@order)
     if @order.save
       redirect_to edit_admin_order_path(@order), notice: "Order Created! Now add something to it..."
     else
@@ -32,9 +33,8 @@ class Admin::OrdersController < AdminController
 
   def update
     @order = Order.find(params[:id])
+    updated_contents(@order)
     if @order.update(order_params)
-      # TODO get updating quantities to work
-      # TODO get adding products to orders to work
       redirect_to admin_order_path(@order), notice: "Order Updated!"
     else
       flash.now[:alert] = "Failed to update order."
@@ -58,7 +58,17 @@ class Admin::OrdersController < AdminController
                                     :user_id,
                                     :shipping_id,
                                     :billing_id,
-                                    :credit_card_id
+                                    :credit_card_id,
+                                    { order_contents_attributes: [:id,
+                                            :product_id,
+                                            :order_id,
+                                            :quantity] }
     )
+  end
+
+  def update_contents(order)
+    order.order_contents.select! do |content|
+      content.quantity > 0 && !content.product_id.nil?
+    end
   end
 end

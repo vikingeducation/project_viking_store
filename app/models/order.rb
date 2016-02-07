@@ -13,6 +13,8 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
 
+  accepts_nested_attributes_for :order_contents, reject_if: proc { |attributes| attributes['product_id'].blank? || attributes['quantity'].to_i < 1 }
+
   def placed?
     !!checkout_date
   end

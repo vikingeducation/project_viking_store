@@ -10,12 +10,14 @@ class Admin::AddressesController < AdminController
   end
 
   def new
-    @address = Address.new
+    @address = Address.new( user_id: params['user_id'] )
   end
 
   def create
-    # TODO adding new cities from form
     @address = Address.new( address_params )
+
+    @address.city = City.find_or_create_by( name: address_params['city_attributes']['name'] )
+
     if @address.save
       redirect_to admin_addresses_path, notice: "Address Created"
     else
@@ -36,7 +38,6 @@ class Admin::AddressesController < AdminController
     @address = Address.find( params[:id] )
 
     if @address.update(address_params)
-      @address.city = City.create(name: params[:address][:city_name])
       @address.save
       redirect_to admin_addresses_path, notice: "Address Updated!"
     else
@@ -60,9 +61,9 @@ class Admin::AddressesController < AdminController
     params.require(:address).permit(  :street_address,
                                       :secondary_address,
                                       :zip_code,
-                                      :city_name,
                                       :state_id,
-                                      :user_id
+                                      :user_id,
+                                      { city_attributes: [:id, :name] }
     )
   end
 end
