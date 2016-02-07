@@ -22,7 +22,7 @@
         <tr>
           <td><%= f.label :billing_id, " Default Billing Address" %></td>
           <% if @user.id %>
-            <td><%= f.collection_select :billing_id, @user.addresses, :id, :street_address, class: "form-control"%></td>
+            <td><%= f.collection_select :billing_id, @user.addresses, :id, :street_address, {}, class: "form-control"%></td>
           <% else %>
             <td><%= f.collection_select :billing_id, @user.addresses, :id, :street_address, {}, {class: "form-control", disabled: "disabled"}%></td>
           <% end %>
@@ -31,7 +31,7 @@
           <td><%= f.label :shipping_id, "Default Shipping Address" %></td>
           <% if @user.id %>
             <td>
-              <%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, class: "form-control"%>
+              <%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, {}, class: "form-control"%>
             </td>
           <% else %>
             <td>

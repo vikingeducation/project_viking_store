@@ -55,7 +55,7 @@
       <p><%= f.label 'Category: ', strong: true%></p>
     </div>
     <div class="col-xs-10">
-      <p><%= f.collection_select :category_id, Category.all, :id, :name, class: "form-control"%></p>
+      <p><%= f.collection_select :category_id, Category.all, :id, :name, {}, class: "form-control"%></p>
       <br>
       <%= f.submit class: "btn btn-block btn-success"%>
       <br>
