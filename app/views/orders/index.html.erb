@@ -1,5 +1,9 @@
 <% if params[:user_id] %>
   <h1 class="text-center">Orders for User <%= @user.id %>: <%= @user.first_name %> <%= @user.last_name %></h1>
+  <br/>
+
+  <%= link_to "Create a New Order", new_user_order_path(@user), class: "btn btn-primary btn-lg btn-block"  %>
+  <br/>
 
 <% else %>
 

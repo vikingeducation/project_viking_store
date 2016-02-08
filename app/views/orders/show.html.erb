@@ -7,7 +7,7 @@
   <h4>Basic Information</h4>
 
   <h5><strong>Customer ID:</strong> <%= @order.user.id %></h5>
-  <h5><strong>Customer:</strong> <%= link_to "#{@order.user.first_name} #{@user.last_name}" %></h5>
+  <h5><strong>Customer:</strong> <%= link_to "#{@order.user.first_name} #{@order.user.last_name}", user_path(@order.user) %></h5>
   <h5><strong>Date Placed:</strong> <%= @order.checkout_date.strftime("%Y-%m-%d") if @order.checkout_date %></h5>
   <h5><strong># Products:</strong> <%= @order.quantity %></h5>
   <h5><strong>Order Value:</strong> <%= number_to_currency(@order.products.single_order_value) %></h5>
@@ -24,7 +24,7 @@
   <h5><%= full_billing(@order.user) %></h5>
   <br/>
   <h4>Billing Card:</h4>
-  <h5><strong>Last 4 Digits</strong><%= @order.credit_card.card_number[-4..-1] if @order.credit_card %></h5>
+  <h5><strong>Last 4 Digits: </strong><%= @order.credit_card.card_number[-4..-1] if @order.credit_card %></h5>
   <hr>
 
   <%= link_to "Edit Order", edit_user_order_path(@order.user, @order) %>

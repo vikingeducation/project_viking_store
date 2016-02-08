@@ -23,6 +23,10 @@ class Order < ActiveRecord::Base
     where("checkout_date IS NOT NULL")
   end
 
+  def checked_out?
+    checkout_date.present?
+  end
+
   def self.most_recent_order
     where("checkout_date IS NOT NULL")
     .order("checkout_date DESC")

@@ -53,8 +53,7 @@
 <div class="well">
 
   <h3 class="text-center">Admin Actions for <%=@user.first_name %> <%= @user.last_name %></h3>
-  <!-- TODO: hook this up to orders and addresses -->
-  <%= link_to "Create Order", {}, class: "btn btn-primary btn-lg btn-block" %>
+  <%= link_to "Create Order", new_user_order_path(@user), class: "btn btn-primary btn-lg btn-block" %>
   <br />
   <%= link_to "Create Address", new_user_address_path(@user), class: "btn btn-primary btn-lg btn-block" %>
 
