@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     orders.any? { |o| o.cart? }
   end
 
+  def cart
+    orders.find_or_create_by( checkout_date: nil )
+  end
+
   def default_billing_address_id
     billing_id
   end

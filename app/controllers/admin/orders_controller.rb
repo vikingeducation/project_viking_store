@@ -33,7 +33,6 @@ class Admin::OrdersController < AdminController
 
   def update
     @order = Order.find(params[:id])
-    updated_contents(@order)
     if @order.update(order_params)
       redirect_to admin_order_path(@order), notice: "Order Updated!"
     else
@@ -64,11 +63,5 @@ class Admin::OrdersController < AdminController
                                             :order_id,
                                             :quantity] }
     )
-  end
-
-  def update_contents(order)
-    order.order_contents.select! do |content|
-      content.quantity > 0 && !content.product_id.nil?
-    end
   end
 end

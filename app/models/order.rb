@@ -1,10 +1,20 @@
+# From the schema
+# create_table "orders", force: :cascade do |t|
+  # t.datetime "checkout_date"
+  # t.integer  "user_id",        null: false
+  # t.integer  "shipping_id"
+  # t.integer  "billing_id"
+  # t.datetime "created_at"
+  # t.datetime "updated_at"
+  # t.integer  "credit_card_id"
+# end
+
 class Order < ActiveRecord::Base
+
   has_many :order_contents, dependent: :destroy
-  has_many :products,   through: :order_contents,
-                        dependent: :nullify
+  has_many :products,   through: :order_contents
   has_many :categories, through: :products,
-                        source: :category,
-                        dependent: :nullify
+                        source: :category
 
   belongs_to :shipping_address, class_name: "Address",
                                 foreign_key: :shipping_id
@@ -13,7 +23,9 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
 
-  accepts_nested_attributes_for :order_contents, reject_if: proc { |attributes| attributes['product_id'].blank? || attributes['quantity'].to_i < 1 }
+  accepts_nested_attributes_for :order_contents, reject_if: proc { |attributes| attributes['product_id'].blank? }
+
+  validates :user_id, presence: true
 
   def placed?
     !!checkout_date
@@ -24,7 +36,7 @@ class Order < ActiveRecord::Base
   end
 
   def value
-    products.sum('price * quantity')
+    products.processed.sum('price * quantity')
   end
 
   def self.recent(num_days = 7)
@@ -32,7 +44,10 @@ class Order < ActiveRecord::Base
   end
 
   def self.total_revenue
-    Order.processed.joins("JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id ").sum("quantity * price").to_f
+    Order.processed.joins(:products).sum('price * quantity')
+
+    # Old query for reference
+    # Order.processed.joins("JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id ").sum("quantity * price").to_f
   end
 
   def self.processed
@@ -40,17 +55,21 @@ class Order < ActiveRecord::Base
   end
 
   def self.top_states
-    Order.processed.select("states.name").
-      joins("JOIN addresses ON addresses.id = orders.billing_id").
-      joins("JOIN states ON states.id = addresses.state_id").
-      group("states.name").
-      order("COUNT(states.name) DESC").
-      limit(3)
-      .count
+    Order.processed.joins(:billing_address).count(:state).order(:state, :desc).limit(3)
+
+    # Order.processed.select("states.name").
+    #   joins("JOIN addresses ON addresses.id = orders.billing_id").
+    #   joins("JOIN states ON states.id = addresses.state_id").
+    #   group("states.name").
+    #   order("COUNT(states.name) DESC").
+    #   limit(3)
+    #   .count
   end
 
   def self.average_value
-    Order.select("order_total").from(Order.order_totals, :orders).average("order_total")
+    # Order.joins(:products).average('price * quantity')
+
+    Order.processed.select("order_total").from(Order.order_totals, :orders).average("order_total")
   end
 
   def self.largest_value
@@ -58,7 +77,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.order_totals
-    Order.processed.select("orders.*, SUM(price * quantity) AS order_total").joins("JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id").group("orders.id")
+    Order.processed.select("orders.*, SUM(price * quantity) AS order_total").joins(:products).group("orders.id")
   end
 
   def self.orders_by_day
