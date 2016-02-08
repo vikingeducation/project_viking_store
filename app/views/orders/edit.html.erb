@@ -67,18 +67,18 @@
       </tr>
     </thead>
     <tbody>
-      <%= form_for [:user, @order.order_contents] do |f| %>    
+      <%= form_for [:order, @order_contents] do |f| %>    
         <tr>
           <td><%= f.collection_select :product_id, Product.all, :id, :name, {:include_blank => 'None'}, :class => "form-control" %></td>
 
-          <td><%= single_product.text_field :quantity, :class => "form-control" %></td>
+          <td><%= f.text_field :quantity, :class => "form-control" %></td>
 
+          <td><%= f.text_field :price %></td>
+          <!-- TODO: figure out total price: -->
           <td><%= "N/A" %></td>
 
-          <td><%= "N/A" %></td>
-
-          <td><% if single_product.object.persisted? %>
-            <%= single_product.check_box :_destroy %>
+          <td><% if f.object.persisted? %>
+            <%= link_to "remove", user_order_path(@order.user, @order), method: :delete %>
             <% end %>
           </td>
         </tr>
@@ -86,6 +86,11 @@
     </tbody>
     </table>
 
+    <div class="form-group">
+      <%= f.submit "Update Order Contents", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+
+    <%= link_to "Delete Order", user_order_path(@order.user, @order), method: :delete %>
 </div>
 
 
@@ -113,5 +118,8 @@
       <% end %>
     </tbody>
     </table>
+    <div class="form-group">
+      <%= f.submit "Add Products", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
 
 </div>
