@@ -51,9 +51,35 @@ class OrdersController < ApplicationController
   end
 
   def edit
+    @order = Order.find(params[:id])
+    @user = @order.user
+    @credit_cards = @user.credit_cards
+    @card = CreditCard.new
+    @order_contents = @order.order_contents
   end
 
   def update
+    @order = Order.find(params[:id])
+
+    @address = Address.find(params[:id])
+
+    c = City.where("name='" + "#{params[:address][:city]}" + "'")
+    c = City.create(name: params[:address][:city]) unless c[0]
+    c = c[0] unless c.is_a?(City)
+
+    if @address.update(
+      street_address: params[:address][:street_address],
+      city_id: c.id,
+      state_id: params[:address][:state_id],
+      zip_code: params[:address][:zip_code],
+      user_id: params[:user_id]
+    )
+      flash[:success] = "You've Sucessfully Updated the Address!"
+      redirect_to address_path(@address.id, user_id: "#{@address.user.id}")
+    else
+      flash.now[:error] = "Error! Address wasn't updated!"
+      render :edit
+    end
   end
 
   def destroy

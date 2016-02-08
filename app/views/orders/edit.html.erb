@@ -1,0 +1,41 @@
+<div class="row" style="border: 2px solid grey;">
+  <div class="col col-xs-12">
+    <h1 class="page-header text-center">Edit Order #<%= "#{@order.id}"%></h1>
+
+    <%= render partial: "form" %>
+
+    <br>
+  </div>
+</div>
+
+<div class="row" style="border: 2px solid grey;">
+  <div class="col col-xs-12">
+    <h1 class="page-header text-center">Edit Order Contents</h1>
+    <%= form_tag(order_path(@order.id), method: :put) do %>
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>ID</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total Price</th>
+        <th>REMOVE</th>
+      </tr>
+      <% @order_contents.each do |oc| %>
+        <tr>
+          <td><%= oc.id %></td>
+          <%= hidden_field_tag("oc_id", "#{oc.id}") %>
+          <td><%= text_field_tag("quantity",value=oc.quantity) %></td>
+          <td><%= number_to_currency(oc.product.price) %></td>
+          <td><%= number_to_currency(oc.value) %></td>
+          <td><%= link_to "remove", order_content_path(oc.id, order_id: "#{@order.id}"), method: "delete", data: {confirm: "Are you sure?"} %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= submit_tag("Update Order Contents", class: "btn btn-block btn-primary") %>
+    <div class="text-center" style="margin: 15px;">
+      <%= link_to "Delete Order", order_path(@order), method: "delete", data: {confirm: "Are you sure?"} %>
+    </div>
+    <% end %>
+    <br>
+  </div>
+</div>

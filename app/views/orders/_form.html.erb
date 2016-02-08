@@ -28,6 +28,14 @@
   </table>
   <%= link_to "Edit Customer Profile", user_path(@user) %>
 
+  <% if @order.persisted? %>
+  <div>
+    <%= label_tag(:status, "Order Status") %>
+    <div style="color:green;"><%= radio_button_tag("status", "false") %> PLACED</div>
+    <div style="color:red;"><%= radio_button_tag("status", "true", true) %> UNPLACED</div>
+  </div>
+  <% end %>
+
   <div>
     <%= f.label :shipping_id, "Shipping Address"%>
     <%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, {},{class: "form-control" } %>
