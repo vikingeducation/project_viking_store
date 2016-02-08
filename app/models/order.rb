@@ -10,13 +10,12 @@ class Order < ActiveRecord::Base
               class_name: 'Address',
               foreign_key: :billing_id
 
-
   has_many :order_contents
   has_many :products, 
             through: :order_contents
 
-  validates :user, :credit_card,
-            presence: true
+  # validates :user, :credit_card,
+  #           presence: true
 
   def self.total_orders_submitted
     Order.where( "checkout_date IS NOT NULL" ).count()
