@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @billing = @user.default_billing_address
     @shipping = @user.default_shipping_address
-    @credit_card = @user.credit_card
+    @credit_card = @user.credit_cards[0]
     @orders = @user.orders
   end
 

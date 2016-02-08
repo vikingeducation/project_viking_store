@@ -90,7 +90,7 @@
       <h3>Billing Card</h3>
       <tr>
         <td>Last 4 Digits</td>
-        <td><%= @order.user.credit_card.card_number[-4..-1] if @order.user.credit_card %></td>
+        <td><%= @order.credit_card.card_number[-4..-1] if @order.credit_card %></td>
       </tr>
     </table>
   </div>

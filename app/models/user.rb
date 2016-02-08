@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :products, through: :orders
 
-  has_one :credit_card
+  has_many :credit_cards
 
   validates :first_name, :last_name, presence: true, length: { maximum: 64 }
 

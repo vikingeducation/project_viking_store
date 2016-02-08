@@ -1,0 +1,58 @@
+<ul>
+  <% @order.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+</ul>
+
+<ul>
+  <% @card.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+</ul>
+
+
+<%= form_for @order do |f| %>
+  <table class="table table-striped table-bordered">
+    <tr>
+      <td>Customer ID</td>
+      <td><%= @user.id %></td>
+    </tr>
+    <tr>
+      <td>Customer</td>
+      <td><%= link_to "#{@user.first_name} #{@user.last_name} (Click to view user)", user_path(@user) %></td>
+    </tr>
+    <tr>
+      <td>Date placed</td>
+      <td><%= @order.checkout_date %></td>
+    </tr>
+  </table>
+  <%= link_to "Edit Customer Profile", user_path(@user) %>
+
+  <div>
+    <%= f.label :shipping_id, "Shipping Address"%>
+    <%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, {},{class: "form-control" } %>
+  </div>
+  <div>
+    <%= f.label :billing_id, "Billing Address"%>
+    <%= f.collection_select :billing_id, @user.addresses, :id, :street_address, {},{class: "form-control" } %>
+  </div>
+  <div>
+    <% if @user.credit_cards[0] %>
+      <%= f.label :credit_card_id, "Billing Card"%>
+      <%= f.collection_select :credit_card_id, @credit_cards, :id, :last_four, {} ,{class: "form-control"} %>
+    <% else %>
+      <%= label_tag(:credit_card_number, "Billing Card Number") %>
+      <%= text_field_tag(:credit_card_number,  nil, class: "form-control", style: "margin: 0 0 10px 0;") %>
+      <%= label_tag(:cc_exp_month, "Billing Card Expiration Month (MM)") %>
+      <%= text_field_tag(:cc_exp_month,  nil, class: "form-control", style: "margin: 0 0 10px 0;") %>
+      <%= label_tag(:cc_exp_year, "Billing Card Expiration Year (YYYY)") %>
+      <%= text_field_tag(:cc_exp_year,  nil, class: "form-control", style: "margin: 0 0 10px 0;") %>
+    <% end %>
+  </div>
+  <%= hidden_field_tag("user_id", "#{@user.id}") %>
+  <%= f.submit class: "btn btn-block btn-primary" %>
+<% end %>
+
+<div>
+  <p class='text-center' style="margin: 10px;">You can add products on the next screen, once it's created.</p>
+</div>
