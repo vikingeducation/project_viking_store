@@ -36,7 +36,7 @@ class Order < ActiveRecord::Base
   end
 
   def value
-    products.processed.sum('price * quantity')
+    products.sum('price * quantity')
   end
 
   def self.recent(num_days = 7)
