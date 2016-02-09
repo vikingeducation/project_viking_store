@@ -7,7 +7,7 @@
   <h3>Category ID: N/A</h3>
 <% end %>
 
-<%= form_for @category do |f| %> 
+<%= form_for [:admin, @category] do |f| %> 
 
   <div class="form-group">
     <%= f.label :name %>

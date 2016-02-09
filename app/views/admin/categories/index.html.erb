@@ -1,7 +1,7 @@
 <h1 class="text-center">Product Categories</h1>
 
 <br />
-<%= link_to "Add a New Category", new_category_path, class: "btn btn-primary btn-lg btn-block" %>
+<%= link_to "Add a New Category", new_admin_category_path, class: "btn btn-primary btn-lg btn-block" %>
 <br />
 
 <div class="panel panel-default">
@@ -22,9 +22,9 @@
       <tr>
         <td><%= category.id %></td>
         <td><%= category.name %></td>
-        <td><%= link_to "show", category_path(category) %></td>
-        <td><%= link_to "edit", edit_category_path(category) %></td>
-        <td><%= link_to "delete", category_path(category), method: :delete, data: { confirm: "Are you sure you want to delete?" }  %></td>
+        <td><%= link_to "show", admin_category_path(category) %></td>
+        <td><%= link_to "edit", edit_admin_category_path(category) %></td>
+        <td><%= link_to "delete", admin_category_path(category), method: :delete, data: { confirm: "Are you sure you want to delete?" }  %></td>
 
       </tr>
 
