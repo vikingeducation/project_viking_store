@@ -22,7 +22,7 @@ class Admin::ProductsController < AdminController
     @product = Product.new(whitelisted_product_params)
     if @product.save
       flash[:success] = "'#{@product.name}' successfully created"
-      redirect_to products_path
+      redirect_to admin_products_path
     else
       render :new
     end
@@ -37,7 +37,7 @@ class Admin::ProductsController < AdminController
     @product = Product.find(params[:id])
     if @product.update(whitelisted_product_params)
       flash[:success] = "'#{@product.name}' successfully updated"
-      redirect_to product_path(@product)
+      redirect_to admin_product_path(@product)
     else
       render :edit
     end
@@ -51,7 +51,7 @@ class Admin::ProductsController < AdminController
     else
       flash[:error] = "Unable to delete '#{@product.name}'" 
     end
-    redirect_to products_path
+    redirect_to admin_products_path
   end
 
 
