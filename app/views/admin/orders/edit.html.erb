@@ -1,0 +1,125 @@
+<h1 class="text-center">Edit Order #<%= @order.id %></h1>
+
+<div class="well">
+
+  <h3 class="text-center">Logistical Information</h3>
+  <h4>Basic Information</h4>
+
+  <h5><strong>Customer ID:</strong> <%= @order.user.id %></h5>
+  <h5><strong>Customer:</strong> <%= link_to "#{@order.user.first_name} #{@order.user.last_name}", user_path(@order.user) %></h5>
+  <h5><strong>Date Placed:</strong> <%= @order.checkout_date.strftime("%Y-%m-%d") if @order.checkout_date %></h5>
+  <h5><strong># Products:</strong> <%= @order.quantity %></h5>
+  <h5><strong>Order Value:</strong> <%= number_to_currency(@order.products.single_order_value) %></h5>
+  <h5> <%= link_to "Edit Customer Profile", edit_user_path(@order.user) %> </h5>
+  <hr>
+
+  <h4>Order Status</h4>
+
+  <%= form_for [@user, @order] do |f| %>
+
+    <div class="form-group">
+      <%= f.radio_button :checked_out?, true %><%= f.label "PLACED" %>
+      <br/>
+      <%= f.radio_button :checked_out?, false %><%= f.label "UNPLACED - Only one unplaced order allowed" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :shipping_id, "Shipping Address" %>
+      <%= f.collection_select :shipping_id, @order.user.addresses, :id, :street_address, {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :billing_id, "Billing Address" %>
+      <%= f.collection_select :billing_id, @order.user.addresses, :id, :street_address, {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :credit_card_id, "Billing Card" %>
+      <%= f.collection_select :credit_card_id, @order.user.credit_cards, :id, :nickname, {}, class: "form-control" %>
+    </div>
+
+      <%= f.hidden_field :user_id, value: @order.user_id %>
+
+    <div class="form-group">
+      <%= f.submit "Update Order", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+
+  <% end %>
+
+  <%= link_to "Delete Order", user_order_path(@order.user, @order), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+
+
+</div> <!-- well -->
+
+<div class="well">
+
+  <h1 class="text-center">Edit Order Contents</h1>
+
+    <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total Price</th>
+        <th>REMOVE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= form_for [:order, @order_contents] do |f| %>    
+        <tr>
+          <td><%= f.collection_select :product_id, Product.all, :id, :name, {:include_blank => 'None'}, :class => "form-control" %></td>
+
+          <td><%= f.text_field :quantity, :class => "form-control" %></td>
+
+          <td><%= f.text_field :price %></td>
+          <!-- TODO: figure out total price: -->
+          <td><%= "N/A" %></td>
+
+          <td><% if f.object.persisted? %>
+            <%= link_to "remove", user_order_path(@order.user, @order), method: :delete %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+
+    <div class="form-group">
+      <%= f.submit "Update Order Contents", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+
+    <%= link_to "Delete Order", user_order_path(@order.user, @order), method: :delete %>
+</div>
+
+
+<div class="well">
+
+  <h1 class="text-center">Add Products to Order</h1>
+  <h4>Add up to 5 products at a time</h4>
+
+    <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= form_for [:user, @order.order_contents] do |f| %>    
+        <tr>
+          <td><%= f.label :product_id %></td>
+          <td><%= f.text_field :product_id %></td>
+
+          <td><%= f.label :quantity %></td>
+          <td><%= f.text_field :quantity %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+    <div class="form-group">
+      <%= f.submit "Add Products", class: "btn btn-primary btn-lg btn-block" %>
+    </div>
+
+</div>

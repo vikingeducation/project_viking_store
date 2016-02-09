@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  root 'dashboard#index'
+  root 'admin/dashboard#index'
 
   # TODO: switch to resources :admin do
   # when we have admin controller, model, etc.
