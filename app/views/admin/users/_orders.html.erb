@@ -23,9 +23,9 @@
         <td><%= number_to_currency(order.products.single_order_value) %></td>
         <td><%= order.checkout_date ? "PLACED" : "UNPLACED" %></td>
         <!-- TODO: finish links to orders -->
-        <td><%= link_to "show", user_order_path(order.user, order) %></td>
-        <td><%= link_to "edit", edit_user_order_path(order.user, order) %></td>
-        <td><%= link_to "delete", user_order_path(order.user, order), method: :delete, data: { confirm: "Are you sure you want to delete?" } %></td>
+        <td><%= link_to "show", admin_user_order_path(order.user, order) %></td>
+        <td><%= link_to "edit", edit_admin_user_order_path(order.user, order) %></td>
+        <td><%= link_to "delete", admin_user_order_path(order.user, order), method: :delete, data: { confirm: "Are you sure you want to delete?" } %></td>
       </tr>
 
     <% end %>

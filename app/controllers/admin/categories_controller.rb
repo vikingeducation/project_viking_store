@@ -13,7 +13,7 @@ class Admin::CategoriesController < AdminController
     @category = Category.new(whitelisted_category_params)
     if @category.save
       flash[:success] = "'#{@category.name}' successfully created"
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       render :new
     end
@@ -33,7 +33,7 @@ class Admin::CategoriesController < AdminController
     @category = Category.find(params[:id])
     if @category.update(whitelisted_category_params)
       flash[:success] = "'#{@category.name}' successfully updated"
-      redirect_to category_path(@category)
+      redirect_to admin_category_path(@category)
     else
       render :edit
     end
@@ -47,7 +47,7 @@ class Admin::CategoriesController < AdminController
     else
       flash[:error] = "'#{@category.name}' was not deleted"
     end
-    redirect_to categories_path
+    redirect_to admin_categories_path
   end
 
 

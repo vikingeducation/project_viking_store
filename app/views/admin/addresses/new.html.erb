@@ -1,6 +1,6 @@
 <h1 class="text-center">Create New Address</h1>
 
-<%= form_for [:user, @address] do |f| %>
+<%= form_for [:admin, :user, @address] do |f| %>
 
   <h5><strong>Owner ID:</strong> <%= @address.user.id %></h5>
   <h5><strong>Owner Name:</strong>
