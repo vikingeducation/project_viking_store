@@ -1,0 +1,10 @@
+<h1>User Sign In Page</h1>
+
+<div class='row'>
+  <%= form_for @session do |session_field| %>
+    <%= session_field.label :email, 'Email' %>
+    <%= session_field.text_field :email %>
+    <br>
+    <%= session_field.submit %>
+  <% end %>
+</div>

@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true,
                     format: { with: /@/ }
 
+  accepts_nested_attributes_for :addresses,
+                                reject_if: :all_blank
 
   def self.new_users_in_last_n_days( n )
     User.where("created_at > ( CURRENT_DATE - #{n} )").count
@@ -81,6 +83,6 @@ class User < ActiveRecord::Base
   end
 
   def cart
-    orders.where.(checkout_date: nil).first || 'n/a'
+    orders.where(checkout_date: nil) || 'n/a'
   end
 end

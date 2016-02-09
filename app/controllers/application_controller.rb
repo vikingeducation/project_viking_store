@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    return nil unless session(:current_user_id)
+    return nil unless session[:current_user_id]
     @current_user ||= User.find(session(:current_user_id))
   end
   helper_method :current_user
@@ -28,4 +28,13 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
   helper_method :signed_in_user?
+
+  private
+
+  def require_login
+    unless signed_in_user?
+      flash[:error] = 'You need to sign in to view this content.'
+      redirect_to new_session_path
+    end
+  end
 end

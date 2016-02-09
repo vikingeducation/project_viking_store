@@ -1,0 +1,5 @@
+<%= form_for @category do |category_field| %>
+  <%= category_field.select(:category_id,
+                            @category_options) %>
+
+<% end %>
