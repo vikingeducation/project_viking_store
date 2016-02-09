@@ -79,4 +79,8 @@ class User < ActiveRecord::Base
           order("checkout_date DESC")
           .first || "n/a"
   end
+
+  def cart
+    orders.where.(checkout_date: nil).first || 'n/a'
+  end
 end
