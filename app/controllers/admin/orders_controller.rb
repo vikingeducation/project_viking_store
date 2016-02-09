@@ -7,7 +7,7 @@ class Admin::OrdersController < AdminController
         @orders = Order.where(user_id: @user.id)
       else
         flash[:error] = "Invalid user id"
-        redirect_to orders_path
+        redirect_to admin_orders_path
       end
     else
       @orders = Order.all
@@ -23,7 +23,7 @@ class Admin::OrdersController < AdminController
     @order.checkout_date ||= Time.now
     if @order.save
       flash[:success] = "Order successfully created"
-      redirect_to user_order_path(@order.user, @order)
+      redirect_to admin_user_order_path(@order.user, @order)
     else
       flash[:error] = "Order was not created"
       render :new
@@ -41,7 +41,7 @@ class Admin::OrdersController < AdminController
     @order.checkout_date ||= Time.now if params[:order][:checked_out]
     if @order.update(whitelisted_order_params)
       flash[:success] = "Order successfully updated"
-      redirect_to user_order_path(@order.user, @order)
+      redirect_to admin_user_order_path(@order.user, @order)
     else
       flash[:error] = "Order was not updated"
       render :edit
@@ -62,7 +62,7 @@ class Admin::OrdersController < AdminController
     else
       flash[:error] = "Order was not deleted"
     end
-    redirect_to orders_path
+    redirect_to admin_orders_path
   end
 
 

@@ -23,7 +23,7 @@
     <% @orders.each do |order| %>
       <tr>
         <td><%= order.id %></td>
-        <td><%= order.user ? (link_to order.user.id, user_orders_path(order.user)) : "N/A" %></td>
+        <td><%= order.user ? (link_to order.user.id, admin_user_orders_path(order.user)) : "N/A" %></td>
         <td><%= order.billing_address.nil? ? "N/A" : order.billing_address.street_address %></td>
         <td><%= order.billing_address.nil? ? "N/A" : order.billing_address.city.name %></td>
         <td><%= order.billing_address.nil? ? "N/A" : order.billing_address.state.name %></td>
@@ -32,9 +32,9 @@
         <td><%= order.checkout_date.strftime("%Y-%m-%d") if order.checkout_date %></td> 
         <!-- TODO: finish links to orders -->
         <% if order.user %>
-          <td><%= link_to "show", user_order_path(order.user, order) %></td>
-          <td><%= link_to "edit", edit_user_order_path(order.user, order) %></td>
-          <td><%= link_to "delete", user_order_path(order.user, order), method: :delete %></td>
+          <td><%= link_to "show", admin_user_order_path(order.user, order) %></td>
+          <td><%= link_to "edit", edit_admin_user_order_path(order.user, order) %></td>
+          <td><%= link_to "delete", admin_user_order_path(order.user, order), method: :delete %></td>
         <% else %>
           <td></td>
           <td></td>
