@@ -24,6 +24,35 @@ class OrdersController < ApplicationController
     @user = User.find(params[:user_id])
     @order = Order.new
   end
+
+  def create
+    @user = User.find(params[:user_id])
+    @order = Order.new(whitelisted_params)
+    @user.orders << @order
+    if @order.save
+      redirect_to edit_user_order_path(@user, @order)
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @user = User.find(params[:user_id])
+    @order = Order.find(params[:id])
+    @order.order_contents.build
+    @order.order_contents.build
+    @order.order_contents.build
+  end
+
+  def update
+
+  end
+
+  private
+
+    def whitelisted_params
+      params.require(:order).permit(:billing_id, :shipping_id)
+    end
 end
 
 

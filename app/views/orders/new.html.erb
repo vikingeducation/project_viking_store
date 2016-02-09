@@ -13,22 +13,20 @@
     <%= link_to "Edit Customer Profile", edit_user_path(@user) %>
   </div>
   <div class="row">
-    <%= form_for [@user, @order] do |f| %>
 
-      <%= f.fields_for :addresses do |af| %>
-        <p>
-          <%= af.label "Shipping Addresses" %>
-          <%= af.collection_select :user_id, @user.addresses.all, :id, :street_address %>
-        </p>
-        <p>
-          <%= af.label "Billing Addresses" %>
-          <%= af.collection_select :user_id, @user.addresses.all, :id, :street_address %>
-        </p>
-      <% end %>
-      <%= f.fields_for :credit_card do |cf| %>
-        <%= cf.label "Card Number Last 4 digits" %>
-        <%= cf.collection_select :user_id, @user.credit_card, :id, :card_number %>
-      <% end %>
+    <%= form_for [@user, @order] do |f| %>
+      <p>
+        <%= f.label "Shipping Addresses" %>
+        <%= f.collection_select :shipping_id, @user.addresses.all, :id, :street_address %>
+      </p>
+      <p>
+        <%= f.label "Billing Addresses" %>
+        <%= f.collection_select :billing_id, @user.addresses.all, :id, :street_address %>
+      </p>
+      <p>
+        <%= f.submit %>
+      </p>
     <% end %>
+
   </div>
 </div>

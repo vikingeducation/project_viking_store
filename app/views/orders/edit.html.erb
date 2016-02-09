@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row text-center">
+    <h1>New Order for <%= @user.first_name %> <%= @user.last_name %></h1>
+  </div>
+  <div class="row text-center">
+    <h3>Logistical Information</h3>
+  </div>
+  <div class="row">
+    <h4>Basic Information</h4>
+    <p>Customer ID: <%= @user.id %></p>
+    <p>Customer: <%= link_to "#{@user.first_name} #{@user.last_name}", @user %></p>
+    <p>Date Placed: N/A </p>
+    <%= link_to "Edit Customer Profile", edit_user_path(@user) %>
+  </div>
+  <div class="row">
+    <%= form_for [@user, @order] do |f| %>
+
+      <%= f.fields_for :addresses do |af| %>
+        <p>
+          <%= af.label "Shipping Addresses" %>
+          <%= af.collection_select :user_id, @user.addresses.all, :id, :street_address %>
+        </p>
+        <p>
+          <%= af.label "Billing Addresses" %>
+          <%= af.collection_select :user_id, @user.addresses.all, :id, :street_address %>
+        </p>
+      <% end %>
+      <% unless @user.credit_card.nil? %>
+        <%= f.label "Last four digits" %>
+        <%= @user.last_four %>
+      <% end %>
+
+      <p><%= f.submit %></p>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h1>Edit Order Contents</h1>
+  </div>
+  <div class="row">
+    <table class="table table-striped">
+      <tr>
+        <td>ID</td>
+        <td>Quantity</td>
+        <td>Price</td>
+        <td>Total Price</td>
+        <td>Remove</td>
+      </tr>
+
+      <%= form_for [@user, @order] do |f| %>
+        <%= f.fields_for :order_contents do |oc| %>
+          <% @order.order_contents.each do |order| %>
+            <% if order.persisted? %>
+              <tr>
+                <td><%= order.id %></td>
+                <td><%= oc.text_field :quantity, value: order.quantity %></td>
+                <td><%= order.product.price %></td>
+                <td><%= order.total %></td>
+                <td><%= link_to "remove" %></td>
+              </tr>
+            <% end %>
+          <% end %>
+          <%= oc.submit %>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<div class ="container">
+  <div class="row">
+    <h1>Add Product</h1>
+  </div>
+  <%= form_for [@user, @order] do |f| %>
+    <%= f.fields_for :order_contents do |order| %>
+      <%= order.label :product_id %>
+      <%= order.text_field :product_id %>
+      <br>
+      <%= order.label :quantity %>
+      <%= order.text_field :quantity %>
+      <br>
+      <%= order.submit %>
+    <% end %>
+  <% end %>
+</div>

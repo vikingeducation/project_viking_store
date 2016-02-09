@@ -47,6 +47,10 @@ class User < ActiveRecord::Base
             :format => { :with => /@/ }
 
 
+  def last_four
+    credit_card.card_number[-4..-1] unless credit_card.nil?
+  end
+           
   def self.total(days=nil)
     if days.nil?
       self.all.count
