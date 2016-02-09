@@ -19,4 +19,13 @@ class OrdersController < ApplicationController
     @user = User.find(params[:user_id])
     @order = Order.find(params[:id])
   end
+
+  def new
+    @user = User.find(params[:user_id])
+    @order = Order.new
+  end
 end
+
+
+
+

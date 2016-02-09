@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row text-center">
+    <h1>New Order for <%= @user.first_name %> <%= @user.last_name %></h1>
+  </div>
+  <div class="row text-center">
+    <h3>Logistical Information</h3>
+  </div>
+  <div class="row">
+    <h4>Basic Information</h4>
+    <p>Customer ID: <%= @user.id %></p>
+    <p>Customer: <%= link_to "#{@user.first_name} #{@user.last_name}", @user %></p>
+    <p>Date Placed: N/A </p>
+    <%= link_to "Edit Customer Profile", edit_user_path(@user) %>
+  </div>
+  <div class="row">
+    <%= form_for [@user, @order] do |f| %>
+
+      <%= f.fields_for :addresses do |af| %>
+        <p>
+          <%= af.label "Shipping Addresses" %>
+          <%= af.collection_select :user_id, @user.addresses.all, :id, :street_address %>
+        </p>
+        <p>
+          <%= af.label "Billing Addresses" %>
+          <%= af.collection_select :user_id, @user.addresses.all, :id, :street_address %>
+        </p>
+      <% end %>
+      <%= f.fields_for :credit_card do |cf| %>
+        <%= cf.label "Card Number Last 4 digits" %>
+        <%= cf.collection_select :user_id, @user.credit_card, :id, :card_number %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
