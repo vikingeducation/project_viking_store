@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
 
 
-  root 'admin/dashboard#index'
+  root 'products#index'
 
-  # TODO: switch to resources :admin do
-  # when we have admin controller, model, etc.
+  resources :products
 
   namespace :admin do
     resources :dashboard, only: [:index, :get]
