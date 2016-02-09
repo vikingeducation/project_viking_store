@@ -3,16 +3,7 @@
 
 <div class="well">
 
-  <h3 class="text-center">Logistical Information</h3>
-  <h4>Basic Information</h4>
-
-  <h5><strong>Customer ID:</strong> <%= @order.user.id %></h5>
-  <h5><strong>Customer:</strong> <%= link_to "#{@order.user.first_name} #{@order.user.last_name}", admin_user_path(@order.user) %></h5>
-  <h5><strong>Date Placed:</strong> <%= @order.checkout_date.strftime("%Y-%m-%d") if @order.checkout_date %></h5>
-  <h5><strong># Products:</strong> <%= @order.quantity %></h5>
-  <h5><strong>Order Value:</strong> <%= number_to_currency(@order.products.single_order_value) %></h5>
-  <h5> <%= link_to "Edit Customer Profile", edit_admin_user_path(@order.user) %> </h5>
-  <hr>
+  <%= render partial: "logistical_info" %>
 
   <h4>Order Status:</h4>
   <h5><%= @order.checkout_date ? "PLACED" : "UNPLACED" %></h5>

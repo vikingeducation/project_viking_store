@@ -1,17 +1,7 @@
 <h1 class="text-center">Edit Order #<%= @order.id %></h1>
 
 <div class="well">
-
-  <h3 class="text-center">Logistical Information</h3>
-  <h4>Basic Information</h4>
-
-  <h5><strong>Customer ID:</strong> <%= @order.user.id %></h5>
-  <h5><strong>Customer:</strong> <%= link_to "#{@order.user.first_name} #{@order.user.last_name}", admin_user_path(@order.user) %></h5>
-  <h5><strong>Date Placed:</strong> <%= @order.checkout_date.strftime("%Y-%m-%d") if @order.checkout_date %></h5>
-  <h5><strong># Products:</strong> <%= @order.quantity %></h5>
-  <h5><strong>Order Value:</strong> <%= number_to_currency(@order.products.single_order_value) %></h5>
-  <h5> <%= link_to "Edit Customer Profile", edit_admin_user_path(@order.user) %> </h5>
-  <hr>
+  <%= render partial: "logistical_info" %>
 
   <h4>Order Status</h4>
 
@@ -68,13 +58,14 @@
     <tbody>
       <%= f.fields_for :order_contents do |purchases| %>    
         <tr>
-          <td><%= purchases.collection_select :product_id, Product.all, :id, :name, {:include_blank => 'None'}, :class => "form-control" %></td>
+          <td> id </td>
+          <td> product name</td>
 
           <td><%= purchases.text_field :quantity, :class => "form-control" %></td>
 
-          <td><%= purchases.text_field :price %></td>
+          <td> price </td>
           <!-- TODO: figure out total price: -->
-          <td><%= "N/A" %></td>
+          <td> total price </td>
 
           <td><%= link_to "remove", admin_user_order_path(@order.user, @order), method: :delete %>
           </td>
@@ -94,7 +85,7 @@
 <div class="well">
 
   <h1 class="text-center">Add Products to Order</h1>
-  <h4>Add up to 5 products at a time</h4>
+  <h4 class="text-center">Add up to 5 products at a time</h4>
 
     <table class="table table-striped table-bordered">
     <thead>
@@ -108,10 +99,7 @@
         <%= f.fields_for :order_contents do |added_purchases| %>  
           <% 5.times do %>  
           <tr>
-            <td><%= added_purchases.label :product_id %></td>
             <td><%= added_purchases.text_field :product_id %></td>
-
-            <td><%= added_purchases.label :quantity %></td>
             <td><%= added_purchases.text_field :quantity %></td>
           </tr>
           <% end %>
