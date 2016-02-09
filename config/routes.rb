@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # TODO: switch to resources :admin do
   # when we have admin controller, model, etc.
 
-  scope "/admin" do
+  namespace :admin do
     resources :dashboard, only: [:index, :get]
     resources :categories
     resources :products
