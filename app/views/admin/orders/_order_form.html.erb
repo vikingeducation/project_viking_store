@@ -1,27 +1,27 @@
-<%= form_for [:admin, @user, @order] do |f| %>
+<%= form_for [:admin, @user, @order] do |order_field| %>
 
-  <%= f.label :billing_id, 'Billing Address' %>
+  <%= order_field.label :billing_id, 'Billing Address' %>
   <% if @user.addresses.empty? %>
-    <%= f.text_field :billing_address %>
+    <%= order_field.text_field :billing_address %>
   <% else %>
-    <%= f.collection_select(:billing_id, @user.addresses, :id, :street_address) %>
+    <%= order_field.collection_select(:billing_id, @user.addresses, :id, :street_address) %>
   <% end %>
   </br>
-  <%= f.label :shipping_id, 'Shipping Address' %>
+  <%= order_field.label :shipping_id, 'Shipping Address' %>
   <% if @user.addresses.empty? %>
-    <%= f.text_field :shipping_address %>
+    <%= order_field.text_field :shipping_address %>
   <% else %>
-    <%= f.collection_select(:shipping_id, @user.addresses, :id, :street_address) %>
+    <%= order_field.collection_select(:shipping_id, @user.addresses, :id, :street_address) %>
   <% end %>
   </br>
-  <%= f.label :credit_card_id, 'Credit Card' %>
+  <%= order_field.label :credit_card_id, 'Credit Card' %>
   <% if @user.credit_cards.empty? %>
-    <%= f.text_field :credit_card %>
+    <%= order_field.text_field :credit_card %>
   <% else %>
-    <%= f.collection_select(:credit_card_id, @user.credit_cards, :id, :card_number) %>
+    <%= order_field.collection_select(:credit_card_id, @user.credit_cards, :id, :card_number) %>
   <% end %>
   </br>
-  <%= f.submit %>
+  <%= order_field.submit %>
 
 <% end %>
 

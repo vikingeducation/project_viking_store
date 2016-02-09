@@ -1,29 +1,29 @@
-<%= form_for [:admin, @user] do |f| %>
+<%= form_for [:admin, @user] do |user_field| %>
 
-  <%= f.label :first_name, 'First Name' %>
-  <%= f.text_field :first_name %>
+  <%= user_field.label :first_name, 'First Name' %>
+  <%= user_field.text_field :first_name %>
   </br>
-  <%= f.label :last_name, 'Last Name' %>
-  <%= f.text_field :last_name %>
+  <%= user_field.label :last_name, 'Last Name' %>
+  <%= user_field.text_field :last_name %>
   </br>
-  <%= f.label :email, 'Email' %>
-  <%= f.text_field :email %>
+  <%= user_field.label :email, 'Email' %>
+  <%= user_field.text_field :email %>
   </br>
-  <%= f.label :billing_id, 'Default Billing Address' %>
+  <%= user_field.label :billing_id, 'Default Billing Address' %>
   <% if @user.addresses.empty? %>
-    <%= f.text_field :billing_address %>
+    <%= user_field.text_field :billing_address %>
   <% else %>
-    <%= f.collection_select(:billing_id, @user.addresses, :id, :street_address) %>
+    <%= user_field.collection_select(:billing_id, @user.addresses, :id, :street_address) %>
   <% end %>
   </br>
-  <%= f.label :shipping_id, 'Default Shipping Address' %>
+  <%= user_field.label :shipping_id, 'Default Shipping Address' %>
   <% if @user.addresses.empty? %>
-    <%= f.text_field :shipping_address %>
+    <%= user_field.text_field :shipping_address %>
   <% else %>
-    <%= f.collection_select(:shipping_id, @user.addresses, :id, :street_address) %>
+    <%= user_field.collection_select(:shipping_id, @user.addresses, :id, :street_address) %>
   <% end %>
   </br>
-  <%= f.submit %>
+  <%= user_field.submit %>
   <%= link_to 'Delete User', admin_user_path, method: :delete %>
 
 <% end %>

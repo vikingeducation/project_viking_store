@@ -1,18 +1,18 @@
-<%= form_for [:admin, @product] do |f| %>
-  <%= f.label :name, 'Name' %>
-  <%= f.text_field :name %>
+<%= form_for [:admin, @product] do |product_field| %>
+  <%= product_field.label :name, 'Name' %>
+  <%= product_field.text_field :name %>
 
-  <%= f.label :sku, 'SKU Number' %>
-  <%= f.text_field :sku %>
+  <%= product_field.label :sku, 'SKU Number' %>
+  <%= product_field.text_field :sku %>
 
-  <%= f.label :description, 'Description' %>
-  <%= f.text_area :description %>
+  <%= product_field.label :description, 'Description' %>
+  <%= product_field.text_area :description %>
 
-  <%= f.label :price, 'Price' %>
-  <%= f.text_field :price %>
+  <%= product_field.label :price, 'Price' %>
+  <%= product_field.text_field :price %>
 
-  <%= f.label :category_id, 'Category ID' %>
-  <%= f.text_field :category_id %>
+  <%= product_field.label :category_id, 'Category ID' %>
+  <%= product_field.text_field :category_id %>
 
-  <%= f.submit %>
+  <%= product_field.submit %>
 <% end %>
