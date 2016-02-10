@@ -1,11 +1,30 @@
 $link-color: #FF69d6;
 $text-color: #3c3;
+$body-bg: #333;
+
+
+
+
+
+.products-controller {
+
+  .darkness {
+    background-color: $body-bg;
+    color: #FFF;
+  }
+
+  .cushion {
+    padding: 10px 0 10px;
+  }
+
+  .product-image {
+    height: 100px;
+    border: 1px solid black;
+  }
+
+
+}
 
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-.darkness {
-  background-color: #333;
-  font-color: #000;
-}

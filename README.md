@@ -90,3 +90,10 @@ class Address
   end
 
 end
+
+===================
+Ways to go about stylesheets:
+===================
+1. create a different layout for each separate page
+2. wrap each view in an overall class to override things
+(what I was missing: "*= require producs.css.scss" in application.css.scss)
