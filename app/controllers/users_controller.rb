@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(whitelisted_params)
+
     if @user.save
+      @user.addresses.build
       flash[:success] = "Welcome, #{@user.full_name}!"
       sign_in(@user)
       redirect_to products_path
@@ -16,8 +18,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = current_user
+  end
+
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
+    @user.addresses.build
+  end
+
+  def update
+    @user = current_user
+
+    if @user.update(whitelisted_params)
+      @user.addresses.build
+      flash[:success] = "User updated"
+      redirect_to products_path
+    else
+      flash[:error] = "Failed to update user"
+      render 'edit'
+    end
   end
 
   private
@@ -29,4 +49,5 @@ class UsersController < ApplicationController
                                   :phone_number,
                                   { :addresses_attributes => [:id, :user_id, :street_address, :city_id, :state_id, :zip_code] })
   end
+
 end

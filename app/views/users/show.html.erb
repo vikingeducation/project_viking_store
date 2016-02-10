@@ -1,0 +1,52 @@
+<h1 class='text-center'> User <%= @user.id %>: <%= @user.full_name %></h1>
+
+<div class='row' style='border: 2px solid black'>
+  <h3 class='text-center' style='text-decoration: underline'>Demographic Information</h3>
+  <p>First Name: <%= @user.first_name %></p>
+  <p>Last Name: <%= @user.last_name %></p>
+  <p>Email: <%= @user.email %></p>
+
+  <strong>Default Billing Address:</strong>
+  <p>
+    <%= @user.default_billing_address.street_address %></br>
+    <%= @user.default_billing_address.secondary_address if 
+        @user.default_billing_address.secondary_address %></br>
+    <%= @user.default_billing_address.city.name %>, 
+    <%= @user.default_billing_address.state.name %> 
+    <%= @user.default_billing_address.zip_code %></br>
+  </p>
+
+  <strong>Default Shipping Address:</strong>
+  <p>
+    <%= @user.default_shipping_address.street_address %></br>
+    <%= @user.default_shipping_address.secondary_address if 
+        @user.default_shipping_address.secondary_address %></br>
+    <%= @user.default_shipping_address.city.name %>, 
+    <%= @user.default_shipping_address.state.name %> 
+    <%= @user.default_shipping_address.zip_code %></br>
+  </p>
+
+  <%= link_to "Edit #{@user.full_name}'s Information", edit_user_path(@user) %></br>
+  <%= link_to "Delete #{@user.full_name}", user_path(@user), method: :delete %></br>
+  <%= link_to "View Unplaced Order (Cart)", cart_path(0) %>
+
+</div>
+
+<div class='row' style='border: 2px solid black'>
+  <h3 class='text-center' style='text-decoration: underline'>Credit Card Information</h3>
+  <% if @user.credit_cards.first %>
+    <p>First Name: <%= @user.first_name %></p>
+    <p>Last Name: <%= @user.last_name %></p>
+    <p>Number: <%= @user.credit_cards.first.card_number %></p>
+    <p>Expiration: <%= @user.credit_cards.first.expiration %></p>
+    <p>CV2: <%= @user.credit_cards.first.ccv %></p>
+  <% else %>
+    <p>This user has no card</p>
+  <% end %>
+</div>
+
+<div class='row' style='border: 2px solid black'>
+  <h3 class='text-center' style='text-decoration: underline'>Order History</h3>
+  
+  <%= render partial: 'user_orders' %>
+</div>

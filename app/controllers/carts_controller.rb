@@ -14,7 +14,7 @@ class CartsController < ApplicationController
       flash[:error] = "Product not added"
     end
 
-    redirect_to products_path({ product_filter: params[:product_filter] })
+    redirect_to products_path(product_filter: params[:product_filter])
   end
 
   def show
