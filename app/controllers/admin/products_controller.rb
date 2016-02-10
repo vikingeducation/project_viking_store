@@ -1,4 +1,4 @@
-class ProductsController < ApplicationController
+class Admin::ProductsController < AdminController
 
   def index
     @products = Product.all
@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       flash[:success] = "You've Sucessfully Created a Product!"
-      redirect_to product_path(@product)
+      redirect_to admin_product_path(@product)
     else
       flash.now[:error] = "Error! Product wasn't created!"
       render :new
@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     if @product.update(product_params)
       flash[:success] = "You've Sucessfully Updated the Product!"
-      redirect_to product_path(@product)
+      redirect_to admin_product_path(@product)
     else
       flash.now[:error] = "Error! Product wasn't updated!"
       render :edit
@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
      @product = Product.find(params[:id])
     if @product.destroy
       flash[:success] = "You've Sucessfully Deleted the Product!"
-      redirect_to products_path
+      redirect_to admin_products_path
     else
       flash.now[:error] = "Error! Product wasn't deleted!"
       render :show

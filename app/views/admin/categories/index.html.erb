@@ -5,7 +5,7 @@
 </div>
 <div class="row">
   <div class="col col-xs-12">
-    <a class="btn btn-success btn-block" href=<%=new_category_path%> role="button">
+    <a class="btn btn-success btn-block" href=<%=new_admin_category_path%> role="button">
         Add New Category
     </a>
     <br>
@@ -24,9 +24,9 @@
         <tr>
           <td><%=category.id%></td>
           <td><%=category.name%></td>
-          <td><%=link_to 'Show', category_path(category.id)%></td>
-          <td><%=link_to 'Edit', edit_category_path(category.id)%></td>
-          <td><%=link_to 'Delete', category, method: "delete" %></td>
+          <td><%=link_to 'Show', admin_category_path(category.id)%></td>
+          <td><%=link_to 'Edit', edit_admin_category_path(category.id)%></td>
+          <td><%=link_to 'Delete', admin_category_path(category.id), method: "delete", data: {confirm: "Are you sure?"}%></td>
         </tr>
         <%end%>
       <tbody>

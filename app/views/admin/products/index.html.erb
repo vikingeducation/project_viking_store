@@ -5,7 +5,7 @@
 </div>
 <div class="row">
   <div class="col col-xs-12">
-    <a class="btn btn-success btn-block" href=<%=new_product_path%> role="button">
+    <a class="btn btn-success btn-block" href=<%=new_admin_product_path%> role="button">
         Add New Product
     </a>
     <br>
@@ -32,9 +32,9 @@
           <td><%=product.sku%></td>
           <td><%=number_to_currency(product.price)%></td>
           <td><%=product.category_id%></td>
-          <td><%=link_to 'Show', product_path(product.id)%></td>
-          <td><%=link_to 'Edit', edit_product_path(product.id)%></td>
-          <td><%=link_to 'Delete', product, method: "delete" %></td>
+          <td><%=link_to 'Show', admin_product_path(product.id)%></td>
+          <td><%=link_to 'Edit', edit_admin_product_path(product.id)%></td>
+          <td><%=link_to 'Delete', admin_product_path(product.id), method: "delete" %></td>
         </tr>
         <%end%>
       <tbody>

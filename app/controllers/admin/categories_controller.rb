@@ -1,7 +1,7 @@
-class CategoriesController < ApplicationController
+class Admin::CategoriesController < AdminController
 
   def index
-    @categories = Category.all
+    @categories = Category.all.order("id")
   end
 
   def new
@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     if @category.save
       flash[:success] = "You've Sucessfully Created a Category!"
-      redirect_to category_path(@category)
+      redirect_to admin_category_path(@category)
     else
       flash.now[:error] = "Error! Category wasn't created!"
       render :new
@@ -32,7 +32,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     if @category.update(category_params)
       flash[:success] = "You've Sucessfully Updated the Category!"
-      redirect_to category_path(@category)
+      redirect_to admin_category_path(@category)
     else
       flash.now[:error] = "Error! Category wasn't updated!"
       render :edit
@@ -43,7 +43,7 @@ class CategoriesController < ApplicationController
      @category = Category.find(params[:id])
     if @category.destroy
       flash[:success] = "You've Sucessfully Deleted the Category!"
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       flash.now[:error] = "Error! Category wasn't deleted!"
       render :show
