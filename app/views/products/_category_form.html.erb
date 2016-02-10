@@ -1,5 +1,7 @@
-<%= form_for @category do |category_field| %>
-  <%= category_field.select(:category_id,
-                            @category_options) %>
-
+<%= form_for @products do |product_field| %>
+  <%= product_field.select(:category_id,
+                            @product.category,
+                            :id,
+                            :name) %>
+  <%= product_field.submit %>
 <% end %>

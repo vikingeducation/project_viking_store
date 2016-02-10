@@ -10,6 +10,7 @@ class Product < ActiveRecord::Base
             through: :order_contents,
             inverse_of: :products
 
+
   def self.total_products_in_last_n_days( n )
     Product.where("created_at > ( CURRENT_DATE - #{n} )").count
   end
