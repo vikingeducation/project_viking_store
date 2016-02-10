@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   root 'products#index'
 
   resources :products
+  resources :carts, only: [:edit, :update, :create, :destroy]
 
   namespace :admin do
+    root 'dashboard#index'
     resources :dashboard, only: [:index, :get]
     resources :categories
     resources :products

@@ -1,0 +1,24 @@
+<article class="col-sm-3">
+  <div class="cushion"> <!-- single product -->
+    <div class="text-center darkness cushion">
+      <h5><%= product.name %></h5>
+    </div>
+
+    <div class="product-image">
+      <div class="text-right"> <!-- tiny product price -->
+        <%= number_to_currency(product.price) %>
+      </div>
+    </div>
+
+    <div class="darkness cushion"> <!-- add to cart -->
+
+      <%= form_tag carts_path(1) do %>
+        <!-- use hidden_field_tag because we're not trying to create Product -->
+        <%= hidden_field_tag(:product, product.id) %>
+        <%=submit_tag "Add to Cart", class: "btn btn-warning center-block" %>
+      <% end %>
+
+    </div>
+
+  </div>
+</article>

@@ -1,0 +1,43 @@
+<div class="carts-controller">
+  <h1>Shopping Cart Contents</h1>
+
+    <div class="panel panel-default">
+
+      <% if session[:cart] %>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> Product Info </td>
+            <td> Quantity + Price Info </td>
+          </tr>
+
+          <tr>
+            <td>Total</td>
+            <td>
+              <button>Update Contents</button>
+              <button> Check Out</button>
+            </td>
+
+          <tr>
+        </tbody>
+      </table>
+
+      <!-- no cart -->
+      <% else %>
+        <h3 class="text-center">You have nothing in your cart. <%= link_to "Back to Products Page", products_path %>
+      <% end %> 
+
+
+
+    </div> <!-- panel -->
+
+
+
+
+</div>
