@@ -1,41 +1,54 @@
-<section id="top-bar">
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">
-          Viking Store
-        </a>
+<%= content_for :public do %>
+  <section id="top-bar">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+            Viking Store
+          </a>
+        </div>
+        <div class="navbar-right">
+          <ul class="nav navbar-nav">
+            <li><img width='48' height='48' alt="Viking" src="assets/viking.png"></li>
+            <li><ul class='nav'>
+              <li><a href="#">Your Cart</a></li>
+              <li><a href="#">Sign In</a></li>
+            </ul></li>
+          </ul>
+
+        </div>
       </div>
-      <div class="navbar-right">
-        <ul class="nav navbar-nav">
-          <li><img width='48' height='48' alt="Viking" src="assets/viking.png"></li>
-          <li><ul class='nav'>
-            <li><a href="#">Your Cart</a></li>
-            <li><a href="#">Sign In</a></li>
-          </ul></li>
-        </ul>
+    </nav>
+  </section>
 
-      </div>
-    </div>
-  </nav>
-</section>
+  <section id="page-title">
+    <h1 class="text-center">The Viking Store</h1>
+  </section>
 
-<section id="page-title">
-  <h1 class="text-center">The Viking Store</h1>
-</section>
+  <section id="page-subtitle">
+    <h2 class="text-center">The Best Viking Gear on the Whole Web</h2>
+  </section>
 
-<section id="page-subtitle">
-  <h2 class="text-center">The Best Viking Gear on the Whole Web</h2>
-</section>
-
-<section id="page-content">
   <div class="container">
-      <%= yield %>
+    <%= yield :content %>
   </div>
-</section>
 
-<section id="bottom-bar">
-
-</section>
+  <section id="bottom-bar">
+    <div class="text-right admin-login">
+      <a href="/admin">Admin Login</a>
+    </div>
+    <div class='text-center contact-info'>
+      <h3>CONTACT</h3>
+      <p>
+        <span class='glyphicon glyphicon-earphone'></span>
+        1-(555)-123-4567
+      </p>
+      <p>
+        <span class='glyphicon glyphicon-envelope'></span>
+        contact@vikingstore.com
+      </p>
+    </div>
+  </section>
+<% end %>
 
 <%= render template: "layouts/application" %>

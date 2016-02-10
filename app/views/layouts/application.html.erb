@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<%= content_for?(:admin) ? yield(:admin) : yield %>
+<%= content_for?(:admin) ? yield(:admin) : yield(:public) %>
 
 </body>
 </html>
