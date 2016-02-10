@@ -16,10 +16,11 @@
 <!-- filter by category -->
 <div class="row">
   <div class="col-sm-4 pull-right form-inline">
-  <%= form_for products_path, {class: "form-inline"} do |f| %>
+  <%= form_for :products_filter, html: {method: "GET", class: "form-inline"} do |f| %>
 
     <div class="form-group">
-    <%= f.collection_select :category_id, Category.all, :id, :name, {}, class: "form-control" %>
+    <%= f.collection_select nil, Category.all, :id, :name, { prompt: true }, class: "form-control" %>
+
     <%= f.submit "Apply Filter", class: "form-control" %>
     </div>
 

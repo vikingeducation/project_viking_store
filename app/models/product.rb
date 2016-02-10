@@ -15,7 +15,9 @@ class Product < ActiveRecord::Base
     sum("quantity * price")
   end
 
-
+  def self.filter_by_category(category)
+    joins("JOIN categories ON products.category_id = categories.id").where("products.category_id = ?", category[0].to_i)
+  end
 
   def self.new_products(n)
     Product.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count
