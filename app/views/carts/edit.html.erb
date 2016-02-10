@@ -1,4 +1,7 @@
 <div class="carts-controller">
+
+<%= form_for @order do |f| %>
+
   <h1 class="text-center">Shopping Cart Contents</h1>
 
     <div class="panel panel-default">
@@ -6,8 +9,7 @@
       <% if session[:cart] %>
       <table class="table table-bordered table-striped">
         <tbody>
-          <!-- TODO: switch to @cart.each --> 
-          <% session[:cart].each do |key, value| %>
+          <% @cart.each do |key, value| %>
           <!-- find the product once so we can use all its things -->
             <% p = find_product(key) %>
             <tr>
@@ -19,32 +21,30 @@
               <td>
                 <strong>Quantity: </strong><%= value %><br/>
                 <strong>Total Price: </strong><%= number_to_currency(p.price * value) %>
-                <%= form_tag carts_path(1) do %>
-                  <%= label_tag :_destroy, "Remove Item" %>
-                  <%= check_box_tag "[session][cart]#{key}" %>
-                  <%= submit_tag "Update Contents", method: :delete %>
+
+                <%= f.fields_for :session do |products| %>
+                  <%= products.label "Remove Item" %>
+                  <%= products.check_box :_destroy %>
+                  <%= products.submit %>
                 <% end %>
-
-<!-- Parameters: {"utf8"=>"✓", "authenticity_token"=>"nfLC1cUan9lHyqR4v/zOZ7Xff5d9CsBt4nO0izUapYU=", "session"=>{"cart"=>{"195"=>"1"}}, "commit"=>"Update Contents"} -->
-
-<!-- Processing by Admin::ProductsController#destroy as HTML
-  Parameters: {"authenticity_token"=>"nfLC1cUan9lHyqR4v/zOZ7Xff5d9CsBt4nO0izUapYU=", "id"=>"110"} -->
-
-
 
               </td>
 
             </tr>
-          <% end %> <!-- cart contents loop -->
+          <% end %> <!-- @cart.each loop -->
             <tr>
               <td><strong>Total: </strong><%= number_to_currency(cart_total) %>
               </td>
-              <td><button> Check Out</button></td>
+              <td>
+              <div><%= f.submit "Check Out", {class: "btn btn-primary btn-md"} %>
+
+              </div></td>
 
             </tr>
 
         </tbody>
       </table>
+
 
       <!-- no cart -->
       <% else %>
@@ -52,6 +52,7 @@
       <% end %> 
 
 
-
     </div> <!-- panel -->
 </div>
+
+<% end %> <!-- end of @cart form -->

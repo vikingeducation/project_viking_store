@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   resources :products
   resources :carts, only: [:edit, :update, :create, :destroy]
+  resources :orders
+  resources :users
+  resources :sessions
 
   namespace :admin do
     root 'dashboard#index'

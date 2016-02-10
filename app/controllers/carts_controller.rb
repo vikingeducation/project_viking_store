@@ -8,6 +8,7 @@ class CartsController < ApplicationController
 
   def update
     @cart = session[:cart]
+    render :edit
   end
 
 
@@ -22,7 +23,7 @@ class CartsController < ApplicationController
       session[:cart][product] = 1
       flash[:success] = "'#{Product.find(product).name}' added to cart."
     end
-    render :edit    
+    redirect_to products_path   
   end
 
 
