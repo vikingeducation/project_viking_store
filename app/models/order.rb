@@ -2,11 +2,20 @@ class Order < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :order_contents, dependent: :destroy
+  has_many :order_contents,
+           dependent: :destroy
 
-  has_many :products, :through => :order_contents, source: :product
+  accepts_nested_attributes_for :order_contents,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true
 
-  has_many :categories, :through => :products, source: :category
+  has_many :products,
+           :through => :order_contents,
+           source: :product
+
+  has_many :categories,
+           :through => :products,
+           source: :category
 
   def shipping_address
     Address.find(self.shipping_id)

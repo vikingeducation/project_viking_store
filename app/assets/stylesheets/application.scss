@@ -14,3 +14,53 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #4C4646;
+  a {
+    color: #FFFFFF;
+  }
+}
+
+#product_heading {
+  background-color: #4C4646;
+  color: #FFFFFF;
+}
+
+#shop_index_jumbotron {
+  position: relative;
+  height: 100px;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: Arial;
+
+}
+
+#shop_index_subtext {
+  position: relative;
+  height: 100px;
+  border-color: grey;
+  border: 2px;
+}
+
+#shop_index_filter {
+  position: relative;
+  height: 60px;
+}
+
+#subhead {
+  color: grey;
+}

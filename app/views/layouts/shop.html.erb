@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Viking Store Admin Portal</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body data-no-turbolink>
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Viking Store</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <% if session[:current_user_id] %>
+              <li class="active">
+                <a href="#" class="pull-left">
+                <img src="http://lorempixel.com/50/50/people/<%= rand(1..10) %>" width = "50px" height = "50px" alt="<%= session[:current_user_id] ? User.find(session[:current_user_id]).first_name : "User" %>"></a>
+              </li>
+              <% end %>
+              <li><a href="<%= session[:current_user_id] ? edit_shop_order_path(User.find(session[:current_user_id]).orders.first.id): edit_shop_order_path(999) %>">Your Cart</a></li>
+              <% if session[:current_user_id] %>
+              <li><%= link_to "Sign Out", shop_session_path(session[:current_user_id]), method: :delete %></li>
+              <% else %>
+              <li><a href="<%= new_shop_user_path %>">Sign In</a></li>
+              <% end %>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+
+
+      <% flash.each do |type, message| %>
+        <div class="alert alert-success">
+          <div>
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong><%= type.titleize %>! <%= message %></strong>
+          </div>
+          </div>
+      <% end %>
+
+        <%= yield %>
+
+
+      <footer class="footer">
+        <div class="container">
+          <p class="pull-right"><%= link_to "Admin Portal", admin_users_path %><br/>
+          <%= link_to "Clear Cart", shop_product_path(999), method: :delete %></p>
+        </div>
+      </footer>
+</body>
+</html>

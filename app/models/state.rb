@@ -1,5 +1,7 @@
 class State < ActiveRecord::Base
 
+  has_many :addresses
+
   def self.top_three_states
     State.select("s.name, COUNT(*) AS state_count")
          .joins("AS s JOIN addresses a ON s.id = a.state_id")

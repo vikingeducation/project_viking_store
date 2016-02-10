@@ -10,6 +10,7 @@ class Product < ActiveRecord::Base
   validates :price, numericality: true, inclusion: 1..10_000
   validates :sku, uniqueness: true
 
+  self.per_page = 6
 
   def self.new_products(n)
     Product.all.where("created_at BETWEEN (NOW() - INTERVAL '#{n} days') AND NOW()").count

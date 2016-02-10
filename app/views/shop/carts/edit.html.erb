@@ -1,0 +1,60 @@
+<h1 class="text-center">Shopping Cart Contents</h1></br>
+
+<div class="container">
+<%= form_for [:shop, @order] do |f| %>
+
+    <% @order.products.each do |product| %>
+      <%= f.fields_for :quantity do |content_fields| %>
+  <div class="row">
+    <div class = "col-xs-6 col-xs-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <p class=""><img src="" width = "95px" height = "95px" alt="<%=product.name%>" class="pull-left">
+          <span class="pull-right"><%= number_to_currency(product.price) %></span>
+          <h4><b class="text-center">&nbsp;&nbsp;&nbsp;<%= product.name %></b></h4>
+          &nbsp;&nbsp;  <%= product.category.name %></p>
+
+        </div>
+    </div>
+  </div>
+    <div class = "col-xs-3">
+      <div class="panel panel-default">
+        <div class="panel-body">
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;<b><u><em>Quantity</em></u></b>
+        <b class="pull-right"><u>Total Price</u></b></p>
+        <div class = "row">
+
+          <div class="col-xs-6">
+            <div class="panel panel-default">
+              <%= content_fields.text_field :quantity, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-xs-6">
+          <b><%= number_to_currency(@order.products.where(:id => product.id).count * product.price) %></b>
+          </div>
+        </div>
+
+        <%= content_fields.check_box 'product_id', product.id %>&nbsp;&nbsp;Remove Item
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+      <% end %>
+    <% end %>
+
+    <div class = "col-xs-6 col-xs-offset-1">
+      <div class="panel panel-default">
+        <h4 class="text-center"><b><u>TOTAL</u></b></h4>
+        <h4 class="text-center"><%= @order.id ? number_to_currency(@order.order_value(@order.id)) : "$0" %></h4>
+      </div>
+    </div>
+
+    <div class = "col-xs-3">
+      <%= submit_tag "Update Contents", class: "btn btn-block btn-default" %>
+      <%= link_to "Check Out", {}, class: "btn btn-block btn-primary" %>
+    </div>
+
+</div>
