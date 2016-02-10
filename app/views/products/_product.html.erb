@@ -12,8 +12,9 @@
 
     <div class="darkness cushion"> <!-- add to cart -->
 
+      <!-- this adds product_id to the params, so we can add it to the session in the controller -->
       <%= form_tag carts_path(1) do %>
-        <!-- use hidden_field_tag because we're not trying to create Product -->
+        <!-- use hidden_field_tag because we're not trying to create a new Product -->
         <%= hidden_field_tag(:product, product.id) %>
         <%=submit_tag "Add to Cart", class: "btn btn-warning center-block" %>
       <% end %>

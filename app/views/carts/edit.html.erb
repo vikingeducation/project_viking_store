@@ -1,30 +1,48 @@
 <div class="carts-controller">
-  <h1>Shopping Cart Contents</h1>
+  <h1 class="text-center">Shopping Cart Contents</h1>
 
     <div class="panel panel-default">
 
       <% if session[:cart] %>
       <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
         <tbody>
-          <tr>
-            <td> Product Info </td>
-            <td> Quantity + Price Info </td>
-          </tr>
+          <!-- TODO: switch to @cart.each --> 
+          <% session[:cart].each do |key, value| %>
+          <!-- find the product once so we can use all its things -->
+            <% p = find_product(key) %>
+            <tr>
+              <td>
+                <strong><%= p.name %></strong><br/>
+                <%= p.category.name %><br/>
+                <%= number_to_currency(p.price) %>
+              </td>
+              <td>
+                <strong>Quantity: </strong><%= value %><br/>
+                <strong>Total Price: </strong><%= number_to_currency(p.price * value) %>
+                <%= form_tag carts_path(1) do %>
+                  <%= label_tag :_destroy, "Remove Item" %>
+                  <%= check_box_tag "[session][cart]#{key}" %>
+                  <%= submit_tag "Update Contents", method: :delete %>
+                <% end %>
 
-          <tr>
-            <td>Total</td>
-            <td>
-              <button>Update Contents</button>
-              <button> Check Out</button>
-            </td>
+<!-- Parameters: {"utf8"=>"✓", "authenticity_token"=>"nfLC1cUan9lHyqR4v/zOZ7Xff5d9CsBt4nO0izUapYU=", "session"=>{"cart"=>{"195"=>"1"}}, "commit"=>"Update Contents"} -->
 
-          <tr>
+<!-- Processing by Admin::ProductsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"nfLC1cUan9lHyqR4v/zOZ7Xff5d9CsBt4nO0izUapYU=", "id"=>"110"} -->
+
+
+
+              </td>
+
+            </tr>
+          <% end %> <!-- cart contents loop -->
+            <tr>
+              <td><strong>Total: </strong><%= number_to_currency(cart_total) %>
+              </td>
+              <td><button> Check Out</button></td>
+
+            </tr>
+
         </tbody>
       </table>
 
@@ -36,8 +54,4 @@
 
 
     </div> <!-- panel -->
-
-
-
-
 </div>

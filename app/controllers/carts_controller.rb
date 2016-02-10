@@ -2,6 +2,7 @@ class CartsController < ApplicationController
 
   def edit
     @cart = session[:cart]
+    @total = 0
   end
 
 
@@ -16,10 +17,10 @@ class CartsController < ApplicationController
 
     if Product.exists?(product) && session[:cart][product]
       session[:cart][product] += 1
-      flash[:success] = "Added one more #{Product.find(product).name} to cart."
+      flash[:success] = "Added one more '#{Product.find(product).name}' to cart."
     elsif Product.exists?(product)
       session[:cart][product] = 1
-      flash[:success] = "#{Product.find(product).name} added to cart."
+      flash[:success] = "'#{Product.find(product).name}' added to cart."
     end
     render :edit    
   end
