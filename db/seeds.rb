@@ -6,17 +6,18 @@ puts "Destroying old records"
 
 # Blow away all the existing records every time.
 
-User.destroy_all
-Address.destroy_all
-Order.destroy_all
-OrderContent.destroy_all
-Category.destroy_all
-CreditCard.destroy_all
-Product.destroy_all
-State.destroy_all
-City.destroy_all
+# ----------------------------------------
+# Database Reset
+# ----------------------------------------
+
+if Rails.env == 'development'
+  puts 'Resetting database'
+  Rake::Task['db:migrate:reset'].invoke
+end
 
 puts "Old records destroyed"
+
+
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
 MULTIPLIER = 10
@@ -31,7 +32,7 @@ def generate_category
   category = Category.new
   category[:name]        = Faker::Commerce.department
   category[:description] = Faker::Lorem.sentence
-  category.save
+  category.save( validate: false )
 end
 
 # Creates a random two-digit number between 0 and 100. You probably used Faker::Commerce.price, which is great, but that method doesn't let us seed the database and it gave us inconsistent pricing.
@@ -47,7 +48,7 @@ def generate_product
   p[:description] = Faker::Lorem.sentence
   p[:sku]         = Faker::Code.ean
   p[:price]       = random_price
-  p.save
+  p.save( validate: false )
 end
 
 # A list of states.
@@ -110,13 +111,13 @@ def generate_user
   u[:last_name]   = last_name
   u[:email]       = Faker::Internet.email("#{first_name} #{last_name}")
   u[:created_at]  = creation_date
-  u.save
+  u.save( validate: false )
 
   # Create affilliated addresses and select billing and shipping addresses.
   generate_addresses_for_user(u.id)
   u[:billing_id]  = random_user_address(u.id)
   u[:shipping_id] = random_user_address(u.id)
-  u.save
+  u.save( validate: false )
 end
 
 # Here are some methods that will help us create Order records.
@@ -134,7 +135,7 @@ def generate_contents(order_id)
     # [:order_id, :product_id]
     if OrderContent.where(:product_id => c.product_id,
                           :order_id => c.order_id).empty?
-      c.save
+      c.save( validate: false )
     end
   end
 end
@@ -172,7 +173,7 @@ def generate_order
       o[:checkout_date] = placement_date(user)
     end
 
-    o.save
+    o.save( validate: false )
     generate_contents(o[:id])
   end
 end
@@ -199,7 +200,7 @@ def generate_credit_cards_for_checked_out_orders
     affiliated_orders = Order.where("user_id = ?", order.user_id).where("checkout_date IS NOT NULL")
     affiliated_orders.each do |aff_ord|
       aff_ord.credit_card_id = card.id
-      aff_ord.save
+      aff_ord.save( validate: false )
     end
   end
 end

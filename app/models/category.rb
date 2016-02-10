@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  has_many :products
+  has_many :products, dependent: :nullify  
 
   has_many :orders, through: :products, source: :order_contents
 

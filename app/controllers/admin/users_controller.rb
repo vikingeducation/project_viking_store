@@ -1,7 +1,7 @@
 class Admin::UsersController < AdminController
   def index
     #@users = User.get_all_with_billing_location
-    @users = User.all
+    @users = User.all.order("id")
   end
 
   def new

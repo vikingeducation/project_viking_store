@@ -5,7 +5,7 @@ class Order < ActiveRecord::Base
   belongs_to :shipping_address, class_name: "Address", foreign_key: :shipping_id
   belongs_to :credit_card, class_name: "CreditCard", foreign_key: :credit_card_id
 
-  has_many :order_contents
+  has_many :order_contents, dependent: :destroy
   has_many :products, through: :order_contents
 
   has_many :categories, through: :order_contents, source: :product

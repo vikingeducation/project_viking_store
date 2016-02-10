@@ -4,7 +4,7 @@ class Admin::OrdersController < AdminController
     @user = params[:user_id].to_i
     if @user != 0
       @user = User.find(@user)
-      @orders = @user.orders
+      @orders = @user.orders.order("id")
     end
   end
 
