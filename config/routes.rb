@@ -10,7 +10,10 @@ Rails.application.routes.draw do
     resources :orders
   end
 
-  root 'dashboard#index'
+  root 'products#index'
+
+  resources :products
+
   get '/dashboard' => 'dashboard#index'
   get '/dashboard/orders_by_day' => 'dashboard#orders_by_day'
   get '/dashboard/orders_by_week' => 'dashboard#orders_by_week'

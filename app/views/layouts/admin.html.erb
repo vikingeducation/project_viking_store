@@ -1,43 +1,45 @@
-<% content_for :content do %>
-  <h1 class="text-center">Viking Store Admin Portal</h1>
+<% content_for :admin do %>
+  <div class="container">
+    <h1 class="text-center">Viking Store Admin Portal</h1>
 
-  <hr>
+    <hr>
 
-  <div class='row'>
+    <div class='row'>
 
-    <div class='col-md-3'>
+      <div class='col-md-3'>
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Navigation Options</h3>
-        </div>
-        <div class="panel-body">
-          <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" <%= active_for_pill('users') %>><%= link_to "Users", admin_users_path %></li>
-            <li role="presentation" <%= active_for_pill('addresses') %>><%= link_to "Addresses", admin_addresses_path %></li>
-            <li role="presentation" <%= active_for_pill('orders') %>><%= link_to "Orders", admin_orders_path %></li>
-            <li role="presentation" <%= active_for_pill('products') %>><%= link_to "Products", admin_products_path %></li>
-            <li role="presentation" <%= active_for_pill('categories') %>><%= link_to "Categories", admin_categories_path %></li>
-            <hr>
-            <li role="presentation"><%= link_to "Analytics Dashboard", dashboard_path %></li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-    <div class='col-md-9'>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="panel-title">
-            <%= yield(:resource_name) %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Navigation Options</h3>
+          </div>
+          <div class="panel-body">
+            <ul class="nav nav-pills nav-stacked">
+              <li role="presentation" <%= active_for_pill('users') %>><%= link_to "Users", admin_users_path %></li>
+              <li role="presentation" <%= active_for_pill('addresses') %>><%= link_to "Addresses", admin_addresses_path %></li>
+              <li role="presentation" <%= active_for_pill('orders') %>><%= link_to "Orders", admin_orders_path %></li>
+              <li role="presentation" <%= active_for_pill('products') %>><%= link_to "Products", admin_products_path %></li>
+              <li role="presentation" <%= active_for_pill('categories') %>><%= link_to "Categories", admin_categories_path %></li>
+              <hr>
+              <li role="presentation"><%= link_to "Analytics Dashboard", dashboard_path %></li>
+            </ul>
           </div>
         </div>
-        <div class="panel-body">
-          <%= flash_messages %>
-          <%= yield %>
+
+      </div>
+
+      <div class='col-md-9'>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <%= yield(:resource_name) %>
+            </div>
+          </div>
+          <div class="panel-body">
+            <%= flash_messages %>
+            <%= yield %>
+          </div>
+            <%= yield(:table) %>
         </div>
-          <%= yield(:table) %>
       </div>
     </div>
   </div>
