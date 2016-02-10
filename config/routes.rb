@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index, :show]
   resource :session, only: [:new, :create, :destroy]
+  resources :users
+  resources :orders
+  resources :carts
   root 'products#index'
 
   namespace :admin do

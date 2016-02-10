@@ -4,6 +4,18 @@ class UsersController < ApplicationController
     @user = User.new
   end
   
+  def create
+    @user = User.new(whitelisted_params)
+    if @user.save
+      flash[:success] = "Welcome, #{@user.full_name}!"
+      sign_in(@user)
+      redirect_to products_path
+    else
+      flash[:error] = "Failed to create user"
+      render :new
+    end
+  end
+
   private
 
   def whitelisted_params
@@ -11,6 +23,6 @@ class UsersController < ApplicationController
                                   :first_name,
                                   :last_name,
                                   :phone_number,
-                                  {:addresses_attributes => [:id, :user_id, :street_address, :city_id, :state_id, :zip_code]})
+                                  { :addresses_attributes => [:id, :user_id, :street_address, :city_id, :state_id, :zip_code] })
   end
 end

@@ -14,4 +14,8 @@ class Product < ActiveRecord::Base
   def self.total_products_in_last_n_days( n )
     Product.where("created_at > ( CURRENT_DATE - #{n} )").count
   end
+
+  def self.containing_category(category)
+    joins(:category).where("products.category_id = ?", category)
+  end
 end

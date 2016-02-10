@@ -1,7 +1,8 @@
-<%= form_tag admin_categories_path do %>
-  <%= select_tag(:category_id,
-                    options_for_select(
-                    @category_options,
-                    @product.category_id)) %>
+<%= form_tag(products_path, method: :get) do %>
+  <%= select_tag(:product_filter,
+                  options_for_select(
+                  @category_options,
+                  @product_filter), 
+                  {prompt: "Category"}) %>
   <%= submit_tag %>
 <% end %>

@@ -138,6 +138,10 @@ class Order < ActiveRecord::Base
       )
   end
 
+  def self.containing_category(category)
+    joins(:products).where("products.category = ?", category)
+  end
+
   def status
     if date_placed
       return "Placed"
