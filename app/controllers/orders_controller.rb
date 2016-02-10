@@ -60,9 +60,35 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    
+    @user = @order.user
+    @credit_cards = @user.credit_cards
+    @card = @order.credit_card
+    @order_contents = @order.order_contents
+
+    if @order.update(order_params)
+      flash[:success] = "You've Sucessfully Updated the Order!"
+      redirect_to order_path(@order)
+    else
+      flash.now[:error] = "Error! Order wasn't created!"
+      @order.order_contents = @order.order_contents.reject { |oc| oc.quantity.nil? || oc.id.nil? }
+      render :edit
+    end
   end
 
   def destroy
+  end
+
+  private
+
+  def order_params
+    params.require(:order).permit(
+      :billing_id,
+      :shipping_id,
+      :credit_card_id,
+      :user_id,
+      {
+        order_contents_attributes: [:product_id, :quantity, :id]
+      }
+    )
   end
 end

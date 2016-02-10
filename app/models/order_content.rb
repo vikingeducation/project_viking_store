@@ -2,6 +2,10 @@ class OrderContent < ActiveRecord::Base
   belongs_to :product
   belongs_to :order
 
+  validates :product, :quantity, :order,
+    presence: true,
+    numericality: { only_integer: true }
+
   def value
     quantity * self.product.price
   end

@@ -5,8 +5,10 @@
 </ul>
 
 <ul>
-  <% @card.errors.full_messages.each do |error| %>
-    <li><%= error %></li>
+  <% if @card %>
+    <% @card.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
   <% end %>
 </ul>
 
