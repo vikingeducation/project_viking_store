@@ -12,8 +12,12 @@ class UsersController < ApplicationController
       redirect_to products_path
     else
       flash[:error] = "Failed to create user"
-      render :new
+      render 'new'
     end
+  end
+
+  def edit
+    @user = User.find(params[:id])
   end
 
   private

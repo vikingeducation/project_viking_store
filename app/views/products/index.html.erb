@@ -23,11 +23,10 @@
       <div class='col-sm-3' style='border: 2px solid black'>
         <p><%= product.name %></p>
         <p>$<%= product.price %></p>
-        <p><%= product.id %></p>
 
         <%= form_tag(carts_path(0), method: :post) do %>
           <%= hidden_field_tag(:product_id, product.id) %>
-          <% hidden_field_tag(:product_filter, @product_filter) %>
+          <%= hidden_field_tag(:product_filter, @product_filter) %>
           <%= submit_tag "Add to Cart" %>
         <% end %>
       </div>
