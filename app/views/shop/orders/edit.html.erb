@@ -1,7 +1,8 @@
 <h1 class="text-center">Shopping Cart Contents</h1></br>
 
 <div class="container">
-<%= form_for [:shop, @order] do |f| %>
+
+    <%= form_for [:shop, @order], :url => shop_order_path(@order) do |f| %>
 
     <% @order.products.each_with_index do |product, index| %>
       <%= f.fields_for :order_contents, @order.order_contents[index] do |content_fields| %>
@@ -42,13 +43,13 @@
     </div>
   </div>
   <% end %>
-      <% end %>
+<% end %>
 
 
     <div class = "col-xs-6 col-xs-offset-1">
       <div class="panel panel-default">
         <h4 class="text-center"><b><u>TOTAL</u></b></h4>
-        <h4 class="text-center"><%= @order.id ? number_to_currency(@order.order_value(@order.id).value) : "$0" %></h4>
+        <h4 class="text-center"><%= @order.id ? number_to_currency(@order.order_value(@order.id)) : "$0" %></h4>
       </div>
     </div>
 

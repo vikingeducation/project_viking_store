@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   validates :last_name, length: { in: 1..64 }
   validates :email, email: true
 
+  accepts_nested_attributes_for :addresses,
+                                :reject_if => :all_blank
+
   def full_name
     "#{self.first_name} #{self.last_name}"
   end

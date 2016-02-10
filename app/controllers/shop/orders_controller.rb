@@ -3,12 +3,13 @@ class Shop::OrdersController < ShopController
   def edit
     if current_user
       @order = current_user.orders.where(:checkout_date => nil).first
-      @order.product_ids << session[:product_ids]
     else
-      @order = Order.new
-      @order.product_ids += session[:product_ids]
+      @order = Cart.new
     end
+    @order.product_ids << session[:product_ids]
   end
+
+
 
   def update
     if current_user

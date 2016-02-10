@@ -26,7 +26,7 @@ class Order < ActiveRecord::Base
   end
 
   def order_value(id)
-    Order.select("SUM(order_contents.quantity * products.price) AS value, orders.id").joins("JOIN order_contents ON order_contents.order_id = orders.id").joins("JOIN products ON order_contents.product_id = products.id").where("order_contents.order_id = #{id}").group("orders.id")[0]
+    Order.select("SUM(order_contents.quantity * products.price) AS value, orders.id").joins("JOIN order_contents ON order_contents.order_id = orders.id").joins("JOIN products ON order_contents.product_id = products.id").where("order_contents.order_id = #{id}").group("orders.id")[0].value
   end
 
   def self.most_recent

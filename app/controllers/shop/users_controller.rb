@@ -1,5 +1,9 @@
 class Shop::UsersController < ShopController
 
+  def index
+    @user = User.new
+  end
+
   def new
     @user = User.new
   end
@@ -33,7 +37,17 @@ class Shop::UsersController < ShopController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email)
+    params.require(:user).permit(:first_name, :last_name, :email, :billing_attributes => [:id, :street_address,
+                                     :secondary_address,
+                                     :zip_code,
+                                     :state_id,
+                                     :user_id,
+                                     :city_attributes => [:id, :name]],:shipping_attributes => [:id, :street_address,
+                                                                      :secondary_address,
+                                                                      :zip_code,
+                                                                      :state_id,
+                                                                      :user_id,
+                                                                      :city_attributes => [:id, :name]])
   end
 
 end

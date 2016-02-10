@@ -32,7 +32,7 @@
               <% if session[:current_user_id] %>
               <li><%= link_to "Sign Out", shop_session_path(session[:current_user_id]), method: :delete %></li>
               <% else %>
-              <li><a href="<%= new_shop_user_path %>">Sign In</a></li>
+              <li><a href="<%= shop_users_path %>">Sign In</a></li>
               <% end %>
             </ul>
           </div><!--/.nav-collapse -->

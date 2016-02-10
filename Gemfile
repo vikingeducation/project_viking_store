@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0'
+gem 'rails' #, '4.1.0'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
@@ -37,6 +37,7 @@ gem 'bootstrap-sass'
 
 gem 'will_paginate', '~> 3.0.6'
 
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'pry-byebug'
@@ -44,6 +45,8 @@ group :development, :test do
 end
 
 gem 'binding_of_caller'
+
+ruby "2.2.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

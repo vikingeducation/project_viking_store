@@ -1,0 +1,36 @@
+<div class = "panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Saved Address 1 (optional)</h3>
+  </div>
+
+  <%= f.fields_for :billing, @user.billing_id do |billing_fields| %>
+
+  <div class="form-group">
+    <%= billing_fields.label "Street" %>
+    <%= billing_fields.text_field :street_address, class: "form-control" %>
+  </div>
+
+
+  <%= billing_fields.fields_for :city do |city_fields| %>
+  <div class="form-group">
+    <%= city_fields.label "City" %>
+    <%= city_fields.text_field :name, class: "form-control" %>
+  </div>
+<% end %>
+
+  <div class="form-group">
+    <%= billing_fields.label "State" %>
+    <%= billing_fields.select :state_id, State.all.collect {|c| [c.name, c.id] }, {}, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= billing_fields.label :zip_code %>
+    <%= billing_fields.text_field :zip_code, class: "form-control"  %>
+  </div>
+
+  <%= billing_fields.hidden_field :user_id, :value => params[:user_id] %>
+
+
+
+<% end %>
+</div>
