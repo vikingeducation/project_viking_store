@@ -2,7 +2,7 @@
   <div class='nav navbar-nav'>
     <h1 class='text-center'>The Viking Store</h1>
     <% if current_user %>
-      <%= link_to 'Your Cart', @current_user.cart %>
+      <%= link_to 'Your Cart', current_user.cart %>
       <%= link_to 'Sign Out', session_path, method: :delete %>
     <% else %>
       <%= link_to 'Sign In', new_session_path %>

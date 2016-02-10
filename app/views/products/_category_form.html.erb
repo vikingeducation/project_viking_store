@@ -1,7 +1,7 @@
-<%= form_for @products do |product_field| %>
-  <%= product_field.select(:category_id,
-                            @product.category,
-                            :id,
-                            :name) %>
-  <%= product_field.submit %>
+<%= form_tag admin_categories_path do %>
+  <%= select_tag(:category_id,
+                    options_for_select(
+                    @category_options,
+                    @product.category_id)) %>
+  <%= submit_tag %>
 <% end %>
