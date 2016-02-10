@@ -1,5 +1,11 @@
-$link-color: #FF69d6 !default;
+$link-color: #FF69d6;
+$text-color: #3c3;
+
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.darkness {
+  background-color: #333;
+  font-color: #000;
+}

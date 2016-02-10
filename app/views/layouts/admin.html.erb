@@ -9,16 +9,14 @@
 <body data-no-turbolink>
 
 
-
-    <% flash.each do |type, message| %>
-      <div class="alert alert-success">
-        <div>
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong><%= type.titleize %>! <%= message %></strong>
-        </div>
-        </div>
-    <% end %> 
-
+  <% flash.each do |type, message| %>
+    <div class="alert alert-success">
+      <div>
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong><%= type.titleize %>! <%= message %></strong>
+      </div>
+      </div>
+  <% end %> 
 
 
   <h1 class='text-center page-header'>Viking Store Admin Portal</h1>

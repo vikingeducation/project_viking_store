@@ -1,8 +1,31 @@
-<div class="jumbotron navbar-offset">
-  <h1 class="text-center">The Viking Store</h1>
+<div class="row">
+  <div class="jumbotron">
+    <h1 class="text-center">The Viking Store</h1>
+  </div>
+
+  <div class="page-header darkness">
+    <h2 class="text-center">The Best Viking Gear on the Whole Web</h2>
+    <p class="text-center">Choose from among our lineup of fine items below</p>
+  </div>
+
 </div>
 
-<div class="page-header">
-  <h2 class="text-center">The Best Viking Gear on the Whole Web</h2>
-  <p class="text-center">Choose from among our lineup of fine items below</p>
+
+<!-- filter by category -->
+<div class="row">
+  <div class="col-sm-4 pull-right form-inline">
+  <%= form_for products_path, {class: "form-inline"} do |f| %>
+
+    <div class="form-group">
+    <%= f.collection_select :category_id, Category.all, :id, :name, {}, class: "form-control" %>
+    <%= f.submit "Apply Filter", class: "form-control" %>
+    </div>
+
+  <% end %>
+  
+  </div>
+</div> <!-- end filter by category -->
+
+<div class="row">
+  <%= render @products %>
 </div>
