@@ -11,7 +11,7 @@
           <ul class="nav navbar-nav">
             <li><img width='48' height='48' alt="Viking" src="assets/viking.png"></li>
             <li><ul class='nav'>
-              <li><a href="#">Your Cart</a></li>
+              <li><a href="<%= cart_path %>">Your Cart</a></li>
               <li><a href="#">Sign In</a></li>
             </ul></li>
           </ul>
@@ -21,17 +21,7 @@
     </nav>
   </section>
 
-  <section id="page-title">
-    <h1 class="text-center">The Viking Store</h1>
-  </section>
-
-  <section id="page-subtitle">
-    <h2 class="text-center">The Best Viking Gear on the Whole Web</h2>
-  </section>
-
-  <div class="container">
-    <%= yield :content %>
-  </div>
+  <%= yield :content %>
 
   <section id="bottom-bar">
     <div class="text-right admin-login">

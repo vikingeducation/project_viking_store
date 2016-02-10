@@ -25,8 +25,6 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :order_contents, reject_if: proc { |attributes| attributes['product_id'].blank? }
 
-  validates :user_id, presence: true
-
   def placed?
     !!checkout_date
   end

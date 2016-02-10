@@ -1,0 +1,50 @@
+<%= content_for :content do %>
+  <div class="container">
+    <h3 class= "text-center">Shopping Cart Contents</h3>
+
+    <h4 class= "text-center"><%= "Your Shopping Cart is Empty" if @order_products.size == 0 %></h4>
+
+    <% @order_products.each do |product| %>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title text-center">
+                <%= link_to "#{product.name}", product_path(product) %>
+              </h4>
+            </div>
+            <div class="product-view panel-body">
+              <h5><%= "Category: #{product.category.name}" %></h5>
+              <p class="price-tag"><%= number_to_currency(product.price) %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title text-center">
+                <%= "Quantity & Totals" %>
+              </h4>
+            </div>
+            <div class="product-view panel-body">
+              <%= form_for :order_contents do |f| %>
+                <div class="form-group">
+                  <%= f.label "Quantity" %>
+                  <%= f.number_field :quantity %>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label "Remove?" %>
+                  <%= f.check_box :remove %>
+                </div>
+              <% end %>
+              <h4><%= "Total Price: #{}" %></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render template: "layouts/public" %>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :products
   resources :users, except: [:index]
+  resource :cart, only: [:show]
 
   get '/dashboard' => 'dashboard#index'
   get '/dashboard/orders_by_day' => 'dashboard#orders_by_day'
