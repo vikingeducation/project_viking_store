@@ -159,7 +159,7 @@ class Order < ActiveRecord::Base
   end
 
   def value
-    products.sum("quantity * price")
+    products.sum(quantity * price)
   end
 
 end

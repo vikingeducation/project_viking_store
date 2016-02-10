@@ -1,6 +1,0 @@
-<h1>Your Cart</h1>
-<% @cart.each do |product_id, quantity| %>
-  <p>Item: <%= Product.find(product_id).name %></p>
-  <p>Quantity: <%= quantity %></p>
-<% end %>
-<%= link_to 'Return to Products', products_path %>

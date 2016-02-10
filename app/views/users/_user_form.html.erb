@@ -22,12 +22,7 @@
     <br>
     <%= address_fields.label :zip_code %>
     <%= address_fields.text_field :zip_code %>
-    <br>
-    <%= address_fields.label :billing_address %>
-    <%= user_fields.radio_button :billing_id, address_fields.index %>
-    <br>
-    <%= address_fields.label :shipping_address %>
-    <%= user_fields.radio_button :shipping_id, address_fields.index %>
+    
   <% end %>
 
   <br>

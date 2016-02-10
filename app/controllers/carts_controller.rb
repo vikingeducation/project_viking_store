@@ -9,7 +9,7 @@ class CartsController < ApplicationController
       flash[:success] = "Added another #{Product.find(product_id).name} to your cart"
     elsif Product.exists?(product_id)
       session[:cart][product_id] = 1
-      flash[:success] = "#{Product.find(product_id).name} added to your cart"
+      flash[:success] = "Added a #{Product.find(product_id).name} to your cart"
     else
       flash[:error] = "Product not added"
     end
@@ -17,7 +17,7 @@ class CartsController < ApplicationController
     redirect_to products_path(product_filter: params[:product_filter])
   end
 
-  def show
+  def edit
     @cart = session[:cart]
   end
 end

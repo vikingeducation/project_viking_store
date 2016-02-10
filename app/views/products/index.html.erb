@@ -2,12 +2,12 @@
   <div class='nav navbar-nav'>
     <h1 class='text-center'>The Viking Store</h1>
     <% if current_user %>
-      <%= link_to 'Your Cart', cart_path(0) %>
+      <%= link_to 'Your Cart', edit_cart_path(0) %>
       <%= link_to 'View Profile', user_path(current_user) %>
       <%= link_to 'Edit Profile', edit_user_path(current_user) %>
       <%= link_to 'Sign Out', session_path, method: :delete %>
     <% else %>
-      <%= link_to 'Your Cart', cart_path(0) %>
+      <%= link_to 'Your Cart', edit_cart_path(0) %>
       <%= link_to 'Sign In', new_session_path %>
     <% end %>
   </div>
@@ -25,6 +25,7 @@
       <div class='col-sm-3' style='border: 2px solid black'>
         <p><%= product.name %></p>
         <p>$<%= product.price %></p>
+        <img src='http://lorempixel.com/100/100/'>
 
         <%= form_tag(carts_path(0), method: :post) do %>
           <%= hidden_field_tag(:product_id, product.id) %>

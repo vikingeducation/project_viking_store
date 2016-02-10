@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :addresses,
                                 reject_if: :all_blank
 
+  accepts_nested_attributes_for :orders, allow_destroy: true
+
   def self.new_users_in_last_n_days( n )
     User.where("created_at > ( CURRENT_DATE - #{n} )").count
   end
@@ -83,6 +85,6 @@ class User < ActiveRecord::Base
   end
 
   def cart
-    orders.where(checkout_date: nil) || 'n/a'
+    orders.find_by(checkout_date: nil) || 'n/a'
   end
 end
