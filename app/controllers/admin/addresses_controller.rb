@@ -1,4 +1,4 @@
-class AddressesController < ApplicationController
+class Admin::AddressesController < AdminController
 
   def index
     @addresses = Address.all
@@ -28,7 +28,7 @@ class AddressesController < ApplicationController
     )
     if @address.save
       flash[:success] = "You've Sucessfully Created an Address!"
-      redirect_to addresses_path(user_id: "#{params[:user_id]}")
+      redirect_to admin_addresses_path(user_id: "#{params[:user_id]}")
     else
       flash.now[:error] = "Error! Address wasn't created!"
       render :new
@@ -61,7 +61,7 @@ class AddressesController < ApplicationController
       user_id: params[:user_id]
     )
       flash[:success] = "You've Sucessfully Updated the Address!"
-      redirect_to address_path(@address.id, user_id: "#{@address.user.id}")
+      redirect_to admin_address_path(@address.id, user_id: "#{@address.user.id}")
     else
       flash.now[:error] = "Error! Address wasn't updated!"
       render :edit
@@ -73,7 +73,7 @@ class AddressesController < ApplicationController
     user_id = @address.user.id
     if @address.destroy
       flash[:success] = "You've Sucessfully Deleted an Address!"
-      redirect_to addresses_path(user_id: user_id)
+      redirect_to admin_addresses_path(user_id: user_id)
     else
       flash.now[:error] = "Error! User wasn't deleted!"
       render :show

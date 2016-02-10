@@ -19,7 +19,7 @@
       </tr>
       <tr>
         <td>Customer</td>
-        <td><%= link_to "#{@user.first_name} #{@user.last_name} (Click to view Profile)", user_path(@user) %></td>
+        <td><%= link_to "#{@user.first_name} #{@user.last_name} (Click to view Profile)", admin_user_path(@user) %></td>
       </tr>
       <tr>
         <td>Date Placed</td>
@@ -96,8 +96,8 @@
   </div>
 
   <div class="col-xs-12">
-    <div><%= link_to "Edit Order", edit_order_path(@order) %></div>
-    <div><%= link_to "Delete Order", order_path(@order), method: "delete", data: {confirm: "Are you sure?"} %></div>
+    <div><%= link_to "Edit Order", edit_admin_order_path(@order) %></div>
+    <div><%= link_to "Delete Order", admin_order_path(@order), method: "delete", data: {confirm: "Are you sure?"} %></div>
   </div>
 </div>
 
@@ -115,7 +115,7 @@
       <% @order.order_contents.each do |oc| %>
       <tr>
         <td><%= oc.product_id %></td>
-        <td><%= link_to "#{Product.find(oc.product_id).name}", product_path(oc.product_id) %></td>
+        <td><%= link_to "#{Product.find(oc.product_id).name}", admin_product_path(oc.product_id) %></td>
         <td><%= oc.quantity %></td>
         <td><%= number_to_currency(Product.find(oc.product_id).price) %></td>
         <td><%= number_to_currency(oc.product_id * Product.find(oc.product_id).price) %></td>
@@ -124,7 +124,7 @@
     </table>
   </div>
   <div class="col-xs-12">
-    <div><%= link_to "Edit Order", edit_order_path(@order) %></div>
-    <div><%= link_to "Delete Order", order_path(@order), method: "delete", data: {confirm: "Are you sure?"} %></div>
+    <div><%= link_to "Edit Order", edit_admin_order_path(@order) %></div>
+    <div><%= link_to "Delete Order", admin_order_path(@order), method: "delete", data: {confirm: "Are you sure?"} %></div>
   </div>
 </div>

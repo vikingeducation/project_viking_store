@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class Admin::OrdersController < AdminController
   def index
     @orders = Order.all.order("orders.id")
     @user = params[:user_id].to_i
@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
 
     if @order.save
       flash[:success] = "You've Sucessfully Created an Order!"
-      redirect_to edit_order_path(@order)
+      redirect_to edit_admin_order_path(@order)
     else
       flash.now[:error] = "Error! Order wasn't created!"
       render :new
@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
 
     if @order.update(order_params)
       flash[:success] = "You've Sucessfully Updated the Order!"
-      redirect_to order_path(@order)
+      redirect_to admin_order_path(@order)
     else
       flash.now[:error] = "Error! Order wasn't created!"
       @order.order_contents = @order.order_contents.reject { |oc| oc.quantity.nil? || oc.id.nil? }
@@ -79,7 +79,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if @order.destroy
       flash[:success] = "You've Sucessfully an Order!"
-      redirect_to orders_path(user_id: @order.user_id)
+      redirect_to admin_orders_path(user_id: @order.user_id)
     else
       flash.now[:error] = "Error! Order wasn't deleted!"
       render :show

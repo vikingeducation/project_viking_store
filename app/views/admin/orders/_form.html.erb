@@ -13,7 +13,7 @@
 </ul>
 
 
-<%= form_for @order do |f| %>
+<%= form_for [:admin, @order] do |f| %>
   <table class="table table-striped table-bordered">
     <tr>
       <td>Customer ID</td>
@@ -21,14 +21,14 @@
     </tr>
     <tr>
       <td>Customer</td>
-      <td><%= link_to "#{@user.first_name} #{@user.last_name} (Click to view user)", user_path(@user) %></td>
+      <td><%= link_to "#{@user.first_name} #{@user.last_name} (Click to view user)", admin_user_path(@user) %></td>
     </tr>
     <tr>
       <td>Date placed</td>
       <td><%= @order.checkout_date %></td>
     </tr>
   </table>
-  <%= link_to "Edit Customer Profile", user_path(@user) %>
+  <%= link_to "Edit Customer Profile", admin_user_path(@user) %>
 
   <% if @order.persisted? %>
   <div>
