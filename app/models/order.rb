@@ -12,6 +12,8 @@ class Order < ActiveRecord::Base
 
   validates :credit_card_id, presence: true
 
+  accepts_nested_attributes_for :order_contents
+
   def value
     products.sum("quantity * price")
   end
