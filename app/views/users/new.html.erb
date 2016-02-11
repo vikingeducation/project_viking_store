@@ -1,0 +1,145 @@
+<%= content_for :content do %>
+
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center">Sign Up</h1>
+
+      <%= form_for @user do |f| %>
+
+        <div class="col-md-4 col-md-offset-2">
+
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3 class="text-center">Saved Address 1 (optional)</h3>
+              <%= f.fields_for :address do |address_fields| %>
+                <div class="form-group">
+                  <%= address_fields.label "Street Address" %>
+                  <%= address_fields.text_field :street_address, class: "form-control"  %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.fields_for :city do |city_fields| %>
+                    <%= city_fields.label "City" %>
+                    <%= city_fields.text_field :city, class: "form-control"  %>
+                  <% end %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.label "State" %>
+                  <%= address_fields.collection_select :state_id, State.all, :id, :name, {}, { class: "form-control" } %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.label "Zip Code" %>
+                  <%= address_fields.text_field :zip_code, class: "form-control"  %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.radio_button :shipping_address, :shipping_address_id %>
+                  <%= address_fields.label "Default Shipping Address" %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.radio_button :billing_address, :billing_address_id %>
+                  <%= address_fields.label "Default Billing Address" %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.check_box :_delete %>
+                  <%= address_fields.label "Delete Address" %>
+                </div>;
+              <% end %>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3 class="text-center">Saved Address 2 (optional)</h3>
+              <%= f.fields_for :address do |address_fields| %>
+                <div class="form-group">
+                  <%= address_fields.label "Street Address" %>
+                  <%= address_fields.text_field :street_address, class: "form-control" %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.fields_for :city do |city_fields| %>
+                    <%= city_fields.label "City" %>
+                    <%= city_fields.text_field :city, class: "form-control"  %>
+                  <% end %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.label "State" %>
+                  <%= address_fields.collection_select :state_id, State.all, :id, :name, {}, { class: "form-control" } %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.label "Zip Code" %>
+                  <%= address_fields.text_field :zip_code, class: "form-control"  %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.radio_button :shipping_address, :shipping_address_id %>
+                  <%= address_fields.label "Default Shipping Address" %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.radio_button :billing_address, :billing_address_id %>
+                  <%= address_fields.label "Default Billing Address" %>
+                </div>
+                <div class="form-group">
+                  <%= address_fields.check_box :_delete %>
+                  <%= address_fields.label "Delete Address" %>
+                </div>;
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-4">
+
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3 class="text-center">Account Information</h3>
+              <div class="form-group">
+                <%= f.label "Email" %>
+                <%= f.email_field :email, class: "form-control"  %>
+              </div>
+              <div class="form-group">
+                <%= f.label "Confirm Email" %>
+                <%= f.email_field :email, class: "form-control"  %>
+              </div>
+              <div class="form-group">
+                <%= f.label "Password" %>
+                <%= f.password_field :password, class: "form-control"  %>
+              </div>
+              <div class="form-group">
+                <%= f.label "Confirm Password" %>
+                <%= f.password_field :password, class: "form-control"  %>
+              </div>
+              <div class="form-group">
+                <%= f.label "First Name" %>
+                <%= f.text_field :first_name, class: "form-control"  %>
+              </div>
+              <div class="form-group">
+                <%= f.label "Last Name" %>
+                <%= f.text_field :last_name, class: "form-control"  %>
+              </div>
+              <div class="form-group">
+                <%= f.label "Telephone (optional)" %>
+                <div class="form-control"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-body text-center">
+              <h2 >Complete Sign Up</h2>
+              <%= f.submit "Sign Up", class: "btn btn-block btn-primary" %>
+              <br>
+              <% if !!@user.id %>
+                <%= link_to "Delete Account", user_path(@user), method: :delete, class: "btn btn-block btn-danger" %>
+              <% end %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+
+<% end %>
+
+<%= render template: "layouts/public" %>

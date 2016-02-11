@@ -33,7 +33,7 @@
             </div>
             <div class="product-view panel-body">
               <p class="price-tag"><%= number_to_currency(product.price) %></p>
-              Product picture goes here...
+              <img src='http://lorempixel.com/358/200/technics'>
             </div>
             <div class="panel-footer text-center">
               <%= form_for :add_to_cart, url: cart_path, html: { method: 'GET' } do |f| %>

@@ -3,7 +3,10 @@ class CartsController < ApplicationController
     if !!params[:add_to_cart]
       current_order.products << Product.find(params[:add_to_cart][:product_id])
     end
-
-    @order_products = current_order.products
+    @order = current_order
+    @order_contents = current_order.order_contents
+    @products = current_order.products
   end
+
+  # TODO use nested forms to edit orders etc
 end

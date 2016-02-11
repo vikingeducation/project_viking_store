@@ -12,7 +12,11 @@
             <li><img width='48' height='48' alt="Viking" src="assets/viking.png"></li>
             <li><ul class='nav'>
               <li><a href="<%= cart_path %>">Your Cart</a></li>
-              <li><a href="#">Sign In</a></li>
+              <% if signed_in_user? %>
+                <li><%= link_to "Sign Out", session_path, :method => "DELETE" %></li>
+              <% else %>
+                <li><%= link_to "Sign In", new_session_path %></li>
+              <% end %>
             </ul></li>
           </ul>
 
