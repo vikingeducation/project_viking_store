@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :users
   resources :orders
-  resources :carts
+  resource :cart
   root 'products#index'
 
   namespace :admin do
