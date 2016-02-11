@@ -1,0 +1,126 @@
+<div>
+
+<%= form_for @user do |f| %>
+
+  <h1 class="text-center">Sign Up</h1>
+
+  <div class="row">
+
+  <%= f.fields_for :addresses do |addr| %>
+    <div class="col-sm-5 well col-sm-offset-1">
+      <div>
+        <p class="text-center">Saved Address 1</p>
+        <div class="form-group">
+          <%= addr.label :street_address %>
+          <%= addr.text_field :street_address, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= addr.label :city %>
+          <%= addr.text_field :city, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= addr.label :state %>
+          <%= addr.collection_select :state_id, State.all, :id, :name, {}, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= addr.label :zip_code %>
+          <%= addr.text_field :zip_code, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= addr.label "Default Shipping Address" %>
+          <%= addr.check_box :default_shipping_address %>
+        </div>
+
+        <div class="form-group">
+          <%= addr.label "Default Billing Address" %>
+          <%= addr.check_box :default_billing_address %>
+        </div> 
+
+      </div>
+
+      <hr>
+      <p class="text-center">Saved Address 2</p>
+      <div class="form-group">
+        <%= addr.label :street_address %>
+        <%= addr.text_field :street_address, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= addr.label :city %>
+        <%= addr.text_field :city, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= addr.label :state %>
+        <%= addr.collection_select :state_id, State.all, :id, :name, {}, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= addr.label :zip_code %>
+        <%= addr.text_field :zip_code, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= addr.label "Default Shipping Address" %>
+        <%= addr.check_box :default_shipping_address %>
+      </div>
+
+      <div class="form-group">
+        <%= addr.label "Default Billing Address" %>
+        <%= addr.check_box :default_billing_address %>
+      </div>      
+
+    <% end %> <!-- end of address fields_for -->
+
+  </div> <!-- col with both addresses -->
+
+
+    <div class="col-sm-5 well col-sm-offset-1">
+    <p class="text-center">Account Information</p>
+
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= field_with_errors(@user, :email) %>
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, "Confirm Email" %>
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= field_with_errors(@user, :first_name) %>
+        <%= f.text_field :first_name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= field_with_errors(@user, :last_name) %>
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :telephone, "Tel Number (optional)" %>
+        <%= f.text_field :telephone, class: "form-control" %>
+      </div>      
+
+
+
+    <div class="form-group">
+      <%= f.submit "Sign Up", class: "btn btn-warning btn-lg btn-block" %>
+    </div>
+
+
+    </div>
+  </div> <!-- row -->
+</div>
+
+
+<% end %> <!-- end of user form -->

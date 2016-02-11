@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+
+      <% data[0].each do |header| %>
+        <th><%= header %></th>
+      <% end %>
+
+      </tr>
+    </thead>
+    <tbody>
+
+
+    <% data[1..-1].each do |row| %>
+        <tr>
+        <% row.each do |column| %>
+        
+          <% if column.is_a? BigDecimal %>
+            <td><%= number_to_currency(column) %></td>
+          <% else %>
+            <td><%= column %></td>
+          <% end %>
+
+        <% end %>
+        </tr>
+    <% end %>
+
+
+    </tbody>
+  </table>
+
+</div>

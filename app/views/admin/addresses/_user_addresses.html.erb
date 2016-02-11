@@ -1,0 +1,6 @@
+<h1 class="text-center"><%= @address.user.first_name %> <%= @address.user.last_name %>'s' Addresses %></h1>
+
+<%= link_to "Create a #{@address.user.first_name} #{@address.user.last_name} Address", class: "btn btn-primary btn-lg btn-block"%>
+
+
+<%= render partial: 'address_table' %>

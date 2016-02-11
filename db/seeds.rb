@@ -5,16 +5,17 @@
 puts "Destroying old records"
 
 # Blow away all the existing records every time.
-
-User.destroy_all
-Address.destroy_all
-Order.destroy_all
-OrderContent.destroy_all
-Category.destroy_all
 CreditCard.destroy_all
-Product.destroy_all
 State.destroy_all
 City.destroy_all
+Product.destroy_all
+OrderContent.destroy_all
+Order.destroy_all
+Address.destroy_all
+User.destroy_all
+# Category.destroy_all
+
+
 
 puts "Old records destroyed"
 
@@ -104,10 +105,12 @@ end
 def generate_user
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
+  telephone = Faker::PhoneNumber.phone_number
 
   u = User.new
   u[:first_name]  = first_name
   u[:last_name]   = last_name
+  u[:telephone]   = telephone
   u[:email]       = Faker::Internet.email("#{first_name} #{last_name}")
   u[:created_at]  = creation_date
   u.save

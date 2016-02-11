@@ -1,4 +1,29 @@
 Rails.application.routes.draw do
+
+
+  root 'products#index'
+
+  resources :products
+  resources :carts, only: [:edit, :update, :create, :destroy]
+  resources :orders
+  resources :users
+  resource :session, :only => [:new, :create, :destroy]
+
+  namespace :admin do
+    root 'dashboard#index'
+    resources :dashboard, only: [:index, :get]
+    resources :categories
+    resources :products
+    resources :addresses, only: [:index]
+    resources :orders, only: [:index]
+    resources :users do
+      resources :addresses
+      resources :orders
+    end
+  end
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Viking Store Admin Portal</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body data-no-turbolink>
+
+
+  <% flash.each do |type, message| %>
+    <div class="alert alert-success">
+      <div>
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong><%= type.titleize %>! <%= message %></strong>
+      </div>
+      </div>
+  <% end %> 
+
+
+  <h1 class='text-center page-header'>Viking Store Admin Portal</h1>
+
+  <div class="container">
+    <div class="row">
+      <!-- navbar -->
+      <div class="col-xs-3 navbar navbar-left navbar-default text-center">
+        <h3>Navigation Options</h3>
+        <div><%= link_to "Users", admin_users_path %></div>
+        <div><%= link_to "Addresses", admin_addresses_path %></div>
+        <div><%= link_to "Orders", admin_orders_path %></div>
+        <div><%= link_to "Products", admin_products_path %></div>
+        <div><%= link_to "Categories", admin_categories_path %></div>
+        <hr>
+        <div><%= link_to "Analytics Dashboard", admin_dashboard_index_path %></div>
+        <hr>
+      </div>
+
+      <!-- page content -->
+      <div class="col-xs-9">
+
+        <%= yield %>
+
+      </div> <!-- column -->
+
+    </div> <!-- row -->
+
+
+  </div> <!-- container -->
+  
+</body>
+</html>

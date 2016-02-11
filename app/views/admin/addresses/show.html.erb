@@ -1,0 +1,20 @@
+<h1 class="text-center"> <%= @address.user.first_name %> <%= @address.user.last_name %>'s address</h1>
+
+<div class="well">
+
+  <h5><strong>Owner ID:</strong> <%= @address.user.id %></h5>
+  <h5><strong>Owner Name:</strong>
+    <%= link_to "#{@address.user.first_name} #{@address.user.last_name} (click to view user)", admin_user_path(@address.user)  %>
+  </h5>
+  <h5><strong>Street:</strong> <%= @address.street_address %></h5>
+  <h5><strong>City:</strong> <%= @address.city.name %></h5>
+  <h5><strong>State:</strong> <%= @address.state.name %></h5>
+  <h5><strong>Zip:</strong> <%= @address.zip_code %></h5>
+
+  <%= link_to "Edit Address", edit_admin_user_address_path(@address.user, @address)%>
+  <br />
+  <%= link_to "Delete Address", admin_user_address_path(@address.user, @address), method: :delete, data: { confirm: "Are you sure you want to delete?" } %>
+  <br />
+
+
+</div> <!-- well -->

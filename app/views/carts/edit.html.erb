@@ -1,0 +1,58 @@
+<div class="carts-controller">
+
+<%= form_for cart_path do |f| %>
+
+  <h1 class="text-center">Shopping Cart Contents</h1>
+
+    <div class="panel panel-default">
+
+      <% if session[:cart] %>
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <% @cart.each do |key, value| %>
+          <!-- find the product once so we can use all its things -->
+            <% p = find_product(key) %>
+            <tr>
+              <td>
+                <strong><%= p.name %></strong><br/>
+                <%= p.category.name %><br/>
+                <%= number_to_currency(p.price) %>
+              </td>
+              <td>
+                <strong>Quantity: </strong><%= value %><br/>
+                <strong>Total Price: </strong><%= number_to_currency(p.price * value) %><br/>
+
+                <%= f.fields_for :session do |products| %>
+                  <%= products.label "Remove Item" %>
+                  <%= products.check_box :_destroy %>
+                  <%= button_to "Update Item" %>
+                <% end %>
+
+              </td>
+
+            </tr>
+          <% end %> <!-- @cart.each loop -->
+            <tr>
+              <td><strong>Total: </strong><%= number_to_currency(cart_total) %>
+              </td>
+              <td>
+              <div><%= f.submit "Check Out", {class: "btn btn-warning btn-md"} %>
+
+              </div></td>
+
+            </tr>
+
+        </tbody>
+      </table>
+
+
+      <!-- no cart -->
+      <% else %>
+        <h3 class="text-center">You have nothing in your cart. <%= link_to "Back to Products Page", products_path %>
+      <% end %> 
+
+
+    </div> <!-- panel -->
+</div>
+
+<% end %> <!-- end of @cart form -->

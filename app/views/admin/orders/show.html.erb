@@ -1,0 +1,36 @@
+<h1 class="text-center">Order <%= @order.id%></h1>
+
+
+<div class="well">
+
+  <%= render partial: "logistical_info" %>
+
+  <h4>Order Status:</h4>
+  <h5><%= @order.checkout_date ? "PLACED" : "UNPLACED" %></h5>
+  <br/>
+  <h4>Shipping Address:</h4>
+  <h5><%= full_shipping(@order.user) %></h5>
+  <br/>
+  <h4>Billing Address:</h4>
+  <h5><%= full_billing(@order.user) %></h5>
+  <br/>
+  <h4>Billing Card:</h4>
+  <h5><strong>Last 4 Digits: </strong><%= @order.credit_card.card_number[-4..-1] if @order.credit_card %></h5>
+  <hr>
+
+  <%= link_to "Edit Order", edit_admin_user_order_path(@order.user, @order) %>
+  <br/>
+  <%= link_to "Delete Order", admin_user_order_path(@order.user, @order), method: :delete, data: { confirm: "Are you sure you want to delete?"} %>
+
+</div> <!-- well -->
+
+<div class="well">
+  <h3 class="text-center">Order Contents</h3>
+
+  <%= render partial: "order_contents" %>
+
+  <%= link_to "Edit Order", edit_admin_user_order_path(@order.user, @order) %>
+  <br/>
+  <%= link_to "Delete Order", admin_user_order_path(@order.user, @order), method: :delete, data: { confirm: "Are you sure you want to delete?"} %>
+
+</div> <!-- well -->
