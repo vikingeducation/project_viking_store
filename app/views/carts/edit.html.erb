@@ -1,6 +1,6 @@
 <div class="carts-controller">
 
-<%= form_for @order do |f| %>
+<%= form_for cart_path do |f| %>
 
   <h1 class="text-center">Shopping Cart Contents</h1>
 
@@ -20,12 +20,12 @@
               </td>
               <td>
                 <strong>Quantity: </strong><%= value %><br/>
-                <strong>Total Price: </strong><%= number_to_currency(p.price * value) %>
+                <strong>Total Price: </strong><%= number_to_currency(p.price * value) %><br/>
 
                 <%= f.fields_for :session do |products| %>
                   <%= products.label "Remove Item" %>
                   <%= products.check_box :_destroy %>
-                  <%= products.submit %>
+                  <%= button_to "Update Item" %>
                 <% end %>
 
               </td>
@@ -36,7 +36,7 @@
               <td><strong>Total: </strong><%= number_to_currency(cart_total) %>
               </td>
               <td>
-              <div><%= f.submit "Check Out", {class: "btn btn-primary btn-md"} %>
+              <div><%= f.submit "Check Out", {class: "btn btn-warning btn-md"} %>
 
               </div></td>
 

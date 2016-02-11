@@ -16,7 +16,7 @@
       <%= form_tag carts_path(1) do %>
         <!-- use hidden_field_tag because we're not trying to create a new Product -->
         <%= hidden_field_tag(:product, product.id) %>
-        <%=submit_tag "Add to Cart", class: "btn btn-warning center-block" %>
+        <%= submit_tag "Add to Cart", class: "btn btn-warning center-block" %>
       <% end %>
 
     </div>
