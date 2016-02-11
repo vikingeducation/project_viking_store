@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+
+
+  root 'shop/products#index'
+  # TODO: switch to resources :admin do
+  # when we have admin controller, model, etc.
+
+  namespace :admin do
+    resources :dashboard, only: [:index, :get]
+    resources :categories
+    resources :products
+    resources :users
+    resources :addresses
+    resources :orders
+    resources :order_contents
+  end
+
+  namespace :shop do
+    resources :products
+    resources :orders
+    resources :session, :only => [:new, :create, :destroy]
+    resources :users
+
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

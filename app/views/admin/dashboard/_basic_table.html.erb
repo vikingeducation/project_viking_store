@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <% data_hash.each do |key, value| %>
+      <tr>
+        <td><%= key %></td>
+
+        <% if value.is_a? BigDecimal %>
+          <td><%= number_to_currency(value) %></td>
+        <% else %>
+          <td><%= value %></td>
+        <% end %>
+
+      </tr>
+
+    <% end %>
+
+    </tbody>
+  </table>
+
+</div>

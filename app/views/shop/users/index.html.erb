@@ -1,0 +1,21 @@
+<div class="container">
+  <h1 class=text-center>Sign Up or Sign In</h1><br/>
+  <div class="col-xs-4 col-xs-offset-2">
+    <h2 id="subhead">I do NOT have an account...</h2><br/>
+    <div class="panel panel-default">
+      <%= link_to "Sign Up", new_shop_user_path, class: "btn btn-lg btn-primary btn-block" %>
+    </div>
+  </div>
+  <%= form_for [:shop, @user], :url => shop_session_index_path do |f| %>
+  <div class="col-xs-4 col-xs-offset-1">
+    <form class="form-signin">
+      <h2 class="form-signin-heading" id="subhead">I have an account...</h2><br/><br/>
+      <%= f.text_field :email, class: 'form-control', placeholder: "Email Address" %>
+      <br/>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password">
+      <br/>
+      <%= f.submit "Sign In", class: 'btn btn-lg btn-primary btn-block' %>
+    </form>
+  </div>
+  <% end %>
+</div>
