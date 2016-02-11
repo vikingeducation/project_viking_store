@@ -1,0 +1,31 @@
+<% content_for :resource_name do %>
+  Addresses
+<% end %>
+
+<h1 class="text-center"><%= "#{@address.user.full_name}'s Address"%></h1>
+
+<h2>Product Information</h2>
+
+<table class="table table-striped special-table">
+  <tbody>
+    <tr>
+      <td><strong>Owner ID</strong></td>
+      <td><%= @address.user_id %></td>
+    </tr>
+    <tr>
+      <td><strong>Owner Name</strong></td>
+      <td><%= link_to @address.user.full_name, admin_user_path(@address.user) %></td>
+    </tr>
+    <tr>
+      <td><strong>Address</strong></td>
+      <td>
+        <p><%= @address.street_address %></p>
+        <p><%= @address.secondary_address %></p>
+        <p><%= "#{@address.city.name}, #{@address.state.name} #{@address.zip_code}" %></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><%= link_to "Edit This Address", edit_admin_address_path(@address) %></p>
+<p><%= link_to "Delete This Address", [:admin, @address], method: :delete %></p>

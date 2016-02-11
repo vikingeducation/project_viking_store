@@ -1,0 +1,37 @@
+<% content_for :resource_name, "Users" %>
+
+<%= link_to "Add a New User", new_admin_user_path, class: "btn btn-primary btn-lg btn-block"%>
+
+<% content_for :table do %>
+  <table class="table table-striped">
+    <thead>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Joined</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Orders</th>
+      <th>Last Order Date</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.full_name %></td>
+          <td><%= user.date_joined %></td>
+          <td><%= user.city %></td>
+          <td><%= user.state %></td>
+          <td><%= link_to user.orders.size, admin_orders_path( user_id: user.id ) %></td>
+          <td><%= user.date_last_order %></td>
+
+          <td><%= link_to "Show", [:admin, user] %></td>
+          <td><%= link_to "Edit", edit_admin_user_path(user) %></td>
+          <td><%= link_to "Delete", [:admin, user], method: :delete, data: { confirm: "Are you sure?"} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

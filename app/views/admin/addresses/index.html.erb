@@ -1,0 +1,38 @@
+<% content_for :resource_name, "Addresses" %>
+
+<% if @user_id.nil? %>
+  <h4 class="text-center">Create New Addresses from Within <strong><%= link_to "User", admin_users_path %></strong> Profiles</h4>
+<% else %>
+  <%= link_to "Add a New Address", new_admin_address_path( user_id: @user_id ), class: "btn btn-primary btn-lg btn-block"%>
+<% end %>
+
+<% content_for :table do %>
+  <table class="table table-striped">
+    <thead>
+      <th>ID</th>
+      <th>User</th>
+      <th>Street</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip Code</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+      <% @addresses.each do |address| %>
+        <tr>
+          <td><%= address.id %></td>
+          <td><%= address.user.full_name %></td>
+          <td><%= address.street_address %></td>
+          <td><%= address.city.name %></td>
+          <td><%= address.state.name %></td>
+          <td><%= address.zip_code %></td>
+          <td><%= link_to "Show", [:admin, address] %></td>
+          <td><%= link_to "Edit", edit_admin_address_path(address) %></td>
+          <td><%= link_to "Delete", [:admin, address], method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

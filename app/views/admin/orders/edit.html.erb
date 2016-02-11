@@ -1,0 +1,145 @@
+<% content_for :resource_name, "Orders" %>
+
+<h1 class="text-center">Edit Order</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Logistical Information</h2>
+    <br>
+
+    <h3>Basic Information</h3>
+    <table class="table table-striped special-table">
+      <tbody>
+        <tr>
+          <td><strong>Customer ID</strong></td>
+          <td><%= @order.user_id %></td>
+        </tr>
+
+        <tr>
+          <td><strong>Customer</strong></td>
+          <td><%= @order.user.full_name %></td>
+        </tr>
+
+        <tr>
+          <td><strong>Date Placed</strong></td>
+          <td>N/A</td>
+        </tr>
+
+        <tr>
+          <td><strong>Total Value</strong></td>
+          <td><%= @order.value %></td>
+        </tr>
+      </tbody>
+    </table>
+    <p><%= link_to "Edit Customer Profile", edit_admin_user_path(@order.user_id) %></p>
+
+    <hr>
+
+    <%= form_for [:admin,@order] do |f| %>
+      <h4>Order Status</h4>
+      <div class="form-group">
+
+
+        <p>
+          <%= radio_button(:order, :checkout_date, DateTime.now) %>
+          <%= f.label :placed, "PLACED", class: "placed-order" %>
+        </p>
+
+        <p>
+          <%= radio_button(:order, :checkout_date, nil, { checked: true }) %>
+          <%= f.label :unplaced, "UNPLACED", class: "unplaced-order" %>
+        </p>
+      </div>
+
+      <h4>Billing Address</h4>
+      <div class="form-group">
+        <%= f.label :billing_id %>
+        <%= f.collection_select :billing_id, @order.user.addresses, :id, :street_address, {}, class: 'selectpicker', data: { width: '100%' } %>
+      </div>
+
+      <h4>Shipping Address</h4>
+      <div class="form-group">
+        <%= f.label :shipping_id %>
+        <%= f.collection_select :shipping_id, @order.user.addresses, :id, :street_address, {}, class: 'selectpicker', data: { width: '100%' } %>
+      </div>
+
+
+      <h4>Payment Card</h4>
+      <% if @order.credit_card_id %>
+        <div class="form-group">
+          <%= f.label :credit_card_id %>
+          <%= f.collection_select :credit_card_id, [@order.user.credit_card], :id, :nickname, {}, class: 'selectpicker', data: { width: '100%' } %>
+        </div>
+      <% else %>
+        <p>No payment information on record :-(</p>
+      <% end %>
+
+      <%= f.submit class: 'btn btn-primary btn-block' %>
+    <% end %>
+
+    <h4><%= link_to "Delete Order" %></h4>
+
+    <hr>
+
+    <h3>Edit Order Contents</h3>
+
+    <%= form_for [:admin,@order] do |f| %>
+      <table class="table table-striped">
+        <thead>
+          <th>ProductID</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total Price</th>
+        </thead>
+        <tbody>
+          <% @order.products.each do |product| %>
+            <tr>
+              <% product_order_contents = product.order_contents.where(order_id: @order.id) %>
+              <td><%= product.id %></td>
+              <td><%= product.name %></td>
+              <%= f.fields_for :order_contents, product_order_contents do |oc_fields| %>
+                <td>
+                  <%= oc_fields.number_field :quantity %>
+                </td>
+                <%= oc_fields.hidden_field :order_id, value: @order.id %>
+                <%= oc_fields.hidden_field :product_id, value: product.id %>
+              <% end %>
+              <td><%= number_to_currency(product.price) %></td>
+              <td><%= number_to_currency(product.price * product_order_contents[0].quantity) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= f.submit "Update Order Contents", class: 'btn btn-primary btn-block' %>
+    <% end %>
+
+    <hr>
+
+    <h3>Add Products to Order</h3>
+
+    <%= form_for [:admin,@order] do |f| %>
+      <table class="table table-striped">
+        <thead>
+          <th>ProductID</th>
+          <th>Quantity</th>
+        </thead>
+        <tbody>
+          <% 5.times do |product| %>
+            <tr>
+              <%= f.fields_for :order_contents, OrderContent.new do |oc_fields| %>
+                <td><%= oc_fields.number_field :product_id %></td>
+                <td><%= oc_fields.number_field :quantity %></td>
+                <%= oc_fields.hidden_field :order_id, value: @order.id %>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= f.submit class: 'btn btn-primary btn-block' %>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<% content_for :resource_name, "Products" %>
+
+<%= link_to "Add a New Product", new_admin_product_path, class: "btn btn-primary btn-lg btn-block"%>
+<% content_for :table do %>
+  <table class="table table-striped">
+    <thead>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= product.name %></td>
+          <td><%= number_to_currency(product.price) %></td>
+          <td><%= ( link_to product.category.name, admin_category_path(product.category) ) if product.category %></td>
+          <td><%= link_to "Show", [:admin, product] %></td>
+          <td><%= link_to "Edit", edit_admin_product_path(product) %></td>
+          <td><%= link_to "Delete", [:admin, product], method: :delete, data: { confirm: "Are you sure?"} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

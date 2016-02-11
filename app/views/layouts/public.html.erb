@@ -1,0 +1,48 @@
+<%= content_for :public do %>
+  <section id="top-bar">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+            Viking Store
+          </a>
+        </div>
+        <div class="navbar-right">
+          <ul class="nav navbar-nav">
+            <li><img width='48' height='48' alt="Viking" src="assets/viking.png"></li>
+            <li><ul class='nav'>
+              <li><a href="<%= cart_path %>">Your Cart</a></li>
+              <% if signed_in_user? %>
+                <li><%= link_to "Sign Out", session_path, :method => "DELETE" %></li>
+              <% else %>
+                <li><%= link_to "Sign In", new_session_path %></li>
+              <% end %>
+            </ul></li>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+  </section>
+
+  <%= yield :content %>
+
+  <section id="bottom-bar">
+    <div class="text-right admin-login">
+      <a href="/admin">Admin Login</a>
+    </div>
+    <div class='text-center contact-info'>
+      <h3>CONTACT</h3>
+      <p>
+        <span class='glyphicon glyphicon-earphone'></span>
+        1-(555)-123-4567
+      </p>
+      <p>
+        <span class='glyphicon glyphicon-envelope'></span>
+        contact@vikingstore.com
+      </p>
+    </div>
+  </section>
+<% end %>
+
+<%= render template: "layouts/application" %>

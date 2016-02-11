@@ -1,0 +1,78 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap-select';
+@import 'bootstrap';
+@import 'admin';
+
+.nav {
+  li {
+    a {
+      position: relative;
+      display: block;
+      padding: 2px 4px;
+    }
+  }
+}
+
+#page-title {
+  background-image: asset_url('viking_crew.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 640px;
+  padding: 0px;
+  h1 {
+    vertical-align: middle;
+    font-size: 72px;
+    text-shadow: 5px #fefefe;
+  }
+}
+
+#page-subtitle {
+  background-color: #333333;
+  color: #fefefe;
+  height: 80px;
+  .text-center {
+    vertical-align: middle;
+    padding: 20px;
+  }
+}
+
+.filter-form {
+  padding: 20px;
+}
+
+.panel-default {
+  border-color: #333333;
+  .panel-heading {
+    background-color: #333333;
+    color: #fefefe;
+  }
+
+  .panel-footer {
+    background-color: #333333;
+    .btn {
+      color: #111111;
+    }
+  }
+}
+
+.product-view {
+  height: 200px;
+  padding: 0px;
+  .price-tag {
+    position: absolute;
+    top: 48px;
+    right: 24px;
+    border: 1px solid #333333;
+    background-color: #fefefe;
+    color: #111111;
+    padding: 2px;
+    border-radius: 5px;
+  }
+}
+
+#bottom-bar {
+  background-color: #333333;
+  color: #fefefe;
+  vertical-align: middle;
+  padding: 20px;
+}

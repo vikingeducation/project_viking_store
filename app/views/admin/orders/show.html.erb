@@ -1,0 +1,113 @@
+<% content_for :resource_name, "Order" %>
+<h1 class="text-center">Order <%= @order.id %></h1>
+
+<h2>Logistical Information</h2>
+<br>
+
+<h3>Basic Information</h3>
+<table class="table table-striped special-table">
+  <tbody>
+    <tr>
+      <td><strong>Customer ID</strong></td>
+      <td><%= @order.user.id %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Customer</strong></td>
+      <td><%= @order.user.full_name %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Date Placed</strong></td>
+      <td><%= @order.checkout_date %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Number of Products</strong></td>
+      <td><%= @order.products.count %></td>
+    </tr>
+
+    <tr>
+      <td><strong>Total Value</strong></td>
+      <td><%= @order.value %></td>
+    </tr>
+  </tbody>
+</table>
+<p><%= link_to "Edit Customer Profile", edit_admin_user_path(@order.user_id) %></p>
+
+<hr>
+
+<h3>Order Status</h3>
+  <div class='<%= @order.placed? ? "placed" : "unplaced" %>-order'>
+    <h4><%= @order.placed? ? "PLACED" : "UNPLACED" %></h4>
+  </div>
+<hr>
+
+<h3>Shipping Address</h3>
+<table class="table table-striped special-table">
+  <tbody>
+    <tr>
+      <td><strong>Address</strong></td>
+      <td>
+        <% address = @order.shipping_address %>
+        <p><%= address.street_address %></p>
+        <p><%= address.secondary_address %></p>
+        <p><%= "#{address.city.name}, #{address.state.name} #{address.zip_code}" %></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+
+<h3>Billing Address</h3>
+<table class="table table-striped special-table">
+  <tbody>
+    <tr>
+      <td><strong>Address</strong></td>
+      <td>
+        <% address = @order.billing_address %>
+        <p><%= address.street_address %></p>
+        <p><%= address.secondary_address %></p>
+        <p><%= "#{address.city.name}, #{address.state.name} #{address.zip_code}" %></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+
+<p>
+  <%= link_to "Edit", edit_admin_order_path(@order), class: 'btn btn-default' %>
+</p>
+<p>
+  <%= link_to "Delete", admin_order_path(@order), method: :delete, class: 'btn btn-default btn-danger', data: { confirm: "Are you sure?"} %>
+</p>
+<hr>
+
+<h2>Order Contents</h2>
+<table class="table table-striped">
+  <thead>
+    <th>ProductID</th>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Total Price</th>
+  </thead>
+  <tbody>
+    <% @order.products.each do |product| %>
+      <tr>
+        <% quantity = product.order_contents.where(order_id: @order.id)[0][:quantity] %>
+        <td><%= product.id %></td>
+        <td><%= product.name %></td>
+        <td><%= quantity %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= number_to_currency(product.price * quantity) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>
+  <%= link_to "Edit", edit_admin_order_path(@order), class: 'btn btn-default' %>
+</p>
+<p>
+  <%= link_to "Delete", admin_order_path(@order), method: :delete, class: 'btn btn-default btn-danger', data: { confirm: "Are you sure?"} %>
+</p>
