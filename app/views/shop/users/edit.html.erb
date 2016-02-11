@@ -1,0 +1,24 @@
+<%= form_for [:shop, @user] do |f| %>
+<h1 class="text-center">Sign Up</h1>
+
+<div class="container">
+<div class="row">
+<div class="col-xs-3 col-xs-offset-1">
+  <%= render partial: 'shipping', locals: {f: f}%>
+</div>
+<div class="col-xs-3">
+  <%= render partial: 'account', locals: {f: f} %>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-3 col-xs-offset-1">
+  <%= render partial: 'billing', locals: {f: f}%>
+</div>
+
+<div class="col-xs-3">
+  <%= f.submit "Sign Up", class: 'btn-primary btn-lg btn-block' %>
+</div>
+</div>
+
+<% end %>
+</div>

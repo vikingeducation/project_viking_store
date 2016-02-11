@@ -46,7 +46,7 @@ end
 
 gem 'binding_of_caller'
 
-ruby "2.2.0"
+ruby "2.2.1"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -1,9 +1,9 @@
 <div class = "panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Saved Address 1 (optional)</h3>
+    <h3 class="panel-title">Shipping Address</h3>
   </div>
 
-  <%= f.fields_for :billing, @user.billing_id do |billing_fields| %>
+  <%= f.fields_for :billing, @user.shipping_address do |billing_fields| %>
 
   <div class="form-group">
     <%= billing_fields.label "Street" %>

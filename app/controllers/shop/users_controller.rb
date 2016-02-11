@@ -20,11 +20,11 @@ class Shop::UsersController < ShopController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     if @user.update(user_params)
       flash[:success] = "Account for #{@user.full_name} updated!"
       redirect_to shop_products_path
@@ -37,12 +37,12 @@ class Shop::UsersController < ShopController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :billing_attributes => [:id, :street_address,
+    params.require(:user).permit(:first_name, :last_name, :email, :billing_address_attributes => [:id, :street_address,
                                      :secondary_address,
                                      :zip_code,
                                      :state_id,
                                      :user_id,
-                                     :city_attributes => [:id, :name]],:shipping_attributes => [:id, :street_address,
+                                     :city_attributes => [:id, :name]],:shipping_address_attributes => [:id, :street_address,
                                                                       :secondary_address,
                                                                       :zip_code,
                                                                       :state_id,

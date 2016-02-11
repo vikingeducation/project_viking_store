@@ -24,7 +24,7 @@
             <ul class="nav navbar-nav navbar-right">
               <% if session[:current_user_id] %>
               <li class="active">
-                <a href="#" class="pull-left">
+                <a href="<%= edit_shop_user_path(session[:current_user_id]) %>" class="pull-left">
                 <img src="http://lorempixel.com/50/50/people/<%= rand(1..10) %>" width = "50px" height = "50px" alt="<%= session[:current_user_id] ? User.find(session[:current_user_id]).first_name : "User" %>"></a>
               </li>
               <% end %>

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+
   has_many :addresses, dependent: :destroy
   has_many :orders
   has_one :credit_card, dependent: :destroy
@@ -22,11 +23,19 @@ class User < ActiveRecord::Base
 
 
   def billing_address
-    self.addresses.find(self.billing_id)
+    if self.id
+      self.addresses.find(self.billing_id)
+    else
+      Address.new
+    end
   end
 
   def shipping_address
-    self.addresses.find(self.shipping_id)
+    if self.id
+      self.addresses.find(self.shipping_id)
+    else
+      Address.new
+    end
   end
 
   def self.total
