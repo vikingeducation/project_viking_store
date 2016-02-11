@@ -8,5 +8,7 @@
   <br>
   <%= order_fields.label :billing_address %>
   <%= order_fields.collection_select(:billing_id, @order.user.addresses, :id, :street_address) %>
+  <br>
+  <%= order_fields.submit 'Place Order' %>
 
 <% end %>
