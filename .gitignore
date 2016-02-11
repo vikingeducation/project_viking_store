@@ -18,6 +18,3 @@
 # ignore database
 solution_viking_store_development
 solution_viking_store_test
-
-# Ignore secrets.yml
-/config/secrets.yml
