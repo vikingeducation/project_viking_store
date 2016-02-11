@@ -1,0 +1,39 @@
+
+<div class = "row" id="shop_index_jumbotron">
+  <h1 class="text-center">The Best Viking Gear On The Whole Web</h1>
+</div>
+
+<div class = "row" id="shop_index_subtext">
+  <h3 class="text-center"><em>Choose from among our lineup of fine items below</em></h3>
+</div>
+
+<div class = "container">
+  <div class = "row" id="shop_index_filter">
+    <div class="col-xs-3 col-xs-offset-8">
+      <form class="form-inline" action="<%= shop_products_url  %>">
+        <%= select_tag(:category_id, options_for_select(@category_options), class: "form-control") %>
+        <%= submit_tag("Apply Filter", class: "btn btn-default") %>
+      </form>
+    </div>
+  </div>
+  <div class = "row">
+
+    <% @products.each do |product| %>
+
+    <div class="col-xs-4">
+      <div class="panel panel-default">
+        <div class="panel-heading" id="product_heading">
+          <h3 class="panel-title"><%= product.name %></h3>
+        </div>
+        <div class="panel-body">
+          <img src="http://lorempixel.com/250/150/technics/<%= rand(1..10) %>" width = "250px" height = "150px" alt="<%=product.name%>">
+          <span class="pull-right"><%= number_to_currency(product.price) %>
+        </div>
+         <div class="panel-footer text-center" id="product_heading"><%= link_to "Add to Cart", new_shop_product_path(:product_id => product.id), class: "btn btn-warning" %></div>
+      </div>
+    </div>
+
+    <% end %>
+      <%= will_paginate @products %>
+  </div>
+</div>

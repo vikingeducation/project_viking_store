@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+  <tr>
+  <th>Item</th>
+  <th>Data</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Number of Orders</td>
+      <td><%= data[:ord_total] %></td>
+    </tr>
+    <tr>
+      <td>Total Revenue</td>
+      <td><%= number_to_currency(data[:rev_total]) %></td>
+    </tr>
+    <tr>
+      <td>Average Order Value</td>
+      <td><%= number_to_currency(data[:ord_avg][0].avg) %></td>    
+    </tr>
+    <tr>
+      <td>Largest Order Value</td>
+      <td><%= number_to_currency(data[:big_ord][0].value) %></td>
+    </tr>
+  </tbody>
+</table>

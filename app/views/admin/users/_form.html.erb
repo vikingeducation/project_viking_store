@@ -1,0 +1,47 @@
+<div class = "col-xs-8 panel panel-default">
+
+<%= form_for [:admin, @user] do |f| %>
+
+  <div class="form-group">
+    <%= f.label :first_name %>
+    <%= field_with_errors(@user, :first_name) %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :last_name %>
+    <%= field_with_errors(@user, :last_name) %>
+    <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= field_with_errors(@user, :email) %>
+    <%= f.text_field :email, class: "form-control"%>
+  </div>
+
+
+<% unless @user.id.nil? %>
+  <div class="form-group">
+    <%= f.label "Billing Address" %>
+    <%= f.select :billing_id, @user.addresses.all.collect {|c| ["#{c.id}: #{c.street_address}", c.id] }, {}, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Shipping Address" %>
+    <%= f.select :shipping_id, @user.addresses.all.collect {|c| ["#{c.id}: #{c.street_address}", c.id] }, {}, {class: "form-control" } %>
+  </div>
+
+<% end %>
+
+  <div class="form-group">
+    <%= f.submit "Save", class: "btn btn-primary btn-lg btn-block" %>
+<% if @user.id %>
+    <br />
+    <%= link_to "Delete #{@user.full_name}", admin_user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: "btn btn-danger btn-lg btn-block" %>
+<% end %>
+  </div>
+
+
+<% end %>
+</div>

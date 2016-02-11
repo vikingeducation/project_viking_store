@@ -1,8 +1,14 @@
 Project: Viking Store Admin
 ========================
 
+Julia + Andrew
+
+Load time with multiplier = 10: Time taken is 0.108385478.
+Load time with multiplier = 50: Time taken is 0.369374212.
+
+
 ##To Get Going On This Assignment
-- run `rake db:create`
+- run `rake db:create` (you might need to do `bundle exec rake db:create`)
 - run `rake db:migrate`
 - run `rake db:seed`
 

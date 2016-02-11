@@ -1,0 +1,93 @@
+<div class = "col-xs-8 panel panel-default">
+
+<%= form_for [:admin, @order] do |f| %>
+
+<%= f.label "Customer ID: "%>  <span class="badge"><%= params[:user_id] %></span><br />
+<strong>Customer: </strong><%= link_to "#{User.find(params[:user_id]).full_name} (click to view)", admin_user_path(params[:user_id]) %><br />
+<strong>Date Placed: </strong> <%= @order.id.nil? ? "N/A" : @order.created_at %><br />
+<%= link_to "Edit Customer Profile", edit_admin_user_path(params[:user_id]), class: "btn btn-primary btn-lg btn-block" %>
+<br /><br />
+<% unless @order.id.nil? %>
+<div class = "form-group">
+  <%= f.label "Placed", style: "color: green;"%>
+  <%= f.radio_button :checkout_date, Date.today , {class: "form-control"}%>
+  <br />
+  <% if @order.user.orders.where(:checkout_date => nil).length < 0 %>
+    <%= f.label "Not Placed", style: "color: red;" %>
+    <%= f.radio_button :checkout_date, nil, class: "form-control" %>
+  <% else %>
+    <%= f.label "Not Placed", style: "color: red;" %>
+    <%= f.radio_button :checkout_date, nil, {class: "form-control", disabled: true} %>
+  <% end %>
+</div>
+<% end %>
+
+
+  <div class="form-group">
+    <%= f.label "Billing Address" %>
+    <%= f.select :billing_id, User.find(params[:user_id]).addresses.all.collect {|c| ["#{c.id}: #{c.street_address}", c.id] }, {}, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Shipping Address" %>
+    <%= f.select :shipping_id, User.find(params[:user_id]).addresses.all.collect {|c| ["#{c.id}: #{c.street_address}", c.id] }, {}, {class: "form-control" } %>
+  </div>
+
+  <% if @order.user.nil? || @order.user.credit_card.nil? %>
+  <div class="form-group">
+    <%= f.label "Billing Card" %>
+    <%= f.select :credit_card_id, [], {}, {class: "form-control", disabled: true } %>
+  </div>
+  <% else %>
+  <div class="form-group">
+    <%= f.label "Billing Card" %>
+    <%= f.select :credit_card_id, ["Ending in #{@order.user.credit_card.card_number[-4..-1]}"], {}, {class: "form-control" } %>
+  </div>
+  <% end %>
+
+</div>
+
+<div class = "col-xs-8 panel panel-default">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ProductID</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total Price</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <% @order.order_contents.each_with_index do |order, index| %>
+      <%= f.fields_for :order_contents, order do |content_fields| %>
+      <tr>
+        <td><%= Product.find(order.product_id).name %></td>
+        <td><%= content_fields.text_field :quantity, class: "form-control", placeholder: Product.find(order.product_id).product_in_order(@order.id).quantity %></td>
+        <td><%= number_to_currency(Product.find(order.product_id).price) %></td>
+        <td><%= number_to_currency(Product.find(order.product_id).product_in_order(@order.id).quantity * Product.find(order.product_id).price) %></td>
+        <td><%= content_fields.check_box :_destroy %></td>
+
+      </tr>
+    <% end %>
+
+    </tbody>
+  <% end %>
+  </table>
+</div>
+<div class = "col-xs-8 panel panel-default">
+
+
+  <div class="form-group">
+    <% if @order.id.nil? %>
+      <%= f.submit "Create Order in Shopping Cart", class: "btn btn-primary btn-lg btn-block" %><br />
+      <h2 class = "text-center" style = "color: grey;">You can add products on the next screen, once it's been created.</h2>
+    <% else %>
+      <%= f.submit "Update Order Information", class: "btn btn-primary btn-lg btn-block" %>
+      <%= link_to "Delete Order", admin_order_path(@order), method: :delete, data: { confirm: "Are you sure you want to delete?" }, class: "btn btn-danger btn-lg btn-block" %>
+    <% end %>
+
+  </div>
+</div>
+<% end %>

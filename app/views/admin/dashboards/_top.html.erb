@@ -1,0 +1,31 @@
+<table class="table">
+  <thead>
+  <tr>
+  <th>Item</th>
+  <th>User</th>
+  <th>Quantity</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Highest Single Order Value</td>
+      <td><%= data[:big_ord][0].first_name %> <%= data[:big_ord][0].last_name %></td>
+      <td><%= number_to_currency(data[:big_ord][0].value) %></td>
+    </tr>
+    <tr>
+      <td>Highest Lifetime Value</td>
+      <td><%= data[:big_life][0].first_name %> <%= data[:big_life][0].last_name %></td>
+      <td><%= number_to_currency(data[:big_life][0].value) %></td>
+    </tr>
+    <tr>
+      <td>Highest Average Order Value</td>
+      <td><%= data[:big_avg][0].first_name %> <%= data[:big_avg][0].last_name %></td>
+      <td><%= number_to_currency(data[:big_avg][0].value) %></td>
+    </tr>
+    <tr>
+      <td>Most Orders Placed</td>
+      <td><%= data[:most_ord][0].first_name %> <%= data[:most_ord][0].last_name %></td>
+      <td><%= data[:most_ord][0].value %></td>
+    </tr>
+  </tbody>
+</table>
