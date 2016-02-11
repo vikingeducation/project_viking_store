@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :carts, only: [:edit, :update, :create, :destroy]
   resources :orders
   resources :users
-  resources :sessions
+  resource :session, :only => [:new, :create, :destroy]
 
   namespace :admin do
     root 'dashboard#index'

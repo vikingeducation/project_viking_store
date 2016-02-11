@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   def sign_in_user(user)
     session[:current_user_id] = user.id
     @current_user = user
+
+    # TODO: add a way to combine cart stored in session with the user's previous cart
   end
 
   def current_user
@@ -24,6 +26,8 @@ class ApplicationController < ActionController::Base
     session.delete(:current_user_id)
     current_user = nil
     session[:current_user_id].nil? && current_user.nil?
+    
+    # TODO: add a way to save current cart to user, and revert to the session cart
   end
 
 
@@ -38,6 +42,6 @@ class ApplicationController < ActionController::Base
 
 
 
-  
+
 end
 

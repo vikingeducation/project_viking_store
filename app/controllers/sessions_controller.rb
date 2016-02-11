@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email(params["/sessions"][:email])
+    user = User.find_by_email(params["/session"][:email])
     if user
       sign_in_user(user)
       flash[:success] = "Signed In"
@@ -21,9 +21,8 @@ class SessionsController < ApplicationController
   def destroy
     if sign_out
       flash[:success] = "You have been signed out"
-
     else
-      flash[:error] = "Failed to sing out"
+      flash[:error] = "Failed to sign out"
     end
     redirect_to products_path
   end
