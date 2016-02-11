@@ -5,11 +5,6 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.cart
-    # @order.order_contents.destroy_all
-
-    # session[:cart].each do |product_id, quantity|
-    #   @order.order_contents.build(product_id: product_id, quantity: quantity)
-    # end
 
     if @order.save
       flash[:success] = 'Order created'
@@ -21,6 +16,10 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order = current_user.cart
+  end
+
+  def edit
     @order = current_user.cart
   end
 
