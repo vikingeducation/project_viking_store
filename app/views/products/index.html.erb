@@ -1,52 +1,33 @@
+<%= render partial: "header" %>
+<div class="container-fluid">
+  <div class="page-header container text-center">
+    <h1>The Viking Store</h1>
+  </div>
+  <div class="row header-filler text-center">
+    <h3>The Best Viking Gear on the Whole Web</h3>
+  </div>
+</div>
+
 <div class="container">
-  <div class="row text-center">
-    <h1>Viking Store Admin Portal</h1>
+  <<div class="row pull-right">
+    <form action="<%= products_path %>" method="get">
+      <select name="category_id">
+        <option value=""></option>
+        <%= @categories.each do |category| %>
+          <option value="<%= category.id %>"><%= category.name %></option>
+        <% end %>
+      </select>
+      <input type="submit", value="Filter">
+    </form>
   </div>
   <div class="row">
-
-    <div class="col-xs-2">
-      <h4>Navigation Options</h4>
-      <div><a href="#">Users</a></div>
-      <div><a href="#">Addresses</a></div>
-      <div><a href="#">Orders</a></div>
-      <div><a href="#">Products</a></div>
-      <div><a href="#">Categories</a></div>
-    </div>
-
-    <div class="col-xs-10">
-      <div class="text-center"><h2>Product</h2></div>
-      <div class="col-xs-offset-3 col-xs-6">
-        <%= link_to "Create Product", new_product_path, class: "btn btn-primary btn-lg btn-block" %>
-      </div>
-      <div class="col-xs-12 text-center">
-        <div class="table-responsive scrollable-table">
-
-          <table class="table table-striped">
-            <tr>
-              <td>ID</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Show</td>
-              <td>Edit</td>
-              <td>Delete</td>
-            </tr>
-            
-            <% @products.each do |product| %>
-              <tr>
-                <td><%= product.id %></td>
-                <td><%= product.name %></td>
-                <td><%= product.price %></td>
-                <td><%= link_to @product_categories[product.id-1].name, category_path(@product_categories[product.id-1].id) %></td>
-                <td><%= link_to "SHOW", product %></td>
-                <td><%= link_to "EDIT", edit_product_path(product) %></td>
-                <td><%= link_to "DELETE", product, method: :delete, data: {confirm: "Are you sure?"} %></td>
-              </tr>
-            <% end %>
-          </table>
-
-        </div>
-      </div>
-    </div>
+    <% @products.all.each do |product| %>
+      <%= render partial: "products", locals: {product: product} %>
+    <% end %>
+  
   </div>
+  <%= will_paginate @posts %>
+</div>
+<div class="container-fluid">
+  <%= render partial: "footer" %>
 </div>

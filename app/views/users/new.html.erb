@@ -1,12 +1,9 @@
 <div class="container">
   <div class="row text-center">
-    <h1>New User</h1>
-  </div>
-
-  <div class="row text-center">
-    <h3>Demographic Information</h3>
+    <h1>Sign Up</h1>
   </div>
   <div class="row">
-    <%= render partial: "form" %>
+    <%= @user.errors.full_messages %>
+    <%= render partial: 'form' %>
   </div>
 </div>

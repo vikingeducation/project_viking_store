@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :products, through: :orders
   has_many :addresses
+  accepts_nested_attributes_for :addresses,
+                                :allow_destroy => true
 
   belongs_to :default_billing_address,
             class_name: "Address",

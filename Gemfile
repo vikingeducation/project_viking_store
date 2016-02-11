@@ -17,3 +17,4 @@ gem 'jazz_hands', '0.5.2', github: 'nixme/jazz_hands', branch: 'bring-your-own-d
 gem 'pry-byebug', '1.3.2'
 gem 'web-console', '2.3.0'
 gem 'autoprefixer-rails', '6.3.1'
+gem 'will_paginate', '~> 3.0.6'

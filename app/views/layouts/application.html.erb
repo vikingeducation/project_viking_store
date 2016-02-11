@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= render partial: 'flash' %>
+<div class="text-center"><%= flash.notice %></div>
 <%= yield %>
 
 </body>

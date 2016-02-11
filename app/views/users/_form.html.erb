@@ -1,29 +1,67 @@
-<%= form_for @user do |f| %>
-  <p>
-    <%= f.label "First Name" %>
-    <%= f.text_field :first_name %>
-  </p>
-  <p>
-    <%= f.label "Last Name" %>
-    <%= f.text_field :last_name %>
-  </p>
-  <p>
-    <%= f.label "Email:" %>
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <% if @user.persisted? %>
-      <%= f.label :default_billing_address %>
-      <%= f.collection_select :billing_id, @user.addresses, :id, :street_address, {}, data: { width: '80%' } %>
-    <% end %>
-  </p>
-  <p>
-    <% if @user.persisted? %>
-      <%= f.label :default_shipping_address %>
-      <%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, {}, data: { width: '80%' } %>
-    <% end %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+<div class="container">
+  <%= form_for @user do |user_field| %>
+
+    <div class="col-xs-6">
+
+     <%= user_field.fields_for :addresses do |addy_field| %>
+      <h3>Saved Address (Optional)</h3>
+      <p>
+        <%= addy_field.label "Street Address" %><br>
+        <%= addy_field.text_field :street_address %>
+      </p>
+      <p>
+        <%= addy_field.label "City" %><br>
+        <%= addy_field.collection_select :city_id, City.all, :id, :name, {include_blank: true} %>
+      </p>
+
+      <p>
+        <%= addy_field.label "State" %><br>
+        <%= addy_field.collection_select :state_id, State.all, :id, :name, {include_blank: true} %>
+      </p>
+      <p>
+        <%= addy_field.label "Zip Code" %><br>
+        <%= addy_field.text_field :zip_code %>
+      </p>
+
+     <% end %>
+    </div>
+
+    <div class="col-sm-6">
+      <h3>Account Information</h3>
+      <p>
+        <%= user_field.label "Email Address" %><br>
+        <%= user_field.text_field :email, placeholder: "foo@bar.com" %>
+      </p>
+      <p>
+        <%= user_field.label "Confirm Address" %><br>
+        <%= text_field_tag("", "",placeholder: "foo@bar.com") %>
+      </p>
+      <p>
+        <%= user_field.label "Password" %><br>
+        <%= user_field.password_field :password %>
+      </p>
+      <p>
+        <%= user_field.label "Confirm Password" %><br>
+        <%= user_field.password_field :password %>
+      </p>
+      <p>
+        <%= user_field.label "First Name" %><br>
+        <%= user_field.text_field :first_name, placeholder: "Foo" %>
+      </p>
+      <p>
+        <%= user_field.label "Last Name" %><br>
+        <%= user_field.text_field :last_name, placeholder: "Bar" %>
+      </p>
+      <p>
+        <%= user_field.label "Phone Number(Optional)" %><br>
+        <%= telephone_field_tag("", "", placeholder:"222-333-4444") %>
+      </p>
+
+      <br><br>
+      <h2>Complete Sign Up</h2>
+
+      <%= user_field.submit "Sign Up", class: "btn btn-block btn-primary" %>
+    </div>
+
+  <% end %>
+</div>
