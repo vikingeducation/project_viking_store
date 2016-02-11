@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-default">
+    <%= link_to "Viking Store", products_path, class: "navbar-brand" %>
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to "Cart" %></li>
+      <% if signed_in_user? %>
+        <li><%= link_to "Sign Out", sessions_path(current_user), method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Sign In", new_sessions_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</div>

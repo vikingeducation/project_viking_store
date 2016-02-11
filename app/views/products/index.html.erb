@@ -1,0 +1,33 @@
+<%= render partial: "header" %>
+<div class="container-fluid">
+  <div class="page-header container text-center">
+    <h1>The Viking Store</h1>
+  </div>
+  <div class="row header-filler text-center">
+    <h3>The Best Viking Gear on the Whole Web</h3>
+  </div>
+</div>
+
+<div class="container">
+  <<div class="row pull-right">
+    <form action="<%= products_path %>" method="get">
+      <select name="category_id">
+        <option value=""></option>
+        <%= @categories.each do |category| %>
+          <option value="<%= category.id %>"><%= category.name %></option>
+        <% end %>
+      </select>
+      <input type="submit", value="Filter">
+    </form>
+  </div>
+  <div class="row">
+    <% @products.all.each do |product| %>
+      <%= render partial: "products", locals: {product: product} %>
+    <% end %>
+  
+  </div>
+  <%= will_paginate @posts %>
+</div>
+<div class="container-fluid">
+  <%= render partial: "footer" %>
+</div>

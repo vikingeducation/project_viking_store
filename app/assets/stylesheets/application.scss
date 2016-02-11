@@ -1,0 +1,16 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.scrollable-table {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+.header-filler {
+    background-color: #3F3F3F;
+    color: white;
+    height: 75px;
+}
+.product-footer {
+  background-color: #3F3F3F;
+  height: 150px;
+}
