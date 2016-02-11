@@ -7,37 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <div class="container">
-    <%= render partial: 'shared/navbar'%>
-
-    <div class="row">
-      <div class="col col-xs-12">
-        <div class="jumbotron">
-          <h1 class="page-header text-center">Welcome to The Viking Store!</h1>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="row">
-      <div class="col col-xs-12">
-        <% flash.each do |type, message| %>
-          <h2 class='<%= type %> alert alert-info'><%= "#{message}" %>
-        <% end %>
-      </div>
-    </div>
-
-
-    <div class="row">
-      <div class="col-xs-3">
-        <%= render partial: 'shared/navbar'%>
-      </div>
-      <div class="col-xs-9">
-        <%= yield %>
-      </div>
-    </div>
-
-  </div>
+  <%= render partial: 'shared/navbar' %>
+  <%= yield %>
+  <%= render partial: 'shared/footer' %>
 </body>
 </html>

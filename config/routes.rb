@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
   namespace :admin do
-    root 'dashboard#index'
-    get '/admin/dashboard' => 'dashboard#index'
+    get '/' => 'dashboard#index'
     resources :addresses
     resources :categories
     resources :credit_cards, only: [:destroy]
@@ -11,6 +10,10 @@ Rails.application.routes.draw do
     resources :products
     resources :users
   end
+
+  root 'products#index'
+  resources :products
+  resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

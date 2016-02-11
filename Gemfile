@@ -15,6 +15,7 @@ gem 'pry'
 gem 'faker'
 gem 'bootstrap-sass'
 gem "binding_of_caller"
+gem 'will_paginate', '~> 3.0.6'
 
 group :development do
   gem "better_errors"
