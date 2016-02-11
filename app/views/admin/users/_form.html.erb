@@ -1,0 +1,71 @@
+<%= form_for [:admin, @user] do |f| %>
+  <ul>
+    <% @user.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+
+  <div class="row">
+    <div class="col-xs-2">
+    </div>
+    <div class="col-xs-10">
+      <h3>Demographic Information</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'First Name: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.text_field :first_name, class: "form-control"%></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Last Name: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.text_field :last_name, class: "form-control"%></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Email: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.text_field :email, class: "form-control"%></p>
+    </div>
+  </div>
+
+  <div class="row">
+    
+    <div class="col-xs-2">
+      <p><%= f.label 'Default Billing Address: ', strong: true%></p>
+    </div>
+
+    <div class="col-xs-10">
+      <p><%=f.collection_select :billing_id, @user.addresses, :id, :street_address, class: "form-control"%></p>
+    </div>
+  
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Default Shipping Address: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, class: "form-control"%></p>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-12">
+      <br>
+      <p><%= f.submit class: "btn btn-block btn-info"%></p>
+    </div>
+  </div>
+
+<%end%>

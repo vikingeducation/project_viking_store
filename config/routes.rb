@@ -1,10 +1,46 @@
 Rails.application.routes.draw do
+ 
+  namespace :admin do
+    resources :categories
+    resources :products
+    resources :users do
+      resources :addresses
+      resources :credit_cards
+      resources :order_contents
+      resources :orders 
+    end
+
+    resources :states
+    resources :cities
+
+  get '/dashboard' => 'dashboard#index'
+  get '/addresses' => 'addresses#all_index', as: "addresses"
+  get '/orders' => 'orders#index', as: "orders"
+ end
+
   resources :categories
   resources :products
-  resources :users
+  
+  resources :users do
+    resources :addresses
+    resources :credit_cards
+    resources :order_contents
+    resources :orders 
+  end
 
-  root 'dashboard#index'
+  resources :states
+  resources :cities
+  resource :cart, controller: 'cart'
+  resource :session, :only => [:new, :create, :destroy]
+
+  root 'products#index'
   get '/dashboard' => 'dashboard#index'
+  get '/addresses' => 'addresses#all_index', as: "addresses"
+  get '/orders' => 'orders#index', as: "orders"
+
+  # root 'dashboard#index'
+  # get '/dashboard' => 'dashboard#index'
+  # get '/addresses' => 'addresses#all_index', as: "addresses"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

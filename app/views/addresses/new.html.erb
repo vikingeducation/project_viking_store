@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col col-xs-12">
+    <h2 class="page-header text-center">New User Address</h2>
+    <%= form_for(@address, url: "/users/#{@user.id}/addresses", html: { method: :post}) do |f| %>
+
+      <ul>
+        <% @address.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+
+      <div class="row">
+        <div class="col-xs-2">
+          <p><%= f.label "Owner ID:", strong: true%></p>
+        </div>
+        <div class="col-xs-10">
+          <p><strong><%=@user.id%></strong></p>
+        </div>  
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2">
+          <p><%= f.label "Owner Name:", strong: true%></p>
+        </div>
+        <div class="col-xs-10">
+          <p><%=link_to "#{@user.first_name} #{@user.last_name} (click to view)", 
+                user_path(@user.id)%></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2">
+          <p><%= f.label 'Address: ', strong: true%></p>
+        </div>
+        <div class="col-xs-10">
+          <p><%= f.text_field :street_address, class: "form-control"%></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2">
+          <p><%= f.label 'City: ', strong: true%></p>
+        </div>
+        <div class="col-xs-10">
+          <p><%= f.collection_select :city_id, City.all, :id, :name, class: "form-control"%></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2">
+          <p><%= f.label 'State: ', strong: true%></p>
+        </div>
+        <div class="col-xs-10">
+          <p><%= f.collection_select :state_id, State.all, :id, :name, class: "form-control"%></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-2">
+          <p><%= f.label 'Zip Code: ', strong: true%></p>
+        </div>
+        <div class="col-xs-10">
+          <p><%= f.text_field :zip_code, class: "form-control"%></p>
+
+        <br>
+          <%= f.submit class: "btn btn-block btn-info"%>
+          <br>
+        </div>
+      </div>
+
+    <%end%>
+    <br>
+  </div>
+</div>

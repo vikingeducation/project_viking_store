@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col col-xs-12">
+    <h1 class="page-header text-center">All Products</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-xs-12">
+    <div class="text-center">
+
+      <form method="get" action="/products">
+        <select name="category_id">
+          <%= @categories.each do |category| %>
+            <option value="<%= category.id %>"><%= category.name %></option>
+          <% end %>
+        </select>
+        <input type="submit" value="Apply Filter" name="submit">
+      </form>
+    
+    </div>
+  </div>
+</div>
+
+<% @products.size.times do |index| %>
+  <div class="row">
+    <% 12.times do %>
+      <div class="col-xs-1">
+        <a href="some.jpg" class="thumbnail">
+          <p><%= @products[index].name %></p>    
+          <img src="some.jpg" alt="Some Pic">
+        </a>
+        <button type="submit" name="product_id" 
+              value="<%= @products[index].id %>">
+              Add to Cart
+        </button>
+      </div>
+    <% end %>
+  </div>
+<% end %>      

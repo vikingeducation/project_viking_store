@@ -5,7 +5,7 @@
 </div>
 <div class="row">
   <div class="col col-xs-12">
-    <a class="btn btn-success btn-block" href=<%=new_user_path%> role="button">
+    <a class="btn btn-info btn-block" href=<%=new_user_path%> role="button">
         Add User User
     </a>
     <br>
@@ -28,16 +28,17 @@
         <tr>
           <td><%=user.id%></td>
           <td><%=user.first_name%> <%=user.last_name%></td>
-          <td><%=user.created_at%></td>
-          <td> </td>
-          <td> </td>
-          <td><%=link_to 'Order', "#"%></td>
+          <td><%=user.joined%></td>
+          <td><%=user.city%></td>
+          <td><%=user.state%></td>
+          <td><%=link_to user.totals, "#"%></td>
           <td><%=link_to 'Show', user_path(user.id)%></td>
           <td><%=link_to 'Edit', edit_user_path(user.id)%></td>
-          <td><%=link_to 'Delete', user, method: "delete" %></td>
+          <td><%=link_to 'Delete', user_path(user), method: :delete, data: {confirm: "Are you sure?"}%>
+          </td>
         </tr>
         <%end%>
-      <tbody>
+      </tbody>
     </table>
   </div>
 </div>

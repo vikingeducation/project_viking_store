@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col col-xs-12">
+    <h1 class="page-header text-center">All Orders</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col col-xs-12">
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User ID</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>Total Value</th> 
+          <th>Status</th>
+          <th>Date Placed</th>
+          <th>SHOW</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%@orders.each do |order|%>
+        <tr>
+          <td><%=order.id%></td>
+          <td><%=order.user_id%></td>
+          <td><%=order.street_address%></td>
+          <td><%=order.city%></td>
+          <td><%=order.totals%></td>
+          <td><%=order.checkout_date.nil? ? "UNPLACED" : "PLACED"%></td>
+          <td><%=order.date_placed%></td>
+          <td><%=link_to 'Show', admin_user_order_path(order.user_id,order.id)%></td>
+          <td><%=link_to 'Edit', edit_admin_user_order_path(order.user_id,order.id)%></td>
+          <td><%=link_to 'Delete', admin_user_order_path(order.user_id,order.id), method: :delete, data: {confirm: "Are you sure?"}%>
+          </td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>

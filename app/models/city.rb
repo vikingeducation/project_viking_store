@@ -1,5 +1,6 @@
 class City < ActiveRecord::Base
-
+  has_many :addresses
+  has_many :users, through: :addresses
 
   def self.top_three_cities
     City.select("c.name, COUNT(*) AS city_count")

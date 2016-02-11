@@ -1,0 +1,50 @@
+<%= form_for [:admin, @user, @order] do |f| %>
+  <ul>
+    <% @order.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+
+  <div class="row">
+    <div class="col-xs-2">
+    </div>
+    <div class="col-xs-10">
+      <h3>New Order For <%=@user.full_name%></h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Shipping Address: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.collection_select :shipping_id, @user.addresses, :id, :street_address, class: "form-control"%></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Billing Address: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.collection_select :billing_id, @user.addresses, :id, :street_address, class: "form-control"%></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Billing Card: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.collection_select :credit_card_id, @user.credit_cards, :id, :card_number, class: "form-control"%></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <br>
+      <p><%= f.submit "Create Order In Shopping Cart", class: "btn btn-block btn-info"%></p>
+    </div>
+  </div>
+
+<%end%>

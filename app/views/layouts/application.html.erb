@@ -10,11 +10,20 @@
 
   <div class="container">
     <div class="row">
-      <div class="col col-xs-12">
-        <h1 class="page-header text-center">Viking Store Admin Portal</h1>
-      </div>
+      <div class="col col-xs-12" id="rcorners">    
+        <div class="navbar">
+          <a class="navbar-brand" href="<%= root_path %>">
+            <h3>Viking Store</h3>
+          </a>
+          <h3>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Your Cart</a></li>
+            <li><%=link_to "Sign In", new_session_path%></li>
+          </ul>
+        </h3>
+        </div>
+      </div>   
     </div>
-
 
     <div class="row">
       <div class="col col-xs-12">
@@ -26,14 +35,23 @@
 
 
     <div class="row">
-      <div class="col-xs-3">
-        <%= render partial: 'shared/navbar'%>
-      </div>
-      <div class="col-xs-9">
+      <div class="col-xs-12">
         <%= yield %>
+        <br>
+        <br>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <p class="text-center">
+              Contact
+              <%= link_to "Admin Portal", admin_dashboard_path%>
+            </p>
+          </div>  
+          <div class="panel-body">
+            <p class="text-center">1-800-900-9010<br>vikingstore@gmail.com</p>
+          </div>
+        </div>
       </div>
-    </div>
-
+    </div> 
   </div>
 
 

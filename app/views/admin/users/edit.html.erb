@@ -1,0 +1,20 @@
+<div class="row" style="border: 2px solid grey">
+  <div class="col col-xs-12">
+    <h1 class="page-header text-center">
+        Edit User <%=@user.id%>: <%=@user.full_name%>
+    </h1>
+
+    <%= render partial: "form" %>
+
+    <br>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <br>
+        <p><h4><%=link_to "View Saved Addresses", admin_user_addresses_path(@user.id)%><h4></p>
+        <p><h4><%=link_to "Delete User", admin_user_path, data: {confirm: "Are you sure?"}%></h4></p>
+      </div>
+    </div>
+
+  </div>
+</div>

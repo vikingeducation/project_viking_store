@@ -1,16 +1,30 @@
 class Order < ActiveRecord::Base
-  has_many :order_contents
+  has_many   :order_contents
+  belongs_to :user
 
   def self.recent(num_days = 7)
     Order.processed.where("orders.checkout_date >= ? ", num_days.days.ago.beginning_of_day)
+  end
+
+  def self.processed
+    Order.where("checkout_date IS NOT NULL")
   end
 
   def self.total_revenue
     Order.processed.joins("JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id ").sum("quantity * price").to_f
   end
 
-  def self.processed
-    Order.where("checkout_date IS NOT NULL")
+  def self.user_order_info(user_id)
+    Order.select("orders.id, DATE(orders.created_at) as date, SUM(quantity * price) as totals, orders.checkout_date").
+    joins("JOIN order_contents ON order_id = orders.id").
+    joins("JOIN products ON order_contents.product_id = products.id").
+    where("orders.user_id = #{user_id}").
+    order("orders.id").group("orders.id")
+  end
+    
+  def self.order_totals(id)
+
+    Order.joins("JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id ").where("orders.id = #{id}").sum("quantity * price").to_f
   end
 
   def self.top_states
@@ -33,6 +47,16 @@ class Order < ActiveRecord::Base
 
   def self.order_totals
     Order.processed.select("orders.*, SUM(price * quantity) AS order_total").joins("JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id").group("orders.id")
+  end
+
+  def self.all_order_totals(id=nil)
+    ot = Order.select("c.name AS city, u.id as user_id, o.checkout_date, a.street_address, DATE(o.created_at) AS date_placed, o.id, SUM(price * quantity) AS totals")
+      .joins("AS o LEFT JOIN users AS u ON o.user_id = u.id")
+      .joins("LEFT JOIN addresses AS a ON u.billing_id = a.id")
+      .joins("LEFT JOIN cities AS c ON c.id=a.city_id")  
+      .joins("LEFT JOIN order_contents AS oc ON oc.order_id = o.id")
+      .joins("LEFT JOIN products AS p ON p.id = oc.product_id")
+      .order("u.id").group("u.id, o.id,a.id,c.name")
   end
 
   def self.orders_by_day
@@ -58,3 +82,14 @@ class Order < ActiveRecord::Base
     Order.joins "RIGHT JOIN GENERATE_SERIES((SELECT DATE(DATE_TRUNC('WEEK', MIN(checkout_date))) FROM orders), CURRENT_DATE, '1 WEEK'::INTERVAL) week ON DATE(DATE_TRUNC('WEEK', orders.checkout_date)) = week"
   end
 end
+
+
+  Order.find_by_sql("
+    select orders.id AS order, orders.user_id AS user, c.name AS city, a.street_address AS street_address, SUM(price * quantity) AS order_total 
+    from orders  
+     JOIN order_contents ON order_id = orders.id
+     JOIN products ON products.id = product_id 
+     JOIN addresses AS a ON a.id = orders.billing_id 
+     JOIN cities AS c ON c.id=a.city_id 
+     group by orders.id,c.name,a.street_address
+    order by orders.id")
