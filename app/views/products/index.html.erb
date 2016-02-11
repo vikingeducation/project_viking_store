@@ -1,0 +1,60 @@
+<div class="jumbotron" style="margin:0px;">
+  <div class="container">
+    <h1 class="page-header text-center">The Viking Store</h1>
+  </div>
+</div>
+<div class="jumbotron" style="margin:0px;background:#333333; ">
+  <div class="container">
+    <h2 class="text-center" style="color:white;">The Best Viking Gear on the Whole Web</h2>
+  </div>
+</div>
+
+<div class="jumbotron" style="margin:0px;padding:5px;background:white;">
+  <div class="container">
+    <h3 class="text-center">Choose from among our lineup of fine items below</h3>
+  </div>
+</div>
+
+<hr>
+
+<div class="container">
+  <div class="row" style="margin: 10px;">
+    <div class="col-xs-offset-8 col-xs-4">
+      <div class="form-inline">
+        <%= form_tag(products_path, method: "get", class: "form-inline") do %>
+        <div class="form-group">
+          <%= select_tag(:category_filter, options_from_collection_for_select(Category.all, "id","name"), class: "form-control", prompt: "Filter by Category") %>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-submit">Apply Filter</button>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+
+    <% @products.each do |product| %>
+      <div class="col-md-4">
+        <div class="panel"  style="background:#333333;color:white;">
+          <div class="panel-heading">
+            <h4 class="text-center"><%= product.name %><h4>
+          </div>
+          <div class="panel-body">
+            <div style="position:absolute;background:white;color:black;">
+              <%= number_to_currency(product.price) %>
+            </div>
+            <div style="float:right;width:100%;height:100%;">
+              <img src="http://placebear.com/330/220" alt=product>
+            </div>
+          </div>
+          <div class="panel-footer" style="background:#333333;color:white;">
+            <%= link_to "Add to Cart", "#", class: "btn btn-block btn-warning" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= will_paginate @products %>
+  </div>
+</div>

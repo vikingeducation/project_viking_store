@@ -1,0 +1,65 @@
+<%= form_for [:admin, @product] do |f| %>
+  <ul>
+    <% @product.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Product ID: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.text_field :id, placeholder: "N/A", disabled: true, class: "form-control" %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Name: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.text_field :name, class: "form-control"%></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Description: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.text_field :description, class: "form-control"%></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'SKU: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.text_field :sku, class: "form-control"%></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Price: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.text_field :price, class: "form-control"%></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Category: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.collection_select :category_id, Category.all, :id, :name, {}, class: "form-control"%></p>
+      <br>
+      <%= f.submit class: "btn btn-block btn-success"%>
+      <br>
+    </div>
+  </div>
+
+<%end%>

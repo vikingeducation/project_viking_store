@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h2><%= "#{@address.user.first_name} #{@address.user.last_name}'s Address'" %></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped table-bordered">
+      <tr>
+        <td>Owner ID</td>
+        <td><%= @address.user.id %></td>
+      </tr>
+      <tr>
+        <td>Owner Name</td>
+        <td><%= link_to "#{@address.user.first_name} #{@address.user.last_name} (Click to View Profile)", admin_user_path(@address.user.id)%></td>
+      </tr>
+      <tr>
+        <td>Street</td>
+        <td><%= @address.street_address %></td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td><%= @address.city.name %></td>
+      </tr>
+      <tr>
+        <td>State</td>
+        <td><%= @address.state.name %></td>
+      </tr>
+      <tr>
+        <td>Zipcode</td>
+        <td><%= @address.zip_code %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to "Edit #{@address.class}", edit_admin_address_path(@address.id, user_id: "#{@address.user_id}") %>
+  </div>
+  <div class="col-xs-12">
+    <%= link_to "Delete #{@address.class}", admin_address_path(@address.id, user_id: "#{@address.user_id}"), method: "delete" , data: {confirm: "Are you sure?"}%>
+  </div>
+</div>

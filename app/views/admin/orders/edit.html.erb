@@ -1,0 +1,66 @@
+<div class="row" style="border: 2px solid grey;">
+  <div class="col col-xs-12">
+    <h1 class="page-header text-center">Edit Order #<%= "#{@order.id}"%></h1>
+
+    <%= render partial: "form" %>
+
+    <br>
+  </div>
+</div>
+
+<div class="row" style="border: 2px solid grey;">
+  <div class="col col-xs-12">
+    <h1 class="page-header text-center">Edit Order Contents</h1>
+    <%= form_for [:admin, @order] do |f| %>
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total Price</th>
+          <th>REMOVE</th>
+        </tr>
+          <%= f.fields_for :order_contents do |oc_fields| %>
+            <tr>
+              <td><%= oc_fields.text_field :product_id, value: oc_fields.object.product.id, disabled: true %></td>
+              <td><%= oc_fields.text_field :quantity, value: oc_fields.object.quantity %></td>
+              <td><%= number_to_currency(oc_fields.object.product.price) %></td>
+              <td><%= number_to_currency(oc_fields.object.value) %></td>
+              <td><%= link_to "remove", admin_order_content_path(oc_fields.object.id, order_id: "#{@order.id}"), method: "delete", data: {confirm: "Are you sure?"} %></td>
+            </tr>
+        <% end %>
+      </table>
+      <tr><%= f.submit "Update Order Contents", class: "btn btn-block btn-primary" %></tr>
+    <% end %>
+    <div class="text-center" style="margin: 15px;">
+      <%= link_to "Delete Order", admin_order_path(@order), method: "delete", data: {confirm: "Are you sure?"} %>
+    </div>
+
+    <br>
+  </div>
+</div>
+
+
+  <div class="row" style="border: 2px solid grey;">
+    <div class="col col-xs-12">
+      <h1 class="page-header text-center">Add Products to Order</h1>
+
+      <%= form_for [:admin, @order] do |f| %>
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+        </tr>
+        <% 5.times do %>
+          <%= f.fields_for :order_contents, OrderContent.new do |oc| %>
+            <tr>
+              <td><%= oc.collection_select :product_id, Product.all, :id, :name %></td>
+              <td><%= oc.text_field :quantity, value: ""%></td>
+            </tr>
+          <% end %>
+        <% end %>
+        </table>
+        <%= f.submit class: "btn btn-block btn-primary" %>
+      <% end %>
+    </div>
+  </div>
