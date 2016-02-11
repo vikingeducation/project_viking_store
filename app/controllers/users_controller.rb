@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @user.addresses.build
-    @user.addresses.build
   end
 
   def create
@@ -16,7 +15,6 @@ class UsersController < ApplicationController
       flash.notice = "It failed"
       render :new
     end
-
   end
 
 

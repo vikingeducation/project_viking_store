@@ -4,7 +4,7 @@
     <div class="col-xs-6">
 
      <%= user_field.fields_for :addresses do |addy_field| %>
-      <h3>Saved Address (Optional)</h3>
+      <h3>Saved Address</h3>
       <p>
         <%= addy_field.label "Street Address" %><br>
         <%= addy_field.text_field :street_address %>

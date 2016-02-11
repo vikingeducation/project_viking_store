@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :sessions, only: [:index, :new, :create, :delete]
+  resource :sessions, only: [:new, :create, :destroy]
   resources :users
   resources :products do
     get 'carts', :on => :collection

@@ -16,6 +16,12 @@ class SessionsController < ApplicationController
 
 
   def destroy
-
+    if sign_out
+      flash.notice = "You successfully signed out"
+      redirect_to products_path
+    else
+      flash.now.notice = "Sorry you couldn't log out"
+      redirect_to products_path
+    end
   end
 end
