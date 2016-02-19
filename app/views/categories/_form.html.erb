@@ -1,0 +1,26 @@
+<%= form_for(@category) do |f| %>
+  <ul>
+    <% @category.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Category ID: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.text_field :id, placeholder: "N/A", disabled: true, class: "form-control" %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <p><%= f.label 'Name: ', strong: true%></p>
+    </div>
+    <div class="col-xs-10">
+      <p><%= f.text_field :name, class: "form-control"%></p>
+      <br>
+      <%= f.submit class: "btn btn-block btn-success"%>
+      <br>
+    </div>
+  </div>
+<%end%>

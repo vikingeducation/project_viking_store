@@ -1,0 +1,74 @@
+<%= form_for(@user) do |user_fields| %>
+  <ul>
+    <% @user.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+
+  <div class="row">
+    
+    <div class="col-xs-5">
+      <% index = 1 %>
+      <%= user_fields.fields_for :addresses do |address_fields| %>
+       
+        <h4> <%= address_fields.label "Saved Address: #{index}" %></h4>    
+       
+        <p> <%= address_fields.label :street_address %></p>       
+        <p><%= address_fields.text_field :street_address, class: "form-control" %></p>
+       
+        <p> <%= address_fields.label :city %></p> 
+        <p> <%= address_fields.text_field :city, class: "form-control" %></p> 
+       
+        <table>
+          <thead>
+            <tr>
+              <td> <%= address_fields.label :state %> </td>
+              <td> <%= address_fields.label :zip_code %> </td>
+            </tr>
+          </thead>     
+          <tbody>
+            <tr>
+              <td> <%= address_fields.text_field :state %> </td>
+              <td> <%= address_fields.text_field :zip_code %> </td>
+            </tr>
+          </tbody>
+        </table>    
+        <% if address_fields.object.persisted? %>
+          <p> <%= address_fields.label :_destroy, "Delete Address?" %>
+              <%= address_fields.check_box :_destroy %></p> 
+        <% end %> 
+        <br>
+        <% index += 1 %>
+      <% end %>
+    </div>
+
+    <div class="col-xs-5">
+      <h3>Account Information</h3>
+      <br>
+      <p><%= user_fields.label 'Email Address'%></p>      
+      <p><%= user_fields.text_field :email, class: "form-control"%></p>
+
+      <p><%= user_fields.label 'Confirm Email'%></p>      
+      <p><%= user_fields.text_field :email, class: "form-control"%></p>
+
+      <p><%= label_tag 'Password'%></p>      
+      <p><%= password_field_tag 'user[password]', nil, class: "form-control"%></p>
+      
+      <p><%= label_tag 'Confirm Password'%></p> 
+      <p><%= password_field_tag 'user[confirm_password]', nil, class: "form-control"%></p>
+
+      <p><%= user_fields.label 'First Name'%></p>      
+      <p><%= user_fields.text_field :first_name, class: "form-control"%></p>
+
+      <p><%= user_fields.label 'Last Name'%></p> 
+      <p><%= user_fields.text_field :last_name, class: "form-control"%></p>
+
+      <p><%= user_fields.label 'Telephone No (optional)'%></p>      
+      <p><%= user_fields.text_field :last_name, class: "form-control"%></p>
+  
+      <h3 class="text-center">Complete Sign Up</h3>
+      <p><%= user_fields.submit "Sign Up", class: "btn btn-block btn-info"%></p>
+    </div>
+  </div>
+
+<%end%>

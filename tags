@@ -1,0 +1,94 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AddCcVtoCreditCard	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150310001747_add_cc_vto_credit_card.rb	/^class AddCcVtoCreditCard < ActiveRecord::Migration$/;"	c
+AddCreditCardToOrder	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150310000301_add_credit_card_to_order.rb	/^class AddCreditCardToOrder < ActiveRecord::Migration$/;"	c
+Address	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/address.rb	/^class Address < ActiveRecord::Base$/;"	c
+Application	/Users/kitlangton/Viking/Unit9/project_viking_store/config/application.rb	/^  class Application < Rails::Application$/;"	c	class:SolutionVikingStore
+ApplicationController	/Users/kitlangton/Viking/Unit9/project_viking_store/app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationHelper	/Users/kitlangton/Viking/Unit9/project_viking_store/app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+BurnCheckedOutWithFire	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150228223038_burn_checked_out_with_fire.rb	/^class BurnCheckedOutWithFire < ActiveRecord::Migration$/;"	c
+Category	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/category.rb	/^class Category < ActiveRecord::Base$/;"	c
+ChangeOrderContentsModelName	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150722160520_change_order_contents_model_name.rb	/^class ChangeOrderContentsModelName < ActiveRecord::Migration$/;"	c
+ChangeTableNameBack	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150722163056_change_table_name_back.rb	/^class ChangeTableNameBack < ActiveRecord::Migration$/;"	c
+City	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/city.rb	/^class City < ActiveRecord::Base$/;"	c
+ClassMethods	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/concerns/recentable.rb	/^  module ClassMethods$/;"	m	class:Recentable
+CreateAddresses	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034526_create_addresses.rb	/^class CreateAddresses < ActiveRecord::Migration$/;"	c
+CreateCategories	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034537_create_categories.rb	/^class CreateCategories < ActiveRecord::Migration$/;"	c
+CreateCities	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034542_create_cities.rb	/^class CreateCities < ActiveRecord::Migration$/;"	c
+CreateCreditCards	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034605_create_credit_cards.rb	/^class CreateCreditCards < ActiveRecord::Migration$/;"	c
+CreateOrderContents	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034915_create_order_contents.rb	/^class CreateOrderContents < ActiveRecord::Migration$/;"	c
+CreateOrders	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034612_create_orders.rb	/^class CreateOrders < ActiveRecord::Migration$/;"	c
+CreateProducts	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034617_create_products.rb	/^class CreateProducts < ActiveRecord::Migration$/;"	c
+CreateStates	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034633_create_states.rb	/^class CreateStates < ActiveRecord::Migration$/;"	c
+CreateUsers	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034639_create_users.rb	/^class CreateUsers < ActiveRecord::Migration$/;"	c
+CreditCard	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/credit_card.rb	/^class CreditCard < ActiveRecord::Base$/;"	c
+DashboardController	/Users/kitlangton/Viking/Unit9/project_viking_store/app/controllers/dashboard_controller.rb	/^class DashboardController < ApplicationController$/;"	c
+DashboardHelper	/Users/kitlangton/Viking/Unit9/project_viking_store/app/helpers/dashboard_helper.rb	/^module DashboardHelper$/;"	m
+MakeCreditCardsAString	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150728225937_make_credit_cards_a_string.rb	/^class MakeCreditCardsAString < ActiveRecord::Migration$/;"	c
+MakeProductSkuAString	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150728230632_make_product_sku_a_string.rb	/^class MakeProductSkuAString < ActiveRecord::Migration$/;"	c
+Order	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^class Order < ActiveRecord::Base$/;"	c
+OrderContent	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order_content.rb	/^class OrderContent < ActiveRecord::Base$/;"	c
+Product	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/product.rb	/^class Product < ActiveRecord::Base$/;"	c
+Recentable	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/concerns/recentable.rb	/^module Recentable$/;"	m
+RemoveNullConstraintFromProductCategoryId	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150722170327_remove_null_constraint_from_product_category_id.rb	/^class RemoveNullConstraintFromProductCategoryId < ActiveRecord::Migration$/;"	c
+SolutionVikingStore	/Users/kitlangton/Viking/Unit9/project_viking_store/config/application.rb	/^module SolutionVikingStore$/;"	m
+State	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/state.rb	/^class State < ActiveRecord::Base$/;"	c
+User	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^class User < ActiveRecord::Base$/;"	c
+average_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.average_value$/;"	F	class:Order
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034526_create_addresses.rb	/^  def change$/;"	f	class:CreateAddresses
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034537_create_categories.rb	/^  def change$/;"	f	class:CreateCategories
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034542_create_cities.rb	/^  def change$/;"	f	class:CreateCities
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034605_create_credit_cards.rb	/^  def change$/;"	f	class:CreateCreditCards
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034612_create_orders.rb	/^  def change$/;"	f	class:CreateOrders
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034617_create_products.rb	/^  def change$/;"	f	class:CreateProducts
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034633_create_states.rb	/^  def change$/;"	f	class:CreateStates
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034639_create_users.rb	/^  def change$/;"	f	class:CreateUsers
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150225034915_create_order_contents.rb	/^  def change$/;"	f	class:CreateOrderContents
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150310000301_add_credit_card_to_order.rb	/^  def change$/;"	f	class:AddCreditCardToOrder
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150310001747_add_cc_vto_credit_card.rb	/^  def change$/;"	f	class:AddCcVtoCreditCard
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150722160520_change_order_contents_model_name.rb	/^  def change$/;"	f	class:ChangeOrderContentsModelName
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150722163056_change_table_name_back.rb	/^  def change$/;"	f	class:ChangeTableNameBack
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150722170327_remove_null_constraint_from_product_category_id.rb	/^  def change$/;"	f	class:RemoveNullConstraintFromProductCategoryId
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150728225937_make_credit_cards_a_string.rb	/^  def change$/;"	f	class:MakeCreditCardsAString
+change	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150728230632_make_product_sku_a_string.rb	/^  def change$/;"	f	class:MakeProductSkuAString
+creation_date	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def creation_date$/;"	f
+down	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150228223038_burn_checked_out_with_fire.rb	/^  def down$/;"	f	class:BurnCheckedOutWithFire
+full_name	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def full_name$/;"	f	class:User
+generate_address	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_address(user_id)$/;"	f
+generate_addresses_for_user	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_addresses_for_user(user_id)$/;"	f
+generate_category	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_category$/;"	f
+generate_city	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_city$/;"	f
+generate_contents	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_contents(order_id)$/;"	f
+generate_credit_cards_for_checked_out_orders	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_credit_cards_for_checked_out_orders$/;"	f
+generate_order	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_order$/;"	f
+generate_product	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_product$/;"	f
+generate_state	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_state(state)$/;"	f
+generate_user	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def generate_user$/;"	f
+has_cart?	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def has_cart?(user_id)$/;"	f
+highest_average_order_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.highest_average_order_value$/;"	F	class:User
+highest_lifetime_order_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.highest_lifetime_order_value$/;"	F	class:User
+highest_order_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.highest_order_value$/;"	F	class:User
+index	/Users/kitlangton/Viking/Unit9/project_viking_store/app/controllers/dashboard_controller.rb	/^  def index$/;"	f	class:DashboardController
+join_days	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.join_days$/;"	F	class:Order
+join_weeks	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.join_weeks$/;"	F	class:Order
+largest_value	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.largest_value$/;"	F	class:Order
+midnight_tonight	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def midnight_tonight$/;"	f
+order_totals	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.order_totals$/;"	F	class:Order
+orders_by_day	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.orders_by_day$/;"	F	class:Order
+orders_by_week	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.orders_by_week$/;"	F	class:Order
+placement_date	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def placement_date(user)$/;"	f
+processed	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.processed$/;"	F	class:Order
+random_price	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def random_price$/;"	f
+random_user_address	/Users/kitlangton/Viking/Unit9/project_viking_store/db/seeds.rb	/^def random_user_address(user_id)$/;"	f
+recent	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/concerns/recentable.rb	/^    def recent(num_days = 7)$/;"	f	class:Recentable.ClassMethods
+recent	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.recent(num_days = 7)$/;"	F	class:Order
+top_cities	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.top_cities$/;"	F	class:User
+top_states	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.top_states$/;"	F	class:Order
+top_states	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/user.rb	/^  def self.top_states$/;"	F	class:User
+total_revenue	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order.rb	/^  def self.total_revenue$/;"	F	class:Order
+total_revenue	/Users/kitlangton/Viking/Unit9/project_viking_store/app/models/order_content.rb	/^  def self.total_revenue$/;"	F	class:OrderContent
+up	/Users/kitlangton/Viking/Unit9/project_viking_store/db/migrate/20150228223038_burn_checked_out_with_fire.rb	/^  def up$/;"	f	class:BurnCheckedOutWithFire

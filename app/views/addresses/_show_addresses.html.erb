@@ -1,0 +1,32 @@
+<br>
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th> 
+      <th>ORDERS</th>
+      <th>SHOW</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@user_info.each do |user_info|%>
+    <tr>
+      <td><%=user_info.id%></td>
+      <td><%=link_to "#{user_info.first_name} #{user_info.last_name}", user_path(user_info.id)%></td>
+      <td><%=user_info.street_address%></td>
+      <td><%=user_info.city%></td>
+      <td><%=user_info.state%></td>
+      <td><%=user_info.totals%></td>
+      <td><%=link_to 'Show', user_address_path(user_info.id,user_info.address_id)%></td>
+      <td><%=link_to 'Edit', edit_user_address_path(user_info.id,user_info.address_id)%></td>
+      <td><%=link_to 'Delete', user_address_path(user_info.id,user_info.address_id), method: :delete, data: {confirm: "Are you sure?"}%>
+      </td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>

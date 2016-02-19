@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col col-xs-12">
+    <h1 class="page-header text-center">Product Categories</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col col-xs-12">
+    <a class="btn btn-success btn-block" href=<%=new_category_path%> role="button">
+        Add New Category
+    </a>
+    <br>
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>SHOW</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%@categories.each do |category|%>
+        <tr>
+          <td><%=category.id%></td>
+          <td><%=category.name%></td>
+          <td><%=link_to 'Show', category_path(category.id)%></td>
+          <td><%=link_to 'Edit', edit_category_path(category.id)%></td>
+          <td><%=link_to 'Delete', category, method: "delete" %></td>
+        </tr>
+        <%end%>
+      <tbody>
+    </table>
+  </div>
+</div>
