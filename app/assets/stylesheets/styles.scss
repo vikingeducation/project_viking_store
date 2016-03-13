@@ -1,22 +1,24 @@
-#topnav{
-  padding: 0 10px;
-  border-bottom: 1px solid gray;
+#index{
+  #topnav{
+    padding: 0 10px;
+    border-bottom: 1px solid gray;
 
-  .logo-container{
-    img{
-      width:45px;
-      height: 45px;
-      margin-top: 2px;
-      vertical-align: middle;
-    }
-    a{
-      text-decoration: none;
-      color: black;
-      font-size: 140%;
+    .logo-container{
+      img{
+        width:45px;
+        height: 45px;
+        margin-top: 2px;
+        vertical-align: middle;
+      }
+      a{
+        text-decoration: none;
+        color: black;
+        font-size: 140%;
+      }
     }
   }
-}
 
-.stats{
-  border: 1px solid gray;
+  .stats{
+    border: 1px solid gray;
+  }
 }

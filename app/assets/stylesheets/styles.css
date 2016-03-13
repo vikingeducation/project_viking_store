@@ -1,17 +1,14 @@
-#topnav {
+#index #topnav {
   padding: 0 10px;
   border-bottom: 1px solid gray; }
-  #topnav .logo-container img {
+  #index #topnav .logo-container img {
     width: 45px;
     height: 45px;
     margin-top: 2px;
     vertical-align: middle; }
-  #topnav .logo-container a {
+  #index #topnav .logo-container a {
     text-decoration: none;
     color: black;
     font-size: 140%; }
-
-.stats {
+#index .stats {
   border: 1px solid gray; }
-
-/*# sourceMappingURL=styles.css.map */
