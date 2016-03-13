@@ -35,6 +35,13 @@ def generate_category
 end
 
 # Creates a random two-digit number between 0 and 100. You probably used Faker::Commerce.price, which is great, but that method doesn't let us seed the database and it gave us inconsistent pricing.
+
+# floor - Returns the largest integer less than or equal to float.
+# 1.2.floor     #=> 1
+# 2.0.floor     #=> 2
+# (-1.2).floor  #=> -2
+# (-2.0).floor  #=> -2
+
 def random_price
   (rand(0..100.0) * 100).floor/100.0
 end
@@ -43,6 +50,8 @@ end
 def generate_product
   p = Product.new
   p[:name]        = Faker::Commerce.product_name
+  # Pluck returns an Array of attribute values type-casted to match the plucked column names, if they can be deduced.
+  # Sample chooses a random eleent or n random elements from the array.
   p[:category_id] = Category.pluck(:id).sample
   p[:description] = Faker::Lorem.sentence
   p[:sku]         = Faker::Code.ean
@@ -87,6 +96,7 @@ def generate_addresses_for_user(user_id)
 end
 
 # Returns the timestamp for midnight of the day the file is run.
+# Time.now.to_date returns todays date, adding 1 returns tomorrows date, changing back to time from date returns tomorrow at 00:00 (which is today's midnight.)
 def midnight_tonight
   (Time.now.to_date + 1).to_time
 end
@@ -160,6 +170,11 @@ def generate_order
   # 2 kinds of users can have orders built
   # a user with a billing address is one
   # a user who still needs a shopping cart built is the other
+  # Not having an ORDER IS NULL
+  # So if a user has a billing_id or doesn't have a order where checkout_date IS NULL then we're going to assign them an order. Why I wonder.
+  # Well for one, there are users without billing_ids so if a user has a billing_id then we are going to make them an order.
+  # If a user has no Orders where the checkout_date is NULL, then we're going to make them an order, so people without shopping carts.
+  # in the next part, beause we've made them an order, we're going to give that order a random checkout_date
   if user[:billing_id] || !has_cart?(user[:id])
     o = Order.new
     o[:user_id]       = user.id
@@ -173,15 +188,18 @@ def generate_order
     end
 
     o.save
+    # Now we're populating that order with products via a join table.
     generate_contents(o[:id])
   end
 end
 
 # Create some CreditCard records for users who have an order.
 def generate_credit_cards_for_checked_out_orders
+  # Grabbing all orders with unique ids and have been checked out.
   checked_out_orders = Order.all.select("DISTINCT user_id").
                                 where("checkout_date IS NOT NULL")
 
+  # For each of those orders we're making a new credit card object.
   checked_out_orders.each do |order|
     card = CreditCard.new
     card[:user_id] = order.user_id
@@ -196,6 +214,7 @@ def generate_credit_cards_for_checked_out_orders
 
     card.save
 
+    # Getting all other orders by the current user that have also been converted from shopping trolley to proper order and setting those orders credit card ids to this card.id.
     affiliated_orders = Order.where("user_id = ?", order.user_id).where("checkout_date IS NOT NULL")
     affiliated_orders.each do |aff_ord|
       aff_ord.credit_card_id = card.id
