@@ -21,28 +21,7 @@
           <h3>Last 7 Days</h3>
         </header>
         <div class="stats-table">
-          <table class="table table-striped">
-            <tr>
-              <th>Item</th>
-              <th>Data</th> 
-            </tr>
-            <tr>
-              <td>New Users</td>
-              <td>100</td> 
-            </tr>
-            <tr>
-              <td>Orders</td>
-              <td>150</td> 
-            </tr>
-            <tr>
-              <td>New Products</td>
-              <td>10</td> 
-            </tr>
-            <tr>
-              <td>Revenue</td>
-              <td>$500000</td> 
-            </tr>
-          </table>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users","100"],["Orders","150"],["New Products","10"],["Revenue","$500000"]]} %>
         </div>
       </section>
       <section>
@@ -50,28 +29,7 @@
           <h3>Last 30 Days</h3>
         </header>
         <div class="stats-table">
-          <table class="table table-striped">
-            <tr>
-              <th>Item</th>
-              <th>Data</th> 
-            </tr>
-            <tr>
-              <td>New Users</td>
-              <td>100</td> 
-            </tr>
-            <tr>
-              <td>Orders</td>
-              <td>150</td> 
-            </tr>
-            <tr>
-              <td>New Products</td>
-              <td>10</td> 
-            </tr>
-            <tr>
-              <td>Revenue</td>
-              <td>$500000</td> 
-            </tr>
-          </table>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users","100"],["Orders","150"],["New Products","10"],["Revenue","$500000"]]} %>
         </div>
       </section>
       <section>
@@ -80,26 +38,7 @@
         </header>
         <div class="stats-table">
           <table class="table table-striped">
-            <tr>
-              <th>Item</th>
-              <th>Data</th> 
-            </tr>
-            <tr>
-              <td>Users</td>
-              <td>100</td> 
-            </tr>
-            <tr>
-              <td>Orders</td>
-              <td>150</td> 
-            </tr>
-            <tr>
-              <td>Products</td>
-              <td>10</td> 
-            </tr>
-            <tr>
-              <td>Revenue</td>
-              <td>$500000</td> 
-            </tr>
+            <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["Users","100"],["Orders","150"],["Products","10"],["Revenue","$500000"]]} %>
           </table>
         </div>
       </section>
@@ -114,24 +53,7 @@
           <h3>Top 3 States Users Live In (billing)</h3>
         </header>
         <div class="stats-table">
-          <table class="table table-striped">
-            <tr>
-              <th>Item</th>
-              <th>Data</th> 
-            </tr>
-            <tr>
-              <td>California</td>
-              <td>23</td> 
-            </tr>
-            <tr>
-              <td>Texas</td>
-              <td>10</td> 
-            </tr>
-            <tr>
-              <td>Oregon</td>
-              <td>3</td> 
-            </tr>
-          </table>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["California","23"],["Texas","10"],["Oregon","3"]]} %>
         </div>
       </section>
       <section>
@@ -139,24 +61,7 @@
           <h3>Top 3 Cities Users Live In (billing)</h3>
         </header>
         <div class="stats-table">
-          <table class="table table-striped">
-            <tr>
-              <th>Item</th>
-              <th>Data</th> 
-            </tr>
-            <tr>
-              <td>Los Angeles</td>
-              <td>8</td> 
-            </tr>
-            <tr>
-              <td>San Francisco</td>
-              <td>5</td> 
-            </tr>
-            <tr>
-              <td>Austin</td>
-              <td>3</td> 
-            </tr>
-          </table>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["Los Angeles","8"],["San Francisco","5"],["Austin","3"]]} %>
         </div>
       </section>
       <section>
@@ -164,33 +69,7 @@
           <h3>Top User With...</h3>
         </header>
         <div class="stats-table">
-          <table class="table table-striped">
-            <tr>
-              <th>Item</th>
-              <th>User</th>
-              <th>Quantity</th>
-            </tr>
-            <tr>
-              <td>Highest Single Order Value</td>
-              <td>Joe Smith</td>
-              <td>$650</td> 
-            </tr>
-            <tr>
-              <td>Highest Lifetime Value</td>
-              <td>Jane Cook</td>
-              <td>$1500</td> 
-            </tr>
-            <tr>
-              <td>Highest Average Order Value</td>
-              <td>Jimmy Boffa</td>
-              <td>$300</td> 
-            </tr>
-            <tr>
-              <td>Most Orders Placed</td>
-              <td>Jill Juno</td>
-              <td>12</td>
-            </tr>
-          </table>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users","100"],["Orders","150"],["New Products","10"],["Revenue","$500000"]]} %>
         </div>
       </section>
     </article>
@@ -206,28 +85,7 @@
           <h3>Last 7 Days</h3>
         </header>
         <div class="stats-table">
-          <table class="table table-striped">
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-            <tr>
-              <td>Numbers of Orders</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td>$500000</td>
-            </tr>
-            <tr>
-              <td>Average Order Value</td>
-              <td>$150</td>
-            </tr>
-            <tr>
-              <td>Largest Order Value</td>
-              <td>$600</td>
-            </tr>
-          </table>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users","100"],["Orders","150"],["New Products","10"],["Revenue","$500000"]]} %>
         </div>
       </section>
       <section>
@@ -235,28 +93,7 @@
           <h3>Last 30 Days</h3>
         </header>
         <div class="stats-table">
-          <table class="table table-striped">
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-            <tr>
-              <td>Numbers of Orders</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td>$500000</td>
-            </tr>
-            <tr>
-              <td>Average Order Value</td>
-              <td>$150</td>
-            </tr>
-            <tr>
-              <td>Largest Order Value</td>
-              <td>$600</td>
-            </tr>
-          </table>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users","100"],["Orders","150"],["New Products","10"],["Revenue","$500000"]]} %>
         </div>
       </section>
       <section>
@@ -264,28 +101,7 @@
           <h3>Total</h3>
         </header>
         <div class="stats-table">
-          <table class="table table-striped">
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-            <tr>
-              <td>Numbers of Orders</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td>$500000</td>
-            </tr>
-            <tr>
-              <td>Average Order Value</td>
-              <td>$150</td>
-            </tr>
-            <tr>
-              <td>Largest Order Value</td>
-              <td>$600</td>
-            </tr>
-          </table>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users","100"],["Orders","150"],["New Products","10"],["Revenue","$500000"]]} %>
         </div>
       </section>
     </article>
@@ -299,48 +115,7 @@
           <h3>Orders by day</h3>
         </header>
         <div class="stats-table">
-          <table class="table table-striped">
-            <tr>
-              <th>Day</th>
-              <th>Quantity</th>
-              <th>Value</th>
-            </tr>
-            <tr>
-              <td>Today</td>
-              <td>3</td>
-              <td>$500</td> 
-            </tr>
-            <tr>
-              <td>Yesterday</td>
-              <td>5</td>
-              <td>$500</td> 
-            </tr>
-            <tr>
-              <td>8/22</td>
-              <td>3</td>
-              <td>$500</td> 
-            </tr>
-            <tr>
-              <td>8/21</td>
-              <td>1</td>
-              <td>$500</td>
-            </tr>
-            <tr>
-              <td>8/20</td>
-              <td>2</td>
-              <td>$500</td>
-            </tr>
-            <tr>
-              <td>8/19</td>
-              <td>4</td>
-              <td>$500</td>
-            </tr>
-            <tr>
-              <td>8/18</td>
-              <td>3</td>
-              <td>$200</td>
-            </tr>
-          </table>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users","100"],["Orders","150"],["New Products","10"],["Revenue","$500000"]]} %>
         </div>
       </section>
       <section>
@@ -348,48 +123,7 @@
           <h3>Orders by Week</h3>
         </header>
         <div class="stats-table">
-          <table class="table table-striped">
-            <tr>
-              <th>Day</th>
-              <th>Quantity</th>
-              <th>Value</th>
-            </tr>
-            <tr>
-              <td>8/22</td>
-              <td>3</td>
-              <td>$500</td> 
-            </tr>
-            <tr>
-              <td>8/15</td>
-              <td>5</td>
-              <td>$500</td>
-            </tr>
-            <tr>
-              <td>8/8</td>
-              <td>3</td>
-              <td>$500</td>
-            </tr>
-            <tr>
-              <td>8/1</td>
-              <td>1</td>
-              <td>$500</td>
-            </tr>
-            <tr>
-              <td>7/25</td>
-              <td>2</td>
-              <td>$500</td>
-            </tr>
-            <tr>
-              <td>7/18</td>
-              <td>4</td>
-              <td>$500</td>
-            </tr>
-            <tr>
-              <td>7/11</td>
-              <td>3</td>
-              <td>$200</td>
-            </tr>
-          </table>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users","100"],["Orders","150"],["New Products","10"],["Revenue","$500000"]]} %>
         </div>
       </section>
     </article>

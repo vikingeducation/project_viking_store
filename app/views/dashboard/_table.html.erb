@@ -1,0 +1,15 @@
+<table class="table table-striped">
+  <tr>
+    <% headers.each do |header| %>
+      <th><%= header %></th>
+    <% end %>
+  </tr>
+    <% rows.each do |row| %>
+      <tr>
+        <% row.each do |data| %>
+          <td><%= data %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  <tr>
+</table>
