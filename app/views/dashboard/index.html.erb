@@ -38,7 +38,7 @@
         </header>
         <div class="stats-table">
           <table class="table table-striped">
-            <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["Users","100"],["Orders","150"],["Products","10"],["Revenue","$500000"]]} %>
+            <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["Users",@total_users],["Orders","150"],["Products","10"],["Revenue","$500000"]]} %>
           </table>
         </div>
       </section>
