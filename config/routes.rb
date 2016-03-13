@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'dashboard#view'
-  get '/dashboard' => 'dashboard#view'
+  root 'dashboard#index'
+  get '/dashboard' => 'dashboard#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

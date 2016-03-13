@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
 
-  def view
+  def index
   end
 
 end
