@@ -53,7 +53,7 @@
           <h3>Top 3 States Users Live In (billing)</h3>
         </header>
         <div class="stats-table">
-          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["California","23"],["Texas","10"],["Oregon","3"]]} %>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[[@best_state_name,@best_state_total],[@second_state_name,@second_state_total],[@third_state_name,@third_state_total]]} %>
         </div>
       </section>
       <section>

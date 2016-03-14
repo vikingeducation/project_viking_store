@@ -13,6 +13,13 @@ class DashboardController < ApplicationController
     @orders_last_seven_days = Order.created_since_days_ago(7)
     @products_last_seven_days = Product.created_since_days_ago(7)
     @total_revenue_last_seven_days = OrderContent.total_revenue_since_days_ago(7)
+    top_three_states = State.top_three_states
+    @best_state_name = top_three_states.first.name
+    @best_state_total = top_three_states.first.total
+    @second_state_name = top_three_states.second.name
+    @second_state_total = top_three_states.second.total
+    @third_state_name = top_three_states.third.name
+    @third_state_total = top_three_states.third.total
   end
 
 end

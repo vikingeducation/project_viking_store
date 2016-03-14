@@ -13,9 +13,4 @@ class Order < ActiveRecord::Base
   def self.created_since_days_ago(number)
     Order.all.where('checkout_date >= ?', number.days.ago).count
   end
-
-  def self.top_three_states
-    # This returns 1 order for each distinct user_id in the orders list
-    Order.select("DISTINCT ON (user_id) *")
-  end
 end
