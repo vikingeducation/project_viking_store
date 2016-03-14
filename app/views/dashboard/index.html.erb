@@ -21,7 +21,7 @@
           <h3>Last 7 Days</h3>
         </header>
         <div class="stats-table">
-          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users","100"],["Orders","150"],["New Products","10"],["Revenue","$500000"]]} %>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users",@users_last_seven_days],["Orders",@orders_last_seven_days],["New Products",@products_last_seven_days],["Revenue","$#{@total_revenue_last_seven_days}"]]} %>
         </div>
       </section>
       <section>
@@ -29,7 +29,7 @@
           <h3>Last 30 Days</h3>
         </header>
         <div class="stats-table">
-          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users",@users_last_thirty_days],["Orders",@orders_last_thirty_days],["New Products",@products_last_thirty_days],["Revenue","$500000"]]} %>
+          <%= render :partial => "table", :locals => {:headers => ["Item","Data"], :rows =>[["New Users",@users_last_thirty_days],["Orders",@orders_last_thirty_days],["New Products",@products_last_thirty_days],["Revenue","$#{@total_revenue_last_thirty_days}"]]} %>
         </div>
       </section>
       <section>

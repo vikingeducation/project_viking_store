@@ -9,6 +9,10 @@ class DashboardController < ApplicationController
     @orders_last_thirty_days = Order.new.created_since_days_ago(30)
     @products_last_thirty_days = Product.new.created_since_days_ago(30)
     @total_revenue_last_thirty_days = OrderContent.new.total_revenue_since_days_ago(30)
+    @users_last_seven_days = User.new.created_since_days_ago(7)
+    @orders_last_seven_days = Order.new.created_since_days_ago(7)
+    @products_last_seven_days = Product.new.created_since_days_ago(7)
+    @total_revenue_last_seven_days = OrderContent.new.total_revenue_since_days_ago(7)
   end
 
 end
