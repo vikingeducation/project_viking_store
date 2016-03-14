@@ -20,6 +20,13 @@ class DashboardController < ApplicationController
     @second_state_total = top_three_states.second.total
     @third_state_name = top_three_states.third.name
     @third_state_total = top_three_states.third.total
+    top_three_cities = City.top_three_cities
+    @best_city_name = top_three_cities.first.name
+    @best_city_total = top_three_cities.first.total
+    @second_city_name = top_three_cities.second.name
+    @second_city_total = top_three_cities.second.total
+    @third_city_name = top_three_cities.third.name
+    @third_city_total = top_three_cities.third.total
   end
 
 end
