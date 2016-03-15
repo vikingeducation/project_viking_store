@@ -27,9 +27,14 @@ class DashboardController < ApplicationController
     @second_city_total = top_three_cities.second.total
     @third_city_name = top_three_cities.third.name
     @third_city_total = top_three_cities.third.total
-    biggest_order = User.biggest_order
-    @biggest_order_name = "#{biggest_order.first.first_name} #{biggest_order.first.last_name}"
-    @biggest_order_amount = biggest_order.first.amount.to_s
+    biggest_single_order = User.biggest_single_order
+    @biggest_order_name = "#{biggest_single_order.first.first_name} #{biggest_single_order.first.last_name}"
+    @biggest_order_amount = biggest_single_order.first.amount.to_s
+    biggest_lifetime_spender = User.biggest_lifetime_spender
+    @biggest_lifetime_spender_name = "#{biggest_lifetime_spender.first.first_name} #{biggest_lifetime_spender.first.last_name}"
+    @biggest_lifetime_spender_amount = biggest_lifetime_spender.first.amount.to_s
+
+
   end
 
 end

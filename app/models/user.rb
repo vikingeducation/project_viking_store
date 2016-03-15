@@ -24,20 +24,25 @@ class User < ActiveRecord::Base
     # a = Order.find_by_sql("SELECT order_contents.order_id, SUM(order_contents.quantity * products.price) as total FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY order_contents.order_id ORDER BY total DESC LIMIT 1")
   # Making this a subquery and joining orders and users tables to it.
 
-  def self.biggest_order
+  def self.biggest_single_order
     User.find_by_sql("SELECT * FROM orders JOIN (SELECT order_contents.order_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY order_contents.order_id ORDER BY amount DESC LIMIT 1) AS sub ON orders.id = sub.order_id JOIN users ON orders.user_id=users.id")
   end
 
 =begin
   # Field: Highest Lifetime value customer (by total revenue generated)
-  Again I only want those orders that have been checked out
-  I wonder if I can group by user_id this time and sum up all the sub values 
-  cos I want
-  user_id - total
+  Alot like the last one except I want to group by the user_id this time.
+
+  a = Order.find_by_sql("SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id ORDER BY amount DESC LIMIT 1")
+
+  User.find_by_sql("SELECT * FROM (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id ORDER BY amount DESC LIMIT 1) AS biggest JOIN users ON biggest.user_id=users.id")
+
+  Now I can use this as a sub query to join up with users
+
+
 =end
 
   def self.biggest_lifetime_spender
-    User.find_by_sql("SELECT * FROM orders JOIN (SELECT order_contents.order_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY order_contents.order_id ORDER BY amount DESC LIMIT 1) AS sub ON orders.id = sub.order_id JOIN users ON orders.user_id=users.id")
+    User.find_by_sql("SELECT * FROM (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id ORDER BY amount DESC LIMIT 1) AS biggest JOIN users ON biggest.user_id=users.id")
   end
 
   # Field: Highest average order value and the customer who placed it
