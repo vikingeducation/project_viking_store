@@ -57,8 +57,13 @@ class DashboardController < ApplicationController
     @most_orders_placed_amount = most_orders_placed.first.total_orders
 
     # Panel 3
+    # A lot of these table results are borrowed from the instance variables above.
     @biggest_order_amount_last_thirty_days = OrderContent.biggest_order(30).first.amount
     @biggest_order_amount_last_seven_days = OrderContent.biggest_order(7).first.amount
+    @average_order_last_thirty_days = OrderContent.average_order(30)
+    @average_order_last_seven_days = OrderContent.average_order(7)
+    @average_order_all_time = OrderContent.average_order(100000)
+
   end
 
 end

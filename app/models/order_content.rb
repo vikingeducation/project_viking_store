@@ -16,4 +16,8 @@ class OrderContent < ActiveRecord::Base
     date = Time.now - number_of_days.days
     OrderContent.find_by_sql("SELECT order_contents.order_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date > '#{date}' GROUP BY order_contents.order_id ORDER BY amount DESC LIMIT 1")
   end
+
+  def self.average_order(number_of_days)
+    (OrderContent.total_revenue_since_days_ago(number_of_days).first.total/Order.created_since_days_ago(number_of_days)).round(2)
+  end
 end

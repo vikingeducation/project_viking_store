@@ -114,7 +114,7 @@
                      :locals => {:headers => ["Item","Data"],
                                  :rows => [["Largest Order Value","$#{@biggest_order_amount_last_seven_days}"],
                                            ["Orders",@orders_last_seven_days],
-                                           ["Average Order Value","??"],
+                                           ["Average Order Value","$#{@average_order_last_seven_days}"],
                                            ["Revenue","$#{@total_revenue_last_seven_days}"]]} %>
         </div>
       </section>
@@ -127,7 +127,7 @@
                      :locals => {:headers => ["Item","Data"],
                                  :rows => [["Largest Order Value","$#{@biggest_order_amount_last_thirty_days}"],
                                            ["Orders",@orders_last_thirty_days],
-                                           ["Average Order Value","??"],
+                                           ["Average Order Value","$#{@average_order_last_thirty_days}"],
                                            ["Revenue","$#{@total_revenue_last_thirty_days}"]]} %>
         </div>
       </section>
@@ -140,7 +140,7 @@
                      :locals => {:headers => ["Item","Data"],
                                  :rows => [["Largest Order Value", "$#{@biggest_order_amount}"],
                                            ["Orders", @total_orders],
-                                           ["Average Order Value", "$#{@average_order_value_total}"],
+                                           ["Average Order Value", "$#{@average_order_all_time}"],
                                            ["Revenue", "$#{@total_revenue}"]]} %>
         </div>
       </section>

@@ -14,9 +14,6 @@ class Order < ActiveRecord::Base
     Order.where('checkout_date >= ?', number.days.ago).count
   end
 
-  # field: Revenue generated
-
   # field: Average order value
-
-  # field: Largest order value
+  # My order.all isn't really legit because they include shopping carts that haven't really been sent.
 end
