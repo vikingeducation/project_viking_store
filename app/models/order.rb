@@ -13,4 +13,10 @@ class Order < ActiveRecord::Base
   def self.created_since_days_ago(number)
     Order.where('checkout_date >= ?', number.days.ago).count
   end
+
+  # field: Revenue generated
+
+  # field: Average order value
+
+  # field: Largest order value
 end

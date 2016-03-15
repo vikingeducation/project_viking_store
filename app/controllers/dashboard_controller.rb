@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
 
   def index
     @total_users = User.all.count
-    @total_orders = Order.all.count
+    @total_orders = Order.where("checkout_date IS NOT NULL").count
     @total_products = Product.all.count
     @total_revenue = OrderContent.total_revenue_since_days_ago(100000).first.total
     @users_last_thirty_days = User.created_since_days_ago(30)
