@@ -71,5 +71,19 @@ class User < ActiveRecord::Base
     Order.find_by_sql("SELECT * FROM(SELECT number_of_orders.user_id, (lifetime_orders.amount/number_of_orders.total_orders) AS average_order FROM (SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS number_of_orders JOIN (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS lifetime_orders ON number_of_orders.user_id=lifetime_orders.user_id ORDER BY average_order DESC LIMIT 1) AS average_table JOIN users ON average_table.user_id=users.id")
   end
 
-  # Field: Most orders placed and the customer who placed it
+=begin
+  Field: Most orders placed and the customer who placed it
+
+  This is just a small part of that big one we just did above:
+  # Now I want to get a user.id and the count of the orders they've made
+    Order.find_by_sql("SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id ORDER BY total_orders DESC LIMIT 1")
+
+  # Now I'll just join that with the users table:
+    Order.find_by_sql("SELECT * FROM (SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id ORDER BY total_orders DESC LIMIT 1) AS total_orders JOIN users ON total_orders.user_id=users.id")
+
+=end
+
+  def self.most_orders_placed
+    Order.find_by_sql("SELECT * FROM (SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id ORDER BY total_orders DESC LIMIT 1) AS total_orders JOIN users ON total_orders.user_id=users.id")
+  end
 end

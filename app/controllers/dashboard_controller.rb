@@ -36,7 +36,9 @@ class DashboardController < ApplicationController
     biggest_average_spender = User.biggest_average_spender
     @biggest_average_spender_name = "#{biggest_average_spender.first.first_name} #{biggest_average_spender.first.last_name}"
     @biggest_average_spender_amount = biggest_average_spender.first.average_order.to_s
-
+    most_orders_placed = User.most_orders_placed
+    @most_orders_placed_name = "#{most_orders_placed.first.first_name} #{most_orders_placed.first.last_name}"
+    @most_orders_placed_amount = most_orders_placed.first.total_orders
 
   end
 
