@@ -14,6 +14,15 @@ class Order < ActiveRecord::Base
     Order.where('checkout_date >= ?', number.days.ago).count
   end
 
-  # field: Average order value
-  # My order.all isn't really legit because they include shopping carts that haven't really been sent.
+  # I want to get the last 7 days worth of results. Erik said specifically, Specifically, make sure your daily time series does NOT require a separate query for each day! I'm guessing he's saying send one query that will grab everything at once. 
+
+  def self.total_orders_for_each_of_the_last_seven_days
+    # Making an array with 7 arrays in it
+    dates_and_totals = Array.new(7) {Array.new}
+    # Want to put in seven time stamps from today backwards
+    7.times do |n|
+      dates_and_totals[n] << Time.now - n.day
+    end
+    Order.where('checkout_date >= ?', Time.now - 1.day).count
+  end
 end

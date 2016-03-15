@@ -1,3 +1,4 @@
+<% @page_title = "| Dashboard" %>
 <div id="index">
 
 <main class="container">
@@ -157,10 +158,13 @@
         <div class="stats-table">
           <%= render :partial => "table",
                      :locals => {:headers => ["Item","Data"],
-                                 :rows => [["New Users","??"],
-                                           ["Orders","??"],
-                                           ["New Products","??"],
-                                           ["Revenue","??"]]} %>
+                                 :rows => [["Today","??"],
+                                           ["Yesterday","??"],
+                                           ["???","??"],
+                                           ["???","??"],
+                                           ["???","??"],
+                                           ["???","??"],
+                                           ["???","??"]]} %>
         </div>
       </section>
       <section>
