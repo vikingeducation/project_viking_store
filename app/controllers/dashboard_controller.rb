@@ -39,6 +39,7 @@ class DashboardController < ApplicationController
     most_orders_placed = User.most_orders_placed
     @most_orders_placed_name = "#{most_orders_placed.first.first_name} #{most_orders_placed.first.last_name}"
     @most_orders_placed_amount = most_orders_placed.first.total_orders
+    @average_order_value_total = OrderContent.average_order_value(100000)
 
   end
 

@@ -138,10 +138,10 @@
         <div class="stats-table">
           <%= render :partial => "table",
                      :locals => {:headers => ["Item","Data"],
-                                 :rows => [["Largest Order Value",@biggest_order_amount],
-                                           ["Orders",@total_orders],
-                                           ["Average Order Value","??"],
-                                           ["Revenue","$#{@total_revenue}"]]} %>
+                                 :rows => [["Largest Order Value", @biggest_order_amount],
+                                           ["Orders", @total_orders],
+                                           ["Average Order Value", "$#{@average_order_value_total}"],
+                                           ["Revenue", "$#{@total_revenue}"]]} %>
         </div>
       </section>
     </article>
