@@ -45,7 +45,31 @@ class User < ActiveRecord::Base
     User.find_by_sql("SELECT * FROM (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id ORDER BY amount DESC LIMIT 1) AS biggest JOIN users ON biggest.user_id=users.id")
   end
 
-  # Field: Highest average order value and the customer who placed it
+=begin
+  Field: Highest average order value and the customer who placed it
+  I was thinking you want a table
+  user_id total_life_time_spend total_number_of_orders_made total_life_time_spend/total_number_of_orders_made
+  lets focus on one thing at a time
+  
+  # This gets me all the user_ids and their total life time spends.
+  Order.find_by_sql("SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id")
+
+  # Now I want to get a user.id and the count of the orders they've made
+  Order.find_by_sql("SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id")
+
+  # Now I want to join these two tables
+  Order.find_by_sql("SELECT * FROM (SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS number_of_orders JOIN (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS lifetime_orders ON number_of_orders.user_id=lifetime_orders.user_id")
+
+  # Now I want to make an extra column by dividing the total by the number
+  Order.find_by_sql("SELECT *, (lifetime_orders.amount/number_of_orders.total_orders) AS average_order FROM (SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS number_of_orders JOIN (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS lifetime_orders ON number_of_orders.user_id=lifetime_orders.user_id ORDER BY average_order DESC LIMIT 1")
+
+  # Now I want to join the users table to this:
+  # Note I had to change the above query from "SELECT *, (life..." to "SELECT orders.user_id, (life..." otherwise that table would have two user_ids which would blow things up.
+  Order.find_by_sql("SELECT * FROM(SELECT number_of_orders.user_id, (lifetime_orders.amount/number_of_orders.total_orders) AS average_order FROM (SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS number_of_orders JOIN (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS lifetime_orders ON number_of_orders.user_id=lifetime_orders.user_id ORDER BY average_order DESC LIMIT 1) AS average_table JOIN users ON average_table.user_id=users.id")
+=end
+  def self.biggest_average_spender
+    Order.find_by_sql("SELECT * FROM(SELECT number_of_orders.user_id, (lifetime_orders.amount/number_of_orders.total_orders) AS average_order FROM (SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS number_of_orders JOIN (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS lifetime_orders ON number_of_orders.user_id=lifetime_orders.user_id ORDER BY average_order DESC LIMIT 1) AS average_table JOIN users ON average_table.user_id=users.id")
+  end
 
   # Field: Most orders placed and the customer who placed it
 end

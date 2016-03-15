@@ -33,6 +33,9 @@ class DashboardController < ApplicationController
     biggest_lifetime_spender = User.biggest_lifetime_spender
     @biggest_lifetime_spender_name = "#{biggest_lifetime_spender.first.first_name} #{biggest_lifetime_spender.first.last_name}"
     @biggest_lifetime_spender_amount = biggest_lifetime_spender.first.amount.to_s
+    biggest_average_spender = User.biggest_average_spender
+    @biggest_average_spender_name = "#{biggest_average_spender.first.first_name} #{biggest_average_spender.first.last_name}"
+    @biggest_average_spender_amount = biggest_average_spender.first.average_order.to_s
 
 
   end
