@@ -11,6 +11,6 @@ class Order < ActiveRecord::Base
   # scope :not_checked_out, lambda { where("checkout_date IS NULL") }
 
   def self.created_since_days_ago(number)
-    Order.all.where('checkout_date >= ?', number.days.ago).count
+    Order.where('checkout_date >= ?', number.days.ago).count
   end
 end
