@@ -112,10 +112,10 @@
         <div class="stats-table">
           <%= render :partial => "table",
                      :locals => {:headers => ["Item","Data"],
-                                 :rows => [["New Users","??"],
-                                           ["Orders","??"],
-                                           ["New Products","??"],
-                                           ["Revenue","??"]]} %>
+                                 :rows => [["Largest Order Value","$#{@biggest_order_amount_last_seven_days}"],
+                                           ["Orders",@orders_last_seven_days],
+                                           ["Average Order Value","??"],
+                                           ["Revenue","$#{@total_revenue_last_seven_days}"]]} %>
         </div>
       </section>
       <section>
@@ -125,10 +125,10 @@
         <div class="stats-table">
           <%= render :partial => "table",
                      :locals => {:headers => ["Item","Data"],
-                                 :rows => [["New Users","??"],
-                                           ["Orders","??"],
-                                           ["New Products","??"],
-                                           ["Revenue","??"]]} %>
+                                 :rows => [["Largest Order Value","$#{@biggest_order_amount_last_thirty_days}"],
+                                           ["Orders",@orders_last_thirty_days],
+                                           ["Average Order Value","??"],
+                                           ["Revenue","$#{@total_revenue_last_thirty_days}"]]} %>
         </div>
       </section>
       <section>
@@ -138,7 +138,7 @@
         <div class="stats-table">
           <%= render :partial => "table",
                      :locals => {:headers => ["Item","Data"],
-                                 :rows => [["Largest Order Value", @biggest_order_amount],
+                                 :rows => [["Largest Order Value", "$#{@biggest_order_amount}"],
                                            ["Orders", @total_orders],
                                            ["Average Order Value", "$#{@average_order_value_total}"],
                                            ["Revenue", "$#{@total_revenue}"]]} %>
