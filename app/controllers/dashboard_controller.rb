@@ -27,6 +27,9 @@ class DashboardController < ApplicationController
     @second_city_total = top_three_cities.second.total
     @third_city_name = top_three_cities.third.name
     @third_city_total = top_three_cities.third.total
+    biggest_order = User.biggest_order
+    @biggest_order_name = "#{biggest_order.first.first_name} #{biggest_order.first.last_name}"
+    @biggest_order_total = biggest_order.first.total.to_s
   end
 
 end

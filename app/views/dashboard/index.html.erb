@@ -67,7 +67,7 @@
           <h3>Top 3 States Users Live In (billing)</h3>
         </header>
         <div class="stats-table">
-          <%= render :partial => "table", :locals => {:headers => ["Item","Data"],
+          <%= render :partial => "table", :locals => {:headers => ["State","# of Customers"],
                                                       :rows => [[@best_state_name,@best_state_total],
                                                                 [@second_state_name,@second_state_total],
                                                                 [@third_state_name,@third_state_total]]} %>
@@ -78,7 +78,7 @@
           <h3>Top 3 Cities Users Live In (billing)</h3>
         </header>
         <div class="stats-table">
-          <%= render :partial => "table", :locals => {:headers => ["Item","Data"],
+          <%= render :partial => "table", :locals => {:headers => ["City","# of Customers"],
                                                       :rows => [[@best_city_name, @best_city_total],
                                                                 [@second_city_name, @second_city_total],
                                                                 [@third_city_name, @third_city_total]]} %>
@@ -90,11 +90,11 @@
         </header>
         <div class="stats-table">
           <%= render :partial => "table",
-                     :locals => {:headers => ["Criteria","Customer Name","Quantity"],
-                                 :rows => [["New Users","100"],
-                                           ["Orders","150"],
-                                           ["New Products","10"],
-                                           ["Revenue","$500000"]]} %>
+                     :locals => {:headers => ["Criteria","Customer","Quantity"],
+                                 :rows => [["Highest Single Order Value",@biggest_order_name, @biggest_order_total],
+                                           ["Highest Lifetime Value Customer","Cheyenne","150"],
+                                           ["Highest Average Order Value","Ella","??"],
+                                           ["Most Ordes Placed","Mick","??"]]} %>
         </div>
       </section>
     </article>
