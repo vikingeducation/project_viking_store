@@ -1,187 +1,143 @@
 <% @page_title = "| Dashboard" %>
 <div id="index">
+  <main class="container">
 
-<main class="container">
-
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <header>
-        <h1>Viking Store Analytics Dashboard</h1>
-      </header>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <header>
+          <h1>Viking Store Analytics Dashboard</h1>
+        </header>
+      </div>
     </div>
-  </div>
 
-  <section id="dashboard" class="col-md-12">
-  <div class="row">
-    <article class="stats col-md-4 col-md-offset-1">
-      <header>
-        <h1>1. Overall Platform</h1>
-      </header>
-      <section>
-        <header>
-          <h3>Last 7 Days</h3>
-        </header>
-        <div class="stats-table">
-          <%= render :partial => "table",
-                     :locals => {:headers => ["Item","Data"],
-                                 :rows => [["New Users",@users_last_seven_days],
-                                           ["Orders",@orders_last_seven_days],
-                                           ["New Products",@products_last_seven_days],
-                                           ["Revenue","$#{@total_revenue_last_seven_days}"]]} %>
-        </div>
-      </section>
-      <section>
-        <header>
-          <h3>Last 30 Days</h3>
-        </header>
-        <div class="stats-table">
-          <%= render :partial => "table",
-                     :locals => {:headers => ["Item","Data"],
-                                 :rows => [["New Users",@users_last_thirty_days],
-                                           ["Orders",@orders_last_thirty_days],
-                                           ["New Products",@products_last_thirty_days],
-                                           ["Revenue","$#{@total_revenue_last_thirty_days}"]]} %>
-        </div>
-      </section>
-      <section>
-        <header>
-          <h3>Total</h3>
-        </header>
-        <div class="stats-table">
-          <table class="table table-striped">
-            <%= render :partial => "table", :locals => {:headers => ["Item","Data"],
-                                                        :rows => [["Users",@total_users],
-                                                                  ["Orders",@total_orders],
-                                                                  ["Products",@total_products],
-                                                                  ["Revenue","$#{@total_revenue}"]]} %>
-          </table>
-        </div>
-      </section>
-    </article>
+    <section id="dashboard" class="col-md-12">
+      <div class="row">
+        <article class="stats col-md-4 col-md-offset-1">
+          <header>
+            <h1>1. Overall Platform</h1>
+          </header>
+          <section>
+              <%= render :partial => "header_and_table",
+                         :locals => {:table_header => "Last 7 Days",
+                                     :headers => ["Item","Data"],
+                                     :rows => [["New Users",@users_last_seven_days],
+                                               ["Orders",@orders_last_seven_days],
+                                               ["New Products",@products_last_seven_days],
+                                               ["Revenue","$#{@total_revenue_last_seven_days}"]]} %>
+          </section>
+          <section>
+            <%= render :partial => "header_and_table",
+                       :locals => {:table_header => "Last 30 Days",
+                                   :headers => ["Item","Data"],
+                                   :rows => [["New Users",@users_last_thirty_days],
+                                             ["Orders",@orders_last_thirty_days],
+                                             ["New Products",@products_last_thirty_days],
+                                             ["Revenue","$#{@total_revenue_last_thirty_days}"]]} %>
+          </section>
+          <section>
+            <%= render :partial => "header_and_table",
+                       :locals => {:table_header => "Total",
+                                   :headers => ["Item","Data"],
+                                   :rows => [["Users",@total_users],
+                                             ["Orders",@total_orders],
+                                             ["Products",@total_products],
+                                             ["Revenue","$#{@total_revenue}"]]} %>
+          </section>
+        </article>
 
-    <article class="stats col-md-4 col-md-offset-1">
-      <header>
-        <h1>2. User Demographics and Behaviour</h1>
-      </header>
-      <section>
-        <header>
-          <h3>Top 3 States Users Live In (billing)</h3>
-        </header>
-        <div class="stats-table">
-          <%= render :partial => "table", :locals => {:headers => ["State","# of Customers"],
-                                                      :rows => [[@best_state_name,@best_state_total],
-                                                                [@second_state_name,@second_state_total],
-                                                                [@third_state_name,@third_state_total]]} %>
-        </div>
-      </section>
-      <section>
-        <header>
-          <h3>Top 3 Cities Users Live In (billing)</h3>
-        </header>
-        <div class="stats-table">
-          <%= render :partial => "table", :locals => {:headers => ["City","# of Customers"],
-                                                      :rows => [[@best_city_name, @best_city_total],
-                                                                [@second_city_name, @second_city_total],
-                                                                [@third_city_name, @third_city_total]]} %>
-        </div>
-      </section>
-      <section>
-        <header>
-          <h3>Top User With...</h3>
-        </header>
-        <div class="stats-table">
-          <%= render :partial => "table",
-                     :locals => {:headers => ["Criteria","Customer","Quantity"],
-                                 :rows => [["Highest Single Order Value",@biggest_order_name, @biggest_order_amount],
-                                           ["Highest Lifetime Value Customer",@biggest_lifetime_spender_name,@biggest_lifetime_spender_amount],
-                                           ["Highest Average Order Value",@biggest_average_spender_name,@biggest_average_spender_amount],
-                                           ["Most Ordes Placed",@most_orders_placed_name,@most_orders_placed_amount]]} %>
-        </div>
-      </section>
-    </article>
-  </div>
+        <article class="stats col-md-4 col-md-offset-1">
+          <header>
+            <h1>2. User Demographics and Behaviour</h1>
+          </header>
+          <section>
+            <%= render :partial => "header_and_table", 
+                       :locals => {:table_header => "Top 3 States Users Live In (billing)",
+                                   :headers => ["State","# of Customers"],
+                                   :rows => [[@best_state_name,@best_state_total],
+                                             [@second_state_name,@second_state_total],
+                                             [@third_state_name,@third_state_total]]} %>
+          </section>
+          <section>
+            <%= render :partial => "header_and_table",
+                       :locals => {:table_header => "Top 3 Cities Users Live In (billing)",
+                                   :headers => ["City","# of Customers"],
+                                   :rows => [[@best_city_name, @best_city_total],
+                                             [@second_city_name, @second_city_total],
+                                             [@third_city_name, @third_city_total]]} %>
+          </section>
+          <section>
+            <%= render :partial => "header_and_table",
+                       :locals => {:table_header => "Top User With...",
+                                   :headers => ["Criteria","Customer","Quantity"],
+                                   :rows => [["Highest Single Order Value",@biggest_order_name, @biggest_order_amount],
+                                             ["Highest Lifetime Value Customer",@biggest_lifetime_spender_name,@biggest_lifetime_spender_amount],
+                                             ["Highest Average Order Value",@biggest_average_spender_name,@biggest_average_spender_amount],
+                                             ["Most Ordes Placed",@most_orders_placed_name,@most_orders_placed_amount]]} %>
+          </section>
+        </article>
+      </div>
 
-  <div class="row">
-    <article class="stats col-md-4 col-md-offset-1">
-      <header>
-        <h1>3. Order Statistics</h1>
-      </header>
-      <section>
-        <header>
-          <h3>Last 7 Days</h3>
-        </header>
-        <div class="stats-table">
-          <%= render :partial => "table",
-                     :locals => {:headers => ["Item","Data"],
-                                 :rows => [["Largest Order Value","$#{@biggest_order_amount_last_seven_days}"],
-                                           ["Orders",@orders_last_seven_days],
-                                           ["Average Order Value","$#{@average_order_last_seven_days}"],
-                                           ["Revenue","$#{@total_revenue_last_seven_days}"]]} %>
-        </div>
-      </section>
-      <section>
-        <header>
-          <h3>Last 30 Days</h3>
-        </header>
-        <div class="stats-table">
-          <%= render :partial => "table",
-                     :locals => {:headers => ["Item","Data"],
-                                 :rows => [["Largest Order Value","$#{@biggest_order_amount_last_thirty_days}"],
-                                           ["Orders",@orders_last_thirty_days],
-                                           ["Average Order Value","$#{@average_order_last_thirty_days}"],
-                                           ["Revenue","$#{@total_revenue_last_thirty_days}"]]} %>
-        </div>
-      </section>
-      <section>
-        <header>
-          <h3>Total</h3>
-        </header>
-        <div class="stats-table">
-          <%= render :partial => "table",
-                     :locals => {:headers => ["Item","Data"],
-                                 :rows => [["Largest Order Value", "$#{@biggest_order_amount}"],
-                                           ["Orders", @total_orders],
-                                           ["Average Order Value", "$#{@average_order_all_time}"],
-                                           ["Revenue", "$#{@total_revenue}"]]} %>
-        </div>
-      </section>
-    </article>
+      <div class="row">
+        <article class="stats col-md-4 col-md-offset-1">
+          <header>
+            <h1>3. Order Statistics</h1>
+          </header>
+          <section>
+            <%= render :partial => "header_and_table",
+                       :locals => {:table_header => "Last 7 Days",
+                                   :headers => ["Item","Data"],
+                                   :rows => [["Largest Order Value","$#{@biggest_order_amount_last_seven_days}"],
+                                             ["Orders",@orders_last_seven_days],
+                                             ["Average Order Value","$#{@average_order_last_seven_days}"],
+                                             ["Revenue","$#{@total_revenue_last_seven_days}"]]} %>
+          </section>
+          <section>
+            <%= render :partial => "header_and_table",
+                       :locals => {:table_header => "Last 30 Days",
+                                   :headers => ["Item","Data"],
+                                   :rows => [["Largest Order Value","$#{@biggest_order_amount_last_thirty_days}"],
+                                             ["Orders",@orders_last_thirty_days],
+                                             ["Average Order Value","$#{@average_order_last_thirty_days}"],
+                                             ["Revenue","$#{@total_revenue_last_thirty_days}"]]} %>
+          </section>
+          <section>
+            <%= render :partial => "header_and_table",
+                       :locals => {:table_header => "Total",
+                                   :headers => ["Item","Data"],
+                                   :rows => [["Largest Order Value", "$#{@biggest_order_amount}"],
+                                             ["Orders", @total_orders],
+                                             ["Average Order Value", "$#{@average_order_all_time}"],
+                                             ["Revenue", "$#{@total_revenue}"]]} %>
+          </section>
+        </article>
 
-    <article class="stats col-md-4 col-md-offset-1">
-      <header>
-        <h1>4. Time Series Data</h1>
-      </header>
-      <section>
-        <header>
-          <h3>Orders by day</h3>
-        </header>
-        <div class="stats-table">
-          <%= render :partial => "table",
-                     :locals => {:headers => ["Item","Data"],
-                                 :rows => [["Today","??"],
-                                           ["Yesterday","??"],
-                                           ["???","??"],
-                                           ["???","??"],
-                                           ["???","??"],
-                                           ["???","??"],
-                                           ["???","??"]]} %>
-        </div>
-      </section>
-      <section>
-        <header>
-          <h3>Orders by Week</h3>
-        </header>
-        <div class="stats-table">
-          <%= render :partial => "table", :locals => {:headers => ["Item","Data"],
-                                          :rows => [["New Users","??"],
-                                                    ["Orders","??"],
-                                                    ["New Products","??"],
-                                                    ["Revenue","??"]]} %>
-        </div>
-      </section>
-    </article>
-  </div>
-  </section>
-
-</main>
+        <article class="stats col-md-4 col-md-offset-1">
+          <header>
+            <h1>4. Time Series Data</h1>
+          </header>
+          <section>
+              <%= render :partial => "header_and_table",
+                         :locals => {:table_header => "Orders by Day",
+                                     :headers => ["Item","Data"],
+                                     :rows => [["Today","??"],
+                                               ["Yesterday","??"],
+                                               ["???","??"],
+                                               ["???","??"],
+                                               ["???","??"],
+                                               ["???","??"],
+                                               ["???","??"]]} %>
+          </section>
+          <section>
+            <%= render :partial => "header_and_table",
+                       :locals => {:table_header => "Orders by Week",
+                                   :headers => ["Item","Data"],
+                                   :rows => [["New Users","??"],
+                                             ["Orders","??"],
+                                             ["New Products","??"],
+                                             ["Revenue","??"]]} %>
+          </section>
+        </article>
+      </div>
+    </section>
+  </main>
 </div>
