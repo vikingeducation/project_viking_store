@@ -11,6 +11,16 @@ class State < ActiveRecord::Base
     # Then I got the top 3.
     # Use this method by:
     # ...first.name #=> 'Texas'  ...first.total #=> 4
-    State.find_by_sql("SELECT states.name, COUNT(*) as total FROM (SELECT user_id, MAX(billing_id) as billing_id FROM orders GROUP BY user_id) AS a JOIN addresses ON a.billing_id=addresses.id JOIN states ON addresses.state_id=states.id GROUP BY states.name ORDER BY total DESC LIMIT 3")
+    State.find_by_sql("SELECT states.name, COUNT(*) as total 
+                       FROM (SELECT user_id, MAX(billing_id) as billing_id 
+                             FROM orders 
+                             GROUP BY user_id) AS a 
+                       JOIN addresses 
+                         ON a.billing_id=addresses.id 
+                       JOIN states 
+                         ON addresses.state_id=states.id 
+                       GROUP BY states.name 
+                       ORDER BY total DESC 
+                       LIMIT 3")
   end
 end

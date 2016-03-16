@@ -25,7 +25,21 @@ class User < ActiveRecord::Base
   # Making this a subquery and joining orders and users tables to it.
 
   def self.biggest_single_order
-    User.find_by_sql("SELECT * FROM orders JOIN (SELECT order_contents.order_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY order_contents.order_id ORDER BY amount DESC LIMIT 1) AS sub ON orders.id = sub.order_id JOIN users ON orders.user_id=users.id")
+    User.find_by_sql("SELECT * 
+                      FROM orders 
+                      JOIN (SELECT order_contents.order_id, SUM(order_contents.quantity * products.price) as amount 
+                            FROM orders 
+                            JOIN order_contents 
+                              ON orders.id=order_contents.order_id 
+                            JOIN products 
+                              ON order_contents.product_id=products.id 
+                            WHERE orders.checkout_date IS NOT NULL 
+                            GROUP BY order_contents.order_id 
+                            ORDER BY amount DESC 
+                            LIMIT 1) AS sub 
+                        ON orders.id = sub.order_id 
+                      JOIN users 
+                        ON orders.user_id=users.id")
   end
 
 =begin
@@ -42,7 +56,19 @@ class User < ActiveRecord::Base
 =end
 
   def self.biggest_lifetime_spender
-    User.find_by_sql("SELECT * FROM (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id ORDER BY amount DESC LIMIT 1) AS biggest JOIN users ON biggest.user_id=users.id")
+    User.find_by_sql("SELECT * 
+                      FROM (SELECT orders.user_id, SUM(order_contents.quantity * products.price) AS amount 
+                            FROM orders 
+                            JOIN order_contents 
+                              ON orders.id=order_contents.order_id 
+                            JOIN products 
+                              ON order_contents.product_id=products.id 
+                            WHERE orders.checkout_date IS NOT NULL 
+                            GROUP BY orders.user_id 
+                            ORDER BY amount DESC 
+                            LIMIT 1) AS biggest 
+                      JOIN users 
+                        ON biggest.user_id=users.id")
   end
 
 =begin
@@ -68,7 +94,25 @@ class User < ActiveRecord::Base
   Order.find_by_sql("SELECT * FROM(SELECT number_of_orders.user_id, (lifetime_orders.amount/number_of_orders.total_orders) AS average_order FROM (SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS number_of_orders JOIN (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS lifetime_orders ON number_of_orders.user_id=lifetime_orders.user_id ORDER BY average_order DESC LIMIT 1) AS average_table JOIN users ON average_table.user_id=users.id")
 =end
   def self.biggest_average_spender
-    User.find_by_sql("SELECT * FROM(SELECT number_of_orders.user_id, (lifetime_orders.amount/number_of_orders.total_orders) AS average_order FROM (SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS number_of_orders JOIN (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id) AS lifetime_orders ON number_of_orders.user_id=lifetime_orders.user_id ORDER BY average_order DESC LIMIT 1) AS average_table JOIN users ON average_table.user_id=users.id")
+    User.find_by_sql("SELECT * 
+                      FROM (SELECT number_of_orders.user_id, (lifetime_orders.amount/number_of_orders.total_orders) AS average_order 
+                            FROM (SELECT orders.user_id, COUNT(orders.id) AS total_orders 
+                                  FROM orders 
+                                  WHERE orders.checkout_date IS NOT NULL 
+                                  GROUP BY orders.user_id) AS number_of_orders 
+                            JOIN (SELECT orders.user_id, SUM(order_contents.quantity * products.price) as amount 
+                                  FROM orders 
+                                  JOIN order_contents 
+                                    ON orders.id=order_contents.order_id 
+                                  JOIN products 
+                                    ON order_contents.product_id=products.id 
+                                  WHERE orders.checkout_date IS NOT NULL 
+                                  GROUP BY orders.user_id) AS lifetime_orders 
+                              ON number_of_orders.user_id=lifetime_orders.user_id 
+                            ORDER BY average_order DESC 
+                            LIMIT 1) AS average_table 
+                      JOIN users 
+                        ON average_table.user_id=users.id")
   end
 
 =begin
@@ -84,6 +128,14 @@ class User < ActiveRecord::Base
 =end
 
   def self.most_orders_placed
-    User.find_by_sql("SELECT * FROM (SELECT orders.user_id, COUNT(orders.id) as total_orders FROM orders WHERE orders.checkout_date IS NOT NULL GROUP BY orders.user_id ORDER BY total_orders DESC LIMIT 1) AS total_orders JOIN users ON total_orders.user_id=users.id")
+    User.find_by_sql("SELECT * 
+                      FROM (SELECT orders.user_id, COUNT(orders.id) AS total_orders 
+                            FROM orders 
+                            WHERE orders.checkout_date IS NOT NULL 
+                            GROUP BY orders.user_id 
+                            ORDER BY total_orders DESC 
+                            LIMIT 1) AS total_orders 
+                      JOIN users 
+                        ON total_orders.user_id=users.id")
   end
 end

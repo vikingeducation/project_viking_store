@@ -23,6 +23,7 @@ class Order < ActiveRecord::Base
     7.times do |n|
       dates_and_totals[n] << Time.now - n.day
     end
+    # What's the most basic way I can think of doing this, it would be to construct 
     Order.where('checkout_date >= ?', Time.now - 1.day).count
   end
 end

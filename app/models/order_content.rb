@@ -9,12 +9,27 @@ class OrderContent < ActiveRecord::Base
 
   def self.total_revenue_since_days_ago(number_of_days)
     date = Time.now - number_of_days.days
-    OrderContent.find_by_sql("SELECT SUM(order_contents.quantity * products.price) as total FROM order_contents JOIN products ON order_contents.product_id=products.id JOIN orders ON orders.id=order_contents.order_id WHERE orders.checkout_date >= '#{date}'")
+    OrderContent.find_by_sql("SELECT SUM(order_contents.quantity * products.price) as total 
+                              FROM order_contents 
+                              JOIN products 
+                                ON order_contents.product_id=products.id 
+                              JOIN orders 
+                                ON orders.id=order_contents.order_id 
+                              WHERE orders.checkout_date >= '#{date}'")
   end
 
   def self.biggest_order(number_of_days)
     date = Time.now - number_of_days.days
-    OrderContent.find_by_sql("SELECT order_contents.order_id, SUM(order_contents.quantity * products.price) as amount FROM orders JOIN order_contents ON orders.id=order_contents.order_id JOIN products ON order_contents.product_id=products.id WHERE orders.checkout_date > '#{date}' GROUP BY order_contents.order_id ORDER BY amount DESC LIMIT 1")
+    OrderContent.find_by_sql("SELECT order_contents.order_id, SUM(order_contents.quantity * products.price) as amount 
+                              FROM orders 
+                              JOIN order_contents 
+                                ON orders.id=order_contents.order_id 
+                              JOIN products 
+                                ON order_contents.product_id=products.id 
+                              WHERE orders.checkout_date > '#{date}' 
+                              GROUP BY order_contents.order_id 
+                              ORDER BY amount DESC 
+                              LIMIT 1")
   end
 
   def self.average_order(number_of_days)
