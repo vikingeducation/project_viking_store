@@ -20,6 +20,12 @@
 	</head>
 	<body>
 
+		<% if flash[:notice] %>
+			<div class="notice">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+
 		<nav id="topnav" class="navbar navbar-default">
 		  <div class="logo-container">
 		    <img class="pull-left" src="http://seeklogo.com/images/V/v-tele-logo-053AACAF21-seeklogo.com.gif">
@@ -40,7 +46,7 @@
 	    </div>
 
 	    <div class="row">
-	    	<div class="col-md-2">
+	    	<div class="col-md-2 side-nav">
 	    		<h6>Navigation Options</h6>
 	    		<ul>
 	    			<a href="#"><li>Users</li></a>
@@ -54,7 +60,7 @@
 	    			<a href="#"><li>Analytics Dashboard</li></a>
 	    		</ul>
 	    	</div>
-	    	<div class="col-md-10">
+	    	<div class="col-md-10 main-content">
 	    		<%= yield %>
 	    	</div>
 	    </div>
