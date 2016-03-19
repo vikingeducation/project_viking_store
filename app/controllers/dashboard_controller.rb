@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
 
+  layout "application"
+
   def index
     # Panel 1
     # Totals Table
