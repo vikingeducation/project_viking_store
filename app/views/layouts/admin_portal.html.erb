@@ -29,7 +29,35 @@
 		  </div>
 		</nav>
 
-		<%= yield %>
+		<main class="container">
+
+			<div class="row">
+	      <div class="col-md-8 col-md-offset-2">
+	        <header>
+	          <h1>Viking Store Admin Portal</h1>
+	        </header>
+	      </div>
+	    </div>
+
+	    <div class="row">
+	    	<div class="col-md-2">
+	    		<h6>Navigation Options</h6>
+	    		<ul>
+	    			<a href="#"><li>Users</li></a>
+	    			<a href="#"><li>Addresses</li></a>
+	    			<a href="#"><li>Orders</li></a>
+	    			<a href="#"><li>Products</li></a>
+	    			<a href="#"><li>Categories</li></a>
+	    			<hr>
+	    			<a href="#"><li>Analytics Dashboard</li></a>
+	    		</ul>
+	    	</div>
+	    	<div class="col-md-10">
+	    		<%= yield %>
+	    	</div>
+	    </div>
+
+		</main>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
