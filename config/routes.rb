@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'admin#index'
+  root 'admin#categories'
   get '/admin/dashboard' => 'dashboard#index'
   get '/admin' => 'admin#index'
   get'/admin/categories' => 'admin#categories'
