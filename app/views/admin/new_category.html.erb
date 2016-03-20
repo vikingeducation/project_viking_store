@@ -1,5 +1,11 @@
 <% @page_title = " | Create A New Category" %>
 
+<% if flash[:alert] %>
+	<div class="notice">
+		<%= flash[:alert] %>
+	</div>
+<% end %>
+
 <section>
   <%= render :partial => "new_form",
              :locals => {:form_header => "Create A New Category",

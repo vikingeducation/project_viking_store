@@ -15,7 +15,9 @@ class AdminController < ApplicationController
     @category = Category.new(whitelisted_params)
     if @category.save 
       redirect_to "/admin/categories"
-    else 
+      flash[:notice] = "New Category Created!"
+    else
+      flash[:alert] = "New Category Could Not Be Created, Please Try Again."
       render :new_category
     end
   end
