@@ -17,7 +17,7 @@
             <h1>1. Overall Platform</h1>
           </header>
           <section>
-              <%= render :partial => "header_and_table",
+              <%= render :partial => "./shared/header_and_table",
                          :locals => {:table_header => "Last 7 Days",
                                      :headers => ["Item","Data"],
                                      :rows => [["New Users",@users_last_seven_days],
@@ -26,7 +26,7 @@
                                                ["Revenue","$#{@total_revenue_last_seven_days}"]]} %>
           </section>
           <section>
-            <%= render :partial => "header_and_table",
+            <%= render :partial => "./shared/header_and_table",
                        :locals => {:table_header => "Last 30 Days",
                                    :headers => ["Item","Data"],
                                    :rows => [["New Users",@users_last_thirty_days],
@@ -35,7 +35,7 @@
                                              ["Revenue","$#{@total_revenue_last_thirty_days}"]]} %>
           </section>
           <section>
-            <%= render :partial => "header_and_table",
+            <%= render :partial => "./shared/header_and_table",
                        :locals => {:table_header => "Total",
                                    :headers => ["Item","Data"],
                                    :rows => [["Users",@total_users],
@@ -50,7 +50,7 @@
             <h1>2. User Demographics and Behaviour</h1>
           </header>
           <section>
-            <%= render :partial => "header_and_table", 
+            <%= render :partial => "./shared/header_and_table", 
                        :locals => {:table_header => "Top 3 States Users Live In (billing)",
                                    :headers => ["State","# of Customers"],
                                    :rows => [[@best_state_name,@best_state_total],
@@ -58,7 +58,7 @@
                                              [@third_state_name,@third_state_total]]} %>
           </section>
           <section>
-            <%= render :partial => "header_and_table",
+            <%= render :partial => "./shared/header_and_table",
                        :locals => {:table_header => "Top 3 Cities Users Live In (billing)",
                                    :headers => ["City","# of Customers"],
                                    :rows => [[@best_city_name, @best_city_total],
@@ -66,7 +66,7 @@
                                              [@third_city_name, @third_city_total]]} %>
           </section>
           <section>
-            <%= render :partial => "header_and_table",
+            <%= render :partial => "./shared/header_and_table",
                        :locals => {:table_header => "Top User With...",
                                    :headers => ["Criteria","Customer","Quantity"],
                                    :rows => [["Highest Single Order Value",@biggest_order_name, @biggest_order_amount],
@@ -83,7 +83,7 @@
             <h1>3. Order Statistics</h1>
           </header>
           <section>
-            <%= render :partial => "header_and_table",
+            <%= render :partial => "./shared/header_and_table",
                        :locals => {:table_header => "Last 7 Days",
                                    :headers => ["Item","Data"],
                                    :rows => [["Largest Order Value","$#{@biggest_order_amount_last_seven_days}"],
@@ -92,7 +92,7 @@
                                              ["Revenue","$#{@total_revenue_last_seven_days}"]]} %>
           </section>
           <section>
-            <%= render :partial => "header_and_table",
+            <%= render :partial => "./shared/header_and_table",
                        :locals => {:table_header => "Last 30 Days",
                                    :headers => ["Item","Data"],
                                    :rows => [["Largest Order Value","$#{@biggest_order_amount_last_thirty_days}"],
@@ -101,7 +101,7 @@
                                              ["Revenue","$#{@total_revenue_last_thirty_days}"]]} %>
           </section>
           <section>
-            <%= render :partial => "header_and_table",
+            <%= render :partial => "./shared/header_and_table",
                        :locals => {:table_header => "Total",
                                    :headers => ["Item","Data"],
                                    :rows => [["Largest Order Value", "$#{@biggest_order_amount}"],
@@ -116,7 +116,7 @@
             <h1>4. Time Series Data</h1>
           </header>
           <section>
-              <%= render :partial => "header_and_table",
+              <%= render :partial => "./shared/header_and_table",
                          :locals => {:table_header => "Orders by Day",
                                      :headers => ["Item","Data"],
                                      :rows => [["Today","??"],
@@ -128,7 +128,7 @@
                                                ["???","??"]]} %>
           </section>
           <section>
-            <%= render :partial => "header_and_table",
+            <%= render :partial => "./shared/header_and_table",
                        :locals => {:table_header => "Orders by Week",
                                    :headers => ["Item","Data"],
                                    :rows => [["New Users","??"],
