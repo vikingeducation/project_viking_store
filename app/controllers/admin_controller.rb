@@ -28,6 +28,8 @@ class AdminController < ApplicationController
 
   def show_category
     @category = Category.find(params[:id])
+    @column_names = ["id","name","sku","description","price","category_id","created_at","updated_at"]
+    @products = Category.products_in_arrays(params[:id])
   end
 
   private

@@ -1,5 +1,16 @@
+<% @page_title = " | Category & Products" %>
+
 <p>id = <%= @category.id %></p>
 <p>name = <%= @category.name %></p>
 <p>description = <%= @category.description %></p>
 <a href="#">EDIT</a>
 <a href="#">DELETE</a>
+
+<section>
+	<%= render :partial => "./shared/header_and_table",
+						 :locals => {:table_header => "Products In This Category",
+						 						 :headers => @column_names,
+						 						 :rows => @products
+						 						}
+	%>
+</section>

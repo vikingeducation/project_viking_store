@@ -17,6 +17,23 @@ class Category < ActiveRecord::Base
     categories_in_arrays
   end
 
+  def self.products_in_arrays(category_id)
+    products = []
+    Product.where(:category_id => category_id).each do |product|
+      product_array = []
+      product_array << product.id
+      product_array << product.name
+      product_array << product.sku
+      product_array << product.description
+      product_array << product.price
+      product_array << product.category_id
+      product_array << product.created_at
+      product_array << product.updated_at
+      products << product_array
+    end
+    products
+  end
+
 =begin
 
   I made this to patch up the problems the method below was causing but now it's making problems with my Category.find method so I have to can it : (.
