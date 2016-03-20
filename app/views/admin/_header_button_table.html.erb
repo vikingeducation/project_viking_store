@@ -1,0 +1,22 @@
+<header>
+  <h3><%= table_header %></h3>
+</header>
+
+<button type="button" class="btn btn-primary btn-lg"><%= button_label %></button>
+
+<div class="stats-table">
+  <table class="table table-striped">
+    <tr>
+      <% headers.each do |header| %>
+        <th><%= header.column_name %></th>
+      <% end %>
+    </tr>
+    <% rows.each do |row| %>
+      <tr>
+        <% row.each do |data| %>
+          <td><%= data %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>

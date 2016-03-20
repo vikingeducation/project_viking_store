@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'admin#index'
   get '/admin/dashboard' => 'dashboard#index'
   get '/admin' => 'admin#index'
+  get'/admin/categories' => 'admin#categories'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

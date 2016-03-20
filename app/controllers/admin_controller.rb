@@ -6,4 +6,8 @@ class AdminController < ApplicationController
 
   end
 
+  def categories
+    @column_names = Category.column_names
+  end
+
 end
