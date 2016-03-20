@@ -5,8 +5,5 @@
              :locals => {:table_header => "Viking Store Categories",
              						 :button_label => "Create a New Category",
                          :headers => @column_names,
-                         :rows => [["New Users",@users_last_seven_days],
-                                   ["Orders",@orders_last_seven_days],
-                                   ["New Products",@products_last_seven_days],
-                                   ["Revenue","$#{@total_revenue_last_seven_days}"]]} %>
+                         :rows => @categories} %>
 </section>

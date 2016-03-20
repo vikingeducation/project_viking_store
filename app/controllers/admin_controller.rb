@@ -8,6 +8,7 @@ class AdminController < ApplicationController
 
   def categories
     @column_names = Category.column_names
+    @categories = Category.all
   end
 
 end
