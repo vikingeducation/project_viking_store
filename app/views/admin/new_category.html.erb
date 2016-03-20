@@ -6,6 +6,10 @@
              						 } %>
 
 	<%= form_for @category, url: admin_path(@category), html: {method: :put} do |f| %>
+		<%= f.label :id, "ID: " %>
+		<%= f.text_field :id, :readonly => true %>
+		<br>
+		<br>
 	  <%= f.label :name, "Name: " %>
 	  <%= f.text_field :name %>
 	  <br>
