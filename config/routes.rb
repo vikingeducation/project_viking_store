@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get'/admin/categories' => 'admin#categories'
   get '/admin/categories/new' => 'admin#new_category'
   post '/admin' => 'admin#create_category'
+  get '/admin/categories/:id' => 'admin#show_category'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -8,7 +8,7 @@ class AdminController < ApplicationController
 
   def categories
     @column_names = ["id","name","description","created_at","updated_at","show","edit","delete"]
-    @categories = Category.all
+    @categories = Category.all_in_arrays
   end
 
   def create_category
@@ -24,6 +24,10 @@ class AdminController < ApplicationController
 
   def new_category
     @category = Category.new
+  end
+
+  def show_category
+    @category = Category.find(params[:id])
   end
 
   private
