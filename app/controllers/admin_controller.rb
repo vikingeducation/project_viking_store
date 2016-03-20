@@ -11,4 +11,8 @@ class AdminController < ApplicationController
     @categories = Category.all
   end
 
+  def new_category
+    @category = Category.new
+  end
+
 end

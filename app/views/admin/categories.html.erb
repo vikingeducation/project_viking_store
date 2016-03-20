@@ -4,6 +4,7 @@
   <%= render :partial => "header_button_table",
              :locals => {:table_header => "Viking Store Categories",
              						 :button_label => "Create a New Category",
+             						 :button_link => "/admin/categories/new",
                          :headers => @column_names,
                          :rows => @categories} %>
 </section>
