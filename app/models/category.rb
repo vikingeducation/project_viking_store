@@ -1,5 +1,8 @@
 class Category < ActiveRecord::Base
 
+  validates :name,
+            :length => {:in => 4..16}
+
   def self.all
     rows = []
     Category.find_by_sql("SELECT * FROM categories").each do |category|
