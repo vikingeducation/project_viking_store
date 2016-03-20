@@ -1,1 +1,19 @@
-<h1>hello</h1>
+<% @page_title = " | Create A New Category" %>
+
+<section>
+  <%= render :partial => "new_form",
+             :locals => {:form_header => "Create A New Category",
+             						 } %>
+
+	<%= form_for @category, url: admin_path(@category), html: {method: :put} do |f| %>
+	  <%= f.label :name, "Name: " %>
+	  <%= f.text_field :name %>
+	  <br>
+	  <br>
+	  <%= f.label :description, "Descirption: " %>
+	  <%= f.text_area :description, size: "60x12" %>
+	  <br>
+	  <br>
+	  <%= f.submit "Create" %>
+	<% end %>
+</section>

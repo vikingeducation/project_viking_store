@@ -8,11 +8,8 @@
   <table class="table table-striped">
     <tr>
       <% headers.each do |header| %>
-        <th><%= header.column_name %></th>
+        <th><%= header %></th>
       <% end %>
-      <th>SHOW</th>
-      <th>EDIT</th>
-      <th>DELETE</th>
     </tr>
     <% rows.each do |row| %>
       <tr>

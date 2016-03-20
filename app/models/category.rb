@@ -2,7 +2,7 @@ class Category < ActiveRecord::Base
 
   def self.all
     rows = []
-    Product.find_by_sql("SELECT * FROM categories").each do |category|
+    Category.find_by_sql("SELECT * FROM categories").each do |category|
       row = []
       row << category.id
       row << category.name
@@ -14,8 +14,13 @@ class Category < ActiveRecord::Base
     rows
   end
 
+=begin
+
+  I think this method is causing me a lot of deadlock, recursive locking issues even though I have no idea why.
+
   def self.column_names
     Product.find_by_sql("SELECT * FROM information_schema.columns where table_name='categories'")
   end
+=end
 
 end
