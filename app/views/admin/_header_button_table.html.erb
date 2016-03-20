@@ -1,8 +1,8 @@
-<header>
+<header class="text-center">
   <h3><%= table_header %></h3>
 </header>
 
-<button type="button" class="btn btn-primary btn-lg"><%= button_label %></button>
+<button type="button" class="btn btn-primary btn-lg center-block"><%= button_label %></button>
 
 <div class="stats-table">
   <table class="table table-striped">
@@ -19,9 +19,9 @@
         <% row.each do |data| %>
           <td><%= data %></td>
         <% end %>
-        <td><a href="#">SHOW</a></td>
-        <td><a href="#">EDIT</a></td>
-        <td><a href="#">DELETE</a></td>
+        <td><a href="#">show</a></td>
+        <td><a href="#">edit</a></td>
+        <td><a href="#">delete</a></td>
       </tr>
     <% end %>
   </table>
