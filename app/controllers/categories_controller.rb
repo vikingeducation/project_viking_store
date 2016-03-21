@@ -1,19 +1,11 @@
-class AdminController < ApplicationController
+class CategoriesController < ApplicationController
 
   layout "admin_portal"
 
-  def index
-  end
-
-  def categories
-    @column_names = ["id","name","description","created_at","updated_at","show","edit","delete"]
-    @categories = Category.all_in_arrays
-  end
-
-  def create_category
+  def create
     @category = Category.new(whitelisted_params)
     if @category.save 
-      redirect_to "/admin/categories"
+      redirect_to :categories
       flash[:notice] = "New Category Created!"
     else
       flash[:alert] = "New Category Could Not Be Created, Please Try Again."
@@ -21,35 +13,40 @@ class AdminController < ApplicationController
     end
   end
 
-  def delete_category
+  def destroy
     Category.find(params[:id]).destroy
-    redirect_to "/admin/categories"
+    redirect_to categories_path
     flash[:notice] = "Category Deleted!"
   end
 
-  def edit_category
+  def edit
     @category = Category.find(params[:id])
   end
 
-  def new_category
+  def index
+    @column_names = ["id","name","description","created_at","updated_at","show","edit","delete"]
+      @categories = Category.all_in_arrays
+  end
+
+  def new
     @category = Category.new
   end
 
-  def show_category
+  def show
     @category = Category.find(params[:id])
     @column_names = ["id","name","sku","description","price","category_id","created_at","updated_at","show"]
     @products = Category.products_in_arrays(params[:id])
   end
 
-  def update_category
+  def update
     @category = Category.find(params[:id])
     @category.update_attributes(whitelisted_params)
     if @category.save
-      redirect_to "/admin/categories"
+      redirect_to :categories
       flash[:notice] = "Category Updated!"
     else
       flash[:alert] = "Category Couldn't be Updated, Try Again."
-      render :edit_category
+      render :edit
     end
   end
 

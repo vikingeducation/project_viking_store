@@ -1,16 +1,8 @@
 Rails.application.routes.draw do
 
   root 'admin#categories'
-  get '/admin/dashboard' => 'dashboard#index'
-  get '/admin' => 'admin#index'
-  get'/admin/categories' => 'admin#categories'
-  get '/admin/categories/new' => 'admin#new_category'
-  post '/admin' => 'admin#create_category'
-  get '/admin/categories/:id' => 'admin#show_category'
-  get '/admin/categories/:id/edit' => 'admin#edit_category'
-  put '/admin/categories/:id' => 'admin#update_category'
-  delete '/admin/categories/:id' => 'admin#delete_category'
-
+  resources :categories, path: '/admin/categories'
+  get 'admin/dashboard' => 'dashboard#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

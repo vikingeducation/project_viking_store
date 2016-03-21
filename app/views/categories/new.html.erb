@@ -11,7 +11,7 @@
              :locals => {:form_header => "Create A New Category",
              						 } %>
 
-	<%= form_for @category, url: admin_path(@category), html: {method: :post} do |f| %>
+	<%= form_for @category do |f| %>
 		<%= f.label :id, "ID: " %>
 		<%= f.text_field :id, :readonly => true %>
 		<br>
