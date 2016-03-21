@@ -25,10 +25,7 @@
     <br>
     <br>
     <%= f.submit "Update" %>
-  <% end %>
-
-  <%= form_for @category, url: ("/admin/categories/" + @category.id.to_s), html: {method: :delete} do |f| %>
-    <%= f.submit "Delete Category" %>
+    <%= link_to 'delete', @category, data: {:confirm => "Are you sure?"}, :method => :delete %>
   <% end %>
 
 </section>

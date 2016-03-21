@@ -3,8 +3,11 @@
 <p>id = <%= @category.id %></p>
 <p>name = <%= @category.name %></p>
 <p>description = <%= @category.description %></p>
-<a href="#">EDIT</a>
-<a href="#">DELETE</a>
+<%= link_to 'edit', "/admin/categories/#{params[:id]}/edit" %>
+<%= link_to 'delete', 
+						"/admin/categories/#{params[:id]}",
+            data: {:confirm => 'Are you sure?'}, 
+            :method => :delete %>
 
 <section>
 	<%= render :partial => "./shared/header_and_table",
