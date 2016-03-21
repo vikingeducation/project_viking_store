@@ -1,5 +1,7 @@
 class Category < ActiveRecord::Base
 
+  # has_many :products, dependent: :nullify
+
   validates :name,
             :length => {:in => 4..16}
 
@@ -9,9 +11,6 @@ class Category < ActiveRecord::Base
       category_array = []
       category_array << category.id
       category_array << category.name
-      category_array << category.description
-      category_array << category.created_at
-      category_array << category.updated_at
       categories_in_arrays << category_array
     end
     categories_in_arrays
@@ -23,13 +22,6 @@ class Category < ActiveRecord::Base
       product_array = []
       product_array << product.id
       product_array << product.name
-      product_array << product.sku
-      product_array << product.description
-      product_array << product.price
-      product_array << product.category_id
-      product_array << product.created_at
-      product_array << product.updated_at
-      product_array << "#"
       products << product_array
     end
     products

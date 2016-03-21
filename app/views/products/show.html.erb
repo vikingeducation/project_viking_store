@@ -1,0 +1,10 @@
+<% @page_title = " | Product" %>
+
+<p>id = <%= @product.id %></p>
+<p>name = <%= @product.name %></p>
+<p>description = <%= @product.description %></p>
+<%= link_to 'edit', "admin/products/#{params[:id]}/edit" %>
+<%= link_to 'delete', 
+						"admin/products/#{params[:id]}", 
+						data: {:confirm => 'Are you sure?'}, 
+						:method => :delete %>

@@ -9,8 +9,10 @@
 <section>
   <%= render :partial => "./shared/header_button_table",
              :locals => {:table_header => "Viking Store Categories",
-             						 :button_label => "Create a New Category",
-             						 :button_link => "/admin/categories/new",
+ 						 :button_label => "Create a New Category",
+ 						 :button_link => new_category_path,
                          :headers => @column_names,
-                         :rows => @categories} %>
+                         :rows => @categories,
+                         :model_name_plural => 'categories' 
+                         } %>
 </section>

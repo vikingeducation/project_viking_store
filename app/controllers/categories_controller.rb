@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @column_names = ["id","name","description","created_at","updated_at","show","edit","delete"]
+    @column_names = ["id","name","show","edit","delete"]
       @categories = Category.all_in_arrays
   end
 
@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @column_names = ["id","name","sku","description","price","category_id","created_at","updated_at","show"]
+    @column_names = ["id","name"]
     @products = Category.products_in_arrays(params[:id])
   end
 

@@ -18,15 +18,15 @@
         <% end %>
         <td>
           <%= link_to 'show', 
-                      "/admin/categories/#{row[0]}" %>
+                      "/admin/#{model_name_plural}/#{row[0]}" %>
         </td>
         <td>
           <%= link_to 'edit', 
-                            "/admin/categories/#{row[0]}/edit" %>
+                            "/admin/#{model_name_plural}/#{row[0]}/edit" %>
         </td>
         <td>
           <%= link_to 'delete', 
-                      "/admin/categories/#{row[0]}",
+                      "/admin/#{model_name_plural}/#{row[0]}",
                       data: {:confirm => 'Are you sure?'}, 
                       :method => :delete %>
         </td>

@@ -12,11 +12,7 @@
     <% rows.each do |row| %>
       <tr>
         <% row.each do |data| %>
-          <% unless data == "#" %>
-            <td><%= data %></td>
-          <% else %>
-            <td><a href=<%=data%>>show</a></td>
-          <% end %>
+          <td><%= data %></td>
         <% end %>
       </tr>
     <% end %>
