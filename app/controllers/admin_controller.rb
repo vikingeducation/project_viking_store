@@ -22,6 +22,10 @@ class AdminController < ApplicationController
     end
   end
 
+  def edit_category
+    @category = Category.find(params[:id])
+  end
+
   def new_category
     @category = Category.new
   end
@@ -30,7 +34,18 @@ class AdminController < ApplicationController
     @category = Category.find(params[:id])
     @column_names = ["id","name","sku","description","price","category_id","created_at","updated_at","show"]
     @products = Category.products_in_arrays(params[:id])
+  end
 
+  def update_category
+    @category = Category.find(params[:id])
+    @category.update_attributes(whitelisted_params)
+    if @category.save
+      redirect_to "/admin/categories"
+      flash[:notice] = "Category Updated!"
+    else
+      flash[:alert] = "Category Couldn't be Updated, Try Again."
+      render :edit_category
+    end
   end
 
   private
