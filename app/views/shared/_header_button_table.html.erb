@@ -16,7 +16,7 @@
         <% row.each do |data| %>
           <td><%= data %></td>
         <% end %>
-        <td><a href="#">show</a></td>
+        <td><%= link_to 'show', "/admin/categories/#{row[0]}" %></td>
         <td><a href="#">edit</a></td>
         <td><%= link_to 'delete', ('/admin/categories/' + row[0].to_s),
             data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
