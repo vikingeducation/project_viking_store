@@ -16,10 +16,20 @@
         <% row.each do |data| %>
           <td><%= data %></td>
         <% end %>
-        <td><%= link_to 'show', "/admin/categories/#{row[0]}" %></td>
-        <td><a href="#">edit</a></td>
-        <td><%= link_to 'delete', ('/admin/categories/' + row[0].to_s),
-            data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
+        <td>
+          <%= link_to 'show', 
+                      "/admin/categories/#{row[0]}" %>
+        </td>
+        <td>
+          <%= link_to 'edit', 
+                            "/admin/categories/#{row[0]}/edit" %>
+        </td>
+        <td>
+          <%= link_to 'delete', 
+                      "/admin/categories/#{row[0]}",
+                      data: {:confirm => 'Are you sure?'}, 
+                      :method => :delete %>
+        </td>
       </tr>
     <% end %>
   </table>
