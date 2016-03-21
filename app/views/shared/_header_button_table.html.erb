@@ -18,7 +18,8 @@
         <% end %>
         <td><a href="#">show</a></td>
         <td><a href="#">edit</a></td>
-        <td><a href="#">delete</a></td>
+        <td><%= link_to 'delete', ('/admin/categories/' + row[0].to_s),
+            data: {:confirm => 'Are you sure?'}, :method => :delete %></td>
       </tr>
     <% end %>
   </table>
