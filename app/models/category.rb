@@ -29,6 +29,7 @@ class Category < ActiveRecord::Base
       product_array << product.category_id
       product_array << product.created_at
       product_array << product.updated_at
+      product_array << "#"
       products << product_array
     end
     products
