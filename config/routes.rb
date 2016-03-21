@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/admin/categories/:id' => 'admin#show_category'
   get '/admin/categories/:id/edit' => 'admin#edit_category'
   put '/admin/categories/:id' => 'admin#update_category'
+  delete '/admin/categories/:id' => 'admin#delete_category'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

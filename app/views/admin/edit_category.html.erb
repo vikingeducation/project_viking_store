@@ -26,4 +26,9 @@
     <br>
     <%= f.submit "Update" %>
   <% end %>
+
+  <%= form_for @category, url: ("/admin/categories/" + @category.id.to_s), html: {method: :delete} do |f| %>
+    <%= f.submit "Delete Category" %>
+  <% end %>
+
 </section>

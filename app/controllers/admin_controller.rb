@@ -22,6 +22,12 @@ class AdminController < ApplicationController
     end
   end
 
+  def delete_category
+    Category.find(params[:id]).destroy
+    redirect_to "/admin/categories"
+    flash[:notice] = "Category Deleted!"
+  end
+
   def edit_category
     @category = Category.find(params[:id])
   end
