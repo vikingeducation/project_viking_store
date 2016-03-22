@@ -6,22 +6,9 @@
   </div>
 <% end %>
 
-<section>
-  <%= render :partial => "./shared/new_form",
-             :locals => {:form_header => "Edit Category"
-                         } %>
-
-  <%= form_for @category do |f| %>
-    <%= f.label :id, "ID: " %>
-    <%= f.text_field :id, :readonly => true %>
-    <br>
-    <br>
-    <%= f.label :name, "Name: " %>
-    <%= f.text_field :name %>
-    <br>
-    <br>
-    <%= f.submit "Update" %>
-    <%= link_to 'Delete', @category, data: {:confirm => "Are you sure?"}, :method => :delete %>
-  <% end %>
-
-</section>
+<%= render :partial => "./shared/edit_new_form",
+           :locals => {:delete_option => true,
+                       :form_header => "Edit Category",
+                       :object => @category,
+                       :submit_label => "Update"
+                       } %>
