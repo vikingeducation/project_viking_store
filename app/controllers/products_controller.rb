@@ -2,6 +2,17 @@ class ProductsController < ApplicationController
 
   layout "admin_portal"
 
+  def create
+    @product = Product.new(whitelisted_params)
+    if @product.save
+      redirect_to products_path
+      flash[:notice] = "Product Created!"
+    else
+      render :new
+      flash[:alert] = "Could Not Make New Product, Title can only be a certain length."
+    end
+  end
+
   def edit
     @product = Product.find(params[:id])
   end
