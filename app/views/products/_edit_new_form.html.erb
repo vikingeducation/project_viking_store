@@ -14,8 +14,12 @@
     <%= f.text_field :name %>
     <br>
     <br>
-    <%= f.label :price, "Price: " %>
+    <%= f.label :price, "Price: $" %>
     <%= f.text_field :price %>
+    <br>
+    <br>
+    <%= f.label :category_id, "Category: " %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, include_blank: true ) %>
     <br>
     <br>
     <%= f.submit submit_label %>
