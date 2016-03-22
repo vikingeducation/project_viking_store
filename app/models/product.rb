@@ -35,4 +35,18 @@ class Product < ActiveRecord::Base
     OrderContent.where('product_id = ?', product_id).count
   end
 
+  # I want the number of shopping carts this product is in. This means I need to know what orders this product is in and how many of those orders have null as their checkout_date.
+  # join up order_contents with orders
+  # grab all the rows from that have my product_id
+  # find all the rows that have null for their checkout_date.
+  # piss
+  def self.number_of_carts_in(product_id)
+    OrderContent.find_by_sql("SELECT COUNT(*) AS total
+                              FROM order_contents
+                              JOIN orders
+                                ON order_contents.order_id=orders.id
+                              WHERE order_contents.product_id = #{product_id}
+                              AND orders.checkout_date IS NULL")
+  end
+
 end
