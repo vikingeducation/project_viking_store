@@ -4,6 +4,9 @@ class Product < ActiveRecord::Base
   has_many :order_contents
   has_many :orders, :through => :order_contents
 
+  validates :name, :sku, :price, :category_id,
+            :presence => true
+
   def self.all_in_arrays
     products = []
     Product.all.each do |product|

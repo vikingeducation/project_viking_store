@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
       redirect_to :categories
       flash[:notice] = "New Category Created!"
     else
-      flash[:alert] = "New Category Could Not Be Created, Please Try Again."
+      flash.now[:alert] = "New Category Could Not Be Created, Please Try Again."
       render :new_category
     end
   end
@@ -45,7 +45,7 @@ class CategoriesController < ApplicationController
       redirect_to :categories
       flash[:notice] = "Category Updated!"
     else
-      flash[:alert] = "Category Couldn't be Updated, Try Again."
+      flash.now[:alert] = "Category Couldn't be Updated, Try Again."
       render :edit
     end
   end

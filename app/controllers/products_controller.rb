@@ -8,8 +8,8 @@ class ProductsController < ApplicationController
       redirect_to products_path
       flash[:notice] = "Product Created!"
     else
+      flash.now[:alert] = "Could Not Make New Product, Title can only be a certain length."
       render :new
-      flash[:alert] = "Could Not Make New Product, Title can only be a certain length."
     end
   end
 
@@ -40,8 +40,8 @@ class ProductsController < ApplicationController
       redirect_to products_path
       flash[:notice] = "Product Updated!"
     else
+      flash.now[:alert] = "Update Failed"
       render :edit
-      flash[:alert] = "Update Failed"
     end
   end
 
