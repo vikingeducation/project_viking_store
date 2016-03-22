@@ -18,4 +18,22 @@ class ProductsController < ApplicationController
     @number_of_carts_in = Product.number_of_carts_in(params[:id]).first.total
   end
 
+  def update
+    @product = Product.find(params[:id])
+    @product.update_attributes(whitelisted_params)
+    if @product.save
+      redirect_to products_path
+      flash[:notice] = "Product Updated!"
+    else
+      render :edit
+      flash[:alert] = "Update Failed"
+    end
+  end
+
+  private
+
+  def whitelisted_params
+    params[:product] ? (params.require(:product).permit(:name, :sku, :description, :price, :category_id, :created_at, :updated_at)) : (params.permit(:name, :sku, :description, :price, :category_id, :created_at, :updated_at))
+  end
+
 end
