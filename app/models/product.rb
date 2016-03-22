@@ -11,7 +11,9 @@ class Product < ActiveRecord::Base
       product_array << product.id
       product_array << product.name
       product_array << product.price
-      product_array << product.category_id
+
+      # Getting the category name and id
+      product_array << {category_id: product.category_id, category_name: Category.find(product.category_id).name}
       products << product_array
     end
     products

@@ -14,7 +14,12 @@
     <% rows.each do |row| %>
       <tr>
         <% row.each do |data| %>
-          <td><%= data %></td>
+          <!-- This was done so that I could have the category column link to that categories show page. I put the category details into a hash in the Product model and this is how I've distinguished it from the rest of the data. -->
+          <% unless data.class == Hash %>
+            <td><%= data %></td>
+          <% else %>
+            <td><%= link_to data[:category_name], "/admin/#{belongs_to_plural}/#{data[:category_id]}" %><td>
+          <% end %>
         <% end %>
         <td>
           <%= link_to 'show', 
