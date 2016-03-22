@@ -6,6 +6,7 @@ class Product < ActiveRecord::Base
 
   validates :name, :sku, :price, :category_id,
             :presence => true
+  validates :price, numericality: { less_than_or_equal_to: 10000 }
 
   def self.all_in_arrays
     products = []
