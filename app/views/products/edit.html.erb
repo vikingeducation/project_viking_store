@@ -1,0 +1,26 @@
+<% @page_title = " | Edit Product" %>
+
+<% if flash[:alert] %>
+	<div class="notice">
+		<%= flash[:alert] %>
+	</div>
+<% end %>
+
+<section>
+	<%= render :partial => './shared/new_form',
+						 :locals => {:form_header => "Edit Product"
+						 								} %>
+
+	<%= form_for @product do |f| %>
+		<%= f.label :id, "ID: " %>
+		<%= f.text_field :id, :readonly => true %>
+		<br>
+		<br>
+		<%= f.label :name, "Name: " %>
+		<%= f.text_field :name %>
+		<br>
+		<br>
+		<%= f.submit "Update" %>
+		<%= link_to 'Delete', @category, data: {:confirm => "Are you sure?"}, :method => :delete %>
+	<% end %>
+</section>

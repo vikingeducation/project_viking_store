@@ -2,6 +2,10 @@ class ProductsController < ApplicationController
 
   layout "admin_portal"
 
+  def edit
+    @product = Product.find(params[:id])
+  end
+
   def index
     @column_names = ["id", 'name','price','category',"show","edit","delete"]
     @products = Product.all_in_arrays
