@@ -23,8 +23,16 @@ class Product < ActiveRecord::Base
     Product.all.where('created_at >= ?', number.days.ago).count
   end
 
+  # Input a category_id, returns the category name.
   def self.category_name(category_id)
     Category.find(category_id).name
+  end
+
+  # Number of orders this product has been in, not the total sold.
+  # order_contents table has order_id, product_id and quantity columns.
+  # If I can get a count of all the rows that have the product_id I'm looking for, that'd be the answer.
+  def self.times_ordered(product_id)
+    OrderContent.where('product_id = ?', product_id).count
   end
 
 end
