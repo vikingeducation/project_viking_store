@@ -36,6 +36,7 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     @product.update_attributes(whitelisted_params)
+    @product.price = Product.format_price(params[:product][:price])
     if @product.save
       redirect_to products_path
       flash[:notice] = "Product Updated!"

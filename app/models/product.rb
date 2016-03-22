@@ -31,6 +31,10 @@ class Product < ActiveRecord::Base
     Category.find(category_id).name
   end
 
+  def self.format_price(price)
+    price.scan(/\d+\.*/).join
+  end
+
   # Number of orders this product has been in, not the total sold.
   # order_contents table has order_id, product_id and quantity columns.
   # If I can get a count of all the rows that have the product_id I'm looking for, that'd be the answer.
