@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @category_name = Product.category_name(@product.category_id)
   end
 
 end

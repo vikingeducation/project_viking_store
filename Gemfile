@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'better_errors'
+gem 'binding_of_caller'
+
 gem 'hirb'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

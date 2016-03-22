@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 
-  # has_many :products, dependent: :nullify
+  has_many :products
 
   validates :name,
             :length => {:in => 4..16}

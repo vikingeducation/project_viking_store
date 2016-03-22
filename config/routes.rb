@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'admin#categories'
+  root 'categories#index'
   resources :categories, path: '/admin/categories'
   resources :products, only: [:index, :show], path: '/admin/products'
   get 'admin/dashboard' => 'dashboard#index'

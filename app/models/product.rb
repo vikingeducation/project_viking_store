@@ -13,7 +13,7 @@ class Product < ActiveRecord::Base
       product_array << product.price
 
       # Getting the category name and id
-      product_array << {category_id: product.category_id, category_name: Category.find(product.category_id).name}
+      product_array << {category_id: product.category_id, category_name: Product.category_name(product.category_id)}
       products << product_array
     end
     products
@@ -21,6 +21,10 @@ class Product < ActiveRecord::Base
 
   def self.created_since_days_ago(number)
     Product.all.where('created_at >= ?', number.days.ago).count
+  end
+
+  def self.category_name(category_id)
+    Category.find(category_id).name
   end
 
 end

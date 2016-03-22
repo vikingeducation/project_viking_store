@@ -1,10 +1,41 @@
 <% @page_title = " | Product" %>
+<h3>Product Information</h3>
+<table>
+	<tr>
+		<td><b>id:</b></td>
+		<td><%= @product.id %></td>
+	</tr>
+	<tr>
+		<td><b>name:</b></td>
+		<td><%= @product.name %></td>
+	</tr>
+	<tr>
+		<td><b>price:</b></td>
+		<td><%= @product.price %></td>
+	</tr>
+	<tr>
+		<td><b>category:</b></td>
+		<td><%= @category_name %></td>
+	</tr>
+</table>
 
-<p>id = <%= @product.id %></p>
-<p>name = <%= @product.name %></p>
-<p>description = <%= @product.description %></p>
-<%= link_to 'edit', "admin/products/#{params[:id]}/edit" %>
-<%= link_to 'delete', 
+<h3>Product Statistics</h3>
+<table>
+	<tr>
+		<td><b>Times Ordered:</b></td>
+		<td><%= "?" %></td>
+	</tr>
+	<tr>
+		<td><b>Carts In:</b></td>
+		<td><%= "?" %></td>
+	</tr>
+</table>
+
+<br>
+
+<%= link_to 'Edit Product', "admin/products/#{params[:id]}/edit" %>
+<br>
+<%= link_to 'Delete Product', 
 						"admin/products/#{params[:id]}", 
 						data: {:confirm => 'Are you sure?'}, 
 						:method => :delete %>
