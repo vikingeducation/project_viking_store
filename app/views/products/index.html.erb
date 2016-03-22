@@ -10,7 +10,7 @@
   <%= render :partial => './shared/header_button_table',
              :locals => { :table_header => 'Products',
                           :button_label => 'Add A New Product',
-                          :button_link => categories_path,
+                          :button_link => new_product_path,
                           :headers => @column_names,
                           :rows => @products,
                           :model_name_plural => 'products',

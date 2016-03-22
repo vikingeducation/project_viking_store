@@ -11,6 +11,10 @@ class ProductsController < ApplicationController
     @products = Product.all_in_arrays
   end
 
+  def new
+    @product = Product.new
+  end
+
   def show
     @product = Product.find(params[:id])
     @category_name = Product.category_name(@product.category_id)
