@@ -36,6 +36,6 @@
 <%= link_to 'Edit Product', edit_product_path %>
 <br>
 <%= link_to 'Delete Product', 
-						"admin/products/#{params[:id]}", 
+						product_path, 
 						data: {:confirm => 'Are you sure?'}, 
 						:method => :delete %>

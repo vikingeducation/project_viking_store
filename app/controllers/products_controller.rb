@@ -8,9 +8,14 @@ class ProductsController < ApplicationController
       redirect_to products_path
       flash[:notice] = "Product Created!"
     else
-      flash.now[:alert] = "Could Not Make New Product, Title can only be a certain length."
+      flash.now[:alert] = "Could Not Make New Product. Attribute Issues Probably."
       render :new
     end
+  end
+
+  def destroy
+    Product.find(params[:id]).destroy
+    redirect_to products_path
   end
 
   def edit
