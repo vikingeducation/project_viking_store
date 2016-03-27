@@ -1,8 +1,12 @@
 class User < ActiveRecord::Base
+  # I think credit_cards should be destroyed when a user is destroyed.
+  has_one :credit_card, :dependent => :destroy
 
-  has_one :credit_card
-  has_many :addresses
-  has_many :orders
+  # Should you delete an address because the user is gone, I guess we shouldn't because a lot of stats are done from those addresses, but I guess we can nullify and it shouldn't make a big deal. 
+  has_many :addresses, :dependent => :nullify
+
+  # as above, shouldn't delete orders because we need them for stats, but we nullify those user_ids
+  has_many :orders, :dependent => :nullify
 
   def self.created_since_days_ago(number)
     User.all.where('created_at >= ?', number.days.ago).count

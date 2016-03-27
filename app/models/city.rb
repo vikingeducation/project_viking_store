@@ -1,5 +1,6 @@
 class City < ActiveRecord::Base
-  has_many :addresses
+  # If you deleted a city would you destroy an address? I don't think so but I don't like the idea of having an address with a null value for it's city but that's more of a general design issue.
+  has_many :addresses, :dependent => :nullify
 
   def self.top_three_cities
     # Trying to find via find_by_sql

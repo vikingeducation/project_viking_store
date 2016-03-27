@@ -1,7 +1,9 @@
 class Product < ActiveRecord::Base
-
+  # You don't need to destroy or null a category when destroying a product.
   belongs_to :category
-  has_many :order_contents
+  # You would destroy all join table items in order contents that have that product_id in there. Again, annoys me the idea that if you delete a product, all previous order records have that item wiped out. 
+  has_many :order_contents, :dependent => :destroy
+  # No need to destroy an order cos you're destroying a product.
   has_many :orders, :through => :order_contents
 
   validates :name, :sku, :price, :category_id,

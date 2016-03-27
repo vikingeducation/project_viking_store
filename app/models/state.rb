@@ -1,5 +1,6 @@
 class State < ActiveRecord::Base
-  has_many :addresses
+  # You wouldnt destroy an address cos you're getting rid of a state, but you should null. 
+  has_many :addresses, :dependent => :nullify
 
   def self.top_three_states
     # Trying to find via find_by_sql

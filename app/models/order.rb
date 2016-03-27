@@ -1,9 +1,13 @@
 class Order < ActiveRecord::Base
 
-  belongs_to :billings, :class_name => "Address", :foreign_key => :billing_id
-  belongs_to :shippings, :class_name => "Address", :foreign_key => :shipping_id
+  # You wouldn't destroy any addresses or nullify any address stuff when you're deleting an order.
+  belongs_to :billing_address, :class_name => "Address", :foreign_key => :billing_id
+  belongs_to :shipping_address, :class_name => "Address", :foreign_key => :shipping_id
+  # You wouldn't destroy an user or nullify anything re user
   belongs_to :user
-  has_many :order_contents
+  # If you deleted an order there's no need to keep any join table items which has this order_id in it. Destroy!
+  has_many :order_contents, :dependent => :destroy
+  # You wouldn't destroy any products because you deleted an order and no need to null anything cos you're destroying orphans in the order_contents join table.
   has_many :products, :through => :order_contents
 
   # scope examples...

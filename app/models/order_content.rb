@@ -1,5 +1,5 @@
 class OrderContent < ActiveRecord::Base
-
+  # Definitely no need to destroy or null anything when it comes to dependents and join tables.
   belongs_to :product
   belongs_to :order
 
