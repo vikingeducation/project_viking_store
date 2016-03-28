@@ -35,7 +35,6 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @column_names = ["id","name"]
-    @products = Category.products_in_arrays(params[:id])
   end
 
   def update

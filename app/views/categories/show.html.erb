@@ -11,8 +11,8 @@
 	</tr>
 </table>
 
-<%= link_to 'edit', "/admin/categories/#{params[:id]}/edit" %>
+<%= link_to 'edit', edit_category_path(:id => @category.id) %>
 <%= link_to 'delete', 
-						"/admin/categories/#{params[:id]}",
+						category_path(:id => @category.id),
             data: {:confirm => 'Are you sure?'}, 
             :method => :delete %>
