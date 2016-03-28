@@ -10,6 +10,8 @@ class Order < ActiveRecord::Base
   # You wouldn't destroy any products because you deleted an order and no need to null anything cos you're destroying orphans in the order_contents join table.
   has_many :products, :through => :order_contents
 
+  has_many :categories, :through => :products
+
   # scope examples...
   # scope :checked_out, lambda { where("checkout_date IS NOT NULL") }
   # scope :not_checked_out, lambda { where("checkout_date IS NULL") }

@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   # as above, shouldn't delete orders because we need them for stats, but we nullify those user_ids
   has_many :orders, :dependent => :nullify
 
+  has_many :products, :through => :orders
+
   def self.created_since_days_ago(number)
     User.all.where('created_at >= ?', number.days.ago).count
   end
