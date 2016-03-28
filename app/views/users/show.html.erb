@@ -37,16 +37,33 @@
             <td><b>Default Billing Address:</b></td>
             <td><%= @user.default_billing_address %></td>
           </tr>
+          <tr>
+            <td><b>Default Shipping Address:</b></td>
+            <td><%= @user.default_shipping_address %></td>
+          </tr>
         </table>
 
       </div>
     </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= link_to "View User's Addresses", '#' %>
+        <br>
+        <% if Order.where("user_id = ? AND checkout_date IS NULL", @user.id) %>
+          <%= link_to "View User's Current Shopping Cart", '#' %>
+          <br>
+        <% end %>
+        <%= link_to 'Edit User', edit_user_path %>
+        <br>
+        <%= link_to 'Delete User', 
+                    user_path, 
+                    data: {:confirm => 'Are you sure?'}, 
+                    :method => :delete %>
+      </div>
+    </div>
+
   </div>
 </div>
-
-<%= link_to 'Edit User', edit_user_path %>
-<br>
-<%= link_to 'Delete User', 
-            user_path, 
-            data: {:confirm => 'Are you sure?'}, 
-            :method => :delete %>

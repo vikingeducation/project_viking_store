@@ -10,13 +10,20 @@ class User < ActiveRecord::Base
 
   has_many :products, :through => :orders
 
+  def city_name(address)
+    City.find(address.city_id).name
+  end
+
   def default_billing_address
     address = Address.find(self.billing_id)
+    # This ternary expression seems to just complicate things but I'm using it for practice
     address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}"
   end
 
-  def city_name(address)
-    City.find(address.city_id).name
+  def default_shipping_address
+    address = Address.find(self.shipping_id)
+    # This ternary expression seems to just complicate things but I'm using it for practice
+    address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}"
   end
 
   def state_name(address)
@@ -31,11 +38,9 @@ class User < ActiveRecord::Base
       user_array << "#{user.first_name} #{user.last_name}"
       user_array << user.created_at
       # City Name
-      user_array << City.find(
-                              Address.find(user.billing_id).city_id
-                              ).name
+      user_array << user.city_name(Address.find(user.billing_id))
       # State Name
-      user_array << State.find(Address.find(user.billing_id).state_id).name
+      user_array << user.state_name(Address.find(user.billing_id))
       # Number of orders this user has made.
       # Sending it in a hash so that the shared view can use if statements on it.
       user_array << {:user_order_count => Order.where(:user_id => user.id).count}
