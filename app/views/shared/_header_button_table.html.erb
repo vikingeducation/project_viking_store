@@ -18,7 +18,11 @@
           <% unless data.class == Hash %>
             <td><%= data %></td>
           <% else %>
-            <td><%= link_to data[:category_name], "/admin/#{belongs_to_plural}/#{data[:category_id]}" %></td>
+            <% if data[:category_name] %>
+              <td><%= link_to data[:category_name], "/admin/#{belongs_to_plural}/#{data[:category_id]}" %></td>
+            <% elsif data[:user_order_count] %>
+              <td><%= link_to data[:user_order_count], "#" %></td>
+            <% end %>
           <% end %>
         <% end %>
 

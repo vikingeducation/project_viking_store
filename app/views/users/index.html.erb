@@ -13,6 +13,8 @@
  						 :button_link => new_user_path,
                          :headers => @column_names,
                          :rows => @users,
-                         :model_name_plural => 'users'
+                         :model_name_plural => 'users',
+                         # Not too sure what I'm gonna send this in as because I'm not sure where that number of orders is going to point to. Will it point to a subset of the users pages like /users/user_id/orders or what?? will decide later I guess
+                         :belongs_to_plural => '#'
                          } %>
 </section>

@@ -23,8 +23,9 @@ class User < ActiveRecord::Base
                               ).name
       # State Name
       user_array << State.find(Address.find(user.billing_id).state_id).name
-      # Number of orders this user has made
-      user_array << Order.where(:user_id => user.id).count
+      # Number of orders this user has made.
+      # Sending it in a hash so that the shared view can use if statements on it.
+      user_array << {:user_order_count => Order.where(:user_id => user.id).count}
       # Latest order made by this user, note it does not include shopping current shopping carts.
       user_array << Order.where(["user_id = ? and checkout_date IS NOT NULL", User.first.id])
                          .order(:updated_at => :desc)
