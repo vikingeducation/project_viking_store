@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'categories#index'
   resources :categories, path: '/admin/categories'
   resources :products, path: '/admin/products'
+  resources :users, path: '/admin/users'
   get 'admin/dashboard' => 'dashboard#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

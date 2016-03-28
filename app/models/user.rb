@@ -10,6 +10,33 @@ class User < ActiveRecord::Base
 
   has_many :products, :through => :orders
 
+  def self.all_in_arrays
+    users = []
+    User.all.each do |user|
+      user_array = []
+      user_array << user.id
+      user_array << "#{user.first_name} #{user.last_name}"
+      user_array << user.created_at
+      # City Name
+      user_array << City.find(
+                              Address.find(user.billing_id).city_id
+                              ).name
+      # State Name
+      user_array << State.find(Address.find(user.billing_id).state_id).name
+      # Number of orders this user has made
+      user_array << Order.where(:user_id => user.id).count
+      # Latest order made by this user, note it does not include shopping current shopping carts.
+      user_array << Order.where(["user_id = ? and checkout_date IS NOT NULL", User.first.id])
+                         .order(:updated_at => :desc)
+                         .limit(1)
+                         .first
+                         .updated_at
+
+      users << user_array
+    end
+    users
+  end
+
   def self.created_since_days_ago(number)
     User.all.where('created_at >= ?', number.days.ago).count
   end
