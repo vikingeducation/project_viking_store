@@ -1,2 +1,52 @@
 <% @page_title = " | User" %>
-<h3>User <%= @user.id %>: <%= "#{@user.first_name} #{@user.last_name}"%></h3>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3>User <%= @user.id %>: <%= "#{@user.first_name} #{@user.last_name}"%></h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="row">
+      <div class="col-md-12">
+        <header>
+          <h5>Demographic Information</h5>
+        </header>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+
+        <table>
+          <tr>
+            <td><b>First Name:</b></td>
+            <td><%= @user.first_name %></td>
+          </tr>
+          <tr>
+            <td><b>Last Name:</b></td>
+            <td><%= @user.last_name %></td>
+          </tr>
+          <tr>
+            <td><b>Email:</b></td>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <td><b>Default Billing Address:</b></td>
+            <td><%= @user.default_billing_address %></td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Edit User', edit_user_path %>
+<br>
+<%= link_to 'Delete User', 
+            user_path, 
+            data: {:confirm => 'Are you sure?'}, 
+            :method => :delete %>

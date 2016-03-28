@@ -10,6 +10,19 @@ class User < ActiveRecord::Base
 
   has_many :products, :through => :orders
 
+  def default_billing_address
+    address = Address.find(self.billing_id)
+    address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}"
+  end
+
+  def city_name(address)
+    City.find(address.city_id).name
+  end
+
+  def state_name(address)
+    State.find(address.state_id).name
+  end
+
   def self.all_in_arrays
     users = []
     User.all.each do |user|
