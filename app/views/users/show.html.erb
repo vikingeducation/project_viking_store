@@ -67,3 +67,57 @@
 
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="row">
+      <div class="col-md-12">
+        <header>
+          <h5>Credit Card Information</h5>
+        </header>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+
+        <table>
+          <tr>
+            <td><b>Nickname:</b></td>
+            <td><%= @user.credit_card.nickname %></td>
+          </tr>
+          <tr>
+            <td><b>Number:</b></td>
+            <td><%= @user.credit_card.card_number %></td>
+          </tr>
+          <tr>
+            <td><b>Expiration:</b></td>
+            <td><%= @user.credit_card.exp_month %>/<%= @user.credit_card.exp_year %></td>
+          </tr>
+          <tr>
+            <td><b>CCV:</b></td>
+            <td><%= @user.credit_card.ccv %></td>
+          </tr>
+          <tr>
+            <td><b>Card Type:</b></td>
+            <td><%= @user.credit_card.brand %></td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= link_to 'Remove Card', 
+                    credit_cards_path, 
+                    data: {:confirm => 'Are you sure?'}, 
+                    :method => :delete %>
+      </div>
+    </div>
+
+  </div>
+</div>
