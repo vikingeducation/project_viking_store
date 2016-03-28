@@ -16,12 +16,3 @@
 						"/admin/categories/#{params[:id]}",
             data: {:confirm => 'Are you sure?'}, 
             :method => :delete %>
-
-<section>
-	<%= render :partial => "./shared/header_and_table",
-						 :locals => {:table_header => "Products In This Category",
-						 						 :headers => @column_names,
-						 						 :rows => @products
-						 						}
-	%>
-</section>

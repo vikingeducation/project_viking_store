@@ -7,12 +7,37 @@
 <% end %>
 
 <section>
-  <%= render :partial => "./shared/header_button_table",
-             :locals => {:table_header => "Viking Store Categories",
- 						 :button_label => "Create a New Category",
- 						 :button_link => new_category_path,
-                         :headers => @column_names,
-                         :rows => @categories,
-                         :model_name_plural => 'categories'
-                         } %>
+	<header class="text-center">
+	  <h3>Categories</h3>
+	</header>
+
+	<%= button_to "Create New Category", new_category_path, :class => "btn btn-primary btn-lg center-block", :method => :get %>
+
+	<div class="stats-table">
+	  <table class="table table-striped">
+	    <tr>
+	      <% @column_headers.each do |header| %>
+	        <th><%= header %></th>
+	      <% end %>
+	    </tr>
+	    <% @categories.each do |category| %>
+	      <tr>
+	        <td><%= category.id %></td>
+					<td><%= category.name %></td>
+	        <td>
+	          <%= link_to 'show', category_path(:id => category.id) %>
+	        </td>
+	        <td>
+	          <%= link_to 'edit', edit_category_path(:id => category.id) %>
+	        </td>
+	        <td>
+	          <%= link_to 'delete', 
+	                      category_path(:id => category.id),
+	                      data: {:confirm => 'Are you sure?'}, 
+	                      :method => :delete %>
+	        </td>
+	      </tr>
+	    <% end %>
+	  </table>
+	</div>
 </section>

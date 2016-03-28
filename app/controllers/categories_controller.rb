@@ -24,8 +24,8 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @column_names = ["id","name","show","edit","delete"]
-      @categories = Category.all_in_arrays
+    @column_headers = ["id","name","show","edit","delete"]
+    @categories = Category.all
   end
 
   def new

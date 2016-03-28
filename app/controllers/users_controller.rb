@@ -9,8 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # @category_name = Product.category_name(@product.category_id)
-    # @times_ordered = Product.times_ordered(params[:id])
-    # @number_of_carts_in = Product.number_of_carts_in(params[:id]).first.total
+    @user_orders_table_headers = ["ID","Order Date","Order Value","Statue","SHOW", "EDIT", "DELETE"]
+    @orders = 
   end
 end
