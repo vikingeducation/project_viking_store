@@ -1,18 +1,60 @@
 <% @page_title = " | Category & Products" %>
 
-<table>
-	<tr>
-		<td><b>id:</b></td>
-		<td><%= @category.id %></td>
-	</tr>
-	<tr>
-		<td><b>name:</b></td>
-		<td><%= @category.name %></td>
-	</tr>
-</table>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Category <%= @category.id %>: <%= @category.name%></h3>
+  </div>
+</div>
 
-<%= link_to 'edit', edit_category_path(:id => @category.id) %>
-<%= link_to 'delete', 
-						category_path(:id => @category.id),
-            data: {:confirm => 'Are you sure?'}, 
-            :method => :delete %>
+<div class="row">
+	<div class="col-md-12">
+		<table>
+			<tr>
+				<td><b>id:</b></td>
+				<td><%= @category.id %></td>
+			</tr>
+			<tr>
+				<td><b>name:</b></td>
+				<td><%= @category.name %></td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= link_to 'edit', edit_category_path(:id => @category.id) %>
+		<%= link_to 'delete', 
+								category_path(:id => @category.id),
+		            data: {:confirm => 'Are you sure?'}, 
+		            :method => :delete %>
+  </div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<section>
+			<header class="text-center">
+			  <h3>Products In Axes</h3>
+			</header>
+
+			<div class="stats-table">
+			  <table class="table table-striped">
+			    <tr>
+			      <% @column_headers.each do |header| %>
+			        <th><%= header %></th>
+			      <% end %>
+			    </tr>
+			    <% @products.each do |product| %>
+			      <tr>
+			        <td><%= product.id %></td>
+			        <td>
+			          <%= link_to product.name, product_path(:id => product.id) %>
+			        </td>
+			      </tr>
+			    <% end %>
+			  </table>
+			</div>
+		</section>
+	</div>
+</div>
