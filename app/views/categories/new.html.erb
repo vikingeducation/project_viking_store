@@ -1,4 +1,4 @@
-<% @page_title = " | Create A New Category" %>
+<% @page_title = " | New Category" %>
 
 <% if flash[:alert] %>
 	<div class="notice">
@@ -6,9 +6,9 @@
 	</div>
 <% end %>
 
-<%= render :partial => "edit_new_form",
-           :locals => {:delete_option => false,
-           						 :form_header => "Create A New Category",
+<%= render :partial => "./shared/edit_or_new_form",
+           :locals => {:form_type => "new",
+           						 :form_header => "New Category",
            						 :object => @category,
-           						 :submit_label => "Create"
+           						 :submit_label => "Create Category"
            						 } %>

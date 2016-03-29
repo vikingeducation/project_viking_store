@@ -1,0 +1,9 @@
+/* added to application file */
+#edit-or-new form {
+  display: table; }
+#edit-or-new p {
+  display: table-row; }
+#edit-or-new label {
+  display: table-cell; }
+#edit-or-new input {
+  display: table-cell; }

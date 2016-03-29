@@ -1,5 +1,4 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
+/* * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
@@ -26,3 +25,13 @@
     text-decoration: none;
     color: black;
     font-size: 140%; }
+
+#edit-or-new form {
+  display: table; }
+#edit-or-new p {
+  display: table-row; }
+#edit-or-new label {
+  display: table-cell; }
+#edit-or-new input {
+  display: table-cell; }
+
