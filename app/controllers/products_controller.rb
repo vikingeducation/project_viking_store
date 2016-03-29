@@ -23,8 +23,8 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @column_names = ["id", 'name','price','category',"show","edit","delete"]
-    @products = Product.all_in_arrays
+    @column_headers = ["ID", 'Name','Price','Category',"SHOW","EDIT","DELETE"]
+    @products = Product.all
   end
 
   def new

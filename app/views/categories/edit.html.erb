@@ -6,9 +6,10 @@
   </div>
 <% end %>
 
-<%= render :partial => "edit_new_form",
+<%= render :partial => "./shared/edit_or_new_form",
            :locals => {:delete_option => true,
-                       :form_header => "Edit Category",
+                       :form_header => "Edit Category #{@category.id}: #{@category.name}",
+                       :form_type => "edit",
                        :object => @category,
                        :submit_label => "Update"
                        } %>

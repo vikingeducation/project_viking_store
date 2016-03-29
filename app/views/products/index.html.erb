@@ -7,13 +7,45 @@
 <% end %>
 
 <section>
-  <%= render :partial => './shared/header_button_table',
-             :locals => { :table_header => 'Products',
-                          :button_label => 'Add A New Product',
-                          :button_link => new_product_path,
-                          :headers => @column_names,
-                          :rows => @products,
-                          :model_name_plural => 'products',
-                          :belongs_to_plural => 'categories'
-              } %>
+  <header class="text-center">
+    <h3>Products</h3>
+  </header>
+
+  <%= button_to "Add a New Product", new_product_path, :class => "btn btn-primary btn-lg center-block", :method => :get %>
+
+  <div class="stats-table">
+    <table class="table table-striped">
+      <tr>
+        <% @column_headers.each do |header| %>
+          <th><%= header %></th>
+        <% end %>
+      </tr>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= product.name %></td>
+          <td>$<%= product.price %></td>
+          <td>
+            <% if product.category_id %>
+              <%= link_to product.category_name(product.category_id), category_path(:id => product.category_id) %>
+            <% else %>
+                n/a
+            <% end %>
+          </td>
+          <td>
+            <%= link_to 'show', product_path(:id => product.id) %>
+          </td>
+          <td>
+            <%= link_to 'edit', edit_product_path(:id => product.id) %>
+          </td>
+          <td>
+            <%= link_to 'delete', 
+                        product_path(:id => product.id),
+                        data: {:confirm => 'Are you sure?'}, 
+                        :method => :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </section>

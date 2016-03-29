@@ -13,7 +13,8 @@
       <%= f.label :name, "Name: " %>
       <%= f.text_field :name %>
     </p>
-    <%= f.submit submit_label %>
+    <br>
+    <%= button_to submit_label, object, :class => "btn btn-primary btn-lg center-block", :method => :post %>
 
     <% if form_type == 'edit' %>
       <%= link_to 'Delete', object, data: {:confirm => "Are you sure?"}, :method => :delete %>
