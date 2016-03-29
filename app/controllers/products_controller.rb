@@ -33,9 +33,13 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @category_name = Product.category_name(@product.category_id)
-    @times_ordered = Product.times_ordered(params[:id])
-    @number_of_carts_in = Product.number_of_carts_in(params[:id]).first.total
+    if @product.category_id
+      @category_name = @product.category_name(@product.category_id)
+    else
+      'n/a'
+    end
+    @times_ordered = @product.times_ordered(params[:id])
+    @number_of_carts_in = @product.number_of_carts_in(params[:id]).first.total
   end
 
   def update

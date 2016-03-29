@@ -10,7 +10,7 @@ class Product < ActiveRecord::Base
             :presence => true
   validates :price, numericality: { less_than_or_equal_to: 10000 }
 
-  def self.created_since_days_ago(number)
+  def created_since_days_ago(number)
     Product.all.where('created_at >= ?', number.days.ago).count
   end
 
@@ -26,7 +26,7 @@ class Product < ActiveRecord::Base
   # Number of orders this product has been in, not the total sold.
   # order_contents table has order_id, product_id and quantity columns.
   # If I can get a count of all the rows that have the product_id I'm looking for, that'd be the answer.
-  def self.times_ordered(product_id)
+  def times_ordered(product_id)
     OrderContent.where('product_id = ?', product_id).count
   end
 
@@ -35,7 +35,7 @@ class Product < ActiveRecord::Base
   # grab all the rows from that have my product_id
   # find all the rows that have null for their checkout_date.
   # piss
-  def self.number_of_carts_in(product_id)
+  def number_of_carts_in(product_id)
     OrderContent.find_by_sql("SELECT COUNT(*) AS total
                               FROM order_contents
                               JOIN orders

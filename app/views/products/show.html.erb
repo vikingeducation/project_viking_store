@@ -1,38 +1,23 @@
 <% @page_title = " | Product" %>
 <h3>Product Information</h3>
-<table>
-	<tr>
-		<td><b>id:</b></td>
-		<td><%= @product.id %></td>
-	</tr>
-	<tr>
-		<td><b>name:</b></td>
-		<td><%= @product.name %></td>
-	</tr>
-	<tr>
-		<td><b>price:</b></td>
-		<td><%= @product.price %></td>
-	</tr>
-	<tr>
-		<td><b>category:</b></td>
-		<td><%= @category_name %></td>
-	</tr>
-</table>
+
+<%= render :partial => "./shared/table_with_side_headers",
+             :locals => {:headers_data => [['id:',@product.id],
+             															 ['name:',@product.name],
+             															 ['price:',@product.price],
+             															 ['category:',@category_name]]
+             						}
+%>
 
 <h3>Product Statistics</h3>
-<table>
-	<tr>
-		<td><b>Times Ordered:</b></td>
-		<td><%= @times_ordered %></td>
-	</tr>
-	<tr>
-		<td><b>Carts In:</b></td>
-		<td><%= @number_of_carts_in %></td>
-	</tr>
-</table>
+
+<%= render :partial => "./shared/table_with_side_headers",
+             :locals => {:headers_data => [['Times Ordered:',@times_ordered],
+             															 ['Carts In:',@number_of_carts_in]]
+             						}
+%>
 
 <br>
-
 <%= link_to 'Edit Product', edit_product_path %>
 <br>
 <%= link_to 'Delete Product', 
