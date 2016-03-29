@@ -6,9 +6,10 @@
 	</div>
 <% end %>
 
-<%= render :partial => 'edit_new_form',
+<%= render :partial => 'edit_or_new_form',
 					 :locals => {:delete_option => true,
-					 						 :form_header => "Edit Product",
+					 						 :form_header => "Edit Product #{@product.id}",
+					 						 :form_type => "edit",
 					 						 :object => @product,
-					 						 :submit_label => "Update"
+					 						 :submit_label => "Update Product"
 					 								} %>
