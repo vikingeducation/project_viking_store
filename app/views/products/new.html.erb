@@ -6,9 +6,9 @@
 	</div>
 <% end %>
 
-<%= render :partial => "edit_new_form",
-					 :locals => {:delete_option => false,
-					 						 :form_header => "Create A New Product",
-					 						 :object => @product,
-					 						 :submit_label => "Create"
-					 } %>
+<%= render :partial => "edit_or_new_form",
+           :locals => {:form_type => "new",
+           						 :form_header => "New Product",
+           						 :object => @product,
+           						 :submit_label => "Create Product"
+           						 } %>
