@@ -107,3 +107,54 @@
   </div>
 
 </div>
+
+<div class="crud-container">
+
+  <div class="row">
+    <div class="col-xs-12 text-center sub-header">
+      <header>
+        <h3>Order History</h3>
+      </header>
+    </div>
+  </div>
+  <br>
+  
+  <div class="stats-table">
+    <table class="table table-striped">
+      <tr>
+        <% @user_orders_table_headers.each do |header| %>
+          <th><%= header %></th>
+        <% end %>
+      </tr>
+      <% @orders.each do |order| %>
+        <tr>
+          <td>
+            <%= order.id %>
+          </td>
+          <td>
+            <%= order.updated_at %>
+          </td>
+          <td>
+            $<%= order.value(order.id) %>
+          </td>
+          <td>
+            ORDER STATUS
+          </td>
+          <td>
+            <%= link_to 'show', order_path(:id => order.id) %>
+          </td>
+          <td>
+            <%= link_to 'edit', edit_order_path(:id => order.id) %>
+          </td>
+          <td>
+            <%= link_to 'delete', 
+                        order_path(:id => order.id),
+                        data: {:confirm => 'Are you sure?'}, 
+                        :method => :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+</div>

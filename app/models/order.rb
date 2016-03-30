@@ -16,6 +16,14 @@ class Order < ActiveRecord::Base
   # scope :checked_out, lambda { where("checkout_date IS NOT NULL") }
   # scope :not_checked_out, lambda { where("checkout_date IS NULL") }
 
+  def value(order_id)
+    OrderContent.find_by_sql("SELECT SUM(order_contents.quantity * products.price)
+                              FROM order_contents
+                              JOIN products
+                              ON order_contents.product_id = products.id
+                              WHERE order_contents.order_id = #{order_id}").first.sum
+  end
+
   def self.created_since_days_ago(number)
     Order.where('checkout_date >= ?', number.days.ago).count
   end
