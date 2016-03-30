@@ -32,10 +32,10 @@
               <%= user.created_at %>
             </td>
             <td>
-              <%= user.city_name(Address.find(user.billing_id)) %>
+              <%= user.city_name %>
             </td>
             <td>
-              <%= user.state_name(Address.find(user.billing_id)) %>
+              <%= user.state_name %>
             </td>
             <td>
               <%= user.number_of_orders(user.id) %>

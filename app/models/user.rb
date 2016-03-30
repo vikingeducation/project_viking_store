@@ -10,20 +10,32 @@ class User < ActiveRecord::Base
 
   has_many :products, :through => :orders
 
-  def city_name(address)
-    City.find(address.city_id).name
+  def city_name
+    if self.billing_id
+      City.find(Address.find(billing_id).city_id).name
+    else
+      'n/a'
+    end
   end
 
   def default_billing_address
-    address = Address.find(self.billing_id)
-    # This ternary expression seems to just complicate things but I'm using it for practice
-    address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}"
+    if self.billing_id
+      address = Address.find(self.billing_id)
+      # This ternary expression seems to just complicate things but I'm using it for practice
+      address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}"
+    else
+      "n/a"
+    end
   end
 
   def default_shipping_address
-    address = Address.find(self.shipping_id)
-    # This ternary expression seems to just complicate things but I'm using it for practice
-    address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}"
+    if self.shipping_id
+      address = Address.find(self.shipping_id)
+      # This ternary expression seems to just complicate things but I'm using it for practice
+      address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}"
+    else
+      "n/a"
+    end
   end
 
   def last_order_date(user_id)
@@ -38,8 +50,12 @@ class User < ActiveRecord::Base
     Order.where(:user_id => user_id).count
   end
 
-  def state_name(address)
-    State.find(address.state_id).name
+  def state_name
+    if self.billing_id
+      State.find(Address.find(billing_id).state_id).name
+    else
+      'n/a'
+    end
   end
 
   def self.created_since_days_ago(number)
