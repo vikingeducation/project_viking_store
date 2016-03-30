@@ -1,55 +1,38 @@
 <% @page_title = " | User" %>
 
 <div class="row">
-  <div class="col-md-12">
-    <h3>User <%= @user.id %>: <%= "#{@user.first_name} #{@user.last_name}"%></h3>
+  <div class="col-md-12 text-center">
+    <h2>User <%= @user.id %>: <%= "#{@user.first_name} #{@user.last_name}"%></h2>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-xs-12">
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-xs-12 text-center">
         <header>
           <h3>Demographic Information</h3>
         </header>
       </div>
     </div>
-    
+
     <div class="row">
-      <div class="col-md-12">
-
-        <table>
-          <tr>
-            <td><b>First Name:</b></td>
-            <td><%= @user.first_name %></td>
-          </tr>
-          <tr>
-            <td><b>Last Name:</b></td>
-            <td><%= @user.last_name %></td>
-          </tr>
-          <tr>
-            <td><b>Email:</b></td>
-            <td><%= @user.email %></td>
-          </tr>
-          <tr>
-            <td><b>Default Billing Address:</b></td>
-            <td><%= @user.default_billing_address %></td>
-          </tr>
-          <tr>
-            <td><b>Default Shipping Address:</b></td>
-            <td><%= @user.default_shipping_address %></td>
-          </tr>
-        </table>
-
+      <div class="col-xs-12">
+        <%= render :partial => "./shared/table_with_side_headers",
+                   :locals => {:headers_data => [['First Name:',@user.first_name],
+                                                 ['Last Name:',@user.last_name],
+                                                 ['Default Billing Address:',@user.default_billing_address],
+                                                 ['Default Shipping Address:',@user.default_shipping_address]]
+                              }
+        %>
       </div>
     </div>
 
     <br>
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-xs-12">
         <%= link_to "View User's Addresses", '#' %>
         <br>
         <% if Order.where("user_id = ? AND checkout_date IS NULL", @user.id) %>
@@ -64,54 +47,37 @@
                     :method => :delete %>
       </div>
     </div>
-
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-xs-12">
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-xs-12 text-center">
         <header>
-          <h5>Credit Card Information</h5>
+          <h3>Credit Card Information</h3>
         </header>
       </div>
     </div>
-    
+
     <div class="row">
-      <div class="col-md-12">
-
-        <table>
-          <tr>
-            <td><b>Nickname:</b></td>
-            <td><%= @user.credit_card.nickname %></td>
-          </tr>
-          <tr>
-            <td><b>Number:</b></td>
-            <td><%= @user.credit_card.card_number %></td>
-          </tr>
-          <tr>
-            <td><b>Expiration:</b></td>
-            <td><%= @user.credit_card.exp_month %>/<%= @user.credit_card.exp_year %></td>
-          </tr>
-          <tr>
-            <td><b>CCV:</b></td>
-            <td><%= @user.credit_card.ccv %></td>
-          </tr>
-          <tr>
-            <td><b>Card Type:</b></td>
-            <td><%= @user.credit_card.brand %></td>
-          </tr>
-        </table>
-
+      <div class="col-xs-12">
+        <%= render :partial => "./shared/table_with_side_headers",
+                   :locals => {:headers_data => [['Nickname:',@user.credit_card.nickname],
+                                                 ['Number:',@user.credit_card.card_number ],
+                                                 ['Expiration:',"#{@user.credit_card.exp_month}/#{@user.credit_card.exp_year}"],
+                                                 ['CCV:',@user.credit_card.ccv],
+                                                 ['Card Type:',@user.credit_card.brand]]
+                              }
+        %>
       </div>
     </div>
 
     <br>
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-xs-12">
         <%= link_to 'Remove Card', 
                     credit_cards_path, 
                     data: {:confirm => 'Are you sure?'}, 
@@ -123,48 +89,27 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-xs-12">
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-xs-12 text-center">
         <header>
           <h3>Demographic Information</h3>
         </header>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-md-12">
-
-        <a href="#" class="btn btn-primary btn-lg center-block">Create Order</button></a>
-
-      </div>
-    </div>
-
     <br>
-
     <div class="row">
-      <div class="col-md-12">
-
+      <div class="col-xs-10 col-xs-offset-1">
+        <a href="#" class="btn btn-primary btn-lg center-block">Create Order</button></a>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
         <a href="#" class="btn btn-primary btn-lg center-block">Create Address</button></a>
-
       </div>
     </div>
-
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-
-    <div class="row">
-      <div class="col-md-12">
-        <header>
-          <h5>Credit Card Information</h5>
-        </header>
-      </div>
-    </div>
-    
 
   </div>
 </div>
