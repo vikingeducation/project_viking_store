@@ -138,7 +138,7 @@
             $<%= order.value(order.id) %>
           </td>
           <td>
-            ORDER STATUS
+            <%= order.status(order.id) %>
           </td>
           <td>
             <%= link_to 'show', order_path(:id => order.id) %>

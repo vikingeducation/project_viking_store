@@ -16,14 +16,6 @@ class Order < ActiveRecord::Base
   # scope :checked_out, lambda { where("checkout_date IS NOT NULL") }
   # scope :not_checked_out, lambda { where("checkout_date IS NULL") }
 
-  def value(order_id)
-    OrderContent.find_by_sql("SELECT SUM(order_contents.quantity * products.price)
-                              FROM order_contents
-                              JOIN products
-                              ON order_contents.product_id = products.id
-                              WHERE order_contents.order_id = #{order_id}").first.sum
-  end
-
   def self.created_since_days_ago(number)
     Order.where('checkout_date >= ?', number.days.ago).count
   end
@@ -39,5 +31,25 @@ class Order < ActiveRecord::Base
     end
     # What's the most basic way I can think of doing this, it would be to construct 
     Order.where('checkout_date >= ?', Time.now - 1.day).count
+  end
+
+  # We want to know if an order has been checked_out yet or not.
+  # Can do this in the orders table using a ternary expression.
+  # If an order has a checkout_date, return "PLACED", else return "UNPLACED"
+  def status(order_id)
+    Order.find(order_id).checkout_date ? "PLACED" : "UNPLACED"
+  end
+
+  # Finding out the value of an order. 
+  # Doing this by joining up the order_contents table and products table.
+  # Only getting those rows that have our desired order_id.
+  # first multiplying the quantity of a product in that order by the price of that product.
+  # next getting the sum of all the totals and accessing that by getting the first value (the only value) and the calling the column name on it (sum)
+  def value(order_id)
+    OrderContent.find_by_sql("SELECT SUM(order_contents.quantity * products.price)
+                              FROM order_contents
+                              JOIN products
+                              ON order_contents.product_id = products.id
+                              WHERE order_contents.order_id = #{order_id}").first.sum
   end
 end
