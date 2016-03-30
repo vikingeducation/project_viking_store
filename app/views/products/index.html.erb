@@ -1,0 +1,42 @@
+<header class='container'>
+  <div class='nav navbar-nav'>
+    <h1 class='text-center'>The Viking Store</h1>
+    <% if current_user %>
+      <%= link_to 'Your Cart', edit_cart_path %>
+      <%= link_to 'View Profile', user_path(current_user) %>
+      <%= link_to 'Edit Profile', edit_user_path(current_user) %>
+      <%= link_to 'Sign Out', session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Your Cart', edit_cart_path %>
+      <%= link_to 'Sign In', new_session_path %>
+    <% end %>
+  </div>
+</header>
+
+<%= render partial: 'category_form' %>
+
+<h2 class='text-center'>The Best Viking Gear on the Whole Web</h2>
+<h3 class='text-center'>Choose from among our lineup of fine items below</h3>
+
+
+<div class='container'>
+  <div class='row'>
+    <% @products.each do |product| %>
+      <div class='col-sm-3' style='border: 2px solid black'>
+        <p><%= product.name %></p>
+        <p>$<%= product.price %></p>
+        <img src='http://lorempixel.com/100/100/'>
+
+        <%= form_tag(cart_path, method: :post) do %>
+          <%= hidden_field_tag(:product_id, product.id) %>
+          <%= hidden_field_tag(:product_filter, @product_filter) %>
+          <%= submit_tag "Add to Cart" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<footer>
+  <%= link_to 'Admin Login', admin_root_path %>
+</footer>

@@ -1,0 +1,32 @@
+<h1>Your Cart</h1>
+<table class='table table-striped'>
+  <th>
+    <td>Product</td>
+    <td>Price</td>
+    <td>Quantity</td>
+    <td>Total Price</td>
+  </th>
+  <% total = 0 %>
+  <% @cart.each do |product_id, quantity| %>
+  <% product = Product.find(product_id) %>
+    <tr>
+      <td></td>
+      <td><%= product.name %></td>
+      <td>$<%= product.price %></td>
+      <td>
+        <%= quantity %>
+      </td>
+      <td>$<%= product.price * quantity %></td>
+      <% total += product.price * quantity %>
+    </tr>
+  <% end %>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Cart Total Price: $<%= total %></td>
+  </tr>
+</table>
+<%= link_to 'Return to Products', products_path %>
+<%= link_to "Check Out", orders_path, method: :post %>

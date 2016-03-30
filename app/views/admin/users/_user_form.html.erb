@@ -1,0 +1,30 @@
+<%= form_for [:admin, @user] do |user_field| %>
+
+  <%= user_field.label :first_name, 'First Name' %>
+  <%= user_field.text_field :first_name %>
+  </br>
+  <%= user_field.label :last_name, 'Last Name' %>
+  <%= user_field.text_field :last_name %>
+  </br>
+  <%= user_field.label :email, 'Email' %>
+  <%= user_field.text_field :email %>
+  </br>
+  <%= user_field.label :billing_id, 'Default Billing Address' %>
+  <% if @user.addresses.empty? %>
+    <%= user_field.text_field :billing_address %>
+  <% else %>
+    <%= user_field.collection_select(:billing_id, @user.addresses, :id, :street_address) %>
+  <% end %>
+  </br>
+  <%= user_field.label :shipping_id, 'Default Shipping Address' %>
+  <% if @user.addresses.empty? %>
+    <%= user_field.text_field :shipping_address %>
+  <% else %>
+    <%= user_field.collection_select(:shipping_id, @user.addresses, :id, :street_address) %>
+  <% end %>
+  </br>
+  <%= user_field.submit %>
+  <%= link_to 'Delete User', admin_user_path, method: :delete %>
+
+<% end %>
+

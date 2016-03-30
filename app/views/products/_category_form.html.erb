@@ -1,0 +1,8 @@
+<%= form_tag(products_path, method: :get) do %>
+  <%= select_tag(:product_filter,
+                  options_for_select(
+                  @category_options,
+                  @product_filter), 
+                  {prompt: "Category"}) %>
+  <%= submit_tag %>
+<% end %>

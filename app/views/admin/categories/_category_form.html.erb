@@ -1,0 +1,6 @@
+<%= form_for [:admin, @category] do |f| %>
+  <%= f.label :name, 'Name' %>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
+<% end %>

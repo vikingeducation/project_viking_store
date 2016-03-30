@@ -1,0 +1,23 @@
+<p>Owner ID: <%= @user.id %></p>
+<p>Owner Name: <%= link_to "#{@user.full_name} (click to view user)", admin_user_path(@user) %></p>
+
+<%= form_for [:admin, @user, @address] do |address_field| %>
+
+  <%= address_field.label :street_address, 'Street' %>
+  <%= address_field.text_field :street_address %>
+  </br>
+  <%= address_field.label :city, 'City' %>
+  <%= address_field.text_field :city %>
+  </br>
+  <%= address_field.label :state, 'State' %>
+  <%= address_field.text_field :state %>
+  </br>
+  <%= address_field.label :zip_code, 'Zip Code' %>
+  <%= address_field.text_field :zip_code %>
+  </br>
+  <%= address_field.submit %>
+  <% unless @address.id.nil? %>
+    <a class='btn btn-primary btn-block' role='button' href=<%= admin_user_addresses_path(@user.id) %> method='delete' >Delete Address</a>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,14 @@
+<h1><%= @order.user.first_name %>'s Checkout</h1>
+
+<%= render partial: 'order_display' %>
+
+<%= form_for @order do |order_fields| %>
+  <%= order_fields.label :shipping_address %>
+  <%= order_fields.collection_select(:shipping_id, @order.user.addresses, :id, :street_address) %>
+  <br>
+  <%= order_fields.label :billing_address %>
+  <%= order_fields.collection_select(:billing_id, @order.user.addresses, :id, :street_address) %>
+  <br>
+  <%= order_fields.submit 'Place Order' %>
+
+<% end %>

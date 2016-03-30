@@ -1,0 +1,12 @@
+<h1 class='text-center'><%= @user.full_name %>'s Address</h1>
+
+<div class='row' style='border: 2px solid black'>
+  <p>Owner ID: <%= @user.id %></p>
+  <p>Owner Name: <%= link_to "#{@user.full_name} (click to view user)", admin_user_path(@user) %></p>
+  <p>Street: <%= @address.street_address %></p>
+  <p>City: <%= @address.city.name %></p>
+  <p>State: <%= @address.state.name %></p>
+  <p>Zip: <%= @address.zip_code %></p>
+  <%= link_to 'Edit Address', edit_admin_user_address_path(@user.id, @address) %></br>
+  <%= link_to 'Delete Address', admin_user_address_path(@user.id, @address), method: :delete %>
+</div>
