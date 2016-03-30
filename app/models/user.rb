@@ -26,34 +26,20 @@ class User < ActiveRecord::Base
     address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}"
   end
 
-  def state_name(address)
-    State.find(address.state_id).name
+  def last_order_date(user_id)
+    unless Order.where(:user_id => user_id).where.not(:checkout_date => nil).order(:updated_at => :desc).limit(1).empty?
+      Order.where(:user_id => user_id).where.not(:checkout_date => nil).order(:updated_at => :desc).limit(1).first.updated_at
+    else
+      'n/a'
+    end
   end
 
-  def self.all_in_arrays
-    users = []
-    User.all.each do |user|
-      user_array = []
-      user_array << user.id
-      user_array << "#{user.first_name} #{user.last_name}"
-      user_array << user.created_at
-      # City Name
-      user_array << user.city_name(Address.find(user.billing_id))
-      # State Name
-      user_array << user.state_name(Address.find(user.billing_id))
-      # Number of orders this user has made.
-      # Sending it in a hash so that the shared view can use if statements on it.
-      user_array << {:user_order_count => Order.where(:user_id => user.id).count}
-      # Latest order made by this user, note it does not include shopping current shopping carts.
-      user_array << Order.where(["user_id = ? and checkout_date IS NOT NULL", User.first.id])
-                         .order(:updated_at => :desc)
-                         .limit(1)
-                         .first
-                         .updated_at
+  def number_of_orders(user_id)
+    Order.where(:user_id => user_id).count
+  end
 
-      users << user_array
-    end
-    users
+  def state_name(address)
+    State.find(address.state_id).name
   end
 
   def self.created_since_days_ago(number)

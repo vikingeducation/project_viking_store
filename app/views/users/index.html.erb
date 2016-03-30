@@ -7,14 +7,56 @@
 <% end %>
 
 <section>
-  <%= render :partial => "./shared/header_button_table",
-             :locals => {:table_header => "Viking Store Users",
- 						 :button_label => "Create a New User",
- 						 :button_link => new_user_path,
-                         :headers => @column_names,
-                         :rows => @users,
-                         :model_name_plural => 'users',
-                         # Not too sure what I'm gonna send this in as because I'm not sure where that number of orders is going to point to. Will it point to a subset of the users pages like /users/user_id/orders or what?? will decide later I guess
-                         :belongs_to_plural => '#'
-                         } %>
+    <header class="text-center">
+      <h3>Viking Store Users</h3>
+    </header>
+
+    <%= button_to "Create New User", new_user_path, :class => "btn btn-primary btn-lg center-block", :method => :get %>
+
+    <div class="stats-table">
+      <table class="table table-striped">
+        <tr>
+          <% @column_headers.each do |header| %>
+            <th><%= header %></th>
+          <% end %>
+        </tr>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= user.id %>
+            </td>
+            <td>
+              <%= user.first_name %> <%= user.last_name %>
+            </td>
+            <td>
+              <%= user.created_at %>
+            </td>
+            <td>
+              <%= user.city_name(Address.find(user.billing_id)) %>
+            </td>
+            <td>
+              <%= user.state_name(Address.find(user.billing_id)) %>
+            </td>
+            <td>
+              <%= user.number_of_orders(user.id) %>
+            </td>
+            <td>
+              <%= user.last_order_date(user.id) %>
+            </td>
+            <td>
+              <%= link_to 'show', user_path(:id => user.id) %>
+            </td>
+            <td>
+              <%= link_to 'edit', edit_user_path(:id => user.id) %>
+            </td>
+            <td>
+              <%= link_to 'delete', 
+                          user_path(:id => user.id),
+                          data: {:confirm => 'Are you sure?'}, 
+                          :method => :delete %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
 </section>
