@@ -1,0 +1,41 @@
+<p>
+  Showing
+  <%= pagination_range_start + 1 %>
+  through
+  <%= pagination_range_end(resources) %>
+  of
+  <%= resources.length %>
+  results
+</p>
+
+<% if resources.length > limit %>
+  <nav>
+    <ul class="pagination">
+
+      <% if pagination_first_page? %>
+        <li>
+          <a href="<%= pagination_url(path, params[:page].to_i - 1) %>" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      <% end %>
+
+      <% pagination_num_pages_for(resources).times do |i| %>
+        <li<% if params[:page].to_i == i %> class="active"<% end %>>
+          <a href="<%= pagination_url(path, i) %>">
+            <%= i + 1 %>
+          </a>
+        </li>
+      <% end %>
+
+      <% if pagination_last_page_for?(resources) %>
+        <li>
+          <a href="<%= pagination_url(path, params[:page].to_i + 1) %>" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      <% end %>
+      
+    </ul>
+  </nav>
+<% end %>

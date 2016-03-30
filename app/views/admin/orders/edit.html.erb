@@ -1,0 +1,10 @@
+<header class="page-header">
+  <h1>
+  Edit Order:
+    <small>
+      <%= link_to("ID - #{@order.id}", admin_order_path(@order)) %>
+    </small>
+  </h1>
+</header>
+
+<%= render :partial => 'form', :locals => {:order => @order} %>

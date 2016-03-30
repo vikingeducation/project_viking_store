@@ -1,0 +1,42 @@
+<h1>Edit Cart</h1>
+
+<% if @cart.items.empty? %>
+  <p>
+    Cart is empty.
+    Put some
+    <%= link_to('products', root_path) %>
+    in it!
+  </p>
+<% else %>
+  <%= form_tag('/cart', :method => :put) do %>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Quantity', 'Product', 'Price', 'Total', 'Delete'],
+      :rows => @cart.items.map.with_index do |item, i|
+        delete_item_param = @cart.persisted? ? {:order_content_id => item.id} : {:product_id => item.product.id}
+
+        [
+          number_field_tag("order_content[#{i}][quantity]", item.quantity, :class => 'form-control'),
+          item.product.name,
+          number_to_currency(item.product.price),
+          number_to_currency(item.revenue),
+          link_to('Delete', cart_path(delete_item_param), :method => :delete, :class => 'text-danger', :data => {:confirm => 'Delete?'})
+        ]
+      end
+    }} %>
+    <% @cart.items.map.with_index do |item, i| %>
+      <%= hidden_field_tag("order_content[#{i}][product_id]", item.product_id) %>
+      <%= hidden_field_tag("order_content[#{i}][id]", item.id) %>
+    <% end %>
+    <%= hidden_field_tag('order_id', @cart.id) %>
+
+    <h2>
+      Total:
+      $<%= @cart.persisted? ? @cart.revenue : @cart.items.reduce(0.0) {|sum, item| sum += item.product.price * item.quantity} %>
+    </h2>
+
+    <%= submit_tag('Update Cart Contents', :class => 'btn btn-primary') %>
+  <% end %>
+  <div class="pull-right">
+    <%= link_to('Checkout', new_order_path, :class => 'btn btn-primary btn-lg') %>
+  </div>
+<% end %>

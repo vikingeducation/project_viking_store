@@ -1,0 +1,10 @@
+<header class="page-header">
+  <h1>
+  Edit Product:
+    <small>
+      <%= link_to(@product.name, admin_product_path(@product)) %>
+    </small>
+  </h1>
+</header>
+
+<%= render :partial => 'form', :locals => {:product => @product} %>

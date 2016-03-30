@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+
+#main {
+  margin-bottom: 64px;
+  min-height: 512px;
+}
+
+#main-footer {
+  background: #333;
+  color: #eee;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+#main-footer .contact-info {
+  max-width: 512px;
+}
+
+#main-footer .contact-info .list-group-item {
+  background: #444;
+  border-color: #333;
+}

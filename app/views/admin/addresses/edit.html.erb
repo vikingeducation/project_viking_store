@@ -1,0 +1,10 @@
+<header class="page-header">
+  <h1>
+  Edit Address:
+    <small>
+      <%= link_to(@address.full_address, admin_address_path(@address)) %>
+    </small>
+  </h1>
+</header>
+
+<%= render :partial => 'form', :locals => {:address => @address} %>

@@ -6,15 +6,17 @@ puts "Destroying old records"
 
 # Blow away all the existing records every time.
 
-User.destroy_all
-Address.destroy_all
-Order.destroy_all
-OrderContent.destroy_all
-Category.destroy_all
-CreditCard.destroy_all
-Product.destroy_all
-State.destroy_all
-City.destroy_all
+Rake::Task['db:migrate:reset'].invoke
+
+# User.destroy_all
+# Address.destroy_all
+# Order.destroy_all
+# OrderContent.destroy_all
+# Category.destroy_all
+# CreditCard.destroy_all
+# Product.destroy_all
+# State.destroy_all
+# City.destroy_all
 
 puts "Old records destroyed"
 

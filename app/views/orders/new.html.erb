@@ -1,0 +1,72 @@
+<header class="page-header">
+  <h1>Checkout</h1>
+</header>
+
+<div class="row">
+  <div class="col-md-6">
+    <h2>Billing Address</h2>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Street', 'City', 'Zip', 'State'],
+      :rows => [[
+        current_user.billing.street_address,
+        current_user.billing.city.name,
+        current_user.billing.zip_code,
+        current_user.billing.state.name
+      ]]
+    }} %>
+
+    <h2>Shipping Address</h2>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Street', 'City', 'Zip', 'State'],
+      :rows => [[
+        current_user.shipping.street_address,
+        current_user.shipping.city.name,
+        current_user.shipping.zip_code,
+        current_user.shipping.state.name
+      ]]
+    }} %>
+
+    <%= link_to('Edit Addresses', edit_user_path(current_user)) %>
+
+    <h2>Credit Card</h2>
+    <p>
+      <%= current_user.credit_cards.first ? current_user.credit_cards.first.name : '-' %>
+    </p>
+  </div>
+
+  <div class="col-md-6">
+    <h2>Order Contents</h2>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Product', 'Quantity', 'Price', 'Total'],
+      :rows => @order.items.map do |item|
+        [
+          item.product.name,
+          item.quantity,
+          number_to_currency(item.product.price),
+          number_to_currency(item.revenue)
+        ]
+      end << ['-', '-', '-', number_to_currency(@order.revenue)]
+    }} %>
+
+    <h3>
+      Total: <%= number_to_currency(@order.revenue) %>
+    </h3>
+
+    <%= link_to('Edit Order', edit_cart_path) %>
+  </div>
+</div>
+
+<% if @order.items.present? %>
+  <div class="pull-right">
+    <%= form_tag(order_path) do %>
+      <%= link_to('Delete Order', '/order', :method => :delete, :class => 'btn btn-danger btn-lg', :data => {:confirm => 'Delete?'}) %>
+
+      <%= hidden_field_tag('order[checkout_date]', 0.days.ago) %>
+      <%= submit_tag('Place Order', :class => 'btn btn-primary btn-lg') %>
+    <% end %>
+  </div>
+<% end %>
+
+
+
+

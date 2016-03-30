@@ -1,0 +1,87 @@
+<%= render :partial => 'shared/errors', :locals => {:object => order} %>
+
+<%
+if User.exists?(params[:user_id])
+  user = User.find(params[:user_id])
+%>
+  <h2>
+    User:
+    <small>
+      <%= link_to(user.name, admin_user_path(user)) %>
+    </small>
+  </h2>
+
+  <% if order.new_record? %>
+    <div class="alert alert-info">
+      Create the order to enable adding and removing items
+    </div>
+  <% end %>
+
+  <!-- Order Info -->
+  <%= form_for([:admin, user, order]) do |f| %>
+    <% if order.persisted? %>
+      <%= render :partial => 'shared/table', :locals => {:table => {
+        :headers => ['Key', 'Value'],
+        :rows => [
+          ['Order ID', order.id],
+          ['User ID', user.id],
+          ['Checkout Date', order.checkout_date ? order.checkout_date : 'Unplaced'],
+          ['Number of Products', order.items.reduce(0) {|sum, i| i.quantity}],
+          ['Revenue', number_to_currency(order.revenue)]
+        ]
+      }} %>
+    <% end %>
+
+    <div class="form-group">
+      <div class="radio">
+        <label class="text-success">
+          <%= f.radio_button(:checkout_date, order.checkout_date || 0.days.ago) %>
+          Placed
+        </label>
+      </div>
+      <div class="radio">
+        <label class="text-danger">
+          <%= f.radio_button(:checkout_date, nil) %>
+          Unplaced
+        </label>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label(:shipping_id) %>
+      <%= f.collection_select(:shipping_id, user.addresses, :id, :street_address, {}, {:class => 'form-control'}) %>
+    </div>
+    <div class="form-group">
+      <%= f.label(:billing_id) %>
+      <%= f.collection_select(:billing_id, user.addresses, :id, :street_address, {}, {:class => 'form-control'}) %>
+    </div>
+    <div class="form-group">
+      <%= f.label(:credit_card_id) %>
+      <%= f.collection_select(:credit_card_id, user.credit_cards, :id, Proc.new{|cc| cc.name}, {}, {:class => 'form-control'}) %>
+    </div>
+    <%= f.hidden_field(:user_id, :class => 'form-control', :value => user.id) %>
+    <%= f.submit(:class => 'btn btn-primary', :value => order.persisted? ? 'Update Order Info' : 'Create Order') %>
+  <% end %>
+
+  <% if @order.persisted? %>
+    <!-- Order Items -->
+    <h2>Order Items</h2>
+    <%= render :partial => 'admin/order_contents/edit_order_contents', :locals => {:order => order} %>
+
+    <!-- Add Products -->
+    <h2>Add Products</h2>
+    <%= render :partial => 'admin/order_contents/add_products', :locals => {:order => order} %>
+  <% end %>
+
+<% else %>
+  <p class="text-danger">Cannot create order without an associated user</p>
+<% end %>
+
+
+
+
+
+
+
+
+

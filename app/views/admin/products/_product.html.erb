@@ -1,0 +1,12 @@
+<%= render :partial => 'shared/table', :locals => {:table => {
+  :headers => ['Key', 'Value'],
+  :rows => [
+    ['ID', product.id],
+    ['Name', product.name],
+    ['Description', product.description],
+    ['Price', number_to_currency(product.price)],
+    ['Category', product.category ? link_to(product.category.name, admin_category_path(product.category)) : '-'],
+    ['Created At', product.created_at.to_formatted_s(:long)],
+    ['Updated At', product.updated_at.to_formatted_s(:long)]
+  ]
+}} %>

@@ -1,0 +1,10 @@
+<header class="page-header">
+  <h1>
+  Edit Category:
+    <small>
+      <%= link_to(@category.name, admin_category_path(@category)) %>
+    </small>
+  </h1>
+</header>
+
+<%= render :partial => 'form', :locals => {:category => @category} %>

@@ -1,0 +1,25 @@
+<% if order.items.empty? %>
+  <p>Order is empty</p>
+<% else %>
+  <%= form_tag(admin_order_content_path(order.items.first), :method => :put) do %>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['ID', 'Quantity', 'Product', 'Price', 'Total', 'Delete'],
+      :rows => order.items.map.with_index do |item, i|
+        [
+          item.id,
+          number_field_tag("order_content[#{i}][quantity]", item.quantity, :class => 'form-control'),
+          "#{item.product.sku} - #{item.product.name}",
+          number_to_currency(item.product.price),
+          number_to_currency(item.revenue),
+          link_to('Delete', admin_order_content_path(item), :method => :delete, :class => 'text-danger', :data => {:confirm => 'Delete?'})
+        ]
+      end
+    }} %>
+    <% order.items.map.with_index do |item, i| %>
+      <%= hidden_field_tag("order_content[#{i}][product_id]", item.product_id) %>
+      <%= hidden_field_tag("order_content[#{i}][id]", item.id) %>
+    <% end %>
+    <%= hidden_field_tag('order_id', order.id) %>
+    <%= submit_tag('Update Order Contents', :class => 'btn btn-primary') %>
+  <% end %>
+<% end %>

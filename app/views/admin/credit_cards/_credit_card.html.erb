@@ -1,0 +1,12 @@
+<%= render :partial => 'shared/table', :locals => {:table => {
+  :headers => ['Key', 'Value'],
+  :rows => [
+    ['ID', credit_card.id],
+    ['User', link_to(credit_card.user.name, admin_user_path(credit_card.user))],
+    ['Name', credit_card.name],
+    ['Expires', "#{credit_card.exp_month}/#{credit_card.exp_year}"],
+    ['Nickname', credit_card.nickname],
+    ['Created At', credit_card.created_at.to_formatted_s(:long)],
+    ['Updated At', credit_card.updated_at.to_formatted_s(:long)]
+  ]
+}} %>

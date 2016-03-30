@@ -1,0 +1,171 @@
+<h1>Analytics</h1>
+
+<div class="row">
+
+  <!-- Overall Platform -->
+  <div class="col-md-6">
+    <h2>Overall Platform</h2>
+
+    <h3>Last 7 Days</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Users', @user_count_last_week],
+        ['Orders', @order_count_last_week],
+        ['Products', @product_count_last_week],
+        ['Revenue', number_to_currency(@order_revenue_last_week)]
+      ]
+    }} %>
+
+
+    <h3>Last 30 Days</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Users', @user_count_last_month],
+        ['Orders', @order_count_last_month],
+        ['Products', @product_count_last_month],
+        ['Revenue', number_to_currency(@order_revenue_last_month)]
+      ]
+    }} %>
+
+    <h3>Total</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Users', @user_count],
+        ['Orders', @order_count],
+        ['Products', @product_count],
+        ['Revenue', number_to_currency(@order_revenue)]
+      ]
+    }} %>
+  </div>
+
+  <!-- User Demographics and Behavior -->
+  <div class="col-md-6">
+    <h2>User Demographics and Behavior</h2>
+
+    <h3>Top 3 States Users Live In (Billing)</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => User.count_by_state[0..2].map {|i| [i.state_name, i.num_users]}
+    }} %>
+
+    <h3>Top 3 Cities Users Live In (Billing)</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => User.count_by_city[0..2].map {|i| [i.city_name, i.num_users]}
+    }} %>
+
+    <h3>Top Users With...</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Item', 'User', 'Quantity'],
+      :rows => [
+        [
+          'Highest Single Order Value',
+          @order_with_max_revenue.user.name,
+          number_to_currency(@order_with_max_revenue.user.spent)
+        ],
+        [
+          'Highest Overall Value',
+          @user_with_max_spent.name,
+          number_to_currency(@user_with_max_spent.spent)
+        ],
+        [
+          'Highest Average Order Value',
+          @user_with_max_avg_spent.name,
+          number_to_currency(@user_with_max_avg_spent.avg_spent)
+        ],
+        ['Most Orders Placed',
+          @user_with_max_placed_orders.name,
+          @user_with_max_placed_orders.orders.length
+        ]
+      ]
+    }} %>
+  </div>
+</div>
+
+<div class="row">
+
+  <!-- Order Statistics -->
+  <div class="col-md-6">
+    <h2>Order Statistics</h2>
+
+    <h3>Last 7 Days</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Number of Orders', @order_count_last_week],
+        ['Total Revenue', number_to_currency(@order_revenue_last_week)],
+        ['Average Order Value', number_to_currency(@order_avg_revenue_last_week)],
+        ['Largest Order Value', number_to_currency(@order_with_max_revenue_last_week.revenue)]
+      ]
+    }} %>
+
+    <h3>Last 30 Days</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Number of Orders', @order_count_last_month],
+        ['Total Revenue', number_to_currency(@order_revenue_last_month)],
+        ['Average Order Value', number_to_currency(@order_avg_revenue_last_month)],
+        ['Largest Order Value', number_to_currency(@order_with_max_revenue_last_month.revenue)]
+      ]
+    }} %>
+
+    <h3>Total</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Item', 'Data'],
+      :rows => [
+        ['Number of Orders', @order_count],
+        ['Total Revenue', number_to_currency(@order_revenue)],
+        ['Average Order Value', number_to_currency(@order_avg_revenue)],
+        ['Largest Order Value', number_to_currency(@order_with_max_revenue.revenue)]
+      ]
+    }} %>
+  </div>
+
+  <!-- Time Series Data -->
+  <div class="col-md-6">
+    <h2>Time Series Data</h2>
+
+    <h3>Orders by Day</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Date', 'Quantity', 'Value'],
+      :rows => @orders_by_day.map {|i| i[2] = number_to_currency(i[2]); i}
+    }} %>
+
+    <h3>Orders by Week</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Date', 'Quantity', 'Value'],
+      :rows => @orders_by_week.map {|i| i[2] = number_to_currency(i[2]); i}
+    }} %>
+
+    <h3>Orders by Month</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Date', 'Quantity', 'Value'],
+      :rows => @orders_by_month.map {|i| i[2] = number_to_currency(i[2]); i}
+    }} %>
+
+    <h3>Orders by Year</h3>
+    <%= render :partial => 'shared/table', :locals => {:table => {
+      :headers => ['Date', 'Quantity', 'Value'],
+      :rows => @orders_by_year.map {|i| i[2] = number_to_currency(i[2]); i}
+    }} %>
+  </div>
+</div>
+
+<footer>
+  Results loaded in <%= Time.now - @before %> seconds
+</footer>
+
+
+
+
+
+
+
+
+
+
+

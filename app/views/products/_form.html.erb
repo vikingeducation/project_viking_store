@@ -1,0 +1,10 @@
+<% if current_user && current_user.cart.product_ids.include?(product.id) %>
+  <%= link_to('Edit in Cart', edit_cart_path, :class => 'btn btn-primary') %>
+<% else %>
+  <%= form_tag('/cart') do %>
+    <%= hidden_field_tag('order_id', current_user ? current_user.cart.id : '') %>
+    <%= hidden_field_tag('order_content[0][product_id]', product.id) %>
+    <%= hidden_field_tag('order_content[0][quantity]', 1) %>
+    <%= submit_tag('Add to Cart', :class => 'btn btn-primary') %>
+  <% end %>
+<% end %>

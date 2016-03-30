@@ -1,0 +1,33 @@
+<%= render :partial => 'shared/errors', :locals => {:object => product} %>
+
+<%= form_for([:admin, product]) do |f| %>
+  <% if product.persisted? %>
+    <p>
+      Product ID: <%= product.id %>
+    </p>
+  <% end %>
+  <div class="form-group">
+    <%= f.label(:name) %>
+    <%= f.text_field(:name, :class => 'form-control') %>
+  </div>
+  <div class="form-group">
+    <%= f.label(:sku) %>
+    <%= f.text_field(:sku, :class => 'form-control') %>
+  </div>
+  <div class="form-group">
+    <%= f.label(:price) %>
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+      <%= f.number_field(:price, :class => 'form-control', :step => 0.01) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label(:category_id, 'Category') %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {:class => 'form-control'}) %>
+  </div>
+  <div class="form-group">
+    <%= f.label(:description) %>
+    <%= f.text_area(:description, :class => 'form-control') %>
+  </div>
+  <%= f.submit(:class => 'btn btn-primary') %>
+<% end %>
