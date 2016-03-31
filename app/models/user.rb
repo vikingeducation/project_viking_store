@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
 
   has_many :products, :through => :orders
 
+  validates_length_of :first_name, :last_name, :email, :within => 1..64
+  validates :email, 
+            :format => { :with => /@/ }
+
   def city_name
     if self.billing_id
       City.find(Address.find(billing_id).city_id).name
