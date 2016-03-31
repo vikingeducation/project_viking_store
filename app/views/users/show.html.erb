@@ -60,14 +60,25 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <%= render :partial => "./shared/table_with_side_headers",
-                 :locals => {:headers_data => [['Nickname:',@user.credit_card.nickname],
-                                               ['Number:',@user.credit_card.card_number ],
-                                               ['Expiration:',"#{@user.credit_card.exp_month}/#{@user.credit_card.exp_year}"],
-                                               ['CCV:',@user.credit_card.ccv],
-                                               ['Card Type:',@user.credit_card.brand]]
-                            }
-      %>
+      <% if @user.credit_card %>
+        <%= render :partial => "./shared/table_with_side_headers",
+                   :locals => {:headers_data => [['Nickname:',@user.credit_card.nickname],
+                                                 ['Number:',@user.credit_card.card_number ],
+                                                 ['Expiration:',"#{@user.credit_card.exp_month}/#{@user.credit_card.exp_year}"],
+                                                 ['CCV:',@user.credit_card.ccv],
+                                                 ['Card Type:',@user.credit_card.brand]]
+                              }
+        %>
+      <% else %>
+        <%= render :partial => "./shared/table_with_side_headers",
+                   :locals => {:headers_data => [['Nickname:','n/a'],
+                                                 ['Number:','n/a' ],
+                                                 ['Expiration:','n/a'],
+                                                 ['CCV:','n/a'],
+                                                 ['Card Type:','n/a']]
+                              }
+        %>
+      <% end %>
     </div>
   </div>
 
