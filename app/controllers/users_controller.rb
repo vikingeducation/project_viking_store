@@ -33,6 +33,17 @@ class UsersController < ApplicationController
     @orders = Order.where(:user_id => params[:id])
   end
 
+  def update
+    @user = User.new(whitelisted_params)
+    if @user.save
+      redirect_to users_path
+      flash[:notice] = "User Updated!"
+    else
+      flash.now[:alert] = "Could Not Update User. Attribute Issues Probably."
+      render(:edit)
+    end
+  end
+
   private
 
   def whitelisted_params
