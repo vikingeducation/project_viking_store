@@ -35,6 +35,18 @@
 #edit-or-new input {
   display: table-cell; }
 
+.main-content {
+  padding: 0px 15px;
+}
+.side-nav {
+  padding: 0px 15px;
+}
+
+.side-nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 .crud-container {
   border: 1px solid black;
   margin: 20px 0; 
