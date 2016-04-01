@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :users, path: '/admin/users'
   resources :credit_cards, path: '/admin/creditcards'
   get 'admin/dashboard' => 'dashboard#index'
+  get 'admin/addresses/user/:user_id' => 'addresses#for_user'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
