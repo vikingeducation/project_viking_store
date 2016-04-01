@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
     if self.billing_id
       address = Address.find(self.billing_id)
       # This ternary expression seems to just complicate things but I'm using it for practice
-      address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}"
+      address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name}, #{state_name}, #{address.zip_code}"
     else
       "n/a"
     end
@@ -40,10 +40,14 @@ class User < ActiveRecord::Base
     if self.shipping_id
       address = Address.find(self.shipping_id)
       # This ternary expression seems to just complicate things but I'm using it for practice
-      address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}"
+      address.secondary_address ? "#{address.street_address}, #{address.secondary_address}, #{city_name(address)}, #{state_name(address)}, #{address.zip_code}" : "#{address.street_address}, #{city_name}, #{state_name}, #{address.zip_code}"
     else
       "n/a"
     end
+  end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
   end
 
   def last_order_date(user_id)
