@@ -5,26 +5,18 @@ class User < ActiveRecord::Base
 
   # Should you delete an address because the user is gone, I guess we shouldn't because a lot of stats are done from those addresses, but I guess we can nullify and it shouldn't make a big deal.
 
-  # has_many :addresses, :dependent => :nullify
+  has_many :addresses, :dependent => :nullify
 
   # didnt want to just nullify, wanted to destroy shopping carts then nullify.
-  has_many :orders, :dependent => :delete_shopping_cart
+  has_many :orders
 
   has_many :products, :through => :orders
+
+  after_destroy :delete_shopping_cart
 
   validates_length_of :first_name, :last_name, :email, :within => 1..64
   validates :email, 
             :format => { :with => /@/ }
-
-  def delete_shopping_cart
-    self.orders.each do |order|
-      if order.checkout_date == nil
-        Order.destroy(order.id)
-      else
-        order.update_attribute(:checkout_date, nil)
-      end
-    end
-  end
 
   def city_name
     if self.billing_id
@@ -207,5 +199,13 @@ class User < ActiveRecord::Base
                             LIMIT 1) AS total_orders 
                       JOIN users 
                         ON total_orders.user_id=users.id")
+  end
+
+  private
+
+  def delete_shopping_cart
+    self.orders.each do |order|
+      Order.destroy(order.id) if order.checkout_date == nil
+    end
   end
 end

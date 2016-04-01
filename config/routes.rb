@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'categories#index'
+  resources :addresses, path: '/admin/addresses'
   resources :categories, path: '/admin/categories'
   resources :orders, path: 'admin/orders'
   resources :products, path: '/admin/products'
