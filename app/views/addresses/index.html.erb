@@ -11,7 +11,7 @@
 	  <h3>Addresses</h3>
 	</header>
 	
-	Create new addresses from within <%= link_to "User", addresses_path %> profiles
+	Create new addresses from within <%= link_to "User", users_path %> profiles
 
 	<div class="stats-table">
 	  <table class="table table-striped">
@@ -29,7 +29,9 @@
 						<td>n/a</td>
 					<% end %>
 					<td><%= address.street_address %></td>
-
+					<td><%= address.city.name %></td>
+					<td><%= address.state.name %></td>
+					
 	        <td>
 	          <%= link_to 'show', address_path(:id => address.id) %>
 	        </td>
