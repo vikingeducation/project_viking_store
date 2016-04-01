@@ -1,18 +1,30 @@
 class User < ActiveRecord::Base
+
   # I think credit_cards should be destroyed when a user is destroyed.
   has_one :credit_card, :dependent => :destroy
 
-  # Should you delete an address because the user is gone, I guess we shouldn't because a lot of stats are done from those addresses, but I guess we can nullify and it shouldn't make a big deal. 
-  has_many :addresses, :dependent => :nullify
+  # Should you delete an address because the user is gone, I guess we shouldn't because a lot of stats are done from those addresses, but I guess we can nullify and it shouldn't make a big deal.
 
-  # as above, shouldn't delete orders because we need them for stats, but we nullify those user_ids
-  has_many :orders, :dependent => :nullify
+  # has_many :addresses, :dependent => :nullify
+
+  # didnt want to just nullify, wanted to destroy shopping carts then nullify.
+  has_many :orders, :dependent => :delete_shopping_cart
 
   has_many :products, :through => :orders
 
   validates_length_of :first_name, :last_name, :email, :within => 1..64
   validates :email, 
             :format => { :with => /@/ }
+
+  def delete_shopping_cart
+    self.orders.each do |order|
+      if order.checkout_date == nil
+        Order.destroy(order.id)
+      else
+        order.update_attribute(:checkout_date, nil)
+      end
+    end
+  end
 
   def city_name
     if self.billing_id
