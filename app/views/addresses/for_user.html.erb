@@ -12,10 +12,10 @@
 	</header>
 	
 	<div class="row">
-		<div class="col-xs-12 text-center">
-			Create new addresses from within <%= link_to "User", users_path %> profiles
-		</div>
-	</div>
+    <div class="col-xs-10 col-xs-offset-1">
+    	<%= button_to "Create Address for #{@user_name}", new_address_path, :class => "btn btn-primary btn-lg center-block", :method => :get %>
+    </div>
+  </div>
 
 	<div class="stats-table">
 	  <table class="table table-striped">
