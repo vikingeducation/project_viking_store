@@ -8,18 +8,24 @@
 
 <div class="crud-container">
 
-  <%= form_for object do |f| %>
+  <%= form_for address do |f| %>
 
-    <p>
-     Owner ID:
-    </p>
-    <p>
-      Owner Name:
-    </p>
-    <%= button_to submit_label, object, :class => "btn btn-primary btn-lg center-block", :method => :post %>
+    <div class="table-row">
+      <%= f.label "Owner ID: " %>
+      <div class="owner-details">
+        <%= user.id %>
+      </div>
+    </div>
+    <div class="table-row">
+      <%= f.label "Owner Name: " %>
+      <div class="owner-details">
+        <%= link_to user.full_name, user_path(:id => user.id) %>
+      </div>
+    </div>
+    <%= button_to submit_label, address, :class => "btn btn-primary btn-lg center-block", :method => :post %>
 
     <% if form_type == 'edit' %>
-      <%= link_to 'Delete', object, data: {:confirm => "Are you sure?"}, :method => :delete %>
+      <%= link_to 'Delete', address, data: {:confirm => "Are you sure?"}, :method => :delete %>
     <% end %>
 
   <% end %>

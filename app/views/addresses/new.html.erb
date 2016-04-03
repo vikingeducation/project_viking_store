@@ -9,6 +9,7 @@
 <%= render :partial => "edit_or_new_form",
            :locals => {:form_type => "new",
            						 :form_header => "Add Address for #{@user.full_name}",
-           						 :object => @address,
+           						 :address => @address,
+           						 :user => @user,
            						 :submit_label => "Create Address"
            						 } %>

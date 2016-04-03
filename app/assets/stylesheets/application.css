@@ -38,6 +38,10 @@
   display: table-cell; }
 #edit-or-new input {
   display: table-cell; }
+#edit-or-new .owner-details {
+  display: table-cell; }
+#edit-or-new .table-row {
+  display: table-row; }
 
 .main-content {
   padding: 0px 15px;
