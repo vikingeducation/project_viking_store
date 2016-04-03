@@ -14,7 +14,7 @@ class AddressesController < ApplicationController
   end
 
   def show
-
+    @address = Address.find(params[:id])
   end
 
 end
