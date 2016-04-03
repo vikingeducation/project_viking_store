@@ -12,5 +12,7 @@ class Address < ActiveRecord::Base
             :city_id, 
             :state_id, 
             :presence => true
+  validates :street_address,
+            :length => {:maximum => 63}
 
 end
