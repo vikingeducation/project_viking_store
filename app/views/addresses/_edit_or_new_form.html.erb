@@ -11,15 +11,51 @@
   <%= form_for address do |f| %>
 
     <div class="table-row">
-      <%= f.label "Owner ID: " %>
-      <div class="owner-details">
+      <div class="table-cell">
+        <%= f.label "Owner ID: " %>
+      </div>
+      <div class="table-cell">
         <%= user.id %>
       </div>
     </div>
     <div class="table-row">
-      <%= f.label "Owner Name: " %>
-      <div class="owner-details">
+      <div class="table-cell">
+        <%= f.label "Owner Name: " %>
+      </div>
+      <div class="table-cell">
         <%= link_to user.full_name, user_path(:id => user.id) %>
+      </div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell">
+        <%= f.label :street_address, "Street: " %>
+      </div>
+      <div class="table-cell">
+        <%= f.text_field :street_address  %>
+      </div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell">
+        <%= f.label :city, "City: " %>
+      </div>
+      <div class="table-cell">
+        <%= f.text_field :city %>
+      </div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell">
+        <%= f.label :state_id, "State: " %>
+      </div>
+      <div class="table-cell">
+         <%= f.collection_select(:state_id, State.all, :id, :name) %>
+      </div>
+    </div>
+    <div class="table-row">
+      <div class="table-cell">
+        <%= f.label :zip_code, "Zip: " %>
+      </div>
+      <div class="table-cell">
+        <%= f.text_field :zip_code %>
       </div>
     </div>
     <%= button_to submit_label, address, :class => "btn btn-primary btn-lg center-block", :method => :post %>
