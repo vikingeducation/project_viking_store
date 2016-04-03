@@ -13,6 +13,10 @@
  *= require_self
  */
 
+.table-striped {
+  margin-top: 12px;
+}
+
 #topnav {
   padding: 0 10px;
   border-bottom: 1px solid gray; }
