@@ -32,7 +32,7 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <%= link_to "View User's Addresses", '#' %>
+      <%= link_to "View User's Addresses", "/admin/addresses/user/#{@user.id}" %>
       <br>
       <% if Order.where("user_id = ? AND checkout_date IS NULL", @user.id) %>
         <%= link_to "View User's Current Shopping Cart", '#' %>
