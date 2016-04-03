@@ -11,7 +11,11 @@
     <h3>Products</h3>
   </header>
 
-  <%= button_to "Add a New Product", new_product_path, :class => "btn btn-primary btn-lg center-block", :method => :get %>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <%= link_to "Add a New Product", new_product_path, :class => "btn btn-primary btn-lg center-block"%>
+    </div>
+  </div>
 
   <div class="stats-table">
     <table class="table table-striped">

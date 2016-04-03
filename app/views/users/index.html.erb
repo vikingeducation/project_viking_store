@@ -7,11 +7,15 @@
 <% end %>
 
 <section>
-    <header class="text-center">
-      <h3>Viking Store Users</h3>
-    </header>
+  <header class="text-center">
+    <h3>Viking Store Users</h3>
+  </header>
 
-    <%= button_to "Create New User", new_user_path, :class => "btn btn-primary btn-lg center-block", :method => :get %>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <%= link_to "Create New User", new_user_path, :class => "btn btn-primary btn-lg center-block" %>
+    </div>
+  </div>
 
     <div class="stats-table">
       <table class="table table-striped">
