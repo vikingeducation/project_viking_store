@@ -41,7 +41,7 @@ class AddressesController < ApplicationController
 
   def index
     @column_headers = ["ID","User","Address","City","State","Orders Shipped To","Created","SHOW","EDIT","DELETE"]
-    @addresses = Address.all
+    params[:user_id] ? @addresses = Address.where(:user_id => params[:user_id]) : @addresses = Address.all
   end
 
   def new
