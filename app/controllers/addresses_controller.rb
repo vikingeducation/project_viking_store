@@ -5,7 +5,7 @@ class AddressesController < ApplicationController
   def create
     @address = Address.new(whitelisted_params)
     if @address.save
-      redirect_to "/admin/addresses/user/#{whitelisted_params[:user_id]}"
+      redirect_to "/admin/addresses/user/#{whitelisted_params['user_id']}"
       flash[:notice] = "New Address Created!"
     else
       flash.now[:alert] = "New Address Could Not Be Created, Please Try Again."
