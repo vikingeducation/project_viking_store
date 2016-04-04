@@ -3,13 +3,13 @@ class AddressesController < ApplicationController
   layout "admin_portal"
 
   def create
-    @address = Address.new(whitelisted_params.merge({:user_id => 1004}))
-    if @address.save 
+    @address = Address.new(whitelisted_params)
+    if @address.save
       redirect_to :addresses
       flash[:notice] = "New Address Created!"
     else
       flash.now[:alert] = "New Address Could Not Be Created, Please Try Again."
-      render :new_a
+      render :new_address
     end
   end
 
@@ -45,7 +45,7 @@ class AddressesController < ApplicationController
   end
 
   def whitelisted_params
-    params.require(:address).permit(:street_address,:zip_code,:state_id).merge(city_id_hash)
+    params.require(:address).permit(:street_address,:zip_code,:state_id, :user_id).merge(city_id_hash)
   end
 
 end
