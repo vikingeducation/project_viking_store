@@ -27,6 +27,12 @@ class AddressesController < ApplicationController
     end
   end
 
+  def for_user
+    @user_name = User.find(params[:user_id]).full_name
+    @column_headers = ["ID","User","Address","City","State","Orders Shipped To","Created","SHOW","EDIT","DELETE"]
+    @addresses = Address.where(:user_id => params[:user_id])
+  end
+
   def index
     @column_headers = ["ID","User","Address","City","State","Orders Shipped To","Created","SHOW","EDIT","DELETE"]
     @addresses = Address.all
@@ -41,10 +47,18 @@ class AddressesController < ApplicationController
     @address = Address.find(params[:id])
   end
 
-  def for_user
-    @user_name = User.find(params[:user_id]).full_name
-    @column_headers = ["ID","User","Address","City","State","Orders Shipped To","Created","SHOW","EDIT","DELETE"]
-    @addresses = Address.where(:user_id => params[:user_id])
+  def update
+    @address = Address.find(params[:id])
+    @address.update_attributes(whitelisted_params)
+    if @address.save
+      redirect_to "/admin/addresses/user/#{whitelisted_params['user_id']}"
+      flash[:notice] = "Address Updated!"
+    else
+      flash.now[:alert] = "Address Could Not Be Updated, Please Try Again."
+      @user = User.find(params['address']['user_id'])
+      render action: "new"
+      # so it's after this that it happens, but where???
+    end
   end
 
   private
