@@ -41,7 +41,7 @@
 	          <%= link_to 'show', address_path(:id => address.id) %>
 	        </td>
 	        <td>
-	          <%= link_to 'edit', edit_address_path(:id => address.id) %>
+	          <%= link_to 'edit', edit_address_path(:id => address.id, :user_id => address.user_id) %>
 	        </td>
 	        <td>
 	          <%= link_to 'delete', 
