@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: solution_viking_store_production
   username: solution_viking_store
   password: <%= ENV['SOLUTION_VIKING_STORE_DATABASE_PASSWORD'] %>
