@@ -18,6 +18,13 @@ class AddressesController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
     @address = Address.find(params[:id])
+    # if params["address"] then it means it's a render right
+    if params["address"]
+      @city_value = params["address"]["city"]
+    # otherwise it's gonna be fresh from the address details
+    else
+      @city_value = Address.find(params[:id]).city.name
+    end
   end
 
   def index

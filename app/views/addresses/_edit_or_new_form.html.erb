@@ -40,11 +40,7 @@
       </div>
       <!-- Wow this on the re-render is tricky because it was trying to reload address.city which doesn't actually exist. You want it to render with the value of params -->
       <div class="table-cell">
-        <% if params["address"] %>
-          <%= f.text_field :city, value: params["address"]["city"] %>
-        <% else %>
-          <%= f.text_field :city %>
-        <% end %>
+        <%= f.text_field :city, value: @city_value %>
       </div>
     </div>
     <div class="table-row">
