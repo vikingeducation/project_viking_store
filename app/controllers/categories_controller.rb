@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
       flash[:notice] = "New Category Created!"
     else
       flash.now[:alert] = "New Category Could Not Be Created, Please Try Again."
-      render :new_category
+      render :new
     end
   end
 

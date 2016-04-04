@@ -38,8 +38,9 @@
       <div class="table-cell">
         <%= f.label :city, "City: " %>
       </div>
+      <!-- Wow this on the re-render is tricky because it was trying to reload address.city which doesn't actually exist. You want it to render with the value of params -->
       <div class="table-cell">
-        <%= f.text_field :city %>
+        <%= f.text_field :city, value: params["address"]["city"] %>
       </div>
     </div>
     <div class="table-row">
