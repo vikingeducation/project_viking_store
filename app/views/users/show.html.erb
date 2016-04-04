@@ -113,7 +113,7 @@
   <br>
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
-      <a href="#" class="btn btn-primary btn-lg center-block">Create Address</button></a>
+      <%= link_to "Create Address", {:user_id => @user.id, :controller => "addresses", :action => "new"}, :class => "btn btn-primary btn-lg center-block"%>
     </div>
   </div>
 
