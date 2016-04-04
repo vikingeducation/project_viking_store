@@ -1,0 +1,61 @@
+<% @page_title = " | Orders" %>
+
+<% if flash[:notice] %>
+	<div class="notice">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
+<section>
+	<header class="text-center">
+	  <h3>Orders</h3>
+	</header>
+	
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			Create new addresses from within <%= link_to "User", users_path %> profiles
+		</div>
+	</div>
+
+	<div class="stats-table">
+	  <table class="table table-striped">
+	    <tr>
+	      <% @column_headers.each do |header| %>
+	        <th><%= header %></th>
+	      <% end %>
+	    </tr>
+	    <% @orders.each do |order| %>
+	      <tr>
+	        <td><%= order.id %></td>
+	        <% if order.user %>
+						<td><%= link_to order.user.full_name, user_path(:id => order.user.id) %></td>
+					<% else %>
+						<td>n/a</td>
+					<% end %>
+					<td><%= order.shipping_address.street_address %></td>
+					<td><%= order.shipping_address.city.name %></td>
+					<td><%= order.shipping_address.state.name %></td>
+					<td>$<%= order.value(order.id) %></td>
+					<td><%= order.status(order.id) %></td>
+					<% if order.checkout_date %>
+						<td><%= order.checkout_date %></td>
+					<% else %>
+						<td>n/a</td>
+	        <% end %>
+	        <td>
+	          <%= link_to 'show', order_path(:id => order.id) %>
+	        </td>
+	        <td>
+	          <%= link_to 'edit', edit_order_path(:id => order.id, :user_id => order.user_id) %>
+	        </td>
+	        <td>
+	          <%= link_to 'delete', 
+	                      order_path(:id => order.id),
+	                      data: {:confirm => 'Are you sure?'}, 
+	                      :method => :delete %>
+	        </td>
+	      </tr>
+	    <% end %>
+	  </table>
+	</div>
+</section>
