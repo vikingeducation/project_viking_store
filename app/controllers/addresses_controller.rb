@@ -15,6 +15,11 @@ class AddressesController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:user_id])
+    @address = Address.find(params[:id])
+  end
+
   def index
     @column_headers = ["ID","User","Address","City","State","Orders Shipped To","Created","SHOW","EDIT","DELETE"]
     @addresses = Address.all
