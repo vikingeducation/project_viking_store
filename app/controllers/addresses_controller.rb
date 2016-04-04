@@ -47,11 +47,13 @@ class AddressesController < ApplicationController
     @address = Address.find(params[:id])
   end
 
+  # This needs some serious cleaning up.
+  # It's a mess because I'm trying to re-render the page with previously entered inputs or if it's a fresh edit, to load the address details etc etc. Really big mess but I don't feel like looking at it right now. 
   def update
     @address = Address.find(params[:id])
     if params["address"]["city"] != ""
       if @address.update_attributes(whitelisted_params)
-        redirect_to "/admin/addresses/user/#{whitelisted_params['user_id']}"
+        redirect_to @address
         flash[:notice] = "Address Updated!"
       else
         flash.now[:alert] = "Address Could Not Be Updated, Please Try Again."
