@@ -49,15 +49,19 @@ class AddressesController < ApplicationController
 
   def update
     @address = Address.find(params[:id])
-    @address.update_attributes(whitelisted_params)
-    if @address.save
-      redirect_to "/admin/addresses/user/#{whitelisted_params['user_id']}"
-      flash[:notice] = "Address Updated!"
+    if params["address"]["city"] != ""
+      if @address.update_attributes(whitelisted_params)
+        redirect_to "/admin/addresses/user/#{whitelisted_params['user_id']}"
+        flash[:notice] = "Address Updated!"
+      else
+        flash.now[:alert] = "Address Could Not Be Updated, Please Try Again."
+        @user = User.find(params['address']['user_id'])
+        render action: "new"
+      end
     else
       flash.now[:alert] = "Address Could Not Be Updated, Please Try Again."
       @user = User.find(params['address']['user_id'])
       render action: "new"
-      # so it's after this that it happens, but where???
     end
   end
 
