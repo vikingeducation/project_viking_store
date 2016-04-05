@@ -6,91 +6,117 @@
 	</div>
 </div>
 
-<h3>Logistical Information</h3>
+<div class="logistical-information">
 
-<div class="row">
-  <div class="col-xs-12">
-    <h4>Basic Information</h4>
+	<h3>Logistical Information</h3>
 
-    <%= render :partial => "./shared/table_with_side_headers",
-             :locals => {:headers_data => [['Customer ID:', @order.user_id],
-                                           ['Customer:', @order.user.full_name],
-                                           ['Date Placed:', @order.checkout_date],
-                                           ['# Products:', @order.order_contents.count],
-                                           ['Order Value:', "$#{@order.value(@order.id)}"]
-                                          ]
-                        }
-    %>
+	<div class="row">
+	  <div class="col-xs-12">
+	    <h4>Basic Information</h4>
 
-    <%= link_to "Edit Customer Profile", edit_user_path(:id => @order.user_id) %>
+	    <%= render :partial => "./shared/table_with_side_headers",
+	             :locals => {:headers_data => [['Customer ID:', @order.user_id],
+	                                           ['Customer:', @order.user.full_name],
+	                                           ['Date Placed:', @order.checkout_date],
+	                                           ['# Products:', @order.order_contents.count],
+	                                           ['Order Value:', "$#{@order.value(@order.id)}"]
+	                                          ]
+	                        }
+	    %>
 
+	    <%= link_to "Edit Customer Profile", edit_user_path(:id => @order.user_id) %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+	    <h4>Order Status</h4>
+
+			<% unless @order.status(@order.id) == "PLACED" %>
+	    	<h3 style="color:#FA58F4">UNPLACED</h3>
+	    <% else %>
+	    	<h3 style="color:#74DF00">PLACED</h3>
+	    <% end %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+	    <h4>Shipping Address</h4>
+
+	    <%= render :partial => "./shared/table_with_side_headers",
+	             :locals => {:headers_data => [['Street:', @order.shipping_street_address],
+	                                           ['City:', @order.shipping_city_name],
+	                                           ['State:', @order.shipping_state_name]
+	                                          ]
+	                        }
+	    %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+	    <h4>Billing Address</h4>
+
+	    <%= render :partial => "./shared/table_with_side_headers",
+	             :locals => {:headers_data => [['Street:', @order.billing_street_address],
+	                                           ['City:', @order.billing_city_name],
+	                                           ['State:', @order.billing_state_name]
+	                                          ]
+	                        }
+	    %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+	    <h4>Billing Card</h4>
+
+	    <%= render :partial => "./shared/table_with_side_headers",
+	             :locals => {:headers_data => [['Last Four Digits:', @order.credit_card_last_four_digits]
+	                                          ]
+	                        }
+	    %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+
+	    <%= link_to "Edit Order", edit_order_path %>
+	    <br>
+	    <%= link_to "Delete Order", order_path,
+		                      				data: {:confirm => 'Are you sure?'}, 
+		                      				:method => :delete %>
+
+		</div>
 	</div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <h4>Order Status</h4>
+<div class="order-contents">
+	<h3>Order Contents</h3>
 
-		<% unless @order.status(@order.id) == "PLACED" %>
-    	<h3 style="color:#FA58F4">UNPLACED</h3>
-    <% else %>
-    	<h3 style="color:#74DF00">PLACED</h3>
-    <% end %>
-
-	</div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <h4>Shipping Address</h4>
-
-    <%= render :partial => "./shared/table_with_side_headers",
-             :locals => {:headers_data => [['Street:', @order.shipping_street_address],
-                                           ['City:', @order.shipping_city_name],
-                                           ['State:', @order.shipping_state_name]
-                                          ]
-                        }
-    %>
-
-	</div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <h4>Billing Address</h4>
-
-    <%= render :partial => "./shared/table_with_side_headers",
-             :locals => {:headers_data => [['Street:', @order.billing_street_address],
-                                           ['City:', @order.billing_city_name],
-                                           ['State:', @order.billing_state_name]
-                                          ]
-                        }
-    %>
-
-	</div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <h4>Billing Card</h4>
-
-    <%= render :partial => "./shared/table_with_side_headers",
-             :locals => {:headers_data => [['Last Four Digits:', @order.credit_card_last_four_digits]
-                                          ]
-                        }
-    %>
-
-	</div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-
-    <%= link_to "Edit Order", edit_order_path %>
-    <br>
-    <%= link_to "Delete Order", order_path,
-	                      				data: {:confirm => 'Are you sure?'}, 
-	                      				:method => :delete %>
-
+	<div class="stats-table">
+	  <table class="table table-striped">
+	    <tr>
+	      <% @column_headers.each do |header| %>
+	        <th><%= header %></th>
+	      <% end %>
+	    </tr>
+	    <% @order_contents.each do |order_content| %>
+	      <tr>
+	        <td><%= order_content.product_id %></td>
+	        <td><%= order_content.product.name %></td>
+	        <td><%= order_content.quantity %></td>
+	        <td><%= "$#{order_content.product.price}" %></td>
+	        <td><%= "$#{order_content.product.price * order_content.quantity}" %></td>
+	      </tr>
+	    <% end %>
+	  </table>
 	</div>
 </div>

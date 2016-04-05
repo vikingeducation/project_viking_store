@@ -25,7 +25,9 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @column_headers = ["ProductID", "Product", "Quantity", "Price", "Total Price"]
     @order = Order.find(params[:id])
+    @order_contents = @order.order_contents
   end
 
 end
