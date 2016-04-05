@@ -42,7 +42,7 @@
               <%= user.state_name %>
             </td>
             <td>
-              <%= user.number_of_orders(user.id) %>
+              <%= link_to user.number_of_orders(user.id), orders_path(:user_id => user.id) %>
             </td>
             <td>
               <%= user.last_order_date(user.id) %>
