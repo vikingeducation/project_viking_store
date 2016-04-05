@@ -24,3 +24,31 @@
 
 	</div>
 </div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4>Order Status</h4>
+
+		<% unless @order.status(@order.id) == "PLACED" %>
+    	<h3 style="color:#FA58F4">UNPLACED</h3>
+    <% else %>
+    	<h3 style="color:#74DF00">PLACED</h3>
+    <% end %>
+
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4>Shipping Address</h4>
+
+    <%= render :partial => "./shared/table_with_side_headers",
+             :locals => {:headers_data => [['Street:', @order.shipping_street_address],
+                                           ['City:', @order.shipping_city_name],
+                                           ['State:', @order.shipping_state_name]
+                                          ]
+                        }
+    %>
+
+	</div>
+</div>

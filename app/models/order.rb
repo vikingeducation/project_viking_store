@@ -33,6 +33,18 @@ class Order < ActiveRecord::Base
     Order.where('checkout_date >= ?', Time.now - 1.day).count
   end
 
+  def shipping_street_address
+    self.shipping_address ? self.shipping_address.street_address : "n/a"
+  end
+
+  def shipping_city_name
+    self.shipping_address ? self.shipping_address.city.name : "n/a"
+  end
+
+  def shipping_state_name
+    self.shipping_address ? self.shipping_address.state.name : "n/a"
+  end
+
   # We want to know if an order has been checked_out yet or not.
   # Can do this in the orders table using a ternary expression.
   # If an order has a checkout_date, return "PLACED", else return "UNPLACED"
