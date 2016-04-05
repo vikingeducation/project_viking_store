@@ -67,3 +67,16 @@
 
 	</div>
 </div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4>Billing Card</h4>
+
+    <%= render :partial => "./shared/table_with_side_headers",
+             :locals => {:headers_data => [['Last Four Digits:', @order.billing_street_address]
+                                          ]
+                        }
+    %>
+
+	</div>
+</div>

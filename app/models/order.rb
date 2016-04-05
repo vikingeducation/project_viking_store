@@ -12,6 +12,8 @@ class Order < ActiveRecord::Base
 
   has_many :categories, :through => :products
 
+  belongs_to :credit_card
+
   def billing_street_address
     self.billing_address ? self.billing_address.street_address : "n/a"
   end
