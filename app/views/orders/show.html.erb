@@ -1,0 +1,26 @@
+<% @page_title = " | Order" %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h3>Order <%= @order.id %></h3>
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4>Basic Information</h4>
+
+    <%= render :partial => "./shared/table_with_side_headers",
+             :locals => {:headers_data => [['Customer ID:', @order.user_id],
+                                           ['Customer:', @order.user.full_name],
+                                           ['Date Placed:', @order.checkout_date],
+                                           ['# Products:', @order.order_contents.count],
+                                           ['Order Value:', "$#{@order.value(@order.id)}"]
+                                          ]
+                        }
+    %>
+
+    <%= link_to "Edit Customer Profile", edit_user_path(:id => @order.user_id) %>
+
+	</div>
+</div>
