@@ -33,15 +33,16 @@ class AddressesController < ApplicationController
     end
   end
 
-  def for_user
-    @user_name = User.find(params[:user_id]).full_name
-    @column_headers = ["ID","User","Address","City","State","Orders Shipped To","Created","SHOW","EDIT","DELETE"]
-    @addresses = Address.where(:user_id => params[:user_id])
-  end
-
   def index
     @column_headers = ["ID","User","Address","City","State","Orders Shipped To","Created","SHOW","EDIT","DELETE"]
-    params[:user_id] ? @addresses = Address.where(:user_id => params[:user_id]) : @addresses = Address.all
+
+    if params[:user_id] 
+      @addresses = Address.where(:user_id => params[:user_id])
+      @addresses_index_header = "#{User.find(params[:user_id]).full_name}'s Addresses"
+    else 
+      @addresses = Address.all
+      @addresses_index_header = "Addresses"
+    end
   end
 
   def new
