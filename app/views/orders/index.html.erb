@@ -10,11 +10,17 @@
 	<header class="text-center">
 	  <h3><%= @orders_index_header %></h3>
 	</header>
-	
+
 	<div class="row">
-		<div class="col-xs-12 text-center">
-			Create new addresses from within <%= link_to "User", users_path %> profiles
-		</div>
+		<% unless @orders_index_header == "Orders" %>
+	    <div class="col-xs-10 col-xs-offset-1">
+	      <%= link_to "Create Order", new_order_path(:user_id => @orders.first.user_id), :class => "btn btn-primary btn-lg center-block" %>
+	    </div>
+		<% else %>
+			<div class="col-xs-12 text-center">
+				Create new orders from within <%= link_to "User", users_path %> profiles
+			</div>
+		<% end %>
 	</div>
 
 	<div class="stats-table">
@@ -32,9 +38,15 @@
 					<% else %>
 						<td>n/a</td>
 					<% end %>
-					<td><%= order.shipping_address.street_address %></td>
-					<td><%= order.shipping_address.city.name %></td>
-					<td><%= order.shipping_address.state.name %></td>
+					<% unless order.shipping_address == nil %>
+						<td><%= order.shipping_address.street_address %></td>
+						<td><%= order.shipping_address.city.name %></td>
+						<td><%= order.shipping_address.state.name %></td>
+					<% else %>
+						<td>n/a</td>
+						<td>n/a</td>
+						<td>n/a</td>
+					<% end %>
 					<td>$<%= order.value(order.id) %></td>
 					<td><%= order.status(order.id) %></td>
 					<% if order.checkout_date %>
