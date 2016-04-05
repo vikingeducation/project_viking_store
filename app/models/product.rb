@@ -10,7 +10,7 @@ class Product < ActiveRecord::Base
             :presence => true
   validates :price, numericality: { less_than_or_equal_to: 10000 }
 
-  def created_since_days_ago(number)
+  def self.created_since_days_ago(number)
     Product.all.where('created_at >= ?', number.days.ago).count
   end
 
