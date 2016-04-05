@@ -12,9 +12,18 @@ class Order < ActiveRecord::Base
 
   has_many :categories, :through => :products
 
-  # scope examples...
-  # scope :checked_out, lambda { where("checkout_date IS NOT NULL") }
-  # scope :not_checked_out, lambda { where("checkout_date IS NULL") }
+  def billing_street_address
+    self.billing_address ? self.billing_address.street_address : "n/a"
+  end
+
+  def billing_city_name
+    self.billing_address ? self.billing_address.city.name : "n/a"
+  end
+
+  def billing_state_name
+    self.billing_address ? self.billing_address.state.name : "n/a"
+  end
+
 
   def self.created_since_days_ago(number)
     Order.where('checkout_date >= ?', number.days.ago).count

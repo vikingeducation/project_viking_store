@@ -52,3 +52,18 @@
 
 	</div>
 </div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h4>Billing Address</h4>
+
+    <%= render :partial => "./shared/table_with_side_headers",
+             :locals => {:headers_data => [['Street:', @order.billing_street_address],
+                                           ['City:', @order.billing_city_name],
+                                           ['State:', @order.billing_state_name]
+                                          ]
+                        }
+    %>
+
+	</div>
+</div>
