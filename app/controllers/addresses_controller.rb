@@ -11,7 +11,6 @@ class AddressesController < ApplicationController
       flash.now[:alert] = "New Address Could Not Be Created, Please Try Again."
       @user = User.find(params['address']['user_id'])
       render action: "new"
-      # so it's after this that it happens, but where???
     end
   end
 
