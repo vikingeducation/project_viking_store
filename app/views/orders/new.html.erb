@@ -9,7 +9,7 @@
 <%= render :partial => "edit_or_new_form",
            :locals => {:form_type => "new",
                        :form_header => "New Order for #{@user.full_name}",
-                       :address => @order,
+                       :order => @order,
                        :user => @user,
-                       :submit_label => "Create Order"
+                       :submit_label => "Create Order In Shopping Cart"
                        } %>
