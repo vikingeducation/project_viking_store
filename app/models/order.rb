@@ -26,6 +26,9 @@ class Order < ActiveRecord::Base
     self.billing_address ? self.billing_address.state.name : "n/a"
   end
 
+  def credit_card_last_four_digits
+    self.credit_card.card_number[-4..-1]
+  end
 
   def self.created_since_days_ago(number)
     Order.where('checkout_date >= ?', number.days.ago).count
