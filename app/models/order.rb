@@ -27,7 +27,7 @@ class Order < ActiveRecord::Base
   end
 
   def credit_card_last_four_digits
-    self.credit_card.card_number[-4..-1]
+    self.credit_card ? self.credit_card.card_number[-4..-1] : "n/a"
   end
 
   def self.created_since_days_ago(number)
