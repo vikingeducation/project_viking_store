@@ -4,6 +4,14 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(whitelisted_params)
+    if @order.save
+      redirect_to edit_order_path
+      flash[:notice] = "New Order Created!"
+    else
+      flash.now[:alert] = "New Order Couldn't Be Created, Please Try Again."
+      @user = User.find(params[:user_id])
+      render :new
+    end
   end
 
   def index
@@ -37,7 +45,7 @@ class OrdersController < ApplicationController
   private
 
   def whitelisted_params
-    params.require(:order).permit(:billing_id, :shipping_id, :credit_card_id)
+    params.require(:order).permit(:billing_id, :shipping_id, :credit_card_id).merge({:user_id => params[:user_id]})
   end
 
 end
