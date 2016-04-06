@@ -4,7 +4,8 @@ class CreditCard < ActiveRecord::Base
 
   has_many :orders, :dependent => :nullify
 
-  def nickname
-    @nickname || 'n/a'
+  def last_four_digits
+    "... #{self.card_number[-4..-1]}"
   end
+
 end

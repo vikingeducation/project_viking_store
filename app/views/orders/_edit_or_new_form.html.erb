@@ -15,25 +15,25 @@
       <h4>Basic Information</h4>
 
       <%= render :partial => "./shared/table_with_side_headers",
-               :locals => {:headers_data => [['Customer ID:', @user.id],
-                                             ['Customer:', @user.full_name],
+               :locals => {:headers_data => [['Customer ID:', user.id],
+                                             ['Customer:', user.full_name],
                                              ['Date Placed:', 'n/a']
                                             ]
                           }
       %>
 
-      <%= link_to "Edit Customer Profile", edit_user_path(:id => @user.id) %>
+      <%= link_to "Edit Customer Profile", edit_user_path(:id => user.id) %>
 
     </div>
   </div>
 
-  <%= form_for @order do |f| %>
+  <%= form_for order do |f| %>
 
   <div class="row">
     <div class="col-xs-12">
       <h4>Shipping Address</h4>
 
-      <%= f.collection_select(:shipping_id, Address.where(:user_id => @user.id), :id, :street_address, include_blank: true ) %>
+      <%= f.collection_select(:shipping_id, Address.where(:user_id => user.id), :id, :street_address, include_blank: true ) %>
 
     </div>
   </div>
@@ -42,7 +42,16 @@
     <div class="col-xs-12">
       <h4>Billing Address</h4>
 
-      <%= f.collection_select(:billing_id, Address.where(:user_id => @user.id), :id, :street_address, include_blank: true ) %>
+      <%= f.collection_select(:billing_id, Address.where(:user_id => user.id), :id, :street_address, include_blank: true ) %>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Billing Card</h4>
+
+      <%= f.collection_select(:credit_card_id, CreditCard.where(:id => user.credit_card.id), :id, :last_four_digits, include_blank: true ) %>
 
     </div>
   </div>

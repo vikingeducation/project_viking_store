@@ -77,7 +77,7 @@
 	    <h4>Billing Card</h4>
 
 	    <%= render :partial => "./shared/table_with_side_headers",
-	             :locals => {:headers_data => [['Last Four Digits:', @order.credit_card_last_four_digits]
+	             :locals => {:headers_data => [['Last Four Digits:', @order.credit_card ? @order.credit_card.last_four_digits : "n/a"]
 	                                          ]
 	                        }
 	    %>
