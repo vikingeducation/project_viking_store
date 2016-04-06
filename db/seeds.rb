@@ -249,9 +249,11 @@ puts "Created products"
 (MULTIPLIER * 10).times { generate_user }
 puts "Created users"
 
+generate_credit_cards_for_checked_out_orders
+puts "Created credit card orders"
+
 # Create orders and add the credit card records.
 (MULTIPLIER * 30).times { generate_order }
 puts "Created orders"
-generate_credit_cards_for_checked_out_orders
-puts "Created credit card orders"
+
 puts "DONE!"
