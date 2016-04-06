@@ -52,7 +52,7 @@
       <div class="col-xs-12">
         <h4>Billing Card</h4>
 
-        <%= f.collection_select(:credit_card_id, CreditCard.where(:id => user.credit_card.id), :id, :last_four_digits, include_blank: true ) %>
+        <%= user.credit_card ? f.collection_select(:credit_card_id, CreditCard.where(:id => user.credit_card.id), :id, :last_four_digits, include_blank: true) : 'n/a' %>
 
       </div>
     </div>
