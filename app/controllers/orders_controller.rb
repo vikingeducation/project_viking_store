@@ -17,6 +17,8 @@ class OrdersController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
     @order = Order.find(params[:id])
+    @column_headers = ["ID", "Quantity", "Price", "Total Price", "REMOVE"]
+    @order_contents = OrderContent.where(:order_id => params[:id])
   end
 
   def index

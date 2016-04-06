@@ -13,3 +13,31 @@
                        :user => @user,
                        :submit_label => "Update Order Information"
                        } %>
+
+<div class="crud-container">
+	<div class="row">
+	  <div class="col-md-12 text-center crud-header">
+
+	    <h3>Edit Order Contents</h3>
+
+	    <div class="stats-table">
+			  <table class="table table-striped">
+			    <tr>
+			      <% @column_headers.each do |header| %>
+			        <th><%= header %></th>
+			      <% end %>
+			    </tr>
+			    <% @order_contents.each do |order_content| %>
+			      <tr>
+			        <td><%= order_content.product_id %></td>
+			        <td><%= order_content.quantity %></td>
+			        <td><%= "$#{order_content.product.price}" %></td>
+			        <td><%= "$#{order_content.product.price * order_content.quantity}" %></td>
+			      </tr>
+			    <% end %>
+			  </table>
+			</div>
+
+	  </div>
+	</div>
+</div>
