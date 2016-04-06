@@ -4,14 +4,19 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(whitelisted_params)
+    @user = User.find(params[:user_id])
     if @order.save
-      redirect_to edit_order_path
+      redirect_to action: "edit", id: @order.id, user_id: @user.id
       flash[:notice] = "New Order Created!"
     else
       flash.now[:alert] = "New Order Couldn't Be Created, Please Try Again."
-      @user = User.find(params[:user_id])
       render :new
     end
+  end
+
+  def edit
+    @user = User.find(params[:user_id])
+    @order = Order.find(params[:id])
   end
 
   def index

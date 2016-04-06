@@ -67,14 +67,30 @@
 
   <% end %>
 
-  <div class="row">
-    <div class="col-xs-12">
+  <% if form_type == 'new' %>
 
-      <p>
-        You can add products on the next screen, once it's been created.
-      </p>
+    <div class="row">
+      <div class="col-xs-12">
 
+        <p>
+          You can add products on the next screen, once it's been created.
+        </p>
+
+      </div>
     </div>
-  </div>
+
+  <% else %>
+
+    <div class="row">
+      <div class="col-xs-12">
+
+        <%= link_to 'Delete Order', order_path,
+                                    data: {:confirm => 'Are you sure?'},
+                                    :method => :delete %>
+
+      </div>
+    </div>
+
+  <% end %>
 
 </section>

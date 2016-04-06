@@ -1,0 +1,15 @@
+<% @page_title = " | Edit Order" %>
+
+<% if flash[:alert] %>
+  <div class="notice">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<%= render :partial => "edit_or_new_form",
+           :locals => {:form_type => "edit",
+                       :form_header => "Edit Order #{@order.id}",
+                       :order => @order,
+                       :user => @user,
+                       :submit_label => "Update Order Information"
+                       } %>
