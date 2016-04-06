@@ -2,6 +2,10 @@ class OrdersController < ApplicationController
 
   layout 'admin_portal'
 
+  def create
+    @order = Order.new(whitelisted_params)
+  end
+
   def index
     @column_headers = ["ID", "UserID", "Address", "City", "State", "Total Value", "Status", "Date Placed", "SHOW", "EDIT", "DELETE"]
     if params[:user_id]
@@ -28,6 +32,12 @@ class OrdersController < ApplicationController
     @column_headers = ["ProductID", "Product", "Quantity", "Price", "Total Price"]
     @order = Order.find(params[:id])
     @order_contents = @order.order_contents
+  end
+
+  private
+
+  def whitelisted_params
+    params.require(:order).permit(:billing_id, :shipping_id, :credit_card_id)
   end
 
 end

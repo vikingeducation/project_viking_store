@@ -29,40 +29,42 @@
 
   <%= form_for order do |f| %>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <h4>Shipping Address</h4>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>Shipping Address</h4>
 
-      <%= f.collection_select(:shipping_id, Address.where(:user_id => user.id), :id, :street_address, include_blank: true ) %>
+        <%= f.collection_select(:shipping_id, Address.where(:user_id => user.id), :id, :street_address, include_blank: true ) %>
 
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <h4>Billing Address</h4>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>Billing Address</h4>
 
-      <%= f.collection_select(:billing_id, Address.where(:user_id => user.id), :id, :street_address, include_blank: true ) %>
+        <%= f.collection_select(:billing_id, Address.where(:user_id => user.id), :id, :street_address, include_blank: true ) %>
 
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <h4>Billing Card</h4>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>Billing Card</h4>
 
-      <%= f.collection_select(:credit_card_id, CreditCard.where(:id => user.credit_card.id), :id, :last_four_digits, include_blank: true ) %>
+        <%= f.collection_select(:credit_card_id, CreditCard.where(:id => user.credit_card.id), :id, :last_four_digits, include_blank: true ) %>
 
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
 
-      <%= button_to submit_label, order, :class => "btn btn-primary btn-lg center-block", :method => :post %>
+        <%= button_to submit_label, order, :class => "btn btn-primary btn-lg center-block", :method => :post %>
 
+      </div>
     </div>
-  </div>
+
+  <% end %>
 
   <div class="row">
     <div class="col-xs-12">
@@ -73,7 +75,5 @@
 
     </div>
   </div>
-
-  <% end %>
 
 </section>

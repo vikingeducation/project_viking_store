@@ -14,6 +14,12 @@ class Order < ActiveRecord::Base
 
   belongs_to :credit_card
 
+  # Order when created must have a billing_id, shipping_id and credit_card_id.
+  validates :billing_id,
+            :shipping_id,
+            :credit_card_id,
+            :presence => true
+
   def billing_street_address
     self.billing_address ? self.billing_address.street_address : "n/a"
   end
