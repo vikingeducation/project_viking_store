@@ -19,6 +19,8 @@ class Order < ActiveRecord::Base
             :shipping_id,
             :credit_card_id,
             :presence => true
+  validates :checkout_date,
+            :uniqueness => true
 
   def billing_street_address
     self.billing_address ? self.billing_address.street_address : "n/a"
