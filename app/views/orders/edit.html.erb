@@ -54,4 +54,14 @@
 
 	  </div>
 	</div>
+
+	<div class="row">
+    <div class="col-xs-12">
+
+      <%= link_to 'Delete Order', order_path,
+                                  data: {:confirm => 'Are you sure?'},
+                                  :method => :delete %>
+
+    </div>
+  </div>
 </div>

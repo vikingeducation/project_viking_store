@@ -14,6 +14,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  def destroy
+    Order.find(params[:id]).destroy
+    redirect_to orders_path
+    flash[:notice] = "Order Deleted!"
+  end
+
   def edit
     @user = User.find(params[:user_id])
     @order = Order.find(params[:id])
