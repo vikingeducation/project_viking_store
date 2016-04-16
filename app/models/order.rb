@@ -19,11 +19,9 @@ class Order < ActiveRecord::Base
             :shipping_id,
             :presence => true
 
-  accepts_nested_attributes_for :order_contents,    
+  accepts_nested_attributes_for :order_contents,
                                 :reject_if => :all_blank,
                                 :allow_destroy => true;
-
-
 
   def billing_street_address
     self.billing_address ? self.billing_address.street_address : "n/a"

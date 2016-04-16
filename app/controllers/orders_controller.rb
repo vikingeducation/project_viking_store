@@ -21,10 +21,10 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:user_id])
     @order = Order.find(params[:id])
+    @user = User.find(@order.user_id || params[:user_id])
     unless @order.user_id
-      @order.update_attributes(:user_id => params[:user_id])
+      @order.update_attributes(:user_id => @user.id)
     end
     @column_headers = ["ID", "Quantity", "Price", "Total Price", "REMOVE"]
   end
@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
     @user = User.find(@order.user_id || params[:user_id])
     if @order.update_attributes(whitelisted_params)
       flash[:notice] = "Order contents updated!"
-      redirect_to action: "edit", id: @order.id, user_id: @user.id
+      redirect_to action: "show"
     else
       flash[:alert] = "Order contents could not be updated!"
       render :edit
@@ -72,7 +72,7 @@ class OrdersController < ApplicationController
   private
 
   def whitelisted_params
-    params.require(:order).permit(:user_id, :billing_id, :shipping_id, :credit_card_id, :order_contents_attributes => [:id, :quantity, :_destroy] ).merge({:user_id => params[:user_id]})
+    params.require(:order).permit(:user_id, :billing_id, :shipping_id, :credit_card_id, :order_contents_attributes => [:id, :product_id, :quantity, :_destroy] ).merge({:user_id => params[:user_id]})
   end
 
 end

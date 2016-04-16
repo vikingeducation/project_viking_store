@@ -21,6 +21,7 @@
 	    <h3>Edit Order Contents</h3>
 
 			<%= form_for @order do |f| %>
+			<%= hidden_field_tag 'user_id', @user.id %>
 	    	<div class="stats-table">
 				  <table class="table table-striped">
 				    <tr>
@@ -37,10 +38,10 @@
 			    				<%= order_content.text_field :quantity %>
 			    			</td>
 			    			<td>
-			    				<%= "$#{order_content.object.product.price}" %>
+			    				<%= "$#{order_content.object.product.price}" if order_content.object.product %>
 			    			</td>
 			        	<td>
-			        		<%= "$#{order_content.object.product.price * order_content.object.quantity}" %>
+			        		<%= "$#{order_content.object.product.price * order_content.object.quantity}" if order_content.object.product %>
 			        	</td>
 			        	<td>
 			        		<%= order_content.check_box '_destroy' %>
@@ -64,4 +65,78 @@
 
     </div>
   </div>
+</div>
+
+<div class="crud-container">
+	<div class="row">
+	  <div class="col-md-12 text-center crud-header">
+
+	    <h3>Add Products to Order</h3>
+	    <h6>Add up to 5 products at a time</h6>
+
+			<%= form_for @order do |f| %>
+			<%= hidden_field_tag 'user_id', @user.id %>
+	    	<div class="stats-table">
+				  <table class="table table-striped">
+				    <tr>
+				      <th>Product ID</th>
+				      <th>Quantity</th>
+				    </tr>
+			    	<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
+			    		<tr>
+			    			<td>
+			    				<%= order_content.text_field :product_id %>
+			    			</td>
+			    			<td>
+			    				<%= order_content.text_field :quantity %>
+			    			</td>
+			    		</tr>
+		    		<% end %>
+		    		<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
+			    		<tr>
+			    			<td>
+			    				<%= order_content.text_field :product_id %>
+			    			</td>
+			    			<td>
+			    				<%= order_content.text_field :quantity %>
+			    			</td>
+			    		</tr>
+		    		<% end %>
+		    		<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
+			    		<tr>
+			    			<td>
+			    				<%= order_content.text_field :product_id %>
+			    			</td>
+			    			<td>
+			    				<%= order_content.text_field :quantity %>
+			    			</td>
+			    		</tr>
+		    		<% end %>
+		    		<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
+			    		<tr>
+			    			<td>
+			    				<%= order_content.text_field :product_id %>
+			    			</td>
+			    			<td>
+			    				<%= order_content.text_field :quantity %>
+			    			</td>
+			    		</tr>
+		    		<% end %>
+		    		<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
+			    		<tr>
+			    			<td>
+			    				<%= order_content.text_field :product_id %>
+			    			</td>
+			    			<td>
+			    				<%= order_content.text_field :quantity %>
+			    			</td>
+			    		</tr>
+		    		<% end %>
+					</table>
+					<%= f.submit %>
+				</div>
+			<% end %>
+
+	  </div>
+	</div>
 </div>
