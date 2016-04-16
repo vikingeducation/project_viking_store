@@ -82,56 +82,18 @@
 				      <th>Product ID</th>
 				      <th>Quantity</th>
 				    </tr>
-			    	<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
-			    		<tr>
-			    			<td>
-			    				<%= order_content.text_field :product_id %>
-			    			</td>
-			    			<td>
-			    				<%= order_content.text_field :quantity, :value => nil %>
-			    			</td>
-			    		</tr>
-		    		<% end %>
-		    		<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
-			    		<tr>
-			    			<td>
-			    				<%= order_content.text_field :product_id %>
-			    			</td>
-			    			<td>
-			    				<%= order_content.text_field :quantity, :value => nil %>
-			    			</td>
-			    		</tr>
-		    		<% end %>
-		    		<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
-			    		<tr>
-			    			<td>
-			    				<%= order_content.text_field :product_id %>
-			    			</td>
-			    			<td>
-			    				<%= order_content.text_field :quantity, :value => nil %>
-			    			</td>
-			    		</tr>
-		    		<% end %>
-		    		<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
-			    		<tr>
-			    			<td>
-			    				<%= order_content.text_field :product_id %>
-			    			</td>
-			    			<td>
-			    				<%= order_content.text_field :quantity, :value => nil %>
-			    			</td>
-			    		</tr>
-		    		<% end %>
-		    		<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
-			    		<tr>
-			    			<td>
-			    				<%= order_content.text_field :product_id %>
-			    			</td>
-			    			<td>
-			    				<%= order_content.text_field :quantity, :value => nil %>
-			    			</td>
-			    		</tr>
-		    		<% end %>
+				    <% 5.times do %>
+				    	<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
+				    		<tr>
+				    			<td>
+				    				<%= order_content.text_field :product_id %>
+				    			</td>
+				    			<td>
+				    				<%= order_content.text_field :quantity, :value => nil %>
+				    			</td>
+				    		</tr>
+			    		<% end %>
+			    	<% end %>
 					</table>
 					<%= f.submit %>
 				</div>
