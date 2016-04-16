@@ -20,23 +20,37 @@
 
 	    <h3>Edit Order Contents</h3>
 
-	    <div class="stats-table">
-			  <table class="table table-striped">
-			    <tr>
-			      <% @column_headers.each do |header| %>
-			        <th><%= header %></th>
-			      <% end %>
-			    </tr>
-			    <% @order_contents.each do |order_content| %>
-			      <tr>
-			        <td><%= order_content.product_id %></td>
-			        <td><%= order_content.quantity %></td>
-			        <td><%= "$#{order_content.product.price}" %></td>
-			        <td><%= "$#{order_content.product.price * order_content.quantity}" %></td>
-			      </tr>
-			    <% end %>
-			  </table>
-			</div>
+			<%= form_for @order do |f| %>
+	    	<div class="stats-table">
+				  <table class="table table-striped">
+				    <tr>
+				      <% @column_headers.each do |header| %>
+				        <th><%= header %></th>
+				      <% end %>
+				    </tr>
+			    	<%= f.fields_for :order_contents do |order_content| %>
+			    		<tr>
+			    			<td>
+			    				<%= order_content.object.id %>
+			    			</td>
+			    			<td>
+			    				<%= order_content.text_field :quantity %>
+			    			</td>
+			    			<td>
+			    				<%= "$#{order_content.object.product.price}" %>
+			    			</td>
+			        	<td>
+			        		<%= "$#{order_content.object.product.price * order_content.object.quantity}" %>
+			        	</td>
+			        	<td>
+			        		<%= order_content.check_box '_destroy' %>
+			        	</td>
+			    		</tr>
+		    		<% end %>
+					</table>
+					<%= f.submit %>
+				</div>
+			<% end %>
 
 	  </div>
 	</div>

@@ -43,4 +43,9 @@
 .crud-container {
   border: 1px solid black;
   margin: 20px 0; 
-  padding: 15px;}
+  padding: 15px;
+}
+
+td {
+  text-align: left;
+}

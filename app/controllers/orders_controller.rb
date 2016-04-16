@@ -17,8 +17,10 @@ class OrdersController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
     @order = Order.find(params[:id])
+    unless @order.user_id
+      @order.update_attributes(:user_id => params[:user_id])
+    end
     @column_headers = ["ID", "Quantity", "Price", "Total Price", "REMOVE"]
-    @order_contents = OrderContent.where(:order_id => params[:id])
   end
 
   def index
@@ -28,7 +30,7 @@ class OrdersController < ApplicationController
         @orders = Order.where(:user_id => params[:user_id])
         @orders_index_header = "#{User.find(params[:user_id]).full_name}'s Orders"
       else
-        flash[:notice] = "Sorry, that user isn't in our system :("
+        flash[:alert] = "Sorry, that user isn't in our system :("
         @orders = Order.all
         @orders_index_header = "Orders"
       end
@@ -49,10 +51,22 @@ class OrdersController < ApplicationController
     @order_contents = @order.order_contents
   end
 
+  def update
+    @order = Order.find(params[:id])
+    @user = User.find(@order.user_id || params[:user_id])
+    if @order.update_attributes(whitelisted_params)
+      flash[:notice] = "Order contents updated!"
+      redirect_to action: "edit", id: @order.id, user_id: @user.id
+    else
+      flash[:alert] = "Order contents could not be updated!"
+      render :edit
+    end
+  end
+
   private
 
   def whitelisted_params
-    params.require(:order).permit(:billing_id, :shipping_id, :credit_card_id).merge({:user_id => params[:user_id]})
+    params.require(:order).permit(:user_id, :billing_id, :shipping_id, :credit_card_id, :order_contents_attributes => [:id, :quantity, :_destroy] ).merge({:user_id => params[:user_id]})
   end
 
 end
