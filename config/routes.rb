@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
 
-  root 'categories#index'
-  resources :addresses, path: '/admin/addresses'
-  resources :categories, path: '/admin/categories'
-  resources :orders, path: 'admin/orders'
-  resources :products, path: '/admin/products'
-  resources :users, path: '/admin/users'
-  resources :credit_cards, path: '/admin/creditcards'
-  get 'admin/dashboard' => 'dashboard#index'
+  root 'admin/categories#index'
+  namespace :admin do
+    resources :addresses
+    resources :categories
+    resources :orders
+    resources :products
+    resources :users
+    resources :credit_cards
+  end
+  get 'admin/dashboard' => 'admin/dashboard#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
