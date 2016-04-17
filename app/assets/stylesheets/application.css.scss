@@ -1,0 +1,64 @@
+#topnav {
+  padding: 0 10px;
+  border-bottom: 1px solid gray;
+  .logo-container {
+    img {
+      width: 45px;
+      height: 45px;
+      margin-top: 2px;
+      vertical-align: middle;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+      font-size: 140%;
+    }
+  }
+}
+
+.main-content {
+  border: 1px solid #ccc;
+  padding: 0px 15px;
+
+  .crud-container {
+    border: 1px solid black;
+    margin: 20px 0; 
+    padding: 15px;
+  }
+
+  .table-striped {
+    margin-top: 12px;
+    td {
+      text-align: left;
+    }
+  }
+
+  #edit-or-new {
+    form {
+      display: table;
+    }
+    p {
+      display: table-row;
+    }
+    label {
+      display: table-cell;
+    }
+    input {
+      display: table-cell;
+    }
+    .table-cell {
+      display: table-cell;
+    }
+    .table-row {
+      display: table-row; }
+  }
+}
+
+.side-nav {
+  padding: 0px 15px;
+  border: 1px solid #ccc;
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+}
