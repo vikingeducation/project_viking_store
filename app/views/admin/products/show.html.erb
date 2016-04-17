@@ -1,0 +1,40 @@
+<% @page_title = " | Product" %>
+
+<div class="row">
+	<div class="col-xs-12">
+		<h2>
+			Product <%= @product.id %>
+		</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+
+		<h3>Product Information</h3>
+
+		<%= render :partial => "./shared/table_with_side_headers",
+		             :locals => {:headers_data => [['id:',@product.id],
+		             															 ['name:',@product.name],
+		             															 ['price:',@product.price],
+		             															 ['category:',@category_name]]
+		             						}
+		%>
+
+		<h3>Product Statistics</h3>
+
+		<%= render :partial => "./shared/table_with_side_headers",
+		             :locals => {:headers_data => [['Times Ordered:',@times_ordered],
+		             															 ['Carts In:',@number_of_carts_in]]
+		             						}
+		%>
+
+		<br>
+		<%= link_to 'Edit Product', edit_admin_product_path %>
+		<br>
+		<%= link_to 'Delete Product', 
+								admin_product_path, 
+								data: {:confirm => 'Are you sure?'}, 
+								:method => :delete %>
+			</div>
+</div>

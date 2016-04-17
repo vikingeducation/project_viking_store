@@ -1,0 +1,56 @@
+<% @page_title = " | Addresses" %>
+
+<% if flash[:notice] %>
+	<div class="notice">
+		<%= flash[:notice] %>
+	</div>
+<% end %>
+
+<section>
+	<header class="text-center">
+	  <h3><%= @addresses_index_header %></h3>
+	</header>
+	
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			Create new addresses from within <%= link_to "User", admin_users_path %> profiles
+		</div>
+	</div>
+
+	<div class="stats-table">
+	  <table class="table table-striped">
+	    <tr>
+	      <% @column_headers.each do |header| %>
+	        <th><%= header %></th>
+	      <% end %>
+	    </tr>
+	    <% @addresses.each do |address| %>
+	      <tr>
+	        <td><%= address.id %></td>
+	        <% if address.user %>
+						<td><%= link_to address.user.full_name, admin_user_path(:id => address.user.id) %></td>
+					<% else %>
+						<td>n/a</td>
+					<% end %>
+					<td><%= address.street_address %></td>
+					<td><%= address.city.name %></td>
+					<td><%= address.state.name %></td>
+					<td><%= address.orders_shipped_to.count %></td>
+					<td><%= address.created_at %></td>
+	        <td>
+	          <%= link_to 'show', admin_address_path(:id => address.id) %>
+	        </td>
+	        <td>
+	          <%= link_to 'edit', edit_admin_address_path(:id => address.id, :user_id => address.user_id) %>
+	        </td>
+	        <td>
+	          <%= link_to 'delete', 
+	                      admin_address_path(:id => address.id),
+	                      data: {:confirm => 'Are you sure?'}, 
+	                      :method => :delete %>
+	        </td>
+	      </tr>
+	    <% end %>
+	  </table>
+	</div>
+</section>

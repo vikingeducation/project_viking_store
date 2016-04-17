@@ -1,0 +1,28 @@
+<section id="edit-or-new">
+
+  <header class="text-center">
+    <h3><%= form_header %></h3>
+  </header>
+
+  <%= form_for [:admin, object] do |f| %>
+    <p>
+  	 <%= f.label :id, "ID: " %>
+  	 <%= f.text_field :id, :placeholder => (object.id || 'n/a'), :readonly => true %>
+  	</p>
+    <p>
+      <%= f.label :name, "Name: " %>
+      <%= f.text_field :name %>
+    </p>
+    <%= f.submit :class => "btn btn-primary btn-lg center-block" %>
+    <br>
+    <% if form_type == 'edit' %>
+      <%= link_to 'Delete',
+                  admin_category_path(:id => object.id),
+                  data: {:confirm => "Are you sure?"},
+                  :method => :delete
+      %>
+    <% end %>
+
+  <% end %>
+
+</section>

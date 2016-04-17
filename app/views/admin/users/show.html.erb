@@ -1,0 +1,179 @@
+<% @page_title = " | User" %>
+
+<div class="row">
+  <div class="col-md-12 text-center crud-header">
+    <h2>User <%= @user.id %>: <%= "#{@user.first_name} #{@user.last_name}"%></h2>
+  </div>
+</div>
+
+<div class="crud-container">
+
+  <div class="row">
+    <div class="col-xs-12 text-center sub-header">
+      <header>
+        <h3>Demographic Information</h3>
+      </header>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <%= render :partial => "./shared/table_with_side_headers",
+                 :locals => {:headers_data => [['First Name:',@user.first_name],
+                                               ['Last Name:',@user.last_name],
+                                               ['Default Billing Address:',@user.default_billing_address],
+                                               ['Default Shipping Address:',@user.default_shipping_address]]
+                            }
+      %>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <%= link_to "View User's Addresses", 
+                  admin_addresses_path(:user_id => @user.id) %>
+      <br>
+      <% if Order.where("user_id = ? AND checkout_date IS NULL", @user.id) %>
+        <%= link_to "View User's Current Shopping Cart", '#' %>
+        <br>
+      <% end %>
+      <%= link_to 'Edit User', 
+                  edit_admin_user_path %>
+      <br>
+      <%= link_to 'Delete User', 
+                  admin_user_path, 
+                  data: {:confirm => 'Are you sure?'}, 
+                  :method => :delete %>
+    </div>
+  </div>
+</div>
+
+<div class="crud-container">
+
+  <div class="row">
+    <div class="col-xs-12 text-center sub-header">
+      <header>
+        <h3>Credit Card Information</h3>
+      </header>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <% if @user.credit_card %>
+        <%= render :partial => "./shared/table_with_side_headers",
+                   :locals => {:headers_data => [['Nickname:',@user.credit_card.nickname],
+                                                 ['Number:',@user.credit_card.card_number ],
+                                                 ['Expiration:',"#{@user.credit_card.exp_month}/#{@user.credit_card.exp_year}"],
+                                                 ['CCV:',@user.credit_card.ccv],
+                                                 ['Card Type:',@user.credit_card.brand]]
+                              }
+        %>
+      <% else %>
+        <%= render :partial => "./shared/table_with_side_headers",
+                   :locals => {:headers_data => [['Nickname:','n/a'],
+                                                 ['Number:','n/a' ],
+                                                 ['Expiration:','n/a'],
+                                                 ['CCV:','n/a'],
+                                                 ['Card Type:','n/a']]
+                              }
+        %>
+      <% end %>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <%= link_to 'Remove Card', 
+                  admin_credit_cards_path, 
+                  data: {:confirm => 'Are you sure?'}, 
+                  :method => :delete %>
+    </div>
+  </div>
+
+</div>
+
+<div class="crud-container">
+
+  <div class="row">
+    <div class="col-xs-12 text-center sub-header">
+      <header>
+        <h3>Demographic Information</h3>
+      </header>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <%= link_to "Create Order", 
+                  new_admin_order_path(:user_id => @user.id), 
+                  :class => "btn btn-primary btn-lg center-block"
+      %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <%= link_to "Create Address", 
+                  new_admin_address_path(:user_id => @user.id), 
+                  :class => "btn btn-primary btn-lg center-block"
+      %>
+    </div>
+  </div>
+
+</div>
+
+<div class="crud-container">
+
+  <div class="row">
+    <div class="col-xs-12 text-center sub-header">
+      <header>
+        <h3>Order History</h3>
+      </header>
+    </div>
+  </div>
+  <br>
+  
+  <div class="stats-table">
+    <table class="table table-striped">
+      <tr>
+        <% @user_orders_table_headers.each do |header| %>
+          <th><%= header %></th>
+        <% end %>
+      </tr>
+      <% @orders.each do |order| %>
+        <tr>
+          <td>
+            <%= order.id %>
+          </td>
+          <td>
+            <%= order.updated_at %>
+          </td>
+          <td>
+            $<%= order.value(order.id) %>
+          </td>
+          <td>
+            <%= order.status(order.id) %>
+          </td>
+          <td>
+            <%= link_to 'show', admin_order_path(:id => order.id) %>
+          </td>
+          <td>
+            <%= link_to 'edit', edit_admin_order_path(:id => order.id) %>
+          </td>
+          <td>
+            <%= link_to 'delete', 
+                        admin_order_path(:id => order.id),
+                        data: {:confirm => 'Are you sure?'}, 
+                        :method => :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+</div>

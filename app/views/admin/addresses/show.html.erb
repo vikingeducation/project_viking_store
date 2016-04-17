@@ -1,0 +1,30 @@
+<% @page_title = " | Address" %>
+
+<div class="row">
+  <div class="col-xs-12">
+
+    <h3><%= User.find(@address.user_id).full_name %>'s Address</h3>
+    
+    <%= render :partial => "./shared/table_with_side_headers",
+                 :locals => {:headers_data => [['Owner ID:',@address.user_id],
+                                               ['Owner Name:',(link_to User.find(@address.user_id).full_name, admin_user_path(:id => @address.user_id))],
+                                               ['Street:',@address.street_address],
+                                               ['City',@address.city.name],
+                                               ['State',@address.state.name],
+                                               ['Zip',@address.zip_code]
+                                              ]
+                            }
+    %>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'edit', edit_admin_address_path(:id => @address.id, :user_id => @address.user_id) %>
+    <%= link_to 'delete', 
+                admin_address_path(:id => @address.id),
+                data: {:confirm => 'Are you sure?'}, 
+                :method => :delete %>
+  </div>
+</div>
