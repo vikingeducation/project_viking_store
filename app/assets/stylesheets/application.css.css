@@ -20,6 +20,18 @@
     margin-right: 10px;
     float: left; }
 
+#bot-nav {
+  background-color: #262626;
+  margin-bottom: 0;
+  padding: 20px 0; }
+  #bot-nav h3 {
+    color: #FF8500;
+    margin-top: 0; }
+  #bot-nav .phone {
+    color: white; }
+  #bot-nav .email {
+    color: white; }
+
 .main-content {
   border: 1px solid #ccc;
   padding: 0px 15px; }
