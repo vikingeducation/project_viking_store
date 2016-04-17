@@ -1,3 +1,8 @@
+html, body {
+  height: 100%; }
+  html .container, body .container {
+    min-height: 100%; }
+
 #topnav {
   padding: 0 10px;
   border-bottom: 1px solid gray; }
