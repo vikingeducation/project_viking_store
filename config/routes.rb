@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'admin/categories#index'
+  resources :tests
   namespace :admin do
     resources :addresses
     resources :categories

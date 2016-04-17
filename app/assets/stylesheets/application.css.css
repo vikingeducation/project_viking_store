@@ -10,6 +10,15 @@
     text-decoration: none;
     color: black;
     font-size: 140%; }
+  #topnav .profile {
+    margin-right: 10px;
+    float: left; }
+    #topnav .profile img {
+      height: 45px;
+      width: 45px; }
+  #topnav .user-links {
+    margin-right: 10px;
+    float: left; }
 
 .main-content {
   border: 1px solid #ccc;
