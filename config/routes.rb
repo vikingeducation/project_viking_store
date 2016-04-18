@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   root 'admin/categories#index'
+  resource :session, :only => [:new, :create, :destroy]
+  
   resources :products
+  
   namespace :admin do
     resources :addresses
     resources :categories
@@ -10,6 +13,7 @@ Rails.application.routes.draw do
     resources :users
     resources :credit_cards
   end
+  
   get 'admin/dashboard' => 'admin/dashboard#index'
 
 
