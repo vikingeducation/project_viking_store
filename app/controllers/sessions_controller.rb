@@ -29,5 +29,7 @@ class SessionsController < ApplicationController
     else
       flash[:error] = "Angry robots have prevented you from signing out. You're stuck here forever."
       redirect_to root_path
+    end
+  end
 
 end
