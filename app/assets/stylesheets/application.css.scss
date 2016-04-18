@@ -1,6 +1,6 @@
 html,body {
   height: 100%;
-  .container{
+  .container-fluid{
     min-height: 100%;
   }
 }
@@ -95,5 +95,63 @@ html,body {
   ul {
     list-style-type: none;
     padding: 0;
+  }
+}
+
+#products-index {
+  .category-filter{
+    margin-bottom: 8px;
+    margin-top: 10px;
+    .category-dropdown{
+      float: left;
+      margin-right: 10px;
+    }
+    .filter-button{
+      input {
+        padding: 2px;
+      }
+    }
+  }
+  .cover{
+    border-bottom: 1px solid #ccc;
+  }
+  .motto{
+    background-color: #262626;
+    border-bottom: 1px solid #ccc;
+    color: white;
+  }
+  .product{
+    border: 1px solid #ccc;
+    position: relative;
+    .product-title{
+      background-color: #262626;
+      color: white;
+      display: inline-block;
+      width: 100%;
+    }
+    .product-image{
+      height: 100px;
+      .price{
+        border: 1px solid black;
+        float: right;
+        margin: 5px;
+        p {
+          margin: 2px 5px;
+        }
+      }
+    }
+    .product-bottom{
+      background-color: #262626;
+      button{
+        margin: 5px 0;
+      }
+    }
+  }
+  .products-row{
+    margin-bottom: 15px;
+  }
+  .third-banner{
+    border-bottom: 1px solid #ccc;
+    color: #7c7c7c;
   }
 }

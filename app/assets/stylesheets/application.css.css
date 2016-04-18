@@ -1,6 +1,6 @@
 html, body {
   height: 100%; }
-  html .container, body .container {
+  html .container-fluid, body .container-fluid {
     min-height: 100%; }
 
 #topnav {
@@ -67,5 +67,45 @@ html, body {
   .side-nav ul {
     list-style-type: none;
     padding: 0; }
+
+#products-index .category-filter {
+  margin-bottom: 8px;
+  margin-top: 10px; }
+  #products-index .category-filter .category-dropdown {
+    float: left;
+    margin-right: 10px; }
+  #products-index .category-filter .filter-button input {
+    padding: 2px; }
+#products-index .cover {
+  border-bottom: 1px solid #ccc; }
+#products-index .motto {
+  background-color: #262626;
+  border-bottom: 1px solid #ccc;
+  color: white; }
+#products-index .product {
+  border: 1px solid #ccc;
+  position: relative; }
+  #products-index .product .product-title {
+    background-color: #262626;
+    color: white;
+    display: inline-block;
+    width: 100%; }
+  #products-index .product .product-image {
+    height: 100px; }
+    #products-index .product .product-image .price {
+      border: 1px solid black;
+      float: right;
+      margin: 5px; }
+      #products-index .product .product-image .price p {
+        margin: 2px 5px; }
+  #products-index .product .product-bottom {
+    background-color: #262626; }
+    #products-index .product .product-bottom button {
+      margin: 5px 0; }
+#products-index .products-row {
+  margin-bottom: 15px; }
+#products-index .third-banner {
+  border-bottom: 1px solid #ccc;
+  color: #7c7c7c; }
 
 /*# sourceMappingURL=application.css.css.map */
