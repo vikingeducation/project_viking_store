@@ -100,7 +100,7 @@ html, body {
         margin: 2px 5px; }
   #products-index .product .product-bottom {
     background-color: #262626; }
-    #products-index .product .product-bottom button {
+    #products-index .product .product-bottom .btn-warning {
       margin: 5px 0; }
 #products-index .products-row {
   margin-bottom: 15px; }

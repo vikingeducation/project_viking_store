@@ -69,7 +69,9 @@
 							</div>
 
 							<div class="product-bottom text-center">
-								<button type="button" class="btn btn-warning">Add to Cart</button>
+								<%= link_to 'Add to Cart', 
+														{:controller => 'products', :action => 'index', :product_id => product.id},
+														:class => "btn btn-warning", :method => :get %>
 							</div>
 
 						</div>
@@ -95,7 +97,9 @@
 						</div>
 
 						<div class="product-bottom text-center">
-							<button type="button" class="btn btn-warning">Add to Cart</button>
+							<%= link_to 'Add to Cart', 
+														{:controller => 'products', :action => 'index', :product_id => product.id},
+														:class => "btn btn-warning", :method => :get %>
 						</div>
 
 					</div>
