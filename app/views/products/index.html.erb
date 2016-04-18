@@ -1,6 +1,12 @@
 <div class="container-fluid">
 	<div id="products-index">
 
+		<% if flash[:notice] %>
+			<div class="flash">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+
 		<div class="row">
 			<div class="col-xs-12 cover">
 				<div class="cover-title text-center">

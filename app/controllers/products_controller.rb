@@ -18,6 +18,9 @@ class ProductsController < ApplicationController
   def add_to_cart
     unless @shopping_cart.order_contents.where(:product_id => params[:product_id]).first
       @shopping_cart.order_contents.create(:product_id => params[:product_id])
+      flash[:notice] = "Item added to cart!"
+    else
+      flash[:notice] = "Item already in cart!"
     end
   end
 
