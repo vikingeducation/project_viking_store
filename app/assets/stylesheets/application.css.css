@@ -1,6 +1,6 @@
 html, body {
   height: 100%; }
-  html .container-fluid, body .container-fluid {
+  html .container-fluid, html .container, body .container-fluid, body .container {
     min-height: 100%; }
 
 #topnav {
@@ -107,5 +107,12 @@ html, body {
 #products-index .third-banner {
   border-bottom: 1px solid #ccc;
   color: #7c7c7c; }
+
+#sessions-new .box {
+  border: 1px solid #ccc;
+  padding: 30px; }
+#sessions-new .header {
+  margin-top: 50px;
+  margin-bottom: 45px; }
 
 /*# sourceMappingURL=application.css.css.map */

@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  layout 'front_facing'
+
   # This should render your sign-in form!
   def new
   end
@@ -13,10 +15,10 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user
       sign_in user
-      flash[:success] = "Thanks for signing in!"
-      redirect_to rooth_path
+      flash[:notice] = "Thanks for signing in!"
+      redirect_to root_path
     else
-      flash.now[:error] = "We coudn't sign you in due to errors."
+      flash.now[:alert] = "We coudn't sign you in due to errors."
       render :new
     end
   end
@@ -24,10 +26,10 @@ class SessionsController < ApplicationController
   # Sign out our user to destroy a session
   def destroy
     if sign_out
-      flash[:success] = "You have successfully signed out"
+      flash[:notice] = "You have successfully signed out"
       redirect_to root_path
     else
-      flash[:error] = "Angry robots have prevented you from signing out. You're stuck here forever."
+      flash[:alert] = "Angry robots have prevented you from signing out. You're stuck here forever."
       redirect_to root_path
     end
   end

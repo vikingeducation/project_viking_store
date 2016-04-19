@@ -77,7 +77,8 @@
 							<div class="product-bottom text-center">
 								<%= link_to 'Add to Cart', 
 														{:controller => 'products', :action => 'index', :product_id => product.id},
-														:class => "btn btn-warning", :method => :get %>
+														:class => "btn btn-warning", 
+														:method => :post %>
 							</div>
 
 						</div>

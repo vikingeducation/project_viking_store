@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'admin/categories#index'
+  root 'products#index'
   resource :session, :only => [:new, :create, :destroy]
   
   resources :products

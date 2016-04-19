@@ -1,6 +1,6 @@
 html,body {
   height: 100%;
-  .container-fluid{
+  .container-fluid, .container{
     min-height: 100%;
   }
 }
@@ -153,5 +153,16 @@ html,body {
   .third-banner{
     border-bottom: 1px solid #ccc;
     color: #7c7c7c;
+  }
+}
+
+#sessions-new{
+  .box{
+    border: 1px solid #ccc;
+    padding: 30px;
+  }
+  .header{
+    margin-top: 50px;
+    margin-bottom: 45px;
   }
 }
