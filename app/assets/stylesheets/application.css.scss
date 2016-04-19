@@ -3,6 +3,10 @@ html,body {
   .container-fluid, .container{
     min-height: 100%;
   }
+  .header{
+    margin-top: 50px;
+    margin-bottom: 45px;
+  }
 }
 
 #topnav {
@@ -160,9 +164,5 @@ html,body {
   .box{
     border: 1px solid #ccc;
     padding: 30px;
-  }
-  .header{
-    margin-top: 50px;
-    margin-bottom: 45px;
   }
 }

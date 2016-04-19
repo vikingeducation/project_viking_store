@@ -2,6 +2,9 @@ html, body {
   height: 100%; }
   html .container-fluid, html .container, body .container-fluid, body .container {
     min-height: 100%; }
+  html .header, body .header {
+    margin-top: 50px;
+    margin-bottom: 45px; }
 
 #topnav {
   padding: 0 10px;
@@ -111,8 +114,5 @@ html, body {
 #sessions-new .box {
   border: 1px solid #ccc;
   padding: 30px; }
-#sessions-new .header {
-  margin-top: 50px;
-  margin-bottom: 45px; }
 
 /*# sourceMappingURL=application.css.css.map */
