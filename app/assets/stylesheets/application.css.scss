@@ -166,3 +166,17 @@ html,body {
     padding: 30px;
   }
 }
+
+#users-new{
+  .sub-form{
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding: 15px;
+    .sub-form-header{
+      text-align: center;
+    }
+    .sub-form-form{
+      padding: 30px;
+    }
+  }
+}

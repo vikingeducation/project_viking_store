@@ -76,22 +76,9 @@ class Admin::AddressesController < AdminController
 
   private
 
-  # How does the city value calculate itself
-
-  def city_id_hash
-    if City.where(:name => params["address"]["city"].downcase.titleize).first
-      {:city_id => City.where(:name => params["address"]["city"].downcase.titleize).first.id}
-    elsif params["address"]["city"].length > 0
-      new_city = City.create(name: params["address"]["city"].downcase.titleize)
-      {:city_id => new_city.id}
-    else
-      {:city_id => ""}
-    end
-  end
-
   def whitelisted_params
     if params["address"]["city"] != ""
-      params.require(:address).permit(:street_address,:zip_code,:state_id, :user_id).merge(city_id_hash)
+      params.require(:address).permit(:street_address,:zip_code,:state_id, :user_id).merge({:city_id => City.name_to_id(params["address"]["city"])})
     else
       params.require(:address).permit(:street_address,:zip_code,:state_id, :user_id)
     end

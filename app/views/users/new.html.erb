@@ -17,5 +17,51 @@
 			</div>
 		</div>
 
+		<div class="row">
+			<%= form_for @user do |user| %>
+
+				<div class="col-xs-6">
+					<% 2.times do |x| %>
+						<div class="sub-form">
+							<div class="sub-form-header">
+								<h4>Address <%= x+1 %> (optional)</h4>
+							</div>
+
+							<div class="sub-form-form">
+								<%= user.fields_for :addresses, @user.addresses.build do |address| %>
+									<%= address.label :street_address, "Street Address" %>
+									<br>
+									<%= address.text_field :street_address %>
+								<% end %>
+							</div>
+
+						</div>
+					<% end %>
+				</div>
+
+				<div class="col-xs-6">
+					<div class="sub-form">
+						<div class="sub-form-header">
+							<h4>Account Information</h4>
+						</div>
+						<div class="sub-form-form">
+							Nice naming you nonghead
+						</div>
+					</div>
+
+					<div class="sub-form">
+						<div class="sub-form-header">
+							<h2>Complete Signup</h2>
+						</div>
+						<div class="sub-form-form">
+							<%= user.submit :class => "btn btn-primary btn-lg center-block" %>
+						</div>
+					</div>
+				</div>
+
+			<% end %>
+
+		</div>
+
 	</div>
 </div>

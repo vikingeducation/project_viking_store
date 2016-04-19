@@ -4,6 +4,21 @@ class City < ActiveRecord::Base
   validates :name,
             :length => {:maximum => 63}
 
+  # For those situations where a user inputs a string into a form and we have to return an ID.
+  # If the city already exists, return that cities id
+  # else create a city with that name and return that citties id.
+  def self.name_to_id(name)
+    # If there's a city with the name the same as the one submitted by our params...
+    if City.where(:name => name.downcase.titleize).first
+      # Then we can return that city's id
+      City.where(:name => params["address"]["city"].downcase.titleize).first.id
+    # Else we're going to create a city object with that name and then return a hash with that objects id.
+    else
+      new_city = City.create(name: name.downcase.titleize)
+      new_city.id
+    end
+  end
+
   def self.top_three_cities
     # Trying to find via find_by_sql
     # First I needed a subquery table that got me all the distinct user_ids and one billing_id attached to each.
