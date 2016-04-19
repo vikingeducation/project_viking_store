@@ -76,7 +76,7 @@
 
 							<div class="product-bottom text-center">
 								<%= link_to 'Add to Cart', 
-														{:controller => 'products', :action => 'index', :product_id => product.id},
+														{:controller => 'order_contents', :action => 'create', :product_id => product.id},
 														:class => "btn btn-warning", 
 														:method => :post %>
 							</div>
@@ -105,8 +105,9 @@
 
 						<div class="product-bottom text-center">
 							<%= link_to 'Add to Cart', 
-														{:controller => 'products', :action => 'index', :product_id => product.id},
-														:class => "btn btn-warning", :method => :get %>
+														{:controller => 'order_contents', :action => 'create', :product_id => product.id},
+														:class => "btn btn-warning", 
+														:method => :post %>
 						</div>
 
 					</div>

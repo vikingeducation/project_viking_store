@@ -9,20 +9,9 @@ class ProductsController < ApplicationController
     @selected_option = current_category
 
     @shopping_cart = shopping_cart
-    add_to_cart if params[:product_id]
   end
 
   private
-
-  # adding item to cart as long as the cart doesn't already have that item in there.
-  def add_to_cart
-    unless @shopping_cart.order_contents.where(:product_id => params[:product_id]).first
-      @shopping_cart.order_contents.create(:product_id => params[:product_id])
-      flash[:notice] = "Item added to cart!"
-    else
-      flash[:notice] = "Item already in cart!"
-    end
-  end
 
   # if there's a params category_id then it means it's been freshly chosen so should be the selected option.
   # it also means we should update the session[:category_id]
@@ -50,13 +39,6 @@ class ProductsController < ApplicationController
 
   # if there's no current cart, I want to build a new order.
   def shopping_cart
-    if session[:order_id]
-      Order.find(session[:order_id])
-    else
-      # An order has to have a shipping_id and a billing_id so I decided to set them to the impossible zero, this way there can be no mess ups, I hope...
-      new_order = Order.create(:shipping_id => 0, :billing_id => 0)
-      session[:order_id] = new_order.id
-      new_order
-    end
+    session[:shopping_cart] ||= Order.new
   end
 end
