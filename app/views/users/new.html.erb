@@ -29,9 +29,35 @@
 
 							<div class="sub-form-form">
 								<%= user.fields_for :addresses, @user.addresses.build do |address| %>
+
 									<%= address.label :street_address, "Street Address" %>
 									<br>
-									<%= address.text_field :street_address %>
+									<%= address.text_field :street_address, :placeholder => "123 fake street" %>
+									<br>
+									
+									<!-- Was thinking about using a fields_for here for the city but I don't think this should be done because I'm not 100% sure I'm gonna build a new city... I think I can just take the name, a City class method on it to return an id to use later on. -->
+
+									<%= address.label :city, "City" %>
+									<br>
+									<%= address.text_field :city, :placeholder => "Somewhere" %>
+									<br>
+									
+									<%= address.label :state_id, "State" %>
+									<br>
+									<%= address.collection_select(:state_id, State.all, :id, :name) %>
+									<br>
+
+									<%= address.label :zip_code, "Zip Code" %>
+									<br>
+									<%= address.text_field :zip_code %>
+									<br>
+
+									<%= user.radio_button :billing_id, address.object.id %>
+									<%= user.label :billing_id, "Default Billing Address" %>
+									<br>
+									<%= user.radio_button :shipping_id, address.object.id %>
+									<%= user.label :shipping_id, "Default Shipping Address" %>
+
 								<% end %>
 							</div>
 
@@ -45,7 +71,21 @@
 							<h4>Account Information</h4>
 						</div>
 						<div class="sub-form-form">
-							Nice naming you nonghead
+							<%= user.label :email, "Email" %>
+							<br>
+						 	<%= user.email_field :email, :placeholder => "foo@bar.com" %>
+						 	<br>
+						 	<%= user.label :password, "Password" %>
+						 	<br>
+						 	<%= user.password_field :password %>
+						 	<br>
+						 	<%= user.label :first_name, "First Name" %>
+						 	<br>
+						 	<%= user.text_field :first_name, :placeholder => "Foo" %>
+						 	<br>
+						 	<%= user.label :last_name, "Last Name" %>
+						 	<br>
+						 	<%= user.text_field :last_name, :placeholder => "Bar" %>
 						</div>
 					</div>
 
