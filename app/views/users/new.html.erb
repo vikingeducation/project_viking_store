@@ -19,29 +19,27 @@
 
 		<div class="row">
 			<%= form_for @user do |user| %>
-
 				<div class="col-xs-6">
-					<% 2.times do |x| %>
-						<div class="sub-form">
-							<div class="sub-form-header">
-								<h4>Address <%= x+1 %> (optional)</h4>
-							</div>
+					<% 2.times do |address_index| %>
+						<%= user.fields_for :addresses, @user.addresses.build do |address| %>
+							<div class="sub-form">
+								<div class="sub-form-header">
+									<h4>Address <%= address_index + 1 %> (optional)</h4>
+								</div>
 
-							<div class="sub-form-form">
-								<%= user.fields_for :addresses, @user.addresses.build do |address| %>
-
+								<div class="sub-form-form">
 									<%= address.label :street_address, "Street Address" %>
 									<br>
 									<%= address.text_field :street_address, :placeholder => "123 fake street" %>
 									<br>
-									
+
 									<!-- Was thinking about using a fields_for here for the city but I don't think this should be done because I'm not 100% sure I'm gonna build a new city... I think I can just take the name, a City class method on it to return an id to use later on. -->
 
 									<%= address.label :city, "City" %>
 									<br>
 									<%= address.text_field :city, :placeholder => "Somewhere" %>
 									<br>
-									
+
 									<%= address.label :state_id, "State" %>
 									<br>
 									<%= address.collection_select(:state_id, State.all, :id, :name) %>
@@ -57,11 +55,10 @@
 									<br>
 									<%= user.radio_button :shipping_id, address.object.id %>
 									<%= user.label :shipping_id, "Default Shipping Address" %>
+								</div>
 
-								<% end %>
 							</div>
-
-						</div>
+						<% end %>
 					<% end %>
 				</div>
 

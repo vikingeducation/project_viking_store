@@ -19,6 +19,11 @@ class User < ActiveRecord::Base
   validates :email, 
             :format => { :with => /@/ }
 
+  accepts_nested_attributes_for :addresses,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true;
+
+
   def city_name
     if self.billing_id
       City.find(Address.find(billing_id).city_id).name
