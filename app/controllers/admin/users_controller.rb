@@ -1,5 +1,5 @@
 class Admin::UsersController < AdminController
-  
+
   layout 'admin_portal'
 
   def create
