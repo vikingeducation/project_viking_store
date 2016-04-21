@@ -11,7 +11,7 @@ class City < ActiveRecord::Base
     # If there's a city with the name the same as the one submitted by our params...
     if City.where(:name => name.downcase.titleize).first
       # Then we can return that city's id
-      City.where(:name => params["address"]["city"].downcase.titleize).first.id
+      City.where(:name => name.downcase.titleize).first.id
     # Else we're going to create a city object with that name and then return a hash with that objects id.
     else
       new_city = City.create(name: name.downcase.titleize)

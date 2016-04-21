@@ -86,9 +86,6 @@
 				    	<%= f.fields_for :order_contents, @order.order_contents.build do |order_content| %>
 				    		<tr>
 				    			<td>
-				    				<%= order_content.label :product_id %>
-				    			</td>
-				    			<td>
 				    				<%= order_content.text_field :product_id %>
 				    			</td>
 				    			<td>
