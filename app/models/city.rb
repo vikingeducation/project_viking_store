@@ -6,7 +6,7 @@ class City < ActiveRecord::Base
 
   # For those situations where a user inputs a string into a form and we have to return an ID.
   # If the city already exists, return that cities id
-  # else create a city with that name and return that citties id.
+  # else create a city with that name and return that city's id.
   def self.name_to_id(name)
     # If there's a city with the name the same as the one submitted by our params...
     if City.where(:name => name.downcase.titleize).first

@@ -50,11 +50,11 @@
 									<%= address.text_field :zip_code %>
 									<br>
 
-									<%= user.radio_button :billing_id, address.object.id %>
-									<%= user.label :billing_id, "Default Billing Address" %>
+									<%= user.radio_button :billing_id, "#{address_index}" %>
+									<%= user.label "billing_id_#{address_index}", "Default Billing Address" %>
 									<br>
-									<%= user.radio_button :shipping_id, address.object.id %>
-									<%= user.label :shipping_id, "Default Shipping Address" %>
+									<%= user.radio_button :shipping_id, "#{address_index}" %>
+									<%= user.label "shipping_id_#{address_index}", "Default Shipping Address" %>
 								</div>
 
 							</div>
