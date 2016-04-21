@@ -17,92 +17,11 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<%= form_for @user do |user| %>
-				<div class="col-xs-6">
-					<% @user.addresses.each_with_index do |address_object, address_index| %>
-						<%= user.fields_for :addresses, address_object do |address| %>
-							<div class="sub-form">
-								<div class="sub-form-header">
-									<h4>Address <%= address_index + 1 %> (optional)</h4>
-								</div>
-
-								<div class="sub-form-form">
-									<%= address.label :street_address, "Street Address" %>
-									<br>
-									<%= address.text_field :street_address, :placeholder => "123 fake street" %>
-									<br>
-
-									<!-- Okay so I didn't use nested fields for city name because we're not making a city each time guaranteed or modifying city names here. So we're going to take a input as city (this is a bit dodge) and then run methods on it in the controller. Ths code below is saying, if the address has a city name already, display that as the value, otherwise display the placeholder instead. -->
-
-									<%= address.label :city, "City" %>
-									<br>
-									<% if address.object.city && address.object.city.name %>
-										<%= address.text_field :city, :value => address.object.city.name %>
-									<% else %>
-										<%= address.text_field :city, :placeholder => "Somewhere" %>
-									<% end %>
-									<br>
-
-									<%= address.label :state_id, "State" %>
-									<br>
-									<%= address.collection_select(:state_id, State.all, :id, :name) %>
-									<br>
-
-									<%= address.label :zip_code, "Zip Code" %>
-									<br>
-									<%= address.text_field :zip_code %>
-									<br>
-
-									<%= user.radio_button :billing_id, "#{address_index}" %>
-									<%= user.label "billing_id_#{address_index}", "Default Billing Address" %>
-									<br>
-									<%= user.radio_button :shipping_id, "#{address_index}" %>
-									<%= user.label "shipping_id_#{address_index}", "Default Shipping Address" %>
-								</div>
-
-							</div>
-						<% end %>
-					<% end %>
-				</div>
-
-				<div class="col-xs-6">
-					<div class="sub-form">
-						<div class="sub-form-header">
-							<h4>Account Information</h4>
-						</div>
-						<div class="sub-form-form">
-							<%= user.label :email, "Email" %>
-							<br>
-						 	<%= user.email_field :email, :placeholder => "foo@bar.com" %>
-						 	<br>
-						 	<%= user.label :password, "Password" %>
-						 	<br>
-						 	<%= user.password_field :password %>
-						 	<br>
-						 	<%= user.label :first_name, "First Name" %>
-						 	<br>
-						 	<%= user.text_field :first_name, :placeholder => "Foo" %>
-						 	<br>
-						 	<%= user.label :last_name, "Last Name" %>
-						 	<br>
-						 	<%= user.text_field :last_name, :placeholder => "Bar" %>
-						</div>
-					</div>
-
-					<div class="sub-form">
-						<div class="sub-form-header">
-							<h2>Complete Signup</h2>
-						</div>
-						<div class="sub-form-form">
-							<%= user.submit :class => "btn btn-primary btn-lg center-block" %>
-						</div>
-					</div>
-				</div>
-
-			<% end %>
-
-		</div>
+		<%= render :partial => "edit_or_new_form",
+		           	:locals => {:object => @user,
+		           							:submit_header => "Update Info"
+		                       } 
+		%>
 
 	</div>
 </div>
