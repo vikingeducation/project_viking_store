@@ -23,6 +23,7 @@ class UsersController < ApplicationController
         @user.shipping_id = nil
       end
       @user.save
+      flash[:notice] = "Your account has been created."
       redirect_to root_path
     else
       render :new
