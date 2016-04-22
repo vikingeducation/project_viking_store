@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
   def whitelisted_params
     # Hopefully i can just require and permit this now...
-    params.require(:user).permit(:billing_id, :shipping_id, :email, :first_name, :last_name, :addresses_attributes => [:id, :street_address, :state_id, :zip_code, :city_id])
+    params.require(:user).permit(:billing_id, :shipping_id, :email, :first_name, :last_name, :addresses_attributes => [:id, :street_address, :state_id, :zip_code, :city_id, :_destroy])
   end
 
 end

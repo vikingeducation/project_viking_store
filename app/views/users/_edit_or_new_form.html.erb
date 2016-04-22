@@ -51,6 +51,12 @@
 							<%= user.label "shipping_id_#{address_index}", "Default Shipping Address" %>
 							<br>
 
+							<% if address.object.persisted? %>
+								<%= address.label :_destroy, "Delete Address?" %>
+      					<%= address.check_box :_destroy %>
+								<br>
+							<% end %>
+
 						</div>
 
 					</div>
