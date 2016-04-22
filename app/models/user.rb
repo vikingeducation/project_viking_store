@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
             :format => { :with => /@/ }
 
   accepts_nested_attributes_for :addresses,
-                                :reject_if => :all_blank,
+                                :reject_if => proc { |attributes| attributes['city'].blank? || attributes['street_address'] },
                                 :allow_destroy => true;
 
 
