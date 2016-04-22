@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   def create
     add_city_id_to_params
     @user = User.new(whitelisted_params)
-    # Now to figure out this default address business...
     # I was thinking if we save the user then the addresses will save as well and therefore their ids will be available. 
     # Also at this time the params will be available, so if we can have the params store the the address key as the user's billiing_id and shipping_id, we could solve it from that, so first I have to get the radio buttons to send the index as the value.
     if @user.save
@@ -38,6 +37,20 @@ class UsersController < ApplicationController
     @user = User.new
     @user.addresses.build
     @user.addresses.build
+  end
+
+  def update
+    @user = User.find(params[:id])
+    add_city_id_to_params
+    if @user.update_attributes(whitelisted_params)
+      # GONNA HAVE TO FIGURE OUT DEFAULT ADDRESSES HERE BEAUSE THERE'S GOING TO BE MORE THAN 2 ADDRESSES POSSIBLY...
+      @user.addresses.build
+      flash.now[:alert] = "User Updated!"
+      render(:edit)
+    else
+      flash.now[:alert] = "Could Not Update User. Attribute Issues Probably."
+      render(:edit)
+    end
   end
 
   private
