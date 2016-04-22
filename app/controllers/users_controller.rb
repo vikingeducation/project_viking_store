@@ -11,8 +11,17 @@ class UsersController < ApplicationController
     if @user.save
       # at this point the addresses will have been saved...
       # I want to know if @user.addresses[@user.billing_id.to_i] will return the correct address
-      @user.billing_id = @user.addresses[@user.billing_id.to_i].id if @user.addresses[@user.billing_id.to_i]
-      @user.shipping_id = @user.addresses[@user.shipping_id.to_i].id if @user.addresses[@user.shipping_id.to_i]
+      if @user.addresses[@user.billing_id.to_i]
+        @user.billing_id = @user.addresses[@user.billing_id.to_i].id 
+      else
+        @user.billing_id = nil
+      end
+
+      if @user.addresses[@user.shipping_id.to_i]
+        @user.shipping_id = @user.addresses[@user.shipping_id.to_i].id 
+      else
+        @user.shipping_id = nil
+      end
       @user.save
       redirect_to root_path
     else
