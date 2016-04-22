@@ -26,6 +26,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Your account has been created."
       redirect_to root_path
     else
+      flash.now[:alert] = "Account could not be created..."
       render :new
     end
   end
