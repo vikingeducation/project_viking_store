@@ -18,6 +18,8 @@ class UsersController < ApplicationController
       # 4 - User creates an address in address 2 and clicks on defaults for this address but address 1 doesn't get, created - user's billling_id and shipping_id will get set to nil.
       # Considering all the problems happen when only one address is created, to make it easy for myself, I'll just make it that if the size is == 1 then this users billing_id and shipping_id are that one addresses id.
       set_new_user_default_addresses(@user)
+      # Now that we've created, we are gonna sign in using method from application controlle.
+      sign_in(@user)
 
       flash[:notice] = "Your account has been created."
       redirect_to root_path
