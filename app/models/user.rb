@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   # Should you delete an address because the user is gone, I guess we shouldn't because a lot of stats are done from those addresses, but I guess we can nullify and it shouldn't make a big deal.
   # Considering the extra logic that's needed on the address page if an address stays when a user is destroyed, I'm gonna dependent destroy for now.
 
-  has_many :addresses, :dependent => :destroy
+  # Update at 23/04/16 - Not 100% sure what I was talking about above but I just changed this to nullify so that deleting an account through users edit page doesn't delete addresses but dis-associates and there was no problems on that side of things so I'll leave this for now and wait eagerly for the oncoming chaos.
+  has_many :addresses, :dependent => :nullify
 
   # didnt want to just nullify, wanted to destroy shopping carts then nullify.
   has_many :orders
