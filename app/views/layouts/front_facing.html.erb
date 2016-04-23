@@ -36,7 +36,11 @@
 		  			<%= link_to "your cart", "#" %>
 		  		</div>
 		  		<div class="sign-in">
-		  			<%= link_to "Sign In", new_session_path %>
+			  		<% unless current_user %>
+			  			<%= link_to "Sign In", new_session_path %>
+			  		<% else %>
+			  			<%= link_to "Sign Out #{current_user.first_name} #{current_user.last_name}", session_path, :method => :delete %>
+			  		<% end %>
 		  		</div>
 		  	</div>
 		  </div>
