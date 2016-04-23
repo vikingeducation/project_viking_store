@@ -28,6 +28,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    sign_out
+    User.find(params[:id]).destroy
+      flash[:notice] = "Your account has been destroyed and you have been signed out!"
+      redirect_to root_path
+  end
+
   def edit
     # It should not be possible to edit the information of anyone who isn't the current_user.
     # could just redirect the user back to the root_path if the current_user.id != params[:id]

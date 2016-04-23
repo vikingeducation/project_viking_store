@@ -114,6 +114,11 @@
 				<div class="sub-form-form">
 					<%= user.submit :class => "btn btn-primary btn-lg center-block" %>
 				</div>
+				<% if current_user.persisted? %> 
+					<div class="delete-account text-center">
+						<%= link_to "Delete My Account", user_path, :method => :delete %>
+					</div>
+				<% end %>
 			</div>
 		</div>
 
