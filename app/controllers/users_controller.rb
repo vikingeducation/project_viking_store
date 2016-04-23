@@ -42,8 +42,13 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     add_city_id_to_params
+    old_address_ids = @user.addresses.ids
     if @user.update_attributes(whitelisted_params)
-      # GONNA HAVE TO FIGURE OUT DEFAULT ADDRESSES HERE BEAUSE THERE'S GOING TO BE MORE THAN 2 ADDRESSES POSSIBLY...
+      edit_users_default_addresses(@user, old_address_ids)
+      # Setting default addresses for a user that's editing his profile.
+      # Situations...
+      # The thing is, in this situation, the addresses from before already have IDs
+      # The only things I have to worry about is if something that is a default gets deleted or if someone creates a new address while also deleting etc... before I update everything I could collect all those addresses ids and compare it with the new collection of ids...
       @user.addresses.build
       flash.now[:alert] = "User Updated!"
       render(:edit)
@@ -68,6 +73,31 @@ class UsersController < ApplicationController
         address[:city_id] = city_id
       end
     end
+  end
+
+  # if the user's billing_id || shipping_id is = 0 we gotta take full effect.
+  # Before the update, the user will have a bunch of addresses with ids
+  # after the update, the user will have a bunch of addresses with ids
+  # new ids - old ids will give us an array that contains only a newly built addresses id.
+  # If there's no id left over, we'll set the 0 to nil.
+  def edit_users_default_addresses(user, old_address_ids)
+    new_id = (user.addresses.ids - old_address_ids).first
+    if user.billing_id == 0
+      if new_id == nil
+        user.billing_id = nil
+      else
+        user.billing_id = new_id
+      end
+    end
+
+    if user.shipping_id == 0
+      if new_id == nil
+        user.shipping_id = nil
+      else
+        user.shipping_id = new_id
+      end
+    end
+    user.save
   end
 
   def set_new_user_default_addresses(user)

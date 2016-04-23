@@ -35,20 +35,39 @@
 							<%= address.text_field :zip_code %>
 							<br>
 
-							<% if current_user.persisted? && current_user.billing_id == address.object.id %>
-							  <%= user.radio_button :billing_id, "#{address_index}", :checked => true %>
+							<% if current_user.persisted? %>
+								<% if !(address.object.persisted?) %>
+									<%= user.radio_button :billing_id, "0" %>
+							 		<%= user.label "billing_id_0", "Default Billing Address" %>
+								<% elsif current_user.billing_id == address.object.id %>
+									<%= user.radio_button :billing_id, "#{address.object.id}", :checked => true %>
+							  	<%= user.label "billing_id_#{address.object.id}", "Default Billing Address" %>
+								<% else %>
+									<%= user.radio_button :billing_id, "#{address.object.id}" %>
+							  	<%= user.label "billing_id_#{address.object.id}", "Default Billing Address" %>
+								<% end %>
 							<% else %>
-							  <%= user.radio_button :billing_id, "#{address_index}" %>
+								<%= user.radio_button :billing_id, "#{address_index}" %>
+							 	<%= user.label "billing_id_#{address_index}", "Default Billing Address" %>
 							<% end %>
-							<%= user.label "billing_id_#{address_index}", "Default Billing Address" %>
+
 							<br>
 
-							<% if current_user.persisted? && current_user.shipping_id == address.object.id %>
-							  <%= user.radio_button :shipping_id, "#{address_index}", :checked => true %>
+							<% if current_user.persisted? %>
+								<% if !(address.object.persisted?) %>
+									<%= user.radio_button :shipping_id, "0" %>
+							 		<%= user.label "shipping_id_0", "Default Billing Address" %>
+								<% elsif current_user.shipping_id == address.object.id %>
+									<%= user.radio_button :shipping_id, "#{address.object.id}", :checked => true %>
+							  	<%= user.label "shipping_id_#{address.object.id}", "Default Billing Address" %>
+								<% else %>
+									<%= user.radio_button :shipping_id, "#{address.object.id}" %>
+							  	<%= user.label "shipping_id_#{address.object.id}", "Default Billing Address" %>
+								<% end %>
 							<% else %>
-							  <%= user.radio_button :shipping_id, "#{address_index}" %>
+								<%= user.radio_button :shipping_id, "#{address_index}" %>
+							 	<%= user.label "shipping_id_#{address_index}", "Default Billing Address" %>
 							<% end %>
-							<%= user.label "shipping_id_#{address_index}", "Default Shipping Address" %>
 							<br>
 
 							<% if address.object.persisted? %>
