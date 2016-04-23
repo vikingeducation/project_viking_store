@@ -44,9 +44,7 @@ class SessionsController < ApplicationController
   def merge_shopping_carts(user)
     # I want to know if the user has a shopping cart already. If they don't, we can just pop the user_id on the current order and then pop the order id onto all the OrderContents and then save them...
     unless user.orders.where(:checkout_date => nil).first
-      session[:shopping_cart].user_id = user.id
-      # Now saving the shopping_cart
-      shopping_cart = session[:shopping_cart]
+      shopping_cart = Order.new(:user_id => user.id)
       shopping_cart.save
       # Now going through all the items in previous cart and adding this id
       add_session_products_to_merged_cart(shopping_cart.id)
@@ -72,7 +70,7 @@ class SessionsController < ApplicationController
 
   def add_session_products_to_merged_cart(shopping_cart_id)
     session[:shopping_cart_items].each do |order_content|
-      order_content.order_id = shopping_cart_id
+      order_content["order_id"] = shopping_cart_id
       OrderContent.new(order_content).save
     end
   end

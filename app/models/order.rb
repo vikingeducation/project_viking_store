@@ -14,10 +14,11 @@ class Order < ActiveRecord::Base
 
   belongs_to :credit_card
 
-  # Order when created must have a billing_id, shipping_id and credit_card_id.
+  # Order when created with a checkout date must have a billing_id, shipping_id and credit_card_id.
+  # !!!!!! THIS CODE NEEDS A SERIOUS LOOKING AT - NOT SURE ABOUT HOW THE MECHANICS OF THIS WORKS...
   validates :billing_id,
             :shipping_id,
-            :presence => true
+            :presence => true, :if => :checked_out?
 
   accepts_nested_attributes_for :order_contents,
                                 :reject_if => :all_blank,
@@ -82,5 +83,11 @@ class Order < ActiveRecord::Base
                               JOIN products
                               ON order_contents.product_id = products.id
                               WHERE order_contents.order_id = #{order_id}").first.sum
+  end
+
+  private
+
+  def checked_out?
+    checkout_date.class == Time
   end
 end
