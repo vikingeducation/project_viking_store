@@ -1,1 +1,82 @@
-<h1>Hello Morland Springs</h1>
+<div class="container">
+	<div id="shopping-cart-edit">
+
+		<% if flash[:alert] %>
+			<div class="flash">
+				<p><%= flash[:alert] %></p>
+			</div>
+		<% end %>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="header text-center">
+					<div class="header-text">
+						<h1>Shopping Cart Contents</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<%= form_tag "/shoppingcart" %>
+						<% @order_contents.each_with_index do |order_content, index| %>
+							<div class="row product-row">
+								<div class="col-xs-8">
+									<div class="product-box">
+										<div class="image">
+											IMAGE
+										</div>
+										<div class="title-and-category">
+											<div class="product-title">
+												<h5><%= order_content.product.name %></h5>
+											</div>
+											<div class="product-category">
+												<p><%= order_content.product.category.name %></p>
+											</div>
+										</div>
+										<div class="product-price">
+											<p>$<%= order_content.product.price %></p>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-4">
+									<div class="product-box text-center">
+										<div class="quantity">
+											<h6>Quantity</h6>
+											<%= fields_for "order_content_#{index}", order_content do |x| %>
+												<%= x.text_field :quantity %>
+											<% end %>
+										</div>
+										<div class="total-price">
+											<h6>Total Price</h6>
+											<h5>$<%= order_content.product.price * order_content.quantity %></h5>
+										</div>
+									</div>
+								</div>
+							</div>
+						<% end %>
+						<div class="row text-center">
+							<div class="col-xs-8">
+								<div class="total">
+									<h3>Total</h3>
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<div class="buttons">
+									<div class="button update">
+										<%= submit_tag "Update Contents" %>
+									</div>
+									<div class="button check-out">
+										Check Out
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

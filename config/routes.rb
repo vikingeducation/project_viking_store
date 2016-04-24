@@ -15,8 +15,9 @@ Rails.application.routes.draw do
     resources :users
     resources :credit_cards
   end
-  
+
   get '/shoppingcart' => 'shopping_carts#edit'
+  post '/shoppingcart' => 'shopping_carts#update'
   get 'admin/dashboard' => 'admin/dashboard#index'
 
 
