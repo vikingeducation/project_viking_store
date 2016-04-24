@@ -149,6 +149,27 @@ html, body {
     #shopping-cart-edit .product-row .product-box .total-price {
       float: right;
       width: 50%; }
+#shopping-cart-edit .total {
+  background-color: #FFE282;
+  border: 1px solid #ccc;
+  height: 95px;
+  padding: 15px; }
+  #shopping-cart-edit .total h3 {
+    margin: 0; }
+  #shopping-cart-edit .total h4 {
+    margin: 5px 0 0 0; }
+#shopping-cart-edit .buttons {
+  height: 95px;
+  padding-top: 5px;
+  position: relative; }
+  #shopping-cart-edit .buttons .update input[type=submit] {
+    width: 100%; }
+  #shopping-cart-edit .buttons .check-out {
+    bottom: 5px;
+    position: absolute;
+    width: 100%; }
+    #shopping-cart-edit .buttons .check-out .btn {
+      width: 100%; }
 
 #users-new .sub-form, #users-edit .sub-form {
   border: 1px solid #ccc;

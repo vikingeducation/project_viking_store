@@ -63,16 +63,17 @@
 						<div class="row text-center">
 							<div class="col-xs-8">
 								<div class="total">
-									<h3>Total</h3>
+									<h4>Total</h4>
+									<h3>$<%= @order_total %></h3>
 								</div>
 							</div>
 							<div class="col-xs-4">
 								<div class="buttons">
 									<div class="button update">
-										<%= submit_tag "Update Contents" %>
+										<%= submit_tag "Update Contents", :class => "btn btn-default" %>
 									</div>
 									<div class="button check-out">
-										Check Out
+										<%= link_to "Check Out", "#", :class => "btn btn-primary" %>
 									</div>
 								</div>
 							</div>

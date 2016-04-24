@@ -8,6 +8,7 @@ class ShoppingCartsController < ApplicationController
       flash[:notice] = "You ain't got no items in your blimey cart."
     else
       @order_contents = order_contents
+      @order_total = order_total(@order_contents)
     end
   end
 
@@ -24,6 +25,7 @@ class ShoppingCartsController < ApplicationController
       flash[:notice] = "You ain't got no items in your blimey cart."
     else
       @order_contents = order_contents
+      @order_total = order_total(@order_contents)
       flash.now[:alert] = "Cart updated."
       render :edit
     end
@@ -48,6 +50,14 @@ class ShoppingCartsController < ApplicationController
     else
       session_cart_as_an_array_of_objects
     end
+  end
+
+  def order_total(order_contents)
+    total = 0
+    order_contents.each do |order_content|
+      total += (order_content.quantity * order_content.product.price)
+    end
+    total
   end
 
   # The order contents in the session was coming out as a hash so I am changing them to objects before I send them in so that the view can just deal with the objects.

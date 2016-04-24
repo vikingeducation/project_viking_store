@@ -176,12 +176,12 @@ html,body {
     display: relative;
     margin-bottom: 15px;
     .product-box{
-      h6{
-        text-decoration: underline;
-      }
       border: 1px solid #ccc;
       height: 95px;
       padding: 15px;
+      h6{
+        text-decoration: underline;
+      }
       .image{
         border: 1px solid #ccc;
         display: inline-block;
@@ -209,6 +209,36 @@ html,body {
       .total-price{
         float: right;
         width: 50%;
+      }
+    }
+  }
+  .total{
+    background-color: #FFE282;
+    border: 1px solid #ccc;
+    height: 95px;
+    padding: 15px;
+    h3{
+      margin: 0;
+    }
+    h4{
+      margin: 5px 0 0 0;
+    }
+  }
+  .buttons{
+    height:95px;
+    padding-top: 5px;
+    position: relative;
+    .update{
+      input[type=submit]{
+      width: 100%;
+      }
+    }
+    .check-out{
+      bottom: 5px;
+      position: absolute;
+      width: 100%;
+      .btn {
+        width: 100%;
       }
     }
   }
