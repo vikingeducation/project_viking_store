@@ -53,6 +53,7 @@ class ShoppingCartsController < ApplicationController
     else
       # The order contents in the session was coming out as a hash so I am changing them to objects before I send them in so that the view can just deal with the objects.
       order_contents_as_objects = []
+      # Sometimes sessions seems to change an object into a hash but other times it doesn't (not sure when this actually happens), so I had to do two lines, one to change the hash into an object and then pop it into order_contents_as_objects or the item straight in.
       session[:shopping_cart_items].each do |order_content_as_hash|
         order_contents_as_objects << OrderContent.new(order_content_as_hash) if order_content_as_hash.class == Hash
         order_contents_as_objects << order_content_as_hash if order_content_as_hash.class == OrderContent
