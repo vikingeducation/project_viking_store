@@ -54,6 +54,7 @@ class SessionsController < ApplicationController
       # We need the order id for this user's previous shopping cart so that we can add it to the Order Contents in the sessions.
       # before we add it we need to make sure that the cart doesn't already have that item.
       # I'm pretty sure we can get an array of all the ids pretty easy and then do a include? on it - something like - Order.first.products.ids.include?(22145)
+      ###### THIS WILL MEAN THAT IF A USER ALREADY HAD AN ITEM ON THEIR PREVIOUS SHOPPING CART, THE QUANTITY WILL STAY THE SAME INSTEAD OF CHANGING TO THE SESSION CARTS QUANTITY!
       previous_cart_id = user.orders.where(:checkout_date => nil).first.id
       previous_cart_product_ids = Order.find(previous_cart_id).products.ids
       session[:shopping_cart_items].each do |order_content|

@@ -32,7 +32,7 @@ class OrderContentsController < ApplicationController
   end
 
   def add_item_to_cart(order, product_id)
-    unless order.persisted?
+    if order.class == Array
       order << OrderContent.new(:product_id => product_id)
     else
       order.order_contents.create(:product_id => product_id)
@@ -40,9 +40,9 @@ class OrderContentsController < ApplicationController
   end
 
   def order_includes_product?(order, product_id)
-    unless order.persisted?
+    if order.class == Array
       order.each do |order_content|
-        return true if order_content["product_id"] == product_id
+        return true if order_content["product_id"] == product_id.to_i
       end
       false
     else
