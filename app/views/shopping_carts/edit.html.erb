@@ -47,6 +47,9 @@
 											<h6>Quantity</h6>
 											<%= fields_for "order_content_#{index}", order_content do |x| %>
 												<%= x.text_field :quantity %>
+												<br>
+												<%= x.check_box :_destroy %>
+												<%= x.label :_destroy, "Remove Item" %>
 											<% end %>
 										</div>
 										<div class="total-price">

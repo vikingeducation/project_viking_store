@@ -143,7 +143,7 @@ html, body {
     #shopping-cart-edit .product-row .product-box .quantity {
       display: inline-block;
       width: 50%; }
-      #shopping-cart-edit .product-row .product-box .quantity input {
+      #shopping-cart-edit .product-row .product-box .quantity input[type=text] {
         width: 100%;
         text-align: center; }
     #shopping-cart-edit .product-row .product-box .total-price {

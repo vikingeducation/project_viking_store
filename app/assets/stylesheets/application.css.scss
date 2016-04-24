@@ -201,7 +201,7 @@ html,body {
       .quantity,{
         display: inline-block;
         width: 50%;
-        input {
+        input[type=text]{
           width: 100%;
           text-align: center;
         }
