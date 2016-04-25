@@ -34,7 +34,7 @@
 																					) 
 							%>
 							<br>
-							<%= order.label( :billing_id, "Billing Address" ) %>
+							<%= order.label :billing_id, "Billing Address"  %>
 							<br>
 							<%= order.collection_select( :billing_id,
 																					 order.object.user.addresses,
@@ -44,6 +44,26 @@
 							%>
 							<br>
 							<%= link_to "Edit Saved Addresses", edit_user_path(:id => current_user.id) %>
+							<br>
+							<br>
+							<%= order.fields_for :credit_card, (@order.user.credit_card || CreditCard.new(:user_id => @order.user_id)) do |cc| %>
+								<%= cc.label :card_number, "Credit Card Number" %>
+								<br>
+								<%= cc.text_field :card_number %>
+								<br>
+								<%= cc.label :exp_month, "Expiry Month" %>
+								<%= cc.text_field :exp_month %>
+								<br>
+								<%= cc.label :exp_year, "Expiry Year" %>
+								<%= cc.text_field :exp_year %>
+								<br>
+								<%= cc.label :ccv, "CCV" %>
+								<%= cc.text_field :ccv %>
+								<br>
+								<% if cc.object.persisted? %>
+									<%= link_to "Delete Card", credit_card_path(id: cc.object.id), method: :delete %>
+								<% end %>
+							<% end %>
 						</div>
 					</div>
 				</div>
