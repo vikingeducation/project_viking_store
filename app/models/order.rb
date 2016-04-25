@@ -18,8 +18,8 @@ class Order < ActiveRecord::Base
   # !!!!!! THIS CODE NEEDS A SERIOUS LOOKING AT - NOT SURE ABOUT HOW THE MECHANICS OF THIS WORKS...
   validates :billing_id,
             :shipping_id,
-            :presence => true, :if => :checked_out?
-
+            :presence => true, :on => :update
+            
   accepts_nested_attributes_for :order_contents,
                                 :reject_if => :all_blank,
                                 :allow_destroy => true;

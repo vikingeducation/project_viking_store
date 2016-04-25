@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
                                 :reject_if => proc { |attributes| attributes['city_id'].blank? || attributes['street_address'].blank? },
                                 :allow_destroy => true;
 
+  accepts_nested_attributes_for :credit_card,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true;
+
 
   def city_name
     if self.billing_id
