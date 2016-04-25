@@ -69,6 +69,10 @@ class User < ActiveRecord::Base
     Order.where(:user_id => user_id).count
   end
 
+  def shopping_cart
+    self.orders.where(checkout_date: nil).first
+  end
+
   def state_name
     if self.billing_id
       State.find(Address.find(billing_id).state_id).name
