@@ -1,0 +1,14 @@
+<% @page_title = " | New Product" %>
+
+<% if flash[:alert] %>
+	<div class="notice">
+		<%= flash[:alert] %>
+	</div>
+<% end %>
+
+<%= render :partial => "edit_or_new_form",
+           :locals => {:form_type => "new",
+           						 :form_header => "New Product",
+           						 :object => @product,
+           						 :submit_label => "Create Product"
+           						 } %>

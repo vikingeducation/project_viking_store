@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>The Viking Store <%= @page_title %></title>
+	  <%= stylesheet_link_tag    'application', media: 'all' %>
+	  <%= javascript_include_tag 'application' %>
+	  <%= csrf_meta_tags %>
+
+	  <!-- Meta Stuff -->
+	  <meta charset="utf-8">
+
+	  <!-- Bootstrap CSS -->
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	  <!-- jQuery -->
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	  <!-- Bootstrap Javascripts -->
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+
+		<nav id="topnav" class="navbar navbar-default">
+		  <div class="logo-container">
+		    <img class="pull-left" src="http://seeklogo.com/images/V/v-tele-logo-053AACAF21-seeklogo.com.gif">
+		    <a class="navbar-brand" href="/admin/categories">
+		      The Viking Store
+		    </a>
+		  </div>
+		  <div class="user-options navbar-right">
+		  	<div class="profile">
+		  		<%= link_to image_tag("http://www.boxnews.com.ua/photos/282/Ricky%20Hatton%20vs%20Kostya%20Tszyu11t.jpg?cachebuster=0.9454717901535332&timestamp=1337256627662", :border => 0), "#" %>
+		  	</div>
+		  	<div class="user-links">
+		  		<div class="cart">
+		  			<%= link_to "Your Cart", shoppingcart_path %>
+		  		</div>
+		  		<div class="sign-in">
+			  		<% unless current_user %>
+			  			<%= link_to "Sign In", new_session_path %>
+			  		<% else %>
+			  			<%= link_to "Sign Out #{current_user.first_name} #{current_user.last_name}", session_path, :method => :delete %>
+			  		<% end %>
+		  		</div>
+		  	</div>
+		  </div>
+		</nav>
+		
+		<%= yield %>
+
+		<nav class="navbar navbar-default navbar-static-bottom" id="bot-nav">
+		  <div class="container">
+		    <div class="row">
+		    	<div class="col-xs-6 col-xs-offset-3 text-center">
+		    		<div class="contact">
+		    			<h3>Contact</h3>
+		    		</div>
+		    		<div class="phone">
+		    			<div class="phone-image">
+		    				phone:
+		    			</div>
+		    			<div class="phone-text">
+		    				1 - 000 - 000 - 000
+		    			</div>
+		    		</div>
+		    		<div class="email">
+		    			<div class="email-image">
+		    				email:
+		    			</div>
+		    			<div class="email-text">
+		    				contact@vikingstore.com
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="col-xs-3">
+						<div class="admin-login pull-right">
+							<%= link_to "Admin Login", "#" %>
+						</div>
+		    	</div>
+		    </div>
+		  </div>
+		</nav>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/bootstrap.min.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,137 @@
+<% @page_title = " | Order" %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h2>Order <%= @order.id %></h2>
+	</div>
+</div>
+
+<div class="crud-container">
+
+	<h3>Logistical Information</h3>
+
+	<div class="row">
+	  <div class="col-xs-12">
+	    <h4>Basic Information</h4>
+
+	    <%= render :partial => "./shared/table_with_side_headers",
+	             :locals => {:headers_data => [['Customer ID:', @order.user_id],
+	                                           ['Customer:', @order.user ? @order.user.full_name : "n/a"],
+	                                           ['Date Placed:', @order.checkout_date],
+	                                           ['# Products:', @order.order_contents.count],
+	                                           ['Order Value:', "$#{@order.value(@order.id)}"]
+	                                          ]
+	                        }
+	    %>
+
+			<% if @order.user %>
+	    	<%= link_to "Edit Customer Profile", edit_admin_user_path(:id => @order.user_id) %>
+			<% end %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+	    <h4>Order Status</h4>
+
+			<% unless @order.status(@order.id) == "PLACED" %>
+	    	<h3 style="color:#FA58F4">UNPLACED</h3>
+	    <% else %>
+	    	<h3 style="color:#74DF00">PLACED</h3>
+	    <% end %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+	    <h4>Shipping Address</h4>
+
+	    <%= render :partial => "./shared/table_with_side_headers",
+	             :locals => {:headers_data => [['Street:', @order.shipping_street_address],
+	                                           ['City:', @order.shipping_city_name],
+	                                           ['State:', @order.shipping_state_name]
+	                                          ]
+	                        }
+	    %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+	    <h4>Billing Address</h4>
+
+	    <%= render :partial => "./shared/table_with_side_headers",
+	             :locals => {:headers_data => [['Street:', @order.billing_street_address],
+	                                           ['City:', @order.billing_city_name],
+	                                           ['State:', @order.billing_state_name]
+	                                          ]
+	                        }
+	    %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+	    <h4>Billing Card</h4>
+
+	    <%= render :partial => "./shared/table_with_side_headers",
+	             :locals => {:headers_data => [['Last Four Digits:', @order.credit_card ? @order.credit_card.last_four_digits : "n/a"]
+	                                          ]
+	                        }
+	    %>
+
+		</div>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+
+	    <%= link_to "Edit Order", edit_admin_order_path %>
+	    <br>
+	    <%= link_to "Delete Order", admin_order_path,
+		                      				data: {:confirm => 'Are you sure?'}, 
+		                      				:method => :delete %>
+
+		</div>
+	</div>
+</div>
+
+<div class="crud-container">
+	<h3>Order Contents</h3>
+
+	<div class="stats-table">
+	  <table class="table table-striped">
+	    <tr>
+	      <% @column_headers.each do |header| %>
+	        <th><%= header %></th>
+	      <% end %>
+	    </tr>
+	    <% @order_contents.each do |order_content| %>
+	      <tr>
+	        <td><%= order_content.product_id %></td>
+	        <td><%= order_content.product.name if order_content.product %></td>
+	        <td><%= order_content.quantity %></td>
+	        <td><%= "$#{order_content.product.price}" if order_content.product %></td>
+	        <td><%= "$#{order_content.product.price * order_content.quantity}" if order_content.product %></td>
+	      </tr>
+	    <% end %>
+	  </table>
+	</div>
+
+	<div class="row">
+	  <div class="col-xs-12">
+
+	    <%= link_to "Edit Order", edit_admin_order_path %>
+	    <br>
+	    <%= link_to "Delete Order", admin_order_path,
+		                      				data: {:confirm => 'Are you sure?'}, 
+		                      				:method => :delete %>
+
+		</div>
+	</div>
+
+</div>

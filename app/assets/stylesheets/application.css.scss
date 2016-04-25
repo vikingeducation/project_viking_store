@@ -1,0 +1,259 @@
+html,body {
+  height: 100%;
+  .container-fluid, .container{
+    min-height: 100%;
+  }
+  .header{
+    margin-top: 50px;
+    margin-bottom: 45px;
+  }
+}
+
+#topnav {
+  padding: 0 10px;
+  border-bottom: 1px solid gray;
+  .logo-container {
+    img {
+      width: 45px;
+      height: 45px;
+      margin-top: 2px;
+      vertical-align: middle;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+      font-size: 140%;
+    }
+  }
+  .profile {
+    margin-right:10px;
+    float:left;
+    img {
+      height: 45px;
+      width: 45px;
+    }
+  }
+  .user-links {
+    margin-right:10px;
+    float:left;
+  }
+}
+
+#bot-nav {
+  background-color: #262626;
+  margin-bottom: 0;
+  padding: 20px 0;
+  h3 {
+    color: #FF8500;
+    margin-top: 0;
+  }
+  .phone {
+    color: white;
+  }
+  .email {
+    color: white;
+  }
+}
+
+.main-content {
+  border: 1px solid #ccc;
+  padding: 0px 15px;
+
+  .crud-container {
+    border: 1px solid black;
+    margin: 20px 0; 
+    padding: 15px;
+  }
+
+  .table-striped {
+    margin-top: 12px;
+    td {
+      text-align: left;
+    }
+  }
+
+  #edit-or-new {
+    form {
+      display: table;
+    }
+    p {
+      display: table-row;
+    }
+    label {
+      display: table-cell;
+    }
+    input {
+      display: table-cell;
+    }
+    .table-cell {
+      display: table-cell;
+    }
+    .table-row {
+      display: table-row; }
+  }
+}
+
+.side-nav {
+  padding: 0px 15px;
+  border: 1px solid #ccc;
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+}
+
+#products-index {
+  .category-filter{
+    margin-bottom: 8px;
+    margin-top: 10px;
+    .category-dropdown{
+      float: left;
+      margin-right: 10px;
+    }
+    .filter-button{
+      input {
+        padding: 2px;
+      }
+    }
+  }
+  .cover{
+    border-bottom: 1px solid #ccc;
+  }
+  .motto{
+    background-color: #262626;
+    border-bottom: 1px solid #ccc;
+    color: white;
+  }
+  .product{
+    border: 1px solid #ccc;
+    position: relative;
+    .product-title{
+      background-color: #262626;
+      color: white;
+      display: inline-block;
+      width: 100%;
+    }
+    .product-image{
+      height: 100px;
+      .price{
+        border: 1px solid black;
+        float: right;
+        margin: 5px;
+        p {
+          margin: 2px 5px;
+        }
+      }
+    }
+    .product-bottom{
+      background-color: #262626;
+      .btn-warning{
+        margin: 5px 0;
+      }
+    }
+  }
+  .products-row{
+    margin-bottom: 15px;
+  }
+  .third-banner{
+    border-bottom: 1px solid #ccc;
+    color: #7c7c7c;
+  }
+}
+
+#sessions-new{
+  .box{
+    border: 1px solid #ccc;
+    padding: 30px;
+  }
+}
+
+#shopping-cart-edit{
+  .box{
+    border: 1px solid #ccc;
+    padding: 30px;
+  }
+  .product-row{
+    display: relative;
+    margin-bottom: 15px;
+    .product-box{
+      border: 1px solid #ccc;
+      height: 95px;
+      padding: 15px;
+      h6{
+        text-decoration: underline;
+      }
+      .image{
+        border: 1px solid #ccc;
+        display: inline-block;
+        height: 60px;
+        margin-right: 15px;
+        vertical-align: top;
+        width: 60px;
+      }
+      .title-and-category{
+        display:inline-block;
+      }
+      .product-price{
+        position: absolute;
+        top: 15px;
+        right: 31px;
+      }
+      .quantity,{
+        display: inline-block;
+        width: 50%;
+        input[type=text]{
+          width: 100%;
+          text-align: center;
+        }
+      }
+      .total-price{
+        float: right;
+        width: 50%;
+      }
+    }
+  }
+  .total{
+    background-color: #FFE282;
+    border: 1px solid #ccc;
+    height: 95px;
+    padding: 15px;
+    h3{
+      margin: 0;
+    }
+    h4{
+      margin: 5px 0 0 0;
+    }
+  }
+  .buttons{
+    height:95px;
+    padding-top: 5px;
+    position: relative;
+    .update{
+      input[type=submit]{
+      width: 100%;
+      }
+    }
+    .check-out{
+      bottom: 5px;
+      position: absolute;
+      width: 100%;
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}
+
+#users-new, #users-edit, #orders-edit{
+  .sub-form{
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding: 15px;
+    .sub-form-header{
+      text-align: center;
+    }
+    .sub-form-form{
+      padding: 30px;
+    }
+  }
+}

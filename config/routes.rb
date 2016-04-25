@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+
+  root 'products#index'
+  resource :session, :only => [:new, :create, :destroy]
+  resources :credit_cards, :only => [:destroy]
+  resources :orders, :only => [:edit, :update, :destroy]
+  resources :order_contents, :only => [:create]
+  resources :users, :only => [:edit, :new, :create, :update, :destroy]
+
+  resources :products
+
+  namespace :admin do
+    resources :addresses
+    resources :categories
+    resources :orders
+    resources :products
+    resources :users
+    resources :credit_cards
+  end
+
+  get '/shoppingcart' => 'shopping_carts#edit'
+  post '/shoppingcart' => 'shopping_carts#update'
+  get 'admin/dashboard' => 'admin/dashboard#index'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

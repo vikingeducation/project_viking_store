@@ -1,0 +1,27 @@
+<div class="container">
+	<div id="users-edit">
+
+		<% if flash[:alert] %>
+			<div class="flash">
+				<p><%= flash[:alert] %></p>
+			</div>
+		<% end %>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="header text-center">
+					<div class="header-text">
+						<h1>Edit User</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<%= render :partial => "edit_or_new_form",
+		           	:locals => {:current_user => @user,
+		           							:submit_header => "Update Info"
+		                       } 
+		%>
+
+	</div>
+</div>

@@ -1,0 +1,123 @@
+<div class="container-fluid">
+	<div id="products-index">
+
+		<% if flash[:notice] %>
+			<div class="flash">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+
+		<div class="row">
+			<div class="col-xs-12 cover">
+				<div class="cover-title text-center">
+					<h1>
+						The Viking Store
+					</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 motto">
+				<div class="motto-text text-center">
+					<h3>
+						The Best Viking Gear on the Whole Web
+					</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 third-banner">
+				<div class="third-banner-text text-center">
+					<h4>
+						Choose from among our lineup of fine items below
+					</h4>
+				</div>
+			</div>
+		</div>
+		<%= form_tag({ controller: 'products', action: 'index' }, method: 'get') do %>
+			<div class="row">
+				<div class="col-xs-4 col-xs-offset-8">
+					<div class="category-filter">
+						<div class="category-dropdown">
+							<%= select_tag("category_id",
+															options_for_select(@category_options, @selected_option))
+							%>
+						</div>
+						<div class="filter-button">
+							<%= submit_tag "Apply Filter", 
+															name: nil %>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% end %>
+		
+		<% @products.each_with_index do |product, index| %>
+			<% if index % 3 == 0 %>
+				<div class="row products-row">
+					<div class="col-xs-4">
+						<div class="product">
+
+							<div class="product-title text-center">
+								<div class="product-title-text">
+									<h5>
+										<%= product.name %>
+									</h5>
+								</div>
+							</div>
+
+							<div class="product-image">
+								<div class="price">
+									<p>$<%= product.price %></p>
+								</div>
+							</div>
+
+							<div class="product-bottom text-center">
+								<%= link_to 'Add to Cart', 
+														{:controller => 'order_contents', :action => 'create', :product_id => product.id},
+														:class => "btn btn-warning", 
+														:method => :post %>
+							</div>
+
+						</div>
+					</div>
+				<!-- div for row can't be closed here, has to close after the last product or after every third product -->
+			<% else %>
+				<div class="col-xs-4">
+					<div class="product">
+						<div class="product-title text-center">
+
+							<div class="product-title-text">
+								<h5>
+									<%= product.name %>
+								</h5>
+							</div>
+
+						</div>
+
+						<div class="product-image">
+							<div class="price">
+								<p>$<%= product.price %></p>
+							</div>
+						</div>
+
+						<div class="product-bottom text-center">
+							<%= link_to 'Add to Cart', 
+														{:controller => 'order_contents', :action => 'create', :product_id => product.id},
+														:class => "btn btn-warning", 
+														:method => :post %>
+						</div>
+
+					</div>
+				</div>
+			<% end %>
+			<!-- closing off the row after every third product or if it's the last product -->
+			<% if index % 3 == 2 || @products.size-1 == index %>
+				</div>
+			<% end %>
+		<% end %>
+
+	</div>
+</div>

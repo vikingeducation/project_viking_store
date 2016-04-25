@@ -1,0 +1,62 @@
+<div class="container">
+	<div id="sessions-new">
+
+		<% if flash[:alert] %>
+			<div class="flash">
+				<p><%= flash[:alert] %></p>
+			</div>
+		<% end %>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="header text-center">
+					<div class="header-text">
+						<h1>Sign Up or Sign In</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row text-center">
+			<div class="col-xs-4">
+
+				<div class="instructions-box">
+					<div class="instructions-text">
+						<h4>I do NOT have an account...</h4>
+					</div>
+				</div>
+
+				<div class="button-box box">
+					<div class="button">
+						<%= link_to "Sign Up", new_user_path, :class => "btn btn-primary btn-lg center-block" %>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-xs-8">
+				
+				<div class="instructions-box">
+					<div class="instructions-text">
+						<h4>I have an account...</h4>
+					</div>
+				</div>
+					
+				<div class="sign-in-box box">
+					<div class="sign-in-form">
+						<%= form_tag session_path do %>
+							<%= label_tag :email, "Email Address" %>
+							<%= email_field_tag :email %>
+							<br>
+							<%= label_tag :password, "Password" %>
+							<%= password_field_tag :password %>
+							<br>
+							<%= submit_tag "Sign In" %>
+						<% end %>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>

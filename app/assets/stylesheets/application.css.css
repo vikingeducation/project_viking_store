@@ -1,0 +1,183 @@
+html, body {
+  height: 100%; }
+  html .container-fluid, html .container, body .container-fluid, body .container {
+    min-height: 100%; }
+  html .header, body .header {
+    margin-top: 50px;
+    margin-bottom: 45px; }
+
+#topnav {
+  padding: 0 10px;
+  border-bottom: 1px solid gray; }
+  #topnav .logo-container img {
+    width: 45px;
+    height: 45px;
+    margin-top: 2px;
+    vertical-align: middle; }
+  #topnav .logo-container a {
+    text-decoration: none;
+    color: black;
+    font-size: 140%; }
+  #topnav .profile {
+    margin-right: 10px;
+    float: left; }
+    #topnav .profile img {
+      height: 45px;
+      width: 45px; }
+  #topnav .user-links {
+    margin-right: 10px;
+    float: left; }
+
+#bot-nav {
+  background-color: #262626;
+  margin-bottom: 0;
+  padding: 20px 0; }
+  #bot-nav h3 {
+    color: #FF8500;
+    margin-top: 0; }
+  #bot-nav .phone {
+    color: white; }
+  #bot-nav .email {
+    color: white; }
+
+.main-content {
+  border: 1px solid #ccc;
+  padding: 0px 15px; }
+  .main-content .crud-container {
+    border: 1px solid black;
+    margin: 20px 0;
+    padding: 15px; }
+  .main-content .table-striped {
+    margin-top: 12px; }
+    .main-content .table-striped td {
+      text-align: left; }
+  .main-content #edit-or-new form {
+    display: table; }
+  .main-content #edit-or-new p {
+    display: table-row; }
+  .main-content #edit-or-new label {
+    display: table-cell; }
+  .main-content #edit-or-new input {
+    display: table-cell; }
+  .main-content #edit-or-new .table-cell {
+    display: table-cell; }
+  .main-content #edit-or-new .table-row {
+    display: table-row; }
+
+.side-nav {
+  padding: 0px 15px;
+  border: 1px solid #ccc; }
+  .side-nav ul {
+    list-style-type: none;
+    padding: 0; }
+
+#products-index .category-filter {
+  margin-bottom: 8px;
+  margin-top: 10px; }
+  #products-index .category-filter .category-dropdown {
+    float: left;
+    margin-right: 10px; }
+  #products-index .category-filter .filter-button input {
+    padding: 2px; }
+#products-index .cover {
+  border-bottom: 1px solid #ccc; }
+#products-index .motto {
+  background-color: #262626;
+  border-bottom: 1px solid #ccc;
+  color: white; }
+#products-index .product {
+  border: 1px solid #ccc;
+  position: relative; }
+  #products-index .product .product-title {
+    background-color: #262626;
+    color: white;
+    display: inline-block;
+    width: 100%; }
+  #products-index .product .product-image {
+    height: 100px; }
+    #products-index .product .product-image .price {
+      border: 1px solid black;
+      float: right;
+      margin: 5px; }
+      #products-index .product .product-image .price p {
+        margin: 2px 5px; }
+  #products-index .product .product-bottom {
+    background-color: #262626; }
+    #products-index .product .product-bottom .btn-warning {
+      margin: 5px 0; }
+#products-index .products-row {
+  margin-bottom: 15px; }
+#products-index .third-banner {
+  border-bottom: 1px solid #ccc;
+  color: #7c7c7c; }
+
+#sessions-new .box {
+  border: 1px solid #ccc;
+  padding: 30px; }
+
+#shopping-cart-edit .box {
+  border: 1px solid #ccc;
+  padding: 30px; }
+#shopping-cart-edit .product-row {
+  display: relative;
+  margin-bottom: 15px; }
+  #shopping-cart-edit .product-row .product-box {
+    border: 1px solid #ccc;
+    height: 95px;
+    padding: 15px; }
+    #shopping-cart-edit .product-row .product-box h6 {
+      text-decoration: underline; }
+    #shopping-cart-edit .product-row .product-box .image {
+      border: 1px solid #ccc;
+      display: inline-block;
+      height: 60px;
+      margin-right: 15px;
+      vertical-align: top;
+      width: 60px; }
+    #shopping-cart-edit .product-row .product-box .title-and-category {
+      display: inline-block; }
+    #shopping-cart-edit .product-row .product-box .product-price {
+      position: absolute;
+      top: 15px;
+      right: 31px; }
+    #shopping-cart-edit .product-row .product-box .quantity {
+      display: inline-block;
+      width: 50%; }
+      #shopping-cart-edit .product-row .product-box .quantity input[type=text] {
+        width: 100%;
+        text-align: center; }
+    #shopping-cart-edit .product-row .product-box .total-price {
+      float: right;
+      width: 50%; }
+#shopping-cart-edit .total {
+  background-color: #FFE282;
+  border: 1px solid #ccc;
+  height: 95px;
+  padding: 15px; }
+  #shopping-cart-edit .total h3 {
+    margin: 0; }
+  #shopping-cart-edit .total h4 {
+    margin: 5px 0 0 0; }
+#shopping-cart-edit .buttons {
+  height: 95px;
+  padding-top: 5px;
+  position: relative; }
+  #shopping-cart-edit .buttons .update input[type=submit] {
+    width: 100%; }
+  #shopping-cart-edit .buttons .check-out {
+    bottom: 5px;
+    position: absolute;
+    width: 100%; }
+    #shopping-cart-edit .buttons .check-out .btn {
+      width: 100%; }
+
+#users-new .sub-form, #users-edit .sub-form, #orders-edit .sub-form {
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  padding: 15px; }
+  #users-new .sub-form .sub-form-header, #users-edit .sub-form .sub-form-header, #orders-edit .sub-form .sub-form-header {
+    text-align: center; }
+  #users-new .sub-form .sub-form-form, #users-edit .sub-form .sub-form-form, #orders-edit .sub-form .sub-form-form {
+    padding: 30px; }
+
+/*# sourceMappingURL=application.css.css.map */

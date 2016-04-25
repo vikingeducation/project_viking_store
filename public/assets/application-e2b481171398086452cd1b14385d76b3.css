@@ -1,0 +1,301 @@
+/* line 1, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+html, body {
+  height: 100%;
+}
+/* line 3, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+html .container-fluid, html .container, body .container-fluid, body .container {
+  min-height: 100%;
+}
+/* line 6, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+html .header, body .header {
+  margin-top: 50px;
+  margin-bottom: 45px;
+}
+
+/* line 12, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#topnav {
+  padding: 0 10px;
+  border-bottom: 1px solid gray;
+}
+/* line 16, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#topnav .logo-container img {
+  width: 45px;
+  height: 45px;
+  margin-top: 2px;
+  vertical-align: middle;
+}
+/* line 22, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#topnav .logo-container a {
+  text-decoration: none;
+  color: black;
+  font-size: 140%;
+}
+/* line 28, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#topnav .profile {
+  margin-right: 10px;
+  float: left;
+}
+/* line 31, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#topnav .profile img {
+  height: 45px;
+  width: 45px;
+}
+/* line 36, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#topnav .user-links {
+  margin-right: 10px;
+  float: left;
+}
+
+/* line 42, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#bot-nav {
+  background-color: #262626;
+  margin-bottom: 0;
+  padding: 20px 0;
+}
+/* line 46, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#bot-nav h3 {
+  color: #FF8500;
+  margin-top: 0;
+}
+/* line 50, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#bot-nav .phone {
+  color: white;
+}
+/* line 53, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#bot-nav .email {
+  color: white;
+}
+
+/* line 58, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.main-content {
+  border: 1px solid #ccc;
+  padding: 0px 15px;
+}
+/* line 62, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.main-content .crud-container {
+  border: 1px solid black;
+  margin: 20px 0;
+  padding: 15px;
+}
+/* line 68, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.main-content .table-striped {
+  margin-top: 12px;
+}
+/* line 70, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.main-content .table-striped td {
+  text-align: left;
+}
+/* line 76, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.main-content #edit-or-new form {
+  display: table;
+}
+/* line 79, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.main-content #edit-or-new p {
+  display: table-row;
+}
+/* line 82, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.main-content #edit-or-new label {
+  display: table-cell;
+}
+/* line 85, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.main-content #edit-or-new input {
+  display: table-cell;
+}
+/* line 88, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.main-content #edit-or-new .table-cell {
+  display: table-cell;
+}
+/* line 91, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.main-content #edit-or-new .table-row {
+  display: table-row;
+}
+
+/* line 96, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.side-nav {
+  padding: 0px 15px;
+  border: 1px solid #ccc;
+}
+/* line 99, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+.side-nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* line 106, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .category-filter {
+  margin-bottom: 8px;
+  margin-top: 10px;
+}
+/* line 109, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .category-filter .category-dropdown {
+  float: left;
+  margin-right: 10px;
+}
+/* line 114, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .category-filter .filter-button input {
+  padding: 2px;
+}
+/* line 119, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .cover {
+  border-bottom: 1px solid #ccc;
+}
+/* line 122, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .motto {
+  background-color: #262626;
+  border-bottom: 1px solid #ccc;
+  color: white;
+}
+/* line 127, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .product {
+  border: 1px solid #ccc;
+  position: relative;
+}
+/* line 130, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .product .product-title {
+  background-color: #262626;
+  color: white;
+  display: inline-block;
+  width: 100%;
+}
+/* line 136, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .product .product-image {
+  height: 100px;
+}
+/* line 138, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .product .product-image .price {
+  border: 1px solid black;
+  float: right;
+  margin: 5px;
+}
+/* line 142, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .product .product-image .price p {
+  margin: 2px 5px;
+}
+/* line 147, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .product .product-bottom {
+  background-color: #262626;
+}
+/* line 149, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .product .product-bottom .btn-warning {
+  margin: 5px 0;
+}
+/* line 154, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .products-row {
+  margin-bottom: 15px;
+}
+/* line 157, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#products-index .third-banner {
+  border-bottom: 1px solid #ccc;
+  color: #7c7c7c;
+}
+
+/* line 164, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#sessions-new .box {
+  border: 1px solid #ccc;
+  padding: 30px;
+}
+
+/* line 171, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .box {
+  border: 1px solid #ccc;
+  padding: 30px;
+}
+/* line 175, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .product-row {
+  display: relative;
+  margin-bottom: 15px;
+}
+/* line 178, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .product-row .product-box {
+  border: 1px solid #ccc;
+  height: 95px;
+  padding: 15px;
+}
+/* line 182, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .product-row .product-box h6 {
+  text-decoration: underline;
+}
+/* line 185, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .product-row .product-box .image {
+  border: 1px solid #ccc;
+  display: inline-block;
+  height: 60px;
+  margin-right: 15px;
+  vertical-align: top;
+  width: 60px;
+}
+/* line 193, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .product-row .product-box .title-and-category {
+  display: inline-block;
+}
+/* line 196, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .product-row .product-box .product-price {
+  position: absolute;
+  top: 15px;
+  right: 31px;
+}
+/* line 201, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .product-row .product-box .quantity {
+  display: inline-block;
+  width: 50%;
+}
+/* line 204, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .product-row .product-box .quantity input[type=text] {
+  width: 100%;
+  text-align: center;
+}
+/* line 209, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .product-row .product-box .total-price {
+  float: right;
+  width: 50%;
+}
+/* line 215, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .total {
+  background-color: #FFE282;
+  border: 1px solid #ccc;
+  height: 95px;
+  padding: 15px;
+}
+/* line 220, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .total h3 {
+  margin: 0;
+}
+/* line 223, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .total h4 {
+  margin: 5px 0 0 0;
+}
+/* line 227, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .buttons {
+  height: 95px;
+  padding-top: 5px;
+  position: relative;
+}
+/* line 232, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .buttons .update input[type=submit] {
+  width: 100%;
+}
+/* line 236, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .buttons .check-out {
+  bottom: 5px;
+  position: absolute;
+  width: 100%;
+}
+/* line 240, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#shopping-cart-edit .buttons .check-out .btn {
+  width: 100%;
+}
+
+/* line 248, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#users-new .sub-form, #users-edit .sub-form, #orders-edit .sub-form {
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+/* line 252, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#users-new .sub-form .sub-form-header, #users-edit .sub-form .sub-form-header, #orders-edit .sub-form .sub-form-header {
+  text-align: center;
+}
+/* line 255, /Users/stevenchang/Desktop/project_viking_store/app/assets/stylesheets/application.css.scss */
+#users-new .sub-form .sub-form-form, #users-edit .sub-form .sub-form-form, #orders-edit .sub-form .sub-form-form {
+  padding: 30px;
+}
