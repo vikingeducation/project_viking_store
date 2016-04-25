@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
       # Second - making sure the order in the params is that user's shopping cart
       if current_user.orders.where(:checkout_date => nil).first.id == params[:id].to_i
         @order = Order.find(params[:id])
-        @order_total = order_total(@order)
+        @order_total = order_total(@order.order_contents)
       else
         flash[:alert] = "You can only checkout your current shopping cart."
         redirect_to shoppingcart_path
@@ -18,16 +18,6 @@ class OrdersController < ApplicationController
       flash[:alert] = "Please sign in or sign up to check out."
       redirect_to new_session_path
     end
-  end
-
-  private
-
-  def order_total(order)
-    total = 0
-    order.order_contents.each do |order_content|
-      total += (order_content.quantity * order_content.product.price)
-    end
-    total
   end
 
 end

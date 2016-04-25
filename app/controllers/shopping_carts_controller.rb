@@ -77,14 +77,6 @@ class ShoppingCartsController < ApplicationController
     end
   end
 
-  def order_total(order_contents)
-    total = 0
-    order_contents.each do |order_content|
-      total += (order_content.quantity * order_content.product.price)
-    end
-    total
-  end
-
   # The order contents in the session was coming out as a hash so I am changing them to objects before I send them in so that the view can just deal with the objects.
   # Sometimes sessions seems to change an object into a hash but other times it doesn't (not sure when this actually happens), so I had to do two lines, one to change the hash into an object and then pop it into order_contents_as_objects or the item straight in.
   def session_cart_as_an_array_of_objects

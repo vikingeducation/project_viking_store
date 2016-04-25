@@ -35,4 +35,9 @@ class OrderContent < ActiveRecord::Base
   def self.average_order(number_of_days)
     (OrderContent.total_revenue_since_days_ago(number_of_days).first.total/Order.created_since_days_ago(number_of_days)).round(2)
   end
+
+  # Total price for many of the same item in an order
+  def total
+    self.quantity * self.product.price
+  end
 end

@@ -37,6 +37,15 @@ class ApplicationController < ActionController::Base
     @current_user = user
   end
 
+  # This is better than having a method in the order model because this can be used for session items where there is no order yet.
+  def order_total(order_contents)
+    total = 0
+    order_contents.each do |order_content|
+      total += (order_content.quantity * order_content.product.price)
+    end
+    total
+  end
+
   # check the general case that there is *someone*
   # currently signed in.
   # !! allows this to return a boolean instead of
