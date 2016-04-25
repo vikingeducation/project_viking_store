@@ -2,6 +2,8 @@ class SessionsController < ApplicationController
 
   layout 'front_facing'
 
+  before_filter :store_referer, :only => [:new]
+
   # This should render your sign-in form!
   def new
   end
@@ -18,7 +20,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Thanks for signing in!"
       # If the user has shopping_cart_items then we're going to merge the items in that cart with the user's previous shopping cart.
       merge_shopping_carts(user) if session[:shopping_cart_items] && session[:shopping_cart_items].size > 0
-      redirect_to root_path
+      redirect_to referer
     else
       flash.now[:alert] = "We coudn't sign you in due to errors."
       render :new
@@ -73,6 +75,19 @@ class SessionsController < ApplicationController
     session[:shopping_cart_items].each do |order_content|
       order_content["order_id"] = shopping_cart_id
       OrderContent.new(order_content).save
+    end
+  end
+
+  # this is one of those times when using a "delete" really comes in handy because it returns the object we want AND removes it from the hash in one operation.
+  def referer
+    session.delete(:referer)
+  end
+
+  def store_referer
+    if request.referer
+      session[:referer] = URI(request.referer).path
+    else
+      session[:referer] = root_path
     end
   end
 
