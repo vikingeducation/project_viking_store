@@ -1,1 +1,58 @@
-<h1>Hello Norld</h1>
+<div class="container">
+	<div id="orders-edit">
+
+		<% if flash[:alert] %>
+			<div class="flash">
+				<p><%= flash[:alert] %></p>
+			</div>
+		<% end %>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="header text-center">
+					<div class="header-text">
+						<h1>Checkout</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<%= form_for @order do |order| %>
+				<div class="col-xs-6">
+					<div class="sub-form">
+						<div class="sub-form-header">
+							<h2>Shipping + Billing</h2>
+						</div>
+						<div class="sub-form-form">
+							crap name crap name
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-6">
+					<div class="sub-form">
+						<div class="sub-form-header">
+							<h2>Review + Complete</h2>
+						</div>
+						<div class="sub-form-form">
+							asdfasfd
+						</div>
+					</div>
+
+					<div class="sub-form">
+						<div class="sub-form-header">
+							<h2>Place Your Order</h2>
+						</div>
+						<div class="sub-form-form">
+							<%= order.submit :class => "btn btn-primary btn-lg center-block" %>
+						</div>
+					</div>
+				</div>
+
+			<% end %>
+
+		</div>
+
+	</div>
+</div>

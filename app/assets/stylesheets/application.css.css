@@ -171,13 +171,13 @@ html, body {
     #shopping-cart-edit .buttons .check-out .btn {
       width: 100%; }
 
-#users-new .sub-form, #users-edit .sub-form {
+#users-new .sub-form, #users-edit .sub-form, #orders-edit .sub-form {
   border: 1px solid #ccc;
   margin-bottom: 15px;
   padding: 15px; }
-  #users-new .sub-form .sub-form-header, #users-edit .sub-form .sub-form-header {
+  #users-new .sub-form .sub-form-header, #users-edit .sub-form .sub-form-header, #orders-edit .sub-form .sub-form-header {
     text-align: center; }
-  #users-new .sub-form .sub-form-form, #users-edit .sub-form .sub-form-form {
+  #users-new .sub-form .sub-form-form, #users-edit .sub-form .sub-form-form, #orders-edit .sub-form .sub-form-form {
     padding: 30px; }
 
 /*# sourceMappingURL=application.css.css.map */
