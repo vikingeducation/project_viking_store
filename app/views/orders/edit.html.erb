@@ -40,8 +40,10 @@
 																					 order.object.user.addresses,
 																					 :id,
 																					 :street_address
-																					) 
+																					)
 							%>
+							<br>
+							<%= link_to "Edit Saved Addresses", edit_user_path(:id => current_user.id) %>
 						</div>
 					</div>
 				</div>
