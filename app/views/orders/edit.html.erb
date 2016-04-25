@@ -25,7 +25,23 @@
 							<h2>Shipping + Billing</h2>
 						</div>
 						<div class="sub-form-form">
-							crap name crap name
+							<%= order.label( :shipping_id, "Shipping Address" ) %>
+							<br>
+							<%= order.collection_select( :shipping_id,
+																					 order.object.user.addresses,
+																					 :id,
+																					 :street_address
+																					) 
+							%>
+							<br>
+							<%= order.label( :billing_id, "Billing Address" ) %>
+							<br>
+							<%= order.collection_select( :billing_id,
+																					 order.object.user.addresses,
+																					 :id,
+																					 :street_address
+																					) 
+							%>
 						</div>
 					</div>
 				</div>
