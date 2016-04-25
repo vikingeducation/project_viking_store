@@ -37,7 +37,7 @@ class OrderContent < ActiveRecord::Base
   end
 
   # Total price for many of the same item in an order
-  def total
+  def sub_total
     self.quantity * self.product.price
   end
 end
