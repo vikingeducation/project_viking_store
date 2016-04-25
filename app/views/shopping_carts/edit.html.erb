@@ -73,11 +73,8 @@
 										<%= submit_tag "Update Contents", :class => "btn btn-default" %>
 									</div>
 									<div class="button check-out">
-										<% if signed_in_user? %>
-											<%= link_to "Check Out", edit_order_path(:id => @order_contents.first.order_id), :class => "btn btn-primary" %>
-										<% else %>
-											<%= link_to "Check Out", new_session_path, :class => "btn btn-primary" %>
-										<% end %>
+										<!-- These links should still update the order  -->
+										<%= submit_tag "Check Out", :class => "btn btn-primary" %>
 									</div>
 								</div>
 							</div>

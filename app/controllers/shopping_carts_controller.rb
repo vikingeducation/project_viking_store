@@ -24,10 +24,21 @@ class ShoppingCartsController < ApplicationController
       redirect_to shoppingcart_path
       flash[:notice] = "You ain't got no items in your blimey cart."
     else
-      @order_contents = order_contents
-      @order_total = order_total(@order_contents)
-      flash.now[:alert] = "Cart updated."
-      render :edit
+      # This code is for the two submit buttons. One will be to update contents, the one for the checkout
+      if params[:commit] == "Update Contents"
+        @order_contents = order_contents
+        @order_total = order_total(@order_contents)
+        flash.now[:alert] = "Cart updated."
+        render :edit
+      else
+        # If the user's signed in, we're going to the edit_order_path, otherwise they're redirected to the new_session_path.
+        if signed_in_user?
+          redirect_to edit_order_path(:id => current_user.orders.where(:checkout_date => nil).first.id)
+        else
+          flash[:alert] = "Please sign in or sign up to check out."
+          redirect_to new_session_path
+        end
+      end
     end
   end
 
