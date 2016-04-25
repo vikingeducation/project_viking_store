@@ -100,7 +100,7 @@
 							
 							<%= link_to "Edit Order", shoppingcart_path %>
 							<br>
-							<%= link_to "Delete Order", "#" %>
+							<%= link_to "Delete Order", order_path(id: @order.id), method: :delete %>
 							<br>
 							<h3>Total: $<%= @order_total %></h3>
 					</div>

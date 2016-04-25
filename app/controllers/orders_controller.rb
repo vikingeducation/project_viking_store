@@ -2,6 +2,13 @@ class OrdersController < ApplicationController
 
   layout 'front_facing'
 
+  def destroy
+    Order.find(params[:id]).destroy
+    current_user.orders.create
+    flash[:notice] = "Order has been destroyed."
+    redirect_to root_path
+  end
+
   # First off, I want this to only work if the user is currently signed in and only if the order belongs to the signed_in user... 
   def edit
     # First - making sure that the user is signed in.

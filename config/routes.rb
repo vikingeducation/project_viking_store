@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'products#index'
   resource :session, :only => [:new, :create, :destroy]
   resources :credit_cards, :only => [:destroy]
-  resources :orders, :only => [:edit, :update]
+  resources :orders, :only => [:edit, :update, :destroy]
   resources :order_contents, :only => [:create]
   resources :users, :only => [:edit, :new, :create, :update, :destroy]
 
