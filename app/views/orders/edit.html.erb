@@ -46,7 +46,11 @@
 							<%= link_to "Edit Saved Addresses", edit_user_path(:id => current_user.id) %>
 							<br>
 							<br>
-							<%= order.fields_for :credit_card, (@order.user.credit_card || CreditCard.new(:user_id => @order.user_id)) do |cc| %>
+							<% if @order.user.credit_card %>
+								<%= order.hidden_field :credit_card_id, :value => @order.user.credit_card.id %>
+							<% end %>
+							<%= order.fields_for :credit_card, (@order.user.credit_card || @order.build_credit_card) do |cc| %>
+								<%= cc.hidden_field :user_id, :value => @order.user_id %>
 								<%= cc.label :card_number, "Credit Card Number" %>
 								<br>
 								<%= cc.text_field :card_number %>

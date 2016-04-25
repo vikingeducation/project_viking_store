@@ -24,6 +24,10 @@ class Order < ActiveRecord::Base
                                 :reject_if => :all_blank,
                                 :allow_destroy => true;
 
+  accepts_nested_attributes_for :credit_card,
+                                :reject_if => :all_blank,
+                                :allow_destroy => true;
+
   def billing_street_address
     self.billing_address ? self.billing_address.street_address : "n/a"
   end
