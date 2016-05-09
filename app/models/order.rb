@@ -19,4 +19,5 @@ class Order < ActiveRecord::Base
     .where("checkout_date > ?", Time.now - t*24*60*60)
     .sum("oc.quantity * p.price")
   end
+
 end

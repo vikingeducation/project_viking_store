@@ -14,6 +14,6 @@ class DashboardController < ApplicationController
     @new_products_seven = Product.new_products(7)
     @revenue_days_seven = Order.revenue_days(7)
 
-
+    @top_states = State.top_states
   end
 end

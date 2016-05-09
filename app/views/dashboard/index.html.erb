@@ -100,31 +100,19 @@
 	<div class='col-sm-5'>
 		<h3>2. User Demographics and Behavior</h3>
 
+		<h3>Top 3 States Users Live In (billing)</h3>
 		<table class="table table-striped">
 			<tr>
 				<th>Item</th>
 				<th>Data</th>
 			</tr>
-
+			<% @top_states.each do |state| %>
+			
 			<tr>
-				<td>New Users</td>
-				<td>100</td>
+				<td><%= state.name %></td>
+				<td><%= state.total %></td>
 			</tr>
-
-			<tr>
-				<td>Orders</td>
-				<td>100</td>
-			</tr>
-
-			<tr>
-				<td>New Product</td>
-				<td>100</td>
-			</tr>
-
-			<tr>
-				<td>Revenue</td>
-				<td>100</td>
-			</tr>
+			<% end %>
 
 		</table>
 	</div>
