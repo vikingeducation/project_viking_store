@@ -56,12 +56,41 @@
 
 			<tr>
 				<td>New Products</td>
-				<td><%= @total_products %></td>
+				<td><%= @new_products %></td>
 			</tr>
 
 			<tr>
 				<td>Revenue</td>
 				<td><%= @revenue_days %></td>
+			</tr>
+
+		</table>
+
+		<h3>Last 7 Days</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Item</th>
+				<th>Data</th>
+			</tr>
+
+			<tr>
+				<td>New Users</td>
+				<td><%= @new_users_seven %></td>
+			</tr>
+
+			<tr>
+				<td>Orders</td>
+				<td><%= @new_orders_seven %></td>
+			</tr>
+
+			<tr>
+				<td>New Products</td>
+				<td><%= @new_products_seven %></td>
+			</tr>
+
+			<tr>
+				<td>Revenue</td>
+				<td><%= @revenue_days_seven %></td>
 			</tr>
 
 		</table>

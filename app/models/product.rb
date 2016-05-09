@@ -4,6 +4,6 @@ class Product < ActiveRecord::Base
   end
 
   def self.new_products(t)
-    Product.where("created_at > ?", Time.now - t*20*60*60)
+    Product.where("created_at > ?", Time.now - t*24*60*60).count
   end
 end
