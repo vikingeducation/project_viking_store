@@ -15,5 +15,6 @@ class DashboardController < ApplicationController
     @revenue_days_seven = Order.revenue_days(7)
 
     @top_states = State.top_states
+    @top_cities = City.top_cities
   end
 end

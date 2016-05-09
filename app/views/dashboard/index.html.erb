@@ -115,6 +115,22 @@
 			<% end %>
 
 		</table>
+
+		<h3>Top 3 Cities Users Live In (billing)</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Item</th>
+				<th>Data</th>
+			</tr>
+			<% @top_cities.each do |city| %>
+			
+			<tr>
+				<td><%= city.name %></td>
+				<td><%= city.total %></td>
+			</tr>
+			<% end %>
+
+		</table>
 	</div>
 
 
