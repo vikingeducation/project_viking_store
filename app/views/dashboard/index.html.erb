@@ -5,7 +5,7 @@
 
 	<!-- Table 1 : Overal Platform -->
 
-	<div class='col-sm-5 col-sm-offset-1'>
+	<div class='col-sm-5 col-sm-offset-1 panel'>
 		<h3>1. Overall Platform</h3>
 
 		<h3>Total</h3>
@@ -97,7 +97,7 @@
 	</div>
 
 	<!-- Table 2 : User Demographics and Behavior -->
-	<div class='col-sm-5'>
+	<div class='col-sm-5 panel'>
 		<h3>2. User Demographics and Behavior</h3>
 
 		<h3>Top 3 States Users Live In (billing)</h3>
@@ -155,6 +155,12 @@
 			</tr>
 
 			<tr>
+				<td>Highest Average Value</td>
+				<td><%= "#{@highest_average_value.first.fname} #{@highest_average_value.first.lname}" %></td>
+				<td>$ <%= @highest_average_value.first.avg %></td>
+			</tr>
+
+			<tr>
 				<td>Most Orders Place</td>
 				<td><%= "#{@most_orders_place.first.fname} #{@most_orders_place.first.lname}" %></td>
 				<td><%= @most_orders_place.first.total %></td>
@@ -162,13 +168,15 @@
 
 		</table>
 	</div>
+</div>
 
-
+<div class="row">
 	<!-- Table 3 : Order Statistics -->
 
-	<div class='col-sm-5 col-sm-offset-1'>
+	<div class='col-sm-5 col-sm-offset-1 panel'>
 		<h3>3. Order Statistics</h3>
 
+		<h3>Total</h3>
 		<table class="table table-striped">
 			<tr>
 				<th>Item</th>
@@ -176,30 +184,30 @@
 			</tr>
 
 			<tr>
-				<td>New Users</td>
-				<td>100</td>
-			</tr>
-
-			<tr>
 				<td>Orders</td>
-				<td>100</td>
-			</tr>
-
-			<tr>
-				<td>New Product</td>
-				<td>100</td>
+				<td><%= @total_orders %></td>
 			</tr>
 
 			<tr>
 				<td>Revenue</td>
-				<td>100</td>
+				<td>$ <%= @revenue %></td>
+			</tr>
+
+			<tr>
+				<td>Average Order Value</td>
+				<td><%= @avg_order_value.first.avg_value %></td>
+			</tr>
+
+			<tr>
+				<td>Largest Order Value</td>
+				<td><%= @largest_order_value.first.total %></td>
 			</tr>
 
 		</table>
 	</div>
 
 	<!-- Table 4 : Time Series Data -->
-	<div class='col-sm-5'>
+	<div class='col-sm-5 panel'>
 		<h3>4. Time Series Data</h3>
 
 		<table class="table table-striped">

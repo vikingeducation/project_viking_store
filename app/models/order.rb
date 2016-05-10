@@ -20,4 +20,22 @@ class Order < ActiveRecord::Base
     .sum("oc.quantity * p.price")
   end
 
+  def self.avg_order_value
+    Order.select("AVG(p.price * oc.quantity) AS avg_value")
+         .joins("JOIN order_contents oc ON orders.id = oc.order_id")
+         .joins("JOIN products p ON oc.product_id = p.id")
+         .where("orders.checkout_date IS NOT NULL")
+         .group("orders.id")
+  end
+
+  def self.largest_order_value
+    Order.select("SUM(p.price * oc.quantity) AS total")
+         .joins("JOIN order_contents oc ON orders.id = oc.order_id")
+         .joins("JOIN products p ON oc.product_id = p.id")
+         .where("orders.checkout_date IS NOT NULL")
+         .group("orders.id")
+         .order("total DESC")
+         .limit(1)
+  end
+
 end

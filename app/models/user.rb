@@ -29,17 +29,14 @@ class User < ActiveRecord::Base
   end
 
   def self.highest_average_value
-    User.find_by_sql("SELECT users.first_name AS fname, users.last_name AS lname, AVG(total) 
-                                                                                       FROM (
-                                                                                       SELECT SUM(p.price * oc.quantity) AS total 
-                                                                                       FROM
-                      users JOIN orders o ON users.id = o.user_id
-                      JOIN order_contents oc ON o.id = oc.order_id
-                      JOIN products p ON oc.product_id = p.id
-                      WHERE o.checkout_date IS NOT NULL
-                      GROUP BY users.id
-                      ORDER total DESC
-                      LIMIT 1) t")
+    User.select("users.first_name AS fname, users.last_name AS lname, AVG(p.price * oc.quantity) AS avg")
+        .joins("JOIN orders o ON users.id = o.user_id")
+        .joins("JOIN order_contents oc ON o.id = oc.order_id")
+        .joins("JOIN products p ON oc.product_id = p.id")
+        .where("o.checkout_date IS NOT NULL")
+        .group("users.id")
+        .order("avg DESC")
+        .limit(1)
 
   end
 
