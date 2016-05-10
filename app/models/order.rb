@@ -65,6 +65,18 @@ class Order < ActiveRecord::Base
          .limit(1)
   end
 
+  def self.orders_by_days
+    Order.find_by_sql("SELECT SUM(p.price * oc.quantity) AS value, DATE(days) AS day,
+                       COUNT(o.*) AS quantity
+                       FROM GENERATE_SERIES(CURRENT_DATE - INTERVAL '7 DAYS', CURRENT_DATE, INTERVAL '1 DAY') days
+                       LEFT JOIN orders o ON DATE(o.checkout_date) = days
+                       LEFT JOIN order_contents oc ON o.id = oc.order_id
+                       LEFT JOIN products p ON p.id = oc.product_id
+                       GROUP BY days
+                       ORDER BY days DESC
+                       LIMIT 7 ")
+  end
+
 end
 
 

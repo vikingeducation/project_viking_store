@@ -1,5 +1,5 @@
 <div class='row'>
-	
+
 	<div class="col-sm-12 text-center">
 		<h1>Viking Store Analytics Dashboard</h1>
 	</div>
@@ -20,5 +20,14 @@
 										    seven_days_stats: @seven_days_stats } %>
 	
 	
-	<%= render partial: "panel4", locals: {} %>
+	<%= render partial: "panel4", locals: { orders_by_days: @orders_by_days } %>
+
+
+
+</div>
+
+<div class= "row">
+	<div class="col-sm-12 text-center">
+		<p>It took <%= @process_time %> to process all the queries</p>
+	</div>
 </div>

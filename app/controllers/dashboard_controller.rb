@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-
+    time_begin = Time.now
 # Panel 1
 
     # Global Data
@@ -66,5 +66,11 @@ class DashboardController < ApplicationController
       avg_order: Order.avg_order_value_days(7),
       largest_order: Order.largest_order_value_days(7)
     }
+
+    @orders_by_days = Order.orders_by_days
+
+
+    time_end = Time.now
+    @process_time = time_end - time_begin
   end
 end

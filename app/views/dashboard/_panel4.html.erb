@@ -2,31 +2,28 @@
 	<div class='col-sm-5 panel'>
 		<h3>4. Time Series Data</h3>
 
+		<h3>Orders by day</h3>
 		<table class="table table-striped">
 			<tr>
-				<th>Item</th>
-				<th>Data</th>
+				<th>Day</th>
+				<th>Quantity</th>
+				<th>Value</th>
 			</tr>
 
-			<tr>
-				<td>New Users</td>
-				<td>100</td>
-			</tr>
+			<% orders_by_days.each_with_index do |order,index| %>
 
 			<tr>
-				<td>Orders</td>
-				<td>100</td>
+				<% if index == 0 %>
+					<td>Today</td>
+				<% elsif index == 1 %>
+					<td>Yesterday</td>
+				<% else %>
+				<td><%= order.day %></td>
+				<% end %>
+				<td><%= order.quantity %></td>
+				<td><%= order.value %></td>
 			</tr>
-
-			<tr>
-				<td>New Product</td>
-				<td>100</td>
-			</tr>
-
-			<tr>
-				<td>Revenue</td>
-				<td>100</td>
-			</tr>
+			<% end %>
 
 		</table>
 	</div>
