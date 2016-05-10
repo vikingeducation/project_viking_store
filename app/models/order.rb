@@ -11,7 +11,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.new_orders(t)
-    Order.where("created_at > ?", Time.now - t*24*60*60).where("checkout_date IS NOT NULL").count
+    Order.where("checkout_date IS NOT NULL").where("checkout_date > ?", Time.now - t*24*60*60).count
   end
 
   def self.revenue_days(t)

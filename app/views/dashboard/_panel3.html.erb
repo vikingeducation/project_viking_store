@@ -1,0 +1,94 @@
+<!-- Table 3 : Order Statistics -->
+
+	<div class='col-sm-5 col-sm-offset-1 panel'>
+		<h3>3. Order Statistics</h3>
+
+		<h3>Total</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Item</th>
+				<th>Data</th>
+			</tr>
+
+			<tr>
+				<td>Orders</td>
+				<td><%= total_stats[:orders] %></td>
+			</tr>
+
+			<tr>
+				<td>Revenue</td>
+				<td>$ <%= total_stats[:revenue] %></td>
+			</tr>
+
+			<tr>
+				<td>Average Order Value</td>
+				<td><%= total_stats[:avg_order].first.avg_order %></td>
+			</tr>
+
+			<tr>
+				<td>Largest Order Value</td>
+				<td><%= total_stats[:largest_order].first.total %></td>
+			</tr>
+
+		</table>
+
+
+		<h3>Last 30 Days</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Item</th>
+				<th>Data</th>
+			</tr>
+
+			<tr>
+				<td>Orders</td>
+				<td><%= thirty_days_stats[:orders] %></td>
+			</tr>
+
+			<tr>
+				<td>Revenue</td>
+				<td>$ <%= thirty_days_stats[:revenue] %></td>
+			</tr>
+
+			<tr>
+				<td>Average Order Value</td>
+				<td><%= thirty_days_stats[:avg_order].first.avg_order %></td>
+			</tr>
+
+			<tr>
+				<td>Largest Order Value</td>
+				<td><%= thirty_days_stats[:largest_order].first.total %></td>
+			</tr>
+
+		</table>
+
+
+		<h3>Last 7 Days</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Item</th>
+				<th>Data</th>
+			</tr>
+
+			<tr>
+				<td>Orders</td>
+				<td><%= seven_days_stats[:orders] %></td>
+			</tr>
+
+			<tr>
+				<td>Revenue</td>
+				<td>$ <%= seven_days_stats[:revenue] %></td>
+			</tr>
+
+			<tr>
+				<td>Average Order Value</td>
+				<td><%= seven_days_stats[:avg_order].first.avg_order %></td>
+			</tr>
+
+			<tr>
+				<td>Largest Order Value</td>
+				<td><%= seven_days_stats[:largest_order].first.total %></td>
+			</tr>
+
+		</table>
+	</div>
