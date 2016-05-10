@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
     @total_orders = Order.total
     @total_products = Product.total
     @revenue = Order.revenue
+
     # 30 days data
     @new_users = User.new_users(30)
     @new_orders = Order.new_orders(30)
@@ -31,5 +32,8 @@ class DashboardController < ApplicationController
     # Order Statistic
     @avg_order_value = Order.avg_order_value
     @largest_order_value = Order.largest_order_value
+
+    @avg_order_value_days = Order.avg_order_value_days(30)
+    @largest_order_value_days = Order.largest_order_value_days(30)
   end
 end
