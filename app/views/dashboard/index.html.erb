@@ -32,7 +32,7 @@
 
 			<tr>
 				<td>Revenue</td>
-				<td><%= @revenue %></td>
+				<td>$ <%= @revenue %></td>
 			</tr>
 
 		</table>
@@ -61,7 +61,7 @@
 
 			<tr>
 				<td>Revenue</td>
-				<td><%= @revenue_days %></td>
+				<td>$ <%= @revenue_days %></td>
 			</tr>
 
 		</table>
@@ -90,7 +90,7 @@
 
 			<tr>
 				<td>Revenue</td>
-				<td><%= @revenue_days_seven %></td>
+				<td>$ <%= @revenue_days_seven %></td>
 			</tr>
 
 		</table>
@@ -116,6 +116,7 @@
 
 		</table>
 
+
 		<h3>Top 3 Cities Users Live In (billing)</h3>
 		<table class="table table-striped">
 			<tr>
@@ -129,6 +130,35 @@
 				<td><%= city.total %></td>
 			</tr>
 			<% end %>
+
+		</table>
+
+
+		<h3>Top User With..</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Criteria</th>
+				<th>Customer Name</th>
+				<th>Quantity</th>
+			</tr>
+			
+			<tr>
+				<td>Highest single order value</td>
+				<td><%= "#{@single_highest_value.first.fname} #{@single_highest_value.first.lname}" %></td>
+				<td>$ <%= @single_highest_value.first.total %></td>
+			</tr>
+
+			<tr>
+				<td>Highest Lifetime Value</td>
+				<td><%= "#{@highest_lifetime_value.first.fname} #{@highest_lifetime_value.first.lname}" %></td>
+				<td>$ <%= @highest_lifetime_value.first.total %></td>
+			</tr>
+
+			<tr>
+				<td>Most Orders Place</td>
+				<td><%= "#{@most_orders_place.first.fname} #{@most_orders_place.first.lname}" %></td>
+				<td><%= @most_orders_place.first.total %></td>
+			</tr>
 
 		</table>
 	</div>
