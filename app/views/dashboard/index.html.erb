@@ -6,7 +6,9 @@
 
 	<%= render partial: "panel1", locals: { overall_total: @overall_total, 
 										    overall_thirty_days: @overall_thirty_days, 
-										    overall_seven_days: @overall_seven_days } %>
+										    overall_seven_days: @overall_seven_days,
+										    change_thirty_days: @change_thirty_days,
+										    change_seven_days: @change_seven_days } %>
 
 	<%= render partial: "panel2", locals: { top_places: @top_places, 
 										    top_users: @top_users } %>
@@ -20,7 +22,7 @@
 										    seven_days_stats: @seven_days_stats } %>
 	
 	
-	<%= render partial: "panel4", locals: { orders_by_days: @orders_by_days } %>
+	<%= render partial: "panel4", locals: { orders_by_time: @orders_by_time } %>
 
 
 

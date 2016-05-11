@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
         .limit(1)
 
   end
+
+  
 end
 
 

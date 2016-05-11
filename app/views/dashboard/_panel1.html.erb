@@ -41,26 +41,31 @@
 			<tr>
 				<th>Item</th>
 				<th>Data</th>
+				<th>Past Week</th>
 			</tr>
 
 			<tr>
 				<td>New Users</td>
 				<td><%= overall_thirty_days[:users] %></td>
+				<td><%= change_thirty_days[:users] %></td>
 			</tr>
 
 			<tr>
 				<td>Orders</td>
 				<td><%= overall_thirty_days[:orders] %></td>
+				<td><%= change_thirty_days[:orders] %></td>
 			</tr>
 
 			<tr>
 				<td>New Products</td>
 				<td><%= overall_thirty_days[:products] %></td>
+				<td><%= change_thirty_days[:products] %></td>
 			</tr>
 
 			<tr>
 				<td>Revenue</td>
 				<td>$ <%= overall_thirty_days[:revenue] %></td>
+				<td><%= change_thirty_days[:revenue] %></td>
 			</tr>
 
 		</table>
@@ -77,21 +82,25 @@
 			<tr>
 				<td>New Users</td>
 				<td><%= overall_seven_days[:users] %></td>
+				<td><%= change_seven_days[:users] %></td>
 			</tr>
 
 			<tr>
 				<td>Orders</td>
 				<td><%= overall_seven_days[:orders] %></td>
+				<td><%= change_seven_days[:orders] %></td>
 			</tr>
 
 			<tr>
 				<td>New Products</td>
 				<td><%= overall_seven_days[:products] %></td>
+				<td><%= change_seven_days[:products] %></td>
 			</tr>
 
 			<tr>
 				<td>Revenue</td>
 				<td>$ <%= overall_seven_days[:revenue] %></td>
+				<td><%= change_seven_days[:revenue] %></td>
 			</tr>
 
 		</table>

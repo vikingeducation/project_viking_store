@@ -2,6 +2,13 @@ class DashboardController < ApplicationController
   def index
     time_begin = Time.now
 # Panel 1
+    
+    # Helper find change
+    def self.change(nb_current, nb_full)
+      nb_past = nb_full - nb_current
+      change = nb_current - nb_past
+      change >= 0 ? (change = "+ #{change}") : (change = "- #{change.abs}")
+    end
 
     # Global Data
     @overall_total = {
@@ -19,6 +26,14 @@ class DashboardController < ApplicationController
       revenue: Order.revenue_days(30)
     }
 
+    # Change 30 days
+    @change_thirty_days = {
+      users: change(@overall_thirty_days[:users], User.new_users(60)),
+      orders: change(@overall_thirty_days[:orders], Order.new_orders(60)),
+      products: change(@overall_thirty_days[:products], Product.new_products(60)),
+      revenue: change(@overall_thirty_days[:revenue], Order.revenue_days(60))
+    }
+
     #7 days data
     @overall_seven_days = {
       users: User.new_users(7),
@@ -26,6 +41,15 @@ class DashboardController < ApplicationController
       products: Product.new_products(7),
       revenue: Order.revenue_days(7)
     }
+
+    # Change 7 days
+    @change_seven_days = {
+      users: change(@overall_seven_days[:users], User.new_users(14)),
+      orders: change(@overall_seven_days[:orders], Order.new_orders(14)),
+      products: change(@overall_seven_days[:products], Product.new_products(14)),
+      revenue: change(@overall_seven_days[:revenue], Order.revenue_days(14))
+    }
+
 
 # Panel 2
 
@@ -67,7 +91,10 @@ class DashboardController < ApplicationController
       largest_order: Order.largest_order_value_days(7)
     }
 
-    @orders_by_days = Order.orders_by_days
+    @orders_by_time = {
+      orders_by_day: Order.orders_by_day,
+      orders_by_week: Order.orders_by_week
+    }
 
 
     time_end = Time.now

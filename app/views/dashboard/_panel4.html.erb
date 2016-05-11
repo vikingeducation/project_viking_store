@@ -10,7 +10,7 @@
 				<th>Value</th>
 			</tr>
 
-			<% orders_by_days.each_with_index do |order,index| %>
+			<% orders_by_time[:orders_by_day].each_with_index do |order,index| %>
 
 			<tr>
 				<% if index == 0 %>
@@ -19,6 +19,31 @@
 					<td>Yesterday</td>
 				<% else %>
 				<td><%= order.day %></td>
+				<% end %>
+				<td><%= order.quantity %></td>
+				<td><%= order.value %></td>
+			</tr>
+			<% end %>
+
+		</table>
+
+		<h3>Orders by week</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Week</th>
+				<th>Quantity</th>
+				<th>Value</th>
+			</tr>
+
+			<% orders_by_time[:orders_by_week].each_with_index do |order,index| %>
+
+			<tr>
+				<% if index == 0 %>
+					<td>This week</td>
+				<% elsif index == 1 %>
+					<td>Last week</td>
+				<% else %>
+				<td><%= order.week %></td>
 				<% end %>
 				<td><%= order.quantity %></td>
 				<td><%= order.value %></td>
