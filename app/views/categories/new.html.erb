@@ -1,0 +1,15 @@
+<%= form_for @category do |f| %>
+
+	<%= f.label :id %>
+	<% if @category.persisted? %>
+		<%= f.text_field :id %>
+	<% else %>
+		N/A
+	<% end %>
+
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<%= f.submit "Create Category", class: "btn btn-primary" %>
+<% end %>
+
