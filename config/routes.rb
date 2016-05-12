@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root 'admin_board#index'
 
+  resources :dashboard, only: [:index]
   resources :categories
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

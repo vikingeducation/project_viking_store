@@ -14,5 +14,5 @@
 <% end %>
 
 <% if @category.persisted? %>
-	<%= link_to "Delete Me", "#" %>
+	<%= link_to "Delete Me", category_path(@category), method: :delete, data: {confirm: "Are you Sure?"} %>
 <% end %>

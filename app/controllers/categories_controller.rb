@@ -39,6 +39,18 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def destroy
+    @category = Category.find(params[:id])
+    if @category.destroy
+      flash[:success] = "You Succesfully Delete the #{@category.name.titleize} Category"
+      redirect_to categories_path
+    else
+      flash[:danger] = "Something went wrong, The Category wasn't delete"
+      redirect_to(:back)
+    end
+
+  end
+
   private
 
   def whitelisted_params

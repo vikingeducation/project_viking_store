@@ -3,8 +3,8 @@
 <h4>Category Id : <%= @category.id %></h4>
 <h4>Name: <%= @category.name %></h4>
 
-<%= link_to "Edit Category", "#" %><br>
-<%= link_to "Delete Category", "#" %>
+<%= link_to "Edit Category", edit_category_path(@category.id) %><br>
+<%= link_to "Delete Category", category_path(@category.id), method: :delete, data: {confirm: "Are you Sure?"} %>
 
 <br>
 <br>
