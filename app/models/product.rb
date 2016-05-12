@@ -10,4 +10,9 @@ class Product < ActiveRecord::Base
   def self.by_category(c)
     Product.where("category_id = ?", c)
   end
+
+  def self.all_with_category
+    Product.select("p.id, p.name, p.price, c.name AS cname, p.category_id AS cid")
+    .joins("AS p JOIN categories c ON p.category_id = c.id")
+  end
 end
