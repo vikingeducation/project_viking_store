@@ -17,8 +17,12 @@ class CategoriesController < ApplicationController
       flash.now[:danger] = "Something went weird, You didn't save anything"
       render :new
     end
-
   end
+
+    def show
+      @category = Category.find(params[:id])
+      @products_of_category = Product.by_category(@category.id)
+    end
 
   private
 

@@ -15,8 +15,8 @@
 			<td><%= category.id %></td>
 			<td><%= category.name %></td>
 			<td><%= link_to "Show", category_path(category.id) %></td>
-			<td>edit</td>
-			<td>delete</td>
+			<td><%= link_to "Edit", "#" %></td>
+			<td><%= link_to "Delete", "#" %></td>
 		</tr>
 	<% end %>
 
