@@ -9,7 +9,22 @@
 </head>
 <body>
 
-<%= yield %>
+	<div class="row text-center">
+		<h1>Viking Store Admin Portal</h1>
+	</div>
+
+	<div class='row'>
+		<%= render "shared/nav" %>
+
+		<div class="col-sm-9 text-center">
+			<% flash.each do |key, value| %>
+				<%= content_tag(:div, value, class: "flash-#{key}") %>
+			<% end %>
+		
+			<%= yield %>
+		</div>
+	</div>
+
 
 </body>
 </html>

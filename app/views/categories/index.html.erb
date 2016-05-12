@@ -1,0 +1,23 @@
+<h2>Product Categories</h2>
+
+<button class="btn btn-primary">Add a New Category</button>
+
+<table class="table">
+	<tr>
+		<th>Id</th>
+		<th>Name</th>
+		<th>SHOW</th>
+		<th>EDIT</th>
+		<th>DELETE</th>
+	</tr>
+	<% @categories.each do |category| %>
+		<tr>
+			<td><%= category.id %></td>
+			<td><%= category.name %></td>
+			<td><%= link_to "Show", category_path(category.id) %></td>
+			<td>edit</td>
+			<td>delete</td>
+		</tr>
+	<% end %>
+
+</table>
