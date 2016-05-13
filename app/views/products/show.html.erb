@@ -1,16 +1,16 @@
-<h2>Product <%= @product.first.id %></h2>
+<h2>Product <%= @product.id %></h2>
 
 <h3>Product Information</h3>
 
-<h4>Product Id : <%= @product.first.id %></h4>
-<h4>Product Name : <%= @product.first.name %></h4>
-<h4>Price : <%= @product.first.price %></h4>
-<h4>Category : <%= @product.first.cname %></h4>
+<h4>Product Id : <%= @product.id %></h4>
+<h4>Product Name : <%= @product.name %></h4>
+<h4>Price : <%= @product.price %></h4>
+<h4>Category : <%= @category.name %></h4>
 
 <h3>Product Statistics</h3>
 
 <h4>Times Ordered : <%= @nb_orders %></h4>
 <h4>Cart In : <%= @nb_carts %></h4>
 
-<%= link_to "Edit", edit_product_path(@product.first)  %>
-<%= link_to "Delete", product_path(@product.first), method: :delete %>
+<%= link_to "Edit", edit_product_path(@product)  %>
+<%= link_to "Delete", product_path(@product), method: :delete %>

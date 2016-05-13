@@ -1,4 +1,10 @@
 class Product < ActiveRecord::Base
+  validates :name, :price, :category_id, :presence => true
+
+  validates :price, :numericality => { :less_than_or_equal_to => 10000 }
+
+  validates :category_id, :inclusion => (Category.ids)
+
   def self.total
     Product.all.count
   end
@@ -16,9 +22,4 @@ class Product < ActiveRecord::Base
     .joins("AS p JOIN categories c ON p.category_id = c.id")
   end
 
-  def self.one_product_with_category(id)
-    Product.select("products.id, products.name, products.price, c.name AS cname, products.category_id AS cid")
-           .joins("products JOIN categories c ON products.category_id = c.id")
-           .where("products.id = ?", id)
-  end
 end

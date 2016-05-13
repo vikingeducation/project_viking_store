@@ -42,6 +42,10 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(params[:id])
     if @category.destroy
+
+      # Reset Category id to nil for products which category is deleted
+      Product.where(category_id: @category.id).update_all(category_id: nil)
+
       flash[:success] = "You Succesfully Delete the #{@category.name.titleize} Category"
       redirect_to categories_path
     else

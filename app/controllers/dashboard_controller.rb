@@ -91,6 +91,7 @@ class DashboardController < ApplicationController
       largest_order: Order.largest_order_value_days(7)
     }
 
+# Panel 4
     @orders_by_time = {
       orders_by_day: Order.orders_by_day,
       orders_by_week: Order.orders_by_week

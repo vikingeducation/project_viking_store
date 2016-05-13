@@ -1,6 +1,6 @@
 <h2>Products</h2>
 
-<%= link_to "Add a New Product", "#" , class: "btn btn-primary" %>
+<%= link_to "Add a New Product", new_product_path , class: "btn btn-primary" %>
 
 
 <table class="table">
@@ -21,8 +21,8 @@
 		<td><%= product.price %></td>
 		<td><%= link_to product.cname, category_path(product.cid) %></td>
 		<td><%= link_to "SHOW", product_path(product) %></td>
-		<td><%= link_to "EDIT", "#" %></td>
-		<td><%= link_to "DELETE", "#" %></td>
+		<td><%= link_to "EDIT", edit_product_path(product) %></td>
+		<td><%= link_to "DELETE", product_path(product), method: :delete, data: {confirm: "Are you Sure?"} %></td>
 	</tr>
 	<% end %>
 

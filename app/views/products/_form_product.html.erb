@@ -1,0 +1,27 @@
+<%= form_for @product do |f| %>
+
+	<%= f.label :id %>
+	<% if @product.persisted? %>
+		<%= @product.id %>
+	<% else %>
+		<span>N/A</span>
+	<% end %>
+
+	<%= f.label :name %>
+	<%= message_errors(@product, :name) %>
+	<%= f.text_field :name %>
+
+	<%= f.label :price %>
+	<%= message_errors(@product, :price) %>
+	<%= f.text_field :price %>
+
+	<%= f.label :category %>
+	<%= message_errors(@product, :category_id) %>
+	<%= f.collection_select(:category_id, Category.all, :id, :name) %>
+
+	<%= f.submit "New Product", class: "btn btn-primary" %>
+<% end %>
+
+<% if @product.persisted? %>
+	<%= link_to "Delete Me", product_path(@product), method: :delete, data: {confirm: "Are you Sure?"} %>
+<% end %>
