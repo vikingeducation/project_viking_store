@@ -90,6 +90,20 @@ class Order < ActiveRecord::Base
                        LIMIT 7 ")
   end
 
+  def self.nb_orders_by_product(id)
+    Order.joins("JOIN order_contents oc ON orders.id = oc.order_id")
+         .where("oc.product_id = ?", id)
+         .where("orders.checkout_date IS NOT NULL")
+         .count
+  end
+
+    def self.nb_carts_by_product(id)
+    Order.joins("JOIN order_contents oc ON orders.id = oc.order_id")
+         .where("oc.product_id = ?", id)
+         .where("orders.checkout_date IS NULL")
+         .count
+  end
+
 end
 
 
