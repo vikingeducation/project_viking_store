@@ -1,4 +1,6 @@
 class State < ActiveRecord::Base
+  has_many :addresses
+
 
   def self.top_states(n= 3)
     State.select('s.name, COUNT(*) AS total')

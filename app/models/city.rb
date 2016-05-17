@@ -1,4 +1,7 @@
 class City < ActiveRecord::Base
+  has_many :addresses
+
+
   def self.top_cities(n= 3)
     City.select("c.name, COUNT(c.name) AS total")
         .joins('AS c JOIN addresses a ON c.id = a.city_id')
