@@ -21,7 +21,6 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @products_of_category = Product.by_category(@category.id)
   end
 
   def edit

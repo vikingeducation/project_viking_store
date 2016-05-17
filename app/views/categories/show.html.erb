@@ -18,7 +18,7 @@
 				<th>Id</th>
 				<th>Name</th>
 			</tr>
-			<% @products_of_category.each do |product| %>
+			<% @category.products.each do |product| %>
 				<tr>
 					<td><%= product.id %></td>
 					<td><%= link_to product.name, "#" %></td>

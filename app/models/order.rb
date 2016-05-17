@@ -97,45 +97,9 @@ class Order < ActiveRecord::Base
                        LIMIT 7 ")
   end
 
-  def self.nb_orders_by_product(id)
-    Order.joins("JOIN order_contents oc ON orders.id = oc.order_id")
-         .where("oc.product_id = ?", id)
-         .where("orders.checkout_date IS NOT NULL")
-         .count
-  end
-
-    def self.nb_carts_by_product(id)
-    Order.joins("JOIN order_contents oc ON orders.id = oc.order_id")
-         .where("oc.product_id = ?", id)
-         .where("orders.checkout_date IS NULL")
-         .count
-  end
-
 end
 
 
-
-
-
-# def self.avg_order_value_days(t = 0)
-#     Order.find_by_sql("SELECT AVG(sum_order) AS avg_order FROM
-#                           (SELECT SUM(p.price * oc.quantity) AS sum_order
-#                           FROM orders
-#                           JOIN order_contents oc ON orders.id = oc.order_id
-#                           JOIN products p ON oc.product_id = p.id
-#                           WHERE orders.checkout_date IS NOT NULL
-#                           AND orders.checkout_date > #{time_helper(t)}
-#                           GROUP BY orders.id) s ")
-#   end
-
-#   # Helper method with time
-#   def self.time_helper(t)
-#     if t == 0
-#       Order.select("checkout_date").where("checkout_date IS NOT NULL").order("checkout_date").limit(1).first.checkout_date
-#     else
-#       (Time.now - t)
-#     end
-#   end
 
 
 

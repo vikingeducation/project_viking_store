@@ -1,14 +1,11 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all_with_category
+    @products = Product.all
   end
 
   def show
     @product = Product.find(params[:id])
-    @category = Category.where(id: @product.category_id).first
-    @nb_orders = Order.nb_orders_by_product(params[:id])
-    @nb_carts = Order.nb_carts_by_product(params[:id])
   end
 
   def new

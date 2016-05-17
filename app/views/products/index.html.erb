@@ -19,7 +19,7 @@
 		<td><%= product.id %></td>
 		<td><%= product.name %></td>
 		<td><%= product.price %></td>
-		<td><%= link_to product.cname, category_path(product.cid) %></td>
+		<td><%= link_to product.category.name, category_path(product.category.id) %></td>
 		<td><%= link_to "SHOW", product_path(product) %></td>
 		<td><%= link_to "EDIT", edit_product_path(product) %></td>
 		<td><%= link_to "DELETE", product_path(product), method: :delete, data: {confirm: "Are you Sure?"} %></td>

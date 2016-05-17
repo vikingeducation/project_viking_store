@@ -5,12 +5,12 @@
 <h4>Product Id : <%= @product.id %></h4>
 <h4>Product Name : <%= @product.name %></h4>
 <h4>Price : <%= @product.price %></h4>
-<h4>Category : <%= @category.name %></h4>
+<h4>Category : <%= @product.category.name %></h4>
 
 <h3>Product Statistics</h3>
 
-<h4>Times Ordered : <%= @nb_orders %></h4>
-<h4>Cart In : <%= @nb_carts %></h4>
+<h4>Times Ordered : <%= @product.orders.where("checkout_date IS NOT NULL").count %></h4>
+<h4>Cart In : <%= @product.orders.where("checkout_date IS NULL").count %></h4>
 
 <%= link_to "Edit", edit_product_path(@product)  %>
 <%= link_to "Delete", product_path(@product), method: :delete %>
