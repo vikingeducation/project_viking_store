@@ -1,6 +1,6 @@
 <h2>Viking Store Users</h2>
 
-<%= link_to "Create New User", "#", class: "btn btn-primary" %>
+<%= link_to "Create New User", new_user_path, class: "btn btn-primary" %>
 
 <table class="table">
 	<tr>
@@ -20,8 +20,8 @@
 			<td><%= user.id %></td>
 			<td><%= user.first_name + " " + user.last_name %></td>
 			<td><%= user.created_at %></td>
-			<td><%= Address.find(user.shipping_id).city.name %></td>
-			<td><%= Address.find(user.shipping_id).state.name %></td>
+			<td><%= Address.find(user.shipping_id).city.name unless user.shipping_id.nil? %></td>
+			<td><%= Address.find(user.shipping_id).state.name unless user.billing_id.nil? %></td>
 			<td><%= user.orders.where("checkout_date IS NOT NULL").count %></td>
 			<td><%= user.orders.where("checkout_date IS NOT NULL").last.checkout_date unless user.orders.nil? || user.orders.where("checkout_date IS NOT NULL").empty?  %></td>
 			<td><%= link_to "show", user %></td>

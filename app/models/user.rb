@@ -4,6 +4,12 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :products, :through => :orders
 
+  validates :first_name, :last_name, :email,
+            :length => {in: (1..64)},
+            :presence => true
+
+  validates :email,
+            format: { with: /@/ }
 
   def self.total
     User.all.count

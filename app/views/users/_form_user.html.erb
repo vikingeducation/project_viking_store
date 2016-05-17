@@ -1,0 +1,30 @@
+<%= form_for(@user) do |f| %>
+		<h3>Demographic Information</h3>
+		<%= f.label :first_name %>
+		<%= message_error(@user, :first_name) %>
+		<%= f.text_field :first_name %>
+
+		<%= f.label :last_name %>
+		<%= message_error(@user, :last_name) %>
+		<%= f.text_field :last_name %>
+
+		<%= f.label :email %>
+		<%= message_error(@user, :email) %>
+		<%= f.email_field :email %>
+
+		<% if @user.persisted? %>
+			<%= f.label :billing, "Default Billing Address" %>
+			<%= f.collection_select(:billing_id, @user.addresses) %>
+
+			<%= f.label :shipping, "Default Shipping Address" %>
+			<%= f.collection_select(:shipping_id, @user.addresses) %>
+
+			<%= link_to "View Saved Addresses", "#" %>
+		<% end %>
+
+		<%= f.submit "Create User", class: "btn btn-primary" %>
+<% end %>
+
+<% if @user.persisted? %>
+	<%= link_to "Delete #{print_name(@user)}", "#" %>
+<% end %>
