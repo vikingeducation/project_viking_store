@@ -25,7 +25,7 @@
 			<td><%= user.orders.where("checkout_date IS NOT NULL").count %></td>
 			<td><%= user.orders.where("checkout_date IS NOT NULL").last.checkout_date unless user.orders.nil? || user.orders.where("checkout_date IS NOT NULL").empty?  %></td>
 			<td><%= link_to "show", user %></td>
-			<td><%= "edit" %></td>
+			<td><%= link_to "edit", edit_user_path(user) %></td>
 			<td><%= "delete" %></td>
 		</tr>
 	<% end %>

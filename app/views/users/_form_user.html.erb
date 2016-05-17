@@ -2,27 +2,30 @@
 		<h3>Demographic Information</h3>
 		<%= f.label :first_name %>
 		<%= message_error(@user, :first_name) %>
-		<%= f.text_field :first_name %>
+		<%= f.text_field :first_name %><br>
 
 		<%= f.label :last_name %>
 		<%= message_error(@user, :last_name) %>
-		<%= f.text_field :last_name %>
+		<%= f.text_field :last_name %><br>
 
 		<%= f.label :email %>
 		<%= message_error(@user, :email) %>
-		<%= f.email_field :email %>
+		<%= f.email_field :email %><br>
 
 		<% if @user.persisted? %>
 			<%= f.label :billing, "Default Billing Address" %>
-			<%= f.collection_select(:billing_id, @user.addresses) %>
+			<%= f.collection_select(:billing_id, @user.addresses, 
+									:id, :street_address) %><br>
 
 			<%= f.label :shipping, "Default Shipping Address" %>
-			<%= f.collection_select(:shipping_id, @user.addresses) %>
+			<%= f.collection_select(:shipping_id, @user.addresses, 
+									:id, :street_address) %><br>
 
-			<%= link_to "View Saved Addresses", "#" %>
+			<%= link_to "View Saved Addresses", "#" %><br>
 		<% end %>
 
-		<%= f.submit "Create User", class: "btn btn-primary" %>
+		<%= f.submit @user.persisted? ? "Update User": "Create User", 
+					 class: "btn btn-primary" %>
 <% end %>
 
 <% if @user.persisted? %>

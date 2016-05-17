@@ -23,6 +23,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(whitelisted_params)
+      flash[:success]= "You succesfully update the user"
+      redirect_to @user
+    else
+      flash.now[:danger]= "Something went wrong"
+      render :edit
+    end
+  end
+
   private
   def whitelisted_params
     params.require(:user).permit(:first_name, :last_name, :email)
