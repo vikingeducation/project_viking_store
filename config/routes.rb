@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :products
   resources :users
+  resources :addresses
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
