@@ -193,7 +193,7 @@ def generate_credit_cards_for_checked_out_orders
     #so far, only good cards
     card[:exp_year] = Time.now.year + rand(5)
     card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
-
+    card[:ccv] = rand(100..999)
     card.save
 
     affiliated_orders = Order.where("user_id = ?", order.user_id).where("checkout_date IS NOT NULL")

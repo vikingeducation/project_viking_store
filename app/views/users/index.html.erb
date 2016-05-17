@@ -24,7 +24,7 @@
 			<td><%= Address.find(user.shipping_id).state.name %></td>
 			<td><%= user.orders.where("checkout_date IS NOT NULL").count %></td>
 			<td><%= user.orders.where("checkout_date IS NOT NULL").last.checkout_date unless user.orders.nil? || user.orders.where("checkout_date IS NOT NULL").empty?  %></td>
-			<td><%= "show" %></td>
+			<td><%= link_to "show", user %></td>
 			<td><%= "edit" %></td>
 			<td><%= "delete" %></td>
 		</tr>

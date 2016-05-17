@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
 
   validates :price, :numericality => { :less_than_or_equal_to => 10000 }
 
-  validates :category_id, :inclusion => (Category.ids)
+  #validates :category_id, :inclusion => (Category.all.ids)
 
   def self.total
     Product.all.count
