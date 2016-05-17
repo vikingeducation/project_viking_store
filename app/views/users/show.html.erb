@@ -1,66 +1,22 @@
 <h2>User <%= @user.id.to_s + ": " + print_name(@user) %></h2>
 
+
 <h3>Demographic Information</h3>
+<%= render partial: "demo_user", locals: {:user => @user} %>
 
-<h4>First name: <%= @user.first_name %></h4>
-<h4>Last name: <%= @user.last_name %></h4>
-<h4>Email: <%= @user.email %></h4>
-<br>
-<h4>Default Billing Address: <%= @user.billing_id.nil? ? "Billing Address empty" :print_address( @user.billing_id ) %></h4>
-<h4>Default Shipping Address: <%= @user.shipping_id.nil? ? "Shipping Address empty" :print_address( @user.shipping_id ) %></h4>
-
-<%= link_to "Edit #{print_name(@user)}'s information", "#" %><br>
-<%= link_to "Delete #{print_name(@user)}", "#"  %><br>
-<%= link_to "View Saved Addresses", "#" %><br>
-
-<% if get_cart(@user) %>
-	<%= link_to "View Unplaced Order (Cart)", "#" %>
-<% else %>
-	<p>View Unplaced Order (Cart)</p>
-<% end %>
 
 <h3>Credit Card Info</h3>
+<%= render partial: "credit_card_user", locals: {:user => @user} %>
 
-<% unless @user.credit_cards.empty? %>
-	<% @user.credit_cards.each do |card| %>
-		<h4>First name: <%= @user.first_name %></h4>
-		<h4>Last name: <%= @user.last_name %></h4>
-		<h4>Card Number: <%= card.card_number %></h4>
-		<h4>Expiration: <%= card.exp_month.to_s + " / " + card.exp_year.to_s %></h4>
-		<h4>CCV: <%= card.ccv %></h4>
-		<%= link_to "Delete Card", "#", method: :delete, data: {confirm: "Are you Sure?"} %>
-	<% end %>
-<% end %>
 
 <h3>Admin Actions for <%= print_name(@user) %></h3>
 
 <%= link_to "Create Order", "#", class: "btn btn-primary" %><br><br>
 <%= link_to "Create Address", "#", class: "btn btn-primary" %>
 
-<h3>Order History</h3>
 
-<table class="table">
-	<tr>
-		<th>Id</th>
-		<th>Order Date</th>
-		<th>Order Value</th>
-		<th>Status</th>
-		<th>SHOW</th>
-		<th>EDIT</th>
-		<th>DELETE</th>
-	</tr>
-	<% @orders.each do |order| %>
-		<tr>
-			<td><%= order.id %></td>
-			<td><%= order.created_at %></td>
-			<td><%= number_to_currency get_price_order(order) %></td>
-			<td><%= is_checkout(order)? "PLACED" : "UNPLACED" %></td>
-			<td><%= "show" %></td>
-			<td><%= "edit" %></td>
-			<td><%= "delete" %></td>
-		</tr>
-	<% end %>
-</table>
+<h3>Order History</h3>
+<%= render partial: "order_history_user", locals: {:orders => @orders} %>
 
 
 

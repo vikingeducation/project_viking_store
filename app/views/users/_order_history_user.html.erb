@@ -1,0 +1,22 @@
+<table class="table">
+	<tr>
+		<th>Id</th>
+		<th>Order Date</th>
+		<th>Order Value</th>
+		<th>Status</th>
+		<th>SHOW</th>
+		<th>EDIT</th>
+		<th>DELETE</th>
+	</tr>
+	<% orders.each do |order| %>
+		<tr>
+			<td><%= order.id %></td>
+			<td><%= order.created_at %></td>
+			<td><%= number_to_currency get_price_order(order) %></td>
+			<td><%= is_checkout(order)? "PLACED" : "UNPLACED" %></td>
+			<td><%= "show" %></td>
+			<td><%= "edit" %></td>
+			<td><%= "delete" %></td>
+		</tr>
+	<% end %>
+</table>

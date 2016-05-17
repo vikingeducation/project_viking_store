@@ -1,0 +1,10 @@
+<% unless user.credit_cards.empty? %>
+	<% user.credit_cards.each do |card| %>
+		<h4>First name: <%= user.first_name %></h4>
+		<h4>Last name: <%= user.last_name %></h4>
+		<h4>Card Number: <%= card.card_number %></h4>
+		<h4>Expiration: <%= card.exp_month.to_s + " / " + card.exp_year.to_s %></h4>
+		<h4>CCV: <%= card.ccv %></h4>
+		<%= link_to "Delete Card", "#", method: :delete, data: {confirm: "Are you Sure?"} %>
+	<% end %>
+<% end %>

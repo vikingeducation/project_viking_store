@@ -1,0 +1,16 @@
+<h4>First name: <%= user.first_name %></h4>
+<h4>Last name: <%= user.last_name %></h4>
+<h4>Email: <%= user.email %></h4>
+<br>
+<h4>Default Billing Address: <%= user.billing_id.nil? ? "Billing Address empty" :print_address( user.billing_id ) %></h4>
+<h4>Default Shipping Address: <%= user.shipping_id.nil? ? "Shipping Address empty" :print_address( user.shipping_id ) %></h4>
+
+<%= link_to "Edit #{print_name(user)}'s information", "#" %><br>
+<%= link_to "Delete #{print_name(user)}", "#"  %><br>
+<%= link_to "View Saved Addresses", "#" %><br>
+
+<% if get_cart(user) %>
+	<%= link_to "View Unplaced Order (Cart)", "#" %>
+<% else %>
+	<p>View Unplaced Order (Cart)</p>
+<% end %>
