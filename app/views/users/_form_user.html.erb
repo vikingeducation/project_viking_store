@@ -29,5 +29,5 @@
 <% end %>
 
 <% if @user.persisted? %>
-	<%= link_to "Delete #{print_name(@user)}", "#" %>
+	<%= link_to "Delete #{print_name(@user)}", method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>

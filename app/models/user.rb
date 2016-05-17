@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :addresses
-  has_many :credit_cards
+  has_many :credit_cards, :dependent => :destroy
   has_many :orders
   has_many :products, :through => :orders
 
@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   validates :email,
             format: { with: /@/ }
+
+  before_destroy :check_order_type
 
   def self.total
     User.all.count
@@ -62,7 +64,13 @@ class User < ActiveRecord::Base
 
   end
 
-  
+  private
+
+  def check_order_type
+    self.orders.each do |order|
+      order.destroy unless is_checkout(order)
+    end
+  end
 end
 
 

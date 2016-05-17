@@ -38,6 +38,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    if @user.delete
+      flash[:success]= "You succesfully delete the user"
+      redirect_to users_path
+    else
+      flash.now[:danger]= "Something went wrong"
+      redirect_to(:back)
+    end
+  end
+
   private
   def whitelisted_params
     params.require(:user).permit(:first_name, :last_name, :email)

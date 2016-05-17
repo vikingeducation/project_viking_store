@@ -6,7 +6,7 @@
 <h4>Default Shipping Address: <%= user.shipping_id.nil? ? "Shipping Address empty" :print_address( user.shipping_id ) %></h4>
 
 <%= link_to "Edit #{print_name(user)}'s information", edit_user_path(user) %><br>
-<%= link_to "Delete #{print_name(user)}", "#"  %><br>
+<%= link_to "Delete #{print_name(user)}", user, method: :delete, data: {confirm: "Are you sure?"} %><br>
 <%= link_to "View Saved Addresses", "#" %><br>
 
 <% if get_cart(user) %>
