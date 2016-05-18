@@ -1,0 +1,47 @@
+<table class="table">
+	<tr>
+		<th>Id</th>
+		<th>User_id</th>
+		<th>Address</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Total Value</th>
+		<th>Status</th>
+		<th>Date Placed</th>
+		<th>SHOW</th>
+		<th>EDIT</th>
+		<th>DELETE</th>
+	</tr>
+
+	<% orders.each do |order| %>
+		<tr>
+			<td><%= order.id %></td>
+			<td><%= link_to "#{order.user.id}", user_path(order.user.id) %></td>
+			<td><%= order.address.street_address %></td>
+			<td><%= order.address.city.name %></td>
+			<td><%= order.address.state.name %></td>
+			<td><%= total_value(order).first.total_value %></td>
+			<%= order.cart? ? 
+							content_tag(:td, class: "unplaced-order") { "UNPLACED" } : 
+							content_tag(:td, class: "placed-order") { "PLACED" } %>
+			<td><%= order.created_at %></td>
+			<td><%= link_to "show", "#" %></td>
+			<td><%= link_to "edit", "#" %></td>
+			<td><%= link_to "delete", "#" %></td>
+		</tr>
+	<% end %>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

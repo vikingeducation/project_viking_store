@@ -1,0 +1,11 @@
+// Place all the styles related to the orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.unplaced-order {
+	color: hsla(15, 40%, 60%, 1);
+}
+
+.placed-order {
+	color: hsla(135, 40%, 60%, 1);
+}

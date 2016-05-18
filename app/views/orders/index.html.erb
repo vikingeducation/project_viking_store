@@ -1,0 +1,9 @@
+<!-- Different Header if all users / one user -->
+<% if @user %>
+	<%= render partial: "index_one_user", locals: {:user => @user} %>
+<% else %>
+	<%= render "index_all_users" %>
+<% end %>
+
+
+<%= render partial: "table_orders", locals: {:orders => @orders} %>

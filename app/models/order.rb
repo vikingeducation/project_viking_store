@@ -4,11 +4,17 @@ class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :credit_card
 
+  belongs_to :address, :foreign_key => :shipping_id
+
   has_many :categories, :through => :products
 
 
   def self.total
     Order.where("checkout_date IS NOT NULL").count
+  end
+
+  def cart?
+    self.checkout_date.nil?
   end
 
   def self.revenue
