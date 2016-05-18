@@ -1,6 +1,6 @@
-<h2><%= print_name(@user) %>'s Addresses</h2>
+<h2><%= print_name(user) %>'s Addresses</h2>
 
-<%= link_to "Create a #{print_name(@user)} address", "#", class: "btn btn-primary"  %>
+<%= link_to "Create a #{print_name(user)} address", new_user_address_path(:user_id => user.id) , class: "btn btn-primary"  %>
 
 <table class="table">
 	<tr>
@@ -25,8 +25,8 @@
 			<td><%= address.state.name %></td>
 			<td><%= Order.where(shipping_id: address.id).count %></td>
 			<td><%= address.created_at %></td>
-			<td><%= link_to "show", address %></td>
-			<td><%= link_to "edit", "#" %></td>
+			<td><%= link_to "show", user_address_path(user_id: user.id, id: address.id) %></td>
+			<td><%= link_to "edit", edit_user_address_path(user_id: address.user.id, id: address.id) %></td>
 			<td><%= link_to "delete", "#" %></td>
 		</tr>
 	<% end %>

@@ -25,8 +25,8 @@
 			<td><%= address.state.name %></td>
 			<td><%= Order.where(shipping_id: address.id).count %></td>
 			<td><%= address.created_at %></td>
-			<td><%= link_to "show", address %></td>
-			<td><%= link_to "edit", "#" %></td>
+			<td><%= link_to "show", user_address_path(user_id: address.user.id, id: address.id) %></td>
+			<td><%= link_to "edit", edit_user_address_path(user_id: address.user.id, id: address.id) %></td>
 			<td><%= link_to "delete", "#" %></td>
 		</tr>
 	<% end %>

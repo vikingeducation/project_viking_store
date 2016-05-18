@@ -8,5 +8,5 @@
 <h4>State: <%= @address.state.name %></h4>
 <h4>Zip: <%= @address.zip_code %></h4>
 
-<%= link_to "Edit Address", edit_address_path(@address) %>
-<%= link_to "Delete Address", @address, method: :delete  %>
+<%= link_to "Edit Address", edit_user_address_path(@address.user, @address) %>
+<%= link_to "Delete Address", user_address_path(@address.user, @address), method: :delete  %>

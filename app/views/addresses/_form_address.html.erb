@@ -1,0 +1,30 @@
+<h2><%= address.persisted? ? "Edit " + print_name(user) : "New " + print_name(user) %> Address</h2>
+
+<h4>Owner ID: <%= user.id %></h4>
+<h4>Owner Name: <%= link_to "#{print_name(user)} (click to view)", user %></h4>
+
+<% if address.persisted? %>
+	<%= form_for(address, url: user_address_path(user, address), method: :patch) do |f| %>
+<% else %>
+	<%= form_for(address, url: user_addresses_path(user), method: :post) do |f| %>
+<% end %>
+
+
+	<%= f.label :street_address, "Street" %>
+	<%= message_error(address, :street_address) %>
+	<%= f.text_field :street_address %><br>
+
+	<%= f.label :city_id %>
+	<%= message_error(address, :city_id) %>
+	<%= f.collection_select(:city_id, City.order(name: :asc), :id, :name) %><br>
+
+	<%= f.label :state_id %>
+	<%= message_error(address, :state_id) %>
+	<%= f.collection_select(:state_id, State.all, :id, :name) %><br>
+
+	<%= f.label :zip_code %>
+	<%= message_error(address, :zip_code) %>
+	<%= f.text_field :zip_code %><br>
+
+	<%= f.submit "Create Address", class: "btn btn-primary	" %>
+<% end %>
