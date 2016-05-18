@@ -5,4 +5,8 @@ class AddressesController < ApplicationController
       @user = User.find(params[:user_id])
     end
   end
+
+  def show
+    @address = Address.find(params[:id])
+  end
 end

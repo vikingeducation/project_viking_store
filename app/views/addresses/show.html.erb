@@ -1,0 +1,12 @@
+<h2><%= print_name(@address.user) %>'s Address</h2>
+
+<h4>Owner ID: <%= @address.user.id %></h4>
+<h4>Owner Name: <%= link_to "#{print_name(@address.user)} (click to view user)", user_path(@address.user) %></h4>
+
+<h4>Street: <%= @address.street_address %></h4>
+<h4>City: <%= @address.city.name %></h4>
+<h4>State: <%= @address.state.name %></h4>
+<h4>Zip: <%= @address.zip_code %></h4>
+
+<%= link_to "Edit Address", edit_address_path(@address) %>
+<%= link_to "Delete Address", @address, method: :delete  %>
