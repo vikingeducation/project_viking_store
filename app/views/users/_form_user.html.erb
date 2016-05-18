@@ -14,14 +14,14 @@
 
 		<% if @user.persisted? %>
 			<%= f.label :billing, "Default Billing Address" %>
-			<%= f.collection_select(:billing_id, @user.addresses, 
+			<%= f.collection_select(:billing_id, @user.addresses.where(:deleted => false), 
 									:id, :street_address) %><br>
 
 			<%= f.label :shipping, "Default Shipping Address" %>
-			<%= f.collection_select(:shipping_id, @user.addresses, 
+			<%= f.collection_select(:shipping_id, @user.addresses.where(:deleted => false), 
 									:id, :street_address) %><br>
 
-			<%= link_to "View Saved Addresses", "#" %><br>
+			<%= link_to "View Saved Addresses", user_addresses_path(@user) %><br>
 		<% end %>
 
 		<%= f.submit @user.persisted? ? "Update User": "Create User", 

@@ -46,6 +46,17 @@ class AddressesController < ApplicationController
     end
   end
 
+  def destroy
+    @address = Address.find(params[:id])
+    if update_user_address(@address)
+      flash[:success] = "You succesfully deleted the address"
+      redirect_to user_addresses_path(params[:user_id])
+    else
+      flash[:danger] = "Something went wrong"
+      redirect_to(:back)
+    end
+  end
+
 
   private
 
@@ -62,4 +73,26 @@ class AddressesController < ApplicationController
       end
     end
   end
+
+  def update_user_address(a)
+    user = a.user
+    a.update(:deleted => true)
+    if user.billing_id == a.id
+      if user.addresses.where(:deleted => false).count > 0
+        user.billing_id = user.addresses.where(:deleted => false).first.id
+      else
+        user.billing_id = nil
+      end
+    end
+
+    if user.shipping_id == a.id
+      if user.addresses.where(:deleted => false).count > 0
+        user.shipping_id = user.addresses.where(:deleted => false).first.id
+      else
+        user.shipping_id = nil
+      end
+    end
+    user.save
+  end
+
 end
