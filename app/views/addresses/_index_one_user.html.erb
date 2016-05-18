@@ -1,0 +1,47 @@
+<h2><%= print_name(@user) %>'s Addresses</h2>
+
+<%= link_to "Create a #{print_name(@user)} address", "#", class: "btn btn-primary"  %>
+
+<table class="table">
+	<tr>
+		<th>Id</th>
+		<th>User</th>
+		<th>Address</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Orders</th>
+		<th>Created</th>
+		<th>SHOW</th>
+		<th>EDIT</th>
+		<th>DELETE</th>
+	</tr>
+
+	<% user.addresses.each do |address| %>
+		<tr>
+			<td><%= address.id %></td>
+			<td><%= link_to "#{address.user.first_name + ' ' + address.user.last_name}", user_path(address.user.id) %></td>
+			<td><%= address.street_address %></td>
+			<td><%= address.city.name %></td>
+			<td><%= address.state.name %></td>
+			<td><%= Order.where(shipping_id: address.id).count %></td>
+			<td><%= address.created_at %></td>
+			<td><%= link_to "show", "#" %></td>
+			<td><%= link_to "edit", "#" %></td>
+			<td><%= link_to "delete", "#" %></td>
+		</tr>
+	<% end %>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
