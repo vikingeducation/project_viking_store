@@ -1,0 +1,58 @@
+<h2>Order <%= @order.id.to_s + (@order.cart? ? " (Shopping Cart)" : "") %></h2>
+
+<h3>Logistical Information</h3>
+
+<h3>Basic Information</h3>
+
+<h4>Customer ID: <%= @order.user.id %></h4>
+<h4>Customer: <%= print_name(@order.user) %> (click to view user)</h4>
+<h4>Date Placed: <%= @order.created_at %></h4>
+<h4># Products: <%= @order.products.count %></h4>
+<h4>Order Value: <%= total_value(@order).first.total_value %></h4>
+
+<%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
+
+<%= @order.cart? ? 
+				content_tag(:h3, class: "unplaced-order") { "UNPLACED" } : 
+				content_tag(:h3, class: "placed-order") { "PLACED" } %>
+
+<h4>Billing Address</h4>
+<h4><%= print_address(@order.user.billing_id) %></h4>
+
+<h4>Shipping Address</h4>
+<h4><%= print_address(@order.user.shipping_id) %></h4>
+
+<% unless @order.credit_card.nil? %>
+	<h4>Billing Card: </h4>
+	<h4>Last 4 Digits: <%= @order.credit_card.card_number[12..16] %></h4>
+<% end %>
+
+<%= link_to "Edit Order", "#" %>
+<%= link_to "Delete Order", "#" %>
+
+<h3>Order Contents</h3>
+
+<table class="table">
+	<tr>
+		<th>Product ID</th>
+		<th>Product</th>
+		<th>Quantity</th>
+		<th>Price</th>
+		<th>Total Price</th>
+	</tr>
+	<% @order.products.each do |product| %>
+		<tr>
+			<td><%= product.id %></td>
+			<td><%= link_to product.name, product %></td>
+			<td><%=  product_quantity(@order, product) %></td>
+			<td><%= product.price %></td>
+			<td><%= product_quantity(@order, product) * product.price %></td>
+		</tr>
+	<% end %>
+</table>
+	
+
+
+
+
+

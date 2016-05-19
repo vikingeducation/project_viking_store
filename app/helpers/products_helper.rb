@@ -1,6 +1,6 @@
 module ProductsHelper
   
-    def message_errors(resource, field)
+  def message_errors(resource, field)
     if resource.errors[field].empty?
       error = ""
     else
@@ -10,4 +10,7 @@ module ProductsHelper
     end
   end
 
+  def product_quantity(order, product)
+    OrderContent.where(:order_id => order.id).where(:product_id => product.id).first.quantity
+  end
 end

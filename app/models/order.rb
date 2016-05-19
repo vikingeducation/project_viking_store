@@ -8,6 +8,16 @@ class Order < ActiveRecord::Base
 
   has_many :categories, :through => :products
 
+  validates :shipping_id, :billing_id, :credit_card_id, :presence => true
+
+  before_create do |order|
+    user = order.user
+    unless user.orders.where(checkout_date: nil).count == 0
+      false
+    end
+  end
+
+
 
   def self.total
     Order.where("checkout_date IS NOT NULL").count

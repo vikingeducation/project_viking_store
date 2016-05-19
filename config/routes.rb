@@ -9,10 +9,11 @@ Rails.application.routes.draw do
   resources :products
   resources :users do
     resources :addresses
+    resources :orders
   end
   resources :addresses, only: [:index]
 
-  resources :orders
+  resources :orders, only: [:index]
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

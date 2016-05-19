@@ -11,7 +11,7 @@
 
 <h3>Admin Actions for <%= print_name(@user) %></h3>
 
-<%= link_to "Create Order", "#", class: "btn btn-primary" %><br><br>
+<%= link_to "Create Order", new_user_order_path(@user),  class: "btn btn-primary" %><br><br>
 <%= link_to "Create Address", "#", class: "btn btn-primary" %>
 
 
