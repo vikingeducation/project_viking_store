@@ -13,9 +13,9 @@
 			<td><%= order.id %></td>
 			<td><%= order.created_at %></td>
 			<td><%= number_to_currency get_price_order(order) %></td>
-			<td><%= is_checkout(order)? "PLACED" : "UNPLACED" %></td>
+			<td><%= order.is_placed ? "PLACED" : "UNPLACED" %></td>
 			<td><%= link_to "show", user_order_path(order.user, order) %></td>
-			<td><%= "edit" %></td>
+			<td><%= link_to "edit", edit_user_order_path(order.user, order) %></td>
 			<td><%= "delete" %></td>
 		</tr>
 	<% end %>

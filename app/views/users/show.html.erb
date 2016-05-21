@@ -1,4 +1,4 @@
-<h2>User <%= @user.id.to_s + ": " + print_name(@user) %></h2>
+<h2>User <%= @user.id.to_s + ": " + @user.full_name %></h2>
 
 
 <h3>Demographic Information</h3>
@@ -9,10 +9,10 @@
 <%= render partial: "credit_card_user", locals: {:user => @user} %>
 
 
-<h3>Admin Actions for <%= print_name(@user) %></h3>
+<h3>Admin Actions for <%= @user.full_name %></h3>
 
 <%= link_to "Create Order", new_user_order_path(@user),  class: "btn btn-primary" %><br><br>
-<%= link_to "Create Address", "#", class: "btn btn-primary" %>
+<%= link_to "Create Address", new_user_address_path(@user), class: "btn btn-primary" %>
 
 
 <h3>Order History</h3>

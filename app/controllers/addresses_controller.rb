@@ -17,7 +17,10 @@ class AddressesController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
+
     @address = Address.new(whitelisted_params)
+    city = City.where(name: params[:city_name]).first_or_create
+    @address.city_id = city.id
     @address.user_id = @user.id
     if @address.save
       flash[:success] = "You created a new address"
@@ -31,13 +34,14 @@ class AddressesController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
     @address = Address.find(params[:id])
+    @city = @address.city
   end
 
   def update
     @user = User.find(params[:user_id])
-    @address = Address.new(whitelisted_params)
-    @address.user_id = @user.id
-    if @address.save
+    @address = Address.find(params[:id])
+    city = City.where(name: params[:city_name]).first_or_create
+    if @address.update_attributes(user_id: @user.id, city_id: city.id)
       flash[:success] = "You edit the address"
       redirect_to user_address_path(@user, @address)
     else

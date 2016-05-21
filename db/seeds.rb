@@ -173,6 +173,7 @@ def generate_order
     end
 
     o.save
+    
     generate_contents(o[:id])
   end
 end

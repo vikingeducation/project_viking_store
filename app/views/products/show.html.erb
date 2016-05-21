@@ -9,8 +9,8 @@
 
 <h3>Product Statistics</h3>
 
-<h4>Times Ordered : <%= @product.orders.where("checkout_date IS NOT NULL").count %></h4>
-<h4>Cart In : <%= @product.orders.where("checkout_date IS NULL").count %></h4>
+<h4>Times Ordered : <%= @product.number_order %></h4>
+<h4>Cart In : <%= @product.number_cart %></h4>
 
 <%= link_to "Edit", edit_product_path(@product)  %>
-<%= link_to "Delete", product_path(@product), method: :delete %>
+<%= link_to "Delete", @product, method: :delete %>

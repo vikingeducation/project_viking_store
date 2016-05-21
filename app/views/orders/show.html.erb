@@ -5,7 +5,7 @@
 <h3>Basic Information</h3>
 
 <h4>Customer ID: <%= @order.user.id %></h4>
-<h4>Customer: <%= print_name(@order.user) %> (click to view user)</h4>
+<h4>Customer: <%= @order.user.full_name %> (click to view user)</h4>
 <h4>Date Placed: <%= @order.created_at %></h4>
 <h4># Products: <%= @order.products.count %></h4>
 <h4>Order Value: <%= total_value(@order).first.total_value %></h4>
@@ -27,7 +27,7 @@
 	<h4>Last 4 Digits: <%= @order.credit_card.card_number[12..16] %></h4>
 <% end %>
 
-<%= link_to "Edit Order", "#" %>
+<%= link_to "Edit Order", edit_user_order_path(@order.user, @order) %>
 <%= link_to "Delete Order", "#" %>
 
 <h3>Order Contents</h3>
@@ -44,7 +44,7 @@
 		<tr>
 			<td><%= product.id %></td>
 			<td><%= link_to product.name, product %></td>
-			<td><%=  product_quantity(@order, product) %></td>
+			<td><%= product_quantity(@order, product) %></td>
 			<td><%= product.price %></td>
 			<td><%= product_quantity(@order, product) * product.price %></td>
 		</tr>

@@ -28,4 +28,12 @@ class Product < ActiveRecord::Base
     .joins("AS p JOIN categories c ON p.category_id = c.id")
   end
 
+
+  def number_order
+    self.orders.where("checkout_date IS NOT NULL").count
+  end
+
+  def number_cart
+    self.orders.where("checkout_date IS NULL").count
+  end
 end

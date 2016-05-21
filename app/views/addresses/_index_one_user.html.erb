@@ -1,6 +1,6 @@
-<h2><%= print_name(user) %>'s Addresses</h2>
+<h2><%= user.full_name %>'s Addresses</h2>
 
-<%= link_to "Create a #{print_name(user)} address", new_user_address_path(:user_id => user.id) , class: "btn btn-primary"  %>
+<%= link_to "Create a #{user.full_name} address", new_user_address_path(:user_id => user.id) , class: "btn btn-primary"  %>
 
 <table class="table">
 	<tr>
@@ -20,7 +20,7 @@
 		<% unless address.deleted == true %>
 			<tr>
 				<td><%= address.id %></td>
-				<td><%= link_to "#{address.user.first_name + ' ' + address.user.last_name}", user_path(address.user.id) %></td>
+				<td><%= link_to "#{address.user.full_name}", user_path(address.user.id) %></td>
 				<td><%= address.street_address %></td>
 				<td><%= address.city.name %></td>
 				<td><%= address.state.name %></td>
@@ -28,7 +28,8 @@
 				<td><%= address.created_at %></td>
 				<td><%= link_to "show", user_address_path(user_id: user.id, id: address.id) %></td>
 				<td><%= link_to "edit", edit_user_address_path(user_id: address.user.id, id: address.id) %></td>
-				<td><%= link_to "delete", user_address_path(user_id: user.id, id: address.id), method: :delete, data: {confirm: "Are you Sure?"} %></td>
+				<td><%= link_to "delete", user_address_path(user_id: user.id, id: address.id), 
+										  method: :delete, data: {confirm: "Are you Sure?"} %></td>
 			</tr>
 		<% end %>
 	<% end %>

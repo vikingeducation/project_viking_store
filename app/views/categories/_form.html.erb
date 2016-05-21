@@ -1,19 +1,17 @@
-<%= form_for @category do |f| %>
+<%= form_for category do |f| %>
 
 	<%= f.label :id %>
-	<% if @category.persisted? %>
-		<%= @category.id %>
-	<% else %>
-		N/A
-	<% end %>
+	<span><%= category.persisted? ? category.id : "N/A" %></span>
 
-	<%= message_errors(@category, :name) %>
+	<%= message_errors(category, :name) %>
 	<%= f.label :name %>
 	<%= f.text_field :name %>
 
-	<%= f.submit "Create Category", class: "btn btn-primary" %>
+	<%= f.submit  category.persisted? ? "Update Category" : "Create Category", 
+				  class: "btn btn-primary" %>
 <% end %>
 
-<% if @category.persisted? %>
-	<%= link_to "Delete Me", category_path(@category), method: :delete, data: {confirm: "Are you Sure?"} %>
+<% if category.persisted? %>
+	<%= link_to "Delete Me", category, method: :delete, 
+									   data: {confirm: "Are you Sure?"} %>
 <% end %>

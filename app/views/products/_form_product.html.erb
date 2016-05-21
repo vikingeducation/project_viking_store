@@ -1,27 +1,25 @@
-<%= form_for @product do |f| %>
+<%= form_for product do |f| %>
 
 	<%= f.label :id %>
-	<% if @product.persisted? %>
-		<%= @product.id %>
-	<% else %>
-		<span>N/A</span>
-	<% end %>
+	<span><%= product.persisted? ? product.id : "N/A" %></span>
 
 	<%= f.label :name %>
-	<%= message_errors(@product, :name) %>
+	<%= message_error(product, :name) %>
 	<%= f.text_field :name %>
 
 	<%= f.label :price %>
-	<%= message_errors(@product, :price) %>
+	<%= message_error(product, :price) %>
 	<%= f.text_field :price %>
 
 	<%= f.label :category %>
-	<%= message_errors(@product, :category_id) %>
-	<%= f.collection_select(:category_id, Category.all, :id, :name) %>
+	<%= message_error(product, :category_id) %>
+	<%= f.collection_select(:category_id, Category.all, :id, :name) %><br>
 
-	<%= f.submit "New Product", class: "btn btn-primary" %>
+	<%= f.submit  product.persisted? ? "Update Product" : "Create Product", 
+				  class: "btn btn-primary" %>
 <% end %>
 
-<% if @product.persisted? %>
-	<%= link_to "Delete Me", product_path(@product), method: :delete, data: {confirm: "Are you Sure?"} %>
+<% if product.persisted? %>
+	<%= link_to "Delete Me", product, method: :delete, 
+									  data: {confirm: "Are you Sure?"} %>
 <% end %>

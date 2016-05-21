@@ -26,7 +26,7 @@
 							content_tag(:td, class: "placed-order") { "PLACED" } %>
 			<td><%= order.created_at %></td>
 			<td><%= link_to "show", user_order_path(order.user, order) %></td>
-			<td><%= link_to "edit", "#" %></td>
+			<td><%= link_to "edit", edit_user_order_path(order.user, order) %></td>
 			<td><%= link_to "delete", "#" %></td>
 		</tr>
 	<% end %>

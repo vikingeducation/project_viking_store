@@ -27,6 +27,23 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @user = User.find(params[:user_id])
+    @order_content = OrderContent.where(order_id: @order.id)
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    @user = User.find(params[:user_id])
+    if params[:status] = "placed"
+      @order.update_attributes(:checkout_date => Time.now)
+    end
+
+    if @order.update_attributes(whitelisted_params)
+      flash[:success] = "You edited the order"
+      redirect_to user_order_path(@user, @order)
+    else
+      flash[:danger] = "Something went wrong"
+      render :edit
+    end
   end
 
   private

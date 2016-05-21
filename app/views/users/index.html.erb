@@ -2,31 +2,4 @@
 
 <%= link_to "Create New User", new_user_path, class: "btn btn-primary" %>
 
-<table class="table">
-	<tr>
-		<th>id</th>
-		<th>Name</th>
-		<th>Joined</th>
-		<th>City</th>
-		<th>State</th>
-		<th>Orders</th>
-		<th>Last Order Date</th>
-		<th>SHOW</th>
-		<th>EDIT</th>
-		<th>DELETE</th>
-	</tr>
-	<% @users.each do |user| %>
-		<tr>
-			<td><%= user.id %></td>
-			<td><%= user.first_name + " " + user.last_name %></td>
-			<td><%= user.created_at %></td>
-			<td><%= Address.find(user.shipping_id).city.name unless user.shipping_id.nil? %></td>
-			<td><%= Address.find(user.shipping_id).state.name unless user.billing_id.nil? %></td>
-			<td><%= user.orders.where("checkout_date IS NOT NULL").count %></td>
-			<td><%= user.orders.where("checkout_date IS NOT NULL").last.checkout_date unless user.orders.nil? || user.orders.where("checkout_date IS NOT NULL").empty?  %></td>
-			<td><%= link_to "show", user %></td>
-			<td><%= link_to "edit", edit_user_path(user) %></td>
-			<td><%= link_to "delete", user, method: :delete, data: {confirm: "Are you sure?"} %></td>
-		</tr>
-	<% end %>
-</table>
+<%= render partial: "index_table", locals: {users: @users} %>

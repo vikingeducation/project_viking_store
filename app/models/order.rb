@@ -8,7 +8,7 @@ class Order < ActiveRecord::Base
 
   has_many :categories, :through => :products
 
-  validates :shipping_id, :billing_id, :credit_card_id, :presence => true
+  validates :shipping_id, :billing_id, :presence => true
 
   before_create do |order|
     user = order.user
@@ -16,7 +16,6 @@ class Order < ActiveRecord::Base
       false
     end
   end
-
 
 
   def self.total
@@ -111,6 +110,11 @@ class Order < ActiveRecord::Base
                        GROUP BY weeks
                        ORDER BY weeks DESC
                        LIMIT 7 ")
+  end
+
+
+  def is_placed
+    self.checkout_date ? true : false
   end
 
 end

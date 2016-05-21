@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_many :addresses
   has_many :credit_cards, :dependent => :destroy
-  has_many :orders
+  has_many :orders   # :dependent => :destroy if: 
+
   has_many :products, :through => :orders
 
   validates :first_name, :last_name, :email,
@@ -64,11 +65,45 @@ class User < ActiveRecord::Base
 
   end
 
+  def full_name
+    self.first_name + " " + self.last_name
+  end
+
+  def find_shipping_address
+    Address.find(self.shipping_id).city.name unless self.shipping_id.nil?
+  end
+
+  def find_billing_address
+    Address.find(self.billing_id).city.name unless self.billing_id.nil?
+  end
+
+  def placed_orders
+    self.orders.where("checkout_date IS NOT NULL")
+  end
+
+  def last_order_date
+    self.placed_orders.last.checkout_date unless self.orders.nil? || self.orders.where("checkout_date IS NOT NULL").empty? 
+  end
+
+  def existing_addresses
+    self.addresses.where(:deleted => false)
+  end
+
+  def get_cart?
+    self.orders.where("checkout_date IS NULL").count > 0
+  end
+
+  def cart
+    self.orders.where("checkout_date IS NULL").first
+  end
+
+
+
   private
 
   def check_order_type
     self.orders.each do |order|
-      order.destroy unless is_checkout(order)
+      order.destroy unless order.is_placed # is_checkout(order)
     end
   end
 end

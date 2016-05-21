@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   resources :addresses, only: [:index]
 
   resources :orders, only: [:index]
+
+  resources :order_contents, only: [:destroy]
+
+  patch 'update_quantities_order' => 'order_contents#update_quantities'
+  patch 'update_products_order' => 'order_contents#update_products'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
