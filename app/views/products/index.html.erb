@@ -21,7 +21,7 @@
 		<div class="col-sm-4 item-card">
 			<div><%= product.name %></div>
 			<div><%= product.price %></div>
-			<div><%= link_to "Add to Cart", "#" %></div>
+			<div><%= link_to "Add to Cart", add_product_path(:id => product.id) %></div>
 		</div>
 	<% end %>
 

@@ -12,4 +12,12 @@ class ProductsController < ApplicationController
     end
 
   end
+
+  def add_product
+    session[:user_cart] = [] if session[:user_cart].nil?
+    if session[:user_cart] << params[:id]
+      flash[:success]= "You Added the #{Product.find(params[:id]).name} to your cart"
+      redirect_to products_path
+    end
+  end
 end

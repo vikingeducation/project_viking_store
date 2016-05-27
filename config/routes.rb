@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :products
+  get 'add_product' => 'products#add_product'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
