@@ -1,0 +1,17 @@
+<%= form_for [:admin, category] do |f| %>
+
+	<%= f.label :id %>
+	<span><%= category.persisted? ? category.id : "N/A" %></span>
+
+	<%= message_errors(category, :name) %>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<%= f.submit  category.persisted? ? "Update Category" : "Create Category", 
+				  class: "btn btn-primary" %>
+<% end %>
+
+<% if category.persisted? %>
+	<%= link_to "Delete Me", [:admin, category], method: :delete, 
+									   data: {confirm: "Are you Sure?"} %>
+<% end %>

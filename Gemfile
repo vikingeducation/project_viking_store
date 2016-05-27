@@ -27,6 +27,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',  '~> 1.3.6',      group: :development
 
 gem 'pry'
+gem 'pry-byebug'
 
 gem 'faker'
 gem 'hirb'
@@ -34,6 +35,7 @@ gem 'hirb'
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
+  gem "bullet"
 end
 
 group :production do

@@ -1,0 +1,34 @@
+<%= form_for [:admin, user] do |f| %>
+
+		<h3>Demographic Information</h3>
+		<%= f.label :first_name %>
+		<%= message_error(user, :first_name) %>
+		<%= f.text_field :first_name %><br>
+
+		<%= f.label :last_name %>
+		<%= message_error(user, :last_name) %>
+		<%= f.text_field :last_name %><br>
+
+		<%= f.label :email %>
+		<%= message_error(user, :email) %>
+		<%= f.email_field :email %><br>
+
+		<% if user.persisted? %>
+			<%= f.label :billing, "Default Billing Address" %>
+			<%= f.collection_select(:billing_id, user.existing_addresses, 
+									:id, :street_address) %><br>
+
+			<%= f.label :shipping, "Default Shipping Address" %>
+			<%= f.collection_select(:shipping_id, user.existing_addresses, 
+									:id, :street_address) %><br>
+
+			<%= link_to "View Saved Addresses", admin_user_addresses_path(user) %><br>
+		<% end %>
+
+		<%= f.submit user.persisted? ? "Update User": "Create User", 
+					 class: "btn btn-primary" %>
+<% end %>
+
+<% if user.persisted? %>
+	<%= link_to "Delete #{user.full_name}", admin_user_path(user), method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
