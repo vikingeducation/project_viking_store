@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  root 'admin/users#index'
+  root 'products#index'
 
 
   namespace :admin do
@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     patch 'update_quantities_order' => 'order_contents#update_quantities'
     patch 'update_products_order' => 'order_contents#update_products'
   end
+
+  resources :products
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

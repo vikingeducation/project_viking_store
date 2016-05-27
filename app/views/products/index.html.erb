@@ -1,0 +1,19 @@
+<div class="Cover text-center">
+	<h1>The Viking Store</h1>
+
+	<h2>The Best Viking Gear on the Whole Web</h2>
+
+	<h3>Choose from among our lineup of fine items below</h3>
+</div>
+
+<div class="row">
+
+	<% @products.each do |product| %>
+		<div class="col-sm-4 item-card">
+			<div><%= product.name %></div>
+			<div><%= product.price %></div>
+			<div><%= link_to "Add to Cart", "#" %></div>
+		</div>
+	<% end %>
+
+</div>
