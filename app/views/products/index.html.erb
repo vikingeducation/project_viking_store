@@ -7,6 +7,15 @@
 </div>
 
 <div class="row">
+	<div class="col-sm_12">
+		<form action= <%= products_path %>>
+			<%= select_tag(:filter_category, options_for_select(Category.all.map{|c| [c.name, c.id] }), {include_blank: true, :prompt => @filter_category }) %>
+			<input type="submit", value="Order by Category", class= "btn btn-primary">
+		</form>
+	</div>
+</div>
+
+<div class="row">
 
 	<% @products.each do |product| %>
 		<div class="col-sm-4 item-card">
