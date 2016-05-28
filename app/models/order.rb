@@ -8,7 +8,7 @@ class Order < ActiveRecord::Base
 
   has_many :categories, :through => :products
 
-  validates :shipping_id, :billing_id, :presence => true
+  # validates :shipping_id, :billing_id, :presence => true
 
   before_create do |order|
     user = order.user

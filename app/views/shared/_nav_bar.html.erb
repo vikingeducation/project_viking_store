@@ -1,10 +1,17 @@
-<div class="col-sm-12 text-center clearfix">
-	<div class="pull-left">
-		<h3>Viking Store</h3>
-	</div>
 
-	<div class="pull-right">
-		<%= link_to "Your Cart", "#" %>
-		<%= link_to "Sign In", "#" %>
-	</div>
+<div class="col-sm-2 text-center">
+	<h3>Viking Store</h3>
+</div>
+
+<div class="col-sm-2 col-sm-offset-6">
+	<%= link_to "Your Cart", "#" %><br>
+</div>
+
+<div class="col-sm-2">
+	<% if signed_in_user? %>
+		<%= "hello " + current_user.full_name  %><br>
+		<%= link_to "Sign Out", session_path, method: :delete %><br>
+	<% else %>
+		<%= link_to "Sign In", new_session_path %><br>
+	<% end %>
 </div>
