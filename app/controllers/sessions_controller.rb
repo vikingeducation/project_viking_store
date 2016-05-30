@@ -19,31 +19,27 @@ class SessionsController < ApplicationController
 
   def destroy
     if signout
+      reset_session
       flash[:success] = "You signed out"
       redirect_to products_path
     else
-      flash[:danger] = "You cannot sign out, sorry"
-      redirect_to products_path
+      flash.now[:danger] = "You cannot sign out, sorry"
+      redirect_to(:back)
     end
   end
 
   private
 
   def update_cart(user)
+    user.get_cart? ? (o = user.cart) : (o = Order.create(:user_id => user.id))
 
-    if user.get_cart?
-      o = user.cart
-      session[:user_cart].each do |product|
-        if o.products && o.product_ids.include?(product.to_i)
-          OrderContent.where(order_id: o.id, product_id: product.to_i).first.quantity += 1
-        else
-          oc = OrderContent.create(:order_id => o.id, :product_id => product.to_i)
-        end
-      end
-    else
-      o = Order.create(:user_id => user.id)
-      session[:user_cart].each do |product|
-        oc = OrderContent.create(:order_id => o.id, :product_id => product.to_i)
+     session[:user_cart].each do |product, quantity|
+      product = product.to_i
+
+      if o.products && o.product_ids.include?(product)
+        OrderContent.where(order_id: o.id, product_id: product).first.quantity += quantity
+      else
+        oc = OrderContent.create(:order_id => o.id, :product_id => product, :quantity => quantity)
       end
     end
   end

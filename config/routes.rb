@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   resource :session, :only => [:new, :create, :destroy]
 
+  resource :shopping_cart, :only => [:edit, :update]
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
