@@ -20,6 +20,31 @@ class ShoppingCartsController < ApplicationController
 
   def edit
     @cart = session[:cart]
+    @total = 0
+    @cart.each do |product, quantity|
+      price = Product.find(product.to_i).price
+      @total += price * quantity.to_i
+    end
+  end
+
+  def update
+    @cart = session[:cart]
+    if update_cart
+      flash[:success] = "You Succesfully Updated your Cart"
+      redirect_to root_path
+    end
+  end
+
+  private
+
+  def update_cart
+    params[:products].each do |product, quantity|
+      if quantity.to_i > 0
+        session[:cart][product] = quantity
+      else
+        session[:cart].delete(product)
+      end
+    end 
   end
 
 end
