@@ -1,0 +1,64 @@
+<%= form_for(user) do |f| %>
+	<div class="row">
+		<div class="col-sm-6">
+			<% count = 1 %>
+			<%= f.fields_for(:addresses) do |address| %>
+				<h3>Saved Address <%= count %> (optional)</h3>
+				<%= message_error(address.object, :street_address) %>
+				<%= address.label :street_address %>
+				<%= address.text_field :street_address %><br>
+
+				<%= message_error(address.object, :city_id) %>
+				<%= address.label :city_id, "City" %>
+				<%= address.text_field :city_id %><br>
+
+				<%= message_error(address.object, :state_id) %>
+				<%= address.label :state_id, "State" %>
+				<%= address.collection_select(:state_id, State.all, :id, :name) %>
+
+				<%= message_error(address.object, :zip_code) %>
+				<%= address.label :zip_code %>
+				<%= address.text_field :zip_code %><br>
+
+				<% if user.persisted? && address.object.persisted? %>
+					<%= address.label :_destroy, "Destroy?" %>
+					<%= address.check_box(:_destroy) %>
+				<% end %>
+
+				<% count += 1 %>
+
+
+			<% end %>
+		</div>
+
+		<div class="col-sm-6">
+			<h3>Account Information</h3>
+			<%= message_error(user, :email) %>
+			<%= f.label :email %>
+			<%= f.email_field :email %><br>
+
+			<%= message_error(user, :email_confirmation) %>
+			<%= f.label :email_confirmation %>
+			<%= f.email_field :email_confirmation %><br>
+
+			<%= f.label :first_name %>
+			<%= f.text_field :first_name %><br>
+
+			<%= f.label :last_name %>
+			<%= f.text_field :last_name %><br>
+		</div>
+
+		<div class="col-sm-12 text-center">
+			<% if user.persisted? %>
+				<%= f.submit "Edit the user" %><br>
+			<% else %>
+				<%= f.submit "Create new user" %><br>
+			<% end %>
+
+			<% if user.persisted? %>
+				<%= link_to "Delete Account", user_path(current_user.id), method: :delete, data: { confirm: "Are you Sure?" } %>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+  

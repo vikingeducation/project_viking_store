@@ -10,7 +10,16 @@ class User < ActiveRecord::Base
             :presence => true
 
   validates :email,
-            format: { with: /@/ }
+            format: { with: /@/ },
+            confirmation: true
+
+  validates_confirmation_of :email,
+                            message: "should match confirmation"
+
+  accepts_nested_attributes_for :addresses, 
+                                :allow_destroy => true,
+                                reject_if: ->(attributes){
+                                attributes.except(:state_id).values.all?(&:blank?)}
 
   before_destroy :check_order_type
 

@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     if user
-      update_cart(user) unless session[:user_cart].nil?
       signin( user )
       flash[:success] = "Welcome #{user.full_name}"
       redirect_to products_path
