@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(whitelisted_params)
     if @user.save
       flash[:success] = "#{@user.full_name} is now living"
-      redirect_to root_path
+      redirect_to session.delete(:return_to)
     else
       flash.now[:danger] = "Something wrong happen"
       @user.addresses.build

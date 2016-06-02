@@ -3,43 +3,15 @@
 		<h2>Shopping Cart Contents</h2>
 
 		<div class="row">
-			<% if @cart %>
+			<% if !@cart.empty? %>
 
-				<%= form_tag(shopping_cart_path, method: :patch)  do %>
-
-					<% @cart.each do |id, quantity| %>
-						<% product = Product.find(id.to_i) %>
-						<div class="cart-box">
-							<div class="col-sm-7">
-								image
-								<%= product.name %>
-								<%= product.category.name %>
-								<%= product.price %>
-							</div>
-
-							<div class="col-sm-5">
-								<%= label_tag :quantity %>
-								<%= text_field_tag("products[#{id}]", quantity) %>
-
-								<%= "total: #{number_to_currency( product.price * quantity.to_i )}" %><br>
-								Delete: <%= check_box_tag("products[#{id}][delete]") %>
-							</div>
-						</div>
-					<% end %>
-					<div class=" cart-box cart-box-total">
-						<div class="col-sm-7">
-							<h3><%= "Total : #{number_to_currency( @total )}" %></h3>
-						</div>
-
-						<div class="col-sm-5">
-							<%= submit_tag "Update Cart", class: "btn btn-default" %><br>
-							<%= link_to "Check Out", "#", class: "btn btn-primary" %>
-						</div>
-					</div>
-				<% end %>
+				<%= render partial: "cart_list", locals: { cart: @cart,
+														   total: @total } %>
 
 			<% else %>
 				<p>You don't have any products in your cart</p>
+
+				<%= link_to "Back to Products Page", root_path, class: "btn btn-primary" %>
 			<% end %>
 		</div>
 	</div>

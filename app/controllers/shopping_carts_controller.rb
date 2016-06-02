@@ -21,17 +21,21 @@ class ShoppingCartsController < ApplicationController
   def edit
     @cart = session[:cart]
     @total = 0
-    @cart.each do |product, quantity|
-      price = Product.find(product.to_i).price
-      @total += price * quantity.to_i
+    unless @cart.nil?
+      @cart.each do |product, quantity|
+        price = Product.find(product.to_i).price
+        @total += price * quantity.to_i
+      end
     end
   end
 
   def update
     @cart = session[:cart]
     if update_cart
+      removed_items if params[:remove]
+      update_db_cart if signed_in_user?
       flash[:success] = "You Succesfully Updated your Cart"
-      redirect_to root_path
+      redirect_to edit_shopping_cart_path
     end
   end
 
@@ -45,6 +49,13 @@ class ShoppingCartsController < ApplicationController
         session[:cart].delete(product)
       end
     end 
+    true
+  end
+
+  def removed_items
+    params[:remove].each do |id, v|
+      session[:cart].delete(id)
+    end
   end
 
 end

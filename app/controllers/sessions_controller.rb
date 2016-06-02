@@ -2,14 +2,18 @@ class SessionsController < ApplicationController
   layout "shop"
 
   def new
+    session[:return_to] = request.referer
   end
 
   def create
     user = User.find_by_email(params[:email])
     if user
       signin( user )
+      session[:cart] ||= {}
+      update_db_cart
+      update_tmp_cart
       flash[:success] = "Welcome #{user.full_name}"
-      redirect_to products_path
+      redirect_to session.delete(:return_to)
     else
       flash.now[:danger] = "Something went wrong"
       render :new
@@ -17,29 +21,14 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    update_db_cart
     if signout
-      reset_session
+      session[:cart] = {}
       flash[:success] = "You signed out"
       redirect_to products_path
     else
       flash.now[:danger] = "You cannot sign out, sorry"
       redirect_to(:back)
-    end
-  end
-
-  private
-
-  def update_cart(user)
-    user.get_cart? ? (o = user.cart) : (o = Order.create(:user_id => user.id))
-
-     session[:user_cart].each do |product, quantity|
-      product = product.to_i
-
-      if o.products && o.product_ids.include?(product)
-        OrderContent.where(order_id: o.id, product_id: product).first.quantity += quantity
-      else
-        oc = OrderContent.create(:order_id => o.id, :product_id => product, :quantity => quantity)
-      end
     end
   end
 

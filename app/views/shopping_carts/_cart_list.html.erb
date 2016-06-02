@@ -1,0 +1,54 @@
+<%= form_tag(shopping_cart_path, method: :patch)  do %>
+
+	<% cart.each do |id, quantity| %>
+		<% product = Product.find(id.to_i) %>
+
+		<!-- Product panel info -->
+
+		<div class="cart-box">
+			<div class="col-sm-6 col-sm-offset-1">
+				<div class="media">
+					<div class='media-left'>
+						<img class="media-object" width="60px" height= "50px" src="<%= image_url('iron_axe.png') %>">
+					</div>
+					<div class="media-body">
+						<h5 class="media-heading"><%= product.name %></h5>
+						<span><%= product.category.name %></span>
+						<span><%= product.price %></span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Product quantity info -->
+
+			<div class="col-sm-5">
+				<%= label_tag :quantity %>
+				<%= text_field_tag("products[#{id}]", quantity) %>
+
+				<%= "total: #{number_to_currency( product.price * quantity.to_i )}" %><br>
+				Delete: <%= check_box_tag "remove[#{id}]" %>
+			</div>
+		</div>
+	<% end %>
+
+	<!-- Cart actions -->
+
+	<div class=" cart-box cart-box-total">
+		<div class="col-sm-7">
+			<h3><%= "Total : #{number_to_currency( total )}" %></h3>
+		</div>
+
+		<div class="col-sm-5">
+			<% unless cart.empty? %>
+				<%= submit_tag "Update Cart", class: "btn btn-default" %><br>
+
+				<% if signed_in_user? %>
+					<%= link_to "Check Out", edit_order_path(current_user.cart), class: "btn btn-primary" %>
+				<% else %>
+					<%= link_to "Sign In to Checkout ", new_session_path, class: "btn btn-primary" %>
+				<% end %>
+			<% end %>
+
+		</div>
+	</div>
+<% end %>

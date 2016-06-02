@@ -24,7 +24,7 @@
 
 .cart-box {
 	border: 1px solid #aaa;
-
+	height: auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	padding-top: 20px;

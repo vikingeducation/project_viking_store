@@ -9,4 +9,29 @@
 	margin-top: 10px;
 	margin-bottom: 30px;
 	border: 1px solid #eee;
+
+	.product-image {
+		background-image: image-url('iron_axe.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		max-width: 100%;
+		height: 250px;
+		margin: 0 auto;
+
+		.product-price {
+			font-size: 18px;
+			color: white;
+			background-color: hsla(225, 40%, 20%, 0.5);
+			width: 100px;
+			margin: auto;
+			padding: 10px 15px;
+			border-radius: 10px;
+
+		}
+	}
+}
+
+.item-card:nth-child(even)  {
+	background-color: #eaeaea;
 }
