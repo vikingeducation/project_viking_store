@@ -1,0 +1,16 @@
+<h2>Sign In</h2>
+<div class="row">
+	<div class="col-sm-4 col-sm-offset-1">
+		<h4>I have an account :</h4>
+		<%= form_tag session_path, method: :post, class: "form-group"%>
+			<label for="email-id">Your Email</label> 
+			<input class="form-control" id="email-id" type="email" name="email" placeholder="Your Email">
+			<input class="form-control" type="submit" value="Sign in">
+		</form>
+	</div>
+
+	<div class="col-sm-4 col-sm-offset-2">
+		<h4>I don't have an account yet :</h4>
+		<%= link_to "Sign Up", new_user_path, class: "btn btn-primary" %>
+	</div>
+</div>

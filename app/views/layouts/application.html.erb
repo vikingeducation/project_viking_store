@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <title>SolutionVikingStore</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -8,7 +9,22 @@
 </head>
 <body>
 
-<%= yield %>
+	<div class="row text-center">
+		<h1>Viking Store Admin Portal</h1>
+	</div>
+
+	<div class='row'>
+		<%= render "admin/shared/nav" %>
+
+		<div class="col-sm-9 text-center">
+			<% flash.each do |key, value| %>
+				<%= content_tag(:div, value, class: "alert alert-#{key} fade-in") %>
+			<% end %>
+		
+			<%= yield %>
+		</div>
+	</div>
+
 
 </body>
 </html>

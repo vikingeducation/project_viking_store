@@ -1,0 +1,5 @@
+<% if @user %>
+	<%= render partial: "index_one_user", locals: {:user => @user} %>
+<% else %>
+	<%= render partial: "index_all_users", locals: {:addresses => @addresses} %>
+<% end %>

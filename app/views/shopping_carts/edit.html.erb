@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="col-sm-8 col-sm-offset-2">
+		<h2>Shopping Cart Contents</h2>
+
+		<div class="row">
+			<% if !@cart.empty? %>
+
+				<%= render partial: "cart_list", locals: { cart: @cart,
+														   total: @total } %>
+
+			<% else %>
+				<p>You don't have any products in your cart</p>
+
+				<%= link_to "Back to Products Page", root_path, class: "btn btn-primary" %>
+			<% end %>
+		</div>
+	</div>
+</div>

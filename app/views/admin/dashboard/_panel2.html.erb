@@ -1,0 +1,76 @@
+<!-- Table 2 : User Demographics and Behavior -->
+	<div class='col-sm-5 panel'>
+		<h3>2. User Demographics and Behavior</h3>
+
+<!-- Top 3 States -->
+
+		<h3>Top 3 States Users Live In (billing)</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Item</th>
+				<th>Data</th>
+			</tr>
+			<% top_places[:states].each do |state| %>
+			
+			<tr>
+				<td><%= state.name %></td>
+				<td><%= state.total %></td>
+			</tr>
+			<% end %>
+
+		</table>
+
+<!-- Top 3 Cities -->
+
+		<h3>Top 3 Cities Users Live In (billing)</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Item</th>
+				<th>Data</th>
+			</tr>
+			<% top_places[:cities].each do |city| %>
+			
+			<tr>
+				<td><%= city.name %></td>
+				<td><%= city.total %></td>
+			</tr>
+			<% end %>
+
+		</table>
+
+<!-- Top Users With -->
+
+		<h3>Top User With..</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Criteria</th>
+				<th>Customer Name</th>
+				<th>Quantity</th>
+			</tr>
+			
+			<tr>
+				<td>Highest single order value</td>
+				<td><%= "#{top_users[:single_value].first.fname} #{top_users[:single_value].first.lname}" %></td>
+				<td>$ <%= top_users[:single_value].first.total %></td>
+			</tr>
+
+			<tr>
+				<td>Highest Lifetime Value</td>
+				<td><%= "#{top_users[:lifetime_value].first.fname} #{top_users[:lifetime_value].first.lname}" %></td>
+				<td>$ <%= top_users[:lifetime_value].first.total %></td>
+			</tr>
+
+			<tr>
+				<td>Highest Average Value</td>
+				<td><%= "#{top_users[:average_value].first.fname} #{top_users[:average_value].first.lname}" %></td>
+				<td>$ <%= top_users[:average_value].first.avg %></td>
+			</tr>
+
+			<tr>
+				<td>Most Orders Place</td>
+				<td><%= "#{top_users[:most_orders].first.fname} #{top_users[:most_orders].first.lname}" %></td>
+				<td><%= top_users[:most_orders].first.total %></td>
+			</tr>
+
+		</table>
+	</div>

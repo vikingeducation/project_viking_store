@@ -2,6 +2,43 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  root 'products#index'
+
+
+  namespace :admin do
+
+    resources :dashboard, only: [:index]
+    resources :categories
+    resources :products
+    resources :users do
+      resources :addresses
+      resources :orders
+    end
+
+    resources :addresses, only: [:index]
+
+    resources :orders, only: [:index]
+
+    resources :order_contents, only: [:destroy]
+
+    patch 'update_quantities_order' => 'order_contents#update_quantities'
+    patch 'update_products_order' => 'order_contents#update_products'
+  end
+
+  resources :products
+  get 'add_product' => 'products#add_product'
+
+  resource :session, :only => [:new, :create, :destroy]
+
+  resource :shopping_cart, :only => [:edit, :update, :create]
+
+  resources :users
+
+  resources :orders
+  resources :credit_cards do
+    resources :orders
+  end
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

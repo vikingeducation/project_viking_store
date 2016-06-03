@@ -1,0 +1,49 @@
+<h2>Addresses</h2>
+
+<p>Create new addresses from within <%= link_to "User", admin_users_path %> profiles</p>
+
+<table class="table">
+	<tr>
+		<th>Id</th>
+		<th>User</th>
+		<th>Address</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Orders</th>
+		<th>Created</th>
+		<th>SHOW</th>
+		<th>EDIT</th>
+		<th>DELETE</th>
+	</tr>
+
+	<% addresses.each do |address| %>
+		<% unless address.deleted == true %>
+			<tr>
+				<td><%= address.id %></td>
+				<td><%= link_to "#{address.user.first_name + ' ' + address.user.last_name}", admin_user_path(address.user.id) %></td>
+				<td><%= address.street_address %></td>
+				<td><%= address.city.name %></td>
+				<td><%= address.state.name %></td>
+				<td><%= Order.where(shipping_id: address.id).count %></td>
+				<td><%= address.created_at %></td>
+				<td><%= link_to "show", admin_user_address_path(user_id: address.user.id, id: address.id) %></td>
+				<td><%= link_to "edit", edit_admin_user_address_path(user_id: address.user.id, id: address.id) %></td>
+				<td><%= link_to "delete", admin_user_address_path(user_id: address.user.id, id: address.id), method: :delete, data: {confirm: "Are you Sure?"} %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

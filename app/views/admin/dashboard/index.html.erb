@@ -1,0 +1,35 @@
+<div class='row'>
+
+	<div class="col-sm-12 text-center">
+		<h1>Viking Store Analytics Dashboard</h1>
+	</div>
+
+	<%= render partial: "panel1", locals: { overall_total: @overall_total, 
+										    overall_thirty_days: @overall_thirty_days, 
+										    overall_seven_days: @overall_seven_days,
+										    change_thirty_days: @change_thirty_days,
+										    change_seven_days: @change_seven_days } %>
+
+	<%= render partial: "panel2", locals: { top_places: @top_places, 
+										    top_users: @top_users } %>
+
+</div>
+
+<div class="row">
+
+	<%= render partial: "panel3", locals: { total_stats: @total_stats, 
+										    thirty_days_stats: @thirty_days_stats,
+										    seven_days_stats: @seven_days_stats } %>
+	
+	
+	<%= render partial: "panel4", locals: { orders_by_time: @orders_by_time } %>
+
+
+
+</div>
+
+<div class= "row">
+	<div class="col-sm-12 text-center">
+		<p>It took <%= @process_time %> to process all the queries</p>
+	</div>
+</div>

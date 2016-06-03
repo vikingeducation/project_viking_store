@@ -1,0 +1,71 @@
+<h2>Checkout</h2>
+
+<div class="row">
+	<%= form_for(@order) do |f| %>
+	  
+	<div class="col-sm-6">
+		<h3>Shipping + Billing</h3>
+		<h5>Shipping Address</h5>
+		<%= f.collection_select(:shipping_id, current_user.addresses, :id, :street_address) %>
+
+		<h5>Billing Address</h5>
+		<%= f.collection_select(:billing_id, current_user.addresses, :id, :street_address) %><br>
+
+		<%= link_to "Edit Saved Addresses", edit_user_path(current_user.id) %><br>
+
+
+		<h5>Credit Card Details</h5>
+		<%= fields_for(@order.credit_card) do |cc|%>
+			<%= cc.label :card_number %>
+			<%= cc.text_field :card_number %><br>
+
+			<%= cc.label :exp_month %>
+			<%= cc.text_field :exp_month %>
+
+			<%= cc.label :exp_year %>
+			<%= cc.text_field :exp_year %><BR>
+
+			<%= cc.label :ccv %>
+			<%= cc.text_field :ccv %><br>
+		<% end %>
+	</div>
+
+	<div class="col-sm-6">
+		<h3>Review + Complete</h3>
+		<table class='table'>
+			<tr>
+				<th>Product</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Total Price</th>
+			</tr>
+			<% @order.products.each do |product| %>
+				<tr>
+					<td><%= product.name %></td>
+					<td><%= OrderContent.where(product_id: product.id, order_id: @order.id).first.quantity %></td>
+					<td><%= number_to_currency( product.price ) %></td>
+					<td><%= number_to_currency( OrderContent.where(product_id: product.id, order_id: @order.id).first.quantity * product.price ) %></td>
+				</tr>
+			<% end %>
+		</table>
+
+		<div class="pull-left">
+			<%= link_to "Edit Order", edit_shopping_cart_path %>
+			<%= link_to "Delete Order", order_path(@order), method: :delete, data: {confirm: "Are you Sure?"} %>
+		</div>
+
+		<div class="pull-right">
+			<p>Shipping: 15 $</p>
+			<p>Tax: 10 $</p>
+
+			<h4>Total: <%= number_to_currency( @total ) %></h4>
+		</div>
+	</div>
+
+	<div class='col-sm-6 col-sm-offset-6'>
+		<h3>Place Your Order</h3>
+		<%= submit_tag("Place Order!", class: "btn btn-primary") %>
+	</div>
+
+	<% end %>
+</div>

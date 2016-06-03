@@ -1,0 +1,26 @@
+<h2>User <%= @user.id.to_s + ": " + @user.full_name %></h2>
+
+
+<h3>Demographic Information</h3>
+<%= render partial: "demo_user", locals: {:user => @user} %>
+
+
+<h3>Credit Card Info</h3>
+<%= render partial: "credit_card_user", locals: {:user => @user} %>
+
+
+<h3>Admin Actions for <%= @user.full_name %></h3>
+
+<%= link_to "Create Order", new_admin_user_order_path(@user),  class: "btn btn-primary" %><br><br>
+<%= link_to "Create Address", new_admin_user_address_path(@user), class: "btn btn-primary" %>
+
+
+<h3>Order History</h3>
+<%= render partial: "order_history_user", locals: {:orders => @orders} %>
+
+
+
+
+
+
+

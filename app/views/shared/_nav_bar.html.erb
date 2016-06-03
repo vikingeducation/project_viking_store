@@ -1,0 +1,18 @@
+
+<div class="col-sm-2 text-center">
+	<h3><%= link_to "Viking Store", root_path %></h3>
+</div>
+
+<div class="col-sm-2 col-sm-offset-6">
+	<%= link_to "Your Cart", edit_shopping_cart_path %><br>
+</div>
+
+<div class="col-sm-2">
+	<% if signed_in_user? %>
+		<%= "hello " + current_user.full_name  %><br>
+		<%= link_to "Edit User", edit_user_path(current_user) %><br>
+		<%= link_to "Sign Out", session_path, method: :delete %><br>
+	<% else %>
+		<%= link_to "Sign In", new_session_path %><br>
+	<% end %>
+</div>

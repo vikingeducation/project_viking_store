@@ -1,0 +1,107 @@
+<!-- Table 1 : Overal Platform -->
+
+	<div class='col-sm-5 col-sm-offset-1 panel'>
+		<h3>1. Overall Platform</h3>
+
+<!-- Overall Total -->
+
+		<h3>Total</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Item</th>
+				<th>Data</th>
+			</tr>
+
+			<tr>
+				<td>Users</td>
+				<td><%= overall_total[:users] %></td>
+			</tr>
+
+			<tr>
+				<td>Orders</td>
+				<td><%= overall_total[:orders] %></td>
+			</tr>
+
+			<tr>
+				<td>Products</td>
+				<td><%= overall_total[:products] %></td>
+			</tr>
+
+			<tr>
+				<td>Revenue</td>
+				<td><%= number_to_currency overall_total[:revenue] %></td>
+			</tr>
+
+		</table>
+
+<!-- Overall Thirty Days -->
+
+		<h3>Last 30 Days</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Item</th>
+				<th>Data</th>
+				<th>Past Week</th>
+			</tr>
+
+			<tr>
+				<td>New Users</td>
+				<td><%= overall_thirty_days[:users] %></td>
+				<td><%= change_thirty_days[:users] %></td>
+			</tr>
+
+			<tr>
+				<td>Orders</td>
+				<td><%= overall_thirty_days[:orders] %></td>
+				<td><%= change_thirty_days[:orders] %></td>
+			</tr>
+
+			<tr>
+				<td>New Products</td>
+				<td><%= overall_thirty_days[:products] %></td>
+				<td><%= change_thirty_days[:products] %></td>
+			</tr>
+
+			<tr>
+				<td>Revenue</td>
+				<td>$ <%= overall_thirty_days[:revenue] %></td>
+				<td><%= change_thirty_days[:revenue] %></td>
+			</tr>
+
+		</table>
+
+<!-- Overall Seven Days -->
+
+		<h3>Last 7 Days</h3>
+		<table class="table table-striped">
+			<tr>
+				<th>Item</th>
+				<th>Data</th>
+			</tr>
+
+			<tr>
+				<td>New Users</td>
+				<td><%= overall_seven_days[:users] %></td>
+				<td><%= change_seven_days[:users] %></td>
+			</tr>
+
+			<tr>
+				<td>Orders</td>
+				<td><%= overall_seven_days[:orders] %></td>
+				<td><%= change_seven_days[:orders] %></td>
+			</tr>
+
+			<tr>
+				<td>New Products</td>
+				<td><%= overall_seven_days[:products] %></td>
+				<td><%= change_seven_days[:products] %></td>
+			</tr>
+
+			<tr>
+				<td>Revenue</td>
+				<td>$ <%= overall_seven_days[:revenue] %></td>
+				<td><%= change_seven_days[:revenue] %></td>
+			</tr>
+
+		</table>
+	</div>

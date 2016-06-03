@@ -1,0 +1,36 @@
+<div class="jumbotron text-center">
+	<div class="container">
+		<h1>The Viking Store</h1>
+
+		<h2>The Best Viking Gear on the Whole Web</h2>
+	</div>
+</div>
+
+<div class="choose-slogan">
+	<h3>Choose from among our lineup of fine items below</h3>
+</div>
+
+<div class="row">
+	<div class="col-sm_12">
+		<form action= <%= products_path %>>
+			<%= select_tag(:filter_category, options_for_select(Category.all.map{|c| [c.name, c.id] }), {include_blank: true, :prompt => @filter_category }) %>
+			<input type="submit", value="Order by Category", class= "btn btn-primary">
+		</form>
+	</div>
+</div>
+
+<div class="row products-list">
+
+	<% @products.each do |product| %>
+		<div class="col-sm-4 item-card">
+			<div class="product-image">
+				<div class="pull-right product-price">
+					<%= number_to_currency( product.price ) %>
+				</div>
+			</div>
+			<div><%= product.name %></div>
+			<div><%= link_to "Add to Cart", shopping_cart_path(:product => product.id), method: :post, class: "btn btn-primary" %></div>
+		</div>
+	<% end %>
+
+</div>

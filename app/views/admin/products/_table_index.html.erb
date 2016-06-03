@@ -1,0 +1,23 @@
+<table class="table">
+	<tr>
+		<th>Id</th>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Category</th>
+		<th>SHOW</th>
+		<th>EDIT</th>
+		<th>DELETE</th>
+	</tr>
+
+	<% products.each do |product| %>
+	<tr>
+		<td><%= product.id %></td>
+		<td><%= product.name %></td>
+		<td><%= product.price %></td>
+		<td><%= link_to product.category.name, [:admin, product.category] %></td>
+		<td><%= link_to "SHOW", [:admin, product] %></td>
+		<td><%= link_to "EDIT", edit_admin_product_path(product) %></td>
+		<td><%= link_to "DELETE", [:admin, product], method: :delete, data: {confirm: "Are you Sure?"} %></td>
+	</tr>
+	<% end %>
+</table>	
