@@ -15,18 +15,18 @@ class ShoppingCartsController < ApplicationController
       flash[:danger] = "Invalid product"
     end
 
-    redirect_to products_path({filter_category: params[:filter_category]})
+    redirect_to products_path()
   end
 
   def edit
     @cart = session[:cart]
     @total = 0
-    unless @cart.nil?
+    # unless @cart.nil?
       @cart.each do |product, quantity|
         price = Product.find(product.to_i).price
         @total += price * quantity.to_i
       end
-    end
+    # end
   end
 
   def update

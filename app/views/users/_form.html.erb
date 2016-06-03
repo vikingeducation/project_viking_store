@@ -1,14 +1,17 @@
 <%= form_for(user) do |f| %>
 	<div class="row">
 		<div class="col-sm-6">
-			<% count = 1 %>
 			<%= f.fields_for(:addresses) do |address| %>
-				<h3>Saved Address <%= count %> (optional)</h3>
+				<h3>Saved Address <%= address.index + 1 %> (optional)</h3>
 				<%= message_error(address.object, :street_address) %>
 				<%= address.label :street_address %>
 				<%= address.text_field :street_address %><br>
 
 				<%= message_error(address.object, :city_id) %>
+
+				<% if address.object.city_id %>
+					<% address.object.city_id = City.find(address.object.city_id).name %>
+				<% end %>
 				<%= address.label :city_id, "City" %>
 				<%= address.text_field :city_id %><br>
 
@@ -20,12 +23,17 @@
 				<%= address.label :zip_code %>
 				<%= address.text_field :zip_code %><br>
 
+				<%= f.radio_button :billing_id, address.object.id %>
+				<%= f.label :billing_id %>
+
+				<%= f.radio_button :shipping_id, address.object.id %>
+				<%= f.label :shipping_id %><br>
+
+
 				<% if user.persisted? && address.object.persisted? %>
 					<%= address.label :_destroy, "Destroy?" %>
 					<%= address.check_box(:_destroy) %>
 				<% end %>
-
-				<% count += 1 %>
 
 
 			<% end %>

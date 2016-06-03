@@ -51,7 +51,36 @@ class UsersController < ApplicationController
   private
 
   def whitelisted_params
-    params.require(:user).permit(:first_name, :last_name, :email, :email_confirmation,
+    check_cities
+    params.require(:user).permit(:first_name, :last_name, :email, :email_confirmation, :shipping_id, :billing_id,
                                  addresses_attributes: [:id, :user_id, :street_address, :state_id, :zip_code, :city_id, :_destroy])
   end
+
+  def check_cities
+    addresses = params[:user][:addresses_attributes]
+    address_keys = addresses.keys
+
+    address_keys.each do |key|
+      next if addresses[key][:city_id] == ""
+      addresses[key][:city_id] = check_city(key, addresses[key][:city_id])
+    end
+  end
+
+  def check_city(key, city)
+    if City.find_by(name: city)
+      City.find_by(name: city).id
+    else
+      c = City.create(name: city)
+      c.id
+    end
+  end
+
 end
+
+
+
+
+
+
+
+

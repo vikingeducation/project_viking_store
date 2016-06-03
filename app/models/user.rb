@@ -5,6 +5,12 @@ class User < ActiveRecord::Base
 
   has_many :products, :through => :orders
 
+  belongs_to :billing_address, class_name: "Address",
+                               foreign_key: :billing_id
+
+  belongs_to :shipping_address, class_name: 'Address',
+                                foreign_key: :shipping_id
+
   validates :first_name, :last_name, :email,
             :length => {in: (1..64)},
             :presence => true

@@ -31,7 +31,9 @@ class ApplicationController < ActionController::Base
 
 
   def update_db_cart
-    current_user.get_cart? ? (cart = current_user.cart) : (cart = Order.create(:user_id => current_user.id))
+    current_user.get_cart? ? 
+                      (cart = current_user.cart) : 
+                                          (cart = Order.create(:user_id => current_user.id))
 
     if session[:cart]
       cart.order_contents.destroy_all

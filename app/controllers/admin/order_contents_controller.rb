@@ -21,9 +21,10 @@ class Admin::OrderContentsController < AdminController
         if quantity >= 0
           if Product.exists?(product_id)
             if order.products.ids.include? product_id
-              OrderContent.where(product_id: product_id).first.update_attributes(quantity: ( OrderContent.where(product_id: product[:id].to_i).first.quantity + product[:quantity].to_i) )
+              order.order_contents.where(product_id: product_id).first.update_attributes(quantity: ( order.order_contents.where(product_id: product[:id]).first.quantity + quantity) )
             else
-              OrderContent.create(product_id: product_id, quantity: quantity, order_id: params[:order_id].to_i)
+              o = order.order_contents.build(product_id: product_id, quantity: quantity)
+              o.save
             end
           end
         end

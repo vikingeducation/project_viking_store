@@ -83,7 +83,7 @@
 <% if @order.persisted? %>
 	<h3>Add Products to Order</h3>
 	<p>Add up to 5 products at a time</p>
-	<%= form_tag("admin/update_products_order", method: :patch) do %>
+	<%= form_tag(admin_update_products_order_path, method: :patch) do %>
 		<table class="table">
 			<tr>
 				<th>Product ID</th>
