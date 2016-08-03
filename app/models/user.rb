@@ -31,17 +31,23 @@ class User < ActiveRecord::Base
     .joins("JOIN orders ON (users.id = orders.user_id)")
     .joins("JOIN order_contents ON (orders.id = order_contents.order_id)")
     .joins("JOIN products ON (products.id = order_contents.product_id)")
-
+    .where("checkout_date IS NOT NULL")
   end
 
   def self.highest_single_order
     join_products_get_order_totals
-    .group("orders.id, users.first_name, users.last_name").max
+    .group("orders.id, users.first_name, users.last_name")
+    .order("order_total DESC")[0]
   end
 
   def self.highest_lifetime_value
     join_products_get_order_totals
-    .group("users.id, users.first_name, users.last_name").max
+    .group("users.id, users.first_name, users.last_name")
+    .order("order_total DESC")[0]
+  end
+
+  def self.highest_avg_value
+    select(User.select("CONCAT(users.first_name, ' ', users.last_name) AS full_name, SUM(products.price * order_contents.quantity) AS order_total").joins("JOIN orders ON (users.id = orders.user_id)").joins("JOIN order_contents ON (orders.id = order_contents.order_id)").joins("JOIN products ON (products.id = order_contents.product_id)").where("checkout_date IS NOT NULL").group("orders.id, users.first_name, users.last_name").order("order_total DESC")).group('users.id')
   end
 
 end
