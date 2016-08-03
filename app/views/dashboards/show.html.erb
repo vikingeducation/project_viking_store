@@ -36,10 +36,17 @@
       <h4>Top States</h4>
       <table class='table table-striped'>
         <%= render "th" %>
-        <%= render partial: "two_col_row", locals: {:label => "New Users", :value => @total_users} %>
-        <%= render partial: "two_col_row", locals: {:label => "Orders", :value => @total_orders} %>
-        <%= render partial: "two_col_row", locals: {:label => "Products", :value => @total_products} %>
-        <%= render partial: "two_col_row", locals: {:label => "Revenue", :value => @total_revenue} %>
+        <% @top_states.each do |state| %>
+          <%= render partial: "two_col_row", locals: {:label => state[:name], :value => state[:total]} %>
+        <% end %>
+      </table>
+
+      <h4>Top Cities</h4>
+      <table class='table table-striped'>
+        <%= render "th" %>
+        <% @top_cities.each do |city| %>
+          <%= render partial: "two_col_row", locals: {:label => city[:name], :value => city[:total]} %>
+        <% end %>
       </table>
     </div>
   </div>
