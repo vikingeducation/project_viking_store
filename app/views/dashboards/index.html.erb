@@ -11,10 +11,14 @@
             <th>Item</th>
             <th>Data</th>
           </tr>
-          <% 4.times do %>
+          <% @all_time_count.each_pair do |key, value| %>
           <tr>
-            <td>Dummy Data</td>
-            <td>Dummy Data</td>
+            <td> 
+            <%= key %> 
+            </td>
+            <td>
+            <%= value %>
+            </td>
           </tr>
           <% end %>
         </table>
