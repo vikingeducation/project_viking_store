@@ -1,2 +1,13 @@
 <h1>Dashboard#show</h1>
 <p>Find me in app/views/dashboard/show.html.erb</p>
+
+<% @last_seven_days.each do |pair| %>
+<table>
+  <%= content_tag :td do %>
+    <%= content_tag :tr, pair[0] %>
+  <% end %>
+  <%= content_tag :td do %>
+    <%= content_tag :tr, pair[1] %>
+  <% end %>
+</table>
+<% end %>
