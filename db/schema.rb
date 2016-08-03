@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20150228223038) do
     t.datetime "updated_at"
   end
 
+  # Index on composite key
   add_index "order_contents", ["order_id", "product_id"], name: "index_order_contents_on_order_id_and_product_id", unique: true
 
   create_table "orders", force: true do |t|
