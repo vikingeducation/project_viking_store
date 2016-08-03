@@ -40,3 +40,7 @@ gem 'faker'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end

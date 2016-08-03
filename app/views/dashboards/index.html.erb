@@ -13,7 +13,16 @@
     </table>
 
     <table>
-
+      <tr>
+        <th>Item</th>
+        <th>Data</th>
+      </tr>
+      <% @totals.each do |key, val| %>
+      <tr>
+        <td><%= key %></td>
+        <td><%= val %></td>
+      </tr>
+      <% end %>
     </table>
   </div>
 
