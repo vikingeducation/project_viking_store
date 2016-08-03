@@ -15,12 +15,15 @@ class DashboardsController < ApplicationController
     @popular_states = create_top_3_hash(User.get_top_states(3))
     @popular_cities = create_top_3_hash(User.get_top_cities(3))
 
-    @top_users_with = { "Highest Single Order" => User.get_greatest_order
+    @top_users_with = { "Highest Single Order" => User.get_greatest_order,
+                        "Hightest Lifetime Value" => User.get_lifetime_value,
+                        "Highest Average Order Value" => User.highest_average_order,
+                        "Most Orders Placed" => User.most_orders_placed
                           
     }
 
 
-    }
+
   end
 
   def create_top_3_hash(method)

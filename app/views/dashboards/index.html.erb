@@ -12,7 +12,7 @@
       <h2> 2. User Demographics and Behavior</h2>
         <%= render partial: "overall_platform_display", locals: {hash: @popular_states, title: "Top 3 States Users Live In"} %>
         <%= render partial: "overall_platform_display", locals: {hash: @popular_cities, title: "Top 3 Cities Users Live In"} %>
-        <%= render partial: "overall_platform_display", locals: {hash: @popular_cities, title: "Top User With..."} %>
+        <%= render partial: "three_column_table", locals: {hash: @top_users_with, title: "Top User With..."} %>
 
     </div>
   </div>

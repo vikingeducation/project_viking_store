@@ -40,15 +40,46 @@ class User < ActiveRecord::Base
 #inc
   def self.get_lifetime_value
   #total order amount by user
-    result = OrderContent.select("SUM(quantity * price) AS order_sum")
+    result = OrderContent.select("orders.user_id, SUM(quantity * price) AS order_sum")
             .joins("JOIN products ON order_contents.product_id = products.id")                          
             .joins("JOIN orders ON order_contents.order_id = orders.id")
             .group("orders.user_id")
-            .order("orders.user_id DESC")
+            .order("order_sum DESC")
             .limit(1)
+    search = User.find(result.to_a.first.user_id)
+    name = "#{search.first_name} #{search.last_name}"
+    total =  result.to_a.first.order_sum.to_f
+    {"name" => name, "total" => total}
   end
 
 
+  def self.highest_average_order
+    result = OrderContent.select("orders.user_id, ROUND(AVG(quantity * price), 2) AS order_avg")
+            .joins("JOIN products ON order_contents.product_id = products.id")                          
+            .joins("JOIN orders ON order_contents.order_id = orders.id")
+            .group("orders.user_id")
+            .order("order_avg DESC")
+            .limit(1)
+    search = User.find(result.to_a.first.user_id)
+    name = "#{search.first_name} #{search.last_name}"
+    total =  result.to_a.first.order_avg.to_f
+    {"name" => name, "total" => total}
+  end
+
+  def self.most_orders_placed
+    result = OrderContent.select("orders.user_id, COUNT(*) AS order_count")
+            .joins("JOIN products ON order_contents.product_id = products.id")                          
+            .joins("JOIN orders ON order_contents.order_id = orders.id")
+            .group("orders.user_id")
+            .order("order_count DESC")
+            .limit(1)
+    search = User.find(result.to_a.first.user_id)
+    name = "#{search.first_name} #{search.last_name}"
+    total =  result.to_a.first.order_count.to_i
+    {"name" => name, "total" => total}
+  end
+
+# result = OrderContent.select("orders.user_id, COUNT(*) AS order_count").joins("JOIN products ON order_contents.product_id = products.id").joins("JOIN orders ON order_contents.order_id = orders.id").group("orders.user_id").order("orders.user_id DESC")
  
 
 end
