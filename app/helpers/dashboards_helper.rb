@@ -58,4 +58,32 @@ module DashboardsHelper
     }
   end
 
+  def get_seven_day_order_stats
+    {
+    "Number of Orders" => OrderContent.day_orders(8),
+    "Total Revenue" => OrderContent.day_revenue(8),
+    "Average Order Value" => OrderContent.average_order(8).round(2),
+    "Largest Order Value" => OrderContent.largest_order(8)
+    }
+  end
+
+  def get_thirty_day_order_stats
+    {
+    "Number of Orders" => OrderContent.day_orders(31),
+    "Total Revenue" => OrderContent.day_revenue(31),
+    "Average Order Value" => OrderContent.average_order(31).round(2),
+    "Largest Order Value" => OrderContent.largest_order(31)
+    }
+  end
+
+
+  def get_total_order_stats
+    {
+    "Number of Orders" => OrderContent.total_orders,
+    "Total Revenue" => OrderContent.total_revenue,
+    "Average Order Value" => OrderContent.average_order_total.round(2),
+    "Largest Order Value" => OrderContent.largest_order_total
+    }
+  end
+
 end

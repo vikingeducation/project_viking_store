@@ -5,6 +5,7 @@ class DashboardsController < ApplicationController
   def index
     get_overall_panel
     get_demographics_panel
+    get_order_stats_panel
   end
 
 
@@ -20,6 +21,12 @@ class DashboardsController < ApplicationController
     @top_states = get_top_states
     @top_cities = get_top_cities
     @best_customers = get_best_customers
+  end
+
+  def get_order_stats_panel
+    @seven_day_order_stats = get_seven_day_order_stats
+    @thirty_day_order_stats = get_thirty_day_order_stats
+    @total_order_stats = get_total_order_stats
   end
 
 end

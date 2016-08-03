@@ -27,20 +27,19 @@
 </div>
 
 <div class='row'>
-  <div class='col-xs-6'>
-    <h2>3. Order Statistics</h2>
-    <table>
 
-    </table>
+<div class='col-xs-6 panel-default panel'>
 
-    <table>
-
-    </table>
-
-    <table>
-
-    </table>
+  <h2>3. Order Statistics</h2>
+  <div class='panel-body'>
+    <%= render partial: 'two_column_table', locals: { caption: "Seven Day Order Stats",
+                                  totals: @seven_day_order_stats } %>
+    <%= render partial: 'two_column_table', locals: { caption: "Thirty Day Order Stats",
+                                  totals: @thirty_day_order_stats } %>
+    <%= render partial: 'two_column_table', locals: { caption: "Total Order Stats",
+                                  totals: @total_order_stats } %>
   </div>
+</div>
 
   <div class='col-xs-6'>
     <h2>4. Time Series Data</h2>

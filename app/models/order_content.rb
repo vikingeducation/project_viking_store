@@ -1,18 +1,52 @@
 class OrderContent < ActiveRecord::Base
 
-  def self.get_revenue
+  def self.get_completed_orders
     joins('JOIN products ON (order_contents.product_id = products.id)')
           .joins('JOIN orders ON (order_contents.order_id = orders.id)')
           .where("checkout_date IS NOT NULL")
   end
 
   def self.day_revenue(day)
-    get_revenue.where("checkout_date > ? ", day.days.ago)
+    get_completed_orders.where("checkout_date > ? ", day.days.ago)
                 .sum('products.price * order_contents.quantity')
   end
 
   def self.total_revenue
-    get_revenue.sum('products.price * order_contents.quantity')
+    get_completed_orders.sum('products.price * order_contents.quantity')
   end
 
+  def self.day_orders(day)
+    get_completed_orders.where("checkout_date > ? ", day.days.ago).count
+  end
+
+  def self.total_orders
+    get_completed_orders.count
+  end
+
+  def self.largest_order(day)
+    get_completed_orders.where("checkout_date > ? ", day.days.ago)
+                    .maximum('products.price * order_contents.quantity')
+
+  end
+
+
+  def self.largest_order_total
+    get_completed_orders.maximum('products.price * order_contents.quantity')
+
+  end
+
+  def self.average_order(day)
+     get_completed_orders.where("checkout_date > ? ", day.days.ago)
+                    .average('products.price * order_contents.quantity')
+  end
+
+  def self.average_order_total
+    get_completed_orders.average('products.price * order_contents.quantity')
+  end
+
+  def self.order_num_on_day(day)
+    get_completed_orders.select("CONVERT(checkout_date, getdate()) AS just_date")
+                        .where("just_date = ? ", day.days.ago).count
+
+  end
 end
