@@ -37,17 +37,33 @@ class User < ActiveRecord::Base
   def self.highest_single_order
     join_products_get_order_totals
     .group("orders.id, users.first_name, users.last_name")
-    .order("order_total DESC")[0]
+    .order("order_total DESC")
   end
 
   def self.highest_lifetime_value
     join_products_get_order_totals
     .group("users.id, users.first_name, users.last_name")
-    .order("order_total DESC")[0]
+    .order("order_total DESC")
   end
 
-  def self.highest_avg_value
-    select(User.select("CONCAT(users.first_name, ' ', users.last_name) AS full_name, SUM(products.price * order_contents.quantity) AS order_total").joins("JOIN orders ON (users.id = orders.user_id)").joins("JOIN order_contents ON (orders.id = order_contents.order_id)").joins("JOIN products ON (products.id = order_contents.product_id)").where("checkout_date IS NOT NULL").group("orders.id, users.first_name, users.last_name").order("order_total DESC")).group('users.id')
-  end
+  def self.highest_avg_order
+    highest_single_order.group("CONCAT(users.first_name, ' ', users.last_name)").average('SUM(products.price * order_contents.quantity)')
+
+    # find_by_sql("SELECT full_name, AVG(order_total) AS order_total FROM ? GROUP BY full_name" , highest_single_order)
+
+    find_by_sql("
+      SELECT full_name, AVG(order_total)
+      FROM ( SELECT CONCAT(users.first_name, ' ', users.last_name) AS full_name, SUM(products.price * order_contents.quantity) AS order_total
+        FROM users JOIN orders ON (users.id = orders.user_id)
+        JOIN order_contents ON (orders.id = order_contents.order_id)
+        JOIN products ON (products.id = order_contents.product_id)
+        WHERE checkout_date IS NOT NULL
+        GROUP BY orders.id, users.first_name, users.last_name
+        ) AS order_sum
+
+      GROUP BY full_name
+      ")
+
+    end
 
 end
