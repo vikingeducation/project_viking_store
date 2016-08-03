@@ -5,6 +5,7 @@ class DashboardsController < ApplicationController
   def index
     get_overall_panel
     get_demographics_panel
+    get_best_customers
   end
 
 

@@ -40,4 +40,8 @@ module DashboardsHelper
     end.to_h
   end
 
+  def get_best_customers
+    User.highest_single_order
+  end
+
 end
