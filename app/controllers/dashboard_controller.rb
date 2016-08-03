@@ -25,5 +25,20 @@ class DashboardController < ApplicationController
         "Most Orders Placed" => OrderContent.most_orders_placed
       }
     }
+
+    @order_stats = {
+      last_seven_days: {
+        "Number of Orders" => @aggregates[:last_seven_days][:orders],
+        "Total Revenue" => @aggregates[:last_seven_days][:revenue],
+        "Average Order Value" => 0,
+        "Largest Order Value" => Order.largest_last_seven_days
+      },
+      last_thirty_days: {
+        "Number of Orders" => @aggregates[:last_thirty_days][:orders],
+        "Total Revenue" => @aggregates[:last_thirty_days][:revenue],
+        "Average Order Value" => 0,
+        "Largest Order Value" => Order.largest_last_thirty_days
+      }
+    }
   end
 end
