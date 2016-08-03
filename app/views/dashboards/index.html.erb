@@ -4,26 +4,13 @@
 
   <div class='col-xs-6'>
     <h2>1. Overall Platform</h2>
-    <table>
+    <%= render partial: 'panel_one_table', locals: { caption: "Seven Day Totals",
+                                  totals: @seven_day_totals } %>
+    <%= render partial: 'panel_one_table', locals: { caption: "Thirty Day Totals",
+                                  totals: @thirty_day_totals } %>
+    <%= render partial: 'panel_one_table', locals: { caption: "All Time Totals",
+                                  totals: @totals } %>
 
-    </table>
-
-    <table>
-
-    </table>
-
-    <table>
-      <tr>
-        <th>Item</th>
-        <th>Data</th>
-      </tr>
-      <% @totals.each do |key, val| %>
-      <tr>
-        <td><%= key %></td>
-        <td><%= val %></td>
-      </tr>
-      <% end %>
-    </table>
   </div>
 
   <div class='col-xs-6'>
