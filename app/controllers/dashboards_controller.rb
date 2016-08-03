@@ -5,7 +5,6 @@ class DashboardsController < ApplicationController
   def index
     get_overall_panel
     get_demographics_panel
-    get_best_customers
   end
 
 
@@ -20,6 +19,7 @@ class DashboardsController < ApplicationController
   def get_demographics_panel
     @top_states = get_top_states
     @top_cities = get_top_cities
+    @best_customers = get_best_customers
   end
 
 end

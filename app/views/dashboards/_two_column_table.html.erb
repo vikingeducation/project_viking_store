@@ -4,11 +4,24 @@
   <tr >
     <th class='text-center'>Item</th>
     <th class='text-center'>Data</th>
+    <% if totals.values.any? { |val| val.is_a?(Array) } %>
+      <th class='text-center'>Quantity</th>
+    <% end %>
   </tr>
+
   <% totals.each do |key, val| %>
   <tr>
     <td><%= key %></td>
-    <td><%= val %></td>
+
+    <% if !val.is_a?(Array) %>
+      <td><%= val %></td>
+
+    <% else %>
+      <% val.each do |item| %>
+        <td><%= item %></td>
+      <% end %>
+    <% end %>
+
   </tr>
   <% end %>
 </table>
