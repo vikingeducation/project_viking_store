@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
     private
 
       def get_created_at(time)
-        where("created_at <= ?", time).count
+        where("created_at >= ?", time).count
       end
 
   end
