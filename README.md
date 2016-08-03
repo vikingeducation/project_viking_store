@@ -29,3 +29,4 @@ Link to solution info on the seeding of this lives [here](https://gist.github.co
 (3) OrderContents belongs_to Order and belongs_to Product
 (4) Product belongs_to Category
 
+An Order is considered 'placed' once it has a 'checked_out' datetime.
