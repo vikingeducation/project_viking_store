@@ -1,7 +1,7 @@
 module DashboardsHelper
 
   def get_totals
-    {
+   {
     users: User.total_users,
     orders: Order.total_orders,
     revenue: OrderContent.total_revenue,
@@ -28,8 +28,16 @@ module DashboardsHelper
     }
   end
 
-  def top_states
-    User.top_states
+  def get_top_states
+    User.top_states.map do |state_row|
+      [state_row.name, state_row.users_in_state]
+    end.to_h
+  end
+
+  def get_top_cities
+    User.top_cities.map do |city_row|
+      [city_row.name, city_row.users_in_city]
+    end.to_h
   end
 
 end

@@ -1,39 +1,24 @@
 <h1>Viking Store Analytics Dashboard</h1>
 
 <div class='row'>
-  <div class='col-xs-6'>
+  <div class='col-xs-6 panel-default panel' >
     <h2>1. Overall Platform</h2>
-    <%= render partial: 'panel_one_table', locals: { caption: "Seven Day Totals",
+    <div class= 'panel-body'>
+    <%= render partial: 'two_column_table', locals: { caption: "Seven Day Totals",
                                   totals: @seven_day_totals } %>
-    <%= render partial: 'panel_one_table', locals: { caption: "Thirty Day Totals",
+    <%= render partial: 'two_column_table', locals: { caption: "Thirty Day Totals",
                                   totals: @thirty_day_totals } %>
-    <%= render partial: 'panel_one_table', locals: { caption: "All Time Totals",
+    <%= render partial: 'two_column_table', locals: { caption: "All Time Totals",
                                   totals: @totals } %>
-
+    </div>
   </div>
 
   <div class='col-xs-6'>
     <h2>2. User Demographics & Behavior</h2>
-    <table>
-      <% @top_states.each do |state| %>
-      <tr>
-          <td>
-            <%= state.name %>
-          </td>
-          <td>
-            <%= state.users_in_state %>
-          </td>
-      </tr>
-      <% end %>
-    </table>
-
-     <table>
-
-    </table>
-
-     <table>
-
-    </table>
+    <%= render partial: 'two_column_table', locals: { caption: "Top States",
+                                  totals: @top_states } %>
+    <%= render partial: 'two_column_table', locals: { caption: "Top Cities",
+                                  totals: @top_cities } %>
   </div>
 </div>
 
