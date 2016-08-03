@@ -1,0 +1,335 @@
+<div class = "container">
+  <div class = "row">
+    <div class = "col-xs-12">
+      <h1> Viking Store Analytics Dashboard </h1>
+    </div>
+  </div>
+  <div class = "row">
+    <div class = "col-xs-6">
+      <h3> 1. Overall Platform </h3>
+      <h4>Last 7 Days</h4>
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>Data</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>New Users</td>
+            <td><%= @last_7_days["New Users"] %></td>
+          </tr>
+          <tr>
+            <td>Orders</td>
+            <td><%= @last_7_days["Orders"] %></td>
+          </tr>
+          <tr>
+            <td>New Products</td>
+            <td><%= @last_7_days["New Products"] %></td>
+          </tr>
+          <tr>
+            <td>Revenue</td>
+            <td><%= @last_7_days["Revenue"] %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Last 30 Days</h4>
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>Data</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>New Users</td>
+            <td><%= @last_30_days["New Users"] %></td>
+          </tr>
+          <tr>
+            <td>Orders</td>
+            <td><%= @last_30_days["Orders"] %></td>
+          </tr>
+          <tr>
+            <td>New Products</td>
+            <td><%= @last_30_days["New Products"] %></td>
+          </tr>
+          <tr>
+            <td>Revenue</td>
+            <td><%= @last_30_days["Revenue"] %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Total</h4>
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>Data</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>New Users</td>
+            <td><%= @total["New Users"] %></td>
+          </tr>
+          <tr>
+            <td>Orders</td>
+            <td><%= @total["Orders"] %></td>
+          </tr>
+          <tr>
+            <td>New Products</td>
+            <td><%= @total["New Products"] %></td>
+          </tr>
+          <tr>
+            <td>Revenue</td>
+            <td><%= @total["Revenue"] %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class = "col-xs-6">
+      <h3> 2. User Demographics and Behavior </h3>
+      <h4>Top 3 States Users Live In (billing)</h4>
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>Data</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @table2["States"][0].name %></td>
+            <td><%= @table2["States"][0].state_count %></td>
+          </tr>
+          <tr>
+            <td><%= @table2["States"][1].name %></td>
+            <td><%= @table2["States"][1].state_count %></td>
+          </tr>
+          <tr>
+            <td><%= @table2["States"][2].name %></td>
+            <td><%= @table2["States"][2].state_count %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Top 3 Cities Users Live In (billing)</h4>
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>Data</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @table2["Cities"][0].name %></td>
+            <td><%= @table2["Cities"][0].city_count %></td>
+          </tr>
+          <tr>
+            <td><%= @table2["Cities"][1].name %></td>
+            <td><%= @table2["Cities"][1].city_count %></td>
+          </tr>
+          <tr>
+            <td><%= @table2["Cities"][2].name %></td>
+            <td><%= @table2["Cities"][2].city_count %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Top User With...</h4>
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>User</th>
+          <th>Quantity</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Highest Single Order Value</td>
+            <td><%= "#{@table2["Highest Single Order"][0].first_name} #{@table2["Highest Single Order"][0].last_name}" %></td>
+            <td>$<%= @table2["Highest Single Order"][0].order_price %></td>
+          </tr>
+          <tr>
+            <td>Highest Lifetime Value</td>
+            <td><%= "#{@table2["Highest Lifetime Value"][0].first_name} #{@table2["Highest Lifetime Value"][0].last_name}" %></td>
+            <td>$<%= @table2["Highest Lifetime Value"][0].lifetime_value %></td>
+          </tr>
+          <tr>
+            <td>Highest Average Order Value</td>
+            <td><%= "#{@table2["Highest Average Order Value"][0].first_name} #{@table2["Highest Average Order Value"][0].last_name}" %></td>
+            <td>$<%= @table2["Highest Average Order Value"][0].avg_order_value.round(2) %></td>
+          </tr>
+          <tr>
+            <td>Most Orders Placed</td>
+            <td><%= "#{@table2["Most Orders Placed"][0].first_name} #{@table2["Most Orders Placed"][0].last_name}" %></td>
+            <td><%= @table2["Most Orders Placed"][0].orders_placed %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class = "row">
+    <div class = "col-xs-6">
+      <h3> 3. Order Statistics </h3>
+      <h4>Last 7 Days</h4>
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>Data</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Number of Orders</td>
+            <td><%= @last_7_days["Orders"] %></td>
+          </tr>
+          <tr>
+            <td>Total Revenue</td>
+            <td><%= @last_7_days["Revenue"] %></td>
+          </tr>
+          <tr>
+            <td>Average Order Value</td>
+            <td><%= @last_7_days["Average Order Value"] %></td>
+          </tr>
+          <tr>
+            <td>Largest Order Value</td>
+            <td><%= @last_7_days["Largest Order Value"] %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Last 30 Days</h4>
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>Data</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Number of Orders</td>
+            <td><%= @last_30_days["Orders"] %></td>
+          </tr>
+          <tr>
+            <td>Total Revenue</td>
+            <td><%= @last_30_days["Revenue"] %></td>
+          </tr>
+          <tr>
+            <td>Average Order Value</td>
+            <td><%= @last_30_days["Average Order Value"] %></td>
+          </tr>
+          <tr>
+            <td>Largest Order Value</td>
+            <td><%= @last_30_days["Largest Order Value"] %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Total</h4>
+      <table class="table">
+        <thead>
+          <th>Item</th>
+          <th>Data</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Number of Orders</td>
+            <td><%= @total["New Users"] %></td>
+          </tr>
+          <tr>
+            <td>Total Revenue</td>
+            <td><%= @total["Revenue"] %></td>
+          </tr>
+          <tr>
+            <td>Average Order Value</td>
+            <td><%= @total["Average Order Value"] %></td>
+          </tr>
+          <tr>
+            <td>Largest Order Value</td>
+            <td><%= @total["Largest Order Value"] %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class = "col-xs-6">
+      <h3> 4. Time Series Data </h3>
+      <h4>Orders by day</h4>
+      <table class="table">
+        <thead>
+          <th>Date</th>
+          <th>Quantity</th>
+          <th>Value</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Today</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Yesterday</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>8/22</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>8/21</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>8/20</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>8/19</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>8/18</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Orders by Week</h4>
+      <table class="table">
+        <thead>
+          <th>Date</th>
+          <th>Quantity</th>
+          <th>Value</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Today</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>Yesterday</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>8/22</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>8/21</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>8/20</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>8/19</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+          <tr>
+            <td>8/18</td>
+            <td>10</td>
+            <td>$100</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
