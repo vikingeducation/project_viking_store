@@ -171,19 +171,19 @@
         <tbody>
           <tr>
             <td>Number of Orders</td>
-            <td>100</td>
+            <td><%= @last_7_days["Orders"] %></td>
           </tr>
           <tr>
             <td>Total Revenue</td>
-            <td>$5100</td>
+            <td><%= @last_7_days["Revenue"] %></td>
           </tr>
           <tr>
             <td>Average Order Value</td>
-            <td>$100</td>
+            <td><%= @last_7_days["Average Order Value"] %></td>
           </tr>
           <tr>
             <td>Largest Order Value</td>
-            <td>$600</td>
+            <td><%= @last_7_days["Largest Order Value"] %></td>
           </tr>
         </tbody>
       </table>
@@ -196,19 +196,19 @@
         <tbody>
           <tr>
             <td>Number of Orders</td>
-            <td>100</td>
+            <td><%= @last_30_days["Orders"] %></td>
           </tr>
           <tr>
             <td>Total Revenue</td>
-            <td>$5100</td>
+            <td><%= @last_30_days["Revenue"] %></td>
           </tr>
           <tr>
             <td>Average Order Value</td>
-            <td>$100</td>
+            <td><%= @last_30_days["Average Order Value"] %></td>
           </tr>
           <tr>
             <td>Largest Order Value</td>
-            <td>$600</td>
+            <td><%= @last_30_days["Largest Order Value"] %></td>
           </tr>
         </tbody>
       </table>
@@ -221,19 +221,19 @@
         <tbody>
           <tr>
             <td>Number of Orders</td>
-            <td>100</td>
+            <td><%= @total["New Users"] %></td>
           </tr>
           <tr>
             <td>Total Revenue</td>
-            <td>$5100</td>
+            <td><%= @total["Revenue"] %></td>
           </tr>
           <tr>
             <td>Average Order Value</td>
-            <td>$100</td>
+            <td><%= @total["Average Order Value"] %></td>
           </tr>
           <tr>
             <td>Largest Order Value</td>
-            <td>$600</td>
+            <td><%= @total["Largest Order Value"] %></td>
           </tr>
         </tbody>
       </table>

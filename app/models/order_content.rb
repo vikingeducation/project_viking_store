@@ -32,6 +32,21 @@ class OrderContent < ActiveRecord::Base
     OrderContent.select("first_name,last_name,COUNT(*) AS orders_placed").super_table.group("first_name,last_name").order("orders_placed DESC").to_a
   end
 
+  def self.order_totals(time = nil)
+    if time
+      select("order_id, SUM(price*quantity) AS order_price").joins("JOIN orders ON orders.id=order_contents.order_id").joins("JOIN products ON order_contents.product_id=products.id").where("orders.checkout_date > ?", time.days.ago).group("order_id")
+    else
+      select("order_id, SUM(price*quantity) AS order_price").joins("JOIN orders ON orders.id=order_contents.order_id").joins("JOIN products ON order_contents.product_id=products.id").group("order_id")
+    end
+  end
+
+  def self.avg_order_value(time = nil)
+    from(order_totals(time)).average("order_price").round(2)
+  end
+
+  def self.largest_order_value(time = nil)
+    from(order_totals(time)).maximum("order_price")
+  end
 end
 
   
