@@ -41,19 +41,21 @@ module DashboardsHelper
   end
 
   def get_best_customers
-    highest_single_order = User.highest_single_order[0]
+    highest_single_order = User.get_all_orders_highest_first[0]
     highest_lifetime_value = User.highest_lifetime_value[0]
     highest_avg_order = User.highest_avg_order[0]
+    most_orders_placed = User.most_orders_placed[0]
 
     {
       "Highest Single Order Value" =>
-        [ highest_single_order.full_name, highest_single_order.order_total ],
-    "Highest Lifetime Value" =>
-    [ highest_lifetime_value.full_name, highest_lifetime_value.order_total ],
-
-    "Highest Average Order" =>
-    [ highest_avg_order.full_name, highest_avg_order.order_total ]
-  }
+        [highest_single_order.full_name, highest_single_order.order_total],
+      "Highest Lifetime Value" =>
+        [highest_lifetime_value.full_name, highest_lifetime_value.order_total],
+      "Highest Average Order" =>
+        [highest_avg_order.full_name, highest_avg_order.order_average],
+      "Most Orders Placed" =>
+        [most_orders_placed.full_name, most_orders_placed.orders]
+    }
   end
 
 end

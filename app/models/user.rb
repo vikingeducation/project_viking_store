@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
     .where("checkout_date IS NOT NULL")
   end
 
-  def self.highest_single_order
+  def self.get_all_orders_highest_first
     join_products_get_order_totals
     .group("orders.id, users.first_name, users.last_name")
     .order("order_total DESC")
@@ -47,23 +47,41 @@ class User < ActiveRecord::Base
   end
 
   def self.highest_avg_order
-    highest_single_order.group("CONCAT(users.first_name, ' ', users.last_name)").average('SUM(products.price * order_contents.quantity)')
+    select("subquery.full_name, AVG(subquery.order_total) AS order_average")
+      .from(get_all_orders_highest_first)
+      .group("subquery.full_name")
+      .order("order_average DESC")
 
-    # find_by_sql("SELECT full_name, AVG(order_total) AS order_total FROM ? GROUP BY full_name" , highest_single_order)
+    # find_by_sql("
+    #   SELECT full_name, SUM(order_total)/COUNT(order_total) AS order_average
+    #   FROM ( SELECT CONCAT(users.first_name, ' ', users.last_name) AS full_name, SUM(products.price * order_contents.quantity) AS order_total
+    #     FROM users JOIN orders ON (users.id = orders.user_id)
+    #     JOIN order_contents ON (orders.id = order_contents.order_id)
+    #     JOIN products ON (products.id = order_contents.product_id)
+    #     WHERE checkout_date IS NOT NULL
+    #     GROUP BY orders.id, users.first_name, users.last_name
+    #     ) AS order_sum
+    #     GROUP BY full_name
+    #     ORDER BY order_average DESC")
+  end
 
-    find_by_sql("
-      SELECT full_name, AVG(order_total)
-      FROM ( SELECT CONCAT(users.first_name, ' ', users.last_name) AS full_name, SUM(products.price * order_contents.quantity) AS order_total
-        FROM users JOIN orders ON (users.id = orders.user_id)
-        JOIN order_contents ON (orders.id = order_contents.order_id)
-        JOIN products ON (products.id = order_contents.product_id)
-        WHERE checkout_date IS NOT NULL
-        GROUP BY orders.id, users.first_name, users.last_name
-        ) AS order_sum
+  def self.most_orders_placed
+    # find_by_sql("
+    #   SELECT full_name, COUNT(order_total) AS orders
+    #   FROM ( SELECT CONCAT(users.first_name, ' ', users.last_name) AS full_name, SUM(products.price * order_contents.quantity) AS order_total
+    #     FROM users JOIN orders ON (users.id = orders.user_id)
+    #     JOIN order_contents ON (orders.id = order_contents.order_id)
+    #     JOIN products ON (products.id = order_contents.product_id)
+    #     WHERE checkout_date IS NOT NULL
+    #     GROUP BY orders.id, users.first_name, users.last_name
+    #     ) AS order_sum
+    #     GROUP BY full_name
+    #     ORDER BY orders DESC")
 
-      GROUP BY full_name
-      ")
-
-    end
+    select("subquery.full_name, COUNT(subquery.order_total) AS orders")
+        .from(get_all_orders_highest_first)
+        .group("subquery.full_name")
+        .order("orders DESC")
+  end
 
 end
