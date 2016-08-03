@@ -6,55 +6,29 @@
 
       <h4>Total</h4>
       <table class='table table-striped'>
-        <tr>
-          <th>
-            Item
-          </th>
-          <th>
-            Data
-          </th>
-        </tr>
+        <%= render "th" %>
         <%= render partial: "two_col_row", locals: {:label => "New Users", :value => @total_users} %>
         <%= render partial: "two_col_row", locals: {:label => "Orders", :value => @total_orders} %>
         <%= render partial: "two_col_row", locals: {:label => "Products", :value => @total_products} %>
-        <tr>
-          <td>
-            Revenue
-          </td>
-          <td>
-            ?
-          </td>
-        </tr>
+        <%= render partial: "two_col_row", locals: {:label => "Revenue", :value => @total_revenue} %>
       </table>
 
       <h4>Last 7 Days</h4>
       <table class='table table-striped'>
-        <tr>
-          <th>
-            Item
-          </th>
-          <th>
-            Data
-          </th>
-        </tr>
+        <%= render "th" %>
         <%= render partial: "two_col_row", locals: {:label => "New Users", :value => @new_week_users} %>
         <%= render partial: "two_col_row", locals: {:label => "Orders", :value => @new_week_orders} %>
         <%= render partial: "two_col_row", locals: {:label => "Products", :value => @new_week_products} %>
+        <%= render partial: "two_col_row", locals: {:label => "Revenue", :value => @new_week_revenue} %>
       </table>
 
       <h4>Last 30 Days</h4>
       <table class='table table-striped'>
-        <tr>
-          <th>
-            Item
-          </th>
-          <th>
-            Data
-          </th>
-        </tr>
+        <%= render "th" %>
         <%= render partial: "two_col_row", locals: {:label => "New Users", :value => @new_month_users} %>
         <%= render partial: "two_col_row", locals: {:label => "Orders", :value => @new_month_orders} %>
         <%= render partial: "two_col_row", locals: {:label => "Products", :value => @new_month_products} %>
+        <%= render partial: "two_col_row", locals: {:label => "Revenue", :value => @new_month_revenue} %>
       </table>
     </div>
     <div class='col-md-5 box'>
