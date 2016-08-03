@@ -137,8 +137,8 @@
         <tbody>
           <tr>
             <td>Highest Single Order Value</td>
-            <td>Joe Smith</td>
-            <td>$650</td>
+            <td><%= "#{@table2["Highest Single Order"][0].first_name} #{@table2["Highest Single Order"][0].last_name}" %></td>
+            <td>$<%= @table2["Highest Single Order"][0].order_price %></td>
           </tr>
           <tr>
             <td>Highest Lifetime Value</td>
