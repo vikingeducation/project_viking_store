@@ -26,6 +26,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',  '~> 1.3.6',      group: :development
 
 gem 'faker'
+gem 'better_errors'
+gem 'binding_of_caller'
 
 gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
 gem 'pry-byebug'

@@ -1,7 +1,11 @@
 class User < ActiveRecord::Base
 
-  def user_count(time)
-    User.select("COUNT(*) AS user_count").where("created_at > ?", time.days.ago)
+  def self.user_count(time = nil)
+    if time
+      User.where("created_at > ?", time.days.ago).count
+    else
+      User.all.count
+    end
   end
 
 end

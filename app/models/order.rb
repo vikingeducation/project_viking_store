@@ -1,10 +1,14 @@
 class Order < ActiveRecord::Base
 
-  def order_count(time)
-    Order.select("COUNT(*) AS order_count").where("checkout_date > ?", time.days.ago)
+  def self.order_count(time = nil)
+    if time
+      Order.where("checkout_date > ?", time.days.ago).count
+    else
+      Order.all.count
+    end
   end
 
-  def orders_by_time(time)
+  def self.orders_by_time(time)
     Order.where("checkout_date > ?", time.days.ago)
   end
 
