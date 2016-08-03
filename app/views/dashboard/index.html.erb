@@ -66,19 +66,19 @@
         <tbody>
           <tr>
             <td>New Users</td>
-            <td>100</td>
+            <td><%= @total["New Users"] %></td>
           </tr>
           <tr>
             <td>Orders</td>
-            <td>100</td>
+            <td><%= @total["Orders"] %></td>
           </tr>
           <tr>
             <td>New Products</td>
-            <td>100</td>
+            <td><%= @total["New Products"] %></td>
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>100</td>
+            <td><%= @total["Revenue"] %></td>
           </tr>
         </tbody>
       </table>
@@ -93,16 +93,16 @@
         </thead>
         <tbody>
           <tr>
-            <td>California</td>
-            <td>23</td>
+            <td><%= @table2["States"][0].name %></td>
+            <td><%= @table2["States"][0].state_count %></td>
           </tr>
           <tr>
-            <td>Texas</td>
-            <td>10</td>
+            <td><%= @table2["States"][1].name %></td>
+            <td><%= @table2["States"][1].state_count %></td>
           </tr>
           <tr>
-            <td>Oregon</td>
-            <td>3</td>
+            <td><%= @table2["States"][2].name %></td>
+            <td><%= @table2["States"][2].state_count %></td>
           </tr>
         </tbody>
       </table>
@@ -114,16 +114,16 @@
         </thead>
         <tbody>
           <tr>
-            <td>Los Angeles</td>
-            <td>100</td>
+            <td><%= @table2["Cities"][0].name %></td>
+            <td><%= @table2["Cities"][0].city_count %></td>
           </tr>
           <tr>
-            <td>San Francisco</td>
-            <td>100</td>
+            <td><%= @table2["Cities"][1].name %></td>
+            <td><%= @table2["Cities"][1].city_count %></td>
           </tr>
           <tr>
-            <td>Austin</td>
-            <td>100</td>
+            <td><%= @table2["Cities"][2].name %></td>
+            <td><%= @table2["Cities"][2].city_count %></td>
           </tr>
         </tbody>
       </table>
