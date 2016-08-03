@@ -13,8 +13,3 @@ class Product < ActiveRecord::Base
   end
 
 end
-
-
-SELECT * FROM orders WHERE orders.checkout_date IS NOT NULL
-INNER JOIN order_contents ON orders.id = order_contents.order_id
-JOIN products ON order_contents.product_id = products.id
