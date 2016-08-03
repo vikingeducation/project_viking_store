@@ -1,3 +1,8 @@
+[Chris Goodson](https://github.com/ChrisGoodson/project_viking_store)
+[Philip Johnson](https://github.com/philipcolejohnson/project_viking_store)
+
+A project for [Viking Code School](http://www.vikingcodeschool.com)
+
 Project: Viking Store Admin
 ========================
 
