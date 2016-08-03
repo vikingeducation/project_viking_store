@@ -18,3 +18,7 @@
 # ignore database
 solution_viking_store_development
 solution_viking_store_test
+
+.env
+
+/config/database.yml
