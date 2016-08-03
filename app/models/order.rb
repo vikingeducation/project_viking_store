@@ -10,4 +10,7 @@ class Order < ActiveRecord::Base
 		end
 	end
 
-end
+
+	def revenue
+		o = Order.joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON products.id = order_contents.product_id").where("checkout_date IS NOT null").count("COUNT(quantity*products.price)")
+	end
