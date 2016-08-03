@@ -12,18 +12,22 @@ class DashboardsController < ApplicationController
                            "Orders" => Order.get_count(30),
                            "Products" => Product.get_count(30),
                            "Revenue" => OrderContent.get_revenue(30) }
-    @popular_states = create_top_3_hash(User.get_top_three_states)
+    @popular_states = create_top_3_hash(User.get_top_states(3))
+    @popular_cities = create_top_3_hash(User.get_top_cities(3))
+
+    @top_users_with = { "Highest Single Order" => User.get_greatest_order
+                          
+    }
 
 
-                       
-
+    }
   end
 
   def create_top_3_hash(method)
     top_3 = method
     top_3_states = {}
     top_3.each do |state|
-      top_3_states[state.name] = state.state_total
+      top_3_states[state.name] = state.total
     end
     top_3_states
   end

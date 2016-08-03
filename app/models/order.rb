@@ -4,6 +4,8 @@ class Order < ActiveRecord::Base
     days_ago = time.days.ago
     self.where("checkout_date IS NOT NULL AND checkout_date > ?", days_ago).count
   end
+
+  
   
 
 end
