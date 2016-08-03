@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
 
   def product_count(time)
-    Product.where("created_at > ?", time.days.ago)
+    Product.select("COUNT(*) AS product_count").where("created_at > ?", time.days.ago)
   end
 end
