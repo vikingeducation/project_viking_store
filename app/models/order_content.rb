@@ -1,5 +1,9 @@
 class OrderContent < ActiveRecord::Base
 
+  def self.super_table
+    joins("JOIN orders ON orders.id=order_contents.order_id").joins("JOIN products ON order_contents.product_id=products.id").joins("JOIN users ON users.id=orders.user_id")
+  end
+
   def self.total_revenue
     OrderContent.joins("JOIN orders ON orders.id=order_contents.order_id").joins("JOIN products ON order_contents.product_id=products.id").sum("products.price*order_contents.quantity")
   end
@@ -9,7 +13,19 @@ class OrderContent < ActiveRecord::Base
   end
 
   def self.highest_single_order
-     a = OrderContent.select("order_id, first_name, last_name, SUM(price*quantity) AS order_price").joins("JOIN orders ON orders.id=order_contents.order_id").joins("JOIN products ON order_contents.product_id=products.id").joins("JOIN users ON users.id=orders.user_id").group("order_id, first_name, last_name").order("order_price DESC").to_a
+     OrderContent.select("order_id, first_name, last_name, SUM(price*quantity) AS order_price").super_table.group("order_id, first_name, last_name").order("order_price DESC").to_a
+  end
+
+  def self.highest_lifetime_value
+    OrderContent.select("first_name,last_name,SUM(price*quantity) AS lifetime_value").super_table.group("first_name,last_name").order("lifetime_value DESC").to_a
+  end
+
+  def self.highest_average_order_value
+    OrderContent.select("first_name,last_name,AVG(price*quantity) AS avg_order_value").super_table.group("first_name,last_name").order("avg_order_value DESC").to_a
+  end
+
+  def self.most_orders_placed
+    OrderContent.select("first_name,last_name,COUNT(*) AS orders_placed").super_table.group("first_name,last_name").order("orders_placed DESC").to_a
   end
 
 end

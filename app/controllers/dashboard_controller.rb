@@ -14,7 +14,10 @@ class DashboardController < ApplicationController
                       "Revenue" => OrderContent.total_revenue}
     @table2 =        {"States" => Address.top_states,
                       "Cities" => Address.top_cities,
-                      "Highest Single Order" => OrderContent.highest_single_order}
+                      "Highest Single Order" => OrderContent.highest_single_order,
+                      "Highest Lifetime Value" => OrderContent.highest_lifetime_value,
+                      "Highest Average Order Value" => OrderContent.highest_average_order_value,
+                      "Most Orders Placed" => OrderContent.most_orders_placed}
 
 
   end
