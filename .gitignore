@@ -19,6 +19,11 @@
 solution_viking_store_development
 solution_viking_store_test
 
+# .env rails file
 .env
 
-/config/database.yml
+# Vim swap files
+*.swp
+
+# config/database.yml
+config/database.yml
