@@ -14,5 +14,10 @@ class DashboardController < ApplicationController
         revenue: Order.revenue_last_thirty_days 
       }
     }
+    
+    @demographics = {
+      top_three_states: Address.top_three_states,
+
+    }
   end
 end
