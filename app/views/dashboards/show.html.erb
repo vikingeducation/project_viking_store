@@ -1,7 +1,8 @@
 <div class='container'>
+  <h1 style="text-align:center">Viking Store  Analytics Dashboard</h1>
   <div class='row'>
     <div class='col-md-5 box'>
-      <h1>Overall Platform</h1>
+      <h2>Overall Platform</h2>
 
       <h4>Total</h4>
       <table class='table table-striped'>
@@ -13,30 +14,9 @@
             Data
           </th>
         </tr>
-        <tr>
-          <td>
-            Users
-          </td>
-          <td>
-            <%= @total_users %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Orders
-          </td>
-          <td>
-            <%= @total_orders %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Products
-          </td>
-          <td>
-            <%= @total_products %>
-          </td>
-        </tr>
+        <%= render partial: "two_col_row", locals: {:label => "New Users", :value => @total_users} %>
+        <%= render partial: "two_col_row", locals: {:label => "Orders", :value => @total_orders} %>
+        <%= render partial: "two_col_row", locals: {:label => "Products", :value => @total_products} %>
         <tr>
           <td>
             Revenue
@@ -57,22 +37,9 @@
             Data
           </th>
         </tr>
-        <tr>
-          <td>
-            New Users
-          </td>
-          <td>
-            100
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Orders
-          </td>
-          <td>
-            150
-          </td>
-        </tr>
+        <%= render partial: "two_col_row", locals: {:label => "New Users", :value => @new_week_users} %>
+        <%= render partial: "two_col_row", locals: {:label => "Orders", :value => @new_week_orders} %>
+        <%= render partial: "two_col_row", locals: {:label => "Products", :value => @new_week_products} %>
       </table>
 
       <h4>Last 30 Days</h4>
@@ -85,34 +52,21 @@
             Data
           </th>
         </tr>
-        <tr>
-          <td>
-            New Users
-          </td>
-          <td>
-            <%= @new_month_user %>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Orders
-          </td>
-          <td>
-            150
-          </td>
-        </tr>
+        <%= render partial: "two_col_row", locals: {:label => "New Users", :value => @new_month_users} %>
+        <%= render partial: "two_col_row", locals: {:label => "Orders", :value => @new_month_orders} %>
+        <%= render partial: "two_col_row", locals: {:label => "Products", :value => @new_month_products} %>
       </table>
     </div>
     <div class='col-md-5 box'>
-      <h1>User Demographics and Behavior</h1>
+      <h2>User Demographics and Behavior</h2>
     </div>
   </div>
   <div class='row'>
     <div class='col-md-5 box'>
-      <h1>Order Statistics</h1>
+      <h2>Order Statistics</h2>
     </div>
     <div class='col-md-5 box'>
-      <h1>Time Series Data</h1>
+      <h2>Time Series Data</h2>
     </div>
   </div>
 </div>
