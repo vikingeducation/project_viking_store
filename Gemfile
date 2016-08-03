@@ -30,6 +30,11 @@ gem 'spring',  '~> 1.3.6',      group: :development
 gem 'pry'
 
 gem 'faker'
+
+group :development do
+  gem "better_errors"
+end
+gem "binding_of_caller"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
