@@ -1,8 +1,5 @@
 class OrderContent < ActiveRecord::Base
 
-  OrderContent.select("*, product*price AS revenue").joins("JOIN products ON order_contents.product_id=products.id").group("order_contents.id",:order_id, "products.id")
-
-
 
   def self.super_table
     joins("JOIN orders ON orders.id=order_contents.order_id").joins("JOIN products ON order_contents.product_id=products.id").joins("JOIN users ON users.id=orders.user_id")
