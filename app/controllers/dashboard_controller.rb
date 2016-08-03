@@ -17,7 +17,13 @@ class DashboardController < ApplicationController
     
     @demographics = {
       top_three_states: Address.top_three_states,
-
+      top_three_cities: Address.top_three_cities,
+      top_users_with: {
+        "Highest Single Order Value" => OrderContent.highest_single_order_value,
+        "Highest Lifetime Value" => OrderContent.highest_lifetime_value,
+        "Highest Average Value" => OrderContent.highest_average_value,
+        "Most Orders Placed" => OrderContent.most_orders_placed
+      }
     }
   end
 end
