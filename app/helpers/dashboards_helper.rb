@@ -29,9 +29,7 @@ module DashboardsHelper
   end
 
   def top_states
-    User.top_states.each do |state|
-
-    end
+    User.top_states
   end
 
 end
