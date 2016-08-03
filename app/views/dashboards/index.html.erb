@@ -1,7 +1,6 @@
 <h1>Viking Store Analytics Dashboard</h1>
 
 <div class='row'>
-
   <div class='col-xs-6'>
     <h2>1. Overall Platform</h2>
     <%= render partial: 'panel_one_table', locals: { caption: "Seven Day Totals",
@@ -16,7 +15,16 @@
   <div class='col-xs-6'>
     <h2>2. User Demographics & Behavior</h2>
     <table>
-
+      <% @top_states.each do |state| %>
+      <tr>
+          <td>
+            <%= state.name %>
+          </td>
+          <td>
+            <%= state.users_in_state %>
+          </td>
+      </tr>
+      <% end %>
     </table>
 
      <table>

@@ -5,6 +5,6 @@ class Product < ActiveRecord::Base
   end
 
   def self.day_products_total(day)
-    where("updated_at > ? ", day.days.ago).count
+    where("created_at > ? ", day.days.ago).count
   end
 end
