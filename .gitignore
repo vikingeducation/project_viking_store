@@ -18,3 +18,12 @@
 # ignore database
 solution_viking_store_development
 solution_viking_store_test
+
+# .env rails file
+.env
+
+# Vim swap files
+*.swp
+
+# config/database.yml
+config/database.yml
