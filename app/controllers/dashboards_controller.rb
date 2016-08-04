@@ -6,6 +6,7 @@ class DashboardsController < ApplicationController
     get_overall_panel
     get_demographics_panel
     get_order_stats_panel
+    get_time_data_panel
   end
 
 
@@ -27,6 +28,11 @@ class DashboardsController < ApplicationController
     @seven_day_order_stats = get_seven_day_order_stats
     @thirty_day_order_stats = get_thirty_day_order_stats
     @total_order_stats = get_total_order_stats
+  end
+
+  def get_time_data_panel
+    @orders_per_day = get_orders_per_day
+    @orders_per_week = get_orders_per_week
   end
 
 end

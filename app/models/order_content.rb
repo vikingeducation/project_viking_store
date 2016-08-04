@@ -45,8 +45,12 @@ class OrderContent < ActiveRecord::Base
   end
 
   def self.order_num_on_day(day)
-    get_completed_orders.select("CONVERT(checkout_date, getdate()) AS just_date")
-                        .where("just_date = ? ", day.days.ago).count
+    get_completed_orders
+    .where("checkout_date BETWEEN ? AND ? ", (day+1).days.ago, day.days.ago).count
+  end
 
+  def self.order_num_on_week(week)
+    get_completed_orders
+    .where("checkout_date BETWEEN ? AND ? ", (week+1).weeks.ago, week.weeks.ago).count
   end
 end
