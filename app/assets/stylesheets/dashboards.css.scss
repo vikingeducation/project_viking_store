@@ -1,0 +1,39 @@
+// Place all the styles related to the dashboards controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.col-md-6
+{
+  border:solid;
+}
+
+h1, h2, h3
+{
+  text-align:center;
+  font-family: Comic Sans MS, Gadget, sans-serif;
+  font-weight: bold;
+  height: 100%;
+}
+
+.row {
+  overflow: hidden; 
+}
+
+[class*="col-"]{
+  margin-bottom: -1000px;
+  padding-bottom: 1000px;
+}
+
+
+
+#main {
+  margin-top: 40px;
+}
+
+table {
+  text-align: center;
+}
+
+th{
+  text-align: center;
+}

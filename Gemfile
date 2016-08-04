@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'hirb'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
 gem 'pg'
@@ -24,6 +24,12 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',  '~> 1.3.6',      group: :development
+
+group :development do
+  gem "better_errors"
+end
+
+gem "binding_of_caller"
 
 gem 'pry'
 

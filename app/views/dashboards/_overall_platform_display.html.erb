@@ -1,0 +1,19 @@
+ <h3><%= title %></h3>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <tr>
+      <th>Item</th>
+      <th>Data</th>
+    </tr>
+    <% hash.each_pair do |key, value| %>
+      <tr>
+        <td> 
+        <%= key %> 
+        </td>
+        <td>
+        <%= value %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

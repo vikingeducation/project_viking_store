@@ -1,0 +1,32 @@
+<h1> Viking Store Analytics Dashboard </h1>
+
+<div class="container" id="main">
+  <div class="row">
+    <div class="col-md-6" style="border:solid">
+      <h2>1. Overall Platform</h2>
+        <%= render partial: "overall_platform_display", locals: {hash: @seven_days_count, title: "Last 7 Days"} %>
+        <%= render partial: "overall_platform_display", locals: {hash: @thirty_days_count, title: "Last 30 Days"} %>
+        <%= render partial: "overall_platform_display", locals: {hash: @all_time_count, title: "Total"} %>
+    </div>
+    <div class ="col-md-6" style="border:solid">
+      <h2> 2. User Demographics and Behavior</h2>
+        <%= render partial: "overall_platform_display", locals: {hash: @popular_states, title: "Top 3 States Users Live In"} %>
+        <%= render partial: "overall_platform_display", locals: {hash: @popular_cities, title: "Top 3 Cities Users Live In"} %>
+        <%= render partial: "three_column_table", locals: {hash: @top_users_with, title: "Top User With..."} %>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6" style="border:solid">
+      <h2>3. Order Statistics</h2>
+        <%= render partial: "overall_platform_display", locals: {hash: @last_seven_days, title: "Last 7 Days"} %>
+        <%= render partial: "overall_platform_display", locals: {hash: @last_thirty_days, title: "Last 30 Days"} %>
+        <%= render partial: "overall_platform_display", locals: {hash: @all_days, title: "Total"} %>
+    </div>
+    <div class ="col-md-6" style="border:solid">
+      <h2>4. Time Series Data</h2>
+    </div>
+  </div>
+
+</div>
