@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
            .order("total DESC")
            .limit(num)
   end
-
+#get_top_states/cities shouldn't be here NOTEEE
   def self.get_top_cities(num)
     User.select("cities.name, COUNT(*) as total")
            .joins("JOIN addresses ON users.billing_id = addresses.id")

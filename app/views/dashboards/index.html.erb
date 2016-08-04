@@ -20,6 +20,9 @@
   <div class="row">
     <div class="col-md-6" style="border:solid">
       <h2>3. Order Statistics</h2>
+        <%= render partial: "overall_platform_display", locals: {hash: @last_seven_days, title: "Last 7 Days"} %>
+        <%= render partial: "overall_platform_display", locals: {hash: @last_thirty_days, title: "Last 30 Days"} %>
+        <%= render partial: "overall_platform_display", locals: {hash: @all_days, title: "Total"} %>
     </div>
     <div class ="col-md-6" style="border:solid">
       <h2>4. Time Series Data</h2>

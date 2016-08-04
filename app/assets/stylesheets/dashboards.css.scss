@@ -12,7 +12,18 @@ h1, h2, h3
   text-align:center;
   font-family: Comic Sans MS, Gadget, sans-serif;
   font-weight: bold;
+  height: 100%;
 }
+
+.row {
+  overflow: hidden; 
+}
+
+[class*="col-"]{
+  margin-bottom: -1000px;
+  padding-bottom: 1000px;
+}
+
 
 
 #main {
