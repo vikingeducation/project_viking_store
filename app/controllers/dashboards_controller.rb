@@ -7,6 +7,7 @@ class DashboardsController < ApplicationController
     get_demographics_panel
     get_order_stats_panel
     get_time_data_panel
+    render :index, layout: "admin_layout"
   end
 
 
