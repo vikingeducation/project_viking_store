@@ -49,8 +49,18 @@ class OrderContent < ActiveRecord::Base
     .where("checkout_date BETWEEN ? AND ? ", (day+1).days.ago, day.days.ago).count
   end
 
+   def self.order_value_on_day(day)
+    get_completed_orders
+    .where("checkout_date BETWEEN ? AND ? ", (day+1).days.ago, day.days.ago).sum('products.price * order_contents.quantity')
+  end
+
   def self.order_num_on_week(week)
     get_completed_orders
     .where("checkout_date BETWEEN ? AND ? ", (week+1).weeks.ago, week.weeks.ago).count
+  end
+
+    def self.order_value_on_week(week)
+    get_completed_orders
+    .where("checkout_date BETWEEN ? AND ? ", (week+1).weeks.ago, week.weeks.ago).sum('products.price * order_contents.quantity')
   end
 end

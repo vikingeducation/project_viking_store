@@ -8,4 +8,5 @@ class Order < ActiveRecord::Base
     where("checkout_date > ? ", day.days.ago).count
   end
 
+
 end
