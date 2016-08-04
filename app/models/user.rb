@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   def self.top_cities
     select("cities.name, COUNT(*) AS users_in_city")
     .joins("JOIN addresses ON (users.billing_id = addresses.id)")
-    .joins("JOIN cities ON (addresses.state_id = cities.id)")
+    .joins("JOIN cities ON (addresses.city_id = cities.id)")
     .group("cities.id").order("COUNT(*) DESC").limit(3)
   end
 

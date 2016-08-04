@@ -100,13 +100,13 @@ module DashboardsHelper
 
   def get_orders_per_week
     {
-      "This Week" => [OrderContent.order_num_on_week(0)],
-      "Last Week" => [OrderContent.order_num_on_week(1)],
-      "#{2.weeks.ago.month}/#{2.weeks.ago.day}" => [OrderContent.order_num_on_week(2)],
-      "#{3.weeks.ago.month}/#{3.weeks.ago.day}" => [OrderContent.order_num_on_week(3)],
-      "#{4.weeks.ago.month}/#{4.weeks.ago.day}" => [OrderContent.order_num_on_week(4)],
-      "#{5.weeks.ago.month}/#{5.weeks.ago.day}" => [OrderContent.order_num_on_week(5)],
-      "#{6.weeks.ago.month}/#{6.weeks.ago.day}" => [OrderContent.order_num_on_week(6)],
+      "This Week" => [OrderContent.order_num_on_week(0), OrderContent.order_num_on_week_value(0)],
+      "Last Week" => [OrderContent.order_num_on_week(1),OrderContent.order_num_on_week_value(1)],
+      "#{2.weeks.ago.month}/#{2.weeks.ago.day}" => [OrderContent.order_num_on_week(2),OrderContent.order_num_on_week_value(2)],
+      "#{3.weeks.ago.month}/#{3.weeks.ago.day}" => [OrderContent.order_num_on_week(3),OrderContent.order_num_on_week_value(3)],
+      "#{4.weeks.ago.month}/#{4.weeks.ago.day}" => [OrderContent.order_num_on_week(4),OrderContent.order_num_on_week_value(4)],
+      "#{5.weeks.ago.month}/#{5.weeks.ago.day}" => [OrderContent.order_num_on_week(5),OrderContent.order_num_on_week_value(5)],
+      "#{6.weeks.ago.month}/#{6.weeks.ago.day}" => [OrderContent.order_num_on_week(6),OrderContent.order_num_on_week_value(6)],
     }
   end
 
