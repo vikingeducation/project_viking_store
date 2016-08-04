@@ -1,8 +1,14 @@
 source 'https://rubygems.org'
 
+gem 'better_errors'
+gem 'binding_of_caller'
+gem 'hirb'
+# Bootstrap
+gem "twitter-bootstrap-rails"
+gem 'dotenv-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0'
+gem 'rails', '4.2.0'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
