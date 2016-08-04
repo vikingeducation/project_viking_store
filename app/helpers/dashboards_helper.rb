@@ -88,14 +88,13 @@ module DashboardsHelper
 
   def get_orders_per_day
     {
-      "Today" => [OrderContent.order_num_on_day(0)],
-      "Yesterday" => [OrderContent.order_num_on_day(1)],
-      "#{2.days.ago.month}/#{2.days.ago.day}" => [OrderContent.order_num_on_day(2)],
-      "#{3.days.ago.month}/#{3.days.ago.month}" => [OrderContent.order_num_on_day(3)],
-      "#{4.days.ago.month}/#{4.days.ago.day}" => [OrderContent.order_num_on_day(4)],
-      "#{5.days.ago.month}/#{5.days.ago.day}" => [OrderContent.order_num_on_day(5)],
-      "#{6.days.ago.month}/#{6.days.ago.day}" => [OrderContent.order_num_on_day(6)],
-      "#{7.days.ago.month}/#{7.days.ago.day}" => [OrderContent.order_num_on_day(7)]
+      "Today" => [OrderContent.order_num_on_day(0), OrderContent.order_num_on_day_value(0)],
+      "Yesterday" => [OrderContent.order_num_on_day(1), OrderContent.order_num_on_day_value(1)],
+      "#{2.days.ago.month}/#{2.days.ago.day}" => [OrderContent.order_num_on_day(2), OrderContent.order_num_on_day_value(2)],
+      "#{3.days.ago.month}/#{3.days.ago.month}" => [OrderContent.order_num_on_day(3), OrderContent.order_num_on_day_value(3)],
+      "#{4.days.ago.month}/#{4.days.ago.day}" => [OrderContent.order_num_on_day(4), OrderContent.order_num_on_day_value(4)],
+      "#{5.days.ago.month}/#{5.days.ago.day}" => [OrderContent.order_num_on_day(5), OrderContent.order_num_on_day_value(5)],
+      "#{6.days.ago.month}/#{6.days.ago.day}" => [OrderContent.order_num_on_day(6), OrderContent.order_num_on_day_value(6)],
     }
   end
 
@@ -104,11 +103,10 @@ module DashboardsHelper
       "This Week" => [OrderContent.order_num_on_week(0)],
       "Last Week" => [OrderContent.order_num_on_week(1)],
       "#{2.weeks.ago.month}/#{2.weeks.ago.day}" => [OrderContent.order_num_on_week(2)],
-      "#{3.weeks.ago.month}/#{3.weeks.ago.month}" => [OrderContent.order_num_on_week(3)],
+      "#{3.weeks.ago.month}/#{3.weeks.ago.day}" => [OrderContent.order_num_on_week(3)],
       "#{4.weeks.ago.month}/#{4.weeks.ago.day}" => [OrderContent.order_num_on_week(4)],
       "#{5.weeks.ago.month}/#{5.weeks.ago.day}" => [OrderContent.order_num_on_week(5)],
       "#{6.weeks.ago.month}/#{6.weeks.ago.day}" => [OrderContent.order_num_on_week(6)],
-      "#{7.weeks.ago.month}/#{7.weeks.ago.day}" => [OrderContent.order_num_on_week(7)]
     }
   end
 
