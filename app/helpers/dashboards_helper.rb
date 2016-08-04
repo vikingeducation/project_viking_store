@@ -101,8 +101,8 @@ module DashboardsHelper
 
   def get_orders_per_week
     {
-      "Today" => [OrderContent.order_num_on_week(0)],
-      "Yesterday" => [OrderContent.order_num_on_week(1)],
+      "This Week" => [OrderContent.order_num_on_week(0)],
+      "Last Week" => [OrderContent.order_num_on_week(1)],
       "#{2.weeks.ago.month}/#{2.weeks.ago.day}" => [OrderContent.order_num_on_week(2)],
       "#{3.weeks.ago.month}/#{3.weeks.ago.month}" => [OrderContent.order_num_on_week(3)],
       "#{4.weeks.ago.month}/#{4.weeks.ago.day}" => [OrderContent.order_num_on_week(4)],

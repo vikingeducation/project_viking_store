@@ -44,10 +44,8 @@
     <div class='panel-body'>
       <%= render partial: 'two_column_table', locals: { caption: "Seven Day Order Stats",
                                     totals: @orders_per_day } %>
-
-      <table>
-
-      </table>
+      <%= render partial: 'two_column_table', locals: { caption: "Seven Day Order Stats",
+                                    totals: @orders_per_week } %>
     </div>
   </div>
 </div>
