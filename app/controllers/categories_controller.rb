@@ -37,6 +37,23 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def show
+    @category = Category.find(params[:id])
+    @all_products = @category.all_products
+  end
+
+  def destroy
+    session[:return_to] = request.referer
+    @category = Category.find(params[:id])
+    if @category.destroy
+      flash[:notice] = "#{@category.name} has been deleted"
+      redirect_to categories_path
+    else
+      flash.now[:alert] = "Failed to delete"
+      redirect_to session.delete(:return_to)
+    end
+  end
+
   private
     def category_params
       params.require(:category).permit(:name, :description)

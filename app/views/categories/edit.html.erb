@@ -1,3 +1,5 @@
 
 
 <%= render partial: "form", locals: { category: @category } %>
+
+<%= link_to "Delete", category_path(@category), method: :delete, data: { confirm: "Are you sure?" } %>

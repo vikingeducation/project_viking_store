@@ -1,6 +1,19 @@
-<ul>
-  <li><%= @category.name %></li>
-  <li><%= @category.description %></li>
-  <li><%= @category.id %></li>
-  <li></li>
+<ul class="list-group">
+  <li class="list-group-item"><%= @category.name %></li>
+  <li class="list-group-item"><%= @category.description %></li>
+  <li class="list-group-item"><%= @category.id %></li>
 </ul>
+
+<table class="table">
+<% @all_products.each do |prod| %>
+  <tr>
+  <td><%= link_to prod.name, '#' %></td>
+  <td><%= prod.description %></td>
+  <td><%= prod.price %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to "Edit", edit_category_path(@category) %>
+<%= link_to "Delete", category_path(@category), method: :delete, data: { confirm: "Are you sure?" } %>
+<%= link_to "Index", categories_path %>

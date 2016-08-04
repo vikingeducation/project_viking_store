@@ -2,11 +2,11 @@
 <ul class="list-group">
 <% @categories.each do |c| %>
 <li class="list-group-item">
-  <%= link_to c.name, "#" %>
+  <%= link_to c.name, category_path(c) %>
   <%= c.description %>
   <%= c.id %>
   <%= link_to "Edit", edit_category_path(c) %>
-  <%= link_to "Delete", '#'%>
+  <%= link_to "Delete", category_path(c), method: :delete, data: { confirm: "Are you sure?" }%>
 </li>
 <% end %>
 </ul>
