@@ -1,0 +1,14 @@
+<table class='table table-striped'>
+
+  <caption class='text-center'><%= caption %></caption>
+  <tr >
+    <th class='text-center'>Item</th>
+    <th class='text-center'>Data</th>
+  </tr>
+  <% totals.each do |key, val| %>
+  <tr>
+    <td><%= key %></td>
+    <td><%= val %></td>
+  </tr>
+  <% end %>
+</table>

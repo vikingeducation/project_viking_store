@@ -1,0 +1,55 @@
+<h1>Viking Store Analytics Dashboard</h1>
+
+<div class='row'>
+  <div class='col-xs-5 panel-default panel' >
+    <h2>1. Overall Platform</h2>
+    <div class= 'panel-body'>
+    <%= render partial: 'two_column_table', locals: { caption: "Seven Day Totals",
+                                  totals: @seven_day_totals } %>
+    <%= render partial: 'two_column_table', locals: { caption: "Thirty Day Totals",
+                                  totals: @thirty_day_totals } %>
+    <%= render partial: 'two_column_table', locals: { caption: "All Time Totals",
+                                  totals: @totals } %>
+    </div>
+  </div>
+
+  <div class='col-xs-5 col-xs-offset-1 panel-default panel'>
+    <h2>2. User Demographics & Behavior</h2>
+    <div class= 'panel-body'>
+    <%= render partial: 'two_column_table', locals: { caption: "Top States",
+                                  totals: @top_states } %>
+    <%= render partial: 'two_column_table', locals: { caption: "Top Cities",
+                                  totals: @top_cities } %>
+       <%= render partial: 'two_column_table', locals: { caption: "Top Cities",
+                                  totals: @best_customers } %>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-xs-5 panel-default panel'>
+    <h2>3. Order Statistics</h2>
+    <div class='panel-body'>
+      <%= render partial: 'two_column_table', locals: { caption: "Seven Day Order Stats",
+                                    totals: @seven_day_order_stats } %>
+      <%= render partial: 'two_column_table', locals: { caption: "Thirty Day Order Stats",
+                                    totals: @thirty_day_order_stats } %>
+      <%= render partial: 'two_column_table', locals: { caption: "Total Order Stats",
+                                    totals: @total_order_stats } %>
+    </div>
+  </div>
+
+  <div class='col-xs-5 col-xs-offset-1 panel-default panel'>
+    <h2>4. Time Series Data</h2>
+    <div class='panel-body'>
+      <%= render partial: 'two_column_table', locals: { caption: "Order Stats by Day",
+                                    totals: @orders_per_day } %>
+      <%= render partial: 'two_column_table', locals: { caption: "Order Stats by Week",
+                                    totals: @orders_per_week } %>
+
+      <table>
+
+      </table>
+    </div>
+  </div>
+</div>
