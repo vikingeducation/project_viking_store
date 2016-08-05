@@ -1,0 +1,21 @@
+
+<table class="table">
+  <tr>
+    <th class="text-center">Name</th>
+    <th class="text-center">Description</th>
+    <th class="text-center">ID</th>
+    <th class="text-center">Price</th>
+  </tr>
+  <% @products.each do |pro| %>
+  <tr>
+    <td><%= link_to pro.name, product_path(pro) %></td>
+    <td><%= pro.description %></td>
+    <td><%= pro.id %></td>
+    <td><%= pro.price %></td>
+    <td><%= link_to "Edit", edit_product_path(pro) %></td>
+    <td><%= link_to "Delete", product_path(pro), method: :delete, data: { confirm: "Are you sure?" }%></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to "New Product", new_product_path, class: "btn btn-primary" %>

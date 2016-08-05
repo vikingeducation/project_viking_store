@@ -1,0 +1,25 @@
+
+<table class="table">
+  <tr>
+    <th>Times Ordered</th>
+    <th>Category</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>ID</th>
+    <th>Price</th>
+    <th>Number in Carts</th>
+  </tr>
+  <tr>
+    <td><%= @times_ordered %></td>
+    <td><%= @category %></td>
+    <td><%= @product.name %></td>
+    <td><%= @product.description %></td>
+    <td><%= @product.id %></td>
+    <td><%= @product.price %></td>
+    <td><%= @num_in_carts %></td>
+  </tr>
+</table>
+
+<%= link_to "Edit", edit_product_path(@product) %>
+<%= link_to "Delete", product_path(@product), method: :delete, data: { confirm: "Are you sure?" } %>
+<%= link_to "Index", products_path %>
