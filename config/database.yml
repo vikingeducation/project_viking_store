@@ -24,7 +24,7 @@ default: &default
 development:
   adapter: postgresql
   database: db/project_viking_store/development
-  host: localhost
+  host:
   pool: 5
   timeout: 5000
 
