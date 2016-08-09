@@ -27,8 +27,10 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',  '~> 1.3.6',      group: :development
 
 gem 'pry'
-
+gem 'hirb'
 gem 'faker'
+gem 'better_errors'
+gem 'binding_of_caller'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
