@@ -1,0 +1,154 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Viking Store Analytics Dashboard</h1>
+  </div>
+
+</div>
+
+
+<div class="row">
+  <div class="col-xs-6">
+    <h1>1. Overall Platform</h1>
+    
+    <h2>Last 7 Days</h2>
+    <table class="table-bordered">
+      <tr>
+        <th>Item</th>
+        <th>Date</th>
+      </tr>
+
+      <tr>
+        <td>New Users</td>
+        <td><%= User.created_last_seven_days.count %></td> 
+      </tr>
+
+      <tr>
+        <td>Orders</td>
+        <td><%= Order.created_last_seven_days.count %></td> 
+      </tr>
+
+      <tr>
+        <td>New Products</td>
+        <td><%= Product.created_last_seven_days.count %></td> 
+      </tr>
+
+      <tr>
+        <td>Revenue</td>
+        <td><%= #get revenue here %></td> 
+      </tr>
+    </table>
+
+    <h2>Last 30 Days</h2>
+    <table class="table-bordered">
+      <tr>
+        <th>Item</th>
+        <th>Date</th>
+      </tr>
+
+      <tr>
+        <td>New Users</td>
+        <td><%= User.created_last_thirty_days.count %></td> 
+      </tr>
+
+      <tr>
+        <td>Orders</td>
+        <td><%= Order.created_last_thirty_days.count %></td> 
+      </tr>
+
+      <tr>
+        <td>New Products</td>
+        <td><%= Product.created_last_thirty_days.count %></td> 
+      </tr>
+
+      <tr>
+        <td>Revenue</td>
+        <td><%= #get revenue here %></td> 
+      </tr>
+    </table>
+
+    <h2>Total</h2>
+    <table class="table-bordered">
+
+      <tr>
+        <th>Item</th>
+        <th>Date</th>
+      </tr>
+
+      <tr>
+        <td>Users</td>
+        <td><%= User.count %></td> 
+      </tr>
+
+      <tr>
+        <td>Orders</td>
+        <td><%= Order.count %></td> 
+      </tr>
+
+      <tr>
+        <td>Products</td>
+        <td><%= Product.count %></td> 
+      </tr>
+
+      <tr>
+        <td>Revenue</td>
+        <td><%= #get revenue here %></td> 
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-xs-6">
+    <h1>2. User Demographics and Behavior</h1>
+
+    <h2>Top 3 States Users Live In(billing)</h2>
+    <table class="table-bordered">
+
+    </table>
+
+    <h2>Top 3 Cities Users Live In(billing)</h2>
+    <table class="table-bordered">
+
+    </table>
+
+    <h2>Top User With...</h2>
+    <table class="table-bordered">
+
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-6">
+    <h1>3. Order Statistics</h1>
+
+    <h2>Last 7 Days</h2>
+    <table class="table-bordered">
+
+    </table>
+
+    <h2>Last 30 Days</h2>
+    <table class="table-bordered">
+
+    </table>
+
+    <h2>Total</h2>
+    <table class="table-bordered">
+
+    </table>
+    
+  </div>
+
+  <div class="col-xs-6">
+    <h1>4. Time Series Data</h1>
+
+    <h2>Orders by Day</h2>
+    <table class="table-bordered">
+
+    </table>
+
+    <h2>Orders by Week</h2>
+    <table class="table-bordered">
+
+    </table>
+
+  </div>
+</div>
