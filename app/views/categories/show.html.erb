@@ -1,0 +1,25 @@
+<h2>Category <%="#{@category.id}: #{@category.name}"%></h2>
+
+<div class="row">
+  <div class="col-sm-12">
+    <strong>Category ID:</strong> <%=@category.id%><br>
+    <strong>Category Name:</strong> <%=@category.name%><br>
+    <%=link_to "Edit Category", edit_category_path(@category)%><br>
+    <%=link_to "Delete Category", category_path(@category), :confirm => "Are you sure?", :method => :delete%><br>
+  
+
+    <p><br><strong>Products in <%=@category.name%>:</strong></p>
+
+    <table class="table table-striped">
+      <tr><th>ID</th><th>Name</th><!--<th>SHOW</th><th>EDIT</th><th>DELETE</th>--></tr>
+      <%@products.each do |prod| %>
+      <tr>
+        <td><%=prod.id%></td>
+        <td><%= link_to prod.name, product_path(prod)%></td>
+      </tr>
+      <%end%>
+
+
+    </table>
+  </div>
+</div>
