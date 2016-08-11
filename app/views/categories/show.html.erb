@@ -6,7 +6,7 @@
     <strong>Category Name:</strong> <%=@category.name%><br>
     <%=link_to "Edit Category", edit_category_path(@category)%><br>
     <%=link_to "Delete Category", category_path(@category), :confirm => "Are you sure?", :method => :delete%><br>
-  
+
 
     <p><br><strong>Products in <%=@category.name%>:</strong></p>
 
