@@ -1,143 +1,207 @@
 <div class="row">
   <div class="col-xs-12">
     <h1>Viking Store Analytics Dashboard</h1>
+
   </div>
 
 </div>
 
 
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-xs-6 panel">
     <h1>1. Overall Platform</h1>
     
     <h2>Last 7 Days</h2>
-    <table class="table-bordered">
-      <tr>
-        <th>Item</th>
-        <th>Date</th>
-      </tr>
+      <div class="row">
+        <table class="table-bordered col-xs-11">
+          <tr>
+            <th>Item</th>
+            <th>Date</th>
+          </tr>
 
-      <tr>
-        <td>New Users</td>
-        <td><%= User.created_last_seven_days.count %></td> 
-      </tr>
+          <tr>
+            <td>New Users</td>
+            <td><%= User.created_last_seven_days.count %></td> 
+          </tr>
 
-      <tr>
-        <td>Orders</td>
-        <td><%= Order.created_last_seven_days.count %></td> 
-      </tr>
+          <tr>
+            <td>Orders</td>
+            <td><%= Order.created_last_seven_days.count %></td> 
+          </tr>
 
-      <tr>
-        <td>New Products</td>
-        <td><%= Product.created_last_seven_days.count %></td> 
-      </tr>
+          <tr>
+            <td>New Products</td>
+            <td><%= Product.created_last_seven_days.count %></td> 
+          </tr>
 
-      <tr>
-        <td>Revenue</td>
-        <td><%= #get revenue here %></td> 
-      </tr>
-    </table>
-
+          <tr>
+            <td>Revenue</td>
+            <td><%= OrderContent.revenue_last_seven_days %></td> 
+          </tr>
+        </table>
+      </div>  
     <h2>Last 30 Days</h2>
-    <table class="table-bordered">
-      <tr>
-        <th>Item</th>
-        <th>Date</th>
-      </tr>
+      <div class="row">
+        <table class="table-bordered col-xs-11">
+          <tr>
+            <th>Item</th>
+            <th>Date</th>
+          </tr>
 
-      <tr>
-        <td>New Users</td>
-        <td><%= User.created_last_thirty_days.count %></td> 
-      </tr>
+          <tr>
+            <td>New Users</td>
+            <td><%= User.created_last_thirty_days.count %></td> 
+          </tr>
 
-      <tr>
-        <td>Orders</td>
-        <td><%= Order.created_last_thirty_days.count %></td> 
-      </tr>
+          <tr>
+            <td>Orders</td>
+            <td><%= Order.created_last_thirty_days.count %></td> 
+          </tr>
 
-      <tr>
-        <td>New Products</td>
-        <td><%= Product.created_last_thirty_days.count %></td> 
-      </tr>
+          <tr>
+            <td>New Products</td>
+            <td><%= Product.created_last_thirty_days.count %></td> 
+          </tr>
 
-      <tr>
-        <td>Revenue</td>
-        <td><%= #get revenue here %></td> 
-      </tr>
-    </table>
-
+          <tr>
+            <td>Revenue</td>
+            <td><%= OrderContent.revenue_last_thirty_days %></td> 
+          </tr>
+        </table>
+      </div>
     <h2>Total</h2>
-    <table class="table-bordered">
+      <div class="row">
+        <table class="table-bordered col-xs-11">
 
-      <tr>
-        <th>Item</th>
-        <th>Date</th>
-      </tr>
+          <tr>
+            <th>Item</th>
+            <th>Date</th>
+          </tr>
 
-      <tr>
-        <td>Users</td>
-        <td><%= User.count %></td> 
-      </tr>
+          <tr>
+            <td>Users</td>
+            <td><%= User.count %></td> 
+          </tr>
 
-      <tr>
-        <td>Orders</td>
-        <td><%= Order.count %></td> 
-      </tr>
+          <tr>
+            <td>Orders</td>
+            <td><%= Order.count %></td> 
+          </tr>
 
-      <tr>
-        <td>Products</td>
-        <td><%= Product.count %></td> 
-      </tr>
+          <tr>
+            <td>Products</td>
+            <td><%= Product.count %></td> 
+          </tr>
 
-      <tr>
-        <td>Revenue</td>
-        <td><%= #get revenue here %></td> 
-      </tr>
-    </table>
+          <tr>
+            <td>Revenue</td>
+            <td><%= OrderContent.total_revenue %></td> 
+          </tr>
+        </table>
+      </div>
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-xs-6 panel">
     <h1>2. User Demographics and Behavior</h1>
 
-    <h2>Top 3 States Users Live In(billing)</h2>
-    <table class="table-bordered">
+    <h2>Top 3 States Users Live In</h2>
+      <div class="row">
+        <table class="table-bordered col-xs-12">
+          <tr>
+            <th>State</th>
+            <th>Users</th>
+          </tr>
+          <% User.top_three_states.to_a.each do |state| %>
+            <tr>
+              <td><%= state.name %></td>
+              <td><%= state.user_count %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
 
-    </table>
-
-    <h2>Top 3 Cities Users Live In(billing)</h2>
-    <table class="table-bordered">
-
-    </table>
+    <h2>Top 3 States Users Live In</h2>
+      <div class="row">
+        <table class="table-bordered col-xs-12">
+          <tr>
+            <th>City</th>
+            <th>Users</th>
+          </tr>
+          <% User.top_three_cities.to_a.each do |city| %>
+            <tr>
+              <td><%= city.name %></td>
+              <td><%= city.user_count %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
 
     <h2>Top User With...</h2>
-    <table class="table-bordered">
+      <div class="row">
+        <table class="table-bordered col-md-12">
+          <tr>
+            <th>Item</th>
+            <th>User</th>
+            <th>Quantity</th>
+          </tr>
 
-    </table>
+          <tr>
+            <td>Highest Single Order Value</td>
+            <td><%= "#{User.max_order.first_name} #{User.max_order.last_name}" %></td>
+            <td><%= User.max_order.max %></td>
+
+          </tr>
+
+          <tr>
+            <td>Highest Life Time Value</td>
+            <td><%= "#{User.highest_life_time_value.first_name} #{User.highest_life_time_value.last_name}" %></td>
+            <td><%= User.highest_life_time_value.order_total %></td>
+          </tr>
+
+          <tr>
+            <td>Highest Average Order Value</td>
+            <td><%= User.highest_average_order.full_name %></td>
+            <td><%= User.highest_average_order.average_order.round(2) %></td>
+          </tr>
+
+          <tr>
+            <td>Most Orders Placed</td>
+            <td><%= User.most_orders.full_name %></td>
+            <td><%= User.most_orders.total_orders %></td>
+          </tr>
+        </table>
+      </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-xs-6 panel">
     <h1>3. Order Statistics</h1>
 
     <h2>Last 7 Days</h2>
-    <table class="table-bordered">
+    <div class="row">
+      <table class="table-bordered col-xs-11">
 
-    </table>
+      </table>
+    </div>
 
     <h2>Last 30 Days</h2>
-    <table class="table-bordered">
+    <div class="row">
+      <table class="table-bordered col-xs-11">
 
-    </table>
+      </table>
+    </div>
 
     <h2>Total</h2>
-    <table class="table-bordered">
+    <div class="row">
+      <table class="table-bordered col-xs-11">
 
-    </table>
+      </table>
+    </div>
     
   </div>
 
-  <div class="col-xs-6">
+  <div class="col-xs-6 panel">
     <h1>4. Time Series Data</h1>
 
     <h2>Orders by Day</h2>
