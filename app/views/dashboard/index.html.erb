@@ -181,21 +181,90 @@
     <h2>Last 7 Days</h2>
     <div class="row">
       <table class="table-bordered col-xs-11">
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
 
+        <tr>
+          <td>Number of Orders</td>
+          <td><%= Order.created_last_seven_days.count %></td>
+        </tr>
+
+        <tr>
+          <td>Total Revenue</td>
+          <td><%= OrderContent.revenue_last_seven_days %></td>
+        </tr>
+
+        <tr>
+          <td>Average Order Value</td>
+          <td><%= OrderContent.avg_order_value_last_seven_days %></td>
+        </tr>
+
+        <tr>
+          <td>Largest Order Value</td>
+          <td><%= OrderContent.max_order_last_seven_days %></td>
+        </tr>
       </table>
     </div>
 
     <h2>Last 30 Days</h2>
     <div class="row">
       <table class="table-bordered col-xs-11">
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
 
+        <tr>
+          <td>Number of Orders</td>
+          <td><%= Order.created_last_thirty_days.count %></td>
+        </tr>
+
+        <tr>
+          <td>Total Revenue</td>
+          <td><%= OrderContent.revenue_last_thirty_days %></td>
+        </tr>
+
+        <tr>
+          <td>Average Order Value</td>
+          <td><%= OrderContent.avg_order_value_last_thirty_days %></td>
+        </tr>
+
+        <tr>
+          <td>Largest Order Value</td>
+          <td><%= OrderContent.max_order_last_thirty_days %></td>
+        </tr>
       </table>
     </div>
 
     <h2>Total</h2>
     <div class="row">
       <table class="table-bordered col-xs-11">
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
 
+        <tr>
+          <td>Number of Orders</td>
+          <td><%= @orders.count %></td>
+        </tr>
+
+        <tr>
+          <td>Total Revenue</td>
+          <td><%= OrderContent.total_revenue %></td>
+        </tr>
+
+        <tr>
+          <td>Average Order Value</td>
+          <td><%= OrderContent.avg_order_value.round(2) %></td>
+        </tr>
+
+        <tr>
+          <td>Largest Order Value</td>
+          <td><%= OrderContent.max_order.round(2) %></td>
+        </tr>
       </table>
     </div>
     
