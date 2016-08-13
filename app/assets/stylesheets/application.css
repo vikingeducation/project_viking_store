@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+#navbar h3 {
+  text-align: center;
+}
+
+#navbar {
+  border: solid 1px black;
+}
+
+#navbar ul li {
+  list-style-type: none;
+  text-align: center;
+  margin-left: -35px;
+}
+
+
+#analytics {
+  border-top: 1px solid black;
+  margin-top: 10px;
+}

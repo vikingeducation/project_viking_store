@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  get 'admin' => 'admin#index'
+
   get 'dashboard' => 'dashboard#index'
+  resources :categories
   root 'dashboard#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
