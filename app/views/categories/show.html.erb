@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1><%= @category.name %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <p id="category-description"><%= @category.description %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <p id="category-links"><%= link_to "Delete", category_path(@category.id), method: "delete" %>, <%= link_to "Edit",edit_category_path(@category.id) %></p>
+  </div>
+</div>
+
+
+<div class="row">
+  <h1>Products</h1>
+
+  <table class="table-bordered col-xs-8 col-xs-offset-2">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>SKU</th>
+    </tr>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= link_to product.name, product_path(product.id) %></td>
+        <td><%= product.description %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= product.sku %></td>
+      </tr>
+    <% end %>
+
+  </table>  
+</div>
