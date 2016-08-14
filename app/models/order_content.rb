@@ -1,4 +1,6 @@
 class OrderContent < ActiveRecord::Base
+  belongs_to :product
+  belongs_to :order
   
   def self.revenue_last_seven_days
     OrderContent.select("SUM(products.price * order_contents.quantity) AS revenue")
