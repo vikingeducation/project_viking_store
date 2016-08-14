@@ -29,4 +29,4 @@
 
   <%= f.submit %>
 <% end %>
-<p><%= link_to "Delete", product_path(@product.id), method: "DELETE" %></p>
+<p><%= link_to "Delete", product_path(@product.id), method: "DELETE", data: {confirm: "Are you sure?"} %></p>

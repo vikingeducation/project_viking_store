@@ -38,6 +38,18 @@ class ProductsController < ApplicationController
     end 
   end
 
+  def destroy
+    @product = Product.find(params[:id])
+
+    if @product.destroy
+      flash[:success] = "Product successfully deleted"
+      redirect_to products_path
+    else
+      flash[:error] = "Something went wrong deleting the product"
+      redirect_to :back
+    end
+  end
+
   private
   def whitelisted_params
     params.require(:product).permit(:name, :description, :sku, :price, :category_id)
