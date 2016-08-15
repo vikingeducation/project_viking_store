@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   get '/admin' => 'admin#portal'
   resources :categories
   resources :products
+  resources :users
 end

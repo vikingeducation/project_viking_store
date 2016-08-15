@@ -1,0 +1,32 @@
+<h2>Users</h2>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <a href="<%=new_user_path%>" type="button" id="new-resource-button" class="btn btn-primary btn-lg btn-block">Create User</a>
+  </div>
+  <div class='col-sm-12'>
+    <table class="table table-striped">
+      <tr><th>ID</th><th>Name</th><th>Joined</th><th>City</th><th>State</th><th>Orders</th><th>Last Order</th><th>SHOW</th><th>EDIT</th><th>DELETE</th></tr>
+      <%@users.sort.reverse.each do |user| %>
+      <tr>
+        <td><%=user.id%></td>
+        <td><%=user.last_name + ", " + user.first_name%></td>
+        <td><%=user.created_at.strftime('%Y %b %d')%></td>
+        <td><%=user.default_billing_address.city.name unless user.default_billing_address.nil?%></td>
+        <td><%=user.default_billing_address.state.name unless user.default_shipping_address.nil?%></td>
+        <td><%=user.orders.count%></td>
+        <% if user.orders.where("checkout_date IS NOT null").empty?%>
+          <td>"--"</td>
+        <% else %>
+          <td><%=user.orders.where("checkout_date IS NOT null").order("checkout_date DESC").limit(1).first.checkout_date.strftime('%Y %b %d')%></td>
+        <% end %>
+        <td><%=link_to "show", user_path(user)%></td>
+        <td><%=link_to "edit", edit_user_path(user)%></td>
+        <td><%=link_to "delete", user_path(user), data: {:confirm => "Are you sure?"}, :method => :delete%></td>
+      </tr>
+      <%end%>
+
+
+    </table>
+  </div>
+</div>

@@ -50,7 +50,6 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @category = Category.where("product_id = @product.id")
     @ordered = OrderContent.where("product_id = ?", @product.id).joins("JOIN orders on order_contents.order_id=orders.id").where("orders.checkout_date IS NOT null").sum("order_contents.quantity")
     @carts = OrderContent.where("product_id = ?", @product.id).joins("JOIN orders on order_contents.order_id=orders.id").where("orders.checkout_date IS null").count("order_contents.quantity")
   end

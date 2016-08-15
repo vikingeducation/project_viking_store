@@ -12,8 +12,7 @@
         <td><%=prod.id%></td>
         <td><%=prod.name%></td>
         <td>$<%=prod.price%></td>
-        <% cat = @categories.find(prod.category_id) %>
-        <td><%=link_to cat.name, category_path(cat)%></td>
+        <td><%=link_to prod.category.name, category_path(prod.category)%></td>
         <td><%=link_to "show", product_path(prod)%></td>
         <td><%=link_to "edit", edit_product_path(prod)%></td>
         <td><%=link_to "delete", product_path(prod), data: {:confirm => "Are you sure?"}, :method => :delete%></td>
