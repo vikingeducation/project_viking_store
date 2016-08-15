@@ -1,0 +1,75 @@
+<h2>User <%="#{@user.id}: #{@user.first_name} #{@user.last_name}"%></h2>
+
+<div class="row">
+  <div class="col-sm-12 content-wrap">
+    <h3>Demographic Information</h3>
+    <strong>First Name:</strong> <%=@user.first_name%><br>
+    <strong>Last Name:</strong> <%=@user.last_name%><br>
+    <strong>Email:</strong> $<%=@user.email%><br><br>
+    <strong>Default Billing Address:</strong><br>
+    <% if @user.default_billing_address.nil? %>
+    <%= "--" %><br><br>
+    <% else %>
+    <%="#{@user.default_billing_address.street_address}, #{@user.default_billing_address.secondary_address}, #{@user.default_billing_address.city.name}, #{@user.default_billing_address.state.name}" %><br><br>
+    <% end %>
+    <strong>Default Shipping Address:</strong><br>
+    <% if @user.default_shipping_address.nil? %>
+    <%= "--" %><br><br>
+    <% else %>
+    <%="#{@user.default_shipping_address.street_address}, #{@user.default_shipping_address.secondary_address}, #{@user.default_shipping_address.city.name}, #{@user.default_shipping_address.state.name}" %><br><br>
+    <% end %>
+    <%=link_to "Edit User's Information", edit_user_path(@user)%><br>
+    <%=link_to "Delete User", user_path(@user), data: {:confirm => "Are you sure?"}, :method => :delete%><br>
+    <%=link_to "View Saved Addresses", addresses_path(:user_id => @user.id) %>
+    <%=link_to "View Unplaced Order (Cart)" %>
+  </div>
+
+  <div class="col-sm-12 content-wrap">
+    <h3>Credit Card Information</h3>
+    <strong>First Name:</strong> <%=@user.first_name%><br>
+    <strong>Last Name:</strong> <%=@user.last_name%><br>
+    <% @user.credit_cards.each do |card|%>
+    <strong>Number:</strong> <%=card.card_number%><br>
+    <strong>Expiration:</strong> <%="#{card.exp_month}/#{card.exp_year}"%><br>
+    <strong>CV2:</strong> $<%=card.ccv%><br>
+    <a href='#'>Remove Card</a>
+    <% end %>
+  </div>
+
+  <div class="col-sm-12 content-wrap">
+    <h3>Admin Actions for <%="#{@user.first_name} #{@user.last_name}"%></h3>
+    <div class="col-sm-8 col-sm-offset-2">
+      <a href="#" type="button" id="new-resource-button" class="btn btn-primary btn-lg btn-block">Create Order</a>
+    </div>
+    <div class="col-sm-8 col-sm-offset-2">
+      <a href=<%=new_address_path(:user_id => @user.id)%> type="button" id="new-resource-button" class="btn btn-primary btn-lg btn-block">Create Address</a>
+    </div>
+  </div>
+
+  <div class="col-sm-12 content-wrap">
+    <h3>Order History</h3>
+    <div class='col-sm-12'>
+      <table class="table table-striped">
+        <tr><th>ID</th><th>Order Date</th><th>Order Value</th><th>Status</th><th>SHOW</th><th>EDIT</th><th>DELETE</th></tr>
+        <%@user.orders.each do |order| %>
+        <tr>
+          <td><%=order.id%></td>
+          <td><%=order.created_at.strftime('%Y %b %d')%></td>
+          <td><%=order_value(order)%></td>
+          <td><%=order.checkout_date.nil? ? "NOT PLACED" : "PLACED"%></td>
+
+          <td><%=link_to "show"%></td>
+          <td><%=link_to "edit"%></td>
+          <td><%=link_to "delete"%></td>
+        </tr>
+        <%end%>
+
+
+      </table>
+    </div>
+
+
+
+  </div>
+
+</div>

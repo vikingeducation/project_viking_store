@@ -1,0 +1,25 @@
+<h2>Products</h2>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <a href="<%=new_product_path%>" type="button" id="new-resource-button" class="btn btn-primary btn-lg btn-block">Create Product</a>
+  </div>
+  <div class='col-sm-12'>
+    <table class="table table-striped">
+      <tr><th>ID</th><th>Name</th><th>SHOW</th><th>EDIT</th><th>DELETE</th></tr>
+      <%@products.each do |prod| %>
+      <tr>
+        <td><%=prod.id%></td>
+        <td><%=prod.name%></td>
+        <td>$<%=prod.price%></td>
+        <td><%=link_to prod.category.name, category_path(prod.category)%></td>
+        <td><%=link_to "show", product_path(prod)%></td>
+        <td><%=link_to "edit", edit_product_path(prod)%></td>
+        <td><%=link_to "delete", product_path(prod), data: {:confirm => "Are you sure?"}, :method => :delete%></td>
+      </tr>
+      <%end%>
+
+
+    </table>
+  </div>
+</div>

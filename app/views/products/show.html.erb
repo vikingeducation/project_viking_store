@@ -1,0 +1,19 @@
+<h2>Product <%="#{@product.id}: #{@product.name}"%></h2>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h3>Product Information</h3>
+    <strong>Product ID:</strong> <%=@product.id%><br>
+    <strong>Product Name:</strong> <%=@product.name%><br>
+    <strong>Product Price:</strong> $<%=@product.price%><br>
+    <strong>Product Category:</strong> <%=@product.category.name%><br>
+    <h3>Product Statistics</h3>
+    <strong>Times Ordered:</strong> <%=@ordered%><br>
+    <strong>Carts In:</strong> <%=@carts%><br><br>
+    <%=link_to "Edit Product", edit_product_path(@product)%><br>
+    <%=link_to "Delete Product", product_path(@product), data: {:confirm => "Are you sure?"}, :method => :delete%><br>
+
+
+
+  </div>
+</div>

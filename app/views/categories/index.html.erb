@@ -1,0 +1,23 @@
+<h2>Product Categories</h2>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <a href="<%=new_category_path%>" type="button" id="new-resource-button" class="btn btn-primary btn-lg btn-block">Create Category</a>
+  </div>
+  <div class='col-sm-12'>
+    <table class="table table-striped">
+      <tr><th>ID</th><th>Name</th><th>SHOW</th><th>EDIT</th><th>DELETE</th></tr>
+      <%@categories.each do |cat| %>
+      <tr>
+        <td><%=cat.id%></td>
+        <td><%=cat.name%></td>
+        <td><%=link_to "show", category_path(cat)%></td>
+        <td><%=link_to "edit", edit_category_path(cat)%></td>
+        <td><%=link_to "delete", category_path(cat), data: {:confirm => "Are you sure?"}, :method => :delete%></td>
+      </tr>
+      <%end%>
+
+
+    </table>
+  </div>
+</div>

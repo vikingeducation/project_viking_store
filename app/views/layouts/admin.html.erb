@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Portal</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+  <body>
+    <div class="container">
+      <h1>Viking Store Admin Portal</h1>
+
+
+        <div class="row">
+            <div class="col-sm-3 sidebar" id="menu-list">
+              <h4>Navigation Options</h4>
+                <span><p>
+                  <%= link_to "Users", users_path%><br>
+                  <%= link_to "Addresses", addresses_path%><br>
+                  <a href="#">Orders</a><br>
+                  <%= link_to "Products", products_path%><br>
+                  <%= link_to "Categories", categories_path%><br>
+                  -----------------------<br>
+                  <a href="#">Analytics Dashboard</a></p>
+                </span>
+            </div>
+            <div class="col-sm-8 col-sm-offset-1 content-wrap">
+              <% flash.each do |key, value| %>
+              <h4 class="error-message"><%= content_tag :div, value, class: "flash #{key}" %></h4>
+            <% end %>
+
+              <%= yield %>
+
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<h2><%= "Create New #{@user.first_name} #{@user.last_name} Address"%></h2>
+<div class="row">
+<div class="col-sm-12 content-wrap">
+
+  <strong>Owner ID:</strong> <%=@user.id%><br>
+  <strong><Owner Name:</strong> <%=@user.first_name+ " " +@user.last_name%><br><br>
+
+<div class="row">
+    <div class="col-xs-3">
+      <%= form_for @address do |f| %>
+      <%= f.label :street_address, "Street Address: " %><br><br>
+      <%= f.label :secondary_address, "Secondary Address: " %><br><br>
+      <%= f.label :city, "City: " %><br><br>
+      <%= f.label :state, "State: " %><br><br>
+      <%= f.label :zip_code, "Zip: " %><br><br>
+    </div>
+    <div class="col-xs-9">
+      <%= field_error_message(@address, :street_address) %>
+      <%= f.text_field :street_address %><br><br>
+      <%= field_error_message(@address, :secondary_address) %>
+      <%= f.text_field :secondary_address %><br><br>
+      <%= field_error_message(@address, :city) %>
+      <%= f.text_field :city %><br><br>
+      <%= field_error_message(@address, :state) %>
+      <%= f.collection_select :state, @states, :id, :name, include_blank: true %><br><br>
+      <%= field_error_message(@address, :zip) %>
+      <%= f.number_field :zip_code %><br><br>
+
+    </div>
+    <div class="col-xs-10 col-xs-offset-1">
+      <%= f.submit "Create New Address", :class => "btn btn-primary btn-lg btn-block", :id => "new-resource-button"  %>
+      <%end%>
+    </div>
+</div>
+
+
+
+
+</div>
+</div>

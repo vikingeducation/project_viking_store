@@ -1,0 +1,33 @@
+<h2><%= "#{@user.first_name} #{@user.last_name}'s " unless @user.nil? %>Addresses</h2>
+
+<div class="row">
+  <% if @user.nil? %>
+  <h3>Create new user address from within <%= link_to "User", users_path%> profiles.</h3>
+   <% else %>
+   <div class="col-sm-8 col-sm-offset-2">
+      <a href="<%=new_address_path(:user_id => @user.id)%>" type="button" id="new-resource-button" class="btn btn-primary btn-lg btn-block">Create<%=" #{@user.first_name} #{@user.last_name}"%> Address</a>
+    </div>
+
+  <%end %>
+  <div class='col-sm-12'>
+    <table class="table table-striped">
+      <tr><th>ID</th><th>User</th><th>Address</th><th>City</th><th>State</th><th>Orders</th><th>Created</th><th>SHOW</th><th>EDIT</th><th>DELETE</th></tr>
+      <%@addresses.each do |addy| %>
+      <tr>
+        <td><%=addy.id%></td>
+        <td><%=addy.user.first_name%></td>
+        <td><%=addy.street_address%></td>
+        <td><%=addy.city.name%></td>
+        <td><%=addy.state.name%></td>
+        <td><%=addresses_orders(addy).count%></td>
+        <td><%=addy.created_at.strftime('%Y %b %d')%></td>
+        <td><%=link_to "show", address_path(addy)%></td>
+        <td><%=link_to "edit", edit_address_path(addy)%></td>
+        <td><%=link_to "delete", address_path(addy), data: {:confirm => "Are you sure?"}, :method => :delete%></td>
+      </tr>
+      <%end%>
+
+
+    </table>
+  </div>
+</div>
