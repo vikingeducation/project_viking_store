@@ -1,6 +1,7 @@
 <h1>New Category</h1>
-<div class="alert alert-danger"><%= flash[:error] %></div>
-
+<% unless flash[:error].nil? %>
+  <div class="alert alert-danger"><%= flash[:error] %></div>
+<% end %>
 <%= form_for @category do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br/>
