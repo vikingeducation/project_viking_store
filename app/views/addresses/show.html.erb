@@ -1,0 +1,17 @@
+<h2><%= "#{@address.user.first_name} #{@address.user.last_name}'s Address"%></h2>
+<div class="row">
+<div class="col-sm-12 content-wrap">
+
+  <strong>Owner ID:</strong> <%=@address.user.id%><br>
+  <strong>Owner Name:</strong> <%=@address.user.first_name+ " " +@address.user.last_name%><br><br>
+
+  <strong>Street: </strong> <%=@address.street_address%><br>
+  <strong>Secondary: </strong> <%=@address.secondary_address || "--"%><br>
+  <strong>City: </strong> <%=@address.city.name%><br>
+  <strong>State: </strong> <%=@address.state.name%><br>
+  <strong>Zip: </strong> <%=@address.zip_code%><br><br>
+  <%= link_to "Edit Address", edit_address_path(@address)%>
+  <%= link_to "Delete Address", address_path(@address), :confirm => "Are you sure?", :method => :delete%>
+
+</div>
+</div>

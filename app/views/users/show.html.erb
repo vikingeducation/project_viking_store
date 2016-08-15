@@ -20,7 +20,7 @@
     <% end %>
     <%=link_to "Edit User's Information", edit_user_path(@user)%><br>
     <%=link_to "Delete User", user_path(@user), data: {:confirm => "Are you sure?"}, :method => :delete%><br>
-    <%=link_to "View Saved Addresses" %>
+    <%=link_to "View Saved Addresses", addresses_path(:user_id => @user.id) %>
     <%=link_to "View Unplaced Order (Cart)" %>
   </div>
 
@@ -42,7 +42,7 @@
       <a href="#" type="button" id="new-resource-button" class="btn btn-primary btn-lg btn-block">Create Order</a>
     </div>
     <div class="col-sm-8 col-sm-offset-2">
-      <a href="#" type="button" id="new-resource-button" class="btn btn-primary btn-lg btn-block">Create Address</a>
+      <a href=<%=new_address_path(:user_id => @user.id)%> type="button" id="new-resource-button" class="btn btn-primary btn-lg btn-block">Create Address</a>
     </div>
   </div>
 

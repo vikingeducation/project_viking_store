@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   ################
   has_many :products, :through => :orders
 
-  has_many :credit_cards
+  has_many :credit_cards, :dependent => :delete_all
 
   ###############
 end

@@ -43,6 +43,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    @user.orders.destroy(@user.orders.where("checkout_date is null").first)
     if @user.destroy
       flash[:success] = "Your User has been deleted!"
     else
