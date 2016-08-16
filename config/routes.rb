@@ -1,25 +1,16 @@
 Rails.application.routes.draw do
   
-  get 'users/index'
-
-  get 'users/show'
-
-  get 'users/edit'
-
-  get 'users/new'
-
-  get 'index/new'
-
-  get 'index/show'
-
-  get 'index/edit'
+  
 
   get 'admin' => 'admin#index'
 
   get 'dashboard' => 'dashboard#index'
   resources :categories
   resources :products
-  resources :users
+  resources :users do 
+    resources :addresses
+  end
+  resources :orders
   root 'dashboard#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

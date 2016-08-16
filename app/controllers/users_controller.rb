@@ -4,11 +4,32 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def new
+    @user = User.new
+    #2.times { @user.addresses.build }
+  end
+
+  def create
+    @user = User.new(whitelisted_params)
+    if @user.save
+      flash[:success] = "User successfully created"
+      redirect_to user_path(@user.id)
+    else
+      flash[:error] = "Something went wrong"
+      render :new
+    end
+  end
+
+  private
+
+  def whitelisted_params
+    params.require(:user).permit(:first_name, :last_name, :email, :shipping_id, :billing_id)
   end
 end

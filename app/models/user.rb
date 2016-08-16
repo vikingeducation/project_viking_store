@@ -1,8 +1,18 @@
 class User < ActiveRecord::Base
   has_many :addresses
   has_many :orders
+  has_many :credit_cards
   belongs_to :billing_address, :class_name => "Address", foreign_key: :billing_id
   belongs_to :shipping_address, :class_name => "Address", foreign_key: :shipping_id
+
+  accepts_nested_attributes_for :addresses,
+                                :allow_destroy => true,
+                                :reject_if => :all_blank
+
+  validates :first_name, :last_name, :email, presence: true
+  validates :first_name, :last_name, :email, length: { in: 1..64 }
+  validates :email, 
+            :format => { :with => /@/ }
 
   def self.created_last_seven_days
     User.where('created_at > ?', Time.now - 7.days)
