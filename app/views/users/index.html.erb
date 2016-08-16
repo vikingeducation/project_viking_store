@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Users</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to "New", new_user_path, class: "btn-primary btn col-xs-4 col-xs-offset-4" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <%= render 'layouts/navbar' %>
+
+  
+  
+  <table class="table-bordered col-xs-8 col-xs-offset-1">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Joined</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Orders</th>
+      <th>Last Order Date</th>
+    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= "#{user.first_name} #{user.last_name}" %></td>
+        <td><%= user.created_at.strftime("%Y-%m-%d") %></td>
+        <td><%= user.billing_address.city.name %></td>
+        <td><%= user.billing_address.state.name %></td>
+        <td><%= link_to user.orders.count, "#" %></td>
+        <td><%= link_to "Show", user_path(user.id) %></td>
+        <td><%= link_to "Edit", edit_user_path(user.id) %></td> 
+        <td><%= link_to "Delete", user_path(user.id), method: "delete", data: { confirm: "Are you sure?"}  %></td>
+      </tr>
+    <% end %>
+  </table>
+
+    
+
+</div>
