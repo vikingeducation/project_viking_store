@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   
   
 
+  get 'addresses/index'
+
+  get 'addresses/show'
+
   get 'admin' => 'admin#index'
 
   get 'dashboard' => 'dashboard#index'
@@ -11,6 +15,7 @@ Rails.application.routes.draw do
     resources :addresses
   end
   resources :orders
+  resources :addresses
   root 'dashboard#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

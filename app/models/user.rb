@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
   validates :email, 
             :format => { :with => /@/ }
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def self.created_last_seven_days
     User.where('created_at > ?', Time.now - 7.days)
   end
