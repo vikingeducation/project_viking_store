@@ -1,8 +1,10 @@
 <div class="row">
+  <% unless flash[:error].nil? %>
     <div class="col-xs-12 alert alert-success">
       <%= flash[:error] %>
     </div>
-  </div>
+  <% end %>
+</div>
 
 <%= form_for @user do |f| %>
   <%= @user.errors[:first_name].first %><br/>
