@@ -11,6 +11,17 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update(whitelisted_params)
+      flash[:success] = "User Successfully Updated"
+      redirect_to user_path(@user.id)
+    else
+      flash[:error] = "Something went wrong"
+      render :edit
+    end
+  end
+
   def new
     @user = User.new
     #2.times { @user.addresses.build }

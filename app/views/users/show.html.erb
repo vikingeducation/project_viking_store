@@ -1,5 +1,11 @@
 <div id="user-fields">
   <div class="row">
+    <div class="col-xs-12 alert alert-success">
+      <%= flash[:success] %>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-xs-12">
       <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
     </div>
