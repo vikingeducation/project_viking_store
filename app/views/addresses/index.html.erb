@@ -1,3 +1,11 @@
+<div class="row">
+  <% unless flash[:success].nil? %>
+    <div class="col-xs-12 alert-success alert">
+      <%= flash[:success] %>
+    </div>
+  <% end %>
+</div>
+
 <h1>Addresses</h1>
 <div class="row">
   
@@ -18,7 +26,7 @@
     </tr>
     <% @addresses.each do |address| %>
       <tr>
-        <td><%= address.id %></td>
+        <td><%= link_to address.id, address_path(address.id) %></td>
         <td><%= (link_to address.user.name, user_path(address.user.id)) if address.user %></td>
         <td><%= address.street_address %></td>
         <td><%= address.city.name %></td>
@@ -27,7 +35,7 @@
         <td><%= address.created_at.strftime("%Y-%m-%d") %></td>
 
         <td><%= link_to "Show", address_path(address.id) %></td>
-        <td><%= link_to "Edit", "#" %></td>
+        <td><%= link_to "Edit", edit_address_path(address.id) %></td>
         <td><%= link_to "Delete", address_path(address.id), method: "DELETE", data: { confirm: "Are you sure?" } %></td>
       </tr>
     <% end %>

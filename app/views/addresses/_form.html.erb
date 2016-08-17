@@ -1,0 +1,30 @@
+<div class="row">
+  <% unless flash[:error].nil? %>
+    <div class="col-xs-12 alert-success alert">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+</div>
+
+<%= form_for @address do |f| %>
+  <%= f.label :owner_id %>
+  <%= f.text_field :user_id, readonly: "readonly" %><br/>
+
+  <%= f.label :owner_name %>
+  <%= f.text_field :owner_name, disabled: true %><br/>
+
+  <%= f.label :street %>
+  <%= f.text_field :street_address %></br>
+
+  <%= f.label :zip %>
+  <%= f.text_field :zip_code %><br/>
+
+  <%= f.label :city %>
+  <%= f.collection_select :city_id, City.all, :id, :name %><br/>
+
+  <%= f.label :state %>
+  <%= f.collection_select :state_id, State.all, :id, :name %><br/>
+
+  <%= f.submit "Submit", class: "btn-primary" %>
+
+<% end %>

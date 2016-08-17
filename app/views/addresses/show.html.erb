@@ -1,2 +1,28 @@
-<h1>Addresses#show</h1>
-<p>Find me in app/views/addresses/show.html.erb</p>
+<div class="row">
+  <% unless flash[:success].nil? %>
+    <div class="col-xs-12 alert-success alert">
+      <%= flash[:success] %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h1><%= @address.user.name %>'s Address</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div id="address-info" class="col-xs-12">
+    <p><span class="label col-xs-3">Owner ID:</span><%= @address.user.id %></p>
+    <p><span class="label col-xs-3">Owner Name:</span><%= link_to @address.user.name, user_path(@address.user.id) %></p><br/>
+
+    <p><span class="label col-xs-3">Street</span><%= @address.street_address %></p>
+    <p><span class="label col-xs-3">City</span><%= @address.city.name %></p>
+    <p><span class="label col-xs-3">State</span><%= @address.state.name %></p>
+    <p><span class="label col-xs-3">Zip</span><%= @address.zip_code %></p>
+
+    <p><%= link_to "Edit", edit_address_path(@address.id), class: "address-link" %></p>
+    <p><%= link_to "Delete", address_path(@address.id), method: "DELETE", data: { confirm: "Are you sure?" }, class: "address-link" %></p>
+  </div>
+</div>
