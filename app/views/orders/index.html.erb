@@ -56,7 +56,7 @@
         <td><%= order.shipping_address.city.name if order.shipping_address %></td>
         <td><%= order.shipping_address.state.name if order.shipping_address %></td>
         <td><%= number_to_currency(order.total_value) %></td>
-        <td><%= order.status %></td>
+        <td><%= render_status(order.status) %></td>
         <td><%= order.created_at.strftime("%Y-%m-%d") %></td>
         <td><%= link_to "Show", order_path(order.id) %>
         <td><%= link_to "Edit", edit_order_path(order.id) %></td> 

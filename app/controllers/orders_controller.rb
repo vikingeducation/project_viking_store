@@ -11,6 +11,10 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order = Order.find(params[:id])
+    @shipping_address = @order.shipping_address 
+    @billing_address = @order.billing_address
+    @order_contents = @order.order_contents
   end
 
   def new

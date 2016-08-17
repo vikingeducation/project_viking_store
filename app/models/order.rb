@@ -11,6 +11,12 @@ class Order < ActiveRecord::Base
               class_name: "Address",
               foreign_key: :billing_id
 
+  belongs_to :credit_card
+
+  def last_four_card_digits
+    credit_card[-4..-1]
+  end
+
   def total_value
     value = order_contents.select("SUM(quantity * price) AS total_value")
                   .joins("JOIN products ON product_id=products.id")
