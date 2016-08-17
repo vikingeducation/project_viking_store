@@ -36,7 +36,7 @@
 
           <tr>
             <td>Revenue</td>
-            <td><%= OrderContent.revenue_last_seven_days %></td> 
+            <td><%= number_to_currency(OrderContent.revenue_last_seven_days) %></td> 
           </tr>
         </table>
       </div>  
@@ -65,7 +65,7 @@
 
           <tr>
             <td>Revenue</td>
-            <td><%= OrderContent.revenue_last_thirty_days %></td> 
+            <td><%= number_to_currency(OrderContent.revenue_last_thirty_days) %></td> 
           </tr>
         </table>
       </div>
@@ -95,7 +95,7 @@
 
           <tr>
             <td>Revenue</td>
-            <td><%= OrderContent.total_revenue %></td> 
+            <td><%= number_to_currency(OrderContent.total_revenue) %></td> 
           </tr>
         </table>
       </div>
@@ -148,20 +148,20 @@
           <tr>
             <td>Highest Single Order Value</td>
             <td><%= "#{User.max_order.first_name} #{User.max_order.last_name}" %></td>
-            <td><%= User.max_order.max %></td>
+            <td><%= number_to_currency(User.max_order.max) %></td>
 
           </tr>
 
           <tr>
             <td>Highest Life Time Value</td>
             <td><%= "#{User.highest_life_time_value.first_name} #{User.highest_life_time_value.last_name}" %></td>
-            <td><%= User.highest_life_time_value.order_total %></td>
+            <td><%= number_to_currency(User.highest_life_time_value.order_total) %></td>
           </tr>
 
           <tr>
             <td>Highest Average Order Value</td>
             <td><%= User.highest_average_order.full_name %></td>
-            <td><%= User.highest_average_order.average_order.round(2) %></td>
+            <td><%= number_to_currency(User.highest_average_order.average_order.round(2)) %></td>
           </tr>
 
           <tr>
