@@ -35,6 +35,31 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    @user = User.find(@order.user.id)
+    5.times { @order.order_contents.build({quantity: nil}) }
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    @order.checkout_date ||= Time.now if params[:order][:checked_out?]
+    if @order.update_attributes(whitelisted_params)
+      flash[:success] = "Order successfully updated"
+      redirect_to order_path(@order.id)
+    else 
+      flash[:error] = "Something went wrong"
+      render :edit
+    end
+  end
+
+  def destroy
+    @order = Order.find(params[:id])
+    if @order.destroy
+      flash[:success] = "Order successfully destroyed"
+      redirect_to orders_path
+    else
+      flash[:error] = "Something went wrong"
+      redirect_to :back
+    end
   end
   
 
@@ -44,6 +69,11 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:checkout_date, 
                                   :user_id, 
                                   :billing_id, 
-                                  :shipping_id)
+                                  :shipping_id,
+                                  :credit_card_id,
+                                  {:order_contents_attributes => 
+                                    [:id, :quantity, :_destroy, :order_id, 
+                                      :product_id]
+                                  })
   end
 end

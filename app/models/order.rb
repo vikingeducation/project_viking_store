@@ -16,8 +16,15 @@ class Order < ActiveRecord::Base
   validates :user_id, presence: true,
             :numericality => { is_integer: true }
 
+  accepts_nested_attributes_for :order_contents, :reject_if => :all_blank,
+                                            :allow_destroy => true
+
   def last_four_card_digits
     credit_card[-4..-1]
+  end
+
+  def checked_out?
+    checkout_date.present?
   end
 
   def total_value
