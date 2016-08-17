@@ -1,0 +1,71 @@
+
+
+<% if @user %>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1><%= @user.name %>'s Orders</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <%= link_to "New", new_user_order_path, class: "btn-primary btn col-xs-4 col-xs-offset-4" %>
+    </div>
+  </div>
+<% else %>
+  
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>All Orders</h1>
+      <p style="text-align: center;">Create new orders from within <%= link_to "User", users_path %> profiles</p>
+    </div>
+  </div>
+
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <% flash.each do |key, value| %>
+        <div class="alert alert-success"><%= value %></div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <%= render 'layouts/navbar' %>
+
+  
+  
+  <table class="table-striped col-xs-8 pull-right">
+    <tr>
+      <th>ID</th>
+      <th>UserID</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Total Value</th>
+      <th>Status</th>
+      <th>Date Placed</th>
+    </tr>
+    <% @orders.each do |order| %>
+      
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.user.id if !order.user.nil? %></td>
+        <td><%= order.shipping_address.street_address if order.shipping_address %></td>
+        <td><%= order.shipping_address.city.name if order.shipping_address %></td>
+        <td><%= order.shipping_address.state.name if order.shipping_address %></td>
+        <td><%= order.total_value %></td>
+        <td><%= order.status %></td>
+        <td><%= order.created_at.strftime("%Y-%m-%d") %></td>
+        <td><%= link_to "Show", order_path(order.id) %>
+        <td><%= link_to "Edit", edit_order_path(order.id) %></td> 
+        <td><%= link_to "Delete", order_path(order.id), method: "delete", data: { confirm: "Are you sure?"}  %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+    
+
+</div>

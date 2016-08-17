@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   
-  
 
-  get 'addresses/index'
+  get 'orders/index'
 
-  get 'addresses/show'
+  get 'orders/show'
+
+  get 'orders/new'
+
+  get 'orders/edit'
 
   get 'admin' => 'admin#index'
 
@@ -13,6 +16,7 @@ Rails.application.routes.draw do
   resources :products
   resources :users do 
     resources :addresses
+    resources :orders
   end
   resources :orders
   resources :addresses

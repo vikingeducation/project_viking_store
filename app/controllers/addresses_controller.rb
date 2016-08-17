@@ -45,7 +45,7 @@ class AddressesController < ApplicationController
   def destroy
     @address = Address.find(params[:id])
     if @address.destroy
-      flash[:succes] = "Address destroyed"
+      flash[:success] = "Address destroyed"
       redirect_to addresses_path
     else
       flash[:error] = "Something went wrong"

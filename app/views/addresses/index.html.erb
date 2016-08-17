@@ -8,13 +8,15 @@
 
 <h1>Addresses</h1>
 <div class="row">
-  
-  <%= link_to "Create Address for User", new_user_address_path(@user_id), class: "btn btn-primary col-xs-4 col-xs-offset-4" %>
-  
+  <% unless @user_id.nil? %>
+    <%= link_to "Create Address for User", new_user_address_path(@user_id), class: "btn btn-primary col-xs-4 col-xs-offset-4" %>
+  <% end %>
 </div>
 
 <div class="row">
-  <table class="table-bordered col-xs-10 col-xs-offset-1">
+  <%= render 'layouts/navbar' %>
+
+  <table class="table-bordered col-xs-8 pull-right">
     <tr>
       <th>ID</th>
       <th>User</th>
