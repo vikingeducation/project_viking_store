@@ -13,6 +13,9 @@ class Order < ActiveRecord::Base
 
   belongs_to :credit_card
 
+  validates :user_id, presence: true,
+            :numericality => { is_integer: true }
+
   def last_four_card_digits
     credit_card[-4..-1]
   end

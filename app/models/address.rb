@@ -14,6 +14,10 @@ class Address < ActiveRecord::Base
     user.id
   end
 
+  def full_address
+    "#{street_address}, #{city.name}, #{state.name} #{zip_code}"
+  end
+
   def owner_name
     user.name
   end
