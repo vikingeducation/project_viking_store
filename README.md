@@ -13,3 +13,6 @@ Link to solution info on the seeding of this lives [here](https://gist.github.co
 Luke/schoetlr
 
 http://vikingcodeschool.com
+
+
+Deployed on Heroku:  https://shielded-plateau-82332.herokuapp.com

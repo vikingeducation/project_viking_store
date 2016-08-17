@@ -30,19 +30,19 @@ class User < ActiveRecord::Base
   end
 
   def self.top_three_states
-    User.select("states.name, COUNT(users.id) as user_count")
+    User.select("states.name, COUNT(states.id) as user_count")
         .joins("JOIN addresses ON users.billing_id=addresses.id")
         .joins("JOIN states ON addresses.state_id=states.id")
-        .group(:name)
-        .order("user_count DESC, states.name" )  
-        .limit(3)  
+        .group("states.name")
+        # .order("user_count DESC, states.name" )  
+        # .limit(3)  
   end
 
   def self.top_three_cities
     User.select("cities.name, COUNT(users.id) as user_count")
         .joins("JOIN addresses ON users.billing_id=addresses.id")
         .joins("JOIN cities ON addresses.city_id=cities.id")
-        .group(:name)
+        .group("states.name")
         .order("user_count DESC, cities.name" )  
         .limit(3)  
   end

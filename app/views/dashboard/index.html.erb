@@ -113,8 +113,8 @@
           </tr>
           <% @top_three_states.each do |state| %>
             <tr>
-              <td><%= state.name %></td>
-              <td><%= state.user_count %></td>
+              <td><%= state.state_name %></td>
+              <td><%= state.users_in_state %></td>
             </tr>
           <% end %>
         </table>
@@ -129,8 +129,8 @@
           </tr>
           <% @top_three_cities.each do |city| %>
             <tr>
-              <td><%= city.name %></td>
-              <td><%= city.user_count %></td>
+              <td><%= city.city_name %></td>
+              <td><%= city.users_in_city %></td>
             </tr>
           <% end %>
         </table>
