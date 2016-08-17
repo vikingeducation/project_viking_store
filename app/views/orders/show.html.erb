@@ -1,0 +1,88 @@
+<div class="row">
+  <% flash.each do |key, msg| %>
+    <div class="col-xs-12 alert alert-success">
+      <%= msg %>  
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Order <%= @order.id %></h1>
+  </div>
+</div>
+
+<div class="row" id="logistics">
+  <h1>Logistical Information</h1>
+  <h3>Basic Information</h3>
+  <div id="order-basic-info" class="col-xs-12">
+    <p><span class="label col-xs-3">Customer ID:</span><%= @order.user.id if @order.user %></p>
+    <p><span class="label col-xs-3">Customer:</span><%= @order.user.name if @order.user %></p><br/>
+
+    <p><span class="label col-xs-3">Date Placed:</span><%= @order.created_at.strftime("%Y-%m-%d") %></p>
+    <p><span class="label col-xs-3"># Products</span><%= @order.products.count %></p>
+    <p><span class="label col-xs-3">Order Value</span><%= @order.total_value %></p>
+    <p><%= (link_to "Edit Customer Profile", edit_user_path(@order.user.id), class: "order-link") if @order.user %></p>
+
+    
+    <h3>Order Status</h3>
+    <p><%= render_status(@order.status) %></p>
+
+    <h3>Shipping Address</h3>
+    <% if @shipping_address %>
+      <p><span class="label col-xs-3">Street</span><%= @shipping_address.street_address %></p>
+      <p><span class="label col-xs-3">City</span><%= @shipping_address.city.name %></p>
+      <p><span class="label col-xs-3">State</span><%= @shipping_address.state.name %></p>
+    <% end %>
+
+    <h3>Billing Address</h3>
+    <% if @billing_address %>
+      <p><span class="label col-xs-3">Street</span><%= @billing_address.street_address %></p>
+      <p><span class="label col-xs-3">City</span><%= @billing_address.city.name %></p>
+      <p><span class="label col-xs-3">State</span><%= @billing_address.state.name %></p>
+    <% end %>
+
+    <h3>Billing Card</h3>
+    <p><%= @order.last_four_card_digits if @order.credit_card %></p>
+
+    <%= link_to "Edit Order", edit_order_path(@order.id) %>
+    <%= link_to "Delete Order", order_path(@order.id), method: "DELETE", data: { confirm: "Are you sure?" } %>
+  </div>
+
+
+</div>
+
+
+
+
+
+<div class="row" id="order-contents">
+  <div class="col-xs-12"><h1>Products</h1></div>
+
+  <table class="table-bordered col-xs-8">
+    <tr>
+      <th>ProductID</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total Price</th>
+    </tr>
+    <% @order_contents.each do |contents| %>
+      <tr>
+        <% product = contents.product %>
+        <td><%= contents.product.id if product %></td>
+        <td><%= (link_to product.name, product_path(product.id)) if product %></td>
+        <td><%= contents.quantity %></td>
+        <td><%= number_to_currency(product.price) if product %></td>
+        <td><%= number_to_currency(contents.total_price) %></td>
+      </tr>
+    <% end %>
+
+  </table>  
+  <div class="row">
+    <div class="col-xs-12">
+      <p><%= link_to "Edit Order", edit_order_path(@order.id) %></p>
+      <p><%= link_to "Delete Order", order_path(@order.id), method: "DELETE", data: { confirm: "Are you sure?" } %></p>
+    </div>
+  </div>
+</div>

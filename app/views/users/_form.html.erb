@@ -1,0 +1,34 @@
+<div class="row">
+  <% unless flash[:error].nil? %>
+    <div class="col-xs-12 alert alert-success">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+</div>
+
+<%= form_for @user do |f| %>
+  <%= @user.errors[:first_name].first %><br/>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %><br/>
+
+  <%= @user.errors[:last_name].first %><br/>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %><br/>
+
+  <%= @user.errors[:email].first %><br/>
+  <%= f.label :email %>
+  <%= f.text_field :email %><br/>
+
+  <%= f.label :shipping %>
+  <%= f.collection_select :shipping_id, Address.where(user_id: @user.id), :id, :street_address %><br/>
+    
+  <%= f.label :billing %>
+  <%= f.collection_select :billing_id, Address.where(user_id: @user.id), :id, :street_address %><br/>
+  
+  <%= (link_to "View Saved Addresses", user_addresses_path(@user.id) if @user.id) %><br/>
+
+  <%= f.submit "Submit" %>
+  
+<% end %>
+
+<%= (link_to "Delete User", user_path(@user.id), method: "DELETE", data: { confirm: "Are you sure?"}) if @user.id %>

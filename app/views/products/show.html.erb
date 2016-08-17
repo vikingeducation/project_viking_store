@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1><%= @product.name %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <p id="product-description"><%= @product.description %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <p id="product-category"><%= @product.category.name unless @product.category.nil? %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <p id="product-price"><%= number_to_currency(@product.price) %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <p id="product-orders">Total Orders: <%= @product.orders.count %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <p id="product-carts"><%#= how many carts it's in %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <p id="category-links"><%= link_to "Delete", product_path(@product.id), method: "delete", data: {confirm: "Are you sure?"} %>, <%= link_to "Edit",edit_product_path(@product.id) %></p>
+  </div>
+</div>
+
+
+

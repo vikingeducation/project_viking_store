@@ -1,0 +1,78 @@
+<div id="user-fields">
+  <div class="row">
+    <% unless flash[:success].nil? %>
+      <div class="col-xs-12 alert alert-success">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <%= link_to "Create Order", "#", class: "btn btn-primary" %>
+      <%= link_to "Create Address", new_user_address_path(@user.id), class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <p><%= @user.email %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <p>Billing Address: <%= formatted_address(@user.billing_address) if @user.billing_address %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <p>Shipping Address: <%= formatted_address(@user.shipping_address) if @user.shipping_address %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <% @user.credit_cards.each do |card| %>
+        <p id="user-cards">Credit Card #:  <%= card.card_number %></p>
+        <p><%= link_to "Destroy Card", "#", method: "delete", data: { confirm: "Are you sure?" } %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <p id="user-links"><%= link_to "User Addresses", user_addresses_path(@user.id) %>,<%= link_to "User Cart", '#' %>,<%= link_to "Delete User", user_path(@user.id), method: "delete", data: { confirm: "Are you sure?" } %>, <%= link_to "Edit User",edit_user_path(@user.id) %></p>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="row">
+    <h1>Orders</h1>
+    <table class="col-xs-10 table-bordered">
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Value</th>
+      </tr>
+      <% @user.orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.created_at.strftime("%Y-%m-%d") %></td>
+          <td><%= number_to_currency(order.products.sum("quantity * price")) %></td>
+          <td><%= link_to "Show", order_path(order.id) %></td>
+          <td><%= link_to "Edit", edit_order_path(order.id) %></td>
+          <td><%= link_to "Delete", order_path(order.id), method: "DELETE", data: { confirm: "Are you sure?" } %></td>
+        </tr>
+      <% end %>
+    </table>
+</div>
