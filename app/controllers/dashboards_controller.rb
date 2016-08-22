@@ -27,5 +27,9 @@ class DashboardsController < ApplicationController
     @top_value_customer = Order.top_value_customer.first
     @top_avg_order = Order.top_avg_order.first
     @user_with_most_orders = Order.user_with_most_orders.first
+
+    # Order statistics
+    @largest_order_value_30 = Order.largest_order_value_30.first
+    @largest_order_value_7 = Order.largest_order_value_7.first
   end
 end

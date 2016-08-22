@@ -2,26 +2,40 @@
   <h1>Viking Dashboard</h1>
 </div>
 
-<%= render "shared/overall", new_users_7: @new_users_7,
-                             new_orders_7: @new_orders_7,
-                             new_products_7: @new_products_7,
-                             revenue_7: @revenue_7,
-                             new_users_30: @new_users_30,
-                             new_orders_30: @new_orders_30,
-                             new_products_30: @new_products_30,
-                             revenue_30: @revenue_30,
-                             total_users: @total_users,
-                             total_orders: @total_orders,
-                             total_products: @total_products,
-                             total_revenue: @total_revenue%>
+<div class="container">
+  <%= render "shared/overall", new_users_7: @new_users_7,
+                              new_orders_7: @new_orders_7,
+                              new_products_7: @new_products_7,
+                              revenue_7: @revenue_7,
+                              new_users_30: @new_users_30,
+                              new_orders_30: @new_orders_30,
+                              new_products_30: @new_products_30,
+                              revenue_30: @revenue_30,
+                              total_users: @total_users,
+                              total_orders: @total_orders,
+                              total_products: @total_products,
+                              total_revenue: @total_revenue%>
 
-<%= render "shared/behavior", top_states: @top_states,
-                              top_cities: @top_cities,
+  <%= render "shared/behavior", top_states: @top_states,
+                                top_cities: @top_cities,
+                                top_single_order: @top_single_order,
+                                top_value_customer: @top_value_customer,
+                                top_avg_order: @top_avg_order,
+                                user_with_most_orders: @user_with_most_orders%>
+</div>
+
+
+<div class="container">
+  <%= render "shared/order",  total_orders: @total_orders,
+                              total_revenue: @total_revenue,
                               top_single_order: @top_single_order,
-                              top_value_customer: @top_value_customer,
-                              top_avg_order: @top_avg_order,
-                              user_with_most_orders: @user_with_most_orders%>
+                              new_orders_30: @new_orders_30,
+                              revenue_30: @revenue_30,
+                              largest_order_value_30: @largest_order_value_30,
+                              new_orders_7: @new_orders_7,
+                              revenue_7: @revenue_7,
+                              largest_order_value_7: @largest_order_value_7%>
 
-<%= render "shared/order" %>
+  <%= render "shared/time" %>
 
-<%= render "shared/time" %>
+</div>
