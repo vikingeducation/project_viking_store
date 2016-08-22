@@ -1,11 +1,24 @@
-Project: Viking Store Admin
-========================
+# README
 
-##To Get Going On This Assignment
-- run `rake db:create`
-- run `rake db:migrate`
-- run `rake db:seed`
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-- take a look around the schema file to see how models were created
+Things you may want to cover:
 
-Link to solution info on the seeding of this lives [here](https://gist.github.com/betweenparentheses/0b6b325ceaaea76a521d)
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...

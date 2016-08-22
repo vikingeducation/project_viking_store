@@ -1,2 +1,2 @@
-class CreditCard < ActiveRecord::Base
+class CreditCard < ApplicationRecord
 end
