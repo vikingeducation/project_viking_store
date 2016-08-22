@@ -15,7 +15,12 @@
                              total_products: @total_products,
                              total_revenue: @total_revenue%>
 
-<%= render "shared/behavior", top_states: @top_states %>
+<%= render "shared/behavior", top_states: @top_states,
+                              top_cities: @top_cities,
+                              top_single_order: @top_single_order,
+                              top_value_customer: @top_value_customer,
+                              top_avg_order: @top_avg_order,
+                              user_with_most_orders: @user_with_most_orders%>
 
 <%= render "shared/order" %>
 

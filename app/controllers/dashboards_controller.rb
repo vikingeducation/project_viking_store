@@ -20,5 +20,12 @@ class DashboardsController < ApplicationController
 
     # top 3 States user live in (billing)
     @top_states = State.top_states
+    @top_cities = City.top_cities
+
+    # top users
+    @top_single_order = Order.top_single_order.first
+    @top_value_customer = Order.top_value_customer.first
+    @top_avg_order = Order.top_avg_order.first
+    @user_with_most_orders = Order.user_with_most_orders.first
   end
 end

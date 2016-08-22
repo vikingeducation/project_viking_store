@@ -13,7 +13,7 @@ class User < ApplicationRecord
     User.count
   end
 
-  
+
 
 
 
