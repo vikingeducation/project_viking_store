@@ -9,6 +9,10 @@ class User < ApplicationRecord
     User.where("created_at > '#{Time.now.to_date - 30}'").count
   end
 
+  def self.total_signups
+    User.count
+  end
+
 
 
 end

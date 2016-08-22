@@ -13,5 +13,9 @@ class DashboardsController < ApplicationController
     @revenue_30 = OrderContent.new_revenue_30.to_i
 
     # totals
+    @total_users = User.total_signups
+    @total_orders = Order.total_orders
+    @total_products = Product.total_products
+    @total_revenue = OrderContent.total_revenue.to_i
   end
 end

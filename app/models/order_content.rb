@@ -19,4 +19,8 @@ class OrderContent < ApplicationRecord
     price * quantity")
   end
 
+  def self.total_revenue
+    all_product_sold.sum("price * quantity")
+  end
+
 end

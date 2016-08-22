@@ -8,4 +8,8 @@ class Product < ApplicationRecord
     Product.where("created_at > '#{Time.now.to_date - 30}'").count
   end
 
+  def self.total_products
+    Product.count
+  end
+
 end
