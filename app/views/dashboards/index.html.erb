@@ -2,7 +2,14 @@
   <h1>Viking Dashboard</h1>
 </div>
 
-<%= render "shared/overall" %>
+<%= render "shared/overall", new_users_7: @new_users_7,
+                             new_orders_7: @new_orders_7,
+                             new_products_7: @new_products_7,
+                             revenue_7: @revenue_7,
+                             new_users_30: @new_users_30,
+                             new_orders_30: @new_orders_30,
+                             new_products_30: @new_products_30,
+                             revenue_30: @revenue_30%>
 
 <%= render "shared/behavior" %>
 
