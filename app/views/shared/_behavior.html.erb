@@ -4,7 +4,32 @@
       <h3 class="panel-title">User Demographics and Behavior</h3>
     </div>
     <div class="panel-body">
-      Panel content
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Top 3 States Users Live in(billing)</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <td>Item</td>
+                <td>Data</td>
+              </tr>
+            </thead>
+            <tbody>
+              <% top_states.each do |state| %>
+              <tr>
+                <td><%= state.name %></td>
+                <td><%= state.users_sum %></td>
+              </tr>
+              <% end %>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
