@@ -21,4 +21,8 @@ class Product < ApplicationRecord
     JOIN orders ON order_id = orders.id").where("products.id = #{id}")
   end
 
+
+  validates :name, :category_id, :price, :sku, presence: true
+  validates :price, numericality: { only_float: true, less_than_or_equal_to: 10_000 }
+
 end
