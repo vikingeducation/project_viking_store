@@ -31,5 +31,8 @@ class DashboardsController < ApplicationController
     # Order statistics
     @largest_order_value_30 = Order.largest_order_value_30.first
     @largest_order_value_7 = Order.largest_order_value_7.first
+
+    # Optional
+
   end
 end
