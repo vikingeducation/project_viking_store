@@ -7,15 +7,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="visible-xs navbar-brand">Sidebar menu</span>
+      <span class="visible-xs navbar-brand">Navgation Options</span>
     </div>
     <div class="navbar-collapse collapse sidebar-navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Menu Item 1</a></li>
+        <li><a href="#">Menu Item 1</a></li>
         <li><a href="#">Menu Item 2</a></li>
         <li><a href="#">Menu Item 3</a></li>
-        <li><a href="#">Menu Item 4</a></li>
-        <li><a href="#">Reviews <span class="badge">1,118</span></a></li>
+        <li><%= link_to "Categories", categories_path %></li>
+        <li><%= link_to "Analytics Board", dashboard_path %></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
