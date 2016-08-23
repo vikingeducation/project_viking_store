@@ -1,0 +1,42 @@
+<table class="table">
+  <thead>
+    <tr>
+      <td>Item</td>
+      <td>Content</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td><%= @product.id %></td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td><%= @product.name %></td>
+    </tr>
+    <tr>
+      <td>Category</td>
+      <td><%= @category.name %></td>
+    </tr>
+    <tr>
+      <td>Price</td>
+      <td><%= @product.price %></td>
+    </tr>
+    <tr>
+      <td>SKU</td>
+      <td><%= @product.sku %></td>
+    </tr>
+    <tr>
+      <td>Orders</td>
+      <td><%= @orders.count %></td>
+    </tr>
+    <tr>
+      <td>Edit</td>
+      <td><%= link_to "Edit", edit_product_path(@product), class: "btn btn-info" %></td>
+    </tr>
+    <tr>
+      <td>Delete</td>
+      <td><%= link_to "Delete", product_path(@product), method: "delete", class: "btn btn-danger" %></td>
+    </tr>
+  </tbody>
+</table>

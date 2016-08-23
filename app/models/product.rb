@@ -12,4 +12,13 @@ class Product < ApplicationRecord
     Product.count
   end
 
+  def self.belonged_category(id)
+    Product.select("distinct categories.*").joins("JOIN categories ON categories.id = category_id").where("products.id = #{id}")
+  end
+
+  def self.all_orders(id)
+    Product.select("*").joins("JOIN order_contents ON products.id = product_id").joins("
+    JOIN orders ON order_id = orders.id").where("products.id = #{id}")
+  end
+
 end

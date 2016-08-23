@@ -1,0 +1,5 @@
+<div class="list-group">
+  <% products.each do |product| %>
+    <%= link_to "ID: #{product.id} #{product.name}", product_path(product), class: "list-group-item" %>
+  <% end %>
+</div>
