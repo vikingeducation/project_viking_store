@@ -1,4 +1,7 @@
 class Category < ApplicationRecord
+  has_many :products
+
+
   validates :name, :presence => true,
                    :length => { within: 4..16 }
 

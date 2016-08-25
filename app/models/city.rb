@@ -1,4 +1,7 @@
 class City < ApplicationRecord
+  has_many :addresses
+
+
   def self.top_cities
     City.select("cities.name, COUNT(cities.name) AS users_sum").joins("
     JOIN addresses ON cities.id = addresses.city_id").joins("

@@ -1,4 +1,15 @@
 class User < ApplicationRecord
+  has_many :addresses
+  has_many :orders
+  has_many :credit_cards, :dependent => :destroy
+
+  belongs_to :default_billing_address,
+             :foreign_key => :billing_id,
+             class_name: "Address"
+
+  belongs_to :default_shipping_address,
+             :foreign_key => :shipping_id,
+             class_name: "Address"
 
 
   def self.new_signups_7

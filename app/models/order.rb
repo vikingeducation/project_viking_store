@@ -1,4 +1,18 @@
 class Order < ApplicationRecord
+  belongs_to :user
+  belongs_to :credit_card
+
+  has_many :order_contents, :dependent => :destroy
+  has_many :products,
+           :through => :order_contents
+
+  belongs_to :order_billing_address,
+             :foreign_key => :billing_id,
+             class_name: "Address"
+
+  belongs_to :order_shipping_address,
+             :foreign_key => :shipping_id,
+             class_name: "Address"
 
 
   def self.new_orders_7
