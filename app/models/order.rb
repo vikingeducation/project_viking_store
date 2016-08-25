@@ -12,11 +12,13 @@ class Order < ApplicationRecord
 
   belongs_to :order_billing_address,
              :foreign_key => :billing_id,
-             class_name: "Address"
+             class_name: "Address",
+             optional: true
 
   belongs_to :order_shipping_address,
              :foreign_key => :shipping_id,
-             class_name: "Address"
+             class_name: "Address",
+             optional: true
 
 
   def value

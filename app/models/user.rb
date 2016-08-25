@@ -22,6 +22,9 @@ class User < ApplicationRecord
   validates :email,
             :format => { :with => /@/ }
 
+  def shopping_cart
+    self.orders.where("checkout_date IS null")
+  end
 
   def self.new_signups_7
     User.where("created_at > '#{Time.now.to_date - 7}' ").count

@@ -45,7 +45,7 @@
     <div class="form-group">
       <%= f.submit "Update", class: "btn btn-success btn-lg", id: "edit-button" %>
     </div>
-    <%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user), method: "delete" %>
+    <%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user), method: "delete",data: { confirm: "Are you sure?" } %>
 
 <% end %>
 </div>

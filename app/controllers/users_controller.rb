@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.all.order("id desc")
   end
 
   def show
@@ -42,6 +42,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     if user && user.destroy
       flash[:success] = ["#{user.first_name} #{user.last_name} is deleted."]
+      user.shopping_cart.destroy_all
       redirect_to users_path
     else
       flash[:danger] = user.errors.full_messages
