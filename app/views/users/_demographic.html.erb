@@ -20,12 +20,12 @@
         <tr>
           <td><strong>Default_Billing_Address:</strong> </td>
           <% a = @user.default_billing_address %>
-          <td><%= "#{a.zip_code} #{a.street_address} #{a.city.name} #{a.state.name}" %></td>
+          <td><%= "#{a.zip_code} #{a.street_address} #{a.city.name} #{a.state.name}" unless a.nil? %></td>
         </tr>
         <tr>
           <td><strong>Default_Shipping_Address:</strong> </td>
           <% a = @user.default_shipping_address %>
-          <td><%= "#{a.zip_code} #{a.street_address} #{a.city.name} #{a.state.name}" %></td>
+          <td><%= "#{a.zip_code} #{a.street_address} #{a.city.name} #{a.state.name}" unless a.nil? %></td>
         </tr>
         <tr>
           <td><%= link_to "Edit #{@user.first_name}'s information", edit_user_path(@user) %></td>

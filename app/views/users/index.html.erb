@@ -25,8 +25,13 @@
           <td><%= user.id %></td>
           <td><%= "#{user.first_name} #{user.last_name}" %></td>
           <td><%= user.created_at.to_date %></td>
-          <td><%= user.default_shipping_address.city.name %></td>
-          <td><%= user.default_billing_address.state.name %></td>
+          <% if user.addresses.empty? %>
+            <td><strong>No address</strong></td>
+            <td><strong>No address</strong></td>
+          <% else %>
+            <td><%= user.default_shipping_address.city.name %></td>
+            <td><%= user.default_billing_address.state.name %></td>
+          <% end %>
           <td><%= link_to "#{user.orders.count}", '#' %></td>
           <% if user.orders.last %>
             <% if user.orders.last.checkout_date %>

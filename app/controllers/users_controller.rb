@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(white_list_params)
     if @user.save
-      flash[:success] = ["#{user.first_name} #{user.last_name} is created."]
+      flash[:success] = ["#{@user.first_name} #{@user.last_name} is created."]
       redirect_to user_path(@user)
     else
       flash.now[:danger] = @user.errors.full_messages
@@ -27,6 +27,27 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
+    if @user && @user.update(white_list_params)
+      flash[:success] = ["#{@user.first_name} #{@user.last_name} is updated."]
+      redirect_to user_path(params[:id])
+    else
+      flash.now[:danger] = @user.errors.full_messages
+      render :edit
+    end
+  end
+
+  def destroy
+    session[:return_to] ||= request.referer
+    user = User.find(params[:id])
+    if user && user.destroy
+      flash[:success] = ["#{user.first_name} #{user.last_name} is deleted."]
+      redirect_to users_path
+    else
+      flash[:danger] = user.errors.full_messages
+      redirect_to session[:return_to]
+      session.delete(:return_to)
+    end
   end
 
 
