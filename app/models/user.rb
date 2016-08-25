@@ -3,6 +3,9 @@ class User < ApplicationRecord
   has_many :orders
   has_many :credit_cards, :dependent => :destroy
 
+  has_many :products,
+           :through => :orders
+
   belongs_to :default_billing_address,
              :foreign_key => :billing_id,
              class_name: "Address"

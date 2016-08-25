@@ -1,9 +1,9 @@
 class Product < ApplicationRecord
   belongs_to :category
 
-  has_many :order_contents, :destroy => :destroy
+  has_many :order_contents, :dependent => :destroy
   has_many :orders,
-           :through => order_contents
+           :through => :order_contents
 
   def self.new_products_7
     Product.where("created_at > '#{Time.now.to_date - 7}'").count

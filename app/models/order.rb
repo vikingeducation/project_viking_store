@@ -6,6 +6,10 @@ class Order < ApplicationRecord
   has_many :products,
            :through => :order_contents
 
+  has_many :categories,
+           :through => :products,
+           :source => :category
+
   belongs_to :order_billing_address,
              :foreign_key => :billing_id,
              class_name: "Address"

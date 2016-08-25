@@ -1,6 +1,6 @@
 class OrderContent < ApplicationRecord
-  belongs_to :orders
-  belongs_to :products
+  belongs_to :order
+  belongs_to :product
 
   def self.all_product_sold
     OrderContent.joins("
