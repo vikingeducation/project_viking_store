@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboards#index'
   resources :categories
   resources :products
-  resources :users
+  resources :users do
+    resources :addresses
+    resources :orders
+    resources :credit_cards
+  end
 
 end

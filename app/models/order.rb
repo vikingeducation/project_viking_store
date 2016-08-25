@@ -19,6 +19,10 @@ class Order < ApplicationRecord
              class_name: "Address"
 
 
+  def value
+    self.order_contents.inject(0) { |sum, e| sum + e.product.price * e.quantity  }
+  end
+
   def self.new_orders_7
     Order.where("checkout_date > '#{Time.now.to_date - 7}'").count
   end

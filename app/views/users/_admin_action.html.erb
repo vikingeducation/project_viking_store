@@ -1,0 +1,15 @@
+<div class="admin_action">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Admin Actions for <%= "#{@user.first_name} #{@user.last_name}" %></h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-md-12">
+        <%= button_to "Create Order", new_user_order_path(@user), class: "btn btn-primary btn-lg" %>
+        <%= button_to "Create Address", new_user_address_path(@user), class: "btn btn-primary btn-lg" %>
+      </div>
+    </div>
+  </div>
+
+</div>

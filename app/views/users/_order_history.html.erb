@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Order History</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <td><strong>ID</strong></td>
+          <td><strong>Order Date</strong></td>
+          <td><strong>Order Value</strong></td>
+          <td><strong>Status</strong></td>
+          <td><strong>Show</strong></td>
+          <td><strong>Edit</strong></td>
+          <td><strong>DELETE</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.orders.each do |order| %>
+            <tr>
+              <td><%= order.id %></td>
+              <td><%= order.checkout_date ? order.checkout_date.to_date : "NO RECORD" %></td>
+              <td><%= order.value %></td>
+              <% if order.checkout_date %>
+                <td>PLACED</td>
+              <% else %>
+                <td><strong>UNPLACED</strong></td>
+              <% end %>
+              <td><%= link_to "show", user_order_path(:user_id => @user.id, :id => order.id) %></td>
+              <td><%= link_to "edit", edit_user_order_path(:user_id => @user.id, :id => order.id) %></td>
+              <td><%= link_to "delete", user_order_path(:user_id => @user.id, :id => order.id) %></td>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
