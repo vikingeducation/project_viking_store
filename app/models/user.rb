@@ -14,6 +14,12 @@ class User < ApplicationRecord
              :foreign_key => :shipping_id,
              class_name: "Address"
 
+  validates :first_name, :last_name, :email,
+            presence: true,
+            :length => { :within => 1..64 }
+  validates :email,
+            :format => { :with => /@/ }
+
 
   def self.new_signups_7
     User.where("created_at > '#{Time.now.to_date - 7}'").count
