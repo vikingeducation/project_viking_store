@@ -3,6 +3,9 @@
 <p>
   Description: <%= @category.description %>
 </p>
-<%= link_to "Edit", edit_category_path(@category) %>
+<div class="category-edit">
+  <%= link_to "Edit", edit_category_path(@category), class: "btn btn-primary btn-lg" %>
+
+</div>
 
 <%= render 'products/products_list', products: @products %>

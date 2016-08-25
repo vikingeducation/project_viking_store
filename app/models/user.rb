@@ -8,11 +8,13 @@ class User < ApplicationRecord
 
   belongs_to :default_billing_address,
              :foreign_key => :billing_id,
-             class_name: "Address"
+             class_name: "Address",
+             optional: true
 
   belongs_to :default_shipping_address,
              :foreign_key => :shipping_id,
-             class_name: "Address"
+             class_name: "Address",
+             optional: true
 
   validates :first_name, :last_name, :email,
             presence: true,
@@ -22,7 +24,7 @@ class User < ApplicationRecord
 
 
   def self.new_signups_7
-    User.where("created_at > '#{Time.now.to_date - 7}'").count
+    User.where("created_at > '#{Time.now.to_date - 7}' ").count
   end
 
   def self.new_signups_30

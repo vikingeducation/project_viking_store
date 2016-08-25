@@ -11,7 +11,6 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    @categories = Category.all
   end
 
   def create
@@ -21,24 +20,21 @@ class ProductsController < ApplicationController
       redirect_to products_path
     else
       flash[:danger] = @product.errors.full_messages
-      @categories = Category.all
       render :new
     end
   end
 
   def edit
     @product = Product.find(params[:id])
-    @categories = Category.all
   end
 
   def update
-    product = Product.find(params[:id])
-    if product.update(while_list_params)
-      flash[:success] = ["#{product.name} has been updated"]
-      redirect_to product_path(product)
+    @product = Product.find(params[:id])
+    if @product.update(while_list_params)
+      flash[:success] = ["#{@product.name} has been updated"]
+      redirect_to product_path(@product)
     else
-      flash.now[:danger] = product.errors.full_messages
-      @categories = Category.all
+      flash.now[:danger] = @product.errors.full_messages
       render :edit
     end
   end

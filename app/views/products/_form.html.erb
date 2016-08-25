@@ -17,12 +17,12 @@
   <div class="form-group">
     <%= f.label :category_id, "Category" %>
     <%= f.select :category_id, "", {}, {class: "form-control"} do %>
-      <% categories.each do |category| %>
+      <% Category.all.each do |category| %>
         <%= content_tag(:option, category.name, value: category.id) %>
       <% end %>
     <% end %>
   </div>
   <div class="form-group">
-    <%= f.submit "Create", class: "btn btn-success" %>
+    <%= f.submit "Confirm", class: "btn btn-success btn-lg" %>
   </div>
 <% end %>
