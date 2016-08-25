@@ -40,7 +40,11 @@
           <td></td>
         </tr>
         <tr>
-          <td><%= link_to "View Unplaced Order(Cart)", user_orders_path(@user) %></td>
+          <% if @user.orders.pluck(:checkout_date).any?(&:nil?) %>
+            <td><%= link_to "View Unplaced Order (Cart)", user_orders_path(@user) %></td>
+          <% else %>
+            <td><strike>View Upplaced Order (Cart)</strike></td>
+          <% end %>
           <td></td>
         </tr>
       </tbody>
