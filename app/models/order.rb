@@ -21,6 +21,15 @@ class Order < ApplicationRecord
              optional: true
 
 
+  def status
+    self.checkout_date ? "Placed" : "Unplaced"
+  end
+
+  def checkout_day
+    self.checkout_date ? self.checkout_date.to_date : "Unplaced"
+  end
+
+
   def value
     self.order_contents.inject(0) { |sum, e| sum + e.product.price * e.quantity  }
   end

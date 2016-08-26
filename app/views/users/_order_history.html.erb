@@ -21,11 +21,7 @@
               <td><%= order.id %></td>
               <td><%= order.checkout_date ? order.checkout_date.to_date : "NO RECORD" %></td>
               <td><%= order.value %></td>
-              <% if order.checkout_date %>
-                <td>PLACED</td>
-              <% else %>
-                <td><strong>UNPLACED</strong></td>
-              <% end %>
+              <td><%= order.status %></td>
               <td><%= link_to "show", user_user_order_path(:user_id => @user.id, :id => order.id) %></td>
               <td><%= link_to "edit", edit_user_user_order_path(:user_id => @user.id, :id => order.id) %></td>
               <td><%= link_to "delete", user_user_order_path(:user_id => @user.id, :id => order.id) %></td>

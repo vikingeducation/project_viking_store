@@ -1,0 +1,45 @@
+<div class="top-section">
+  <h2>All Orders</h2>
+  <h4>New order can only be created in User page <%= link_to "LINK", users_path %></h4>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <td><strong>ID</strong></td>
+        <td><strong>UserID</strong></td>
+        <td><strong>State</strong></td>
+        <td><strong>Total Value</strong></td>
+        <td><strong>Status</strong></td>
+        <td><strong>Date Placed</strong></td>
+        <td><strong>Show</strong></td>
+        <td><strong>Edit</strong></td>
+        <td><strong>Delete</strong></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <% if order.user %>
+        <td><%= order.user.id %></td>
+        <% else %>
+        <td><strong>No User</strong></td>
+        <% end %>
+        <% if order.order_shipping_address %>
+        <td><%= order.order_shipping_address.state.name %></td>
+        <% else %>
+        <td><strong>No record</strong></td>
+        <% end %>
+        <td><%= order.value %></td>
+        <td><%= order.status %></td>
+        <td><%= order.checkout_day %></td>
+        <td><%= link_to "Show", order_path(order) %></td>
+        <td><%= link_to "Edit", new_order_path(order) %></td>
+        <td><%= link_to "Delete", order_path(order), method: "delete", data: { confirm: "Are you sure?" } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
