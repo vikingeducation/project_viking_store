@@ -20,6 +20,9 @@ class Order < ApplicationRecord
              class_name: "Address",
              optional: true
 
+  def self.user_orders(user_id)
+    self.where("user_id = ?", user_id)
+  end
 
   def status
     self.checkout_date ? "Placed" : "Unplaced"
@@ -28,7 +31,6 @@ class Order < ApplicationRecord
   def checkout_day
     self.checkout_date ? self.checkout_date.to_date : "Unplaced"
   end
-
 
   def value
     self.order_contents.inject(0) { |sum, e| sum + e.product.price * e.quantity  }
