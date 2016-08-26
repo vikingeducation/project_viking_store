@@ -19,6 +19,11 @@ class Address < ApplicationRecord
            :foreign_key => :shipping_id,
            class_name: "Order"
 
+  validates :street_address, :city_id, :state_id, :zip_code,
+            :presence => true
+  validates :street_address, length: { maximum: 64 }
+  validates :zip_code, length: { is: 5 }
+
 
 
 end

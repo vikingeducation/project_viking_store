@@ -27,7 +27,7 @@
         <td><%= address.state.name %></dt>
         <td><%= link_to "Show", address_path(address) %></td>
         <td><%= link_to "Edit", edit_address_path(address) %></td>
-        <td><%= link_to "Delete", address_path(address), method: "delete" %></td>
+        <td><%= link_to "Delete", address_path(address), method: "delete", data: { confirm: "Are you sure?" } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -6,8 +6,8 @@
     </div>
     <div class="panel-body">
       <div class="col-md-12">
-        <%= button_to "Create Order", new_user_user_order_path(@user), class: "btn btn-primary btn-lg" %>
-        <%= button_to "Create Address", new_user_user_address_path(@user), class: "btn btn-primary btn-lg" %>
+        <%= button_to "Create Order", new_user_user_order_path(@user), class: "btn btn-primary btn-lg", method: "get" %>
+        <%= button_to "Create Address", new_user_user_address_path(@user), class: "btn btn-primary btn-lg", method: "get" %>
       </div>
     </div>
   </div>
