@@ -28,7 +28,7 @@
               <td><%= card.ccv %></td>
             </tr>
             <tr>
-              <td><%= link_to "Remove Card", user_credit_card_path(:user_id => @user.id, :id => card.id) %></td>
+              <td><%= link_to "Remove Card", user_user_credit_card_path(:user_id => @user.id, :id => card.id) %></td>
               <td></td>
             </tr>
           </tbody>

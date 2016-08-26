@@ -26,9 +26,9 @@
               <% else %>
                 <td><strong>UNPLACED</strong></td>
               <% end %>
-              <td><%= link_to "show", user_order_path(:user_id => @user.id, :id => order.id) %></td>
-              <td><%= link_to "edit", edit_user_order_path(:user_id => @user.id, :id => order.id) %></td>
-              <td><%= link_to "delete", user_order_path(:user_id => @user.id, :id => order.id) %></td>
+              <td><%= link_to "show", user_user_order_path(:user_id => @user.id, :id => order.id) %></td>
+              <td><%= link_to "edit", edit_user_user_order_path(:user_id => @user.id, :id => order.id) %></td>
+              <td><%= link_to "delete", user_user_order_path(:user_id => @user.id, :id => order.id) %></td>
             </tr>
         <% end %>
       </tbody>

@@ -1,0 +1,53 @@
+<div class="address-show">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Address information</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Item</td>
+            <td>Content</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Owner ID</td>
+            <td><%= @address.user.id %></td>
+          </tr>
+          <tr>
+            <td>Owner Name</td>
+            <td><%= link_to "#{@address.user.first_name} #{@address.user.last_name}(Click to view user)", user_path(@address.user) %></td>
+          </tr>
+          <tr>
+            <td>Street</td>
+            <td><%= @address.street_address %></td>
+          </tr>
+          <tr>
+            <td>City</td>
+            <td><%= @address.city.name %></td>
+          </tr>
+          <tr>
+            <td>SKU</td>
+            <td><%= @address.state.name %></td>
+          </tr>
+          <tr>
+            <td>Zip</td>
+            <td><%= @address.zip_code %></td>
+          </tr>
+          <tr>
+            <td>Edit</td>
+            <td><%= link_to "Edit", edit_address_path(@address), class: "btn btn-info" %></td>
+          </tr>
+          <tr>
+            <td>Delete</td>
+            <td><%= link_to "Delete", address_path(@address), method: "delete", class: "btn btn-danger", data: {confirm: "Are you sure?"} %></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>

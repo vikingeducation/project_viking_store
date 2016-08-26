@@ -36,12 +36,12 @@
           <td></td>
         </tr>
         <tr>
-          <td><%= link_to "View Saved Addresses", user_addresses_path(@user) %></td>
+          <td><%= link_to "View Saved Addresses", user_user_addresses_path(@user) %></td>
           <td></td>
         </tr>
         <tr>
           <% if @user.orders.pluck(:checkout_date).any?(&:nil?) %>
-            <td><%= link_to "View Unplaced Order (Cart)", user_orders_path(@user) %></td>
+            <td><%= link_to "View Unplaced Order (Cart)", user_user_orders_path(@user) %></td>
           <% else %>
             <td><strike>View Upplaced Order (Cart)</strike></td>
           <% end %>

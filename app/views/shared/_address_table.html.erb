@@ -1,0 +1,34 @@
+<table class="table table-bordered table-responsive table-hover" >
+  <thead>
+    <tr>
+      <td><strong>ID</strong></td>
+      <td><strong>User</strong></td>
+      <td><strong>ZIP</strong></td>
+      <td><strong>Street</strong></td>
+      <td><strong>City</strong></td>
+      <td><strong>State</strong></td>
+      <td><strong>Show</strong></td>
+      <td><strong>Edit</strong></td>
+      <td><strong>Delete</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% addresses.each do |address| %>
+      <tr>
+        <td><%= address.id %></td>
+        <% if address.user %>
+          <td><%= link_to "#{address.user.first_name} #{address.user.last_name}", user_user_addresses_path(address.user.id) %></td>
+        <% else %>
+          <td><strong>Abandoned</strong></td>
+        <% end %>
+        <td><%= address.zip_code %></td>
+        <td><%= address.street_address %></td>
+        <td><%= address.city.name %></td>
+        <td><%= address.state.name %></dt>
+        <td><%= link_to "Show", address_path(address) %></td>
+        <td><%= link_to "Edit", edit_address_path(address) %></td>
+        <td><%= link_to "Delete", address_path(address), method: "delete" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
