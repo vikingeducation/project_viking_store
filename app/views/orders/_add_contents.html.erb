@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><strong>Add Products to Order</strong></h3>
+  </div>
+  <div class="panel-body">
+    <%= form_for(@order, :url => order_new_product_path(@order)) do |f| %>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <td><strong>ProductID</strong></td>
+            <td><strong>Quantity</strong></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% 5.times do %>
+          <tr>
+            <td>
+                <%= select_tag "product_id[]", options_for_select(Product.all.collect{ |p| [p.name, p.id] }),{class: "form-control"} %>
+            </td>
+                <td>
+                <%= number_field_tag "quantity[]", {},{class: "form-control"} %>
+              </td>
+
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= f.submit "Confirm", class: "btn btn-success btn-lg" %>
+    <% end %>
+  </div>
+</div>

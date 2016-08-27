@@ -78,7 +78,7 @@
       </tbody>
     </table>
     <%= link_to "Edit Order", edit_order_path(@order) %><br />
-    <%= link_to "Delete Order", order_path(@order) %>
+    <%= link_to "Delete Order", order_path(@order), method: "delete", data: {confirm: "Are you sure?"} %>
 
   </div>
 </div>

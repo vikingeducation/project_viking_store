@@ -70,6 +70,31 @@ class OrdersController < ApplicationController
     end
   end
 
+  def destroy
+    session[:return_to] = request.referer
+    order = Order.find_by(:id => params[:id])
+    if order && order.destroy
+      flash[:success] = ["Order destroyed!"]
+      redirect_to orders_path
+    else
+      flash[:danger] = order.errors.full_messages
+      redirect_to session[:return_to]
+      session.delete(:return_to)
+    end
+  end
+
+  def new_product
+    order = Order.find(params[:id])
+    params[:quantity].each_with_index do |val, index|
+      if val.empty?
+        next
+      else
+        OrderContent.create(:order_id => params[:id], :quantity => val, :product_id => params[:product_id][index])
+      end
+    end
+    redirect_to order_path(order)
+  end
+
   private
     def white_list_params
       params.require(:order).permit(:user_id, :shipping_id, :billing_id, :shipping_id, :credit_card_id)

@@ -13,7 +13,7 @@ class UserOrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     if new_order = OrderContent.update(update_products_params.keys, update_products_params.values)
-      flash[:success] = ["Order content update success!"]
+      flash[:success] = ["Order content update success!!!!!"]
       redirect_to order_path(@order)
     else
       flash.now[:danger] = new_order.errors.full_messages

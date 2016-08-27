@@ -2,6 +2,8 @@ class OrderContent < ApplicationRecord
   belongs_to :order
   belongs_to :product
 
+  validates :quantity, numericality: { only_integer: true }
+
   def self.all_product_sold
     OrderContent.joins("
     JOIN orders ON order_id = orders.id").joins("
