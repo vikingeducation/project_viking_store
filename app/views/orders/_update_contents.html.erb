@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit Order Contents</h3>
+  </div>
+  <div class="panel-body">
+    <%= form_for(@order, url: user_user_order_path(@order)) do |f|  %>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <td><strong>ID</strong></td>
+          <td><strong>Product</strong></td>
+          <td><strong>Quantity</strong></td>
+          <td><strong>Price</strong></td>
+          <td><strong>Remove</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+          <% @order.products.each do |product| %>
+            <tr>
+              <td><%= link_to "#{product.id}", product_path(product) %></td>
+              <td><%= product.name %></td>
+              <td><%= number_field_tag "products[#{@order.product_id_in_order(product)}][quantity]", @order.product_quantity(product), class: "form-control" %></dt>
+              <td><%= product.price %></td>
+              <td><%= @order.product_quantity(product) * product.price %></td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
+    <div class="form-group">
+      <%= f.submit "Update Order Contents", class: "btn btn-success btn-lg" %>
+    </div>
+    <% end %>
+
+  </div>
+</div>

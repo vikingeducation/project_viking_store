@@ -1,6 +1,8 @@
 class Order < ApplicationRecord
+  attr_accessor :checked
+
   belongs_to :user
-  belongs_to :credit_card
+  belongs_to :credit_card, optional: true
 
   has_many :order_contents, :dependent => :destroy
   has_many :products,
@@ -19,6 +21,26 @@ class Order < ApplicationRecord
              :foreign_key => :shipping_id,
              class_name: "Address",
              optional: true
+
+  def product_id_in_order(product)
+    self.order_contents.where("product_id = ?", product.id).first.id
+  end
+
+  def checked
+    self.checkout_date ? true : false
+  end
+
+  def product_quantity(product)
+    self.order_contents.find_by(:product_id => product.id).quantity
+  end
+
+  def last_4_digits
+    if self.credit_card
+      self.credit_card.card_number[-4..-1]
+    else
+      "No card info"
+    end
+  end
 
   def self.user_orders(user_id)
     self.where("user_id = ?", user_id)

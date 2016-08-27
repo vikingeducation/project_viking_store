@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Order Contents</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <td><strong>ProductID</strong></td>
+          <td><strong>Product</strong></td>
+          <td><strong>Quantity</strong></td>
+          <td><strong>Price</strong></td>
+          <td><strong>Total Price</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.products.each do |product| %>
+          <tr>
+            <td><%= link_to "#{product.id}", product_path(product) %></td>
+            <td><%= product.name %></td>
+            <td><%= @order.product_quantity(product) %></td>
+            <td><%= product.price %></td>
+            <td><%= @order.product_quantity(product) * product.price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

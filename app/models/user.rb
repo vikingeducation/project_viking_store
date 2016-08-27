@@ -22,6 +22,15 @@ class User < ApplicationRecord
   validates :email,
             :format => { :with => /@/ }
 
+  def has_additional_unplaced_order?(order)
+    my_orders = self.orders.where("id != #{order.id}")
+    return my_orders.where("checkout_date IS null").empty? ? false : true
+  end
+
+  def has_unplaced_order?
+    self.shopping_cart.empty? ? false : true
+  end
+
   def shopping_cart
     self.orders.where("checkout_date IS null")
   end
