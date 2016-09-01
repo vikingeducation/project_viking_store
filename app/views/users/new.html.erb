@@ -1,0 +1,23 @@
+<div class="top-section">
+  <h2>Create New User</h2>
+</div>
+
+<div class="user-form">
+  <%= form_for(@user) do |f| %>
+    <div class="form-group">
+      <%= f.label :first_name, "First Name" %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :last_name, "Last Name" %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, "Email" %>
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "Create", class: "btn btn-success btn-lg" %>
+    </div>
+  <% end %>
+</div>

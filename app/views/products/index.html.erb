@@ -1,0 +1,7 @@
+<div class="top-section">
+  <h2>Viking Store Products</h2>
+  <%= link_to "New Product", new_product_path, class: "btn btn-primary btn-lg" %>
+</div>
+
+
+<%= render 'products_list', products: @products %>

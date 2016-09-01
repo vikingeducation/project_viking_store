@@ -1,0 +1,39 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.top-section {
+  text-align: center;
+  margin: 10px auto;
+}
+
+.top-section a {
+  width: 100%
+}
+
+.user table {
+  text-align: center;
+}
+
+.user-profile h2 {
+  text-align: center;
+  margin: 10px auto;
+}
+
+.user-profile .panel-heading {
+  text-align: center;
+}
+
+.admin_action .panel-body a {
+  width: 100%;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.user-form input {
+  width: 100%;
+}
+
+#edit-button {
+  width: 100%;
+  margin-top: 15px;
+}

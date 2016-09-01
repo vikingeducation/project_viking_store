@@ -1,0 +1,10 @@
+<div class="user-profile">
+  <h2><%= "User #{@user.id}: #{@user.first_name} #{@user.last_name}" %></h2>
+  <%= render 'demographic' %>
+
+  <%= render 'card_info' %>
+
+  <%= render 'admin_action' %>
+
+  <%= render 'order_history' %>
+</div>

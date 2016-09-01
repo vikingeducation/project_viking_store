@@ -1,0 +1,84 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Logistical Information</h3>
+  </div>
+  <div class="panel-body">
+    <h3>Basic Information</h3>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td><strong>Customer ID:</strong></td>
+          <td><%= @order.id %></td>
+        </tr>
+        <tr>
+          <td><strong>Customer: </strong></td>
+          <td><%= link_to "#{@order.user.first_name} #{@order.user.last_name}(click to view user)", user_path(@order.user) %></td>
+        </tr>
+        <tr>
+          <td><strong>Date Placed:</strong></td>
+          <td><%= @order.checkout_day %></td>
+        </tr>
+        <tr>
+          <td><strong># Products</strong></td>
+          <td><%= @order.products.count %></td>
+        </tr>
+        <tr>
+          <td><strong>Order value:</strong></td>
+          <td>$<%= @order.value %></td>
+        </tr>
+      </tbody>
+    </table>
+    <%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
+
+    <h3>Order Status: <strong><%= @order.status %></strong></h3>
+
+    <h3>Shipping Address</h3>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td><strong>Street</strong></td>
+          <td><%= @order.order_shipping_address.street_address %></td>
+        </tr>
+        <tr>
+          <td><strong>City</strong></td>
+          <td><%= @order.order_shipping_address.city.name %></td>
+        </tr>
+        <tr>
+          <td><strong>State</strong></td>
+          <td><%= @order.order_shipping_address.state.name %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Billing Address</h3>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td><strong>Street</strong></td>
+          <td><%= @order.order_billing_address.street_address %></td>
+        </tr>
+        <tr>
+          <td><strong>City</strong></td>
+          <td><%= @order.order_billing_address.city.name %></td>
+        </tr>
+        <tr>
+          <td><strong>State</strong></td>
+          <td><%= @order.order_billing_address.state.name %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Billing Card</h3>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td><strong>Last 4 Digits</strong></td>
+          <td><%= @order.last_4_digits %></td>
+        </tr>
+      </tbody>
+    </table>
+    <%= link_to "Edit Order", edit_order_path(@order) %><br />
+    <%= link_to "Delete Order", order_path(@order), method: "delete", data: {confirm: "Are you sure?"} %>
+
+  </div>
+</div>

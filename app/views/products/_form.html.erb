@@ -1,0 +1,28 @@
+<%= form_for(product) do |f| %>
+  <div class="form-group">
+    ID: <%= product.id %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :price, "Price" %>
+    <%= f.text_field :price, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :sku, "SKU" %>
+    <%= f.text_field :sku, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :category_id, "Category" %>
+    <%= f.select :category_id, "", {}, {class: "form-control"} do %>
+      <% Category.all.each do |category| %>
+        <%= content_tag(:option, category.name, value: category.id) %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Confirm", class: "btn btn-success btn-lg" %>
+  </div>
+<% end %>

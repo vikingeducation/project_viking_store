@@ -1,0 +1,112 @@
+<div class="col-md-6">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Overall Platform</h3>
+    </div>
+    <div class="panel-body">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Last 7 days</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <td>Item</td>
+                <td>Data</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>New Users</td>
+                <td><%= new_users_7 %></td>
+              </tr>
+              <tr>
+                <td>New Orders</td>
+                <td><%= new_orders_7 %></td>
+              </tr>
+              <tr>
+                <td>New Products</td>
+                <td><%= new_products_7 %></td>
+              </tr>
+              <tr>
+                <td>Revenue</td>
+                <td>$<%= revenue_7 %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Last 30 days</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <td>Item</td>
+                <td>Data</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>New Users</td>
+                <td><%= new_users_30 %></td>
+              </tr>
+              <tr>
+                <td>New Orders</td>
+                <td><%= new_orders_30 %></td>
+              </tr>
+              <tr>
+                <td>New Products</td>
+                <td><%= new_products_30 %></td>
+              </tr>
+              <tr>
+                <td>Revenue</td>
+                <td>$<%= revenue_30 %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Total</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <td>Item</td>
+                <td>Data</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Total Users</td>
+                <td><%= total_users %></td>
+              </tr>
+              <tr>
+                <td>Total Orders</td>
+                <td><%= total_orders %></td>
+              </tr>
+              <tr>
+                <td>Total Products</td>
+                <td><%= total_products %></td>
+              </tr>
+              <tr>
+                <td>Total Revenue</td>
+                <td>$<%= total_revenue %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

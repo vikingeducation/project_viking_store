@@ -1,0 +1,6 @@
+<div class="top-section">
+  <h2>All User Addresses</h2>
+  <h4>Address can only be created in the user page <%= link_to "LINK", users_path %></h4>
+</div>
+
+<%= render 'shared/address_table', addresses: @addresses %>

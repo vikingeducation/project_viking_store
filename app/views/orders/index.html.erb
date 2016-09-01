@@ -1,0 +1,6 @@
+<div class="top-section">
+  <h2>All Orders</h2>
+  <h4>New order can only be created in User page <%= link_to "LINK", users_path %></h4>
+</div>
+
+<%= render 'shared/order_table', orders: @orders %>

@@ -1,0 +1,39 @@
+<div class="address-form">
+
+
+<%= form_for(@address, url: user_user_addresses_path) do |f| %>
+  <div class="form-group">
+    <h4><strong>Owner Name:</strong><%= link_to "   #{@address.user.first_name} #{@address.user.last_name}(click to view)", user_path(@address.user) %></h4>
+    <%= f.label :user_id, "User_ID" %>
+    <%= f.text_field :user_id, class: "form-control", value: @address.user.id, :readonly => true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :street_address, "Street" %>
+    <%= f.text_field :street_address, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :city_id %>
+    <%= f.select :city_id,"", {},{class: "form-control"} do %>
+      <% City.all.each do |city| %>
+        <%= content_tag(:option, city.name, value: city.id) %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :state_id %>
+    <%= f.select :state_id,"", {},{class: "form-control"} do %>
+      <% State.all.each do |state| %>
+        <%= content_tag(:option, state.name, value: state.id) %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :zip_code %>
+    <%= f.text_field :zip_code, class: "form-control", placeholder: "Five digits please" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Create Address", class: "btn btn-success btn-lg" %>
+  </div>
+<% end %>
+
+</div>

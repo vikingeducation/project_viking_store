@@ -1,0 +1,114 @@
+<div class="col-md-6">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Order Statistics</h3>
+    </div>
+    <div class="panel-body">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Last 7 days</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <td>Item</td>
+                <td>Data</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Number of orders</td>
+                <td><%= new_orders_7 %></td>
+              </tr>
+              <tr>
+                <td>Revenue</td>
+                <td>$<%= revenue_7 %></td>
+              </tr>
+              <tr>
+                <td>Average revenue</td>
+                <td>$<%= revenue_7 / new_orders_7 %></td>
+              </tr>
+              <tr>
+                <td>Largest order value</td>
+                <td>$<%= largest_order_value_7.order_value.to_i %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Last 30 days</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <td>Item</td>
+                <td>Data</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Number of orders</td>
+                <td><%= new_orders_30 %></td>
+              </tr>
+              <tr>
+                <td>Revenue</td>
+                <td>$<%= revenue_30 %></td>
+              </tr>
+              <tr>
+                <td>Average revenue</td>
+                <td>$<%= revenue_30 / new_orders_30 %></td>
+              </tr>
+              <tr>
+                <td>Largest order value</td>
+                <td>$<%= largest_order_value_30.order_value.to_i %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Total Statistics</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <td>Item</td>
+                <td>Data</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Total orders</td>
+                <td><%= total_orders %></td>
+              </tr>
+              <tr>
+                <td>Total revenue</td>
+                <td>$<%= total_revenue %></td>
+              </tr>
+              <tr>
+                <td>Average revenue</td>
+                <td>$<%= total_revenue / total_orders %></td>
+              </tr>
+              <tr>
+                <td>Largest order value</td>
+                <td>$<%= top_single_order.revenue.to_i %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

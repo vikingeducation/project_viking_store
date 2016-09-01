@@ -110,7 +110,7 @@ def generate_user
   u[:last_name]   = last_name
   u[:email]       = Faker::Internet.email("#{first_name} #{last_name}")
   u[:created_at]  = creation_date
-  u.save
+  u.save!
 
   # Create affilliated addresses and select billing and shipping addresses.
   generate_addresses_for_user(u.id)
@@ -172,7 +172,7 @@ def generate_order
       o[:checkout_date] = placement_date(user)
     end
 
-    o.save
+    o.save!
     generate_contents(o[:id])
   end
 end

@@ -1,0 +1,64 @@
+<div class="top-section">
+  <h2>New Order for <%= "#{@order.user.first_name} #{@order.user.last_name}" %></h2>
+</div>
+
+<div class="order-new">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><strong>Logistical Information</strong></h3>
+  </div>
+  <div class="panel-body">
+    <h4>Basic Information</h4>
+    <table class="table table-bordered">
+      <tr>
+        <td><strong>Customer ID</strong></td>
+        <td><%= @order.user.id %></td>
+      </tr>
+      <tr>
+        <td><strong>Customer</strong></td>
+        <td><%= link_to "#{@order.user.first_name} #{@order.user.last_name}(click to view user)", user_path(@order.user) %></td>
+      </tr>
+      <tr>
+        <td><strong>Date Placed</strong></td>
+        <td>N/A</td>
+      </tr>
+    </table>
+    <%= link_to "Edit Customer Profile", edit_user_path(@order.user) %>
+
+    <hr>
+
+    <%= form_for(@order) do |f| %>
+      <%= f.text_field :user_id, value: @order.user.id, hidden: true %>
+      <div class="form-group">
+        <%= f.label :shipping_id, "Shipping Address" %>
+        <%= f.select :shipping_id,"", {},{class: "form-control"} do %>
+          <% @order.user.addresses.all.each do |address| %>
+            <%= content_tag(:option, "#{address.street_address} #{address.city.name} #{address.state.name}", value: address.id) %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :billing_id, "Billing Address" %>
+        <%= f.select :billing_id,"", {},{class: "form-control"} do %>
+          <% @order.user.addresses.all.each do |address| %>
+            <%= content_tag(:option, "#{address.street_address} #{address.city.name} #{address.state.name}", value: address.id) %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :credit_card_id, "Billing Address" %>
+        <%= f.select :credit_card_id,"", {},{class: "form-control"} do %>
+          <% @order.user.credit_cards.each do |creditcard| %>
+            <%= content_tag(:option, creditcard.last_4_digits, value: creditcard.id) %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Create Order in Shopping Card", class: "btn btn-success btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+</div>

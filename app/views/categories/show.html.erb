@@ -1,0 +1,11 @@
+<h4>ID: <%= @category.id %></h4>
+<h2><%= @category.name %></h2>
+<p>
+  Description: <%= @category.description %>
+</p>
+<div class="category-edit">
+  <%= link_to "Edit", edit_category_path(@category), class: "btn btn-primary btn-lg" %>
+
+</div>
+
+<%= render 'products/products_list', products: @products %>
