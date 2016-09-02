@@ -152,27 +152,74 @@
 <div class="row">
   <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
     <div class="well">
-      <h1 class="text-center">Example</h1>
+      <h1 class="text-center">3. Order Statistics</h1>
+      <h4>Last 7 days</h4>
       <table class="table table-striped">
         <tr>
           <th>Item</th>
-          <th>Date</th>
+          <th>Total</th>
         </tr>
         <tr>
-          <td>New Users</td>
-          <td>100</td>
+          <td>Number of Orders</td>
+          <td><%=  @order_count_7 %></td>
         </tr>
         <tr>
-          <td>Orders</td>
-          <td>150</td>
+          <td>Total revenue</td>
+          <td><%= number_to_currency @revenue_7 %></td>
         </tr>
         <tr>
-          <td>New Products</td>
-          <td>10</td>
+          <td>Average Order Value</td>
+          <td><%= number_to_currency @revenue_7/@order_count_7 %></td>
         </tr>
         <tr>
-          <td>Total Revenue</td>
-          <td>$50000</td>
+          <td>Largest Order Value</td>
+          <td><%= number_to_currency @highest_order_value_7 %></td>
+        </tr>
+      </table>
+      <h4>Last 30 days</h4>
+      <table class="table table-striped">
+        <tr>
+          <th>Item</th>
+          <th>Total</th>
+        </tr>
+        <tr>
+          <td>Number of Orders</td>
+          <td><%=  @order_count_30 %></td>
+        </tr>
+        <tr>
+          <td>Total revenue</td>
+          <td><%= number_to_currency @revenue_30 %></td>
+        </tr>
+        <tr>
+          <td>Average Order Value</td>
+          <td><%= number_to_currency @revenue_30/@order_count_30 %></td>
+        </tr>
+        <tr>
+          <td>Largest Order Value</td>
+          <td><%= number_to_currency @highest_order_value_30 %></td>
+        </tr>
+      </table>
+      <h4>Total</h4>
+      <table class="table table-striped">
+        <tr>
+          <th>Item</th>
+          <th>Total</th>
+        </tr>
+        <tr>
+          <td>Number of Orders</td>
+          <td><%= @total_number_orders %></td>
+        </tr>
+        <tr>
+          <td>Total revenue</td>
+          <td><%= number_to_currency @total_revenue %></td>
+        </tr>
+        <tr>
+          <td>Average Order Value</td>
+          <td><%= number_to_currency @avg_order_value %></td>
+        </tr>
+        <tr>
+          <td>Largest Order Value</td>
+          <td><%= number_to_currency @highest_order_value %></td>
         </tr>
       </table>
     </div>

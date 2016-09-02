@@ -9,12 +9,15 @@ class Order < ActiveRecord::Base
   end
 
   def self.revenue(days_since)
-    self.join_with_products.where("checkout_date > '#{DateTime.now - days_since}'")
+    self.join_with_products
+        .where("checkout_date > '#{DateTime.now - days_since}' AND orders.checkout_date IS NOT null")
         .sum("price * quantity")
   end
 
   def self.total_revenue
-    self.join_with_products.sum("order_contents.quantity * products.price")
+    self.join_with_products
+        .where("orders.checkout_date IS NOT null")
+        .sum("order_contents.quantity * products.price")
   end
 
   def self.highest_single_order_user
@@ -68,9 +71,22 @@ class Order < ActiveRecord::Base
         .order('order_value desc')
   end
 
-  def self.order_and_products
-    self.select("orders.id, order_contents.product_id, order_contents.quantity, products.price")
-        .join_with_products
+  def self.total_number
+    self.where("orders.checkout_date IS NOT null").count
+  end
+
+  def self.avg_value
+    total_revenue/total_number
+  end
+
+  def self.largest_value
+    self.highest_single_order_user[0].order_value
+  end
+
+  def self.highest_order_since(days_since)
+    self.orders_with_values
+        .where("checkout_date > '#{DateTime.now - days_since}' AND orders.checkout_date IS NOT null")
+        .limit(1)
   end
 
   def self.join_with_users
