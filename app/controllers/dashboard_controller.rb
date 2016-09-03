@@ -34,5 +34,10 @@ class DashboardController < ApplicationController
     @highest_order_value = Order.largest_value
     @highest_order_value_7 = Order.highest_order_since(7)[0].order_value
     @highest_order_value_30 = Order.highest_order_since(30)[0].order_value
+
+
+    #4.Time Series Data
+    @order_by_date = Order.by_date(5)
+    @order_by_week = Order.by_week(5)
   end
 end

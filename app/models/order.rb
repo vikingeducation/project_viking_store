@@ -71,6 +71,23 @@ class Order < ActiveRecord::Base
         .order('order_value desc')
   end
 
+  def self.average_ar
+    self.orders_with_values.average("order_value").to_sql
+  end
+
+  def self.average
+    self.find_by_sql("
+      SELECT AVG(order_value)
+      FROM(
+        SELECT orders.*, SUM(order_contents.quantity *  products.price) AS order_value
+        FROM orders JOIN order_contents ON orders.id = order_contents.order_id
+        JOIN products ON products.id = order_contents.product_id
+        WHERE orders.checkout_date IS NOT null
+        GROUP BY orders.id
+        ) as table1
+    ")
+  end
+
   def self.total_number
     self.where("orders.checkout_date IS NOT null").count
   end
@@ -87,6 +104,41 @@ class Order < ActiveRecord::Base
     self.orders_with_values
         .where("checkout_date > '#{DateTime.now - days_since}' AND orders.checkout_date IS NOT null")
         .limit(1)
+  end
+
+
+  def self.by_date(num_days)
+    self.find_by_sql("
+      SELECT DATE(days) AS day, COUNT(DISTINCT orders.*) AS num_orders,
+      COALESCE(SUM(order_contents.quantity * products.price), 0) AS amount
+      FROM GENERATE_SERIES(
+        (SELECT DATE(MIN(checkout_date))
+        FROM orders)
+      , CURRENT_DATE, '1 DAY'::INTERVAL) days
+      LEFT JOIN orders ON DATE(orders.checkout_date) = days
+      LEFT JOIN order_contents ON orders.id = order_contents.order_id
+      LEFT JOIN products ON products.id = order_contents.product_id
+      GROUP BY days
+      ORDER BY days DESC
+      LIMIT #{num_days}
+    ")
+  end
+
+  def self.by_week(num_weeks)
+    self.find_by_sql("
+      SELECT DATE(weeks) AS week, COUNT(DISTINCT orders.*) AS num_orders,
+      COALESCE(SUM(order_contents.quantity * products.price), 0) AS amount
+      FROM GENERATE_SERIES(
+        (SELECT DATE(DATE_TRUNC('WEEK', MIN(checkout_date)))
+         FROM orders)
+      , CURRENT_DATE, '1 WEEK'::INTERVAL) weeks
+      LEFT JOIN orders ON DATE(DATE_TRUNC('WEEK', orders.checkout_date)) = weeks
+      LEFT JOIN order_contents ON orders.id = order_contents.order_id
+      LEFT JOIN products ON products.id = order_contents.product_id
+      GROUP BY weeks
+      ORDER BY weeks DESC
+      LIMIT #{num_weeks}
+    ")
   end
 
   def self.join_with_users
