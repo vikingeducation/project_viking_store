@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+    <div class="well">
+      <h1 class="text-center">Categories</h1>
+      <%= link_to "Add New Category", new_category_path, :class => "btn btn-primary pull-right" %>
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>SHOW</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
+        </tr>
+        <% @categories.each do |cat| %>
+          <tr>
+            <td><%= cat.id %></td>
+            <td><%= cat.name %></td>
+            <td><%= cat.description %></td>
+            <td><%= link_to "show", category_path(cat.id) %></td>
+            <td><%= link_to "edit", edit_category_path(cat.id) %></td>
+            <td><%= link_to "delete"%></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,23 +1,14 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-3 col-lg-3">
-      <nav class="navbar navbar-default navbar-fixed-side">
-        <ul class="nav navbar-nav">
-          <div class="col-lg-12">
-          <h4>Navigation options</h4>
-          <li><a href="#">Users</a></li>
-          <li><a href="#">Address</a></li>
-          <li><a href="#">Orders</a></li>
-          <li><a href="#">Products</a></li>
-          <li><a href="#">Categories</a></li>
-          <hr>
-          <li><%= link_to "Analytics Dashboard", dashboard_path %></a></li>
-          </div>
-        </ul>
-      </nav>
+<nav class="navbar navbar-default navbar-fixed-side">
+  <ul class="nav navbar-nav">
+    <div class="col-lg-12">
+    <h4>Navigation options</h4>
+    <li><a href="#">Users</a></li>
+    <li><a href="#">Address</a></li>
+    <li><a href="#">Orders</a></li>
+    <li><a href="#">Products</a></li>
+    <li><%= link_to "Categories", category_index_path %></li>
+    <hr>
+    <li><%= link_to "Analytics Dashboard", dashboard_path %></a></li>
     </div>
-    <div class="col-sm-9 col-lg-3">
-      <!-- your page content -->
-    </div>
-  </div>
-</div>
+  </ul>
+</nav>
