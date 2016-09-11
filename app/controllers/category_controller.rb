@@ -52,7 +52,7 @@ class CategoryController < ApplicationController
 
   private
     def whitelist_params
-      params.require(:category).permit(:name, :description, :due_date)
+      params.require(:category).permit(:name, :description)
     end
 
     def show_errors(messages)
