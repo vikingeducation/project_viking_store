@@ -1,4 +1,19 @@
 class User < ActiveRecord::Base
+  has_many :addresses
+  has_many :orders
+  has_many :order_contents, :through => :orders
+  has_many :products, through: :order_contents
+  belongs_to :default_billing_address, class_name: "Address", :foreign_key => :billing_id
+  belongs_to :default_shipping_address, class_name: "Address", :foreign_key => :shipping_id
+
+  def default_billing_address_id
+    self.default_billing_address.id
+  end
+
+  def default_shipping_address_id
+    self.default_shipping_address.id
+  end
+
   def self.new_users(days_since)
     self.where("created_at > '#{DateTime.now - days_since}'").count
   end

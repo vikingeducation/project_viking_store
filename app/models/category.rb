@@ -1,6 +1,9 @@
 class Category < ActiveRecord::Base
   validates :name, :presence => true, :length => { :in => 4..16 }
 
+  has_many :products
+  has_many :orders, :through => :products
+
   def self.products(category_id)
     self.select("products.*")
         .join_with_products

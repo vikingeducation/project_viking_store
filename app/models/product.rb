@@ -2,6 +2,10 @@ class Product < ActiveRecord::Base
   validates :name, :description, :price, :sku, :presence => true
   validates :price, numericality: { less_than: 10000 }
 
+  has_many :order_contents
+  has_many :orders, through: :order_contents
+  belongs_to :category
+
   def self.total
     self.count
   end
