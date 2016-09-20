@@ -1,10 +1,15 @@
 class User < ActiveRecord::Base
   has_many :addresses
+
   has_many :orders
+
   has_many :order_contents, :through => :orders
   has_many :products, through: :order_contents
+
   belongs_to :default_billing_address, class_name: "Address", :foreign_key => :billing_id
   belongs_to :default_shipping_address, class_name: "Address", :foreign_key => :shipping_id
+
+  has_many :credit_cards, dependent: :destroy
 
   def default_billing_address_id
     self.default_billing_address.id

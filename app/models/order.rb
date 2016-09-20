@@ -1,8 +1,14 @@
 class Order < ActiveRecord::Base
   belongs_to :user
+
   has_many :order_contents
   has_many :products, through: :order_contents
   has_many :categories, through: :products
+
+  belongs_to :credit_card
+
+  belongs_to :billing_address, class_name: "Address", :foreign_key => :billing_id
+  belongs_to :shipping_address, class_name: "Address", :foreign_key => :shipping_id
 
   def self.new_orders(days_since)
     self.where("checkout_date > '#{DateTime.now - days_since}'").count

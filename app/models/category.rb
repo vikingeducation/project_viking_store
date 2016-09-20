@@ -1,7 +1,8 @@
 class Category < ActiveRecord::Base
   validates :name, :presence => true, :length => { :in => 4..16 }
 
-  has_many :products
+  has_many :products, dependent: :nullify
+
   has_many :orders, :through => :products
 
   def self.products(category_id)

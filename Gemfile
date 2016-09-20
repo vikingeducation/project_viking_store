@@ -35,6 +35,11 @@ group :development, :test do
   gem 'pry-byebug'
 end
 
+group :development do
+  gem "better_errors", "2.0.0"
+end
+
+gem 'binding_of_caller'
 gem 'faker'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

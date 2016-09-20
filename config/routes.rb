@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'dashboard' => 'dashboard#index'
   resources :category
   resources :products
+  resources :users
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
