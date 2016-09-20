@@ -81,6 +81,13 @@ class Order < ActiveRecord::Base
         .order('order_value desc')
   end
 
+  def self.order_value(id)
+    self.join_with_products
+        .group("orders.id")
+        .where("orders.id = #{id}")
+        .sum("order_contents.quantity * products.price")
+  end
+
   def self.average_ar
     self.orders_with_values.average("order_value").to_sql
   end

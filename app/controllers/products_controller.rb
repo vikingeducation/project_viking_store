@@ -51,6 +51,7 @@ class ProductsController < ApplicationController
 
   def destroy
     product = Product.find(params[:id])
+    session[:return_to] ||= request.referer
     if product
       product.destroy
       flash[:success] = "product #{product.name} deleted!"

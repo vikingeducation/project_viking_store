@@ -1,0 +1,8 @@
+<h4 class="text-center"><%= "Addresses of #{@user.first_name} #{@user.last_name}" %></h4>
+<article class="well">
+<ul class="list-group">
+<% @addresses_str.each do |address| %>
+  <li class="list-group-item"><%= address %></li>
+<% end %>
+</ul>
+</article>

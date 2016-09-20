@@ -1,0 +1,53 @@
+<%= form_for user do |f| %>
+  <fieldset>
+    <% if user.id.nil? == false %>
+      <div class="form-group">
+        <div class="col-lg-2"><p>ID</p></div>
+        <div class="col-lg-10"><p><%= user.id %></p></div>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.label :first_name, 'First Name', class: "col-lg-2 control-label" %>
+      <div class="col-lg-10">
+        <%= f.text_field :first_name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :last_name, 'Last Name', class: "col-lg-2 control-label" %>
+      <div class="col-lg-10">
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, 'Email', class: "col-lg-2 control-label" %>
+      <div class="col-lg-10">
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+    </div>
+
+    <% unless @addresses.nil? %>
+      <div class="form-group row">
+        <%= f.label :billing_id, 'Billing Address', class: "col-lg-2 control-label" %>
+        <div class="col-lg-10">
+        <%= f.select :billing_id, @addresses %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :shipping_id, 'Shipping Address', class: "col-lg-2 control-label" %>
+        <div class="col-lg-10">
+        <%= f.select :shipping_id, @addresses %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <%= f.submit submit(form_type, "User"), :class => "btn btn-large btn-primary btn-block" %>
+      </div>
+    </div>
+
+  </fieldset>
+  <%= (link_to "View Saved Adresses", user_addresses_path(user.id)) if user.id %><br>
+<% end %>
+

@@ -21,9 +21,14 @@
             <td><%= user.id %></td>
             <td><%= "#{user.first_name} #{user.last_name}" %></td>
             <td><%= user.created_at.to_time.strftime("%F") %></td>
-            <td><%= user.default_shipping_address.city.name %></td>
-            <td><%= user.default_shipping_address.state.name %></td>
-            <td><%= user.orders.count %></td>
+            <% unless user.default_shipping_address.nil? %>
+              <td><%= user.default_shipping_address.city.name %></td>
+              <td><%= user.default_shipping_address.state.name %></td>
+            <% else %>
+              <td></td>
+              <td></td>
+            <% end %>
+            <td><%= link_to user.orders.count, user_path(user.id) %></td>
             <% if !user.orders.last.nil? && !user.orders.last.checkout_date.nil? %>
             <td><%= user.orders.last.checkout_date.to_time.strftime("%F") %></td>
             <% else %>

@@ -1,3 +1,105 @@
+<h4 class="text-center"><%= "User #{@user.id} : #{@user.first_name} #{@user.last_name}"%></h4>
 <article class="well">
-<h4>Basic Information</h4>
+<h4 class="text-center">Demographic Information</h4>
+<table class="table table-striped">
+<tr>
+  <td>First Name:</td>
+  <td><%= @user.first_name %></td>
+</tr>
+<tr>
+  <td>Last Name:</td>
+  <td><%= @user.last_name %></td>
+</tr>
+<tr>
+  <td>Email:</td>
+  <td><%= @user.email %></td>
+</tr>
+<tr>
+  <td>Default Billing Address:</td>
+  <td><%= @billing_address %></td>
+</tr>
+<tr>
+  <td>Default Shipping Address:</td>
+  <td><%= @shipping_address %></td>
+</tr>
+</table>
+<%= link_to "Edit #{@user.first_name} #{@user.last_name}'s information", edit_user_path(@user)%><br>
+<%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user),  method: :delete, data: { confirm: "Are you sure?"} %><br>
+<%= link_to "View Saved Addresses", user_addresses_path(@user) %><br>
+<%  if @user.orders.any? { |o| o.checkout_date.nil? } && @user.orders.count > 0 %>
+  <%= link_to "View Unplaced Orders (Cart)"%><br>
+<% else %>
+  <p class="text-muted">View Unplaced Orders (Cart)</p>
+<% end %>
+</article>
+
+<article class="well">
+<h4 class="text-center">Credit Card Information</h4>
+<table class="table table-striped">
+<% @user.credit_cards.each do |cc| %>
+  <tr>
+    <td>First Name:</td>
+    <td><%= @user.first_name %></td>
+  </tr>
+  <tr>
+    <td>Last Name:</td>
+    <td><%= @user.last_name %></td>
+  </tr>
+  <tr>
+    <td>Number:</td>
+    <td><%= cc.card_number.scan(/.{4}/).join(" ") %></td>
+  </tr>
+  <tr>
+    <td>Exp:</td>
+    <td><%= "#{cc.exp_month.to_s.rjust(2,'0')}-#{cc.exp_year}" %></td>
+  </tr>
+  <tr>
+    <td>CCV:</td>
+    <td><%= cc.ccv %></td>
+  </tr>
+  <tr>
+    <td><%= link_to "Remove Card", credit_card_path(cc),  method: :delete, data: { confirm: "Are you sure?" }%></td>
+  </tr>
+<% end %>
+</table>
+</article>
+
+<article class="well">
+<h4 class="text-center">Admin Actions for Foo Bar</h4>
+<div class="row">
+  <%= link_to "Create Order", new_user_order_path(@user.id),
+      :class => "btn btn-primary center col-md-6 col-md-offset-3" %>
+  <hr>
+  <%= link_to "Create Address", new_user_address_path(@user.id), :class => "btn btn-primary center",
+        :class => "btn btn-primary center col-md-6 col-md-offset-3" %>
+</div>
+</article>
+
+<article class="well">
+<h4 class="text-center">Order History</h4>
+      <table class="table table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Order Date</th>
+          <th>Order Value</th>
+          <th>Status</th>
+          <th>SHOW</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
+        </tr>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.created_at.to_time.strftime("%F") %></td>
+            <td><%= number_to_currency Order.order_value(order.id).values.first %></td>
+            <% if order.checkout_date.nil? %>
+              <td class="text-danger">UNPLACED</td>
+            <% else %>
+              <td>PLACED</td>
+            <% end %>
+            <td><%= link_to "show" %></td>
+            <td><%= link_to "edit" %></td>
+            <td><%= link_to "delete", nil,  method: :delete, data: { confirm: "Are you sure?" }%></td>
+          </tr>
+        <% end %>
 </article>

@@ -3,7 +3,14 @@ Rails.application.routes.draw do
   get 'dashboard' => 'dashboard#index'
   resources :category
   resources :products
-  resources :users
+  resources :users do
+    resources :addresses
+    resources :orders
+  end
+  # get '/users/:id/addresses', to: 'users#addresses', as: 'user_address'
+  resources :credit_cards, only: [:destroy]
+  resources :orders, only: [:index]
+  resources :address, only: [:index]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
