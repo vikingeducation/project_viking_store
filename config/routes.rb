@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # get '/users/:id/addresses', to: 'users#addresses', as: 'user_address'
   resources :credit_cards, only: [:destroy]
   resources :orders, only: [:index]
-  resources :address, only: [:index]
+  resources :addresses, only: [:index]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
