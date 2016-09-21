@@ -16,10 +16,9 @@ class OrderContentsController < ApplicationController
     @user =  @order.user
     params[:product].each do |k, v|
       next if @order.product_ids.include?(v[:productID]) || v[:productID].empty?
-      order_content = OrderContent.new(order_id: @order.id,
+      @order.order_contents << OrderContent.new(order_id: @order.id,
                                        product_id: v[:productID],
                                        quantity: v[:quantity])
-      order_content.save
     end
     redirect_to user_order_path(@user, @order)
   end
