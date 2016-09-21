@@ -1,0 +1,12 @@
+<div class="well">
+<%= render partial: 'user_info', locals: {user: @user, order: @order } %>
+<%= render partial: "order_form", locals: {order: @order, form_type: "Edit"} %>
+</div>
+<% if @order_contents.any? %>
+<div class="well">
+<%= render partial: "order_contents_form", locals: {order: @order, order_contents: @order_contents, form_type: "Edit"} %>
+</div>
+<% end %>
+<div class="well">
+<%= render partial: "order_products_form", locals: {order: @order, order_content: @order_content} %>
+</div>

@@ -1,0 +1,7 @@
+<h4 class="text-center">Logistical Information</h2>
+<h4>Basic Information</h2>
+<p>Customer ID: <%= user.id %></p>
+<p>Customer Name: <%= link_to user.user_name, user_path(user) %></p>
+<p>Date Placed: <%= order.checkout_date.to_time.strftime("%F") if order.checked_out? %></p>
+
+<%= link_to "Edit Customer Profile", edit_user_path(user) %><br>

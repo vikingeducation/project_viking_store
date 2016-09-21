@@ -58,8 +58,8 @@ class AddressesController < ApplicationController
       redirect_to session.delete(:return_to)
     end
   end
-  private
 
+  private
   def set_address
     @address = Address.find(params[:id])
   end

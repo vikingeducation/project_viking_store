@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :credit_cards, only: [:destroy]
   resources :orders, only: [:index]
   resources :addresses, only: [:index]
+  resources :order_contents
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

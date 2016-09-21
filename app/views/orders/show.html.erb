@@ -2,14 +2,9 @@
 <p class="text-center"><%= "(Shopping Cart)" if !@order.checked_out? %></p>
 
 <div class="well">
-<h4 class="text-center">Logistical Information</h2>
-<h4>Basic Information</h2>
-<p>Customer ID: <%= @user.id %></p>
-<p>Customer Name: <%= link_to @user.user_name, user_path(@user) %></p>
-<p>Date Placed: <%= @order.checkout_date.to_time.strftime("%F") if @order.checked_out? %></p>
+<%= render partial: 'user_info', locals: {user: @user, order: @order } %>
 <p># Products: <%= @num_products %></p>
 <p>Order Value: <%= number_to_currency @order_value %></p>
-<%= link_to "Edit Customer Profile", edit_user_path(@user) %><br>
 <h4>Order Status</h2>
 <% if @order.status == "PLACED" %>
   <h3 class="text-success"><%= @order.status %></h3>
@@ -33,7 +28,7 @@
 <% end %>
 <%= link_to "Edit Order",
     edit_user_order_path(@user, @order) %><br>
-<%= link_to "Delete Address",
+<%= link_to "Delete Order",
     user_order_path(@user, @order),
     :method => :delete,
     :data => { confirm: "Are you sure?" } %>
@@ -43,7 +38,7 @@
 <%= render partial: 'order_contents', locals: {order_contents: @order.order_contents} %>
 <%= link_to "Edit Order",
     edit_user_order_path(@user, @order) %><br>
-<%= link_to "Delete Address",
+<%= link_to "Delete Order",
     user_order_path(@user, @order),
     :method => :delete,
     :data => { confirm: "Are you sure?" } %>

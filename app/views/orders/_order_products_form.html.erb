@@ -1,0 +1,19 @@
+<h4 class="text-center">Add Products to Order</h4>
+<%= form_for order_content do |f| %>
+  <table class="table table-striped">
+    <tr>
+      <th>ProductID</th>
+      <th>Quantity</th>
+    </tr>
+    <% 5.times do |i| %>
+      <tr>
+        <td><input type="text" name="product[<%=i%>][productID]"></td>
+        <td><input type="text" name="product[<%=i%>][quantity]"></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= f.hidden_field :order_id, :value => order.id %>
+  <div class="form-group">
+  <%= f.submit 'Add Products', class: "btn btn-lg btn-primary" %>
+  </div>
+<% end %>

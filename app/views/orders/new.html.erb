@@ -1,0 +1,4 @@
+<div class="well">
+<%= render partial: 'user_info', locals: {user: @user, order: @order } %>
+<%= render partial: "order_form", locals: {order: @order, form_type: "Create"} %>
+</div>

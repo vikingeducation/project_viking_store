@@ -1,0 +1,24 @@
+<h4 class="text-center">Order Contents</h4>
+<%= form_for order_contents.first do |f| %>
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total Price</th>
+      <th>Remove</th>
+    </tr>
+    <% order_contents.each do |oc| %>
+      <tr>
+        <td><%= oc.id %></td>
+        <td><input type="text" name="order[<%=oc.id%>][quantity]" value=<%="#{oc.quantity}"%>></td>
+        <td><%= number_to_currency oc.product.price %></td>
+        <td><%= number_to_currency (oc.product.price * oc.quantity) %></td>
+        <td><%= link_to "remove", nil,  method: :delete, data: { confirm: "Are you sure?" }%></td>
+      </tr>
+    <% end %>
+  </table>
+  <div class="form-group">
+  <%= f.submit 'Update Order information', class: "btn btn-lg btn-success" %>
+  </div>
+<% end %>
