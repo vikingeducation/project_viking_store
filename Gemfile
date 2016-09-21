@@ -39,6 +39,10 @@ group :development do
   gem "better_errors", "2.0.0"
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 gem 'binding_of_caller'
 gem 'faker'
 # Use ActiveModel has_secure_password

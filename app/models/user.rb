@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     self.where("created_at > '#{DateTime.now - days_since}'").count
   end
 
-  def name
+  def user_name
     "#{self.first_name} #{self.last_name}"
   end
 
