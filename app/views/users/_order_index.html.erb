@@ -1,0 +1,32 @@
+<table class="table table-striped">
+  <% if @user %>
+    <h2 class="text-center">Orders of <%= @user.user_name %></h2>
+  <% else %>
+    <h2 class="text-center">All Orders</h2>
+  <% end %>
+  <tr>
+    <th>ID</th>
+    <th>UserID</th>
+    <th>Order Date</th>
+    <th>Order Value</th>
+    <th>Status</th>
+    <th>SHOW</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  </tr>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= link_to order.user_id, user_path(order.user_id) %></td>
+      <td><%= order.created_at.to_time.strftime("%F") %></td>
+      <td><%= number_to_currency Order.order_value(order.id).values.first %></td>
+      <% if order.checkout_date.nil? %>
+        <td class="text-danger">UNPLACED</td>
+      <% else %>
+        <td>PLACED</td>
+      <% end %>
+      <td><%= link_to "show", user_order_path(order.user_id, order) %></td>
+      <td><%= link_to "edit" %></td>
+      <td><%= link_to "delete", nil,  method: :delete, data: { confirm: "Are you sure?" }%></td>
+    </tr>
+  <% end %>

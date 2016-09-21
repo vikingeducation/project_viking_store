@@ -10,6 +10,14 @@ class Order < ActiveRecord::Base
   belongs_to :billing_address, class_name: "Address", :foreign_key => :billing_id
   belongs_to :shipping_address, class_name: "Address", :foreign_key => :shipping_id
 
+  def status
+    self.checkout_date.nil? ? "UNPLACED" : "PLACED"
+  end
+
+  def checked_out?
+    !self.checkout_date.nil?
+  end
+
   def self.new_orders(days_since)
     self.where("checkout_date > '#{DateTime.now - days_since}'").count
   end

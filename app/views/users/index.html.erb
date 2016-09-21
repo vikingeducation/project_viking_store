@@ -28,7 +28,7 @@
               <td></td>
               <td></td>
             <% end %>
-            <td><%= link_to user.orders.count, user_path(user.id) %></td>
+            <td><%= link_to user.orders.count, user_orders_path(user.id) %></td>
             <% if !user.orders.last.nil? && !user.orders.last.checkout_date.nil? %>
             <td><%= user.orders.last.checkout_date.to_time.strftime("%F") %></td>
             <% else %>

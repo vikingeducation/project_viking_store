@@ -77,29 +77,5 @@
 
 <article class="well">
 <h4 class="text-center">Order History</h4>
-      <table class="table table-striped">
-        <tr>
-          <th>ID</th>
-          <th>Order Date</th>
-          <th>Order Value</th>
-          <th>Status</th>
-          <th>SHOW</th>
-          <th>EDIT</th>
-          <th>DELETE</th>
-        </tr>
-        <% @orders.each do |order| %>
-          <tr>
-            <td><%= order.id %></td>
-            <td><%= order.created_at.to_time.strftime("%F") %></td>
-            <td><%= number_to_currency Order.order_value(order.id).values.first %></td>
-            <% if order.checkout_date.nil? %>
-              <td class="text-danger">UNPLACED</td>
-            <% else %>
-              <td>PLACED</td>
-            <% end %>
-            <td><%= link_to "show" %></td>
-            <td><%= link_to "edit" %></td>
-            <td><%= link_to "delete", nil,  method: :delete, data: { confirm: "Are you sure?" }%></td>
-          </tr>
-        <% end %>
+<%= render partial: 'order_index', locals: {order: @orders} %>
 </article>

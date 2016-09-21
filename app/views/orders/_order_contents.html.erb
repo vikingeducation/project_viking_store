@@ -1,0 +1,19 @@
+<h4 class="text-center">Order Contents</h4>
+<table class="table table-striped">
+  <tr>
+    <th>ProductID</th>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Total Price</th>
+  </tr>
+  <% order_contents.each do |oc| %>
+    <tr>
+      <td><%= oc.product.id %></td>
+      <td><%= oc.product.name %></td>
+      <td><%= oc.quantity %></td>
+      <td><%= number_to_currency oc.product.price %></td>
+      <td><%= number_to_currency (oc.product.price * oc.quantity) %></td>
+    </tr>
+  <% end %>
+</table>

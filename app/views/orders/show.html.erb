@@ -1,0 +1,52 @@
+<h1 class="text-center">Order <%= @order.id %></h1>
+<p class="text-center"><%= "(Shopping Cart)" if !@order.checked_out? %></p>
+
+<div class="well">
+<h4 class="text-center">Logistical Information</h2>
+<h4>Basic Information</h2>
+<p>Customer ID: <%= @user.id %></p>
+<p>Customer Name: <%= link_to @user.user_name, user_path(@user) %></p>
+<p>Date Placed: <%= @order.checkout_date.to_time.strftime("%F") if @order.checked_out? %></p>
+<p># Products: <%= @num_products %></p>
+<p>Order Value: <%= number_to_currency @order_value %></p>
+<%= link_to "Edit Customer Profile", edit_user_path(@user) %><br>
+<h4>Order Status</h2>
+<% if @order.status == "PLACED" %>
+  <h3 class="text-success"><%= @order.status %></h3>
+<% else %>
+  <h3 class="text-danger"><%= @order.status %></h3>
+<% end %>
+
+<h4>Shipping Address</h4>
+<p>Street: <%= @user.default_billing_address.street_address %></p>
+<p>City:   <%= @user.default_billing_address.city.name %></p>
+<p>State:  <%= @user.default_billing_address.state.name %></p>
+
+<h4>Billing Address</h4>
+<p>Street: <%= @user.default_shipping_address.street_address %></p>
+<p>City:   <%= @user.default_shipping_address.city.name %></p>
+<p>State:  <%= @user.default_shipping_address.state.name %></p>
+
+<% unless @order.credit_card.nil? %>
+  <h4>Billing Card</h4>
+  <p>Last 4 Digits: <%= @order.credit_card.last_4%></p>
+<% end %>
+<%= link_to "Edit Order",
+    edit_user_order_path(@user, @order) %><br>
+<%= link_to "Delete Address",
+    user_order_path(@user, @order),
+    :method => :delete,
+    :data => { confirm: "Are you sure?" } %>
+</div>
+
+<div class="well">
+<%= render partial: 'order_contents', locals: {order_contents: @order.order_contents} %>
+<%= link_to "Edit Order",
+    edit_user_order_path(@user, @order) %><br>
+<%= link_to "Delete Address",
+    user_order_path(@user, @order),
+    :method => :delete,
+    :data => { confirm: "Are you sure?" } %>
+</div>
+</div>
+
