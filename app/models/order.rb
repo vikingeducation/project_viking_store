@@ -1,4 +1,6 @@
 class Order < ActiveRecord::Base
+  validate :cannot_have_an_active_cart
+
   belongs_to :user
 
   has_many :order_contents
@@ -180,5 +182,13 @@ class Order < ActiveRecord::Base
 
   def self.join_order_contents_with_products
     joins("JOIN products ON order_contents.product_id = products.id")
+  end
+
+  private
+  def cannot_have_an_active_cart
+    op = self.user.orders.any? { |o| o[:checkout_date] == nil }
+    if op == true
+      errors.add(:user_id, "can't create more than 1 unplaced order")
+    end
   end
 end

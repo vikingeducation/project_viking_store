@@ -42,8 +42,9 @@ class OrdersController < ApplicationController
       flash[:success] = "order created successfully."
       redirect_to edit_user_order_path(order.user_id, order)
     else
-      flash.now[:error] = "Failed to create Address."
-      render 'new'
+      flash[:danger] = "Failed to create Order: #{order.errors.messages[:user_id].first}"
+      @user = User.find(params[:user_id])
+      redirect_to user_orders_path(@user)
     end
   end
 
