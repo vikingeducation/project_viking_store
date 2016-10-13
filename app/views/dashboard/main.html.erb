@@ -13,19 +13,19 @@
         </tr>
         <tr>
           <td>New Users</td>
-          <td></td>
+          <td><%= User.where("created_at > ?",Time.now-7.day).count %></td>
         </tr>
         <tr>
           <td>Orders</td>
-          <td></td>
+          <td><%= Order.where("created_at > ?",Time.now-7.day).count %></td>
         </tr>
         <tr>
           <td>New Products</td>
-          <td></td>
+          <td><%= Product.where("created_at > ?",Time.now-7.day).count %></td>
         </tr>
         <tr>
           <td>Revenue</td>
-          <td></td>
+          <td>$<%= Order.where("checkout_date > ?",Time.now-7.day).joins("JOIN order_contents on orders.id = order_contents.order_id").joins("JOIN products on products.id = order_contents.product_id").sum("ROUND(products.price*order_contents.quantity,2)") %></td>
         </tr>
       </table>
       <h4>Last 30 Days</h4>
@@ -36,19 +36,19 @@
         </tr>
         <tr>
           <td>New Users</td>
-          <td></td>
+          <td><%= User.where("created_at > ?",Time.now-30.day).count %></td>
         </tr>
         <tr>
           <td>Orders</td>
-          <td></td>
+          <td><%= Order.where("created_at > ?",Time.now-30.day).count %></td>
         </tr>
         <tr>
           <td>New Products</td>
-          <td></td>
+          <td><%= Product.where("created_at > ?",Time.now-30.day).count %></td>
         </tr>
         <tr>
           <td>Revenue</td>
-          <td></td>
+          <td>$<%= Order.where("checkout_date > ?",Time.now-30.day).joins("JOIN order_contents on orders.id = order_contents.order_id").joins("JOIN products on products.id = order_contents.product_id").sum("ROUND(products.price*order_contents.quantity,2)") %></td>
         </tr>
       </table>
       <h4>Total</h4>
@@ -59,19 +59,19 @@
         </tr>
         <tr>
           <td>Users</td>
-          <td></td>
+          <td><%= User.count %></td>
         </tr>
         <tr>
           <td>Orders</td>
-          <td></td>
+          <td><%= Order.count %></td>
         </tr>
         <tr>
           <td>Products</td>
-          <td></td>
+          <td><%= Product.count %></td>
         </tr>
         <tr>
           <td>Revenue</td>
-          <td></td>
+          <td>$<%= Order.joins("JOIN order_contents on orders.id = order_contents.order_id").joins("JOIN products on products.id = order_contents.product_id").sum("products.price*order_contents.quantity")%>
         </tr>
       </table>
     </div>
