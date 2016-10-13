@@ -1,0 +1,70 @@
+<h3 class='text-center'>3. Order Statistics</h3>
+<h4>Last 7 Days</h4>
+<table class='table table-bordered'>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= Order.where("checkout_date > ?",Time.now-7.day).count %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td>$</td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+    <td>$</td>
+  </tr>
+  <tr>
+    <td>Largest Order Value</td>
+    <td>$</td>
+  </tr>
+</table>
+<h4>Last 30 Days</h4>
+<table class='table table-bordered'>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= Order.where("checkout_date > ?",Time.now-30.day).count %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td>$</td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+    <td>$</td>
+  </tr>
+  <tr>
+    <td>Largest Order Value</td>
+    <td>$</td>
+  </tr>
+</table>
+<h4>Total</h4>
+<table class='table table-bordered'>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  <tr>
+    <td>Number Of Orders</td>
+    <td><%= Order.count %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td>$<%= Order.joins("JOIN order_contents on orders.id = order_contents.order_id").joins("JOIN products on products.id = order_contents.product_id").sum("products.price*order_contents.quantity")%></td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+    <td>$<%= @average.average_value %></td>
+  </tr>
+  <tr>
+    <td>Largest Order Value</td>
+    <td>$<%= @single.sum %>
+  </tr>
+</table>
