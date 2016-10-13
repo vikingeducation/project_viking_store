@@ -34,15 +34,17 @@
   </tr>
   <tr>
     <td>Total Revenue</td>
-    <td>$</td>
+    <td>$<%= Order.joins("JOIN order_contents on orders.id = order_contents.order_id").joins("JOIN products on products.id = order_contents.product_id").where("orders.checkout_date IS NOT null AND orders.checkout_date > ?", Time.now - 30.day).sum("products.price*order_contents.quantity")%></td>
   </tr>
   <tr>
     <td>Average Order Value</td>
-    <td>$</td>
+    <% @average_30 = OrderContent.joins("JOIN orders ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = products.id JOIN users ON users.id = orders.user_id").select("users.first_name, users.last_name, AVG(order_contents.quantity * products.price) AS average_value").where("orders.checkout_date IS NOT NULL AND orders.checkout_date > ?", Time.now - 30.day).group("users.id, users.first_name, users.last_name, order_contents.quantity, products.price").order("average_value DESC").first %>
+    <td>$<%= @average_30.average_value %></td>
   </tr>
   <tr>
     <td>Largest Order Value</td>
-    <td>$</td>
+    <% @largest_30 = User.joins("JOIN orders ON users.id = orders.user_id").joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON products.id = order_contents.product_id").select("users.first_name, users.last_name, orders.id, sum(ROUND(products.price * order_contents.quantity, 2))").where("checkout_date IS NOT NULL AND checkout_date > ?", Time.now - 30.day).group("users.first_name, users.last_name, orders.id").order("sum DESC").first %>
+    <td>$ <%= @largest_30.sum %> </td>
   </tr>
 </table>
 <h4>Total</h4>
