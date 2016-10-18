@@ -1,0 +1,25 @@
+<h2 class='text-center'>Product Categories</h2>
+<br/>
+<button class='btn btn-primary' type='submit'>Add a New Category</button>
+<table class='table table-bordered'>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>SHOW</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  </tr>
+  <% @categories = Order.find_by_sql("
+      SELECT categories.id AS ID, name
+      FROM categories
+    ") %>
+  <% @categories.each do |i| %>
+    <tr>
+      <td><%= i.id %></td>
+      <td><%= i.name %></td>
+      <td><a href='#'>show</a></td>
+      <td><a href='#'>edit</a></td>
+      <td><a href='#'>delete</a></td>
+    </tr>
+  <% end %>
+</table>
