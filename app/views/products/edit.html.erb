@@ -1,0 +1,23 @@
+<div class="page-header text-center">
+  <h1>New Product</h1>
+</div>
+<div class='container'>
+  <div class='row'>
+    <% unless flash[:error].nil? %>
+      <div class="alert alert-danger"><%= flash[:error] %></div>
+    <% end %>
+    <%= form_for @product do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name%>
+      <br/>
+      <%= f.label :price %>
+      <%= f.text_field :price%>
+      <br/>
+      <%= f.label :category %>
+      <%= f.select :category, Category.all.map {|category| [category.name, category.id] } %>
+      <br/>
+      <%= f.submit class: 'btn btn-primary' %><br/>
+      <%= link_to "Delete", product_path(@product.id), method: 'delete', data: {confirm: "Are you sure?"} %>
+    <% end %>
+  </div>
+</div>

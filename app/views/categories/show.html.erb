@@ -1,0 +1,41 @@
+<div class="page-header text-center">
+    <h1>Category <%= @category.id %>: <%= @category.name %></h1>
+</div>
+<div class='container'>
+  <div class='row'>
+    <table>
+      <tr>
+        <th>Category ID:</th>
+        <td><%= @category.id %></td>
+      </tr>
+      <tr>
+        <th>Name:</th>
+        <td><%= @category.name %></td>
+      </tr>
+    </table>
+    <%= link_to "Delete", category_path(@category.id), method: "delete" %>
+    <br/>
+    <%= link_to "Edit",edit_category_path(@category.id) %>
+    <div class="row">
+      <h3>Products in <%= @category.name %></h3>
+      <table class="table table-bordered">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>SKU</th>
+        </tr>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= link_to product.id, product_path(product.id) %></td>
+            <td><%= product.name %></td>
+            <td><%= product.description %></td>
+            <td><%= number_to_currency(product.price) %></td>
+            <td><%= product.sku %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

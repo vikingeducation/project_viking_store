@@ -1,0 +1,27 @@
+<div class="page-header text-center">
+  <h1>Edit Category <%= @category.id %>: <%= @category.name %></h1>
+</div>
+<div class='container'>
+  <div class='row'>
+    <% unless flash[:error].nil? %>
+      <div class="alert alert-danger"><%= flash[:error] %></div>
+    <% end %>
+    <table>
+    <%= form_for @category do |f| %>
+    <tr>
+      <th><%= f.label :name %></th>
+      <td><%= f.text_field :name %></td>
+    </tr><br/>
+    <tr>
+      <th><%= f.label :description %></th>
+      <td><%= f.text_area :description %></td>
+    </tr><br/>
+    <tr>
+      <td><%= f.submit class: 'btn btn-primary' %></td>
+    </tr>
+    <tr>
+      <td><%= link_to "Delete", category_path(@category.id), method: 'delete', data: {confirm: "Are you sure?"} %></td>
+    </tr>
+    <% end %>
+  </div>
+</div>
