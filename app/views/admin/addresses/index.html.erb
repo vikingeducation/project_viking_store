@@ -24,7 +24,7 @@
         <td><%= link_to "#{address.street_address}", admin_user_address_path(address.user_id, address.id) %></td>
         <td><%= address.city.name %></td>
         <td><%= address.state.name %></td>
-        <td><%=  %></td>
+        <td><%= address.orders_billed_here.count %></td>
         <td><%= address.created_at.strftime("%Y-%m-%d") %></td>
         <td><%= link_to "Edit", edit_admin_user_address_path(address.user_id, address.id) %></td>
         <td><%= link_to "Delete", admin_user_address_path(address.user_id, address.id), method: 'delete', data: {confirm: "Are you sure?"} %></td>

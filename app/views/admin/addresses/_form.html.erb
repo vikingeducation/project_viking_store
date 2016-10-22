@@ -1,24 +1,31 @@
 <h1 class="page-header text-center">Edit <%= @address.user.first_name %> <%= @address.user.last_name %>'s Address</h1>
 
-<div class='form-group'>
   <%= form_for [:admin, @address], {:url => { :action => (@address.id ? :update : :create) } } do |f| %>
+    <div class='form-group'>
+      <%= f.label "User ID:" %>
+      <%= @address.user_id %>
+      <%= f.hidden_field :user_id %><br/>
+
+      <%= f.label "User:" %>
+      <%= link_to "#{@address.user.first_name} #{@address.user.last_name}(Click to view user)", admin_user_path(@address.user_id) %>
+    </div>
     <div class='form-group'>
       <%= f.label :street %>
       <%= f.text_field :street_address, placeholder: "#{@address.street_address}", class: "form-control"%>
       <br/>
       <%= f.label :city %>
-      <%= f.text_field :city_id, placeholder: "#{@address.city}", class: "form-control"%>
+      <%= f.collection_select :city_id, City.all, :id, :name, {}, class: "form-control" %>
       <br/>
       <%= f.label :state %>
-      <%= f.text_field :state_id, placeholder: "#{@address.state}", class: "form-control" %>
+      <%= f.collection_select :state_id, State.all, :id, :name, {}, class: "form-control" %>
       <br/>
       <%= f.label :zip %>
       <%= f.text_field :zip_code, placeholder: "#{@address.zip_code}", class: "form-control" %>
       <br/>
     </div>
+
     <div class='form-group'>
-      <%= f.submit class: 'btn btn-primary btn-lg btn-block' %>
-      <%= link_to "Delete Address", admin_user_address_path(@address.user_id, @address.id), class: 'btn btn-danger btn-lg btn-block', method: 'delete', data: {confirm: "Are you sure?"} %>
+      <%= f.submit "Save", class: 'btn btn-primary btn-lg btn-block' %>
+      <%= link_to "Delete Address", admin_user_address_path(@address.user_id, @address.id), class: 'btn btn-danger btn-lg btn-block', method: 'delete', data: {confirm: "Are you sure?"} if @address.id %>
     </div>
   <% end %>
-</div>
