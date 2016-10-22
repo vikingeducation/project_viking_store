@@ -11,3 +11,4 @@ Project: Viking Store Admin
 Link to solution info on the seeding of this lives [here](https://gist.github.com/betweenparentheses/0b6b325ceaaea76a521d)
 
 [Tamal Riedman](https://github.com/triedman99/project_viking_store)
+[Heroku](https://radiant-escarpment-42653.herokuapp.com/)

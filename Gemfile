@@ -48,3 +48,10 @@ group :development, :test do
 end
 
 gem 'binding_of_caller'
+
+ruby '2.2.4'
+
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+end
