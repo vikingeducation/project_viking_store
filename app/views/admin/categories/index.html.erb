@@ -1,0 +1,22 @@
+<h1 class='text-center'>Product Categories</h1>
+<br/>
+<%= link_to "Add a New Category", new_admin_category_path, class: 'btn btn-primary btn-lg btn-block' %>
+<br/>
+<table class='table table-bordered'>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>SHOW</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  </tr>
+  <% @categories.each do |i| %>
+    <tr>
+      <td><%= i.id %></td>
+      <td><%= i.name %></td>
+      <td><%= link_to "Show", admin_category_path(i.id) %></td>
+      <td><%= link_to "Edit", edit_admin_category_path(i.id) %></td>
+      <td><%= link_to "Delete", admin_category_path(i.id), method: 'delete', data: {confirm: "Are you sure?"} %></td>
+    </tr>
+  <% end %>
+</table>

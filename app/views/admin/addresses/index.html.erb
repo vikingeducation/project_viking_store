@@ -1,0 +1,34 @@
+<h1 class='text-center'>Addresses</h1>
+<h4 class='text-center'>Create new addresses from within <%= link_to "User", admin_users_path %> profiles</h4>
+<br/>
+
+<table class='table table-bordered'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Orders</th>
+      <th>Created</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @addresses.each do |address| %>
+      <tr>
+        <td><%= address.id %></td>
+        <td><%= link_to "#{address.user.first_name} #{address.user.last_name}", admin_user_path(address.user) %></td>
+        <td><%= link_to "#{address.street_address}", admin_user_address_path(address.user_id, address.id) %></td>
+        <td><%= address.city.name %></td>
+        <td><%= address.state.name %></td>
+        <td><%=  %></td>
+        <td><%= address.created_at.strftime("%Y-%m-%d") %></td>
+        <td><%= link_to "Edit", edit_admin_user_address_path(address.user_id, address.id) %></td>
+        <td><%= link_to "Delete", admin_user_address_path(address.user_id, address.id), method: 'delete', data: {confirm: "Are you sure?"} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

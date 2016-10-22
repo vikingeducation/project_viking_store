@@ -1,4 +1,5 @@
-class UsersController < ApplicationController
+class Admin::UsersController < AdminController
+  layout 'admin'
 
   def index
     @users = User.all
@@ -17,7 +18,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = "You have successfully created a user"
-      redirect_to users_path
+      redirect_to admin_users_path
     else
       flash[:error] = "Something went wrong"
       render :new
@@ -28,7 +29,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(whitelisted_user_params)
       flash[:success] = "user successfully updated"
-      redirect_to users_path
+      redirect_to admin_users_path
     else
       flash[:error] = "Something went wrong updating your user"
       render :edit
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
 
     if @user.destroy
       flash[:success] = "User was successfully destroyed"
-      redirect_to users_path
+      redirect_to admin_users_path
     else
       flash[:error] = "Could not delete User"
       redirect_to :back

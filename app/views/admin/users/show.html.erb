@@ -1,0 +1,53 @@
+<h1 class="text-center">User <%= @user.id %>: <%= @user.first_name %> <%= @user.last_name %></h1>
+
+<div class='panel panel-default'>
+  <h3 class='text-center'>Demographic Information</h3>
+  <h5><strong>First Name:</strong> <%= @user.first_name %></h5>
+  <h5><strong>Last Name:</strong> <%= @user.last_name %></h5>
+  <h5><strong>Email:</strong> <%= @user.email %></h5>
+  <h5><strong>Default Billing Address:</strong> <%= @user.billing_address.full_address || "n/a" %></h5>
+  <h5><strong>Default Shipping Adress:</strong> <%= @user.shipping_address.full_address || "n/a" %></h5>
+</div>
+<%= link_to "Edit #{@user.first_name}'s Information", edit_admin_user_path(@user), class: 'btn btn-primary btn-lg btn-block' %>
+<%= link_to "View Saved Addresses", admin_user_addresses_path(@user), class: 'btn btn-primary btn-lg btn-block' %>
+<%= link_to "Delete", admin_user_path(@user), class: 'btn btn-danger btn-lg btn-block', method: "delete", data: { confirm: "Are you sure?" }%>
+<br/>
+
+
+<div class='panel panel-default'>
+  <% @user.credit_cards.each do |credit_card| %>
+    <h3 class='text-center'>Credit Card Information</h3>
+    <h5><strong>First Name:</strong> <%= @user.first_name %></h5>
+    <h5><strong>Last Name:</strong> <%= @user.last_name %></h5>
+    <h5><strong>Number:</strong> <%= credit_card.card_number %></h5>
+    <h5><strong>Expiration:</strong> <%= credit_card.exp_month %>, <%= credit_card.exp_year %></h5>
+    <h5><strong>CV2:</strong> <%= credit_card.ccv %></h5>
+  <% end %>
+</div>
+
+<div class='panel panel-default'>
+  <h3 class='text-center'> Order History</h3>
+  <table class='table table-bordered'>
+    <thead>
+      <th>ID</th>
+      <th>Order Date</th>
+      <th>Order Value</th>
+      <th>Status</th>
+      <th>SHOW</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </thead>
+    <tbody>
+      <% @user.orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.created_at.strftime("%Y-%m-%d") %></td>
+          <td><%= number_to_currency(order.value) %></td>
+          <td><%= order.checkout_date ? "Placed" : "Unplaced" %></td>
+          <td><%= link_to "Show", admin_user_order_path(order.user.id, order.id) %></td>
+          <td><%= link_to "Edit", edit_admin_user_order_path(order.user.id, order.id) %></td>
+          <td><%= link_to "Delete", admin_user_order_path(order.user.id, order.id), method: 'delete', data: {confirm: "Are you sure?"} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
