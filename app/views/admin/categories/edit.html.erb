@@ -1,0 +1,18 @@
+<h1 class="page-header text-center">Edit Category <%= @category.id %>: <%= @category.name %></h1>
+
+<% unless flash[:error].nil? %>
+  <div class="alert alert-danger"><%= flash[:error] %></div>
+<% end %>
+
+<div class='form-group'>
+  <%= form_for [:admin, @category] do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+    <br/>
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control' %>
+    <br/>
+    <%= f.submit class: 'btn btn-primary btn-lg btn-block' %>
+    <%= link_to "Delete", admin_category_path(@category.id), class: 'btn btn-danger btn-lg btn-block', method: 'delete', data: {confirm: "Are you sure?"}  %>
+  <% end %>
+</div>

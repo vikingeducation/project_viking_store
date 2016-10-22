@@ -1,0 +1,25 @@
+<h1 class="page-header text-center">New Product</h1>
+
+<% unless flash[:error].nil? %>
+  <div class="alert alert-danger"><%= flash[:error] %></div>
+<% end %>
+<div class='form-group'>
+  <%= form_for [:admin, @product] do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, placeholder: 'enter a name', class: 'form-control'%>
+    <br/>
+    <%= f.label :price %>
+    <%= f.text_field :price, placeholder: '$price', class: 'form-control' %>
+    <br/>
+    <%= f.label :description %>
+    <%= f.text_area :description, class: "form-control" %>
+    <br/>
+    <%= f.label :category %>
+    <%= f.select :category_id, Category.all.map {|category| [category.name, category.id] }, {}, class: 'form-control' %>
+    <br/>
+    <%= f.label :sku %>
+    <%= f.text_field :sku, class: "form-control", placeholder: "123-456-789" %>
+    <br/>
+    <%= f.submit class: 'btn btn-primary btn-lg btn-block' %>
+  <% end %>
+</div>

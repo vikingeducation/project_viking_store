@@ -1,0 +1,31 @@
+<h1 class='text-center'>Products</h1>
+<br/>
+<%= link_to "Add a New Product", new_admin_product_path, class: 'btn btn-primary btn-lg btn-block' %>
+<br/>
+<table class='table table-bordered'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>SHOW</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <% category = product.category %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= product.name %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= link_to category.name, admin_category_path(category.id) %></td>
+        <td><%= link_to "Show", admin_product_path(product.id) %></td>
+        <td><%= link_to "Edit", edit_admin_product_path(product.id) %></td>
+        <td><%= link_to "Delete", admin_product_path(product.id), method: 'delete', data: {confirm: "Are you sure?"} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

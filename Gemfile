@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.0.0'
 gem 'pg'
 
+gem 'tzinfo-data'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -41,3 +43,15 @@ gem 'faker'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :development, :test do
+  gem 'better_errors'
+end
+
+gem 'binding_of_caller'
+
+ruby '2.2.4'
+
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+end

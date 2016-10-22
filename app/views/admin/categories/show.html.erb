@@ -1,0 +1,33 @@
+<h1 class="page-header text-center">Category <%= @category.id %>: <%= @category.name %></h1>
+
+<h5><strong>Category ID:</strong> <%= @category.id %></h5>
+<h5><strong>Name:</strong> <%= @category.name %></h5>
+<%= link_to "Edit",edit_admin_category_path(@category), class: 'btn btn-primary btn-lg btn-block' %>
+<%= link_to "Delete", admin_category_path(@category), method: "delete", class: 'btn btn-danger btn-lg btn-block' %>
+<br/>
+
+<h3>Products in <%= @category.name %></h3>
+<div class="panel panel-default">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>SKU</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= link_to product.id, admin_product_path(product.id) %></td>
+          <td><%= product.name %></td>
+          <td><%= product.description %></td>
+          <td><%= number_to_currency(product.price) %></td>
+          <td><%= product.sku %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,30 @@
+<h1 class='text-center'>Edit Order <%= @order.id %></h1>
+<%= render partial: 'form' %>
+
+<%= form_for [:admin, @order], {:url => { :action => (@order.id ? :update : :create) } } do |f| %>
+<div class='panel panel-default'>
+  <h3 class='text-center'>Edit Order Contents</h3>
+    <table class='table table-bordered'>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= f.fields_for :order_contents do |purchase_fields| %>
+          <tr>
+            <td><%= purchase_fields.collection_select :product_id, Product.all, :id, :name, {:inculde_blank => 'None'}, class: 'form-control' %></td>
+            <td><%= purchase_fields.text_field :quantity, class: 'form-control' %>
+            <td><%=  @product_id.nil? ? "n/a" : @product.price %></td>
+            <td><%=  %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= f.submit "Update Order Contents", class: 'btn btn-primary btn-lg btn-block' %>
+  <%= link_to "Delete Order", admin_user_order_path(@order.user.id, @order.id), class: 'btn btn-danger btn-lg btn-block',method: 'delete', data: {confirm: "Are you sure?"} %>
+</div>
+<% end %>

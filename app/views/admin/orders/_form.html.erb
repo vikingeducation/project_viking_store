@@ -1,0 +1,49 @@
+<%= form_for [:admin, @order], {:url => { :action => (@order.id ? :update : :create) } } do |f| %>
+<div class='panel panel-default'>
+  <h3>Basic Information</h3>
+  <h5><strong>Customer ID:</strong> <%= @order.id %></h5>
+  <h5><strong>Customer:</strong> <%= @order.user ? (link_to "#{@order.user.first_name} #{@order.user.last_name}", admin_user_path(@user)) : "n/a" %></h5>
+  <h5><strong>Date Placed:</strong> <%= @order.checkout_date ? @order.checkout_date : "n/a" %></h5>
+  <br/>
+  <%= @order.user ? (link_to "Edit #{@user.first_name}'s Profile", edit_admin_user_path(@user), class: 'btn btn-primary btn-lg btn-block') : "n/a" %><br/>
+
+  <% unless @order.id.nil? %>
+    <div class = "form-group">
+      <%= f.label "Placed", style: "color: green;"%>
+      <%= f.radio_button :checkout_date, Date.today, checked: true%>
+      <br />
+      <% if @order.user.orders.where(:checkout_date => nil).length < 0 %>
+        <%= f.label "Not Placed", style: "color: red;" %>
+        <%= f.radio_button :checkout_date, nil %>
+      <% else %>
+        <%= f.label "Not Placed", style: "color: red;" %>
+        <%= f.radio_button :checkout_date, nil, disabled: true %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @user %>
+  <div class='form-group'>
+    <%= f.label :shipping_address %>
+    <%= f.select :shipping_id, @user.addresses.all.collect {|c| ["#{c.id}: #{c.street_address}", c.id]}, {}, {class: "form-control"} %>
+    <br/>
+    <%= f.label :billing_address %>
+    <%= f.select :billing_id, @user.addresses.all.collect {|c| ["#{c.id}: #{c.street_address}", c.id]}, {}, {class: "form-control"} %>
+    <br/>
+    <% end %>
+    <% if @order.user.nil? || @order.user.credit_card.nil? %>
+      <div class="form-group">
+        <%= f.label "Billing Card" %>
+        <%= f.select :credit_card_id, [], {}, {class: "form-control", disabled: true } %>
+      </div>
+    <% else %>
+      <div class="form-group">
+        <%= f.label "Billing Card" %>
+        <%= f.select :credit_card_id, ["Ending in #{@order.user.credit_card.card_number[-4..-1]}"], {}, {class: "form-control" } %>
+      </div>
+    <% end %>
+    <br/>
+    <%= f.submit "Create Order in Shopping Cart", class: 'btn btn-primary btn-lg btn-block' %>
+  </div>
+</div>
+<% end %>

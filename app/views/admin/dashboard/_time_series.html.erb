@@ -1,0 +1,59 @@
+<h3 class='text-center'>4. Time Series Data</h3>
+<h4>Orders by Day</h4>
+<table class='table table-bordered table-striped'>
+  <tr>
+    <th>Date</th>
+    <th>Quantity</th>
+    <th>Value</th>
+  </tr>
+  <% @by_date = Order.find_by_sql("
+      SELECT DATE(days) AS day, COUNT(DISTINCT orders.*) AS num_orders,
+      COALESCE(SUM(order_contents.quantity * products.price), 0) AS amount
+      FROM GENERATE_SERIES(
+        (SELECT DATE(MIN(checkout_date))
+        FROM orders)
+      , CURRENT_DATE, '1 DAY'::INTERVAL) days
+      LEFT JOIN orders ON DATE(orders.checkout_date) = days
+      LEFT JOIN order_contents ON orders.id = order_contents.order_id
+      LEFT JOIN products ON products.id = order_contents.product_id
+      GROUP BY days
+      ORDER BY days DESC
+      LIMIT 7
+    ") %>
+  <% @by_date.each do |i| %>
+    <tr>
+      <td><%= i.day %></td>
+      <td><%= i.num_orders %></td>
+      <td>$<%= i.amount %></td>
+    </tr>
+  <% end %>
+</table>
+<h4>Orders by Week</h4>
+<table class='table table-bordered table-striped'>
+  <tr>
+    <th>Date</th>
+    <th>Quantity</th>
+    <th>Value</th>
+  </tr>
+  <% @by_week = Order.find_by_sql("
+      SELECT DATE(weeks) AS week, COUNT(DISTINCT orders.*) AS num_orders,
+      COALESCE(SUM(order_contents.quantity * products.price), 0) AS amount
+      FROM GENERATE_SERIES(
+        (SELECT DATE(DATE_TRUNC('WEEK', MIN(checkout_date)))
+         FROM orders)
+      , CURRENT_DATE, '1 WEEK'::INTERVAL) weeks
+      LEFT JOIN orders ON DATE(DATE_TRUNC('WEEK', orders.checkout_date)) = weeks
+      LEFT JOIN order_contents ON orders.id = order_contents.order_id
+      LEFT JOIN products ON products.id = order_contents.product_id
+      GROUP BY weeks
+      ORDER BY weeks DESC
+      LIMIT 7
+    ") %>
+  <% @by_week.each do |i| %>
+    <tr>
+      <td><%= i.week %></td>
+      <td><%= i.num_orders %></td>
+      <td>$<%= i.amount %></td>
+    </tr>
+  <% end %>
+</table>

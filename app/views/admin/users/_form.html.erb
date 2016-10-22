@@ -1,0 +1,34 @@
+<h1 class="page-header text-center">Edit User <%= @user.id %>: <%= @user.first_name %> <%= @user.last_name %></h1>
+
+<div class='form-group'>
+  <%= form_for [:admin, @user] do |f| %>
+    <div class='form-group'>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, placeholder: "#{@user.first_name}", class: "form-control"%>
+      <br/>
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, placeholder: "#{@user.last_name}", class: "form-control"%>
+      <br/>
+      <%= f.label :email %>
+      <%= f.text_field :email, placeholder: "#{@user.email}", class: "form-control" %>
+      <br/>
+    </div>
+    <% if @user.id %>
+      <div class='form-group'>
+        <%= f.label :billing_id %>
+        <%= f.select :billing_id, @user.addresses.all.collect {|c| ["#{c.id}: #{c.street_address}", c.id]}, {}, {class: "form-control"} %>
+        <br/>
+        <%= f.label :shipping_id %>
+        <%= f.select :shipping_id, @user.addresses.all.collect {|c| ["#{c.id}: #{c.street_address}", c.id]}, {}, {class: "form-control"} %>
+        <br/>
+      </div>
+    <% end %>
+    <div class='form-group'>
+      <%= f.submit class: 'btn btn-primary btn-lg btn-block' %>
+      <% if @user.id %>
+        <br/>
+        <%= link_to "Delete #{@user.first_name} #{@user.last_name}", admin_user_path(@user), class: 'btn btn-danger btn-lg btn-block', method: 'delete', data: {confirm: "Are you sure?"} %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
