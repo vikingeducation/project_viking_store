@@ -28,6 +28,12 @@ gem 'spring',  '~> 1.3.6',      group: :development
 
 gem 'pry'
 
+group :development, :test do
+  gem 'jazz_fingers'
+  gem 'pry-rails'
+end
+
+
 gem 'faker'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
