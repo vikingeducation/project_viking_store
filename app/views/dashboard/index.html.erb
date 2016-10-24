@@ -2,14 +2,14 @@
 <div class="col-md-5 panel panel-default">
    <div class="panel-body">
      <h4 class="text-center">Overall Platform</h4>
-     
+
      <h5>Last 7 Days</h5>
    	 <table class="table">
    	  	<tr>
          <th>Item</th>
-         <th>Data</th> 
+         <th>Data</th>
         </tr>
-        
+
         <tr>
           <td>New Users</td>
           <td><%= @users_seven_days %></td>
@@ -24,7 +24,7 @@
         </tr>
         <tr>
           <td>Revenue</td>
-          <td>$50000</td>
+          <td>$<%= @revenue_seven_days.to_f %></td>
         </tr>
    	 </table >
 
@@ -32,7 +32,7 @@
        <table class="table">
          <tr>
            <th>Item</th>
-           <th>Data</th> 
+           <th>Data</th>
          </tr>
 
         <tr>
@@ -51,7 +51,7 @@
           <td>Revenue</td>
           <td>$50000</td>
         </tr>
-        
+
 
      </table>
 
@@ -61,7 +61,7 @@
        <table class="table">
          <tr>
            <th>Item</th>
-           <th>Data</th> 
+           <th>Data</th>
          </tr>
 
         <tr>
@@ -80,7 +80,7 @@
           <td>Revenue</td>
           <td>$50000</td>
         </tr>
-        
+
 
      </table>
 
@@ -118,11 +118,11 @@
       <tr>
         <td>Los Angelos</td>
         <td>8</td>
-      </tr>  
+      </tr>
       <tr>
         <td>San Francisco</td>
         <td>3</td>
-      </tr>  
+      </tr>
       <tr>
         <td>San Diego</td>
         <td>10</td>
