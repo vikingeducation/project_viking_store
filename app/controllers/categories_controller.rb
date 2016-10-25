@@ -31,7 +31,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
 
       if @category.update_attributes(category_params)
-        flash[:notice] = "Successfully created a new category..."
+        flash[:notice] = "Successfully updated the category..."
         redirect_to category_path(@category)
       else
         flash[:error] = "Something went wrong"
@@ -45,10 +45,6 @@ class CategoriesController < ApplicationController
   end
 
   private
-
-  def category_params
-    params.require(:category).permit(:name, :description)
-  end
 
 	def white_list_params
     params.require(:category).permit(:name, :description)
