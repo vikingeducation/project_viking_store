@@ -1,0 +1,17 @@
+<h4>Edit Category</h4>
+
+
+<% @category.errors.full_messages.each do | msg| %>
+	<%= msg %>
+<% end %>
+<div class="col-md-12 category-form">
+<div class="input-group ">
+	<h4>ID: <%= @category.id %></h4>
+	<%= form_for @category, url: {action: "update"} do |f| %>
+	  <%= f.label "Name"%>
+	  <%= f.text_field :name, class: "form-control input-lg" %>
+	  <br/><br/><br><br>
+	  <%= f.submit "Update", class: "btn btn-primary btn-block" %>
+	<% end %>
+	</div>
+</div>

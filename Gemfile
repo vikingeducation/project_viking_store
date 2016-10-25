@@ -33,6 +33,10 @@ group :development, :test do
   gem 'pry-rails'
 end
 
+group :development do
+  gem "better_errors"
+end
+gem "binding_of_caller"
 
 gem 'faker'
 # Use ActiveModel has_secure_password

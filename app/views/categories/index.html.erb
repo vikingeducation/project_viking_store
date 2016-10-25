@@ -1,0 +1,21 @@
+<h4>All Post Display here</h4>
+<% @categories.each do |category| %>
+
+<table class="table">
+<tr>
+  <th>id</th>
+  <th>Name</th>
+  <th>Show</th>
+  <th>Edit</th>
+  <th>Delete</th>
+</tr>
+<tr>
+  <td><%= category.id %></td>
+  <td><%= category.name %></td>
+  <td><%= link_to "Show", category_path(category) %></td>
+  <td><%= link_to "Edit", edit_category_path(category) %></td>
+  <td><%= link_to "Delete", category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+</tr>
+</table>
+<% end %>

@@ -3,5 +3,9 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  resources 'dashboard', only: [:index]
+  get 'dashboard' => 'dashboard#index'
+  get 'admin' => 'admin#index'
+
+  resources :categories
+  resources :products
 end
