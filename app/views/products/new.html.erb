@@ -11,6 +11,8 @@
     <%= f.text_field :price, class: "form-control" %>
     <%= f.label :sku, "SKU" %>
     <%= f.text_field :sku, class: "form-control" %>
+		<%= f.label :description, "deaded" %>
+    <%= f.text_field :description, class: "form-control" %>
     <%= f.label :category_id, "Category" %>
     <%= f.select :category_id, "", {}, {class: "form-control"} do %>
       <% Category.all.each do |category| %>

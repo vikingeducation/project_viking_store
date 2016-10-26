@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new
+    @product = Product.new(white_list_params)
 
     if @product.save
       redirect_to @product
@@ -45,6 +45,6 @@ class ProductsController < ApplicationController
   private
 
   def white_list_params
-  	params.require(:product).permit(:name, :description)
+  	params.require(:product).permit(:name, :description, :sku, :price, :category_id )
   end
 end
