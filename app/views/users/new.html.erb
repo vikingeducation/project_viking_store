@@ -1,0 +1,13 @@
+<h4 class="text-center">New User</h4>
+<div class="form-group col-md-8">
+  <%= form_for @user do |f| %>
+    <%= f.label :first_name, "First Name" %>
+    <%= f.text_field :first_name, class: "form-control"%>
+    <%= f.label :last_name, "Last Name" %>
+    <%= f.text_field :last_name, class: "form-control"%>
+    <%= f.label :email, "Email" %>
+    <%= f.text_field :email, class: "form-control"%>
+    <br />
+    <%= f.submit "Create new User", class: "btn btn-primary btn-block"%>
+  <% end %>
+</div>

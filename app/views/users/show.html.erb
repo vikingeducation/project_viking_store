@@ -1,0 +1,10 @@
+<h3 class="text-center">User <%= @user.id %>: <%= @user.first_name + " "+ @user.last_name %></h3>
+
+<div class="panel panel-default col-md-7 pull-right">
+  <div class="panel-body">
+    <h5 class="text-center">Demographic Information</h5>
+    <p>First Name: <%= @user.first_name %></p>
+    <p>Last Name: <%= @user.last_name %></p>
+    <p>Email: <%= link_to @user.email, "#" %></p>
+  </div>
+</div>

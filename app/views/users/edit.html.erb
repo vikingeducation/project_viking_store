@@ -1,0 +1,13 @@
+<h3 class="text-center">Edit User Info</h3>
+<%= form_for @user do |f| %>
+<div class="form-group col-md-8">
+  <%= f.label :first_name, "First name" %>
+  <%= f.text_field :first_name, class: "form-control" %>
+  <%= f.label :last_name, "Last name" %>
+  <%= f.text_field :last_name, class: "form-control" %>
+  <%= f.label :email, "Email" %>
+  <%= f.text_field :email, class: "form-control" %>
+  <br />
+  <%= f.submit "Update", class: "btn btn-primary btn-block"%>
+</div>
+<% end %>
