@@ -7,7 +7,17 @@
   <%= f.text_field :last_name, class: "form-control" %>
   <%= f.label :email, "Email" %>
   <%= f.text_field :email, class: "form-control" %>
+  <%= f.label :billing_id, "Addresses" %>
+
+  <%= f.select :billing_id, "", {}, {class: "form-control"} do %>
+    <% @user.addresses.each do |address| %>
+      <%= content_tag(:option, address.street_address, value: address.id) %>
+    <% end %>
+  <% end %>
+
+
   <br />
-  <%= f.submit "Update", class: "btn btn-primary btn-block"%>
+  <%= f.submit "Update #{@user.first_name} #{@user.last_name}", class: "btn btn-primary btn-block"%>
+  <br /><%= link_to "Delete #{@user.first_name} #{@user.last_name}", @user, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-block"%>
 </div>
 <% end %>

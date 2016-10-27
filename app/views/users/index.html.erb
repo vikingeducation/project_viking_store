@@ -20,8 +20,10 @@
       <td class="col-md-1"><%= user.id %></td>
       <td class="col-md-1"><%= user.first_name + " " + user.last_name %></td>
       <td class="col-md-1"><%= user.created_at.strftime('%v') %></td>
+      <% if user.addresses.first %>
       <td class="col-md-1"><%= user.addresses.first.city.name %></td>
       <td class="col-md-1"><%= user.addresses.first.state.name %></td>
+      <% end %>
       <td class="col-md-1"><%= link_to user.orders.count, "#" %></td>
       <td class="col-md-1"><%= user.orders.first.created_at.strftime('%v') if user.orders.first %></td>
       <td class="col-md-1"><%= link_to "Show", user_path(user) %></td>

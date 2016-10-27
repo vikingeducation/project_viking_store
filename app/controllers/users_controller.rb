@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all.first(10)
+    @users = User.all.last(10)
   end
 
   def show
     @user = User.find(params[:id])
+    @user_orders = User.find(params[:id]).orders.last(3)
   end
 
   def edit
