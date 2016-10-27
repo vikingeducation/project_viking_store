@@ -7,17 +7,17 @@ Name: <strong><%= @category.name %></strong>
 <br /><br />
 
 <h3>Products in this category</h3>
-<% @category_products.each do |product| %>
 <table class="table">
   <tr>
     <th>ID</th>
     <th>Name</th>
     <th>Description</th>
   </tr>
+<% @category_products.each do |product| %>
   <tr>
     <td><%= product.id %></td>
     <td><h4><%= link_to product.name, "#" %></h4></td>
     <td><p><%= product.description %></p></td>
   </tr>
-</table>
 <% end %>
+</table>

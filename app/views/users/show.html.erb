@@ -24,10 +24,15 @@
     <h5 class="text-center">Credit Card Information</h5>
     <p>First Name: <%= @user.first_name %></p>
     <p>Last Name: <%= @user.last_name %></p>
-    <p>Number: <%= @user.credit_cards.first.card_number%></p>
-    <p>Expiration Date: <%= "#{@user.credit_cards.first.exp_month} #{@user.credit_cards.first.exp_year}" %></p>
-    <p>CV# <%= @user.credit_cards.first.ccv %></p>
-    <a><%= link_to "Remove Card", "#"%></a>
+    <% if @user.credit_cards.first %>
+      <p>Number: <%= @user.credit_cards.first.card_number%></p>
+      <p>Expiration Date: <%= "#{@user.credit_cards.first.exp_month} #{@user.credit_cards.first.exp_year}" %></p>
+      <p>CV# <%= @user.credit_cards.first.ccv %></p>
+      <a><%= link_to "Remove Card", "#"%></a>
+    <% else %>
+      <p>No creadit card for this user</p>
+    <% end %>
+
   </div>
 </div>
 

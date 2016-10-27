@@ -1,0 +1,30 @@
+<h2 class="text-center">Edit Address</h2>
+<div class="form-group col-md-8">
+  <p>Owner ID: <%= @address.user.id%></p>
+  <p>Owner Name: <%= link_to "#{@address.user.first_name} #{@address.user.last_name} (click to view)", user_path(@address.user) %></p>
+  <%= form_for @address do |f| %>
+    <%= f.label :street_address, "Street Address" %>
+    <%= f.text_field :street_address, class: "form-control" %>
+
+    <%= f.label :city_id, "City" %>
+    <%= f.select :city_id, "", {}, {class: "form-control"} do %>
+      <% City.all.each do |city| %>
+        <%= content_tag(:option, city.name, value: city.id) %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :state_id, "State" %>
+    <%= f.select :state_id, "", {}, {class: "form-control"} do %>
+      <% State.all.each do |state| %>
+        <%= content_tag(:option, state.name, value: state.id) %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :zip_code, "Zipcode" %>
+    <%= f.text_field :zip_code, class: "form-control" %>
+
+
+    <br />
+    <%= f.submit "Update Address", class: "btn btn-primary btn-block"%>
+  <% end %>
+</div>
