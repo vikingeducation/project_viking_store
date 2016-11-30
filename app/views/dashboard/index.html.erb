@@ -1,6 +1,6 @@
 <h1>Analytics Dashboard</h1>
 <div class="row">
-  <% infographics.each do |infographic| %>
+  <% @infographics.each do |infographic| %>
     <%= render partial: 'shared/panel', locals: { infographic: infographic } %>
   <% end %>
 </div>

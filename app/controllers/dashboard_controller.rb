@@ -8,6 +8,19 @@ class DashboardController < ApplicationController
       # all orders
       # all new products
       # total revenue
+    # users = User.select('Count(*) as user_count').where(:created_at <= 7.days.ago)
+    # users = User.select('Count(*) as user_count').where(:created_at <= 30.days.ago)
+    # users = User.select('Count(*) as user_count')
+
+    @infographics = []
+    sections = []
+    sections <<  {
+                    title: "Last 7 Days",
+                    headers: ["Item", "Data"],
+                    data: Overall.data(7)
+                  }
+
+    @infographics << {title: "1. Overall Platform", sections: sections}
 
 
     # User Demographics
