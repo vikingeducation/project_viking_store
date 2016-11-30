@@ -26,6 +26,16 @@ MULTIPLIER = 10
 # Because seeds.rb is run as a script, you'll need to put helper methods ABOVE where they are used to generate records.
 # This file defines all the methods and data first, then runs all the procedural stuff at the end.
 
+# This method returns a random date
+def creation_date
+  time_frames = []
+  (MULTIPLIER**2).times do |x|
+     time_frames << midnight_tonight - ((x*3) + 1).month
+  end
+  date_range = (time_frames.sample..midnight_tonight)
+  rand(date_range)
+end
+
 # Generate Category records for your Product records.
 def generate_category
   category = Category.new
@@ -47,6 +57,7 @@ def generate_product
   p[:description] = Faker::Lorem.sentence
   p[:sku]         = Faker::Code.ean
   p[:price]       = random_price
+  p[:created_at]  = creation_date
   p.save
 end
 
@@ -89,16 +100,6 @@ end
 # Returns the timestamp for midnight of the day the file is run.
 def midnight_tonight
   (Time.now.to_date + 1).to_time
-end
-
-# This method returns a random date
-def creation_date
-  time_frames = []
-  (MULTIPLIER**2).times do |x|
-     time_frames << midnight_tonight - ((x*3) + 1).month
-  end
-  date_range = (time_frames.sample..midnight_tonight)
-  rand(date_range)
 end
 
 def generate_user

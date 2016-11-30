@@ -18,7 +18,7 @@ class DashboardController < ApplicationController
                             title: "Last 7 Days",
                             headers: ["Item", "Data"],
                             data: OverallPlatform.data(7)
-                          }, 
+                          },
                           {
                             title: "Last 30 Days",
                             headers: ["Item", "Data"],
@@ -49,6 +49,11 @@ class DashboardController < ApplicationController
                               title: "Top 3 Cities Users Live In (billing)",
                               headers: ["Item", "Data"],
                               data: UserDemographics.location_demo('city')
+                            },
+                            {
+                              title: "Top User With...",
+                              headers: ["Item", "User", "Quantity"],
+                              data: UserDemographics.extremist_users
                             }
                           ]
 
