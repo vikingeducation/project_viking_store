@@ -1,4 +1,5 @@
 class UserDemographics
+  include ActionView::Helpers::TextHelper
 
   def self.location_demo(location)
 
@@ -9,13 +10,13 @@ class UserDemographics
     # order by count of state desc
     # limit 3
 
-    plural_location = pluralize(location)
+    plural = ActiveSupport::Inflector.pluralize(location)
 
-    locations = User.select("#{plural_location}.name AS name, COUNT(users.id) AS user_count")
-                 .joins('JOIN addresses ON (addresses.id = billing_id')
-                 .joins("JOIN #{plural_location} ON (#{plural_location}.id = #{location}_id")
-                 .group("#{plural_location}.name")
-                 .order('COUNT(users.id)', :desc)
+    locations = User.select("#{plural}.name AS name, COUNT(users.id) AS user_count")
+                 .joins('JOIN addresses ON (addresses.id = users.billing_id)')
+                 .joins("JOIN #{plural} ON (#{plural}.id = addresses.#{location}_id)")
+                 .group("#{plural}.name")
+                 .order('COUNT(users.id) DESC')
                  .limit(3)
 
     locations.map do |row|
