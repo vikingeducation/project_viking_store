@@ -16,4 +16,29 @@ class User < ApplicationRecord
     users.limit(limit) if limit
 
   end
+
+  def self.greatest_revenue(type: "Lifetime", aggr: "SUM")
+    user =  select("CONCAT(first_name,' ',last_name) as name, #{aggr}(quantity * price) as quantity")
+                .joins("JOIN orders ON (user_id = users.id)")
+                .joins("JOIN order_contents ON (order_id = orders.id)")
+                .joins("JOIN products ON (product_id = products.id)")
+
+    user =  user.group(:order_id) if (type == 'Single')
+
+    user =  user.group(["users.id", :first_name, :last_name])
+                .order("#{aggr}(quantity * price) DESC")
+                .limit(1)
+
+    user[0]
+  end
+
+  def self.most_orders
+    user =  select("CONCAT(first_name,' ',last_name) as name, COUNT(orders.id) as quantity")
+                .joins("JOIN orders ON (user_id = users.id)")
+                .group(["users.id", :first_name, :last_name])
+                .order("COUNT(orders.id) DESC")
+                .limit(1)
+    user[0]
+  end
+
 end

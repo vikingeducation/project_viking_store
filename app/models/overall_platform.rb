@@ -2,9 +2,9 @@ class OverallPlatform
   def self.data(num_days = nil)
     [
       user_count(num_days),
-      order_count(num_days),
+      OrderStats.order_count(num_days),
       new_products_count(num_days),
-      total_revenue(num_days)
+      OrderStats.total_revenue(num_days)
     ]
   end
 
@@ -12,16 +12,8 @@ class OverallPlatform
     [ (num_days ? "New Users" : "Users"), User.count_by_days(num_days)]
   end
 
-  def self.order_count(num_days)
-    ["Orders", Order.count_by_days(num_days)]
-  end
-
   def self.new_products_count(num_days)
     [(num_days ? "New Products" : "Products"), Product.count_by_days(num_days)]
-  end
-
-  def self.total_revenue(num_days)
-    ["Revenue", Order.revenue_by_days(num_days)]
   end
 
 end

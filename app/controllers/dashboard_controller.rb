@@ -74,6 +74,26 @@ class DashboardController < ApplicationController
       # average order value
       # largest order value
 
+      order_stats_sections = [
+                                {
+                                  title: "Last 7 Days",
+                                  headers: ["Item", "Data"],
+                                  data: OrderStats.data(7)
+                                },
+                                {
+                                  title: "Last 30 Days",
+                                  headers: ["Item", "Data"],
+                                  data: OrderStats.data(30)
+                                },
+                                {
+                                  title: "Total",
+                                  headers: ["Item", "Data"],
+                                  data: OrderStats.data
+                                }
+                              ]
+
+      @infographics << { title: "3. Order Statistics", sections: order_stats_sections }
+
     # Time Series Data [ date, quantity, value ]
       # orders grouped by day (last 7)
       # orders grouped by week (last 7, date is first day of week)
