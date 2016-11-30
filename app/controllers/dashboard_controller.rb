@@ -23,6 +23,16 @@ class DashboardController < ApplicationController
 
     @hsov = highest_user_order_value
     @hlv = highest_lifetime_value
+
+    @hao = highest_avg_order_value
+    @most_placed = most_orders_placed
+
+    @average_seven_days = average_order_value(7)
+    @average_thirty_days = average_order_value(30)
+    @average_all_time = average_order_value(36000)
+
+
+
   end
 
 

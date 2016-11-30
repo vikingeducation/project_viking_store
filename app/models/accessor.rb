@@ -43,8 +43,13 @@ module Accessor
   end
 
   def highest_avg_order_value_id
-    all_orders_and_profit = join_table_op.select("order_id", "user_id", "SUM(quantity*price) AS profit" ).group("order_id, user_id")
-    all_orders_and_profit.
+    join_table_op.select("user_id", "AVG(quantity*price) AS profit" ).group("user_id").order("profit DESC").limit(1).first
+  end
+
+  def highest_avg_order_value
+    holder = highest_avg_order_value_id
+    user = User.find(holder.user_id)
+    [holder.profit, user.first_name, user.last_name]
   end
 
   def highest_lifetime_value
@@ -59,6 +64,40 @@ module Accessor
     user = User.find(user_id)
     [profit_holder.profit, user.first_name, user.last_name]
   end
+
+##
+  def most_orders_placed_id
+    Order.select("user_id, count(user_id) AS total").group("user_id").order("total DESC").limit(1).first
+  end
+
+  def most_orders_placed
+    holder = most_orders_placed_id
+    user = User.find(holder.user_id)
+    [holder.total, user.first_name, user.last_name]
+  end
+
+  def average_order_value(days_ago)
+    join_table_op.select("user_id").where("checkout_date > ?", days_ago.days.ago).average("quantity*price").to_i
+  end
+
+  def largest_order_value(days_ago)
+    join_table_op.select("user_id").where("checkout_date > ?", days_ago.days.ago).maximum("quantity*price").to_i
+  end
+
+
+# Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id")
+#
+# Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id").select("user_id", "SUM(quantity*price) AS profit" ).where("checkout_date > ?", days_ago.days.ago).group("user_id").average(profit)
+#
+# Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id").select("user_id").where("checkout_date > ?", 7.days.ago).average("quantity*price")
+  # def total_orders(days_ago)
+  #   Order.where("checkout_date > ?", days_ago.days.ago)
+  # end
+
+#Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id").select("user_id", "AVG(quantity*price) AS profit" ).group("user_id").order("profit DESC").limit(1).first
+
+
+
 
 #returns order id, amount spent, user order id to find user name
 

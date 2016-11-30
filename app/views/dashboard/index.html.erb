@@ -164,16 +164,131 @@
       </tr>
       <tr>
         <td>Highest Average Order Value</td>
-        <td><%= @products_all_time || "no products!" %></td>
+        <td><%= "#{@hao[1]} #{@hao[2]}" %></td>
+        <td><%= "$#{@hao[0]}" %></td>
+
       </tr>
 
       <tr>
         <td>Most Orders Placed</td>
-        <td><%= @revenue_all_time || "no products!" %></td>
+        <td><%= "#{@most_placed[1]} #{@most_placed[2]}" %></td>
+        <td><%= "#{@most_placed[0]}" %></td>
       </tr>
     </tbody>
     </table>
 
+<!--  -->
+
+
+
+
+<h3> Order Statistics </h3>
+<h4> Last 7 Days </h4>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= @orders_seven_days || "no orders!" %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td><%= @revenue_seven_days || "no orders!" %></td>
+
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+    <td><%= "$#{@average_seven_days}" %></td>
+
+
+  </tr>
+
+  <tr>
+    <td>Largest Order Value</td>
+    <td><%= "#{@most_placed[1]} #{@most_placed[2]}" %></td>
+    <td><%= "#{@most_placed[0]}" %></td>
+  </tr>
+</tbody>
+</table>
+
+
+<h4> Last 30 Days </h4>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= @orders_thirty_days || "no orders!" %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td><%= @revenue_thirty_days || "no orders!" %></td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+<td><%= "$#{@average_thirty_days}" %></td>
+
+  </tr>
+
+  <tr>
+    <td>Largest Order Value</td>
+    <td><%= "#{@most_placed[1]} #{@most_placed[2]}" %></td>
+    <td><%= "#{@most_placed[0]}" %></td>
+  </tr>
+</tbody>
+</table>
+
+
+<!--  -->
+
+<h4> Total </h4>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Number of Orders</td>
+    <td><%= @orders_all_time || "no orders!" %></td>
+  </tr>
+  <tr>
+    <td>Total Revenue</td>
+    <td><%= @revenue_all_time || "no orders!" %></td>
+  </tr>
+  <tr>
+    <td>Average Order Value</td>
+<td><%= "$#{@average_all_time}" %></td>
+
+  </tr>
+
+  <tr>
+    <td>Largest Order Value</td>
+    <!-- <td><%= "#{@most_placed[1]} #{@most_placed[2]}" %></td> -->
+
+  </tr>
+</tbody>
+</table>
+
+
+
+
+<!--  -->
+
+
+<!--  -->
     </div>
     <div class="col-xs-6">
 
