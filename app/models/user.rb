@@ -10,4 +10,9 @@ class User < ApplicationRecord
   def self.total_user_count
     User.count
   end
+
+  def self.join_orders_products
+    joins("JOIN orders ON users.id=orders.user_id JOIN order_contents ON orders.id=order_id JOIN products ON products.id=product_id")
+  end
+
 end
