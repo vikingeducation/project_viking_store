@@ -1,5 +1,4 @@
 class UserDemographics
-  include ActionView::Helpers::TextHelper
 
   def self.location_demo(location)
 
