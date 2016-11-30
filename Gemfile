@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
-gem 'pg'
+gem 'pg', '0.19.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -35,6 +35,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 group :development, :test do
   gem 'jazz_fingers'
   gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 # Use unicorn as the app server
 # gem 'unicorn'
