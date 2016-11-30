@@ -31,7 +31,7 @@ class OverallPlatform
                    .joins('JOIN order_contents ON (order_id = orders.id)')
                    .joins('JOIN products ON (product_id = products.id)')
     revenue = revenue.where("checkout_date <= ?", num_days.days.ago) if num_days
-    ["Revenue", revenue[0].total]
+    ["Revenue", ActionController::Base.helpers.number_to_currency(revenue[0].total)]
   end
 
 end
