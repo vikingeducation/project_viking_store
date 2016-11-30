@@ -12,15 +12,15 @@ class Dashboard
   def populate_overall_platform
     op = Hash.new { |h, k| h[k] = { } }
 
-    op[:last_7][:new_users] = User.get_new_user_count(7)
-    op[:last_7][:orders] = Order.get_order_count(7)
-    op[:last_7][:new_products] = Product.get_product_count(7)
-    op[:last_7][:revenue] = get_revenue(7)
+    op[:last_7_days][:new_users] = User.get_new_user_count(7)
+    op[:last_7_days][:orders] = Order.get_order_count(7)
+    op[:last_7_days][:new_products] = Product.get_product_count(7)
+    op[:last_7_days][:revenue] = get_revenue(7)
 
-    op[:last_30][:new_users] = User.get_new_user_count(30)
-    op[:last_30][:orders] = Order.get_order_count(30)
-    op[:last_30][:new_products] = Product.get_product_count(30)
-    op[:last_30][:revenue] = get_revenue(30)
+    op[:last_30_days][:new_users] = User.get_new_user_count(30)
+    op[:last_30_days][:orders] = Order.get_order_count(30)
+    op[:last_30_days][:new_products] = Product.get_product_count(30)
+    op[:last_30_days][:revenue] = get_revenue(30)
 
     op[:totals][:new_users] = User.get_new_user_count
     op[:totals][:orders] = Order.get_order_count
