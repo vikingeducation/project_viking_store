@@ -5,18 +5,26 @@
 <main class="container">
   <div class="row">
     <div class="col-sm-6">
-      <%= render partial: "panel" %>
+      <%= render  partial: 'panel',
+                  locals: { panel_data: @overall_platform,
+                            title: "1. Overall Platform" } %>
     </div>
     <div class="col-sm-6">
-      <%= render partial: "panel" %>
+      <%= render  partial: 'panel',
+                  locals: { panel_data: @overall_platform,
+                            title: "2. User Demographics and Behavior" } %>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <%= render partial: "panel" %>
+      <%= render  partial: 'panel',
+                  locals: { panel_data: @overall_platform,
+                            title: "3. Order Statistics" } %>
     </div>
     <div class="col-sm-6">
-      <%= render partial: "panel" %>
+      <%= render  partial: 'panel',
+                  locals: { panel_data: @overall_platform,
+                            title: "4. Time Series Data" } %>
     </div>
   </div>
 </main>

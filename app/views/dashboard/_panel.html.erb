@@ -1,30 +1,22 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">1. Overall Platform</h3>
+    <h3 class="panel-title"><%= title %></h3>
   </div>
   <div class="panel-body">
-    <h4>Last 7 Days</h4>
-    <table class="table table-striped">
-      <tr>
-        <td>Item</td>
-        <td>Data</td>
-      </tr>
-      <tr>
-        <td>New Users</td>
-        <td>some_method</td>
-      </tr>
-      <tr>
-        <td>Orders</td>
-        <td>some_method</td>
-      </tr>
-      <tr>
-        <td>New Products</td>
-        <td>some_method</td>
-      </tr>
-      <tr>
-        <td>Revenue</td>
-        <td>some_method</td>
-      </tr>
-    </table>
+    <% panel_data.each do |top_name, value_hash| %>
+      <h4><%= name_parse( top_name ) %></h4>
+      <table class="table table-striped">
+        <tr>
+          <td>Item</td>
+          <td>Data</td>
+        </tr>
+        <% value_hash.each do |name, value| %>
+          <tr>
+            <td><%= name_parse(name) %></td>
+            <td><%= value %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
   </div>
 </div>
