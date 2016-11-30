@@ -12,7 +12,7 @@ class Overall
     if num_days
       users = users.where("created_at <= ?", num_days.days.ago)
     end
-    ["New Users", users[0].user_count]
+    ["New Users", users[0].count]
   end
 
   def self.order_count(days)
