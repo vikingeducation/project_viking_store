@@ -1,0 +1,24 @@
+<h3>section.title</h3>
+
+<!-- Table -->
+<table class="table">
+
+  <thead>
+    <tr>
+      <% section.headers.each do |header| %>
+        <th><%= header %></th>
+      <% end%>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% section.data.each do |row| %>
+      <tr>
+        <% row.each do |item| %>
+          <td><%= item %></td>
+        <% end%>
+      </tr>
+    <% end %>
+  </tbody>
+  
+</table>

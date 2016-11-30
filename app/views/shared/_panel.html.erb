@@ -1,0 +1,14 @@
+<section class="col-sm-6 panel panel-default">
+
+  <div class="panel-heading">
+    <h2 class="panel-title"><%= infographic.title %></h2>
+  </div>
+
+  <!-- Default panel contents -->
+  <div class="panel-body">
+    <% infographic.sections.each do |section| %>
+      <%= render partial: 'shared/panel_section', locals: { section: section } %>
+    <% end %>
+  </div>
+
+</section>
