@@ -13,9 +13,8 @@ module DashboardHelper
 
   def total_revenue(days_ago)
     join_table
-    .select("SUM(price * quantity)")
     .where("orders.created_at > ?", days_ago.days.ago)
-
+    .sum("quantity * price")
   end
 
   def join_table #order to product
@@ -36,3 +35,7 @@ end
 #
 #
 # .select(:price, :quantity, "price * quantity AS revenue").where("orders.created_at > ?", days_ago.days.ago).sum(:revenue)
+
+
+
+# Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id").where("orders.created_at > ?", days_ago.days.ago).sum
