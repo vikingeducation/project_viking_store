@@ -18,13 +18,21 @@
         <td><%= @users_seven_days || "no users!" %></td>
       </tr>
       <tr>
-        <td>Mary</td>
-        <td>Moe</td>
+        <td>Orders</td>
+        <td><%= @orders_seven_days || "no orders!" %></td>
       </tr>
       <tr>
-        <td>July</td>
-        <td>Dooley</td>
+        <td>Products</td>
+        <td><%= @products_seven_days || "no products!" %></td>
       </tr>
+
+      <tr>
+        <td>total rev</td>
+        <td><%= @revenue_seven_days || "no products!" %></td>
+      </tr>
+
+
+
     </tbody>
   </table>
 
