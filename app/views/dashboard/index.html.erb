@@ -134,23 +134,11 @@
       </tr>
     </thead>
     <tbody>
+      <% @top_cities.each do |state| %>
       <tr>
-        <td>Users</td>
-        <td><%= @users_all_time || "no users!" %></td>
+         <td> <%= state[0] %> </td> <td> <%= state[1] %> </td>
       </tr>
-      <tr>
-        <td>Orders</td>
-        <td><%= @orders_all_time || "no orders!" %></td>
-      </tr>
-      <tr>
-        <td>Products</td>
-        <td><%= @products_all_time || "no products!" %></td>
-      </tr>
-
-      <tr>
-        <td>total rev</td>
-        <td><%= @revenue_all_time || "no products!" %></td>
-      </tr>
+      <% end %>
     </tbody>
     </table>
 
@@ -165,20 +153,20 @@
     </thead>
     <tbody>
       <tr>
-        <td>Users</td>
+        <td>Highest Single Order Value</td>
         <td><%= @users_all_time || "no users!" %></td>
       </tr>
       <tr>
-        <td>Orders</td>
+        <td>Highest LifetimeValue</td>
         <td><%= @orders_all_time || "no orders!" %></td>
       </tr>
       <tr>
-        <td>Products</td>
+        <td>Highest Average Order Value</td>
         <td><%= @products_all_time || "no products!" %></td>
       </tr>
 
       <tr>
-        <td>total rev</td>
+        <td>Most Orders Placed</td>
         <td><%= @revenue_all_time || "no products!" %></td>
       </tr>
     </tbody>

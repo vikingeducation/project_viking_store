@@ -18,6 +18,8 @@ class DashboardController < ApplicationController
     @revenue_all_time = total_revenue(36000)
 
     @top_states = top_three_states
+
+    @top_cities = top_three_cities
   end
 
 
