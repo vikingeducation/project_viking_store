@@ -154,11 +154,13 @@
     <tbody>
       <tr>
         <td>Highest Single Order Value</td>
-        <td><%= @users_all_time || "no users!" %></td>
+        <td><%= "#{@hsov[1]} #{@hsov[2]}" %></td>
+        <td><%= "$#{@hsov[0]}" %></td>
       </tr>
       <tr>
         <td>Highest LifetimeValue</td>
-        <td><%= @orders_all_time || "no orders!" %></td>
+        <td><%= "#{@hlv[1]} #{@hlv[2]}" %></td>
+        <td><%= "$#{@hlv[0]}" %></td>
       </tr>
       <tr>
         <td>Highest Average Order Value</td>

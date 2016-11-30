@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  include DashboardHelper
+  include Accessor
   def index
     @users_seven_days = total_users(7)
     @orders_seven_days = total_orders(7)
@@ -20,6 +20,9 @@ class DashboardController < ApplicationController
     @top_states = top_three_states
 
     @top_cities = top_three_cities
+
+    @hsov = highest_user_order_value
+    @hlv = highest_lifetime_value
   end
 
 
