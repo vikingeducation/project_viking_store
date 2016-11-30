@@ -9,3 +9,9 @@ Project: Viking Store Admin
 - take a look around the schema file to see how models were created
 
 Link to solution info on the seeding of this lives [here](https://gist.github.com/betweenparentheses/0b6b325ceaaea76a521d)
+
+## Contributors
+
+[Sampson Crowley](https://github.com/SampsonCrowley)
+
+[Luke Schleicher](https://github.com/luke-schleicher)
