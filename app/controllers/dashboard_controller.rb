@@ -94,10 +94,23 @@ class DashboardController < ApplicationController
 
       @infographics << { title: "3. Order Statistics", sections: order_stats_sections }
 
+
     # Time Series Data [ date, quantity, value ]
       # orders grouped by day (last 7)
       # orders grouped by week (last 7, date is first day of week)
-
+      time_series_sections =  [
+                                {
+                                  title: "Orders By Day",
+                                  headers: ["Date", "Quantity", "Value"],
+                                  data: TimeSeries.data(1)
+                                },
+                                {
+                                  title: "Orders By Week",
+                                  headers: ["Date", "Quantity", "Value"],
+                                  data: TimeSeries.data(7)
+                                }
+                              ]
+    @infographics << { title: "4. Time Series", sections: time_series_sections }
   end
 
 end
