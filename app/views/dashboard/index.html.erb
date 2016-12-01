@@ -210,9 +210,7 @@
 
   <tr>
     <td>Largest Order Value</td>
-    <td><%= "#{@most_placed[1]} #{@most_placed[2]}" %></td>
-    <td><%= "#{@most_placed[0]}" %></td>
-  </tr>
+    <td><%= "$#{@max_seven_days}" %></td>
 </tbody>
 </table>
 
@@ -236,14 +234,13 @@
   </tr>
   <tr>
     <td>Average Order Value</td>
-<td><%= "$#{@average_thirty_days}" %></td>
+    <td><%= "$#{@average_thirty_days}" %></td>
 
   </tr>
 
   <tr>
     <td>Largest Order Value</td>
-    <td><%= "#{@most_placed[1]} #{@most_placed[2]}" %></td>
-    <td><%= "#{@most_placed[0]}" %></td>
+    <td><%= "$#{@max_thirty_days}" %></td>
   </tr>
 </tbody>
 </table>
@@ -270,13 +267,13 @@
   </tr>
   <tr>
     <td>Average Order Value</td>
-<td><%= "$#{@average_all_time}" %></td>
+    <td><%= "$#{@average_all_time}" %></td>
 
   </tr>
 
   <tr>
     <td>Largest Order Value</td>
-    <!-- <td><%= "#{@most_placed[1]} #{@most_placed[2]}" %></td> -->
+    <td><%= "$#{@max_all_time}" %></td>
 
   </tr>
 </tbody>

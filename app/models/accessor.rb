@@ -77,13 +77,15 @@ module Accessor
   end
 
   def average_order_value(days_ago)
-    join_table_op.select("user_id").where("checkout_date > ?", days_ago.days.ago).average("quantity*price").to_i
+    Order.from(Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id").select("order_id", "quantity*price AS profit" ).where("checkout_date > ?", days_ago.days.ago).group("order_id, profit"), :profits).average("profits.profit").to_i
   end
 
   def largest_order_value(days_ago)
-    join_table_op.select("user_id").where("checkout_date > ?", days_ago.days.ago).maximum("quantity*price").to_i
+    Order.from(Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id").select("user_id", "quantity*price AS profit" ).where("checkout_date > ?", days_ago.days.ago).group("user_id, profit"), :profits).maximum("profits.profit").to_i
   end
 
+#grab all orders where date
+#group by order_id
 
 # Order.joins("JOIN order_contents ON orders.id = order_id").joins("JOIN products ON products.id = product_id")
 #

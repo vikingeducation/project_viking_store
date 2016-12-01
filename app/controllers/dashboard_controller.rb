@@ -31,6 +31,9 @@ class DashboardController < ApplicationController
     @average_thirty_days = average_order_value(30)
     @average_all_time = average_order_value(36000)
 
+    @max_seven_days = largest_order_value(7)
+    @max_thirty_days = largest_order_value(30)
+    @max_all_time = largest_order_value(36000)
 
 
   end
