@@ -1,0 +1,9 @@
+<h1>Analytics Dashboard</h1>
+<div class="row">
+  <% @infographics.each_with_index do |infographic, i| %>
+    <% if i % 2 == 0 %>
+     <div class="clearfix"></div>
+    <% end %>
+    <%= render partial: 'shared/panel', locals: { infographic: infographic } %>
+  <% end %>
+</div>
