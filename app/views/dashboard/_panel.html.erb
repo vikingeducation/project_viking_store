@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= title %></h3>
+  </div>
+  <div class="panel-body">
+    <% panel_data.each do |top_name, value_hash| %>
+      <h4><%= value_hash[:title] %></h4>
+      <table class="table table-striped">
+        <tr>
+          <td>Item</td>
+          <td>Data</td>
+        </tr>
+        <% value_hash[:data].each do |name, value| %>
+          <tr>
+          <% if value.is_a? Array %>
+            <% value.each do |cell| %>
+            <td><%= cell %></td>
+            <% end %>
+          <% else %>
+              <td><%= name_parse(name) %></td>
+              <td><%= value %></td>
+          <% end %>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+</div>
