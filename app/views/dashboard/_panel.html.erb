@@ -4,16 +4,19 @@
   </div>
   <div class="panel-body">
     <% panel_data.each do |top_name, value_hash| %>
-      <h4><%= name_parse( top_name ) %></h4>
+      <h4><%= value_hash[:title] %></h4>
       <table class="table table-striped">
         <tr>
           <td>Item</td>
           <td>Data</td>
         </tr>
-        <% value_hash.each do |name, value| %>
+        <% value_hash[:data].each do |name, value| %>
           <tr>
-            <td><%= name_parse(name) %></td>
-            <td><%= value %></td>
+          <% if value.is_a? Array %>
+          <% else %>
+              <td><%= name_parse(name) %></td>
+              <td><%= value %></td>
+          <% end %>
           </tr>
         <% end %>
       </table>
