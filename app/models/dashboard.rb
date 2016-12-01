@@ -12,9 +12,7 @@ class Dashboard
 # private
 
     def populate_overall_platform
-      op = Hash.new #{ |h, k| h[k] = { } }
-      # op = Hash.new { |h, k| h[k] =
-      #                 Hash.new{ |h, k| h[k] = {} } }
+      op = {}
 
       op[:last_7_days]= { title: "Last 7 Days",
                           data: { new_users: User.get_new_user_count(7),
@@ -35,7 +33,7 @@ class Dashboard
       op[:totals][:data]  = { new_users: User.get_new_user_count,
                               orders: Order.get_order_count,
                               new_products: Product.get_product_count,
-                              revenue: get_revenue }
+                              revenue: "$#{get_revenue}" }
 
       op
     end
@@ -43,21 +41,38 @@ class Dashboard
     def populate_user_demographics
       ud = Hash.new { |h, k| h[k] = {} }
 
+      top_states = get_top_states
       ud[:top_3_states][:title] = "Top 3 States Users Live In (billing)"
-      ud[:top_3_states][:data]  = { states: get_top_states }
+      ud[:top_3_states][:data]  = { state1: top_states[0],
+                                    state2: top_states[1],
+                                    state3: top_states[2]}
 
+      top_cities = get_top_cities
       ud[:top_3_cities][:title] = "Top 3 Cities Users Live In (billing)"
-      ud[:top_3_cities][:data]  = { cities: get_top_cities }
+      ud[:top_3_cities][:data]  = { city1: top_cities[0],
+                                    city2: top_cities[1],
+                                    city3: top_cities[2]}
 
       ud[:top_user_with][:title] = "Top User With"
       ud[:top_user_with][:data] = {
-                         highest_single_order: highest_single_order
+                         highest_single_order: highest_single_order,
+                         highest_lfv: highest_lfv,
+                         highest_avg_ov: highest_avg_ov,
+                         most_orders_placed: most_orders_placed
                        }
       ud
     end
 
     def populate_order_statistics
-      {}
+      os = {}
+
+      os[:last_7_days]= { title: "Last 7 Days",
+                          data: { number_of_orders: Order.count("checkout_date"),
+                                  total_revenue: get_revenue(7),
+                                  average_order_value: average_order_value(7),
+                                  largest_order_value: get_revenue(7) }
+                        }
+      os
     end
 
     def populate_time_series_data
@@ -88,9 +103,9 @@ class Dashboard
                    .limit(3)
 
       [
-        [ ts[0]["states.name"], ts[0].state_count],
-        [ ts[1]["states.name"], ts[1].state_count],
-        [ ts[2]["states.name"], ts[2].state_count]
+        [ ts[0].name, ts[0].state_count],
+        [ ts[1].name, ts[1].state_count],
+        [ ts[2].name, ts[2].state_count]
       ]
     end
 
@@ -103,9 +118,9 @@ class Dashboard
                    .limit(3)
 
        [
-         [ tc[0]["cities.name"], tc[0].city_count],
-         [ tc[1]["cities.name"], tc[1].city_count],
-         [ tc[2]["cities.name"], tc[2].city_count]
+         [ tc[0].name, tc[0].city_count],
+         [ tc[1].name, tc[1].city_count],
+         [ tc[2].name, tc[2].city_count]
        ]
     end
 
@@ -118,6 +133,47 @@ class Dashboard
                          .order("total_price DESC")
                          .limit(1)
 
-      ["Highest Single Order Value", "#{hso[0].first_name} #{hso[0].last_name}", hso.first.total_price.to_f]
+      ["Highest Single Order Value", "#{hso[0].first_name} #{hso[0].last_name}", "$#{hso.first.total_price.to_f}"]
     end
+
+    def highest_lfv
+      hlv = User.select("first_name, last_name,
+                         SUM(quantity * price) AS total_price")
+                         .join_orders_products
+                         .where("checkout_date IS NOT NULL")
+                         .group("first_name, last_name")
+                         .order("total_price DESC")
+                         .limit(1)
+
+      ["Highest Lifetime Value", "#{hlv[0].first_name} #{hlv[0].last_name}", "$#{hlv.first.total_price.to_f}"]
+    end
+
+    def highest_avg_ov
+      haov = User.select("first_name, last_name,
+                         SUM(quantity * price)/COUNT(*) AS avg_price")
+                         .join_orders_products
+                         .where("checkout_date IS NOT NULL")
+                         .group("first_name, last_name")
+                         .order("avg_price DESC")
+                         .limit(1)
+
+      ["Highest Average Order Value", "#{haov[0].first_name} #{haov[0].last_name}", "$#{haov.first.avg_price.to_f}"]
+    end
+
+    def most_orders_placed
+      mop = User.select("first_name, last_name,
+                         COUNT(*) AS total_orders")
+                         .joins("JOIN orders ON user_id=users.id")
+                         .where("checkout_date IS NOT NULL")
+                         .group("first_name, last_name")
+                         .order("total_orders DESC")
+                         .limit(1)
+
+      ["Most Orders Plaed", "#{mop[0].first_name} #{mop[0].last_name}", mop.first.total_orders]
+    end
+
+    def average_order_value(n_of_days)
+      aov = Order.select("SUM(quantity * price)/COUNT(*) AS avg_order_value").joins("JOIN order_contents ON order_id=orders.id JOIN products ON product_id=products.id").where("checkout_date IS NOT NULL").group("order_id")
+    end
+
 end

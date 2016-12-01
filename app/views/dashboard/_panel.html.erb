@@ -13,6 +13,9 @@
         <% value_hash[:data].each do |name, value| %>
           <tr>
           <% if value.is_a? Array %>
+            <% value.each do |cell| %>
+            <td><%= cell %></td>
+            <% end %>
           <% else %>
               <td><%= name_parse(name) %></td>
               <td><%= value %></td>
