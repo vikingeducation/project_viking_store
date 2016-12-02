@@ -1,0 +1,25 @@
+<% @product.errors.full_messages.each do | msg| %>
+	<%= msg %>
+<% end %>
+
+
+<%= form_for @product do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name, class: "form-control" %>
+    <%= f.label :price, "Price" %>
+    <%= f.text_field :price, class: "form-control" %>
+    <%= f.label :sku, "SKU" %>
+    <%= f.text_field :sku, class: "form-control" %>
+		<%= f.label :description, "deaded" %>
+    <%= f.text_field :description, class: "form-control" %>
+    <%= f.label :category_id, "Category" %>
+    <%= f.select :category_id, "", {}, {class: "form-control"} do %>
+      <% Category.all.each do |category| %>
+        <%= content_tag(:option, category.name, value: category.id) %>
+      <% end %>
+    <% end %>
+    <br />
+    <%= f.submit "Create Product", class: "btn btn-primary btn-block" %>
+  </div>
+<% end %>

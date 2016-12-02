@@ -1,0 +1,23 @@
+
+ID: <strong><%= @category.id %></strong>
+<br>
+Name: <strong><%= @category.name %></strong>
+<%= link_to "Delete", @category, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to "Edit", edit_category_path(@category) %>
+<br /><br />
+
+<h3>Products in this category</h3>
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+<% @category_products.each do |product| %>
+  <tr>
+    <td><%= product.id %></td>
+    <td><h4><%= link_to product.name, "#" %></h4></td>
+    <td><p><%= product.description %></p></td>
+  </tr>
+<% end %>
+</table>

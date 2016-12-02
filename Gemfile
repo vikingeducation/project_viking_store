@@ -13,6 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
+gem 'rails_12factor', group: :production
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -28,6 +29,16 @@ gem 'spring',  '~> 1.3.6',      group: :development
 
 gem 'pry'
 
+group :development, :test do
+  gem 'jazz_fingers'
+  gem 'pry-rails'
+end
+
+group :development do
+  gem "better_errors"
+end
+gem "binding_of_caller"
+
 gem 'faker'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -40,4 +51,3 @@ gem 'faker'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-

@@ -1,5 +1,7 @@
 Project: Viking Store Admin
 ========================
+##By Farruh
+
 
 ##To Get Going On This Assignment
 - run `rake db:create`

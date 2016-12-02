@@ -1,0 +1,30 @@
+<h2 class="text-center">Products </h2>
+<br />
+<%= render "shared/left_nav" %>
+<div class="col-md-8 pull-right">
+<%= link_to "Add a New Product", new_product_path, class: "btn btn-primary btn-block" %>
+<br />
+
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+<% @products.each do |product| %>
+    <tr>
+      <td><%= product.id %></td>
+      <td><%= product.name %></td>
+      <td>$<%= product.price %></td>
+      <td><%= product.category.name  %></td>
+      <td><%= link_to "Show", product_path(product) %></td>
+      <td><%= link_to "Edit", edit_product_path(product) %></td>
+      <td><%= link_to "Delete", product, method: :delete, data: {confirm: "Are you sure?"}%></td>
+    </tr>
+<% end %>
+</table>
+</div>

@@ -1,0 +1,12 @@
+<h4>New Category</h4>
+<% @category.errors.full_messages.each do | msg| %>
+	<%= msg %>
+<% end %>
+<div class="fomr-group">
+	<%= form_for @category, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+	  <%= f.label "Name"%>
+	  <%= f.text_field :name, class: "form-control" %>
+	  <br/><br/>
+	  <%= f.submit "Create", class: "btn btn-primary btn-block" %>
+	<% end %>
+</div>

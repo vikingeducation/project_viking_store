@@ -1,0 +1,73 @@
+<h3 class="text-center">User <%= @user.id %>: <%= @user.first_name + " "+ @user.last_name %></h3>
+
+<div class="panel panel-default col-md-7 pull-right">
+  <div class="panel-body">
+    <h5 class="text-center">Demographic Information</h5>
+    <p>First Name: <%= @user.first_name %></p>
+    <p>Last Name: <%= @user.last_name %></p>
+    <p>Email: <%= link_to @user.email, "#" %></p>
+    <p>Telephone: (123) 456 7890 </p>
+    <p>Default billing address: </p>
+    <% a = @user.addresses.first %>
+    <p><%= "#{a.street_address} #{a.city.name}, #{a.state.name}" %></p
+    <p>Default shipping address: </p>
+    <p><%= "#{a.street_address} #{a.city.name}, #{a.state.name}" %></p
+    <a><%= link_to "Edit #{@user.first_name} #{@user.last_name}'s information", edit_user_path%></a><br>
+    <a><%= link_to "Delete #{@user.first_name} #{@user.last_name}", @user, method: :delete, data: { confirm: "Are you sure?"}%></a>
+    <br><a><%= link_to "View saved addresses", "#"%></a>
+    <br><a><%= link_to "View Unplaced Order(cart)"%></a>
+  </div>
+</div>
+
+<div class="panel panel-default col-md-7 pull-right">
+  <div class="panel-body">
+    <h5 class="text-center">Credit Card Information</h5>
+    <p>First Name: <%= @user.first_name %></p>
+    <p>Last Name: <%= @user.last_name %></p>
+    <% if @user.credit_cards.first %>
+      <p>Number: <%= @user.credit_cards.first.card_number%></p>
+      <p>Expiration Date: <%= "#{@user.credit_cards.first.exp_month} #{@user.credit_cards.first.exp_year}" %></p>
+      <p>CV# <%= @user.credit_cards.first.ccv %></p>
+      <a><%= link_to "Remove Card", "#"%></a>
+    <% else %>
+      <p>No creadit card for this user</p>
+    <% end %>
+
+  </div>
+</div>
+
+<div class="panel panel-default col-md-7 pull-right">
+  <div class="panel-body">
+    <h5 class="text-center">Admin Actions for <%= "#{@user.first_name} #{@user.last_name} "%></h5>
+    <%= link_to "Create Order", "#", class: "btn btn-primary" %> <br/><br>
+    <%= link_to "Create Address", "#", class: "btn btn-primary" %>
+  </div>
+</div>
+
+<div class="panel panel-default col-md-7 pull-right">
+  <div class="panel-body">
+    <h5 class="text-center">Order History</h5>
+    <% @user_orders.each do |order| %>
+      <table class="table">
+        <tr>
+          <th class="col-md-1">ID</th>
+          <th class="col-md-1">Order Date</th>
+          <th class="col-md-1">Order Value</th>
+          <th class="col-md-1">Status</th>
+          <th class="col-md-1">Show</th>
+          <th class="col-md-1">Edit</th>
+          <th class="col-md-1">Delete</th>
+        </tr>
+        <tr>
+          <td class="col-md-1"><%= order.id %></td>
+          <td class="col-md-1"><%= order.created_at.strftime('%v') %></td>
+          <td class="col-md-1"><%= order.id %></td>
+          <td class="col-md-1"><%= order.id %></td>
+          <td class="col-md-1"><%= link_to "Show", "#" %></td>
+          <td class="col-md-1"><%= link_to "Edit", "#" %></td>
+          <td class="col-md-1"><%= link_to "Delete", "#" %></td>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+</div>
