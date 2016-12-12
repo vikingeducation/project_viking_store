@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_one :address
 
-  def total_users(last_date = nil)
-    last_date.nil? ? User.count : User.where(created_at: last_date..Date.today).count
+  def self.total_users(day_number = nil)
+    day_number.nil? ? User.all.count : User.all.where(created_at: day_number.days.ago.beginning_of_day..Time.now).count
   end
 
 end
