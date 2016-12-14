@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-xs-6">
+    <h2>1. Overall Platform</h2>
+    <div>
+    <h3>Total</h3>
+    <table class="table">
+      <tr>
+        <th>Item</th>
+        <th>Data</th>
+      </tr>
+      <tr>
+        <td>New Users</td>
+        <td><%= User.total_users %></td>
+      </tr>
+      <tr>
+        <td>Orders</td>
+        <td><%= Order.total_orders%></td>
+      </tr>
+      <tr>
+        <td>Products</td>
+        <td><%= Product.total_products %></td>
+      </tr>
+      <tr>
+        <td>Revenue</td>
+        <td><%= Order.total_revenue %></td>
+      </tr>
+    </table>
+  </div>
+
+    <div>
+      <h3>Last 7 days</h3>
+      <table class="table">
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+        <tr>
+          <td>New Users</td>
+          <td><%= User.total_users(7) %></td>
+        </tr>
+        <tr>
+          <td>Orders</td>
+          <td><%= Order.total_orders(7) %></td>
+        </tr>
+        <tr>
+          <td>Products</td>
+          <td><%= Product.total_products(7) %></td>
+        </tr>
+        <tr>
+          <td>Revenue</td>
+          <td><%= Order.total_revenue(7) %></td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <h3>Last 30 days</h3>
+      <table class="table">
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+        <tr>
+          <td>New Users</td>
+          <td><%= User.total_users(30) %></td>
+        </tr>
+        <tr>
+          <td>Orders</td>
+          <td><%= Order.total_orders(30) %></td>
+        </tr>
+        <tr>
+          <td>Products</td>
+          <td><%= Product.total_products(30) %></td>
+        </tr>
+        <tr>
+          <td>Revenue</td>
+          <td><%= Order.total_revenue(30) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-6">
+  <h2>1. Overall Platform</h2>
+  <div>
+    <h3>Total</h3>
+    <table class="table">
+      <tr>
+        <th>Item</th>
+        <th>Data</th>
+      </tr>
+      <% User.top_states.each do |state| %>
+      <tr>
+        <td><%= state.name %></td>
+        <td><%= state.state_count %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
