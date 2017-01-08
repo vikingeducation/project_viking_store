@@ -1,0 +1,57 @@
+<h2>1. Overall Platform</h2>
+<br>
+<h3>Last 7 Days</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-center">Item</th>
+        <th class="text-center">Data</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @last_7.each do |category, value| %>
+      <tr>
+        <td><%= category %></td>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+
+<h3>Last 30 Days</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-center">Item</th>
+        <th class="text-center">Data</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @last_30.each do |category, value| %>
+      <tr>
+        <td><%= category %></td>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+
+<h3>Total</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="text-center">Item</th>
+        <th class="text-center">Data</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @total.each do |category, value| %>
+      <tr>
+        <td><%= category %></td>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
