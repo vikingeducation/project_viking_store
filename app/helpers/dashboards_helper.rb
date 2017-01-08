@@ -24,7 +24,7 @@ module DashboardsHelper
     {
       "Number of Orders" => Order.total(num_days),
       "Total Revenue" => revenue(num_days),
-      "Average Order Value" => Order.highest_average_order_value(num_days)[0].avg_order_value,
+      "Average Order Value" => Order.average_order_value(num_days)[0].avg_order_value,
       "Largest Order Value" => Order.largest_order_value(num_days)[0].order_value
       }
   end

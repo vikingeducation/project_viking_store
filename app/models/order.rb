@@ -1,5 +1,30 @@
 class Order < ApplicationRecord
 
+  def self.by_day
+    Order.select("orders.created_at, COUNT(orders.created_at) AS quantity, SUM(order_contents.quantity * products.price) AS order_value")
+          .join_with_products
+          .where("checkout_date IS NOT NULL")
+          .group("orders.created_at, orders.id")
+          .order("orders.created_at")
+          .limit(7)
+  end
+
+  def self.by_week
+    Order.find_by_sql("
+      SELECT DATE(weeks) AS week,
+      COUNT(orders.created_at) AS quantity,
+      COALESCE(SUM(order_contents.quantity * products.price), 0) AS order_value
+        FROM GENERATE_SERIES((
+              SELECT DATE(DATE_TRUNC('WEEK', MIN(checkout_date))) FROM orders), CURRENT_DATE, '1 WEEK'::INTERVAL) weeks
+                LEFT JOIN orders ON DATE(DATE_TRUNC('WEEK', orders.checkout_date)) = weeks
+        LEFT JOIN order_contents ON orders.id = order_contents.order_id
+        LEFT JOIN products ON products.id = order_contents.product_id
+        GROUP BY weeks
+        ORDER BY weeks DESC
+        LIMIT 10
+      ")
+  end
+
   def self.total(num_days=nil)
     if num_days
       Order.where("created_at > ?", num_days.days.ago).count
@@ -37,7 +62,7 @@ class Order < ApplicationRecord
     end
   end
 
-  def self.highest_average_order_value(num_days=nil)
+  def self.average_order_value(num_days=nil)
     if num_days
       Order.select("AVG(order_contents.quantity * products.price) AS avg_order_value")
             .join_with_products

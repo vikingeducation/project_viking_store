@@ -10,21 +10,13 @@
       </tr>
     </thead>
     <tbody>
+    <% @by_day.each_with_index do |date, i| %>
       <tr>
-        <td>something</td>
-        <td>something</td>
-        <td>something</td>
+        <td><%= @by_day[i].created_at %></td>
+        <td><%= @by_day[i].quantity %></td>
+        <td><%= @by_day[i].order_value %></td>
       </tr>
-      <tr>
-        <td>something</td>
-        <td>something</td>
-        <td>something</td>
-      </tr>
-      <tr>
-        <td>something</td>
-        <td>something</td>
-        <td>something</td>
-      </tr>
+    <% end %>
     </tbody>
   </table>
 
@@ -38,20 +30,12 @@
       </tr>
     </thead>
     <tbody>
+    <% @by_week.each_with_index do |date, i| %>
       <tr>
-        <td>something</td>
-        <td>something</td>
-        <td>something</td>
+        <td><%= @by_week[i].week %></td>
+        <td><%= @by_week[i].quantity %></td>
+        <td><%= @by_week[i].order_value %></td>
       </tr>
-      <tr>
-        <td>something</td>
-        <td>something</td>
-        <td>something</td>
-      </tr>
-      <tr>
-        <td>something</td>
-        <td>something</td>
-        <td>something</td>
-      </tr>
+    <% end %>
     </tbody>
   </table>
