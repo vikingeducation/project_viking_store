@@ -1,5 +1,13 @@
 class User < ApplicationRecord
 
+  def self.total(num_days=nil)
+    if num_days
+      User.where("created_at > ?", num_days.days.ago).count
+    else
+      User.all.count
+    end
+  end
+
   def self.highest_single_order_value
     User.select("MAX(quantity*price) as order_value, CONCAT(first_name, ' ', last_name) AS name")
     .joins("JOIN orders ON users.id = orders.user_id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON order_contents.product_id = product_id")

@@ -1,37 +1,13 @@
 module DashboardsHelper
 
-  # Queries for Panel 1: Overall Platform
+# Panel 1: Overall Platform
   def metrics(num_days=nil)
     {
-      "User" => user_count(num_days),
-      "Order" => order_count(num_days),
-      "Product" => product_count(num_days),
+      "User" => User.total(num_days),
+      "Order" => Order.total(num_days),
+      "Product" => Product.total(num_days),
       "Revenue" => revenue(num_days)
       }
-  end
-
-  def user_count(num_days=nil)
-    if num_days
-      User.where("created_at > ?", num_days.days.ago).count
-    else
-      User.count
-    end
-  end
-
-  def order_count(num_days=nil)
-    if num_days
-      Order.where("created_at > ?", num_days.days.ago).count
-    else
-      Order.count
-    end
-  end
-
-  def product_count(num_days=nil)
-    if num_days
-      User.where("created_at > ?", num_days.days.ago).count
-    else
-      User.count
-    end
   end
 
   def revenue(num_days=nil)
@@ -43,6 +19,14 @@ module DashboardsHelper
     end
   end
 
-  # Queries for Panel 1: Overall Platform
+# Panel 3: Order Stats
+  def order_stats(num_days=nil)
+    {
+      "Number of Orders" => Order.total(num_days),
+      "Total Revenue" => revenue(num_days),
+      "Average Order Value" => Order.highest_average_order_value(num_days)[0].avg_order_value,
+      "Largest Order Value" => Order.largest_order_value(num_days)[0].order_value
+      }
+  end
 
 end

@@ -1,4 +1,4 @@
-<h2 class="text-center">1. Overall Platform</h2>
+<h2 class="text-center">3. Order Statistics</h2>
 <br>
 <h3 class="text-center">Last 7 Days</h3>
   <table class="table table-striped">
@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @last_7_overall.each do |category, value| %>
+    <% @last_7_stats.each do |category, value| %>
       <tr>
         <td><%= category %></td>
         <td><%= value %></td>
@@ -28,7 +28,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @last_30_overall.each do |category, value| %>
+    <% @last_7_stats.each do |category, value| %>
       <tr>
         <td><%= category %></td>
         <td><%= value %></td>
@@ -47,7 +47,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @total_overall.each do |category, value| %>
+    <% @last_7_stats.each do |category, value| %>
       <tr>
         <td><%= category %></td>
         <td><%= value %></td>

@@ -7,19 +7,17 @@
     <div class="col-sm-6">
       <%= render partial: 'shared/overall' %>
     </div>
-
     <div class="col-sm-6">
-      <%= render partial: 'shared/user' %>
+      <%= render partial: 'shared/user_demographics' %>
     </div>
-
+  </div> 
+  <div class="row">
     <div class="col-sm-6">
-      <%= render partial: 'shared/order' %>
-    </div>
-
-    <div class="col-sm-6">
-      <%= render partial: 'shared/time_series' %>
-    </div>
-
-
+        <%= render partial: 'shared/order_stats' %>
+      </div>
+      <div class="col-sm-6">
+        <%= render partial: 'shared/time_series' %>
+      </div>
   </div>
+
 </div>
