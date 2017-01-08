@@ -1,6 +1,6 @@
-<h3>2. User Demographics + Behavior</h3>
-
-<h5>Top 3 States Users Live in (billing)</h5>
+<h2 class="text-center">2. User Demographics + Behavior</h2>
+<br>
+<h3 class="text-center">Top 3 States Users Live in (Billing)</h3>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -9,23 +9,17 @@
       </tr>
     </thead>
     <tbody>
+    <% (0..2).each do |i| %>
       <tr>
-        <td>something</td>
-        <td>something</td>
+        <td><%= @states[i].name %></td>
+        <td><%= @states[i].count %></td>
       </tr>
-      <tr>
-        <td>something</td>
-        <td>something</td>
-      </tr>
-      <tr>
-        <td>something</td>
-        <td>something</td>
-      </tr>
+    <% end %>
     </tbody>
   </table>
 
 
-<h5>Top 3 Cities Users Live in (billing)</h5>
+<h3 class="text-center">Top 3 Cities Users Live in (Billing)</h3>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -34,23 +28,17 @@
       </tr>
     </thead>
     <tbody>
+    <% (0..2).each do |i| %>
       <tr>
-        <td>something</td>
-        <td>something</td>
+        <td><%= @cities[i].name %></td>
+        <td><%= @cities[i].count %></td>
       </tr>
-      <tr>
-        <td>something</td>
-        <td>something</td>
-      </tr>
-      <tr>
-        <td>something</td>
-        <td>something</td>
-      </tr>
+    <% end %>
     </tbody>
   </table>
 
 
-<h5>Top User With...</h5>
+<h3 class="text-center">Top User With...</h3>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -61,19 +49,24 @@
     </thead>
     <tbody>
       <tr>
-        <td>something</td>
-        <td>something</td>
-        <td>something</td>
+        <td>Highest Single Order Value</td>
+        <td><%= @highest_single_order_value[0].name %></td>
+        <td><%= @highest_single_order_value[0].order_value %></td>
       </tr>
       <tr>
-        <td>something</td>
-        <td>something</td>
-        <td>something</td>
+        <td>Highest Lifetime Value</td>
+        <td><%= @highest_lifetime_value[0].name %></td>
+        <td><%= @highest_lifetime_value[0].lifetime %></td>
       </tr>
       <tr>
-        <td>something</td>
-        <td>something</td>
-        <td>something</td>
+        <td>Highest Average Order Value</td>
+        <td><%= @highest_average_value[0].name %></td>
+        <td><%= @highest_average_value[0].average %></td>
+      </tr>
+      <tr>
+        <td>Most Orders Placed</td>
+        <td><%= @most_orders_placed[0].name %></td>
+        <td><%= @most_orders_placed[0].num_orders %></td>
       </tr>
     </tbody>
   </table>

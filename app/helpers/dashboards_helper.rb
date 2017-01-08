@@ -43,4 +43,6 @@ module DashboardsHelper
     end
   end
 
+  # Queries for Panel 1: Overall Platform
+
 end

@@ -1,8 +1,9 @@
 class Order < ApplicationRecord
 
   def self.total_revenue
-    revenue = Order.select('SUM(price * quantity) AS sum')
+    Order.select('SUM(price * quantity) AS sum')
                    .join_with_products
+                   .where("checkout_date IS NOT NULL")
 
   end
 
