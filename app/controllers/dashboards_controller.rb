@@ -15,12 +15,12 @@ class DashboardsController < ApplicationController
     @highest_average_value = User.highest_average_order_value
     @most_orders_placed = User.most_orders_placed
 
-    #Panel 3: Order Stats
+    # Panel 3: Order Stats
     @last_7_stats = order_stats(7)
     @last_30_stats = order_stats(30)
     @total_stats = order_stats
 
-    #Panel 4: Time Series
+    # Panel 4: Time Series
     @by_day = Order.by_day
     @by_week = Order.by_week
   end

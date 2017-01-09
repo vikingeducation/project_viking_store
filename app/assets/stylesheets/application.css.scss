@@ -17,3 +17,17 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.extend {
+  width: 100%;
+}
+
+.btn {
+  margin: 20px 0;
+  padding: 20xp 0;
+}
+
+nav, article {
+  border: 4px solid #eee;
+  padding: 30px;
+}

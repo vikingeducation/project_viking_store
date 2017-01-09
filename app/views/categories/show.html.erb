@@ -1,0 +1,41 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container">
+
+  <div class="row">
+    <%= render partial: 'shared/nav' %>
+
+    <article class="col-sm-9">
+      <h2 class="text-center">
+        Category <%= @category.id %>:  
+      </h2>
+
+      <p>Category ID: <%= @category.id %></p>
+      <p>Name: <%= @category.name %></p>
+
+
+      <p><%= link_to 'Edit Category', edit_category_path(@category.id) %></p>
+      <p><%= link_to 'Delete Category', @category, method: 'delete', data: { confirm: 'Are you sure?' } %></p>
+      
+
+      <h3>Products in <%=@category.name%>:</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= product.name %></td>
+        </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+
+    </article>
+  </div>
+</div>
