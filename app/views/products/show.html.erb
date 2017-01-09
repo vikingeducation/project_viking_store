@@ -1,0 +1,50 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container">
+
+  <div class="row">
+    <%= render partial: 'shared/nav' %>
+
+    <article class="col-sm-9">
+      <h2 class="text-center">Product <%= @product.id %></h2>
+
+      <h3>Product Information</h3>
+      <table class='table'>
+        <tr>
+          <td>Product ID</td>
+          <td><%= @product.id %></td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td><%= @product.name %></td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td>$<%= @product.price %></td>
+        </tr>
+        <tr>
+          <td>Category</td>
+          <td><%= @category.name %></td>
+        </tr>
+      </table>
+
+      <h3>Product Statistics</h3>
+      <table class="table">
+        <tr>
+          <td>Times Ordered</td>
+          <td><%= @times[0].count %></td>
+        </tr>
+        <tr>
+          <td>Carts In</td>
+          <td><%= @carts[0].count %></td>
+        </tr>
+      </table>
+
+<!--       <p><%= link_to 'Edit Product', edit_product_path(@product.id) %></p>
+      <p><%= link_to 'Delete Product', @product, method: 'delete', data: { confirm: 'Are you sure?' } %></p> -->
+
+    </article>
+
+  </div>
+</div>
+
+

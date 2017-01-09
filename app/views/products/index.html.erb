@@ -1,0 +1,45 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container">
+
+  <div class="row">
+    <%= render partial: 'shared/nav' %>
+
+    <article class="col-sm-9">
+      <h2 class="text-center">Product</h2>
+      <br>
+      
+       <%=link_to 'Add a New Product', new_product_path, class: 'btn btn-primary center-block extend' %>
+      
+      <br>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>SHOW</th>
+            <th>EDIT</th>
+            <th>DELETE</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @products.each do |prod| %>
+          <tr>
+            <td><%= prod.id %></td>
+            <td><%= prod.name %></td>
+            <td><%= prod.price %></td>
+            <td><%= prod.cat_name %></td>
+            <td><%= link_to 'SHOW', product_path(prod.id) %></td>
+            <td><%= link_to 'EDIT', edit_product_path(prod.id) %></td>
+            <td><%= link_to 'DELETE', prod, method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>  
+    </article>
+
+  </div>
+</div>
+
+

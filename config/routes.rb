@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :categories
 
+  resources :products
+
   get "/index" => "dashboards#index"
 
   get "/admin" => "dashboards#admin"

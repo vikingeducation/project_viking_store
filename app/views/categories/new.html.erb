@@ -4,38 +4,32 @@
   <div class="row">
     <%= render partial: 'shared/nav' %>
 
-<article class="col-sm-9">
-  <h2 class="text-center">New Category</h2>
+    <article class="col-sm-9">
+      <h2 class="text-center">New Category</h2>
 
 
-  <%= form_for @category do |c| %>
-    <div class="form-group">
-      <%= c.label 'Category ID:', class: "control-label" %>
-      <span>N/A</span>
-    </div>
+      <%= form_for @category do |c| %>
+        <div class="form-group">
+          <%= c.label 'Category ID:', class: "control-label" %>
+          <span>N/A</span>
+        </div>
 
-    <div class="form-group">
-        <%= c.label 'Name:', class: "control-label" %>
-        <%= c.text_field :name, placeholder: "enter the category name here", class: 'form-horizontal' %>  
-    </div>
+        <div class="form-group">
+            <%= c.label 'Name:', class: "control-label" %>
+            <%= c.text_field :name, placeholder: "enter the category name here", class: 'form-horizontal' %>  
+        </div>
 
-    <div class="form-group">
-      <%= c.submit 'Create Category', class: 'btn btn-primary center-block extend' %>
-    </div>
-  <% end %>
+        <div class="form-group">
+          <%= c.submit 'Create Category', class: 'btn btn-primary center-block extend' %>
+        </div>
+      <% end %>
 
 
 
-</article>
+    </article>
 
 
   </div>
-  
-
-
-
-
-
 </div>
 
 

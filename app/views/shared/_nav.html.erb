@@ -1,15 +1,24 @@
 <div class="col-sm-3">
   <nav class="col-sm-12">
-    <h5 class="text-center">Navigation Options</h5>
+    <h4 class="text-center">Navigation Options</h5>
 
-    <ul>
-      <li>User</li>
-      <li>Addresses</li>
-      <li>Orders</li>
-      <li>Products</li>
-      <li>Categories</li>
-    </ul>
+      <h5 class="text-center">User</h5>
+      <h5 class="text-center">Addresses</h5>
+      <h5 class="text-center">Orders</h5>
+      <h5 class="text-center">Products</h5>
+      <h5 class="text-center">Categories</h5>
+    
+      <h5 class="text-center">
+        <%= link_to 'Categories', categories_path %>
+      </h5>
 
-    <a href="#">Analytics Dashboard</a>
+      <h5 class="text-center">
+        <%= link_to 'Products', products_path %>
+      </h5>
+
+      <h5 class="text-center">
+        <%= link_to 'Analytics Dashboard', admin_path %>
+      </h5>
+
   </nav>    
 </div>
