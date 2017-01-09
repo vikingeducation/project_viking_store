@@ -24,5 +24,8 @@ class DashboardsController < ApplicationController
     @by_day = Order.by_day
     @by_week = Order.by_week
   end
+
+  def admin
+  end
   
 end
