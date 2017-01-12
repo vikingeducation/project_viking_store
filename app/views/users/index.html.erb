@@ -1,0 +1,18 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container">
+
+  <div class="row">
+    <%= render partial: 'shared/nav' %>
+
+    <article class="col-sm-9">
+      <h2 class="text-center">Viking Store Users</h2>
+      <br>
+      <%=link_to 'Add a New User', new_user_path, class: 'btn btn-primary center-block extend' %>
+      <br>
+      <%= render partial: 'index_table', :locals => { users: @users } %>
+    </article>
+
+  </div>
+</div>
+
+

@@ -1,5 +1,9 @@
 class Order < ApplicationRecord
 
+  has_many :order_contents, :foreign_key => :order_id, :dependent => :nullify
+  has_many :products, :through => :order_contents, :source => :product
+  belongs_to :user
+
   def self.by_day
     Order.select("orders.created_at, COUNT(orders.created_at) AS quantity, SUM(order_contents.quantity * products.price) AS order_value")
           .join_with_products

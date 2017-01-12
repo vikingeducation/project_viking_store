@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
-  root :to => "dashboards#admin"
+  root :to => "dashboards#index"
 
   resources :categories
 
   resources :products
+
+  resources :users
+
+  resources :addresses
 
   get "/index" => "dashboards#index"
 

@@ -1,5 +1,19 @@
 class User < ApplicationRecord
 
+  has_many :credit_cards, :dependent => :destroy
+  has_many :orders, :dependent => :nullify
+  has_many :addresses, :dependent => :nullify
+  belongs_to :default_billing, :foreign_key => :billing_id, :class_name => "Address"
+  belongs_to :default_shipping, :foreign_key => :shipping_id, :class_name => "Address"
+
+  validates :first_name, :last_name, :email, :presence => true,
+                                             :length => { in: 1..64 }
+  validates :email, :format => { :with => /@/ }
+
+  def last_order_date(user)
+    user.orders.select('checkout_date').where('checkout_date IS NOT NULL').order('checkout_date DESC').limit(1)[0].checkout_date
+  end
+
   def self.total(num_days=nil)
     if num_days
       User.where("created_at > ?", num_days.days.ago).count

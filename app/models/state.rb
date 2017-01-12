@@ -1,5 +1,7 @@
 class State < ApplicationRecord
 
+    belongs_to :address
+
   def self.three_most_populated
     # State.find_by_sql("
     #   SELECT COUNT(states.id) AS count, states.name

@@ -1,0 +1,52 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container">
+
+  <div class="row">
+    <%= render partial: 'shared/nav' %>
+
+    <article class="col-sm-9">
+      <h2 class="text-center"><%= full_name(@address.user) %>'s Address </h2>
+
+      <section class="col-sm-10 col-sm-offset-1">
+          <div class="col-sm-10 col-sm-offset-1">
+            <table class="table-condensed">
+              <tr>
+                <th>Owner ID:</th>
+                <td><%= @address.user.id %></td>
+              </tr>
+              <tr>
+                <th>Owner Name:</th>
+                <td><%= link_to "#{full_name(@address.user)} (Click to View User)", user_path(@address.user.id) %></td>
+              </tr>
+              <tr>
+                <th>Street</th>
+                <td><%= @address.street_address %></td>
+              </tr>
+              <tr>
+                <th>City</th>
+                <td><%= @address.city.name %></td>
+              </tr>
+              <tr>
+                <th>State</th>
+                <td><%= @address.state.name %></td>
+              </tr>
+              <tr>
+                <th>Zip</th>
+                <td><%= @address.zip_code %></td>
+              </tr>        
+            </table>        
+            <p>
+              <%= link_to "Edit Address", edit_address_path(@address.id) %>
+            </p>
+
+            <p>
+              <%= link_to "Delete Address", @address, method: 'delete', data: { confirm: 'Are you sure?'} %>
+            </p>
+          </div>
+      </section>
+
+    </article>
+
+  </div>
+</div>
+

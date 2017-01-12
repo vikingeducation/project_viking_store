@@ -1,0 +1,32 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Orders</th>
+      <th>Created</th>
+      <th>SHOW</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% addresses.each do |address| %>
+    <tr>
+      <td><%= address.id %></td>
+      <td><%= link_to address.user.last_name, user_path(address.user_id) %></td>
+      <td><%= address.street_address %></td>
+      <td><%= address.city.name %></td>
+      <td><%= address.state.name %></td>
+      <td><%= address.user.orders.count %></td>
+      <td><%= address.created_at.strftime('%m/%d/%Y') %></td>
+      <td><%= link_to 'SHOW', address_path(address.id) %></td>
+      <td><%= link_to 'EDIT', edit_address_path(address.id, :user_id => address.user_id) %></td>
+      <td><%= link_to 'DELETE', address, method: 'delete', data: { confirm: 'Are you sure?'} %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

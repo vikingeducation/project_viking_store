@@ -1,0 +1,136 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container">
+
+  <div class="row">
+    <%= render partial: 'shared/nav' %>
+
+<article class="col-sm-9">  
+
+  <h2 class="text-center">
+    User <%=@user.id%>: <%= full_name(@user) %>
+  </h2>
+  <br>
+
+   <section class="col-sm-10 col-sm-offset-1">
+
+      <h3 class="text-center">Demographic Information</h3>
+        <dl class="dl">
+          <dt>First Name:</dt>
+          <dd><%= @user.first_name %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>Last Name:</dt>
+          <dd><%= @user.last_name %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>Email:</dt>
+          <dd><%= @user.email %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>Default Billing Address:</dt>
+          <dd><%= @user.default_billing.street_address %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>Default Shipping Addess:</dt>
+          <dd><%= @user.default_shipping.street_address %></dd>
+        </dl>
+
+        <p>
+          <%=link_to "Edit #{full_name(@user)}'s Information", edit_user_path(@user.id) %>
+        </p>
+        <p>
+          <%=link_to "Delete #{full_name(@user)}", @user, method: 'delete', data: { confirm: "Are you sure?"} %>
+        </p>
+        <p>
+          <%= link_to 'View Saved Addresses', addresses_path(:user_id => "#{@user.id}") %>
+        </p>
+        <p>
+          <%= link_to 'View Unplaced Orders (Cart)' %>
+        </p>
+
+
+    </section> 
+
+    <section class="col-sm-10 col-sm-offset-1">
+      <h3 class="text-center">Credit Card Information</h3>
+        <dt>First Name:</dt>
+          <dd><%= @user.first_name %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>Last Name:</dt>
+          <dd><%= @user.last_name %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>Number:</dt>
+          <dd><%= @user.credit_cards.first.card_number %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>Expiration:</dt>
+          <dd><%= "#{@user.credit_cards.first.exp_month}/#{@user.credit_cards.first.exp_year}" %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>CCV:</dt>
+          <dd><%="#{@user.credit_cards.first.ccv}"%></dd>
+        </dl>
+        <p>
+          <%= link_to 'Remove Card', data: { confirm: 'Are you sure?'} %> 
+        </p>
+
+    </section>
+
+    <section class="col-sm-10 col-sm-offset-1">
+      <h3 class="text-center">Admin Actions for Foo Bar</h3>
+      <%=link_to 'Create Order', new_user_path, class: 'btn btn-primary center-block extend' %>
+      <%=link_to 'Create Address', new_address_path(:user_id => 
+      "#{@user.id}"), class: 'btn btn-primary center-block extend' %>
+    </section>
+
+    <section class="col-sm-10 col-sm-offset-1">
+      <h3 class="text-center">Order History</h3>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Order Date</th>
+            <th>Order Value</th>
+            <th>Status</th>
+            <th>SHOW</th>
+            <th>EDIT</th>
+            <th>DELETE</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @user.orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.created_at.strftime('%Y-%m-%d') %></td>
+            <td><%= order_value(order) %></td>
+            <td><%= status(order) %></td>
+            <td><%= link_to 'SHOW' %></td>
+            <td><%= link_to 'EDIT' %></td>
+            <td><%= link_to 'DELETE' %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </section>    
+
+
+  </article>
+
+<!-- row enclosing all articles and nav bar -->
+  </div>
+  
+
+
+
+</div>

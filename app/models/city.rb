@@ -1,5 +1,8 @@
 class City < ApplicationRecord
 
+    validates :name, :length => { :maximum => 64 }
+    belongs_to :city
+
   def self.three_most_populated
     # City.find_by_sql("
     #   SELECT COUNT(cities.id) AS count, cities.name

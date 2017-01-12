@@ -1,5 +1,9 @@
 class Product < ApplicationRecord
 
+  belongs_to :category
+  has_many :order_contents, :foreign_key => :order_id, :dependent => :nullify
+  has_many :orders, :through => :order_contents
+
   validates :id, :name, :price, :category_id, :sku, :presence => true
   validates :price, :sku, :numericality => true
   validates :id, :uniqueness => true

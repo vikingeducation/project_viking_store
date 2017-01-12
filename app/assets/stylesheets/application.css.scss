@@ -27,7 +27,12 @@
   padding: 20xp 0;
 }
 
-nav, article {
+nav {
+  border: 4px solid #eee;
+  padding: 30px;
+}
+
+article {
   border: 4px solid #eee;
   padding: 30px;
 }

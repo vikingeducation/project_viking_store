@@ -1,0 +1,39 @@
+      <%= form_for address do |c| %>
+        <div class="form-group">
+          <%= c.label 'Owner ID:', class: "control-label" %>
+          <%= user.id %>
+        </div>
+
+        <div class="form-group">
+            <%= c.label 'Owner Name:', class: "control-label" %>
+            <%= link_to full_name(user), user_path(user.id) %>
+        </div>
+
+        <div class="form-group">
+            <%= c.label 'Street:', class: "control-label" %>
+            <%= c.text_field :street_address, placeholder: "Street St.", class: 'form-control' %>  
+        </div>
+
+<!--         <div class="form-group">
+            <%= c.label 'City:', class: "control-label" %>
+            <%= c.text_field :city, placeholder: "City", class: 'form-control' %>  
+        </div> -->
+
+        <div class="form-group">
+            <%= c.label 'State:', class: "control-label" %>
+            <%= c.select(:state_id) do %>
+                <%= states.each do |state| %>
+                    <%= content_tag(:option, state.name, value: state.id) %>
+                <% end %>
+            <% end %>
+        </div>
+
+        <div class="form-group">
+            <%= c.label 'Zip', class: "control-label" %>
+            <%= c.text_field :zip_code, placeholder: "88888", class: 'form-control' %>  
+        </div>
+
+        <div class="form-group">
+          <%= c.submit 'Submit', class: 'btn btn-primary center-block extend' %>
+        </div>
+      <% end %>
