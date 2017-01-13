@@ -36,7 +36,7 @@
               </tr>        
             </table>        
             <p>
-              <%= link_to "Edit Address", edit_address_path(@address.id) %>
+              <%= link_to "Edit Address", edit_address_path(@address.id, user_id: @address.user_id) %>
             </p>
 
             <p>

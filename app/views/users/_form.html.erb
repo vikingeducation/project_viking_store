@@ -1,58 +1,50 @@
-      <%= form_for user do |c| %>
-        <div class="form-group">
-          <%= c.label 'user ID:', class: "control-label" %>
-          <span>N/A</span>
-        </div>
+  <%= form_for user do |c| %>
+    <div class="form-group">
+      <%= c.label 'User ID:', class: "control-label" %>
+      <span>N/A</span>
+    </div>
 
-        <div class="form-group">
-            <%= c.label 'First Name:', class: "control-label" %>
-            <%= c.text_field :first_name, placeholder: "first name", class: 'form-control' %>  
-        </div>
+    <div class="form-group">
+        <%= c.label 'First Name:', class: "control-label" %>
+        <%= c.text_field :first_name, placeholder: "first name", class: 'form-control' %>  
+    </div>
 
-        <div class="form-group">
-            <%= c.label 'Last Name:', class: "control-label" %>
-            <%= c.text_field :last_name, placeholder: "last name", class: 'form-control' %>  
-        </div>
+    <div class="form-group">
+        <%= c.label 'Last Name:', class: "control-label" %>
+        <%= c.text_field :last_name, placeholder: "last name", class: 'form-control' %>  
+    </div>
 
+    <div class="form-group">
+        <%= c.label 'Email:', class: "control-label" %>
+        <%= c.text_field :email, placeholder: "email", class: 'form-control' %>  
+    </div>
+    
+    <% if user.persisted? %>
         <div class="form-group">
-            <%= c.label 'Email:', class: "control-label" %>
-            <%= c.text_field :email, placeholder: "email", class: 'form-control' %>  
-        </div>
-
-        <div class="form-group">
-            <%= c.label 'Default Billing:', class: "control-label" %>
-            <% if user.persisted? %>
-                <%= c.select(:default_billing) do %>
-                    <%= user.addresses.each do |address| %>
-                        <%= content_tag(:option, address.street_address, value: address.id) %>
-                    <% end %>
+        <%= c.label 'Default Billing:', class: "control-label" %>
+            <%= c.select(:default_billing) do %>
+                <%= user.addresses.each do |address| %>
+                    <%= content_tag(:option, address.street_address, value: address.id) %>
                 <% end %>
-            <% else %>
-                <%= c.text_field :default_billing, placeholder: "default billing", class: 'form-control' %>
             <% end %>
         </div>
 
         <div class="form-group">
         <%= c.label 'Default Shipping:', class: "control-label" %>
-        <% if user.persisted? %>
             <%= c.select(:shipping_id) do %>
-            <% user.addresses.each do |address| %>
-              <%= content_tag(:option, address.street_address, value: address.id) %>
+                <% user.addresses.each do |address| %>
+                    <%= content_tag(:option, address.street_address, value: address.id) %>
               <% end %>
-            <% end %>
-        <% else %>
-            <%= c.text_field :shipping_id, placeholder: "default shipping", class: 'form-control' %>  
         <% end %>
         </div>
 
-        <% if user.persisted? %>
-            <p>
-              <%= link_to 'View Saved Addresses', addresses_path(:user_id => "#{user.id}") %>
-            </p>
-        <% end %>
+        <p>
+          <%= link_to 'View Saved Addresses', addresses_path(:user_id => "#{user.id}") %>
+        </p>
+    <% end %>
 
 
-        <div class="form-group">
-          <%= c.submit 'Submit', class: 'btn btn-primary center-block extend' %>
-        </div>
-      <% end %>
+    <div class="form-group">
+      <%= c.submit 'Submit', class: 'btn btn-primary center-block extend' %>
+    </div>
+  <% end %>

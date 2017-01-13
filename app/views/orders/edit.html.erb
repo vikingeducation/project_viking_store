@@ -1,0 +1,46 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container">
+
+  <div class="row">
+    <%= render partial: 'shared/nav' %>
+
+    <article class="col-sm-9">
+      <h2 class="text-center">Edit Order #<%= @order.id %> </h2>
+
+      <section class="col-sm-10 col-sm-offset-1">
+        <%= render partial: 'form', locals: { user: @user, order: @order } %>
+      </section>
+
+      <section class="col-sm-10 col-sm-offset-1">
+        <h3 class="text-center">Edit Order Contents</h3>
+        <%= render partial: 'edit_order_contents', locals: { order: @order } %>
+      </section>
+
+      <section class="col-sm-10 col-sm-offset-1">
+        <h3 class="text-center">Add Products to Order</h3>
+        <p class="text-center">Add up to 5 products at a time</p>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Product ID</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <% 5.times do %>
+            <tr>
+              <td>text field here</td>
+              <td>text field here</td>              
+            </tr>
+            <% end %>
+
+          </tbody>
+        </table>
+      </section>
+    </article>
+
+  </div>
+</div>
+

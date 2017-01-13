@@ -24,9 +24,9 @@ module UsersHelper
 
   def status(order)
     if order.checkout_date.nil?
-      "NOT PLACED"
+      "In Cart"
     else
-      "PLACED"
+      "Placed"
     end
   end
 

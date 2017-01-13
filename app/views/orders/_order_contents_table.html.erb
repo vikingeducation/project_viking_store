@@ -1,0 +1,31 @@
+<h3 class="text-center">Order Contents</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ProductID</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% order.products.each do |product| %>
+    <tr>
+      <td><%= product.id %></td>
+      <td><%= product.name %></td>
+      <td><%= quantity = order.order_contents.select('quantity').where("product_id=#{product.id}")[0].quantity %></td>
+      <td><%= product.price %></td>
+      <td><%= quantity * product.price %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+  <p>
+    <%=link_to "Edit Order", edit_order_path(order.id) %>
+  </p>
+  <p>
+    <%=link_to "Delete Order", order, method: 'delete', data: { confirm: "Are you sure?"} %>
+  </p>

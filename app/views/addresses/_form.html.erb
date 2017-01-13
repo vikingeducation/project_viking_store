@@ -2,6 +2,7 @@
         <div class="form-group">
           <%= c.label 'Owner ID:', class: "control-label" %>
           <%= user.id %>
+          <%= c.hidden_field :user_id, value: user.id %>
         </div>
 
         <div class="form-group">
@@ -14,10 +15,14 @@
             <%= c.text_field :street_address, placeholder: "Street St.", class: 'form-control' %>  
         </div>
 
-<!--         <div class="form-group">
+        <div class="form-group">
             <%= c.label 'City:', class: "control-label" %>
-            <%= c.text_field :city, placeholder: "City", class: 'form-control' %>  
-        </div> -->
+            <%= c.select(:city_id) do %>
+                <%= cities.each do |city| %>
+                    <%= content_tag(:option, city.name, value: city.id) %>
+                    <% end %>
+                <% end %>
+        </div>
 
         <div class="form-group">
             <%= c.label 'State:', class: "control-label" %>

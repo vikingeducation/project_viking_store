@@ -1,0 +1,61 @@
+<h3 class="text-center">Credit Card Information</h3>
+
+<% if user.credit_cards.empty? %>
+      <dl class="dl">
+        <dt>First Name:</dt>
+        <dd>n/a</dd>
+      </dl>
+
+      <dl class="dl">
+        <dt>Last Name:</dt>
+        <dd>n/a</dd>
+      </dl>
+
+      <dl class="dl">
+        <dt>Number:</dt>
+        <dd>n/a</dd>
+      </dl>
+
+      <dl class="dl">
+        <dt>Expiration:</dt>
+        <dd>n/a</dd>
+      </dl>
+
+      <dl class="dl">
+        <dt>CCV:</dt>
+        <dd>n/a</dd>
+      </dl>        
+<% else %>
+  <% card = user.credit_cards.first %>
+      <dl class="dl">
+        <dt>First Name:</dt>
+        <dd><%= user.first_name %></dd>
+      </dl>
+
+      <dl class="dl">
+        <dt>Last Name:</dt>
+        <dd><%= user.last_name %></dd>
+      </dl>
+
+      <dl class="dl">
+        <dt>Number:</dt>
+        <dd><%= card.card_number %></dd>
+      </dl>
+
+      <dl class="dl">
+        <dt>Expiration:</dt>
+        <dd><%= "#{card.exp_month}/#{card.exp_year}" %></dd>
+      </dl>
+
+      <dl class="dl">
+        <dt>CCV:</dt>
+        <dd><%="#{card.ccv}"%></dd>
+      </dl>
+
+      <p>
+        <%= link_to 'Remove Card', credit_card_path(card.id), method: 'delete', data: { confirm: 'Are you sure?'} %> 
+      </p>
+<% end %>
+
+
+        

@@ -1,0 +1,28 @@
+<h3>Basic Information</h3>
+  <dl class="dl">
+    <dt>Customer ID:</dt>
+    <dd><%= order.user_id %></dd>
+  </dl>
+
+  <dl class="dl">
+    <dt>Customer:</dt>
+    <dd><%= link_to "#{full_name(order.user)} (click to view user)", user_path(order.user_id) %></dd>
+  </dl>
+
+  <dl class="dl">
+    <dt>Date Placed:</dt>
+    <dd><%= order.created_at.strftime('%m-%d-%Y') %></dd>
+  </dl>
+
+  <dl class="dl">
+    <dt># Products:</dt>
+    <dd><%= order.products.count %></dd>
+  </dl>
+
+  <dl class="dl">
+    <dt>Order Value:</dt>
+    <dd><%= order.id %></dd>
+  </dl>
+  <p>
+    <%=link_to "Edit #{full_name(order.user)}'s Profile", edit_user_path(order.user_id) %>
+  </p>

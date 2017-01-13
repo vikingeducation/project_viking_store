@@ -1,0 +1,30 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container">
+
+  <div class="row">
+    <%= render partial: 'shared/nav' %>
+
+    <article class="col-sm-9">
+
+    <section>
+      <% if @user %>
+        <h2 class="text-center"><%= full_name(@user) %>'s Orders </h2>
+      <%=link_to "Create a #{full_name(@user)} Order", new_order_path(user_id: "#{@user.id}"), class: 'btn btn-primary center-block extend' %>
+      <% else %>
+        <h2 class="text-center">All Orders</h2>
+        <br>
+        <h4 class="text-center"><b>
+          Create new Orders from within <%= link_to 'User', users_path %> profiles
+        </b></h4>
+      <% end %>
+      <br>
+
+      <%= render partial: 'orders/index_table', :locals => { orders: @orders } %>      
+    </section>
+
+
+    </article>
+
+  </div>
+</div>
+

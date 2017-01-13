@@ -1,0 +1,102 @@
+<% if in_cart?(order) %>
+  <h3>Order Status</h3>
+    <span class="unplaced"><%= status(order) %></span>
+  <h3>Shipping Address</h3>
+    <dl class="dl">
+      <dt>Street</dt>
+        <dd>n/a</dd>
+    </dl>
+
+    <dl class="dl">
+      <dt>City</dt>
+      <dd>n/a</dd>
+    </dl>
+
+    <dl class="dl">
+      <dt>State</dt>
+      <dd>n/a</dd>
+    </dl>
+
+    <h3>Billing Address</h3>
+    <dl class="dl">
+      <dt>Street</dt>
+      <dd>n/a</dd>
+    </dl>
+
+  <h3>Billing Card</h3>
+
+  <dl class="dl">
+    <dt>Last 4 Digits</dt>
+    <% if card = order.credit_card %>
+      <dd><%= card.card_number[-4..-1] %></dd>
+    <% else %>
+      <dd>Not provided</dd>
+    <% end %>
+  </dl>
+
+  <dl class="dl">
+    <dt>City</dt>
+    <dd>n/a</dd>
+  </dl>
+
+  <dl class="dl">
+    <dt>State</dt>
+    <dd>n/a</dd>
+  </dl>
+<% else %>
+  <h3>Order Status</h3>
+    <span class="placed"><%= status(order) %></span>
+  <h3>Shipping Address</h3>
+    <dl class="dl">
+      <dt>Street</dt>
+      <% address = order.shipping_address %>
+        <dd><%= address.street_address %></dd>
+        <dd>n/a</dd>
+    </dl>
+
+    <dl class="dl">
+      <dt>City</dt>
+      <dd><%= address.city.name %></dd>
+    </dl>
+
+    <dl class="dl">
+      <dt>State</dt>
+      <dd><%= address.state.name %></dd>
+    </dl>
+    <h3>Billing Address</h3>
+    <% address = Address.find(order.billing_id) %>
+    <dl class="dl">
+      <dt>Street</dt>
+      <dd><%= address.street_address %></dd>
+    </dl>
+
+  <h3>Billing Card</h3>
+
+  <dl class="dl">
+    <dt>Last 4 Digits</dt>
+    <% if card = order.credit_card %>
+      <dd><%= card.card_number[-4..-1] %></dd>
+    <% else %>
+      <dd>Not provided</dd>
+    <% end %>
+  </dl>
+
+  <dl class="dl">
+    <dt>City</dt>
+    <dd><%= address.city.name %></dd>
+  </dl>
+
+  <dl class="dl">
+    <dt>State</dt>
+    <dd><%= address.state.name %></dd>
+  </dl>
+<% end %>
+
+
+
+<p>
+  <%=link_to "Edit Order", edit_order_path(order.id) %>
+</p>
+<p>
+  <%=link_to "Delete Order", order, method: 'delete', data: { confirm: "Are you sure?"} %>
+</p>

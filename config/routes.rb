@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   resources :addresses
 
+  resources :orders
+
+  resources :credit_cards, :only => [:destroy]
+
   get "/index" => "dashboards#index"
 
   get "/admin" => "dashboards#admin"

@@ -22,16 +22,17 @@ class AddressesController < ApplicationController
     @user = User.find(params[:user_id])
     @address = Address.new
     @states = State.all
+    @cities = City.all
   end
 
   def create
-    @address = Address.find(params[:id])
-    if @address.create(address_params)
+    @address = Address.new(params[:id])
+    if @address.save
       flash[:success] = "Success!"
       redirect_to addresses_path(:user_id => @address.user_id)
     else
-      flash.now[:warning] = @address.errors.full_messages
-      render :new
+      flash[:warning] = @address.errors.full_messages
+      redirect_to(:back)
     end
   end
 
@@ -39,23 +40,24 @@ class AddressesController < ApplicationController
     @user = User.find(params[:user_id])
     @address = Address.find(params[:id])
     @states = State.all
+    @cities = City.all
   end
 
   def update
     @address = Address.find(params[:id])
-    if @address.create(address_params)
+    if @address.update(address_params)
       flash[:success] = "Success"
-      redirect_to addresses_path
+      redirect_to address_path(params[:id])
     else
-      flash.now[:warning] = @address.errors.full_messages
-      render :edit
+      flash[:warning] = @address.errors.full_messages
+      redirect_to(:back)
     end
   end
 
   def destroy
     @address = Address.find(params[:id])
     if @address.destroy
-      flash[:success] = Success!
+      flash[:success] = "Success!"
       redirect_to addresses_path
     else
       flash[:warning] = @address.errors.full_messages
@@ -66,7 +68,7 @@ class AddressesController < ApplicationController
   private
 
   def address_params
-    params.require(:address).permit(:street_address, :state_id, :city_id, :zip_code)
+    params.require(:address).permit(:user_id, :street_address, :state_id, :city_id, :zip_code)
   end
 
 end
