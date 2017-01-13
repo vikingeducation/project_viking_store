@@ -1,0 +1,57 @@
+<h2 class="text-center">3. Order Statistics</h2>
+<br>
+<h3 class="text-center">Last 7 Days</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @last_7_stats.each do |category, value| %>
+      <tr>
+        <td><%= category %></td>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+
+<h3 class="text-center">Last 30 Days</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @last_7_stats.each do |category, value| %>
+      <tr>
+        <td><%= category %></td>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+
+<h3 class="text-center">Total</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @last_7_stats.each do |category, value| %>
+      <tr>
+        <td><%= category %></td>
+        <td><%= value %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>

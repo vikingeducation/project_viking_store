@@ -1,0 +1,30 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container">
+
+  <div class="row">
+    <%= render partial: 'shared/nav' %>
+
+    <article class="col-sm-9">
+
+    <section>
+      <% if @user %>
+        <h2 class="text-center"><%= full_name(@user) %>'s Addresses </h2>
+      <%=link_to "Create a #{full_name(@user)} Address", new_address_path(user_id: "#{@user.id}"), class: 'btn btn-primary center-block extend' %>
+      <% else %>
+        <h2 class="text-center">Addresses</h2>
+        <br>
+        <h4 class="text-center"><b>
+          Create new addresses from within <%= link_to 'User', users_path %> profiles
+        </b></h4>
+      <% end %>
+      <br>
+
+      <%= render partial: 'index_table', :locals => { addresses: @addresses } %>      
+    </section>
+
+
+    </article>
+
+  </div>
+</div>
+

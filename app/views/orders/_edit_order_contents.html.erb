@@ -1,0 +1,25 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total Price</th>
+      <th>REMOVE</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% order.order_contents.each do |content| %>
+  <% product = Product.find(content.product_id) %>
+    <tr>
+      <td><%= content.id %></td>
+      <td><%= product.name %></td>
+      <td><%= content.quantity %> </td>
+      <td>$<%= product.price %></td>
+      <td>$<%= content.value %></td>
+      <td><%= link_to 'REMOVE', data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

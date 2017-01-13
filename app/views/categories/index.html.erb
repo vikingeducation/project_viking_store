@@ -1,0 +1,44 @@
+<%= render partial: 'shared/admin_header' %>
+<div class="container">
+
+  <div class="row">
+    <%= render partial: 'shared/nav' %>
+
+<article class="col-sm-9">
+  <h2 class="text-center">Product Categories</h2>
+  <br>
+       <%=link_to 'Add a New Category', new_category_path, class: 'btn btn-primary center-block extend' %>
+  <br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>SHOW</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @categories.each do |cat| %>
+      <tr>
+        <td><%= cat.id %></td>
+        <td><%= cat.name %></td>
+        <td><%= link_to 'SHOW', category_path(cat.id) %></td>
+        <td><%= link_to 'EDIT', edit_category_path(cat.id) %></td>
+        <td><%= link_to 'DELETE', cat, method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>  
+</article>
+
+
+  </div>
+  
+
+
+
+</div>
+
+

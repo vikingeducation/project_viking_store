@@ -1,0 +1,23 @@
+<div class="jumbotron text-center">
+  <h1>Viking Store Analytics Dashboard</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 dashboard-article">
+      <%= render partial: 'shared/overall' %>
+    </div>
+    <div class="col-sm-6 dashboard-article">
+      <%= render partial: 'shared/user_demographics' %>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col-sm-6 dashboard-article">
+        <%= render partial: 'shared/order_stats' %>
+      </div>
+      <div class="col-sm-6 dashboard-article">
+        <%= render partial: 'shared/time_series' %>
+      </div>
+  </div>
+
+</div>

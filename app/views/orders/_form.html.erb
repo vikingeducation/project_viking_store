@@ -1,0 +1,74 @@
+      <%= form_for order do |c| %>
+      <h3 class="text-center">Logistical Information</h3>
+      <h3>Basic Information</h3>
+        <div class="form-group">
+          <%= c.label 'Customer ID:', class: "control-label" %>
+          <%= user.id %>
+        </div>
+
+        <div class="form-group">
+            <%= c.label 'Customer', class: "control-label" %>
+            <%= link_to "#{full_name(user)} (click to view user)", user_path(user.id) %>
+        </div>
+
+        <div class="form-group">
+            <%= c.label 'Date Placed:', class: "control-label" %>
+            <% if order.persisted? %>
+                <%= c.text_field :created_at, placeholder: "Street St.", class: 'form-control' %>  
+            <% else %>
+                <span>n/a</span>
+            <% end %>
+        </div>
+
+        <p>
+          <%=link_to "Edit Customer Profile", edit_user_path(user.id) %>
+        </p>
+
+        <% if order.persisted? %>
+            <%= c.label 'Order Status' %><br>
+            <%= radio_button_tag(:checkout_date, value: Time.now) %>
+            <%= c.label 'PLACED', class: "control-label" %><br>
+            <% if user.orders.where('checkout_date IS NULL').empty? %>
+                <%= radio_button_tag(:checkout_date, value: nil) %>
+                <%= c.label 'UNPLACED', class: "control-label" %><br>
+            <% end %>
+        <% end %>
+
+        <div class="form-group">
+            <%= c.label 'Shipping Address:', class: "control-label" %>
+            <%= c.select(:shipping_id) do %>
+                <%= user.addresses.each do |address| %>
+                    <%= content_tag(:option, address.street_address, value: address.id) %>
+                <% end %>
+            <% end %>
+        </div>
+
+        <div class="form-group">
+            <%= c.label 'Billing Address:', class: "control-label" %>
+            <%= c.select(:billing_id) do %>
+                <%= user.addresses.each do |address| %>
+                    <%= content_tag(:option, address.street_address, value: address.id) %>
+                <% end %>
+            <% end %>
+        </div>
+
+        <div class="form-group">
+            <%= c.label 'Billing Card:', class: "control-label" %>
+            <%= c.select(:credit_card_id) do %>
+                <%= user.credit_cards.each do |card| %>
+                    <%= content_tag(:option, "#{card.brand} #{card.card_number[-4..-1]}", value: card.id) %>
+                <% end %>
+            <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= c.submit 'Create Order in Shopping Cart', class: 'btn btn-primary center-block extend' %>
+        </div>
+        <% if order.persisted? %>
+            <h5 class="text-center">
+                <%= link_to 'Delete User', @user, method: 'delete', data: { confirm: 'Are you sure?' } %>
+            </h5>
+        <% else %>
+            <p class='text-center'>You can add products on the next screen, once it's been created.</p>
+        <% end %>
+      <% end %>

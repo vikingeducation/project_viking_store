@@ -1,0 +1,32 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Joined</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Orders</th>
+      <th>Last Order Date</th>
+      <th>SHOW</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= full_name(user) %></td>
+      <td><%= user.created_at.strftime("%m/%d/%Y") %></td>
+      <td><%= default_city(user) %></td>
+      <td><%= default_state(user) %></td>
+      <td><%= link_to number_orders(user), orders_path(user_id: user.id) %></td>
+      <td><%= last_order_date(user) %></td>
+      <td><%= link_to 'SHOW', user_path(user.id) %></td>
+      <td><%= link_to 'EDIT', edit_user_path(user.id) %></td>
+      <td><%= link_to 'DELETE', user, method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>  

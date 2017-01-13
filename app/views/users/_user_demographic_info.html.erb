@@ -1,0 +1,42 @@
+<h3 class="text-center">Demographic Information</h3>
+        <dl class="dl">
+          <dt>First Name:</dt>
+          <dd><%= user.first_name %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>Last Name:</dt>
+          <dd><%= user.last_name %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>Email:</dt>
+          <dd><%= user.email %></dd>
+        </dl>
+
+        <dl class="dl">
+          <dt>Default Billing Address:</dt>
+          <% if user.default_billing.nil? %>
+            <dd>n/a</dd>
+          <% else %>
+            <dd><%= user.default_billing.street_address %></dd>
+          <% end %>
+        </dl>
+
+        <dl class="dl">
+          <dt>Default Shipping Addess:</dt>
+          <dd><%= user.default_shipping.street_address %></dd>
+        </dl>
+
+        <p>
+          <%=link_to "Edit #{full_name(user)}'s Information", edit_user_path(user.id) %>
+        </p>
+        <p>
+          <%=link_to "Delete #{full_name(user)}", user, method: 'delete', data: { confirm: "Are you sure?"} %>
+        </p>
+        <p>
+          <%= link_to 'View Saved Addresses', addresses_path(:user_id => "#{user.id}") %>
+        </p>
+        <p>
+          <%= link_to 'View Unplaced Orders (Cart)', orders_path(:user_id => "#{user.id}") %>
+        </p>

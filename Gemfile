@@ -4,6 +4,10 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
 gem 'pg'
+gem 'hirb'
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
+gem 'pry-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -40,4 +44,7 @@ gem 'faker'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+group :development do
+  gem "better_errors"
+end
+gem "binding_of_caller"
