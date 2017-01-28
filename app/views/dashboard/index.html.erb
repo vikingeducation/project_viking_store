@@ -1,0 +1,77 @@
+<div class="container">
+	<header>
+		<h1>Dashboard</h1>
+	</header>
+	<main>
+		<div class="row">
+			<div class="col-md-6 panel-wrapper">
+				<div class="panel">
+					<div class="row">
+						<h2>1. Overal Platform</h2>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<h4>Last 7 Days</h4>
+							<%= render partial: "table2", locals: {data: @p1_table_7} %>
+							<h4>Last 30 Days</h4>
+							<%= render partial: "table2", locals: {data: @p1_table_30} %>
+							<h4>Total</h4>
+							<%= render partial: "table2", locals: {data: @p1_table_total} %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 panel-wrapper">
+				<div class="panel">
+					<div class="row">
+						<h2>2. User Demographics and Behavior</h2>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<h4>Top 4 States Users Live In (billing)</h4>
+							<%= render partial: "table2", locals: {data: @p2_table_state} %>
+							<h4>Top 4 Cities Users Live In (billing)</h4>
+							<%= render partial: "table2", locals: {data: @p2_table_city} %>
+							<h4>Top User With</h4>
+							<%= render partial: "table3", locals: {data: @p2_table_best_user} %>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 panel-wrapper">
+				<div class="panel">
+					<div class="row">
+						<h2>1. Order Statistics</h2>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<h4>Last 7 Days</h4>
+							<%= render partial: "table2", locals: {data: @p3_table_7} %>
+							<h4>Last 30 Days</h4>
+							<%= render partial: "table2", locals: {data: @p3_table_30} %>
+							<h4>Total</h4>
+							<%= render partial: "table2", locals: {data: @p3_table_total} %>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 panel-wrapper">
+				<div class="panel">
+					<div class="row">
+						<h2>1. Time Series Data</h2>
+					</div>
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<h4>Orders by Day</h4>
+							<%= render partial: "table3", locals: {data: @p2_table_best_user} %>
+							<h4>Orders by Week</h4>
+							<%= render partial: "table3", locals: {data: @p2_table_best_user} %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</div>

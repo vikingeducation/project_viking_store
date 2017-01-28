@@ -1,0 +1,9 @@
+<table class="table table-bordered table-striped">
+	<% 5.times do |row| %>
+    <tr>
+      <% 2.times do |col| %>
+        <th><%= data[row][col] %></th>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,23 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container{
+	header{
+		h1{
+			text-align: center;
+		}
+	}
+}
+
+main{
+	.panel-wrapper{
+		padding: 10px;
+		h2{
+			text-align: center;
+		}
+	}
+	.panel{
+		border: 2px solid gray;
+	}
+}
