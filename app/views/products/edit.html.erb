@@ -1,0 +1,4 @@
+<h4>Edit Product Info</h4>
+<%= render "form" %>
+<br><br>
+<%= link_to "Delete", product_path(@product.id), method: "delete", data: {confirm: "Do you really want to delete?"} %><br><br><br>

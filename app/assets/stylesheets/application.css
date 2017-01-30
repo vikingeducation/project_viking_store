@@ -14,3 +14,25 @@
  *= require_tree .
  *= require_self
  */
+
+.shared-header{
+	text-align: center;
+	margin: 20px;
+}
+
+h2{
+	text-align: center;
+}
+ 
+.create-btn-wrapper{
+	text-align: center;	
+}
+
+.create-button{
+ 	background-color: blue;
+ 	color: white;
+ 	width: 400px;
+ 	border-radius: 0;
+ 	margin-bottom: 30px;
+}
+

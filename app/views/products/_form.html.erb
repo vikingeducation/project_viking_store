@@ -1,0 +1,32 @@
+<%= form_for @product do |f| %>
+
+	<div class="form-group">
+		<%= f.label :id %><br>
+		<%= @product.id %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :name %>
+		<%= f.text_field :name, class: "form-control", placeholder: "XBOX" %><%= form_field_error_messages(@product, :name) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :price %>
+		<%= f.text_field :price, class: "form-control", placeholder: "139.99" %><%= form_field_error_messages(@product, :price) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :category_id %>
+		<%= f.collection_select :category_id, Category.all, :id, :name %><%= form_field_error_messages(@product, :category_id) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :description %>
+		<%= f.text_area :description, class: "form-control", rows: "3", placeholder: "A console which you can play with ... " %><%= form_field_error_messages(@product, :description) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.submit %><br />
+	</div>
+
+<% end %>

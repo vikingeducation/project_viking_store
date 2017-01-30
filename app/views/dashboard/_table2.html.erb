@@ -2,7 +2,11 @@
 	<% 5.times do |row| %>
     <tr>
       <% 2.times do |col| %>
-        <th><%= data[row][col] %></th>
+        <% if row == 0 %>
+			<th><%= data[row][col] %></th>
+		<% else %>
+			<td><%= data[row][col] %></td>
+		<% end %>
       <% end %>
     </tr>
   <% end %>

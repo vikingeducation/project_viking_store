@@ -1,0 +1,25 @@
+<h3>Product ID: 
+	<h5><%= @product.id %></h5>
+</h3>
+<h3>Product Name: 
+	<h5><%= @product.name %></h5>
+</h3>
+<h3>Product Description: 
+	<h5><%= @product.description %></h5>
+</h3>
+<h3>Product SKU: 
+	<h5><%= @product.sku %></h5>
+</h3>
+<h3>Product Price: 
+	<h5><%= "$#{@product.price}" %></h5>
+</h3>
+<h3>Total Quantity Ordered
+	<h5><%= "#{@num_ordered}" %></h5>
+</h3>
+<h3>Total Quantity In Cart
+	<h5><%= "#{@num_in_cart}" %></h5>
+</h3>
+
+<br>
+<%= link_to "Edit", edit_product_path(@product.id) %><br>
+<%= link_to "Delete", product_path(@product.id), method: "delete", data: {confirm: "Do you really want to delete?"} %><br><br><br>

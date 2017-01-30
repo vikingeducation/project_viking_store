@@ -2,18 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.container{
-	header{
-		h1{
-			text-align: center;
-		}
+.main-content{
+	border: 2px solid #999;
+	h1{
+		text-align: center;
 	}
 }
 
 main{
 	.panel-wrapper{
 		padding: 10px;
-		h2{
+		h3{
 			text-align: center;
 		}
 	}

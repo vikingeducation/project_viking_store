@@ -1,0 +1,13 @@
+<h3>Category ID: 
+	<h5><%= @category.id %></h5>
+</h3>
+<h3>Category Name: 
+	<h5><%= @category.name %></h5>
+</h3>
+<h3>Category Description: 
+	<h5><%= @category.description %></h5>
+</h3>
+<br>
+<%= link_to "Edit", edit_category_path(@category.id) %><br>
+<%= link_to "Delete", category_path(@category.id), method: "delete", data: {confirm: "Do you really want to delete?"} %><br><br><br>
+<%= render "table_product" %>
