@@ -47,7 +47,7 @@ def generate_product
   p[:description] = Faker::Lorem.sentence
   p[:sku]         = Faker::Code.ean
   p[:price]       = random_price
-  p.save
+  p.save!
 end
 
 # A list of states.
