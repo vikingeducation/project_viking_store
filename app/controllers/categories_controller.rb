@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
 
 	def show
 		@category = Category.find(params[:id])
-		@products = Product.where(:category_id => params[:id]).order(:id).to_a
+		@products = Category.products
 	end
 
 	def create

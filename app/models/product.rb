@@ -11,7 +11,15 @@ class Product < ApplicationRecord
 
     #validates 	:category_id, :inclusion => { in: Category.pluck(:id)}
 
-	def self.past_days(n)
-		Product.where(:created_at => (Time.now - n.days)..Time.now)
+    def self.get_past_week
+		Product.get_past_days(7)
+	end
+
+	def self.get_past_month
+		Product.get_past_days(30)
+	end
+
+	def self.get_past_days(n)
+		Product.where(:created_at => (Time.now - n.days)..Time.now).count
 	end
 end
