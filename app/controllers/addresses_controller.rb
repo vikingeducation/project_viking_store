@@ -3,12 +3,11 @@ class AddressesController < ApplicationController
 	include AddressesHelper
 
 	def index
-		
 		if params[:user_id]
 			@filtered_address = true
 			if User.all.ids.include? params[:user_id].to_i
 				@user = User.find(params[:user_id])
-				@addresses = @user.addresses
+				@addresses = @user.addresses.order(:id)
 			else
 				flash[:error] = "Bad user id! Showing all addresses"
 				@filtered_address = false
@@ -25,21 +24,16 @@ class AddressesController < ApplicationController
 	end
 
 	def new
-		@address = User.find(params[:user_id]).addresses.build()
+		@user = User.find(params[:user_id])
+		@address = Address.new
 	end
 
 	def create
-		@address = Address.find(params[:id])
-		@address.street_address = params[:street_address]
-		@address.secondary_address = params[:secondary_address]
-		@address.zip_code = params[:zip_code]
-		@address.city_id = params[:city_id]
-		@address.state_id = params[:state_id]
-		puts "printing params hash"
-		p params
+		@user = User.find(params[:user_id])
+		@address = @user.addresses.build(addresses_params)
 		if @address.save
 			flash[:success] = "Address created successfully"
-			render action: "index"
+			redirect_to user_addresses_path(@user.id)
 		else
 			flash[:error] = "Address creation failed"
 			render action: "new"
@@ -51,11 +45,25 @@ class AddressesController < ApplicationController
 	end
 
 	def update
-
+		@address = Address.find(params[:id])
+		if @address.update(addresses_params)
+			flash[:success] = "Great! Your address has been updated!"
+			redirect_to address_path(@address.id)
+		else
+			flash[:error] = "Could not update!"
+			render action: "edit"
+		end
 	end
 
 	def destroy
-
+		@address = Address.find(params[:id])
+		if @address.destroy
+			flash[:success] = "Great! Your address has been removed!"
+			redirect_to addresses_path
+		else
+			flash[:error] = "Could not remove user!"
+			redirect_to(:back)
+		end
 	end
 	
 end

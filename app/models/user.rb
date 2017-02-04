@@ -2,8 +2,6 @@ class User < ApplicationRecord
 	has_many :cards, class_name: "CreditCard", foreign_key: :user_id, dependent: :destroy
 	has_many :orders, dependent: :nullify
 	has_many :addresses, dependent: :nullify
-	has_one :default_shipping_address_id, class_name: "Address", foreign_key: :user_id
-	has_one :default_billing_address_id, class_name: "Address", foreign_key: :user_id
 	has_many :order_contents,
 			 :through => :orders
 	has_many :products, 
@@ -16,6 +14,14 @@ class User < ApplicationRecord
     validates	:email, :format => { :with => /@/ }
 
     before_destroy :remove_carts
+
+    def default_billing_address
+    	Address.find(self.billing_id)
+    end
+
+    def default_shipping_address
+    	Address.find(self.shipping_id)
+    end
 
     def has_cart?
     	(self.orders.where(:checkout_date => nil).count != 0)

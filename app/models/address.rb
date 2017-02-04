@@ -10,6 +10,19 @@ class Address < ApplicationRecord
 				:presence => true
 	validates 	:street_address, :length =>{ :in => 1..64 }
 
+	before_destroy :deassociate_defaults
+
+	def deassociate_defaults
+		if self.id == self.user.billing_id
+			self.user.billing_id = nil
+			self.user.save
+		end
+		if self.id == self.user.shipping_id
+			self.user.shipping_id = nil
+			self.user.save
+		end
+	end
+
 	def self.get_top_4_states 
 		Address.select("count(addresses.state_id), states.name").
 			joins("JOIN users ON users.billing_id = addresses.id").
@@ -29,15 +42,10 @@ class Address < ApplicationRecord
 		table_state = Array.new(5) { Array.new }
 		table_state[0][0] = 'Item';
 		table_state[0][0] = 'Data';
-		table_state[1][0] = states_array[0].name
-		table_state[2][0] = states_array[1].name
-		table_state[3][0] = states_array[2].name
-		table_state[4][0] = states_array[3].name
-
-		table_state[1][1] = states_array[0].count
-		table_state[2][1] = states_array[1].count
-		table_state[3][1] = states_array[2].count
-		table_state[4][1] = states_array[3].count
+		0.upto(3) do |index|
+			table_state[index + 1][0] = states_array[index].name
+			table_state[index + 1][1] = states_array[0].count
+		end
 		table_state
 	end
 
@@ -46,15 +54,10 @@ class Address < ApplicationRecord
 		table_city = Array.new(5) { Array.new }
 		table_city[0][0] = 'Item';
 		table_city[0][0] = 'Data';
-		table_city[1][0] = cities_array[0].name
-		table_city[2][0] = cities_array[1].name
-		table_city[3][0] = cities_array[2].name
-		table_city[4][0] = cities_array[3].name
-
-		table_city[1][1] = cities_array[0].count
-		table_city[2][1] = cities_array[1].count
-		table_city[3][1] = cities_array[2].count
-		table_city[4][1] = cities_array[3].count
+		0.upto(3) do |index|
+			table_city[index + 1][0] = cities_array[index].name
+			table_city[index + 1][1] = cities_array[0].count
+		end
 		table_city
 	end
 end

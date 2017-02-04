@@ -7,14 +7,14 @@
 			<h4>Email: <%= @user.email %></h4>
 			<h4>Phone: <%= @user.phone %></h4>
 			<h4>Default Billing Address:</h4>
-			<% if @user.default_billing_address_id %>
-				<p><%= "#{@user.default_billing_address_id.street_address} #{@user.default_billing_address_id.secondary_address}, #{@user.default_billing_address_id.city.name} #{@user.default_billing_address_id.state.name}"%></p>
+			<% if @user.billing_id %>
+				<p><%= "#{@user.default_billing_address.street_address} #{@user.default_billing_address.secondary_address}, #{@user.default_billing_address.city.name} #{@user.default_billing_address.state.name}"%></p>
 			<% else %>
 				<p><%= "123 Fake Street, San Fransisco, CA"%></p>
 			<% end %>
 			<h4>Default Shipping Address:</h4>
-			<% if @user.default_shipping_address_id %>
-				<p><%= "#{@user.default_shipping_address_id.street_address} #{@user.default_shipping_address_id.secondary_address}, #{@user.default_shipping_address_id.city.name} #{@user.default_shipping_address_id.state.name}"%></p>
+			<% if @user.shipping_id %>
+				<p><%= "#{@user.default_shipping_address.street_address} #{@user.default_shipping_address.secondary_address}, #{@user.default_shipping_address.city.name} #{@user.default_shipping_address.state.name}"%></p>
 			<% else %>
 				<p><%= "123 Fake Street, San Fransisco, CA"%></p>
 			<% end %>
