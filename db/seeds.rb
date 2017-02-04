@@ -47,7 +47,7 @@ def generate_product
   p[:description] = Faker::Lorem.sentence
   p[:sku]         = Faker::Code.ean
   p[:price]       = random_price
-  p.save
+  p.save!
 end
 
 # A list of states.
@@ -109,6 +109,7 @@ def generate_user
   u[:first_name]  = first_name
   u[:last_name]   = last_name
   u[:email]       = Faker::Internet.email("#{first_name} #{last_name}")
+  u[:phone]       = Faker::PhoneNumber.cell_phone
   u[:created_at]  = creation_date
   u.save
 

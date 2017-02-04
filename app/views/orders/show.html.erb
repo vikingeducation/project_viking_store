@@ -1,0 +1,7 @@
+<% if @order.is_placed? %>
+	<h2>Order <%= "#{@order.id}" %></h2>
+<% else %>
+	<h2>Cart <%= "#{@order.id}" %></h2>
+<% end %>
+<%= render "logistics" %>
+<%= render "contents" %>

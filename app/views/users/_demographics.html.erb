@@ -1,0 +1,31 @@
+<div class= "user-section-wrapper">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Demographic Information</h3>
+			<h4>First Name: <%= @user.first_name %></h4>
+			<h4>Last Name: <%= @user.last_name %></h4>
+			<h4>Email: <%= @user.email %></h4>
+			<h4>Phone: <%= @user.phone %></h4>
+			<h4>Default Billing Address:</h4>
+			<% if @user.billing_id %>
+				<p><%= "#{@user.default_billing_address.street_address} #{@user.default_billing_address.secondary_address}, #{@user.default_billing_address.city.name} #{@user.default_billing_address.state.name}"%></p>
+			<% else %>
+				<p><%= "123 Fake Street, San Fransisco, CA"%></p>
+			<% end %>
+			<h4>Default Shipping Address:</h4>
+			<% if @user.shipping_id %>
+				<p><%= "#{@user.default_shipping_address.street_address} #{@user.default_shipping_address.secondary_address}, #{@user.default_shipping_address.city.name} #{@user.default_shipping_address.state.name}"%></p>
+			<% else %>
+				<p><%= "123 Fake Street, San Fransisco, CA"%></p>
+			<% end %>
+			<%= link_to "Edit #{@user.first_name} #{@user.last_name}'s Information", edit_user_path(@user.id) %><br>
+			<%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user.id), method: "delete", data: {confirm: "Do you really want to delete?"} %><br>
+			<%= link_to "View Saved Addresses", user_addresses_path(@user.id) %><br>
+			<% if @user.has_cart? %>
+				<%= link_to "View Cart", user_orders_path(@user.id) %><br>
+			<% else %>
+				<p>View Cart</p>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,12 @@
+<div class="address-show-wrapper">
+	<h4><%= "#{@address.user.first_name} #{@address.user.last_name} " %>Address</h4><br><br>
+	<h3>Owner ID: <%= "#{@address.user.id}" %></h3>
+	<h3>Owner Name: <%= link_to "#{@address.user.first_name} #{@address.user.last_name}", user_path(@address.user.id) %></h3>
+	<h3>Street: <%= "#{@address.street_address} #{@address.secondary_address}" %></h3>
+	<h3>City: <%= "#{@address.city.name}" %></h3>
+	<h3>State: <%= "#{@address.state.name}" %></h3>
+	<h3>Zip: <%= "#{@address.zip_code}" %></h3><br><br>
+
+	<%= link_to "Edit this Address", edit_address_path(@address.id) %><br>
+	<%= link_to "Delete this Address", address_path(@address.id), method: "delete", data: {confirm: "Do you really want to delete?"} %>
+</div>

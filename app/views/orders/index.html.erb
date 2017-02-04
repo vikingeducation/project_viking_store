@@ -1,0 +1,16 @@
+
+<% if @filtered_order %>
+	<h2><%= "#{@user.first_name} #{@user.last_name}" %> Orders</h2>
+<% else %>
+	<h2>Viking Store Orders</h2>
+<% end %>
+<div class="create-btn-wrapper">
+	<% if @filtered_order %>
+		<form method="get" action=<%="/users/#{@user.id}/orders/new"%>>
+			<button type="submit" class="btn btn-lg create-button text-center">Create a New Order</button>
+		</form>
+	<% else %>
+		<h4>Create new orders from within <%= link_to "User's", users_path %> Profile </h4>
+	<% end %>
+	<%= render partial: "table_order", locals: {data: 'Hello'} %>
+</div>

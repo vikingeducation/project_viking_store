@@ -1,0 +1,26 @@
+<form class="naked-html-form-wrapper" method="POST" action=<%= "/order_contents_update" %>>
+	<table class="table table-bordered table-striped table-user">
+
+		<tr>
+			<th>ID</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th>Total Price</th>
+			<th>Remove</th>
+		</tr>
+		<% @purchases.each do |purchase| %>
+			<tr>
+				<td><%= purchase.product_id %></td>
+	    		<td><input type="text" name=<%= "quantity[#{purchase.product_id}]" %> id="quantity" value=<%= "#{purchase.quantity}" %>></td>
+	    		<td><%= "$#{@order.get_price(purchase.product_id)}" %></td>
+				<td><%= "$#{purchase.quantity * @order.get_price(purchase.product_id)}" %></td>
+				<td><%= link_to "Remove", order_order_content_path(@order.id, purchase.id), method: "delete", data: {confirm: "Do you really want to delete?"} %></td>
+			</tr>
+		<% end %><br><br>
+		<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+		<input type="hidden" name="order_id" value=<%= "#{@order.id}" %>>
+		<input type="hidden" name="user_id" value=<%= "#{@order.user.id}" %>>
+		<input name="utf8" type="hidden" value="✓">	
+	</table>
+	<input type="submit" value="Update" class="update-button">
+</form>

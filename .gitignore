@@ -18,3 +18,9 @@
 # ignore database
 solution_viking_store_development
 solution_viking_store_test
+
+# ignore DS_Store
+.DS_Store
+*.DS_Store
+*/.DS_Store
+*/*/.DS_Store

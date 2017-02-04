@@ -1,0 +1,26 @@
+<table class="table table-bordered table-striped table-user">
+	<tr>
+		<th>ID</th>
+		<th>User</th>
+		<th>Street Address</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Orders</th>
+		<th>Created</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<% @addresses.each do |address| %>
+		<tr>
+			<td><%= link_to "#{address.id}", address_path(address.id) %></td>
+			<td><%= (address.user) ? "#{address.user.first_name} #{address.user.last_name}" : "" %></td>
+			<td><%= address.street_address %></td>
+			<td><%= address.city.name %></td>
+			<td><%= address.state.name %></td>
+			<td><%= address.used_as_shipping.count %></td>
+			<td><%= address.created_at %></td>
+			<td><%= link_to "Edit", edit_address_path(address.id) %></td>
+			<td><%= link_to "Delete", address_path(address.id), method: "delete", data: {confirm: "Do you really want to delete?"} %></td>
+		</tr>
+	<% end %>
+</table>

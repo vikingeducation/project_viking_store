@@ -1,0 +1,31 @@
+<table class="table table-bordered table-striped table-user">
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Joined Date</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Orders</th>
+		<th>Last Order Date</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<% @users.each do |user| %>
+		<tr>
+			<td><%= link_to "#{user.id}", user_path(user.id) %></td>
+			<td><%= "#{user.first_name} #{user.last_name}" %></td>
+			<td><%= user.created_at %></td>
+			<td><%= (user.shipping_id) ? user.default_shipping_address.city.name : "" %></td>
+			<td><%= (user.shipping_id) ? user.default_shipping_address.state.name : "" %></td>
+			<td><%= user.orders.count %></td>
+			<% if user.last_order %>
+				<td><%= user.last_order.created_at %></td>
+			<% else %>
+				<td><%= "" %></td>
+			<% end %>
+			
+			<td><%= link_to "Edit", edit_user_path(user.id) %></td>
+			<td><%= link_to "Delete", user_path(user.id), method: "delete", data: {confirm: "Do you really want to delete?"} %></td>
+		</tr>
+	<% end %>
+</table>

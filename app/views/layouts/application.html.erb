@@ -7,8 +7,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+	<% flash.each do |type, message| %>
+      	<div>
+        	<strong><%= type %>! <%= message %></strong>
+      	</div>
+    <% end %>
+	<div class="container">
+  		<h1 class="shared-header">Viking Store Admin Portal</h1>
+  		<div class="row">
+  			<div class="col-md-3">
+				<%= render "shared/navbar" %>
+    		</div>
+    		<div class="col-md-9 main-content">
+				<%= yield %>
+			</div>
+	</div>
 
 </body>
 </html>

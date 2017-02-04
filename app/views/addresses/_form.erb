@@ -1,0 +1,34 @@
+<%= form_for [@user, @address] do |f| %>
+
+	Owner ID: <%= "#{@address.user.id}" if @address.user  %><br>
+	Owner Name: <%= link_to "#{@address.user.first_name} #{@address.user.last_name}", user_path(@address.user.id) if @address.user %>
+	<div class="form-group">
+		<%= f.label :street_address %>
+		<%= f.text_field :street_address, class: "form-control", placeholder: "123 Fake Street" %><%= form_field_error_messages(@address, :street_address) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :secondary_address %>
+		<%= f.text_field :secondary_address, class: "form-control", placeholder: "Apt 4025" %><%= form_field_error_messages(@address, :secondary_address) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :city_id, "City" %><br>
+		<%= f.collection_select :city_id, City.all, :id, :name %><%= form_field_error_messages(@address, :city_id) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :state_id, "State" %><br>
+		<%= f.collection_select :state_id, State.all, :id, :name %><%= form_field_error_messages(@address, :state_id) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :zip_code %>
+		<%= f.text_field :zip_code, class: "form-control", placeholder: "90012" %><%= form_field_error_messages(@address, :zip_code) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.submit %><br />
+	</div>
+
+<% end %>

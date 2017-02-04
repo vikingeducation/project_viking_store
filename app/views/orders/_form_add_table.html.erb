@@ -1,0 +1,19 @@
+<form class="naked-html-form-wrapper" method="POST" action=<%= "/order_contents_add" %>>
+	<table class="table table-bordered table-striped table-user">
+		<tr>
+			<th>ProductID</th>
+			<th>Quantity</th>
+		</tr>
+		<% 5.times do |index| %>
+			<tr>
+	    		<td><input type="text" name=<%= "product_id[#{index}]" %> id="productID"></td>
+	    		<td><input type="text" name=<%= "quantity[#{index}]" %> id="quantity"></td>
+			</tr>
+		<% end %><br><br>
+		<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+		<input type="hidden" name="order_id" value=<%= "#{@order.id}" %>>
+		<input type="hidden" name="user_id" value=<%= "#{@order.user.id}" %>>
+		<input name="utf8" type="hidden" value="✓">	
+	</table>
+	<input type="submit" value="Add" class="update-button">
+</form>

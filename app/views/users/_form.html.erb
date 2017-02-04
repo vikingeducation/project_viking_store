@@ -1,0 +1,46 @@
+<%= form_for @user do |f| %>
+
+	<div class="form-group">
+		<%= f.label :id %><br>
+		<%= @user.id %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :first_name %>
+		<%= f.text_field :first_name, class: "form-control", placeholder: "Akbar" %><%= form_field_error_messages(@user, :first_name) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :last_name %>
+		<%= f.text_field :last_name, class: "form-control", placeholder: "Mashhadi" %><%= form_field_error_messages(@user, :last_name) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :email %>
+		<%= f.text_field :email, class: "form-control", placeholder: "akbar@mashhadi.zart" %><%= form_field_error_messages(@user, :email) %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :phone %>
+		<%= f.text_field :phone, class: "form-control", placeholder: "987-654-3210" %><%= form_field_error_messages(@user, :phone) %>
+	</div>
+
+	<% if @edit_form %>
+		<div class="form-group">
+			<%= f.label :billing_id, "Default Billing Address" %><br>
+			<%= f.collection_select :billing_id, @user.addresses, :id, :street_address %><%= form_field_error_messages(@user, :category_id) %>
+		</div>
+		<div class="form-group">
+			<%= f.label :shipping_id, "Default Shipping Address" %><br>
+			<%= f.collection_select :shipping_id, @user.addresses, :id, :street_address %><%= form_field_error_messages(@user, :category_id) %>
+		</div>
+
+		<%= link_to "View Saved Addresses", user_addresses_path(@user.id) %><br><br>
+
+	<% end %>
+
+	<div class="form-group">
+		<%= f.submit %><br />
+	</div>
+
+<% end %>

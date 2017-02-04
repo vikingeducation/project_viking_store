@@ -1,0 +1,13 @@
+<% if @filtered_address %>
+	<h2><%= "#{@user.first_name} #{@user.last_name}" %> Addresses</h2>
+<% else %>
+	<h2>Viking Store Addresses</h2>
+<% end %>
+<div class="create-btn-wrapper">
+	<% if @filtered_address %>
+		<form method="get" action=<%="/users/#{@user.id}/addresses/new"%>>
+			<button type="submit" class="btn btn-lg create-button text-center">Create a New Address</button>
+		</form>
+	<% end %>
+	<%= render partial: "table_address", locals: {data: 'Hello'} %>
+</div>

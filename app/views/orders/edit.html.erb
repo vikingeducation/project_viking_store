@@ -1,0 +1,22 @@
+<div class="address-new-edit">
+	<div class="order-edit-order row">
+		<div class="col-md-12">
+			<%= render "new_logistics" %>
+			<%= render "form" %>
+			<%= link_to "Delete", user_order_path(@user.id, @order.id), method: "delete", data: {confirm: "Do you really want to delete?"} %>
+		</div>
+	</div>
+	<div class="order-edit-content row">
+		<div class="col-md-12">
+			<h3>Edit Order Content</h3>
+			<%= render "form_table" %>
+		</div>
+	</div>
+	<div class="order-add-product row">
+		<div class="col-md-12">
+			<h3>Add Products To Order</h3>
+			<h5>Add up to 5 products at a time</h5>
+			<%= render "form_add_table" %>
+		</div>
+	</div>
+</div>
