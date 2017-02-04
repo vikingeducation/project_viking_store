@@ -1,0 +1,18 @@
+<table class="table table-bordered table-striped table-user">
+	<tr>
+		<th>Product ID</th>
+		<th>Product</th>
+		<th>Quantity</th>
+		<th>Price</th>
+		<th>Total Price</th>
+	</tr>
+	<% this_order.products.each do |product| %>
+		<tr>
+			<td><%= link_to "#{product.id}", product_path(product.id) %></td>
+			<td><%= product.name %></td>
+			<td><%= this_order.product_quantity(product.id) %></td>
+			<td><%= "$#{product.price}" %></td>
+			<td><%= "$#{product.price * this_order.product_quantity(product.id)}" %></td>
+		</tr>
+	<% end %>
+</table>

@@ -1,0 +1,19 @@
+<table class="table table-bordered table-striped table-user">
+	<tr>
+		<th>ID</th>
+		<th>Quantity</th>
+		<th>Price</th>
+		<th>Total Price</th>
+		<th>Remove</th>
+	</tr>
+		<% for purchase in @purchases %>
+			<tr>
+				<td><%= purchase.product_id %></td>
+				<td><%= form_for purchase do |f| %>
+						<%= f.text_field :quantity, class: "form-control" %><%= form_field_error_messages(purchase, :quantity) %>
+				<% end %></td>
+				<td><%= @order.get_price(purchase.product_id) %></td>
+				<td><%= "$#{purchase.quantity * @order.get_price(purchase.product_id)}" %></td>
+			</tr>
+		<% end %>	
+</table>

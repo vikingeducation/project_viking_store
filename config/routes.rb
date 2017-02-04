@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   	resources :addresses
   	resources :products
   	resources :orders
+    resources :order_contents
 end

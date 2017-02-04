@@ -13,8 +13,8 @@
 			<td><%= order.created_at %></td>
 			<td><%= "$#{order.value}" %></td>
 			<td><%= (order.checkout_date) ? "PLACED" : "UNPLACED" %></td>
-			<td><%= link_to "Edit", "#" %></td>
-			<td><%= link_to "Delete", "#", method: "delete", data: {confirm: "Do you really want to delete?"} %></td>
+			<td><%= link_to "Edit", edit_user_order_path(@user.id, order.id) %></td>
+			<td><%= link_to "Delete", user_order_path(@user.id, order.id), method: "delete", data: {confirm: "Do you really want to delete?"} %></td>
 		</tr>
 	<% end %>
 </table>

@@ -1,0 +1,32 @@
+<div class= "user-section-wrapper">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Logistical Information</h3>
+			<h4>Basic Information</h4>
+			<p>Customer ID: <%= @order.user_id%> </p>
+			<p>Customer: <%= link_to "#{@order.user.first_name} #{@order.user.last_name}", user_path(@order.user_id) %> </p>
+			<p>Date Placed: <%= @order.checkout_date if @order.checkout_date %> </p>
+			<p># Products: <%= @order.products.count %> </p>
+			<p>Order Value: <%= "$#{@order.value}" %> </p>
+			<%= link_to "Edit Customer Profile", edit_user_path(@order.user_id) %>
+			<h4>Order Status</h4>
+			<% if @order.is_placed? %>
+				<h4 class="placed-order-highlight">PLACED</h4>
+			<% else %>
+				<h4 class="unplaced-order-highlight">UNPLACED</h4>
+			<% end %>
+			<h4>Shipping Address</h4>
+			<p>Street Address: <%= @order.shipping_address.street_address %> </p>
+			<p>City: <%= @order.shipping_address.city.name %> </p>
+			<p>State: <%= @order.shipping_address.state.name%> </p>
+			<h4>Billing Address</h4>
+			<p>Street Address: <%= @order.billing_address.street_address %> </p>
+			<p>City: <%= @order.billing_address.city.name %> </p>
+			<p>State: <%= @order.billing_address.state.name%> </p>
+			<h4>Billing Card</h4>
+			<p>Last 4 Digits: <%= @order.payment.card_number[12..15] if @order.payment %> </p><br><br>
+			<%= link_to "Edit Order", edit_order_path(@order.id) %><br>
+			<%= link_to "Delete Order", order_path(@order.id), method: "delete", data: {confirm: "Do you really want to delete?"} %>
+		</div>
+	</div>
+</div>

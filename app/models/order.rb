@@ -9,8 +9,28 @@ class Order < ApplicationRecord
 	has_many :categories, 
 			 :through => :products
 
+	def product_quantity(id)
+		self.order_contents.where(:product_id => id).first.quantity
+	end
+
+	def content_id(id)
+		self.order_contents.where(:product_id => id).first.id
+	end
+
+	def get_price(pid)
+		self.products.where(:id => pid).first.price
+	end
+
 	def value
 		self.order_contents.joins(:product).sum("quantity * price").to_f
+	end
+
+	def shipping_address
+		Address.find(self.shipping_id)
+	end
+
+	def billing_address
+		Address.find(self.billing_id)
 	end
 
 	def self.purchases_period(a, b)
@@ -39,6 +59,10 @@ class Order < ApplicationRecord
 
 	def self.placed
 		Order.where.not(:checkout_date => nil)
+	end
+
+	def is_placed?
+		self.checkout_date != nil
 	end
 
 	def self.get_past_n_days_revenue(n)
