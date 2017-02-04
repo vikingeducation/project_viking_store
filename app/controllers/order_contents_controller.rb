@@ -8,7 +8,7 @@ class OrderContentsController < ApplicationController
 		@order_content = OrderContent.find(params[:id])
 		if @order_content.destroy
 			flash[:success] = "Great! Your order content has been removed!"
-			redirect_to edit_user_order_path(params[:user_id], params[:order_id])
+			redirect_to edit_order_path(params[:order_id])
 		else
 			flash[:error] = "Could not remove order content!"
 			redirect_to(:back)

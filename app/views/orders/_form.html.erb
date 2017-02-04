@@ -1,10 +1,10 @@
 <%= form_for [@user, @order] do |f| %>
 
 	<% if @in_edit_mode %>
-		<%= f.radio_button :checkout_date, @cur_time, :checked => false %>
-		<%= label :status_placed, 'PLACED', :class => "placed-order-highlight" %><br>
-		<%= f.radio_button :checkout_date, nil %>
-		<%= label :status_unplaced, 'UNPLACED', :class => "unplaced-order-highlight" %>
+		<%= f.radio_button :checkout_date, nil, :checked => !@order.is_placed? %>
+		<%= label :status_unplaced, 'UNPLACED', :class => "unplaced-order-highlight" %><br>
+		<%= f.radio_button :checkout_date, @cur_time, :checked => @order.is_placed? %>
+		<%= label :status_placed, 'PLACED', :class => "placed-order-highlight" %>
 	<% end %>
 
 	<div class="form-group">

@@ -13,13 +13,15 @@ class Address < ApplicationRecord
 	before_destroy :deassociate_defaults
 
 	def deassociate_defaults
-		if self.id == self.user.billing_id
-			self.user.billing_id = nil
-			self.user.save
-		end
-		if self.id == self.user.shipping_id
-			self.user.shipping_id = nil
-			self.user.save
+		if self.user
+			if self.id == self.user.billing_id
+				self.user.billing_id = nil
+				self.user.save
+			end
+			if self.id == self.user.shipping_id
+				self.user.shipping_id = nil
+				self.user.save
+			end
 		end
 	end
 

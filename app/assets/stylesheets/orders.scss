@@ -13,7 +13,7 @@
 
 .address-new-edit{
 	padding: 40px;
-	h3{
+	h3, h5{
 		text-align: center;
 	}
 }
@@ -25,8 +25,13 @@
 
 .order-edit-content{
 	border: 1px solid black;
+	margin-bottom: 20px;
 }
 
 .order-add-product{
 	border: 1px solid black;
+}
+
+.update-button{
+	margin-bottom: 20px;
 }

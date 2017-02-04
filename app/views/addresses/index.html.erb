@@ -1,4 +1,8 @@
-<h2>Viking Store Addresses</h2>
+<% if @filtered_address %>
+	<h2><%= "#{@user.first_name} #{@user.last_name}" %> Addresses</h2>
+<% else %>
+	<h2>Viking Store Addresses</h2>
+<% end %>
 <div class="create-btn-wrapper">
 	<% if @filtered_address %>
 		<form method="get" action=<%="/users/#{@user.id}/addresses/new"%>>
