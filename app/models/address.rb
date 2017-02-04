@@ -3,6 +3,12 @@ class Address < ApplicationRecord
 	belongs_to :state
 	belongs_to :customer, :class_name => "User", foreign_key: :user_id
 	belongs_to :user
+	has_many :used_as_billing, :class_name => "Order", foreign_key: :billing_id
+	has_many :used_as_shipping, :class_name => "Order", foreign_key: :shipping_id
+
+	validates 	:street_address, :city_id, :state_id,
+				:presence => true
+	validates 	:street_address, :length =>{ :in => 1..64 }
 
 	def self.get_top_4_states 
 		Address.select("count(addresses.state_id), states.name").

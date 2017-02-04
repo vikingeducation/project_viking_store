@@ -3,11 +3,15 @@ class Order < ApplicationRecord
 	belongs_to :user
 	belongs_to :customer, :class_name => "User", foreign_key: :user_id
 	belongs_to :payment, :class_name => "CreditCard", foreign_key: :credit_card_id
-	has_many :order_contents
+	has_many :order_contents, :dependent => :destroy
 	has_many :products, 
 			 :through => :order_contents
 	has_many :categories, 
 			 :through => :products
+
+	def value
+		self.order_contents.joins(:product).sum("quantity * price").to_f
+	end
 
 	def self.purchases_period(a, b)
 		Order.joins("JOIN order_contents ON orders.id = order_contents.order_id")

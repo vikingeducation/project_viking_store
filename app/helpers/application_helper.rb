@@ -10,4 +10,9 @@ module ApplicationHelper
 		  ['New Users', '1', '1'] ] 
 
 	end
+	def form_field_error_messages(resource, symbol)
+		unless resource.errors[symbol].empty?
+			"#{symbol.to_s.titleize} #{resource.errors[symbol].first}"
+		end
+	end
 end

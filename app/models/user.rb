@@ -1,13 +1,36 @@
 class User < ApplicationRecord
-	has_many :cards, class_name: "CreditCard", foreign_key: :user_id
-	has_many :orders
-	has_many :addresses
+	has_many :cards, class_name: "CreditCard", foreign_key: :user_id, dependent: :destroy
+	has_many :orders, dependent: :nullify
+	has_many :addresses, dependent: :nullify
 	has_one :default_shipping_address_id, class_name: "Address", foreign_key: :user_id
 	has_one :default_billing_address_id, class_name: "Address", foreign_key: :user_id
 	has_many :order_contents,
 			 :through => :orders
 	has_many :products, 
 			 :through => :order_contents
+
+	validates 	:first_name, :last_name, :email,
+				:presence => true,
+            	:length =>{ :in => 1..64 }
+
+    validates	:email, :format => { :with => /@/ }
+
+    before_destroy :remove_carts
+
+    def has_cart?
+    	(self.orders.where(:checkout_date => nil).count != 0)
+    end
+
+    def remove_carts
+    	carts = self.orders.where(:checkout_date => nil)
+    	carts.each do |cart|
+    		cart.destroy
+    	end
+    end
+
+    def last_order
+    	self.orders.where.not(:checkout_date => nil).order(:checkout_date).limit(1)[0]
+    end
 
 	def self.get_past_week
 		User.get_past_days(7)

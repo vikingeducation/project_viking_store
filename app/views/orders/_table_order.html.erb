@@ -1,0 +1,13 @@
+<table class="table table-bordered table-striped table-user">
+	<% 9.times do |row| %>
+		<tr>
+			<% 10.times do |col| %>
+				<% if row == 0 %>
+					<th><%= data %></th>
+				<% else %>
+					<td><%= data %></td>
+				<% end %>
+			<% end %>
+		</tr>
+	<% end %>
+</table>

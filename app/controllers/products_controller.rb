@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
+
+	include ProductsHelper
+
 	def index
-		@products = Product.joins("JOIN categories ON products.category_id = categories.id").select("products.*, categories.name AS cname").order(:id).to_a
+		@products = Product.order(:id)
 	end
 
 	def new
@@ -8,15 +11,9 @@ class ProductsController < ApplicationController
 	end
 
 	def show
-		@product = Product.joins("JOIN categories ON products.category_id = categories.id").select("products.*, categories.name AS cname").find(params[:id])
-		@num_ordered = OrderContent.joins("JOIN orders ON orders.id = order_contents.order_id")
-					.where.not("orders.checkout_date" => nil)
-					.where(:product_id => @product.id)
-					.sum(:quantity)
-		@num_in_cart = OrderContent.joins("JOIN orders ON orders.id = order_contents.order_id")
-					.where("orders.checkout_date" => nil)
-					.where(:product_id => @product.id)
-					.sum(:quantity)
+		@product = Product.find(params[:id])
+		@num_ordered = @product.placed_times
+		@num_in_cart = @product.in_carts
 	end
 
 	def create
@@ -63,9 +60,5 @@ class ProductsController < ApplicationController
 			flash[:error] = "Could not remove product!"
 			redirect_to(:back)
 		end
-  	end
-
-	def products_params
-    	params.require(:product).permit(:name, :description, :price, :category_id)
   	end
 end

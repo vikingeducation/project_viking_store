@@ -1,0 +1,16 @@
+<div class= "user-section-wrapper">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Admin Actions</h3>
+			<div class="create-btn-wrapper">
+				<form method="get" action=<%= "/users/#{@user.id}/orders/new"%>>
+					<button type="submit" class="btn btn-lg create-button text-center">Create Order</button>
+				</form>
+				<br>
+				<form method="get" action=<%= "/users/#{@user.id}/addresses/new"%>>
+					<button type="submit" class="btn btn-lg create-button text-center">Create Address</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

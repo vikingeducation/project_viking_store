@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+
+	include CategoriesHelper
+
 	def index
 		@categories = Category.order(:id)
 	end
@@ -9,7 +12,7 @@ class CategoriesController < ApplicationController
 
 	def show
 		@category = Category.find(params[:id])
-		@products = Category.products
+		@products = @category.products
 	end
 
 	def create
@@ -41,10 +44,6 @@ class CategoriesController < ApplicationController
 	def destroy
 		@category = Category.find(params[:id])
 		if @category.destroy
-			child_products = Product.where(:category_id => params[:id]).to_a
-			child_products.each do |product|
-				product.category_id = nil
-			end
 			flash[:success] = "Great! Your category has been removed!"
 			redirect_to categories_path
 		else
@@ -53,7 +52,4 @@ class CategoriesController < ApplicationController
 		end
   	end
 
-	def categories_params
-    	params.require(:category).permit(:name, :description)
-  	end
 end

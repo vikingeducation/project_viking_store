@@ -1,0 +1,14 @@
+<div class= "user-section-wrapper">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Credit Card Information</h3>
+			<% @user.cards.each do |card| %>
+				<h4>First Name: <%= @user.first_name %></h4>
+				<h4>Last Name: <%= @user.last_name %></h4>
+				<h4>Number: <%= card.card_number %></h4>
+				<h4>Expiration: <%= "#{card.exp_month}, #{card.exp_year}" %></h4>
+				<%= link_to "Remove Card", user_credit_card_path(@user.id, card.id), method: "delete", data: {confirm: "Do you really want to delete?"} %>
+			<% end %>
+		</div>
+	</div>
+</div>

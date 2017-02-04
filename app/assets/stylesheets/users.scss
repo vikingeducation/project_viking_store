@@ -1,3 +1,14 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-section-wrapper{
+	border: 1px solid black;
+	h3{
+		text-align: center;
+	}
+	h4, p, a{
+		padding: 5px;
+	}
+	margin-bottom: 30px;
+}

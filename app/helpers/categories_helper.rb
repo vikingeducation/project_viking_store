@@ -1,7 +1,5 @@
 module CategoriesHelper
-	def form_field_error_messages(resource, symbol)
-		unless resource.errors[symbol].empty?
-			"#{symbol.to_s.titleize} #{resource.errors[symbol].first}"
-		end
-	end
+	def categories_params
+    	params.require(:category).permit(:name, :description)
+  	end
 end
