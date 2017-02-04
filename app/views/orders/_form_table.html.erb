@@ -6,7 +6,8 @@
 		<th>Total Price</th>
 		<th>Remove</th>
 	</tr>
-		<% for purchase in @purchases %>
+	<%= form_for @order, :url => edit_order_path, :html => { :method => :put } do %>
+		<% @purchases.each do |purchase| %>
 			<tr>
 				<td><%= purchase.product_id %></td>
 				<td><%= form_for purchase do |f| %>
