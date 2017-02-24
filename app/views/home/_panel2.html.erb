@@ -1,0 +1,75 @@
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <h2 class="text-center">2. User Demographics and Behavior </h2>
+
+      <h3>Top 3 States Users Live In (billing)</h3>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% panel2[:state_demos].each do |state| %>
+            <tr>
+              <td><%= state[0] %>
+              <td><%= state[1] %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
+      <h3>Top 3 Cities Users Live In (billing)</h3>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% panel2[:city_demos].each do |city| %>
+            <tr>
+              <td><%= city[0] %>
+              <td><%= city[1] %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
+      <h3>Top User With...</h3>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>User</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Highest Single Order Value</th>
+            <td><%= panel2[:top_user_by_order_value][0][0] %></td>
+            <td><%= panel2[:top_user_by_order_value][0][1] %></td>
+          </tr>
+          <tr>
+            <th>Highest Lifetime Value</th>
+            <td><%= panel2[:top_user_by_lifetime_value][0][0] %></td>
+            <td><%= panel2[:top_user_by_lifetime_value][0][1] %></td>
+          </tr>
+          <tr>
+            <th>Highest Average Order Value</th>
+            <td><%= panel2[:top_user_by_average_order_value][0][0] %></td>
+            <td><%= panel2[:top_user_by_average_order_value][0][1] %></td>
+          </tr>
+          <tr>
+            <th>Most Orders Placed</th>
+            <td><%= panel2[:top_user_by_most_orders][0][0] %></td>
+            <td><%= panel2[:top_user_by_most_orders][0][1] %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

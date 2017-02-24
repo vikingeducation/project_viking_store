@@ -14,7 +14,3 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-
-# ignore database
-solution_viking_store_development
-solution_viking_store_test

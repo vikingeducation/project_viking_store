@@ -1,0 +1,36 @@
+<div class="container">
+  <h1> Hi I'm the Dashboard </h1>
+  <hr>
+
+  <div class="row>">
+    <div class="col-sm-6 col-xs-12">
+      <h1> Panel 1 / Overall Platform </h1>
+      Last 7 days (new users, orders, new products, revenue) <br>
+      Last 30 days (new users, orders, new products, revenue) <br>
+      Total (users, orders, products, revenue)
+    </div>
+    <div class="col-sm-6 col-xs-12">
+      <%= render partial: 'panel2', locals: { panel2: @panel2 } %>
+    </div>
+  </div>
+
+  <div class="row>">
+    <div class="col-sm-6 col-xs-12">
+      <%= render partial: 'panel3', locals: { panel3: @panel3 } %>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+      <h1>Panel 4 / Time Series Data </h1>
+  Orders by Day (goes back 7 days | Today, Yesterday, then M/DD) [ order quantity, value]
+  Orders by Week (goes back 7 weeks, display start date of week)
+    </div>
+  </div>
+
+  <hr>
+  <h1> Additional Queries </h1>
+
+  Panel 1: Display a "Change" column in both the 7- and 30- day tables which shows the change between that period and the prior period of teh same duration (e.g. days 1-30 vs 31-60) <br>
+  Panel 2: Show the top customer by value in each of our top 3 states by value. <br>
+  Panel 3: Show the top state that orders were shipped to in each of the 3 available time periods. <br>
+  Panel 4: Show a 5-week trailing average order value column in the "orders by week" table
+
+</div>
