@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2 class="text-center">4. Time Series Data</h2>
+    <h3>Orders By Day</h3>
+    <%= render partial: 'panel4_time_series_table', locals: { data: panel4[:orders_by_day], day: true } %>
+    <h3>Orders By Week</h3>
+    <%= render partial: 'panel4_time_series_table', locals: { data: panel4[:orders_by_week], day: false } %>
+  </div>
+</div>

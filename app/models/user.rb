@@ -3,6 +3,14 @@ class User < ApplicationRecord
   has_many :credit_cards, dependent: :destroy
   has_many :orders
 
+  def self.get_num_of_new_users(start = Time.now, days_ago = nil)
+    result = User.select("count(*) AS num_new_users")
+    unless days_ago.nil?
+      result = result.where("users.created_at <= '#{start}' AND users.created_at >= '#{start - days_ago.days}'")
+    end
+    result[0].num_new_users.to_s
+  end
+
   def self.top_states(limit = 3)
     state_demos = []
     result = User.select("states.name AS state_name, COUNT(*) AS state_count")
@@ -45,7 +53,7 @@ class User < ApplicationRecord
             .join_users_orders_order_contents_and_products
             .where("orders.checkout_date IS NOT NULL")
             .group("users.id")
-            .order("SUM(order_contents.quantity * products.price)/COUNT(orders.checkout_date) DESC")
+            .order("SUM(order_contents.quantity * products.price) DESC")
             .limit(limit)
     result.each { |r| highest_lifetime_value << ["#{r.first_name} #{r.last_name}", sprintf('$%.2f', r.lifetime_value)] }
     highest_lifetime_value

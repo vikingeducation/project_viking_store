@@ -9,7 +9,21 @@ class Order < ApplicationRecord
     }
   end
 
-  private
+  def self.get_time_series_data(start = Time.now, interval = 'day', data_points = 7)
+    data = []
+    if interval == 'day'
+      data_points.times do |index|
+        t1 = start - index.days
+        data << [t1.strftime("%-m/%d"), self.number_of_orders(t1, 1), sprintf('$%.2f', self.total_revenue(t1, 1))]
+      end
+    elsif interval == 'week'
+      data_points.times do |index|
+        t1 = start - index.week
+        data << [(t1 - 7.days).strftime("%-m/%d"), self.number_of_orders(t1, 7), sprintf('$%.2f', self.total_revenue(t1, 7))]
+      end
+    end
+    data
+  end
 
   def self.number_of_orders(start = Time.now, days_ago = nil)
     result = Order.where("orders.checkout_date IS NOT NULL")
@@ -22,8 +36,11 @@ class Order < ApplicationRecord
                   .join_orders_order_contents_and_products
                   .where("orders.checkout_date IS NOT NULL")
                   .time_series(start, days_ago)
+    return 0 if result.empty?
     result[0].revenue           
   end
+
+  private
 
   def self.average_order_value(start = Time.now, days_ago = nil)
     result = sprintf('$%.2f', total_revenue(start, days_ago) / number_of_orders(start, days_ago))

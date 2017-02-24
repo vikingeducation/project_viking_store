@@ -1,0 +1,11 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2 class="text-center">1. Overall Platform </h2>
+    <h3>Last 7 Days</h3>
+    <%= render partial: 'panel1_overall_platform_table', locals: { data: panel1[:overall_platform_last_7_days], total: false } %>
+    <h3>Last 30 Days</h3>
+    <%= render partial: 'panel1_overall_platform_table', locals: { data: panel1[:overall_platform_last_30_days], total: false } %>
+    <h3>Total</h3>
+    <%= render partial: 'panel1_overall_platform_table', locals: { data: panel1[:overall_platform_total], total: true } %>
+  </div>
+</div>

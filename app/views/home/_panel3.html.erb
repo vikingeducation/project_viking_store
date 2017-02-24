@@ -1,11 +1,11 @@
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <h2 class="text-center">3. Order Statistics </h2>
-      <h3>Last 7 Days</h3>
-      <%= render partial: 'panel3_order_stats_table', locals: { data: panel3[:order_stats_last_7_days] } %>
-      <h3>Last 30 Days</h3>
-      <%= render partial: 'panel3_order_stats_table', locals: { data: panel3[:order_stats_last_30_days]} %>    
-      <h3>Total</h3>
-      <%= render partial: 'panel3_order_stats_table', locals: { data: panel3[:order_stats_total] } %>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2 class="text-center">3. Order Statistics </h2>
+    <h3>Last 7 Days</h3>
+    <%= render partial: 'panel3_order_stats_table', locals: { data: panel3[:order_stats_last_7_days] } %>
+    <h3>Last 30 Days</h3>
+    <%= render partial: 'panel3_order_stats_table', locals: { data: panel3[:order_stats_last_30_days]} %>    
+    <h3>Total</h3>
+    <%= render partial: 'panel3_order_stats_table', locals: { data: panel3[:order_stats_total] } %>
   </div>
+</div>
