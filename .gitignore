@@ -14,3 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Only store example secrets and database configs
+config/database.yml
+config/secrets.yml
