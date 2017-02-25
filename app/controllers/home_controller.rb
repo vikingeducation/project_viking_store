@@ -3,8 +3,8 @@ class HomeController < ApplicationController
   end
 
   def dashboard
-    # start_time = Time.now
-    start_time = Time.new(2017, 2, 23)
+    start_time = Time.now
+    # start_time = Time.new(2017, 2, 23)
 
     # Panel 1
     @panel1 = {
