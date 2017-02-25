@@ -1,0 +1,17 @@
+<% # the title might have to be passed in %>
+<h3><%= title %></h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <% headings.each do |h| %>
+        <th><%= h %>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% # REPLACE THIS LOOP %>
+      <% rows.each do |row| %>
+        <%= render partial: 'table_row', locals: {data: row} %>
+      <% end %>
+    </tbody>
+  </table>

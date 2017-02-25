@@ -1,0 +1,20 @@
+<h1 class="text-center">Viking Store Analytics Dashboard</h1>
+<div class="row">
+  <div class="col-md-6">
+    <h2>1. Overall Platform</h2>
+  </div>
+  <div class="col-md-6">
+    <h2>2. User Demographics and Behaviour</h2>
+    <%= render partial: 'table', :locals => {title: "Top 3 States Users Live In (billing)", headings: ['Item', 'Data'], rows: @top_states } %>
+    <%= render partial: 'table', :locals => {title: "Top 3 Cities Users Live In (billing)", headings: ['Item', 'Data'], rows: @top_cities } %>
+    <%= render partial: 'table', locals: {title: 'Top User With...', headings: ['Item', 'User', 'Quantity'], rows: @top_users_with} %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <h2>3. Order Statistics</h2>
+  </div>
+  <div class="col-md-6">
+    <h2>4. Time Series Data</h2>
+  </div>
+</div>

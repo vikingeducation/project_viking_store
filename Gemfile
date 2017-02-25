@@ -5,6 +5,10 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.0.0'
 gem 'pg'
 
+
+# Add boostrap
+gem "twitter-bootstrap-rails"
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -29,6 +33,12 @@ gem 'spring',  '~> 1.3.6',      group: :development
 gem 'pry'
 
 gem 'faker'
+
+group :development do
+gem 'better_errors'
+gem 'jazz_fingers'
+gem 'binding_of_caller'
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -40,4 +50,3 @@ gem 'faker'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
