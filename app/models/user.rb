@@ -6,7 +6,7 @@ class User < ApplicationRecord
   def self.get_num_of_new_users(start = Time.now, days_ago = nil)
     result = User.select("count(*) AS num_new_users")
     unless days_ago.nil?
-      result = result.where("users.created_at <= '#{start}' AND users.created_at >= '#{start - days_ago.days}'")
+      result = result.where("users.created_at <= ? AND users.created_at >= ?", start, start - days_ago.days)
     end
     result[0].num_new_users.to_s
   end

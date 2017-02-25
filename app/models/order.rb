@@ -22,7 +22,7 @@ class Order < ApplicationRecord
         data << [(t1 - 7.days).strftime("%-m/%d"), self.number_of_orders(t1, 7), sprintf('$%.2f', self.total_revenue(t1, 7))]
       end
     end
-    data
+    data  
   end
 
   def self.number_of_orders(start = Time.now, days_ago = nil)
@@ -59,9 +59,9 @@ class Order < ApplicationRecord
 
   def self.time_series(start, days_ago)
     if days_ago.nil?
-      where("orders.checkout_date <= '#{start}'")
+      where("orders.checkout_date <= ?", start)
     else
-      where("orders.checkout_date <= '#{start}' AND orders.checkout_date >= '#{start - days_ago.days}'")
+      where("orders.checkout_date <= ? AND orders.checkout_date >= ?", start, start - days_ago.days )
     end
   end
 
