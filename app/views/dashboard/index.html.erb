@@ -22,5 +22,7 @@
   </div>
   <div class="col-md-6">
     <h2>4. Time Series Data</h2>
+    <%= render partial: 'table', locals: {title: 'Orders by Day', headings: ['Date', 'Quantity', 'Value'], rows: @orders_by_day} %>
+    <%= render partial: 'table', locals: {title: 'Orders by Week', headings: ['Date', 'Quantity', 'Value'], rows: @orders_by_week} %>
   </div>
 </div>

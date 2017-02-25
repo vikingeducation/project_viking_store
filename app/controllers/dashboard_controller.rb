@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  include DashboardHelper
   def index
 
     #panel 2 user demographics and behaviour
@@ -40,6 +41,10 @@ class DashboardController < ApplicationController
       ]
       instance_variable_set("@order_stats#{days || '_total'}", arrs)
     end
+    # time series statistics
+    @orders_by_day = Order.by_day
+    @orders_by_week = Order.by_week
   end
+
 
 end
