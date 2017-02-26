@@ -9,8 +9,12 @@ $navbar-bg-color: #a3e0ff;
 $navbar-heading-bg-color: #0099cc;
 $navbar-width: 120px;
 
-/* Main content color scheme */ 
+/* Main content color scheme, size */ 
 $admin-main-content-color: #e3f5ff;
+$admin-main-content-header-font-size: 26px;
+$table-border-color: #b29935;
+$table-row-even-color: #ffefb2;
+$table-row-odd-color: #ffdb4c;
 
 /* Mixin(s) */
 @mixin container($border-color, $bg-color) {
@@ -21,6 +25,8 @@ $admin-main-content-color: #e3f5ff;
 
 .admin-portal {
   background-color: $admin-bg-color;
+  min-width: 768px;
+  width: auto !important;
 }
 .admin-banner {
   background-color: $admin-banner-color;
@@ -28,13 +34,41 @@ $admin-main-content-color: #e3f5ff;
   font-size: $admin-banner-font-size;
   font-weight: 300;
   padding: 5px;
-  margin-bottom: 20px;
 }
 
 .admin-main-content {
   @include container($navbar-border-color, $admin-main-content-color);
   margin-right: 25px;
   margin-left: $navbar-width + 50px;
+  margin-top: 20px;
+  padding: 20px;
+  table {
+    border: 1px solid $table-border-color;
+    tr th, tr td { border-bottom: 1px solid $table-border-color; }
+    thead { 
+      tr { background-color: $table-border-color; }
+    }
+    tbody {
+      tr:nth-child(even){ background-color: $table-row-even-color }
+      tr:nth-child(odd){ background-color: $table-row-odd-color }
+    }
+  }
+}
+.admin-main-content-header {
+  h1 {
+    font-size: $admin-main-content-header-font-size;
+    margin: 0;
+  }
+}
+
+.admin-hr {
+  border-top: 1px solid $navbar-border-color;
+  box-shadow: 2px 1px 2px $navbar-border-color;
+}
+
+.admin-alert {
+  padding-left: 25px;
+  border-radius: 0;
 }
 
 @import 'navbar';

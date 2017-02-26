@@ -1,17 +1,16 @@
 .navbar-fixed-left {
+  a {
+    color: #000;
+  }
   @include container($navbar-border-color, $navbar-bg-color);
   width: $navbar-width;
   display: block;
   float: left;
   margin-left: 25px;
+  margin-top: 20px;
   .navbar-heading {
     border-bottom: 1px solid $navbar-border-color;
     background-color: $navbar-heading-bg-color;
     color: #fff;
   }
-}
-
-.navbar-hr {
-  border-top: 1px solid $navbar-border-color;
-  box-shadow: 2px 1px 2px $navbar-border-color;
 }

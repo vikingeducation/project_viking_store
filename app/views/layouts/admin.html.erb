@@ -11,6 +11,15 @@
   <div class="admin-banner text-center">
     Viking Store Admin Portal
   </div>
+  <% if flash[:success] %>
+    <div class="alert alert-success admin-alert">
+      <%= flash[:success] %>
+    </div>
+  <% elsif flash[:error] %>
+    <div class="alert alert-danger admin-alert-style">
+     <%= flash[:error] %>
+    </div>
+  <% end %>
 
   <%= render 'admin/navbar' %>
 
