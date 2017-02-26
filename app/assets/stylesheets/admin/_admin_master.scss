@@ -1,0 +1,40 @@
+/* Admin portal color scheme */
+$admin-bg-color: #e6ffe6;
+$admin-banner-color: #698b69;
+$admin-banner-font-size: 32px;
+
+/* Navbar color scheme, width */
+$navbar-border-color: #003399;
+$navbar-bg-color: #a3e0ff;
+$navbar-heading-bg-color: #0099cc;
+$navbar-width: 120px;
+
+/* Main content color scheme */ 
+$admin-main-content-color: #e3f5ff;
+
+/* Mixin(s) */
+@mixin container($border-color, $bg-color) {
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  background-color: $bg-color;
+}
+
+.admin-portal {
+  background-color: $admin-bg-color;
+}
+.admin-banner {
+  background-color: $admin-banner-color;
+  color: #fff;
+  font-size: $admin-banner-font-size;
+  font-weight: 300;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.admin-main-content {
+  @include container($navbar-border-color, $admin-main-content-color);
+  margin-right: 25px;
+  margin-left: $navbar-width + 50px;
+}
+
+@import 'navbar';

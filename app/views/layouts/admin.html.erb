@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Viking Store Admin Portal</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="admin-portal">
+
+  <div class="admin-banner text-center">
+    Viking Store Admin Portal
+  </div>
+
+  <%= render 'admin/navbar' %>
+
+  <div class="admin-main-content">
+    <%= yield %>
+  </div>
+
+</body>
+</html>

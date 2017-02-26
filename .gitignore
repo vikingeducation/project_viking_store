@@ -16,5 +16,8 @@
 /tmp
 
 # Only store example secrets and database configs
-config/database.yml
-config/secrets.yml
+/config/database.yml
+/config/secrets.yml
+
+# Ignore .DS_Store
+.DS_Store
