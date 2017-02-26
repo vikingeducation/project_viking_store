@@ -11,7 +11,7 @@
     <tbody>
       <% # REPLACE THIS LOOP %>
       <% rows.each do |row| %>
-        <%= render partial: 'table_row', locals: {data: row} %>
+        <%= render partial: 'shared/table_row', locals: {data: row} %>
       <% end %>
     </tbody>
   </table>

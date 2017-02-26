@@ -2,27 +2,27 @@
 <div class="row">
   <div class="col-md-6">
     <h2>1. Overall Platform</h2>
-    <%= render partial: 'table', :locals => {title: "Last 7 Days", headings: ['Item', 'Data', 'Change'], rows: @last_7day_totals } %>
-    <%= render partial: 'table', :locals => {title: "Last 30 Days", headings: ['Item', 'Data', 'Change'], rows: @last_30day_totals } %>
-    <%= render partial: 'table', :locals => {title: "Total", headings: ['Item', 'Data'], rows: @overall_totals } %>
+    <%= render partial: 'shared/table', :locals => {title: "Last 7 Days", headings: ['Item', 'Data', 'Change'], rows: @last_7day_totals } %>
+    <%= render partial: 'shared/table', :locals => {title: "Last 30 Days", headings: ['Item', 'Data', 'Change'], rows: @last_30day_totals } %>
+    <%= render partial: 'shared/table', :locals => {title: "Total", headings: ['Item', 'Data'], rows: @overall_totals } %>
   </div>
   <div class="col-md-6">
     <h2>2. User Demographics and Behaviour</h2>
-    <%= render partial: 'table', :locals => {title: "Top 3 States Users Live In (billing)", headings: ['Item', 'Data', 'Top Customer'], rows: @top_states } %>
-    <%= render partial: 'table', :locals => {title: "Top 3 Cities Users Live In (billing)", headings: ['Item', 'Data', 'Top Customer'], rows: @top_cities } %>
-    <%= render partial: 'table', locals: {title: 'Top User With...', headings: ['Item', 'User', 'Quantity'], rows: @top_users_with} %>
+    <%= render partial: 'shared/table', :locals => {title: "Top 3 States Users Live In (billing)", headings: ['Item', 'Data', 'Top Customer'], rows: @top_states } %>
+    <%= render partial: 'shared/table', :locals => {title: "Top 3 Cities Users Live In (billing)", headings: ['Item', 'Data', 'Top Customer'], rows: @top_cities } %>
+    <%= render partial: 'shared/table', locals: {title: 'Top User With...', headings: ['Item', 'User', 'Quantity'], rows: @top_users_with} %>
   </div>
 </div>
 <div class="row">
   <div class="col-md-6">
     <h2>3. Order Statistics</h2>
-    <%= render partial: 'table', locals: {title: 'Last 7 Days', headings: ['Item', 'Data'], rows: @order_stats7} %>
-    <%= render partial: 'table', locals: {title: 'Last 30 Days', headings: ['Item', 'Data'], rows: @order_stats30} %>
-    <%= render partial: 'table', locals: {title: 'Total', headings: ['Item', 'Data'], rows: @order_stats_total} %>
+    <%= render partial: 'shared/table', locals: {title: 'Last 7 Days', headings: ['Item', 'Data'], rows: @order_stats7} %>
+    <%= render partial: 'shared/table', locals: {title: 'Last 30 Days', headings: ['Item', 'Data'], rows: @order_stats30} %>
+    <%= render partial: 'shared/table', locals: {title: 'Total', headings: ['Item', 'Data'], rows: @order_stats_total} %>
   </div>
   <div class="col-md-6">
     <h2>4. Time Series Data</h2>
-    <%= render partial: 'table', locals: {title: 'Orders by Day', headings: ['Date', 'Quantity', 'Value'], rows: @orders_by_day} %>
-    <%= render partial: 'table', locals: {title: 'Orders by Week', headings: ['Date', 'Quantity', 'Value', '5-week Avg'], rows: @orders_by_week} %>
+    <%= render partial: 'shared/table', locals: {title: 'Orders by Day', headings: ['Date', 'Quantity', 'Value'], rows: @orders_by_day} %>
+    <%= render partial: 'shared/table', locals: {title: 'Orders by Week', headings: ['Date', 'Quantity', 'Value', '5-week Avg'], rows: @orders_by_week} %>
   </div>
 </div>

@@ -7,9 +7,17 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <%= render 'shared/flash' %>
     <div class="container">
-      <%= render 'shared/flash' %>
-      <%= yield %>
+      <h1>Viking Store Admin Portal</h1>
+      <div class="row">
+        <div class="col-sm-3">
+          <%= render 'shared/admin_nav' %>
+        </div>
+        <div class="col-sm-9">
+          <%= yield %>
+        </div>
+      </div>
     </div>
   </body>
 </html>
