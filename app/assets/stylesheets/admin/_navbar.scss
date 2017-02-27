@@ -1,6 +1,15 @@
-.navbar-fixed-left {
+.admin-navbar-fixed-left {
+  .admin-nav-link: {
+    width: $navbar-width - 20px;
+  }
+  .admin-nav-link:hover {
+    background-color: $admin-main-content-color;
+  }
   a {
     color: #000;
+  }
+  a:hover {
+    text-decoration: none;
   }
   @include container($navbar-border-color, $navbar-bg-color);
   width: $navbar-width;
@@ -8,7 +17,7 @@
   float: left;
   margin-left: 25px;
   margin-top: 20px;
-  .navbar-heading {
+  .admin-navbar-heading {
     border-bottom: 1px solid $navbar-border-color;
     background-color: $navbar-heading-bg-color;
     color: #fff;

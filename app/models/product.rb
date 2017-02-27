@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  belongs_to :category
+
   def self.get_num_of_new_products(start = Time.now, days_ago = nil)
     result = Product.select("count(*) AS num_new_products")
     unless days_ago.nil?

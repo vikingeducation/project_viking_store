@@ -1,11 +1,13 @@
-<div class="panel panel-default navbar-fixed-left text-center">
-  <div class="panel-heading navbar-heading">Navigation</div>
+<div class="panel panel-default admin-navbar-fixed-left text-center">
+  <div class="panel-heading admin-navbar-heading">Navigation</div>
   <div class="panel-body">
     Users<br>
     Addresses<br>
     Orders<br>
     Products<br>
-    <%= link_to 'Categories', admin_categories_path %>
+    <div class="admin-nav-link">
+      <%= link_to 'Categories', admin_categories_path %>
+    </div>
     <hr class="admin-hr">
     Analytics Dashboard
   </div>

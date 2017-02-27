@@ -1,5 +1,7 @@
 <div class="admin-main-content-header text-center">
   <h1>Categories</h1>
+  <br>
+  <%= link_to 'Create a New Category', new_admin_category_path, class: "btn btn-primary"  %>
 </div>
 <hr class="admin-hr">
 <div class="table-responsive">
@@ -15,10 +17,14 @@
     <tbody>
       <% @categories.each do |category| %>
         <tr>
-          <td><%= category.id %></td>
+          <td><%= link_to "#{category.id}", admin_category_path(category.id) %></td>
           <td><%= category.name %></td>
           <td><%= category.description %></td>
-          <td>links go here</td>
+          <td>
+            <%= link_to 'Edit', edit_admin_category_path(category.id) %>
+            |
+            <%= link_to 'Delete', admin_category_path(category.id), method: "delete", data: { confirm: "Are you sure you want to delete the category '#{category.name}'?" } %>
+          </td>
         </tr>
       <% end %>
     </tbody>
