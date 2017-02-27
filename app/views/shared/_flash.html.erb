@@ -1,5 +1,8 @@
 <% unless flash.empty? %>
   <% flash.each do |key, value| %>
-    <div class="alert <%= flash_class(key) %> alert-dismissible" role="alert"><%= value %></div>
+    <div class="alert <%= flash_class(key) %>" role="alert" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      <%= value %>
+    </div>
   <% end %>
 <% end %>
