@@ -66,10 +66,11 @@ class Order < ApplicationRecord
     RIGHT OUTER JOIN weeks ON date_trunc('week', checkout_date) = weeks.start
     GROUP BY weeks.start 
     ORDER BY start DESC)
-    SELECT AVG(m2.sum), m1.start
+    SELECT AVG(m2.sum) AS avg, m1.start
     FROM main m1 JOIN main m2 ON m1.start >= m2.start - interval '4 weeks' AND m1.start <= m2.start
     GROUP BY m1.start
     ORDER BY m1.start DESC
+    LIMIT 7
     "
     o.map do |a|
       a.avg
@@ -86,7 +87,8 @@ class Order < ApplicationRecord
     i = -1
     orders.map do |o|
       i += 1
-      [human_time(o.date), o.quantity, o.amount.to_s(:currency, precision:0), averages[i].to_s(:currency, precision:0)]
+      average = averages[i].nil? ? '-' : averages[i].to_s(:currency, precision:0)
+      [human_time(o.date), o.quantity, o.amount.to_s(:currency, precision:0), average]
     end
   end
 

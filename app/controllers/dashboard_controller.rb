@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   include DashboardHelper
+  layout 'admin'
   def index
 
     # panel 1 overall

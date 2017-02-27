@@ -1,5 +1,5 @@
 <% # the title might have to be passed in %>
-<h3><%= title %></h3>
+<h4><%= title %></h4>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -11,7 +11,7 @@
     <tbody>
       <% # REPLACE THIS LOOP %>
       <% rows.each do |row| %>
-        <%= render partial: 'shared/table_row', locals: {data: row} %>
+        <%= render partial: 'table_row', locals: {data: row} %>
       <% end %>
     </tbody>
   </table>

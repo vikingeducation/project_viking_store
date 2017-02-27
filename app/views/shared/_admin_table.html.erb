@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <% headings.each do |h| %>
+      <th><%= h.titleize %></th>
+    <% end  %>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <% rows.each do |r| %>
+      <tr>
+        <% headings.each do |h| %>
+          <td><%= r[h] %></td>
+        <% end %>
+        <td><%= link_to 'Show', [:admin, r] %></td>
+        <td><%= link_to 'Edit', [:edit, :admin, r] %></td>
+        <td><%= link_to 'Delete', [:admin, r], method: :delete, data: {confirm: "Delete the #{r.model_name.name.downcase} '#{r.name}'?"}%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
