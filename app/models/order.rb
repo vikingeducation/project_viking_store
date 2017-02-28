@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   has_many :order_contents
+  has_many :products, through: :order_contents
 
   def self.get_stats(start = Time.now, days_ago = nil)
     { num_orders: number_of_orders(start, days_ago).to_s,

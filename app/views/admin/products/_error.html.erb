@@ -1,0 +1,7 @@
+<% unless error_msg.empty? %>
+  <div class="alert alert-danger admin-alert-form">
+    <% error_msg.each do |error| %>
+      <%= "#{column} #{error}!" %>
+    <% end %>
+  </div>
+<% end %>

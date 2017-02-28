@@ -3,3 +3,7 @@
 </div>
 <hr class="admin-hr">
 <%= render partial: 'form' %>
+<hr class="admin-hr">
+<div class="text-right">
+  <%= link_to 'Delete', admin_category_path(@category.id), method: "delete", data: { confirm: "Are you sure you want to delete the category '#{@category.name}'?" }, class: "btn btn-primary" %>
+</div>

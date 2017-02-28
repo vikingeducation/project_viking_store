@@ -1,0 +1,15 @@
+<div class="admin-main-content-header text-center">
+  <h1>Product #<%= @product.id %> &mdash; <%= @product.name %></h1>
+</div>
+<hr class="admin-hr">
+<p><strong>Description &mdash; </strong> <%= @product.description %></p>
+<p><strong>SKU &mdash; </strong> <%= @product.sku %></p>
+<p><strong>Price &mdash; </strong> <%= sprintf('$%.2f', @product.price) %></p>
+<p><strong>Category &mdash; </strong> <%= @product.category.name %></p>
+<div class="text-right">
+  <%= link_to 'Edit', edit_admin_product_path(@product.id), class: "btn btn-sm btn-primary" %>
+  <%= link_to 'Delete', admin_product_path(@product.id), method: "delete", data: { confirm: "Are you sure you want to delete the product '#{@product.name}'?" }, class: "btn btn-sm btn-primary" %>
+</div>
+<hr class="admin-hr">
+<p><strong>Number of orders with product &mdash; </strong> <%= @order_count %></p>
+<p><strong>Number of carts with product &mdash; </strong> <%= @cart_count %></p>

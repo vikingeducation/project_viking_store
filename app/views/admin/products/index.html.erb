@@ -1,0 +1,42 @@
+<div class="admin-main-content-header text-center">
+  <h1>Products</h1>
+  <br>
+  <%= link_to 'Create a New Product', new_admin_product_path, class: "btn btn-primary"  %>
+</div>
+<hr class="admin-hr">
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>SKU</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= link_to "#{product.id}", admin_product_path(product.id) %></td>
+          <td><%= product.sku %></td>
+          <td><%= product.name %></td>
+          <td><%= sprintf('$%.2f', product.price) %></td>
+          <td>
+            <% if product.category_id %>
+              <%= link_to "#{product.category.name}", admin_category_path(product.category_id) %>
+            <% end %>
+          </td>
+          <td>
+            <div style="display: inline-block">
+            <%= link_to 'Edit', edit_admin_product_path(product.id) %>
+            &nbsp;
+            <%= link_to 'Delete', admin_product_path(product.id), method: "delete", data: { confirm: "Are you sure you want to delete the product '#{product.name}'?" } %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

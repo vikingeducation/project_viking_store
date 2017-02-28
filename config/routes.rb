@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   get 'dashboard' => 'home#dashboard'
 
   namespace :admin do
-    resources :categories
+    resources :categories, :products
   end
 end

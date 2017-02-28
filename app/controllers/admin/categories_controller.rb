@@ -1,6 +1,6 @@
 class Admin::CategoriesController < AdminController
   def index
-    @categories = Category.all
+    @categories = Category.order(:id)
   end
 
   def new
@@ -8,7 +8,7 @@ class Admin::CategoriesController < AdminController
   end
 
   def create
-    @category = Category.create(whitelisted_category_params)
+    @category = Category.new(whitelisted_category_params)
     if @category.save
       flash[:success] = "Category '#{@category.name}'' created!"
       redirect_to admin_categories_path

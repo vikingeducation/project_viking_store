@@ -1,0 +1,9 @@
+<div class="admin-main-content-header text-center">
+  <h1>Edit Product #<%= @product.id %>  &mdash; <%= @product.name %></h1>
+</div>
+<hr class="admin-hr">
+<%= render partial: 'form' %>
+<hr class="admin-hr">
+<div class="text-right">
+  <%= link_to 'Delete', admin_product_path(@product.id), method: "delete", data: { confirm: "Are you sure you want to delete the product '#{@product.name}'?" }, class: "btn btn-primary" %>
+</div>
