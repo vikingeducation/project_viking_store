@@ -1,4 +1,8 @@
 class Order < ApplicationRecord
+  belongs_to :user
+  has_many :order_contents
+  has_many :products, through: :order_contents
+  has_many :categories, through: :products
 
   def self.new_orders_count(days=nil, n=0)
     o = Order.where("checkout_date IS NOT NULL #{days_ago(days, n)}").count

@@ -1,4 +1,11 @@
 class User < ApplicationRecord
+  has_many :addresses
+  has_many :orders
+  has_many :order_contents, through: :orders
+  has_many :products, through: :order_contents
+  has_one :default_billing_address, foreign_key: :id, :class_name => 'Address'
+  has_one :default_shipping_address, foreign_key: :id, :class_name => 'Address'
+
 
   def self.new_users_count(days_ago=7, n=0)
     u = User.where("created_at <= current_date - '#{n * days_ago} days'::interval AND created_at > current_date - '#{(n + 1) * days_ago} days'::interval").count
