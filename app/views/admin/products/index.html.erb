@@ -17,7 +17,7 @@
        <td><%= r.id %></td>
        <td><%= r.name %></td>
        <td><%= r.price %></td>
-       <td><%= link_to r.category, admin_category_path(r.category_id) if r.category_id %></td>
+       <td><%= link_to r.category.name, admin_category_path(r.category_id) if r.category_id %></td>
         <td><%= link_to 'Show', [:admin, r] %></td>
         <td><%= link_to 'Edit', [:edit, :admin, r] %></td>
         <td><%= link_to 'Delete', [:admin, r], method: :delete, data: {confirm: "Delete the #{r.model_name.name.downcase} '#{r.name}'?"}%></td>

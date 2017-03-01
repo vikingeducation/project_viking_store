@@ -1,0 +1,13 @@
+<tr>
+<td><%= user.id %></td>
+	<td><%= user.first_name + ' ' + user.last_name %></td>
+	<td><%= user.created_at.strftime('%d/%m/%y') %></td>
+	<td><%= user.city.name %></td>
+	<td><%= user.state.name %></td>
+	<td><%= user.order_count %></td>
+	<td><%= user.last_order_date %></td>
+	<td><%= link_to 'Show', '#' %></td>
+	<td><%= link_to 'Edit', '#' %></td>
+	<td><%= link_to 'Delete', '#', method: :delete, data: { confirm: 'Are you sure you want to delete this user?'} %></td>
+	<td><%= %></td>
+</tr>

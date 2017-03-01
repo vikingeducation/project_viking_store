@@ -5,7 +5,18 @@ class User < ApplicationRecord
   has_many :products, through: :order_contents
   has_one :default_billing_address, foreign_key: :id, :class_name => 'Address'
   has_one :default_shipping_address, foreign_key: :id, :class_name => 'Address'
+  has_one :city, through: :default_shipping_address
+  has_one :state, through: :default_shipping_address
 
+  def order_count
+    self.orders.where('checkout_date IS NOT NULL').count
+  end
+
+  def last_order_date(formatting=nil)
+    formatting ||= '%d/%m/%y'
+    records = self.orders.where('checkout_date IS NOT NULL').order('checkout_date DESC')
+    records.empty? ? 'N/A' : records.first.checkout_date.strftime(formatting)
+  end
 
   def self.new_users_count(days_ago=7, n=0)
     u = User.where("created_at <= current_date - '#{n * days_ago} days'::interval AND created_at > current_date - '#{(n + 1) * days_ago} days'::interval").count

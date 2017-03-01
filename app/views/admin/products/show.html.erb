@@ -10,7 +10,7 @@
   <dt>Price</dt>
   <dd><%= @product.price %></dd>
   <dt>Category</dt>
-  <dd><%= Category.find(@product.category_id).name %></dd>
+  <dd><%= @product.category.name %></dd>
 </dl>
 
 <h3>Product Statistics</h3>
