@@ -25,14 +25,14 @@
     <div class="form-group <%= form_error_class(@user, :billing_id) %>">
       <%= f.label :billing_id, 'Default Billing Address',  class: 'control-label col-sm-2'  %>
       <div class="col-sm-8">
-        <%= f.select :billing_id, options_for_select(@addresses, disabled: '', selected: ''), {}, class: 'form-control' %>
+        <%= f.select :billing_id, options_for_select(@billing_addresses, disabled: '', selected: ''), {}, class: 'form-control' %>
         <%= form_error(@user, :billing_id) %>
       </div>
     </div>
     <div class="form-group <%= form_error_class(@user, :shipping_id) %>">
       <%= f.label :shipping_id, 'Default Shipping Address', class: 'control-label col-sm-2'  %>
       <div class="col-sm-8">
-        <%= f.select :shipping_id, options_for_select(@addresses, disabled: '', selected: ''), {}, class: 'form-control' %>
+        <%= f.select :shipping_id, options_for_select(@shipping_addresses, disabled: '', selected: ''), {}, class: 'form-control' %>
         <%= form_error(@user, :shipping_id) %>
       </div>
     </div>
@@ -43,8 +43,9 @@
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-6">
+    <div class="col-sm-offset-3 col-sm-6 text-center">
       <%= f.submit class: 'btn btn-primary btn-block' %>
+      <%= link_to 'Delete User', '#', method: :delete, data: {confirm: "Are you sure you want to delete #{@user.full_name}?"} %>
     </div>
   </div>
 <% end %>

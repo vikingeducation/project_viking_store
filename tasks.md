@@ -38,14 +38,14 @@
 - [x] Failure re-renders the form with errors  
 
 ### Edit a User
-- [ ] Edit displays the same form as new  
-- [ ] Shows user's name/id in the header  
-- [ ] All fields are editable as per the mockup  
-- [ ] Validations and other criteria are as per the NEW story  
-- [ ] Link to DELETE the user with confirm (not wired)  
-- [ ] Success/failure flashes  
-- [ ] success redirects to SHOW  
-- [ ] failure re-renders form with errors  
+- [x] Edit displays the same form as new  
+- [x] Shows user's name/id in the header  
+- [x] All fields are editable as per the mockup  
+- [x] Validations and other criteria are as per the NEW story  
+- [x] Link to DELETE the user with confirm (not wired)  
+- [x] Success/failure flashes  
+- [x] success redirects to SHOW  
+- [x] failure re-renders form with errors  
 
 ### Delete a User
 - [ ] DELETE links are wired up to destroy the user with CONFIRMATION  

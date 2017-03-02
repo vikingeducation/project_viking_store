@@ -17,7 +17,8 @@ class Admin::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    @addresses = addresses_as_options(@user)
+    @shipping_addresses = addresses_as_options(@user).unshift([@user.print_shipping_address, ''])
+    @billing_addresses = addresses_as_options(@user).unshift([@user.print_billing_address, ''])
   end
 
   def create
@@ -28,6 +29,28 @@ class Admin::UsersController < ApplicationController
     else
       flash[:error] = "We couldn't create the user. Please check the form for errors"
       render :new
+    end
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(whitelisted_params)
+      flash[:success] = "Success! The user #{@user.full_name} was update!"
+      redirect_to admin_user_path(@user)
+    else
+      flash[:error] = "We couldn't update the user. Please check the form for errors"
+      render :edit
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:success] = "Success! The user #{@user.full_name} was deleted!"
+      redirect_to admin_users_path
+    else
+      flash[:error] = "Sorry. This user can't be deleted"
+      redirect_to admin_user_path(@user)
     end
   end
 
@@ -43,7 +66,7 @@ class Admin::UsersController < ApplicationController
         add += ', ' + a.state.name
         [add, a.id]
       end
-      return adds << ['Select an Address', '']
+      return adds
     end
   end
 

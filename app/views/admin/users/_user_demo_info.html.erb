@@ -30,19 +30,19 @@
     <div class="row mts">
       <div class="col-xs-12">
         <p class="h5">Default Billing Address:</p>
-        <span><%= @user.print_billing_address %></span>
+        <span><%= @user.print_billing_address || '-' %></span>
       </div>
     </div>
     <div class="row mts">
       <div class="col-xs-12">
         <p class="h5">Default Shipping Address:</p>
-        <span><%= @user.print_shipping_address %></span>
+        <span><%= @user.print_shipping_address || '-' %></span>
       </div>
     </div>
     <div class="row mts">
       <div class="col-xs-12">
         <p><%= link_to "Edit #{@user.first_name} #{@user.last_name}'s information", edit_admin_user_path(@user) %></p>
-        <p><%= link_to "Delete #{@user.first_name} #{@user.last_name}", admin_user_path(@user), method: :delete, data: { confirm: 'Are you sure you want to delete this user?'} %></p>
+        <p><%= link_to "Delete #{@user.first_name} #{@user.last_name}", '#', method: :delete, data: { confirm: 'Are you sure you want to delete this user?'} %></p>
         <p><%= link_to "View Saved Addresses", admin_user_addresses_path(@user) %></p>
         <p><%=  link_to_view_cart(@user) %></p>
       </div>

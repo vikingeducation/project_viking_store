@@ -1,10 +1,10 @@
 class User < ApplicationRecord
-  has_many :addresses
+  has_many :addresses, dependent: :destroy
   has_many :orders
   has_many :order_contents, through: :orders
   has_many :products, through: :order_contents
-  has_one :default_billing_address, foreign_key: :id, :class_name => 'Address'
-  has_one :default_shipping_address, foreign_key: :id, :class_name => 'Address'
+  has_one :default_billing_address, foreign_key: :id, primary_key: :billing_id, :class_name => 'Address'
+  has_one :default_shipping_address, foreign_key: :id, primary_key: :shipping_id, :class_name => 'Address'
   has_one :city, through: :default_shipping_address
   has_one :state, through: :default_shipping_address
   has_many :credit_cards, dependent: :destroy
@@ -22,22 +22,16 @@ class User < ApplicationRecord
   end
 
   def print_billing_address
-    add = self.billing_id
-    if add
+    if self.billing_id
       add = self.default_billing_address
       add.street_address + ', ' + add.city.name + ', ' + add.state.name
-    else
-      '-'
     end
   end
 
   def print_shipping_address
-    add = self.shipping_id
-    if add
+    if self.shipping_id
       add = self.default_shipping_address
       add.street_address + ', ' + add.city.name + ', ' + add.state.name
-    else
-      '-'
     end
   end
 
