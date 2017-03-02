@@ -7,13 +7,13 @@
 - [x] The addresses index page renders the table with all database addresses as per the mockup. Note: No phone number needed.
 - [x] The User column links to that user's show page
 - [x] Links for SHOW / EDIT / DELETE an address
-- [ ] Disclaimer that addresses can only be created in a User profile, linking to the Users INDEX page
+- [x] Disclaimer that addresses can only be created in a User profile, linking to the Users INDEX page
 
 ### Filter Index of Addresses by User
-- [ ] If a user_id is provided as a parameter to the Addresses INDEX path, filter results for only that user
-- [ ] If an invalid ID is provided, display flash appropriately and render all as normal
-- [ ] Render a CREATE button to create an address under that user's id
-- [ ] Wire up the address links in the User pages to link to that user's filtered list of addresses
+- [x] If a user_id is provided as a parameter to the Addresses INDEX path, filter results for only that user
+- [x] If an invalid ID is provided, display flash appropriately and render all as normal
+- [x] Render a CREATE button to create an address under that user's id
+- [x] Wire up the address links in the User pages to link to that user's filtered list of addresses
 
 ### Show an Address
 - [ ] The show page renders

@@ -1,3 +1,10 @@
-<h2 class="text-center">Addresses</h2>
-<p class="text-center">Create new addresses from within <%= link_to 'User', admin_users_path %> profiles</p>
+<% if @user %>
+  <h2 class="text-center">
+    <%= "#{@user.full_name}'s Addresses" %>
+  </h2>
+  <%= render partial: 'shared/admin_header', locals: { the_model: 'Address'} %>
+<% else %>
+  <h2 class="text-center">Addresses</h2>
+  <p class="text-center">Create new addresses from within <%= link_to 'User', admin_users_path %> profiles</p>
+<% end %>
 <%= render 'address_table' %>

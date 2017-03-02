@@ -13,7 +13,7 @@
   </thead>
   <tbody>
     <% @addresses.each do |a| %>
-      <% user = User.find(a.user_id) %>
+      <% user = @user || User.find(a.user_id) %>
       <tr>
         <td><%= a.user_id %></td>
         <td><%= link_to user.full_name, admin_user_path(user) %></td>
