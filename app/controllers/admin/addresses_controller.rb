@@ -10,4 +10,9 @@ class Admin::AddressesController < ApplicationController
       @addresses = Address.all.limit(10)
     end
   end
+
+  def show
+    @address = Address.find(params[:id])
+    @user = @address.user
+  end
 end

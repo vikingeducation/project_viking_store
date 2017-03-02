@@ -16,12 +16,12 @@
 - [x] Wire up the address links in the User pages to link to that user's filtered list of addresses
 
 ### Show an Address
-- [ ] The show page renders
-- [ ] The information displayed conforms to the mockup
-- [ ] Link to the User's SHOW page
-- [ ] User's name in header
-- [ ] Links to DELETE and EDIT address (not wired yet)
-- [ ] Wire up links to addresses from other resources like the User pages
+- [x] The show page renders
+- [x] The information displayed conforms to the mockup
+- [x] Link to the User's SHOW page
+- [x] User's name in header
+- [x] Links to DELETE and EDIT address (not wired yet)
+- [x] Wire up links to addresses from other resources like the User pages
 
 ### Create a new address
 - [ ] New page renders
