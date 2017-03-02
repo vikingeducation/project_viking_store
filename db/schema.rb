@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728230632) do
+ActiveRecord::Schema.define(version: 20170302053957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20150728230632) do
     t.integer  "exp_month",                              null: false
     t.integer  "exp_year",                               null: false
     t.string   "brand",       default: "VISA",           null: false
-    t.integer  "user_id",                                null: false
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ccv"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20150728230632) do
 
   create_table "orders", force: :cascade do |t|
     t.datetime "checkout_date"
-    t.integer  "user_id",        null: false
+    t.integer  "user_id"
     t.integer  "shipping_id"
     t.integer  "billing_id"
     t.datetime "created_at"

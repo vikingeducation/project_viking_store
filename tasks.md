@@ -48,10 +48,10 @@
 - [x] failure re-renders form with errors  
 
 ### Delete a User
-- [ ] DELETE links are wired up to destroy the user with CONFIRMATION  
-- [ ] Deleting does NOT destroy historical records of orders  
-- [ ] Deleting DOES destroy current shopping cart  
-- [ ] Deleting DOES destroy credit card info associated with the user  
+- [x] DELETE links are wired up to destroy the user with CONFIRMATION  
+- [x] Deleting does NOT destroy historical records of orders  
+- [x] Deleting DOES destroy current shopping cart  
+- [x] Deleting DOES destroy credit card info associated with the user  
 
 
 ## FKs on Models
