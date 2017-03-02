@@ -26,16 +26,16 @@
 
 ### Create a New User
 - [x] New form displays user's name at top  
-- [ ] Displays demographic info as in the mockup  
-- [ ] Link to view that user's addresses (not wired)  
-- [ ] Button to save user  
-- [ ] Must include submission of first and last name and email  
-- [ ] fname, lname, email must be 1-64 characters  
-- [ ] email must have an @  
-- [ ] Address dropdowns come pre-populated with the user's addresses. For new users, no addresses will be available and this can be disabled.  
-- [ ] Success/failure flash messages  
-- [ ] Success renders the SHOW page  
-- [ ] Failure re-renders the form with errors  
+- [x] Displays demographic info as in the mockup  
+- [x] Link to view that user's addresses (not wired)  
+- [x] Button to save user  
+- [x] Must include submission of first and last name and email  
+- [x] fname, lname, email must be 1-64 characters  
+- [x] email must have an @  
+- [x] Address dropdowns come pre-populated with the user's addresses. For new users, no addresses will be available and this can be disabled.  
+- [x] Success/failure flash messages  
+- [x] Success renders the SHOW page  
+- [x] Failure re-renders the form with errors  
 
 ### Edit a User
 - [ ] Edit displays the same form as new  

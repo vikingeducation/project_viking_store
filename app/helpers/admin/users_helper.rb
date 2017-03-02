@@ -7,4 +7,5 @@ module Admin::UsersHelper
       link_to 'View Unplaced Order (Cart)', admin_user_order_path(user, o.first)
     end
   end
+
 end

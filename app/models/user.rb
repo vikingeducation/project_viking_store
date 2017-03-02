@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_one :state, through: :default_shipping_address
   has_many :credit_cards, dependent: :destroy
 
+  validates :first_name, :last_name, :email, presence: true, length: {in: 1..64 }
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+
 
   def full_name
     self.first_name + ' '  + self.last_name
@@ -19,8 +22,9 @@ class User < ApplicationRecord
   end
 
   def print_billing_address
-    add = self.default_billing_address
+    add = self.billing_id
     if add
+      add = self.default_billing_address
       add.street_address + ', ' + add.city.name + ', ' + add.state.name
     else
       '-'
@@ -28,8 +32,9 @@ class User < ApplicationRecord
   end
 
   def print_shipping_address
-    add = self.default_shipping_address
+    add = self.shipping_id
     if add
+      add = self.default_shipping_address
       add.street_address + ', ' + add.city.name + ', ' + add.state.name
     else
       '-'
