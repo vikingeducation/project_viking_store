@@ -1,29 +1,31 @@
 ## Admin_Users
 
 ### Display Index of Users
-- [ ] Index action displays the index table  
-- [ ] The table contains the fields shown in the mockup  
-- [ ] Link to SHOW / EDIT / DELETE (not wired yet)  
-- [ ] Link to that user's orders (not wired yet)  
-- [ ] Button to create a new user  
+- [x] Index action displays the index table  
+- [x] The table contains the fields shown in the mockup  
+- [x] Link to SHOW / EDIT / DELETE (not wired yet)  
+- [x] Link to that user's orders (not wired yet)  
+- [x] Button to create a new user  
 
 ### Show a User
-- [ ] The show page renders  
-- [ ] The users name is across the top  
-- [ ] The relevant information from the mockup is displayed  
-- [ ] Link to EDIT that user's information  
-- [ ] Link to DELETE that user (not wired)  
-- [ ] Link to view that user's ADDRESSES (not wired)  
-- [ ] Link to view that user's CART (not wired), only clickable if the user actually has a cart!  
-- [ ] Credit Card info is displayed (NOTE: DONT DO THIS IN THE REAL WORLD)  
-- [ ] Link to DESTROY the credit card entry functions with a confirmation. Re-renders the page  
-- [ ] Buttons for CREATE ORDER (not wired) and CREATE ADDRESS (not wired) link to the create pages for these resources but will make them scoped just to this user  
-- [ ] Order History is displayed with the fields shown.  
-- [ ] Order History links SHOW EDIT DELETE (not wired)  
-- [ ] Handles displaying a placeholder for shipping and billing addresses if none have been selected  
+- [x] The show page renders  
+- [x] The users name is across the top  
+- [x] The relevant information from the mockup is displayed  
+- [x] Link to EDIT that user's information  
+- [x] Link to DELETE that user (not wired)  
+- [x] Link to view that user's ADDRESSES (not wired)  
+- [x] Link to view that user's CART (not wired), only clickable if the user actually has a cart!  
+- [x] Credit Card info is displayed (NOTE: DONT DO THIS IN THE REAL WORLD)  
+- [x] Link to DESTROY the credit card entry functions with a confirmation. Re-renders the page  
+- [x] Buttons for CREATE ORDER (not wired) and CREATE ADDRESS (not wired) link to the create pages for these resources but will make them scoped just to this user  
+- [x] Order History is displayed with the fields shown.  
+- [x] Order History links SHOW EDIT DELETE (not wired)  
+- [x] Handles displaying a placeholder for shipping and billing addresses if none have been selected  
+- [ ] Add telephone
+- [ ] Refactor with presenter pattern
 
 ### Create a New User
-- [ ] New form displays user's name at top  
+- [x] New form displays user's name at top  
 - [ ] Displays demographic info as in the mockup  
 - [ ] Link to view that user's addresses (not wired)  
 - [ ] Button to save user  

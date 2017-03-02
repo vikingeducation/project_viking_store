@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Order History</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table">
+      <thead>
+        <th>ID</th>
+        <th>Order Date</th>
+        <th>Order Value</th>
+        <th>Status</th>
+        <th>Show</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </thead>
+      <tbody>
+        <% @user.orders.each do |o| %>
+       <% if o.checkout_date %>
+        <tr>
+          <td><%= o.id %></td>
+          <td><%= o.checkout_date.strftime('%d/%m/%y')  %></td>
+          <td><%= number_to_currency(o.order_value, precision:2) %></td>
+          <td><%= o.checkout_date.nil? ? 'Unplaced' : 'Placed' %></td>
+          <td><%= link_to 'Show', '#' %></td>
+          <td><%= link_to 'Edit', '#' %></td>
+          <td><%= link_to 'Delete', '#' %></td>
+        </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

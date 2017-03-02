@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :categories
     resources :products
-    resources :users
+    resources :users do
+      resources :addresses, only: [:index, :new]
+      resources :orders, only: [:show, :new]
+      resources :credit_cards, only: :destroy
+    end
   end
 
 

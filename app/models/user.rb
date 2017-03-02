@@ -7,9 +7,33 @@ class User < ApplicationRecord
   has_one :default_shipping_address, foreign_key: :id, :class_name => 'Address'
   has_one :city, through: :default_shipping_address
   has_one :state, through: :default_shipping_address
+  has_many :credit_cards, dependent: :destroy
+
+
+  def full_name
+    self.first_name + ' '  + self.last_name
+  end
 
   def order_count
     self.orders.where('checkout_date IS NOT NULL').count
+  end
+
+  def print_billing_address
+    add = self.default_billing_address
+    if add
+      add.street_address + ', ' + add.city.name + ', ' + add.state.name
+    else
+      '-'
+    end
+  end
+
+  def print_shipping_address
+    add = self.default_shipping_address
+    if add
+      add.street_address + ', ' + add.city.name + ', ' + add.state.name
+    else
+      '-'
+    end
   end
 
   def last_order_date(formatting=nil)

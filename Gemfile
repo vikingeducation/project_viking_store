@@ -31,13 +31,12 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',  '~> 1.3.6',      group: :development
 
 gem 'pry'
-
 gem 'faker'
 
 group :development do
-gem 'better_errors'
-gem 'jazz_fingers'
-gem 'binding_of_caller'
+  gem 'better_errors'
+  gem 'jazz_fingers'
+  gem 'binding_of_caller'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
