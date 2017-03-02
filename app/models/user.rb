@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_one :city, through: :default_shipping_address
   has_one :state, through: :default_shipping_address
   has_many :credit_cards, dependent: :nullify
+  accepts_nested_attributes_for :addresses
+
 
   validates :first_name, :last_name, :email, presence: true, length: {in: 1..64 }
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }

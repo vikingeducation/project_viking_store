@@ -24,20 +24,20 @@
 - [x] Wire up links to addresses from other resources like the User pages
 
 ### Create a new address
-- [ ] New page renders
-- [ ] Fields are present as per the mockup
-- [ ] ID field is displayed but not editable
-- [ ] Name field is linked to user's SHOW page
-- [ ] State is a dropdown pre-populated by states
-- [ ] User's name is in the header
-- [ ] Street, city and state must be present
-- [ ] State must be within the acceptable US states (and territories if you're ambitious)
-- [ ] Street and city < 64 chars
-- [ ] The UserID must be a real user
-- [ ] Success/failure flash messages
-- [ ] Success renders the user's filtered index page
-- [ ] failure re-renders the form with errors
-- [ ] Wire up the New Address button on the User's SHOW page
+- [x] New page renders
+- [x] Fields are present as per the mockup
+- [x] ID field is displayed but not editable
+- [x] Name field is linked to user's SHOW page
+- [x] State is a dropdown pre-populated by states
+- [x] User's name is in the header
+- [x] Street, city and state must be present
+- [x] State must be within the acceptable US states (and territories if you're ambitious)
+- [x] Street and city < 64 chars
+- [x] The UserID must be a real user
+- [x] Success/failure flash messages
+- [x] Success renders the user's filtered index page
+- [x] failure re-renders the form with errors
+- [x] Wire up the New Address button on the User's SHOW page
 
 ### Edit an Address
 - [ ] Edit form renders
