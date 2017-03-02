@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :orders, only: [:show, :new]
       resources :credit_cards, only: :destroy
     end
+    resources :addresses, only: [:index, :show, :edit, :destroy]
   end
 
 

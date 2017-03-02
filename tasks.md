@@ -1,5 +1,97 @@
 ## Admin_Users
 
+
+
+## Admin Addresses
+### Show an index of all addresses
+- [x] The addresses index page renders the table with all database addresses as per the mockup. Note: No phone number needed.
+- [x] The User column links to that user's show page
+- [x] Links for SHOW / EDIT / DELETE an address
+- [ ] Disclaimer that addresses can only be created in a User profile, linking to the Users INDEX page
+
+### Filter Index of Addresses by User
+- [ ] If a user_id is provided as a parameter to the Addresses INDEX path, filter results for only that user
+- [ ] If an invalid ID is provided, display flash appropriately and render all as normal
+- [ ] Render a CREATE button to create an address under that user's id
+- [ ] Wire up the address links in the User pages to link to that user's filtered list of addresses
+
+### Show an Address
+- [ ] The show page renders
+- [ ] The information displayed conforms to the mockup
+- [ ] Link to the User's SHOW page
+- [ ] User's name in header
+- [ ] Links to DELETE and EDIT address (not wired yet)
+- [ ] Wire up links to addresses from other resources like the User pages
+
+### Create a new address
+- [ ] New page renders
+- [ ] Fields are present as per the mockup
+- [ ] ID field is displayed but not editable
+- [ ] Name field is linked to user's SHOW page
+- [ ] State is a dropdown pre-populated by states
+- [ ] User's name is in the header
+- [ ] Street, city and state must be present
+- [ ] State must be within the acceptable US states (and territories if you're ambitious)
+- [ ] Street and city < 64 chars
+- [ ] The UserID must be a real user
+- [ ] Success/failure flash messages
+- [ ] Success renders the user's filtered index page
+- [ ] failure re-renders the form with errors
+- [ ] Wire up the New Address button on the User's SHOW page
+
+### Edit an Address
+- [ ] Edit form renders
+- [ ] User name is in form name
+- [ ] Fields as per the mockup
+- [ ] User ID displayed
+- [ ] Link to User SHOW page in name
+- [ ] Link to DELETE (not wired yet)
+- [ ] Success/Failure Flash as justified
+- [ ] Success goes to the address's SHOW page
+- [ ] failure re-renders form with errors
+
+### Delete an Address
+As an admin
+I want to be able to "delete" addresses
+If the user cannot do it him/herself
+NOTE: Your data architecture might allow for de-associating addresses so they never actually get deleted. If this is the case, make sure to handle the fact that it might be included as a billing/shipping address as well.
+
+- [ ] Delete links are wired to delete addresses with CONFIRMATION
+- [ ] Deleting an address does not destroy the user who linked to it as a billing/shipping address, simply de-associates it
+- [ ] Success renders Index
+- [ ] Failure goes BACK
+- [ ] Flash messages as appropriate
+- [ ] Deleting a user's address does not break any of that user's views. Specifically, it should not leave any foreign keys pointing to nonexistant addresses.
+
+## FKs on Models
+
+### Addresses
+id | user_id | city_id | state_id | ... |
+
+### Credit_cards
+id | user_id | ...
+
+### Orders 
+id | user_id | shipping_id | billing_id | ...
+
+### Order_contents
+id | product_id | order_id | ...
+
+### Products
+id | category_id | ...
+
+### Users
+id | billing_id | shipping_id | ...
+
+### Categories
+id | name 
+
+### Cities
+id | name
+
+### States
+id | name
+
 ### Display Index of Users
 - [x] Index action displays the index table  
 - [x] The table contains the fields shown in the mockup  
@@ -52,37 +144,6 @@
 - [x] Deleting does NOT destroy historical records of orders  
 - [x] Deleting DOES destroy current shopping cart  
 - [x] Deleting DOES destroy credit card info associated with the user  
-
-
-## FKs on Models
-
-### Addresses
-id | user_id | city_id | state_id | ... |
-
-### Credit_cards
-id | user_id | ...
-
-### Orders 
-id | user_id | shipping_id | billing_id | ...
-
-### Order_contents
-id | product_id | order_id | ...
-
-### Products
-id | category_id | ...
-
-### Users
-id | billing_id | shipping_id | ...
-
-### Categories
-id | name 
-
-### Cities
-id | name
-
-### States
-id | name
-
 
 
 

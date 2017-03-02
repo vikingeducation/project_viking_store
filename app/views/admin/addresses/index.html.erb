@@ -1,4 +1,3 @@
-<% @user.addresses.each do |a|
- %>
- <%= a.street_address %>
- <% end %>
+<h2 class="text-center">Addresses</h2>
+<p class="text-center">Create new addresses from within <%= link_to 'User', admin_users_path %> profiles</p>
+<%= render 'address_table' %>
