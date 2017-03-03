@@ -14,6 +14,15 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :email, presence: true, length: {in: 1..64 }
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
 
+  def print_city
+    return self.city.name if self.city
+    '-'
+  end
+
+  def print_state
+    return self.state.name if self.city
+    '-'
+  end
 
   def full_name
     self.first_name + ' '  + self.last_name

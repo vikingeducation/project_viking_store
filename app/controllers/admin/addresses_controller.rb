@@ -42,7 +42,7 @@ class Admin::AddressesController < ApplicationController
         @city.save
       end
       if @address.save
-        flash[:success] = "Success! New addresses created"
+        flash[:success] = "Success! New address created"
         redirect_to admin_user_addresses_path(@user, @address)
       else
         flash[:error] = "Sorry, we couldn't create that address. Please check the form for errors!"
@@ -79,6 +79,16 @@ class Admin::AddressesController < ApplicationController
       flash[:error] = "Sorry! The address couldn't be updated"
       render :edit
     end
+  end
+
+  def destroy
+    @address = Address.find(params[:id])
+    if @address.destroy
+      flash[:success] = "Success! The address has been removed"
+    else
+      flash[:error] = "Sorry! The address could not be removed"
+    end
+    redirect_to admin_addresses_path
   end
 
 

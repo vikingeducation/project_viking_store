@@ -56,12 +56,12 @@ I want to be able to "delete" addresses
 If the user cannot do it him/herself
 NOTE: Your data architecture might allow for de-associating addresses so they never actually get deleted. If this is the case, make sure to handle the fact that it might be included as a billing/shipping address as well.
 
-- [ ] Delete links are wired to delete addresses with CONFIRMATION
-- [ ] Deleting an address does not destroy the user who linked to it as a billing/shipping address, simply de-associates it
-- [ ] Success renders Index
-- [ ] Failure goes BACK
-- [ ] Flash messages as appropriate
-- [ ] Deleting a user's address does not break any of that user's views. Specifically, it should not leave any foreign keys pointing to nonexistant addresses.
+- [x] Delete links are wired to delete addresses with CONFIRMATION
+- [x] Deleting an address does not destroy the user who linked to it as a billing/shipping address, simply de-associates it
+- [x] Success renders Index
+- [x] Failure goes BACK
+- [x] Flash messages as appropriate
+- [x] Deleting a user's address does not break any of that user's views. Specifically, it should not leave any foreign keys pointing to nonexistant addresses.
 
 ## FKs on Models
 
