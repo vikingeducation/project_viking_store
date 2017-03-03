@@ -187,6 +187,14 @@ NOTE: Your data architecture might allow for de-associating addresses so they ne
 - [x] Failure goes BACK
 - [x] Flash messages as appropriate
 - [x] Deleting a user's address does not break any of that user's views. Specifically, it should not leave any foreign keys pointing to nonexistant addresses.
+<<<<<<< HEAD
+=======
+
+## FKs on Models
+
+### Addresses
+id | user_id | city_id | state_id | ... |
+>>>>>>> f6cba45a95fc659c2ed69696b515e5d992acdf87
 
 ## Admin_Users
 
