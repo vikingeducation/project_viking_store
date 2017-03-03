@@ -83,8 +83,9 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
 production:
   <<: *default
-  database: solution_viking_store_production
-  username: solution_viking_store
-  password: <%= ENV['SOLUTION_VIKING_STORE_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  database: viking_store_production
+
