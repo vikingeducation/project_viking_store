@@ -7,11 +7,11 @@ Rails.application.routes.draw do
     resources :categories
     resources :products
     resources :users do
-      resources :addresses, only: [:index, :new, :create]
+      resources :addresses, only: [:index, :new, :create, :edit, :show, :update]
       resources :orders, only: [:show, :new]
       resources :credit_cards, only: :destroy
     end
-    resources :addresses, except: :new
+    resources :addresses, only: :index
   end
 
 

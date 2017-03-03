@@ -1,56 +1,56 @@
 <h2 class="text-center"><%= @product.persisted? ? "Edit Product #{@product.id}" : "New Product" %></h2>
 <%= form_for [:admin, @product], html: {class: 'form-horizontal'} do |f| %>
-<div class="form-group">
+  <div class="form-group">
     <%= f.label 'Product ID', class: 'col-sm-2 text-right' %>
     <div class="col-sm-10">
-        <span>
-            <%= @product.id || 'N/A'  %>
-            <span></div>
+      <span>
+        <%= @product.id || 'N/A'  %>
+        <span></div>
+      </div>
+      <div class="form-group <%= form_error_class(@product, :name) %>">
+        <%= f.label :name, class: 'col-sm-2 control-label' %>
+        <div class="col-sm-10">
+          <%= f.text_field :name, class:'form-control' %>
+          <%= form_error(@product, :name) %>
         </div>
-        <div class="form-group <%= form_error_class(@product, :name) %>">
-            <%= f.label :name, class: 'col-sm-2 control-label' %>
-            <div class="col-sm-10">
-                <%= f.text_field :name, class:'form-control' %>
-                <%= form_error(@product, :name) %>
-            </div>
+      </div>
+      <div class="form-group <%= form_error_class(@product, :price) %>">
+        <%= f.label :price, class: 'col-sm-2 control-label' %>
+        <div class="col-sm-10">
+          <%= f.number_field :price, in: 0..10000, step: 0.01, class: 'form-control' %>
+          <%= form_error(@product, :price) %>
         </div>
-        <div class="form-group <%= form_error_class(@product, :price) %>">
-            <%= f.label :price, class: 'col-sm-2 control-label' %>
-            <div class="col-sm-10">
-                <%= f.number_field :price, in: 0..10000, step: 0.01, class: 'form-control' %>
-                <%= form_error(@product, :price) %>
-            </div>
+      </div>
+      <div class="form-group <%= form_error_class(@product, :description) %>">
+        <%= f.label :description, class: 'col-sm-2 control-label' %>
+        <div class="col-sm-10">
+          <%= f.text_area :description, class: 'form-control' %>
+          <%= form_error(@product, :description) %>
         </div>
-        <div class="form-group <%= form_error_class(@product, :description) %>">
-            <%= f.label :description, class: 'col-sm-2 control-label' %>
-            <div class="col-sm-10">
-                <%= f.text_area :description, class: 'form-control' %>
-                <%= form_error(@product, :description) %>
-            </div>
+      </div>
+      <div class="form-group <%= form_error_class(@product, :sku) %>">
+        <%= f.label :sku, class: 'col-sm-2 control-label' %>
+        <div class="col-sm-10">
+          <%= f.text_field :sku, class:'form-control' %>
+          <%= form_error(@product, :sku) %>
         </div>
-        <div class="form-group <%= form_error_class(@product, :sku) %>">
-            <%= f.label :sku, class: 'col-sm-2 control-label' %>
-            <div class="col-sm-10">
-                <%= f.text_field :sku, class:'form-control' %>
-                <%= form_error(@product, :sku) %>
-            </div>
+      </div>
+      <div class="form-group <%= form_error_class(@product, :category_id) %>">
+        <%= f.label :category_id, class: 'col-sm-2 control-label' %>
+        <div class="col-sm-10">
+          <%= f.select :category_id, options_for_select(categories_as_options, disabled: '', selected: ''),  {}, class: 'form-control' %>
+          <%= form_error(@product, :category_id) %>
         </div>
-        <div class="form-group <%= form_error_class(@product, :category_id) %>">
-            <%= f.label :category_id, class: 'col-sm-2 control-label' %>
-            <div class="col-sm-10">
-              <%= f.select :category_id, options_for_select(categories_as_options, disabled: '', selected: ''),  {}, class: 'form-control' %>
-              <%= form_error(@product, :category_id) %>
-            </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-6 col-sm-offset-3">
-            <%= f.submit  class:'btn btn-primary btn-block' %>
-            <% if @product.persisted? %>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-6 col-sm-offset-3">
+          <%= f.submit  class:'btn btn-primary btn-block' %>
+          <% if @product.persisted? %>
             <p class="text-center"
             ><%= link_to 'Delete Product',  [:admin, @product], method: :delete, data: { confirm: "Are you sure you want to delete the category '#{@product.name}'?"} %>
-          </p>
-            <% end %>
-             </div>
-          </div>
-           </div>
-<% end %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>

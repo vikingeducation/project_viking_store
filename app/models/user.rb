@@ -3,8 +3,8 @@ class User < ApplicationRecord
   has_many :orders, dependent: :nullify
   has_many :order_contents, through: :orders
   has_many :products, through: :order_contents
-  has_one :default_billing_address, foreign_key: :id, primary_key: :billing_id, :class_name => 'Address'
-  has_one :default_shipping_address, foreign_key: :id, primary_key: :shipping_id, :class_name => 'Address'
+  belongs_to :default_billing_address, foreign_key: :billing_id, primary_key: :id, :class_name => 'Address'
+  belongs_to :default_shipping_address, foreign_key: :shipping_id, primary_key: :id, :class_name => 'Address'
   has_one :city, through: :default_shipping_address
   has_one :state, through: :default_shipping_address
   has_many :credit_cards, dependent: :nullify

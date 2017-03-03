@@ -40,15 +40,15 @@
 - [x] Wire up the New Address button on the User's SHOW page
 
 ### Edit an Address
-- [ ] Edit form renders
-- [ ] User name is in form name
-- [ ] Fields as per the mockup
-- [ ] User ID displayed
-- [ ] Link to User SHOW page in name
-- [ ] Link to DELETE (not wired yet)
-- [ ] Success/Failure Flash as justified
-- [ ] Success goes to the address's SHOW page
-- [ ] failure re-renders form with errors
+- [x] Edit form renders
+- [x] User name is in form name
+- [x] Fields as per the mockup
+- [x] User ID displayed
+- [x] Link to User SHOW page in name
+- [x] Link to DELETE (not wired yet)
+- [x] Success/Failure Flash as justified
+- [x] Success goes to the address's SHOW page
+- [x] failure re-renders form with errors
 
 ### Delete an Address
 As an admin

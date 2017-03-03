@@ -22,9 +22,9 @@
         <td><%= a.state.name %></td>
         <td><%= user.order_count %></td>
         <td><%= user.created_at.strftime('%d/%m/%y') %></td>
-        <td><%= link_to 'Show', admin_address_path(a) %></td>
-        <td><%= link_to 'Edit', edit_admin_address_path(a) %></td>
-        <td><%= link_to 'Delete', admin_address_path(a), method: :delete, data: {confirm: "Are you sure you want to delete the address #{a.street_address}?" } %></td>
+        <td><%= link_to 'Show', admin_user_address_path(user, a) %></td>
+        <td><%= link_to 'Edit', edit_admin_user_address_path(user, a) %></td>
+        <td><%= link_to 'Delete', admin_user_address_path(user, a), method: :delete, data: {confirm: "Are you sure you want to delete the address #{a.street_address}?" } %></td>
       </tr>
     <% end %>
   </tbody>

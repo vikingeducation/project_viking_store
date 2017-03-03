@@ -3,6 +3,8 @@ class Order < ApplicationRecord
   has_many :order_contents
   has_many :products, through: :order_contents
   has_many :categories, through: :products
+  belongs_to :billing_address, foreign_key: :id, primary_key: :billing_id, class_name: 'Address'
+  belongs_to :shipping_address, foreign_key: :id, primary_key: :billing_id, class_name: 'Address'
 
   def order_value
     self.products.sum(:price)
