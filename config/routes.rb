@@ -9,10 +9,15 @@ Rails.application.routes.draw do
     resources :products
     resources :users do
       resources :addresses, only: [:index, :new, :create, :edit, :show, :update, :destroy]
-      resources :orders, only: [:show, :new]
+      resources :orders, only: [:show, :new, :create, :index]
       resources :credit_cards, only: :destroy
     end
     resources :addresses, only: :index
+    resources :orders, only: [:edit, :index, :show, :destroy] do
+      post 'update_contents', on: :member
+      post 'add_products', on: :member
+    end
+    resources :order_contents, only: [:destroy]
   end
 
 

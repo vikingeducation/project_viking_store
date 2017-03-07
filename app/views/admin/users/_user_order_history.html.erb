@@ -21,9 +21,9 @@
           <td><%= o.checkout_date.strftime('%d/%m/%y')  %></td>
           <td><%= number_to_currency(o.order_value, precision:2) %></td>
           <td><%= o.checkout_date.nil? ? 'Unplaced' : 'Placed' %></td>
-          <td><%= link_to 'Show', '#' %></td>
-          <td><%= link_to 'Edit', '#' %></td>
-          <td><%= link_to 'Delete', '#' %></td>
+          <td><%= link_to 'Show', admin_order_path(o) %></td>
+          <td><%= link_to 'Edit', edit_admin_order_path(o) %></td>
+          <td><%= link_to 'Delete', admin_order_path(o), method: :delete, data: {confirm: 'Are you sure you want to delete this order?'} %></td>
         </tr>
         <% end %>
         <% end %>

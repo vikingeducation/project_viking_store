@@ -1,0 +1,7 @@
+<tr>
+  <td><%= order_content.product.id %></td>
+  <td><%= order_content.product.name %></td>
+  <td><%= order_content.quantity %></td>
+  <td><%= order_content.product.price.to_s(:currency, precision: 2) %></td>
+  <td><%= (order_content.product.price * order_content.quantity).to_s(:currency, precision: 2) %></td>
+</tr>
