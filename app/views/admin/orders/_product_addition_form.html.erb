@@ -1,0 +1,23 @@
+<%= form_for [:add_products, :admin, @order], method: :add_products do |f| %>
+  <table class="table">
+    <thead>
+      <th>Product ID</th>
+      <th>Quantity</th>
+    </thead>
+    <tbody>
+      <% 5.times do |i| %>
+        <%= f.fields_for "order_contents[#{i}]" do |ff| %>
+          <tr>
+            <td><%= ff.number_field :product_id, class: 'form-control' %></td>
+            <td><%= ff.number_field :quantity, value: nil, min: 1, class: 'form-control' %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+  <%= f.submit "Add Products", class: 'btn btn-primary btn-block'%>
+    </div>
+  </div>
+<% end %>

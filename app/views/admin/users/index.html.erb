@@ -1,0 +1,19 @@
+<h2 class="text-center">Viking Store Users</h2>
+<%= render partial: 'shared/admin_header', locals: {the_model: 'User'} %>
+<table class="table">
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Joined</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Orders</th>
+    <th>Last Order Date</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+   <%= render @users %>
+  </tbody>
+</table>

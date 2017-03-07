@@ -95,7 +95,7 @@ end
 def creation_date
   time_frames = []
   (MULTIPLIER**2).times do |x|
-     time_frames << midnight_tonight - ((x*3) + 1).month
+    time_frames << midnight_tonight - ((x*3) + 1).month
   end
   date_range = (time_frames.sample..midnight_tonight)
   rand(date_range)
@@ -180,7 +180,7 @@ end
 # Create some CreditCard records for users who have an order.
 def generate_credit_cards_for_checked_out_orders
   checked_out_orders = Order.all.select("DISTINCT user_id").
-                                where("checkout_date IS NOT NULL")
+    where("checkout_date IS NOT NULL")
 
   checked_out_orders.each do |order|
     card = CreditCard.new
@@ -220,7 +220,7 @@ puts "Created states"
 puts "Created cities"
 
 # Create categories and products
- MULTIPLIER.times       { generate_category }
+MULTIPLIER.times       { generate_category }
 
 puts "Created categories"
 (MULTIPLIER * 10).times { generate_product }

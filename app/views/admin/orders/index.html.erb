@@ -1,0 +1,33 @@
+<% if @user %>
+  <center>
+    <h2><%= @user.full_name %>'s Orders</h2>
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <p><%= link_to "Create an Order for #{@user.full_name}", new_admin_user_order_path, class: 'btn btn-primary btn-block' %></p>
+      </div>
+    </div>
+  </center>
+<% else %>
+  <center>
+    <h2>All Orders</h2>
+    <p>Create new orders from within <%= link_to "User", admin_users_path %> profiles.</p>
+  </center>
+<% end %>
+<table class="table">
+  <thead>
+    <th>ID</th>
+    <th>User ID</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Total Value</th>
+    <th>Status</th>
+    <th>Date Placed</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <%= render @orders %>
+  </tbody>
+</table>

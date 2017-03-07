@@ -1,0 +1,51 @@
+<%= form_for [:admin, @user], html: {class: 'form-horizontal' } do |f| %>
+  <h3>Demographic Information</h3>
+  <div class="form-group <%= form_error_class(@user, :first_name) %>">
+    <%= f.label :first_name, class: 'control-label col-sm-2'  %>
+    <div class="col-sm-8">
+      <%= f.text_field :first_name, class: 'form-control' %>
+      <%= form_error(@user, :first_name) %>
+    </div>
+  </div>
+  <div class="form-group <%= form_error_class(@user, :last_name) %>">
+    <%= f.label :last_name, class: 'control-label col-sm-2'  %>
+    <div class="col-sm-8">
+      <%= f.text_field :last_name, class: 'form-control' %>
+      <%= form_error(@user, :last_name) %>
+    </div>
+  </div>
+  <div class="form-group <%= form_error_class(@user, :email) %>">
+    <%= f.label :email, class: 'control-label col-sm-2'  %>
+    <div class="col-sm-8">
+      <%= f.text_field :email, class: 'form-control' %>
+      <%= form_error(@user, :email) %>
+    </div>
+  </div>
+  <% if @user.persisted? %>
+    <div class="form-group <%= form_error_class(@user, :billing_id) %>">
+      <%= f.label :billing_id, 'Default Billing Address',  class: 'control-label col-sm-2'  %>
+      <div class="col-sm-8">
+        <%= f.select :billing_id, options_for_select(@billing_addresses, disabled: '', selected: ''), {}, class: 'form-control' %>
+        <%= form_error(@user, :billing_id) %>
+      </div>
+    </div>
+    <div class="form-group <%= form_error_class(@user, :shipping_id) %>">
+      <%= f.label :shipping_id, 'Default Shipping Address', class: 'control-label col-sm-2'  %>
+      <div class="col-sm-8">
+        <%= f.select :shipping_id, options_for_select(@shipping_addresses, disabled: '', selected: ''), {}, class: 'form-control' %>
+        <%= form_error(@user, :shipping_id) %>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <div class="col-xs-12">
+      <%= link_to 'View Saved Addresses', admin_user_addresses_path(@user) if @user.persisted?  %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-6 text-center">
+      <%= f.submit class: 'btn btn-primary btn-block' %>
+      <%= link_to 'Delete User', admin_user_path(@user), method: :delete, data: {confirm: "Are you sure you want to delete #{@user.full_name}?"} if @user.persisted? %>
+    </div>
+  </div>
+<% end %>

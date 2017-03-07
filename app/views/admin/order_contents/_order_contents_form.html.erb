@@ -1,0 +1,27 @@
+ORDER CONTENTS FORM
+
+<%= form_for [:update_contents, :admin, @order], method: :update_contents do |f| %>
+  <table class="table">
+    <thead>
+      <th>ID</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Total Price</th>
+      <th>Remove</th>
+    </thead>
+    <tbody>
+      <% @order_contents.each do |oc| %>
+        <%= fields_for :order_contents do |ff| %>
+          <tr>
+            <td><%= oc.id %></td>
+            <td><%= ff.number_field "#{oc.id}[quantity]", value: oc.quantity %></td>
+            <td><%= oc.product.price %></td>
+            <td><%= oc.quantity * oc.product.price %></td>
+            <td><%= link_to "Remove", admin_order_content_path(oc), method: :delete, data: {confirm: "Are you sure you want to remove this item?"} %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= f.submit %>
+<% end %>

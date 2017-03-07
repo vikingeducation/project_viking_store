@@ -1,0 +1,14 @@
+<% if @user %>
+  <h2 class="text-center">
+    <%= "#{@user.full_name}'s Addresses" %>
+  </h2>
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+      <%= link_to 'Create a New Address', new_admin_user_address_path(@user, @address), class: 'btn btn-primary btn-block' %>
+    </div>
+  </div>
+<% else %>
+  <h2 class="text-center">Addresses</h2>
+  <p class="text-center">Create new addresses from within <%= link_to 'User', admin_users_path(@user) %> profiles</p>
+<% end %>
+<%= render 'address_table' %>

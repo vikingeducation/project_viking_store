@@ -1,0 +1,26 @@
+<h3 class="text-center">Edit Order <%= @order.id %></h3>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Logistical Information</h3>
+  </div>
+  <div class="panel-body">
+    <%= render 'order_info' %>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit Order Contents</h3>
+  </div>
+  <div class="panel-body">
+    <%= render 'order_contents_form' %>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Add Products to Order</h3>
+    <p>Add up to 5 products at a time</p>
+  </div>
+  <div class="panel-body">
+    <%= render 'product_addition_form' %>
+  </div>
+</div>

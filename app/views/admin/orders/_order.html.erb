@@ -1,0 +1,13 @@
+<tr>
+  <td><%= order.id %></td>
+  <td><%= link_to order.user_id, admin_user_orders_path(order.user_id) %></td>
+  <td><%= order.shipping_address ? order.shipping_address.street_address : '-' %></td>
+  <td><%= order.shipping_address.city.name %></td>
+  <td><%= order.shipping_address.state.name %></td>
+  <td><%= order.order_value.to_s(:currency, precision: 2) %></td>
+  <td><%= order.checkout_date ? 'PLACED' : '<span class="text-danger">UNPLACED</span>'.html_safe %></td>
+  <td><%= order.checkout_date ? order.checkout_date.strftime('%d/%m/%y') : '-' %></td>
+  <td><%= link_to "Show", admin_order_path(order) %></td>
+  <td><%= link_to "Edit", edit_admin_order_path(order) %></td>
+  <td><%= link_to "Delete", admin_order_path(order), method: :delete, data: {confirm: 'Are you sure you want to delete this order?'} %></td>
+</tr>

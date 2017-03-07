@@ -1,0 +1,10 @@
+.field_with_errors, .error-block {
+  color: #a94442;
+}
+
+.mts {
+  margin-top: 1.2em;
+}
+.mbs {
+  margin-bottom: 1.2em;
+}

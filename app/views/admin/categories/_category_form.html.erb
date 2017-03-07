@@ -1,0 +1,28 @@
+<h2 class="text-center"><%=  @category.persisted? ? "Edit Category #{@category.id}: #{@category.name}" : 'New Category' %></h2>
+<%= form_for [:admin, @category], html: {class: 'form-horizontal'} do |f| %>
+<div class="form-group">
+  <%= f.label :id, class: 'col-sm-2 control-label'  %>:
+  <%= @category.id || 'N/A' %>
+</div>
+  <div class="form-group <%= form_error_class(@category, :name) %>">
+    <%= f.label :name, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10"><%= f.text_field :name, class: 'form-control' %>
+      <%= form_error(@category, :name) %></div>
+  </div>
+  <div class="form-group <%= form_error_class(@category, :description) %>">
+    <%= f.label :description, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10"><%= f.text_area :description, class: 'form-control'  %>
+        <%= form_error(@category, :description) %></div>
+    </div>
+  <div class="form-group">
+    <div class="col-sm-6 col-sm-offset-3">
+    <%= f.submit  class:'btn btn-primary btn-block' %>
+    <% if @category.persisted? %>
+    <p class="text-center"
+    ><%= link_to 'Delete Category',  [:admin, @category], method: :delete, data: { confirm: "Are you sure you want to delete the category '#{@category.name}'?"} %>
+  </p>
+    <% end %>
+     </div>
+   </div>
+<% end %>
+</div>
