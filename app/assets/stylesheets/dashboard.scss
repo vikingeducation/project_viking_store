@@ -1,0 +1,42 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1, h3, h6, td {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  padding-bottom: 40px;
+  padding-top: 30px;
+}
+
+div.row {
+  margin-bottom: 30px;
+}
+
+div.stat-window {
+  border: 3px solid #999;
+  padding: 15px;
+}
+
+
+div.inner-content {
+  margin: auto 30px;
+}
+
+table caption {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-left: 1px solid #cecfd5;
+}
