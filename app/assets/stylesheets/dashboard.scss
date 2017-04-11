@@ -6,6 +6,10 @@ h1, h3, h6, td {
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
+h2 {
+  text-align: center;
+}
+
 h1 {
   text-align: center;
   padding-bottom: 40px;
@@ -27,7 +31,7 @@ div.inner-content {
 }
 
 table caption {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   color: #333;
 }

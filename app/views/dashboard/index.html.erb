@@ -7,39 +7,10 @@
     <div class="col-md-6">
       <div class="stat-window">
         <div class="inner-content">
-          <H3>
+          <H2>
             1. Overall Platform
-          </H3>
-
-          <table class="table table-striped">
-            <caption>Last 7 Days</caption>
-            <thead>
-              <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Data</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>New Users</td>
-                <td><%=@seven_days_users %></td>
-              </tr>
-              <tr>
-                <td>Orders</td>
-                <td><%=@seven_days_orders %></td>
-              </tr>
-              <tr>
-                <td>New Products</td>
-                <td><%=@seven_days_products %></td>
-              </tr>
-              <tfoot>
-                </tr>
-                  <td>Revenue</td>
-                  <td>$<%=@seven_days_revenue %></td>
-                </tr>
-              </tfoot>
-            </tbody>
-          </table>
+          </H2>
+          <%= render "shared/overall_platform_stats" %>
 
           <table class="table table-striped">
             <caption>Last 30 Days</caption>
@@ -108,9 +79,9 @@
     <div class="col-md-6">
       <div class="stat-window">
         <div class="inner-content">
-          <H3>
+          <H2>
             2. User Demographics and Behavior
-          </H3>
+          </H2>
 
           <table class="table table-striped">
             <caption>Top 3 States Users Live in (billing)</caption>
@@ -120,20 +91,7 @@
                 <th scope="col">Data</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>California</td>
-                <td>100</td>
-              </tr>
-              <tr>
-                <td>Texas</td>
-                <td>100</td>
-              </tr>
-              <tr>
-                <td>Oregon</td>
-                <td>100</td>
-              </tr>
-            </tbody>
+            <%= render "shared/user_demographics" %>
           </table>
 
           <table class="table table-striped">
@@ -144,20 +102,20 @@
                 <th scope="col">Data</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Los Angeles</td>
-                <td>100</td>
-              </tr>
-              <tr>
-                <td>San Francisco</td>
-                <td>100</td>
-              </tr>
-              <tr>
-                <td>Austin</td>
-                <td>100</td>
-              </tr>
-            </tbody>
+              <tbody>
+                <tr>
+                  <td><%= @top_three_cities[0].name %></td>
+                  <td><%= @top_three_cities[0].num_users %></td>
+                </tr>
+                <tr>
+                  <td><%= @top_three_cities[1].name %></td>
+                  <td><%= @top_three_cities[1].num_users %></td>
+                </tr>
+                <tr>
+                  <td><%= @top_three_cities[2].name %></td>
+                  <td><%= @top_three_cities[2].num_users %></td>
+                </tr>
+              </tbody>
           </table>
 
           <table class="table table-striped">
@@ -166,7 +124,7 @@
               <tr>
                 <th scope="col">Item</th>
                 <th scope="col">User</th>
-                <th scope="col">Quantity</th>
+                <th scope="col">Data</th>
               </tr>
             </thead>
             <tbody>
@@ -204,9 +162,9 @@
     <div class="col-md-6">
       <div class="stat-window">
         <div class="inner-content">
-          <H3>
+          <H2>
             3. Order Statistics
-          </H3>
+          </H2>
 
           <table class="table table-striped">
             <caption>Last 7 Days</caption>
@@ -300,9 +258,9 @@
     <div class="col-md-6">
       <div class="stat-window">
         <div class="inner-content">
-          <H3>
+          <H2>
             4. Time Series Data
-          </H3>
+          </H2>
 
           <table class="table table-striped">
             <caption>Orders by Day</caption>

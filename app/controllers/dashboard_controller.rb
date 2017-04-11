@@ -16,6 +16,9 @@ class DashboardController < ApplicationController
     @total_products = Product.total_products
     @total_revenue = Order.total_revenue[0].sum
 
+    @top_three_cities = User.top_three_cities
+    @top_three_states = User.top_three_states
+
 
 
 

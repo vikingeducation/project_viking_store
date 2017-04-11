@@ -1,0 +1,29 @@
+<table class="table table-striped">
+  <caption>Last 7 Days</caption>
+  <thead>
+    <tr>
+      <th scope="col">Item</th>
+      <th scope="col">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>New Users</td>
+      <td><%=@seven_days_users %></td>
+    </tr>
+    <tr>
+      <td>Orders</td>
+      <td><%=@seven_days_orders %></td>
+    </tr>
+    <tr>
+      <td>New Products</td>
+      <td><%=@seven_days_products %></td>
+    </tr>
+    <tfoot>
+      </tr>
+        <td>Revenue</td>
+        <td>$<%=@seven_days_revenue %></td>
+      </tr>
+    </tfoot>
+  </tbody>
+</table>
