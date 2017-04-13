@@ -37,7 +37,7 @@ class User < ApplicationRecord
       joins("JOIN orders ON orders.user_id = users.id").
       joins("JOIN order_contents ON orders.id = order_contents.order_id").
       joins("JOIN products ON products.id = order_contents.product_id").
-      where('orders.checkout_date' => nil).
+      where.not('orders.checkout_date' => nil).
       order("order_value desc").
       limit(1)
     end
@@ -47,18 +47,30 @@ class User < ApplicationRecord
       joins("JOIN orders ON orders.user_id = users.id").
       joins("JOIN order_contents ON orders.id = order_contents.order_id").
       joins("JOIN products ON products.id = order_contents.product_id").
-      where('orders.checkout_date' => nil).
+      where.not('orders.checkout_date' => nil).
       group("users.id").
       order("all_orders_value desc").
-      limit(3)
+      limit(1)
     end
 
-    def highest_avg_order_val
-
+    def self.highest_avg_order_val
+      select("users.first_name, users.last_name, AVG(order_contents.quantity*products.price) AS avg_value").
+        joins("JOIN orders ON orders.user_id = users.id").
+        joins("JOIN order_contents ON orders.id = order_contents.order_id").
+        joins("JOIN products ON products.id = order_contents.product_id").
+        where.not('orders.checkout_date' => nil).
+        group("users.id").
+        order("avg_value desc").
+        limit(1)
     end
 
-    def most_orders
-
+    def self.most_orders
+      select("users.first_name, users.last_name, count(orders.id) AS no_of_orders").
+        joins("JOIN orders ON orders.user_id = users.id").
+        where.not('orders.checkout_date' => nil).
+        group("users.id").
+        order("no_of_orders desc").
+        limit(1)
     end
 
 
