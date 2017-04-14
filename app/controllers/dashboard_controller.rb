@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
     @total_users =User.total_users
     @total_orders = Order.total_orders
     @total_products = Product.total_products
-    @total_revenue = Order.total_revenue_s[0].sum
+    @total_revenue_checked = Order.total_revenue_checked[0].sum_orders
 
     @top_three_cities = User.top_three_cities
     @top_three_states = User.top_three_states
@@ -24,26 +24,41 @@ class DashboardController < ApplicationController
     @highest_avg_order_val = User.highest_avg_order_val[0]
     @most_orders = User.most_orders[0]
 
+    @num_of_orders_by_days = {7 => num_of_orders(7), 
+                            30 => num_of_orders(30), 
+                            'all_time' => num_of_orders}
+
+    @total_revenue = {7 => total_revenue(7).round(2), 
+                    30 => total_revenue(30).round(2), 
+                    'all_time' => total_revenue.round(2)}
+
+    @avg_order_val = {7 => avg_order_val(7).round(2), 
+                    30 => avg_order_val(30).round(2), 
+                    'all_time' => avg_order_val.round(2)}
+
+    @large_order_val = {7 => large_order_val(7), 
+                        30 => large_order_val(30), 
+                        'all_time' => large_order_val}
+
+  end
+
+
+  private
     def num_of_orders(period = nil)
-        Order.num_of_orders(period)[0].all_orders
+        Order.num_of_orders(period)
     end
 
-    def total_revenue(period)
+    def total_revenue(period = nil)
         Order.total_revenue(period)[0].sum_orders
     end
 
-    def avg_order_val(period)
+    def avg_order_val(period = nil)
         Order.avg_order_val(period)[0].avg_orders
     end
 
-    def large_order_val(period)
+    def large_order_val(period = nil)
         Order.large_order_val(period)[0].order_value
     end
 
-    @num_of_orders_by_days = {7 => num_of_orders(7), 30 => num_of_orders(30), 'all_time' => num_of_orders}
-
-
-
-
-  end
 end
+

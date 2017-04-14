@@ -32,25 +32,11 @@ class Order < ApplicationRecord
         ")
     end
 
-    def self.total_revenue_s
-      find_by_sql("
-          SELECT SUM(price * quantity) AS sum FROM orders
-          JOIN order_contents ON orders.id = order_contents.order_id
-          JOIN products ON products.id = order_contents.product_id
-          WHERE checkout_date IS NOT NULL
-        ")
-    end
-
-    def self.all_time_count_orders
-      select("count(*) AS all_orders")
-    end
-
     def self.num_of_orders(period = nil)
       if period
-        all_time_count_orders.
-        where(:created_at => ((Time.now - period.days)..Time.now))
+        where(:created_at => ((Time.now - period.days)..Time.now)).count
       else
-        all_time_count_orders
+        count
       end
     end
 
@@ -70,6 +56,23 @@ class Order < ApplicationRecord
       select("price * quantity AS order_value").
       joins("JOIN order_contents ON orders.id = order_contents.order_id").
       joins("JOIN products ON products.id = order_contents.product_id")
+    end
+
+    def self.total_revenue_checked(period = nil)
+      # find_by_sql("
+      #     SELECT SUM(price * quantity) AS sum FROM orders
+      #     JOIN order_contents ON orders.id = order_contents.order_id
+      #     JOIN products ON products.id = order_contents.product_id
+      #     WHERE checkout_date IS NOT NULL
+      #   ")
+      if period
+        all_time_total_revenue.
+        where(:created_at => ((Time.now - period.days)..Time.now)).
+        where.not(:checkout_date => nil)
+      else
+        all_time_total_revenue.
+        where.not(:checkout_date => nil)
+      end
     end
 
     def self.total_revenue(period = nil)
@@ -97,7 +100,7 @@ class Order < ApplicationRecord
         order("order_value desc").
         limit(1)
       else
-        all_time_total_revenue.
+        all_time_biggest_order.
         order("order_value desc").
         limit(1)
       end

@@ -66,7 +66,7 @@
               <tfoot>
                 <tr>
                   <td>Revenue</td>
-                  <td>$<%=@total_revenue %></td>
+                  <td>$<%=@total_revenue_checked %></td>
                 </tr>
               </tfoot>
             </tbody>
@@ -168,17 +168,29 @@
 
           <table class="table table-striped">
             <caption>Last 7 Days</caption>
-            <%= render partial: "shared/order_stats", locals: {number: @num_of_orders_by_days[7]} %>
+            <%= render partial: "shared/order_stats", locals: {
+              number: @num_of_orders_by_days[7],
+              revenue: @total_revenue[7],
+              avg_ord_val: @avg_order_val[7],
+              lrg_ord_val: @large_order_val[7]} %>
           </table>
 
           <table class="table table-striped">
             <caption>Last 30 Days</caption>
-            <%= render "shared/order_stats", locals: {period: 30} %>
+            <%= render partial: "shared/order_stats", locals: {
+              number: @num_of_orders_by_days[30],
+              revenue: @total_revenue[30],
+              avg_ord_val: @avg_order_val[30],
+              lrg_ord_val: @large_order_val[30]} %>
           </table>
 
           <table class="table table-striped">
             <caption>Total</caption>
-            <%= render "shared/order_stats" %>
+            <%= render partial: "shared/order_stats", locals: {
+              number: @num_of_orders_by_days['all_time'],
+              revenue: @total_revenue['all_time'],
+              avg_ord_val: @avg_order_val['all_time'],
+              lrg_ord_val: @large_order_val['all_time']} %>
           </table>
 
 
