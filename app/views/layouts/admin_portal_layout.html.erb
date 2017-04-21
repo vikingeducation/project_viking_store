@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SolutionVikingStore</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+<H1>Viking Store Admin Portal</H1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="nav-wrapper">
+        <div class="nav-holder">
+          <h4>Navigation Options</h4>
+          <ul>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Addresses</a></li>
+            <li><a href="#">Orders</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Categories</a></li>
+            <hr>
+            <li><a href="/dashboard">Analytics Dashboard</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="admin-wrapper">
+        <div class="admin-holder">
+          <% flash.each do |key, value| %>
+            <div class="alert alert-dismissible alert-<%= key %>">
+              <%= value %>
+              <button type="button" class="close fade" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <% end %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

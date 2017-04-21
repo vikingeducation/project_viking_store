@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+    layout 'application'
 
   def index
     @seven_days_users = User.seven_days_users
@@ -28,13 +29,13 @@ class DashboardController < ApplicationController
                             30 => num_of_orders(30), 
                             'all_time' => num_of_orders}
 
-    @total_revenue = {7 => total_revenue(7).round(2), 
-                    30 => total_revenue(30).round(2), 
-                    'all_time' => total_revenue.round(2)}
+    @total_revenue = {7 => total_revenue(7), 
+                    30 => total_revenue(30), 
+                    'all_time' => total_revenue}
 
-    @avg_order_val = {7 => avg_order_val(7).round(2), 
-                    30 => avg_order_val(30).round(2), 
-                    'all_time' => avg_order_val.round(2)}
+    @avg_order_val = {7 => avg_order_val(7), 
+                    30 => avg_order_val(30), 
+                    'all_time' => avg_order_val}
 
     @large_order_val = {7 => large_order_val(7), 
                         30 => large_order_val(30), 
@@ -45,19 +46,19 @@ class DashboardController < ApplicationController
 
   private
     def num_of_orders(period = nil)
-        Order.num_of_orders(period)
+        Order.num_of_orders(period) unless Order.num_of_orders(period).nil?
     end
 
     def total_revenue(period = nil)
-        Order.total_revenue(period)[0].sum_orders
+        Order.total_revenue(period)[0].sum_orders unless Order.total_revenue(period)[0].nil?
     end
 
     def avg_order_val(period = nil)
-        Order.avg_order_val(period)[0].avg_orders
+        Order.avg_order_val(period)[0].avg_orders unless Order.avg_order_val(period)[0].nil?
     end
 
     def large_order_val(period = nil)
-        Order.large_order_val(period)[0].order_value
+        Order.large_order_val(period)[0].order_value unless Order.large_order_val(period)[0].nil?
     end
 
 end
