@@ -1,0 +1,28 @@
+<H3>Category <%= @category.id %>: <%= @category.name %></H3>
+
+
+<H5>Category ID:  <%= @category.id %></H5>
+<H5>Name: <%= @category.name %></H5> <br>
+<%= link_to("Edit Category", "/admin_portal/<%= @category.id %>/edit_categ", method: :get) %>
+<%= link_to("Delete Category", "/admin_portal/<%= @category.id %>", method: :delete) %>
+
+
+
+<a href="/admin_portal/<%= @category.id %>/edit_categ">Edit Category</a><br>
+<a href="/admin_portal/<%= @category.id %>">Delete Category</a>
+
+<table class="table">
+  <caption>Products in <%= @category.name %></caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>data</td>
+    </tr>
+  </tbody>
+</table>

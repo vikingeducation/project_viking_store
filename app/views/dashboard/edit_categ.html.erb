@@ -1,4 +1,4 @@
-<H3>Edit Category</H3>
+<H3>Edit Category <%= @category.id %>: <%= @category.name %></H3>
 
 <div class="form-wrapper">
 
@@ -17,6 +17,9 @@
     </div>
     <div class="button-wrapper">
       <%= f.submit "Update Category", class: "btn btn-primary btn-group btn-group-lg" %>
+      <%= link_to("#", html_options = {}) do %>
+        Delete Category
+      <% end %>
     </div>
   <% end %>
 

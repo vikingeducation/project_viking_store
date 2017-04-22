@@ -24,9 +24,9 @@
         <tr>
           <td><%= categ.id %></td>
           <td><%= categ.name %></td>
-          <td><a href="#">show</a></td>
-          <td><a href="#">edit</a></td>
-          <td><a href="#">edit</a></td>
+          <td><a href="admin_portal/<%= categ.id %>">show</a></td>
+          <td><a href="/admin_portal/<%= categ.id %>/edit_categ">edit</a></td>
+          <td><a href="#">delete</a></td>
         </tr>
       <% end %>
     </tbody>
