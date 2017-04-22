@@ -1,0 +1,10 @@
+<%= form_for @category do |f| %>
+  <%= f.label :category_id %>:
+  <%= f.text_field :category_id %><br />
+
+  <%= f.label :Name, "Name" %>:
+  <%= f.text_field :Name %><br />
+  <div class="button-wrapper">
+  <%= f.submit "Create Category", class: "btn btn-primary btn-group btn-group-lg" %>
+  </div>
+<% end %>

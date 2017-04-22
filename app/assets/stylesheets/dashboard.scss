@@ -41,17 +41,30 @@
 // ==========================
 
 div.button-wrapper {
-    width: 280px;
-    margin: 0 auto;
-    button.btn-primary {
-      width: 100%;
-      padding: 7px 30px;
-      font-size: 16px;
-    }
+  max-width: 250px;
+  margin: 0 auto;
+  a.btn-primary, input.btn-primary {
+    width: 100%;
+    padding: 7px 30px;
+    font-size: 16px;
+  }
+}
+@media (min-width: 750px) {
+  form div.button-wrapper {
+  margin-right: 15%;
+  }
 }
 
 div.table-wrapper {
-  padding: 10px 80px;
+  // padding: 10px 80px;
+}
+
+div.form-wrapper {
+  // margin: 0 auto;
+  form {
+    max-width: 600px;
+    // padding: 10px;
+  }
 }
 
 

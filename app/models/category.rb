@@ -1,7 +1,8 @@
 class Category < ApplicationRecord
 
-  # def all_categories
-  #   Category.all
-  # end
+  validates :name,
+            :presence => true,
+            :uniqueness => true,
+            :length => {:in => 4..16}
 
 end
