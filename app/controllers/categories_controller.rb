@@ -3,7 +3,8 @@ class CategoriesController < ApplicationController
 
   def index_categ
     flash[:success] = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, alias."
-    render "/dashboard/index_categ"
+    @all_categories = Category.all
+    render "/dashboard/index_categ", :locals => {:all_categories => @all_categories }
   end
 
 

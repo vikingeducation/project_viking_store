@@ -1,2 +1,34 @@
 
-<H1>Hello, test of index_categ</H1>
+<H3>Product Categories</H3>
+
+<div class="button-wrapper">
+  <button class="btn btn-primary btn-group btn-group-lg" role="group">
+    Add a New Category
+    </button>
+</div>
+
+<div class="table-wrapper">
+  <table class="table table-striped">
+    <caption></caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>SHOW</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% all_categories.each do |categ| %>
+        <tr>
+          <td><%= categ.id %></td>
+          <td><%= categ.name %></td>
+          <td><a href="#">show</a></td>
+          <td><a href="#">edit</a></td>
+          <td><a href="#">edit</a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

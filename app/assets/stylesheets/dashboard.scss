@@ -36,6 +36,25 @@
   margin: 10px;
 }
 
+// ==========================
+// ADMIN - CATEGORIES
+// ==========================
+
+div.button-wrapper {
+    width: 280px;
+    margin: 0 auto;
+    button.btn-primary {
+      width: 100%;
+      padding: 7px 30px;
+      font-size: 16px;
+    }
+}
+
+div.table-wrapper {
+  padding: 10px 80px;
+}
+
+
 
 // ==========================
 // ADMIN - ANALYTICS DASHBOARD
@@ -45,7 +64,7 @@ h1, h3, h6, td {
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-h2 {
+h2, h3 {
   text-align: center;
 }
 
