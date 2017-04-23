@@ -12,5 +12,11 @@ class Product < ApplicationRecord
     count
   end
 
+  def self.by_categories(categ_id)
+    Product.select("products.id, products.name").
+    joins("JOIN categories ON categories.id = products.category_id").
+    where(:category_id => categ_id)
+  end
+
 
 end

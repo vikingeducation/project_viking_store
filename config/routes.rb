@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post "/admin_portal/create_categ" => 'categories#create_categ'
   get "/admin_portal/:id" => 'categories#show_categ'
   get "/admin_portal/:id/edit_categ" => 'categories#edit_categ'
-  # put "/admin_portal/:id" => 'categories#edit_categ'
+  put "/admin_portal/:id" => 'categories#update_categ'
   patch "/admin_portal/:id" => 'categories#update_categ'
   delete "/admin_portal/:id" => 'categories#delete_categ'
 end
