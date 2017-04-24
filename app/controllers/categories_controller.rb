@@ -36,7 +36,7 @@ class CategoriesController < ApplicationController
 
   def update_categ
     @category = Category.find(params[:id])
-    if @category.update(whitelisted_category_params)
+    if @category.update_attributes(whitelisted_category_params)
       flash.now[:success] = "Category has been updated"
       redirect_to "/admin_portal"
     else
@@ -60,5 +60,5 @@ end
 
 private
 def whitelisted_category_params
-  params.require(:category).permit(:name)
+  params.require(:category).permit(:name  )
 end

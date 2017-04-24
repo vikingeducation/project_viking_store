@@ -18,9 +18,7 @@
     </div>
     <div class="button-wrapper">
       <%= f.submit "Update Category", class: "btn btn-primary btn-group btn-group-lg" %>
-      <%= link_to("#", html_options = {}) do %>
-        Delete Category
-      <% end %>
+      <%= link_to("Delete Category", "/admin_portal/#{:id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
     </div>
   <% end %>
 

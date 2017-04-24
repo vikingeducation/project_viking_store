@@ -1,0 +1,38 @@
+
+<H3>Products</H3>
+
+<div class="button-wrapper">
+  <a class="btn btn-primary btn-group btn-group-lg" role="group" href="/admin_portal/new_categ">
+    Add a New Product
+    </a>
+</div>
+
+<div class="table-wrapper">
+  <table class="table table-striped">
+    <caption></caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>SHOW</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |prod| %>
+        <tr>
+          <td><%= prod.id %></td>
+          <td><%= prod.name %></td>
+          <td>$<%= prod.price %></td>
+          <td><%= prod.category.nil? ? "N.A." : (link_to("#{prod.category}", "#")) %></td>
+          <td><%= link_to("show", edit_admin_product_path(product)) %></td>
+          <td><%= link_to("edit", show_admin_product_path(product)) %></td>
+          <td><%= link_to("delete", "/admin_portal/#{categ.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
