@@ -15,10 +15,25 @@ class Product < ApplicationRecord
   end
 
   def self.by_categories(categ_id)
-    Product.select("products.id, products.name").
+    select("products.id, products.name").
     joins("JOIN categories ON categories.id = products.category_id").
     where(:category_id => categ_id)
   end
 
+  def self.times_ordered(prod_id)
+    select("*").
+    joins("JOIN order_contents ON order_contents.product_id = products.id").
+    joins("JOIN orders ON order_contents.order_id = orders.id").
+    where.not("orders.checkout_date" => nil).
+    where("products.id" => prod_id).count
+  end
+
+  def self.times_in_carts(prod_id)
+    select("*").
+    joins("JOIN order_contents ON order_contents.product_id = products.id").
+    joins("JOIN orders ON order_contents.order_id = orders.id").
+    where("orders.checkout_date" => nil).
+    where("products.id" => prod_id).count
+  end
 
 end

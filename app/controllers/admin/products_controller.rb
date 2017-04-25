@@ -8,6 +8,8 @@ class Admin::ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @product_times_ordered = Product.times_ordered(params[:id])
+    @product_times_in_carts = Product.times_in_carts(params[:id])
   end
 
 
