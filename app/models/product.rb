@@ -2,6 +2,12 @@ class Product < ApplicationRecord
 
   belongs_to :category
 
+  before_validation :strip_dollar, :only => [:price]
+
+  validates :price,
+            :presence => true,
+            :if => :price <= 10000
+
   def self.seven_days_products
     where('created_at > ?', (Time.zone.now.end_of_day - 7.days)).count
   end
@@ -35,5 +41,10 @@ class Product < ApplicationRecord
     where("orders.checkout_date" => nil).
     where("products.id" => prod_id).count
   end
+
+  private
+  # def strip_dollar
+  #   self.name = self.name.strip unless self.name.nil?
+  # end
 
 end
