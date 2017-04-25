@@ -57,7 +57,7 @@ div.button-wrapper {
 }
 
 div.table-wrapper {
-  // padding: 10px 80px;
+  padding: 10px 30px;
 }
 
 div.form-wrapper {
@@ -70,6 +70,15 @@ div.form-wrapper {
 
 table td a{
   text-decoration: underline;
+}
+
+table.no-borders {
+  border: none;
+}
+
+td.title-cell {
+  width: 120px;
+  padding: 5px 10px;
 }
 
 

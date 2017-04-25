@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
 
+  belongs_to :category
+
   def self.seven_days_products
     where('created_at > ?', (Time.zone.now.end_of_day - 7.days)).count
   end

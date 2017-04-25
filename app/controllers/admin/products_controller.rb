@@ -3,6 +3,16 @@ class Admin::ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    render "/admin/products/index", :locals => {:products => @products }
+    # render "/admin/products/index", :locals => {:products => @products }
   end
+
+  def show
+    @product = Product.find(params[:id])
+  end
+
+
+
+
+
+
 end

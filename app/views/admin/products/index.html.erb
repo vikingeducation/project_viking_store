@@ -27,10 +27,10 @@
           <td><%= prod.id %></td>
           <td><%= prod.name %></td>
           <td>$<%= prod.price %></td>
-          <td><%= prod.category.nil? ? "N.A." : (link_to("#{prod.category}", "#")) %></td>
-          <td><%= link_to("show", edit_admin_product_path(product)) %></td>
-          <td><%= link_to("edit", show_admin_product_path(product)) %></td>
-          <td><%= link_to("delete", "/admin_portal/#{categ.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
+          <td><%= prod.category.nil? ? "N.A." : (link_to("#{prod.category.name}", "/admin_portal/#{prod.category_id}")) %></td>
+          <td><%= link_to("show", admin_product_path(prod.id)) %></td>
+          <td><%= link_to("edit", edit_admin_product_path(prod.id)) %></td>
+          <td><%= link_to("delete", "/admin_portal/#{prod.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
         </tr>
       <% end %>
     </tbody>

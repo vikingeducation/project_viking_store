@@ -1,0 +1,58 @@
+<H3>Product <%= @product.id %></H3>
+
+<table class="no-borders">
+  <caption>Product Information</caption>
+  <tbody>
+    <tr>
+      <td class="title-cell">Product ID:</td>
+      <td><%= @product.id %></td>
+    </tr>
+    <tr>
+      <td class="title-cell">Name:</td>
+      <td><%= @product.name %></td>
+    </tr>
+    <tr>
+      <td class="title-cell">Price: </td>
+      <td><%= @product.price %></td>
+    </tr>
+    <tr>
+      <td class="title-cell">Category:</td>
+      <td><%= @product.category.name %></td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="no-borders">
+  <caption>Product Statistics</caption>
+  <tbody>
+    <tr>
+      <td class="title-cell">Product ID:</td>
+      <td><%= @product.id %></td>
+    </tr>
+    <tr>
+      <td class="title-cell">Name:</td>
+      <td><%= @product.name %></td>
+    </tr>
+  </tbody>
+</table>
+<H4>Product Statistics</H4>
+Times Ordered:
+Carts In:
+
+<table>
+  <caption>table title and/or explanatory text</caption>
+  <thead>
+    <tr>
+      <th>header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<%= link_to("Edit Product", edit_admin_product_path(@product.id)) %><br>
+<%= link_to("Delete Product", "/admin_portal/#{@product.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
