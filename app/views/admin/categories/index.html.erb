@@ -2,9 +2,7 @@
 <H3>Product Categories</H3>
 
 <div class="button-wrapper">
-  <a class="btn btn-primary btn-group btn-group-lg" role="group" href="/admin_portal/new_categ">
-    Add a New Category
-    </a>
+  <%= link_to("Add a New Category", new_admin_category_path, :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
 </div>
 
 <div class="table-wrapper">
@@ -20,15 +18,13 @@
       </tr>
     </thead>
     <tbody>
-      <% all_categories.each do |categ| %>
+      <% @categories.each do |categ| %>
         <tr>
           <td><%= categ.id %></td>
           <td><%= categ.name %></td>
-          <td><a href="admin_portal/<%= categ.id %>">show</a></td>
-          <td><a href="/admin_portal/<%= categ.id %>/edit_categ">edit</a></td>
-          <td><%= link_to("delete", "/admin_portal/#{categ.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
-
-
+          <td><%= link_to("show", admin_category_path(categ.id)) %></td>
+          <td><%= link_to("edit", edit_admin_category_path(categ.id)) %></td>
+          <td><%= link_to("delete", "/admin/categories/#{categ.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
         </tr>
       <% end %>
     </tbody>

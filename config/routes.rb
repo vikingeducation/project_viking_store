@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   # get "/dashboard" => "dashboard#index"
   # get "/admin_portal" => 'categories#index_categ'
   # get "/admin_portal/new_categ" => 'categories#new_categ'
@@ -15,4 +16,4 @@ Rails.application.routes.draw do
     resources :products
   end
 
-end
+end 

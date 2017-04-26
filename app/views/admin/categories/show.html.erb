@@ -3,8 +3,8 @@
 
 <H5>Category ID:  <%= @category.id %></H5>
 <H5>Name: <%= @category.name %></H5> <br>
-<%= link_to("Edit Category", "/admin_portal/#{@category.id}/edit_categ", method: :get) %><br>
-<%= link_to("Delete Category", "/admin_portal/#{@category.id}", method: :delete) %>
+<%= link_to("Edit Category", edit_admin_category_path) %><br>
+<%= link_to("Delete Category", "/admin/products/#{@category.id}", method: :delete) %>
 
 <table class="table">
   <caption>Products in <%= @category.name %></caption>
