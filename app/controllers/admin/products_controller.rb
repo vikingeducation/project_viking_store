@@ -18,6 +18,8 @@ class Admin::ProductsController < ApplicationController
 
   def create
     @product = Product.new(whitelisted_category_params)
+    price_dol = @product.price.to_s
+    @product.price = price_dol.match(/\d*\.\d*/)[0].to_s
     if @product.save
       flash[:success] = "New Product has been added"
       redirect_to admin_products_path
