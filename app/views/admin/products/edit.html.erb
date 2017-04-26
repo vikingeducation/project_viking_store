@@ -1,0 +1,43 @@
+<H3>Edit Product <%= @product.id %> </H3>
+
+<div class="form-wrapper">
+
+  <%= form_for( @product, url: "/admin/products/#{@product.id}", html: { :class => "form-horizontal" } ) do |f| %>
+    <div class="form-group">
+      <%= f.label :id, "Product ID:", class: "col-sm-4 control-label" %>
+<!--         <%= f.text_field :id, class: "form-control", placeholder: "N.A.", disabled: 'disabled' %> -->
+      <div class="col-sm-8">
+        <h4><%= @product.id %></h4>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :name, "Name:", class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :price, "Price:", class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <%= f.text_field :price, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :sku, "SKU:", class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <%= f.text_field :sku, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :category_id, "Category:", class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <%= f.collection_select :category_id, Category.all, :id, :name, :class => "form-control" %>
+      </div>
+    </div>
+    <div class="button-wrapper">
+      <%= f.submit "Update Product", class: "btn btn-primary btn-group btn-group-lg" %>
+      <%= link_to("Delete Product", "/admin/products/#{:id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
+    </div>
+  <% end %>
+
+</div>
