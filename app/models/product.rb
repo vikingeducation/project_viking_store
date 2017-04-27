@@ -4,7 +4,7 @@ class Product < ApplicationRecord
 
   validates :price,
             :presence => true,
-            numericality: { less_than_or_equal_to: 10000 }
+            numericality: { less_than_or_equal_to: 10000,     greater_than: 0 }
 
   def self.seven_days_products
     where('created_at > ?', (Time.zone.now.end_of_day - 7.days)).count
@@ -23,6 +23,9 @@ class Product < ApplicationRecord
     joins("JOIN categories ON categories.id = products.category_id").
     where(:category_id => categ_id)
   end
+
+  
+  # category.products
 
   def self.times_ordered(prod_id)
     select("*").

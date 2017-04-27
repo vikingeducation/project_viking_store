@@ -1,5 +1,9 @@
 class User < ApplicationRecord
 
+  has_many :addresses
+  belongs_to :billing, class_name: "Address"
+  belongs_to :billing_address, foreign_key: 'billing_id'
+
     def self.seven_days_users
       where('created_at > ?', (Time.zone.now.end_of_day - 7.days)).count
     end

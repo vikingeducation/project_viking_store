@@ -3,7 +3,6 @@ class Admin::ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    # render "/admin/products/index", :locals => {:products => @products }
   end
 
   def show
@@ -18,8 +17,7 @@ class Admin::ProductsController < ApplicationController
 
   def create
     @product = Product.new(whitelisted_product_params)
-    price_dol = @product.price.to_s
-    @product.price = price_dol.match(/\d*\.\d*/)[0].to_s
+    strip_dollar_sign
     if @product.save
       flash[:success] = "New Product has been added"
       redirect_to admin_products_path
@@ -62,6 +60,11 @@ class Admin::ProductsController < ApplicationController
   private
   def whitelisted_product_params
     params.require(:product).permit(:name, :price, :sku, :category_id )
+  end
+
+  def strip_dollar_sign
+    price_dol = @product.price.to_s
+    @product.price = price_dol.match(/\d*\.\d*/)[0].to_s
   end
 
 
