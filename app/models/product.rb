@@ -1,7 +1,8 @@
 class Product < ApplicationRecord
 
   belongs_to :category
-  belongs_to :order_content
+  has_many :order_contents
+  has_many :orders, :through => :order_contents
 
   validates :price,
             :presence => true,

@@ -1,8 +1,8 @@
 class User < ApplicationRecord
 
   has_many :addresses, :dependent => :destroy
-  has_one :default_billing_address, class_name: "Address", :foreign_key => :billing_id, :dependent => :destroy
-  has_one :default_shipping_address, class_name: "Address", :foreign_key => :shipping_id, :dependent => :destroy
+  belongs_to :default_billing_address, class_name: "Address", :foreign_key => :billing_id, :dependent => :destroy
+  belongs_to :default_shipping_address, class_name: "Address", :foreign_key => :shipping_id, :dependent => :destroy
   has_one :credit_card, :dependent => :destroy
 
   has_many :orders
