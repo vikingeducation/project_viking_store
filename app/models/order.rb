@@ -1,5 +1,11 @@
 class Order < ApplicationRecord
 
+  has_one :order_content, :dependent => :destroy
+  belongs_to :billing, class_name: "Address", :foreign_key => :billing_id
+  belongs_to :shipping, class_name: "Address", :foreign_key => :shipping_id
+  belongs_to :user
+  belongs_to :credit_card
+
   def self.seven_days_orders
     where('created_at > ?', (Time.zone.now.end_of_day - 7.days)).count
   end
