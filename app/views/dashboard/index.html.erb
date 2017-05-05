@@ -98,18 +98,13 @@
               <th>Item</th>
               <th>Data</th>
             </tr>
+            <% @two[:states].each do |keyvals| %>
             <tr>
-              <td>California</td>
-              <td>23</td>
+              <td><%= keyvals[:name] %></td>
+              <td><%= keyvals[:total] %></td>
             </tr>
-            <tr>
-              <td>Texas</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>Oregon</td>
-              <td>3</td>
-            </tr>
+            <% end %>
+
           </table>
 
           <h3>Top 3 Cities Users Live In (billing)</h3>
@@ -118,18 +113,12 @@
               <th>Item</th>
               <th>Data</th>
             </tr>
+            <% @two[:cities].each do |keyvals| %>
             <tr>
-              <td>Los Angeles</td>
-              <td>23</td>
+              <td><%= keyvals[:name] %></td>
+              <td><%= keyvals[:total] %></td>
             </tr>
-            <tr>
-              <td>San Francisco</td>
-              <td>10</td>
-            </tr>
-            <tr>
-              <td>Austin</td>
-              <td>3</td>
-            </tr>
+            <% end %>
           </table>
 
 
