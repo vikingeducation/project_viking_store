@@ -14,6 +14,22 @@ class User < ApplicationRecord
             length: { maximum: 250 }, 
             presence: true
 
+  # REGIONS = Carmen::Country.named('United States').subregions
+
+  def state_abbrev
+    # user_state = self.addresses.first.state.name
+    # REGIONS.named(user_state).code
+    self.addresses.first.state.name
+  end
+
+  def joined_date
+    created_at.strftime("%m/%d/%y")
+  end
+
+  def last_order_dated
+    sort_ord = self.orders.order('checkout_date DESC').where.not(:checkout_date => nil)
+    sort_ord[0].checkout_date.strftime("%m/%d/%y") if sort_ord.any?
+  end
 
   def self.seven_days_users
     where('created_at > ?', (Time.zone.now.end_of_day - 7.days)).count

@@ -1,0 +1,37 @@
+<H3>User <%= @user.id %>: <%= @user.first_name %><%= @user.last_name %></H3>
+
+<div class="table-wrapper">
+  <table class="no-borders">
+    <caption>Demographic Information</caption>
+    <tbody>
+      <tr>
+        <td class="title-cell">First Name:</td>
+        <td><%= @user.first_name %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Last Name:</td>
+        <td><%= @user.last_name %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Email:</td>
+        <td>$ <%= @user.email %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Telephone:</td>
+        <td>555.123.4567</td>
+      </tr>
+      <tr>
+        <td class="title-cell">Default Billing Address:</td>
+        <td>555.123.4567</td>
+      </tr>
+      <tr>
+        <td class="title-cell">Default Shipping Address:</td>
+        <td>555.123.4567</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= link_to("Edit Product", edit_admin_product_path(@product.id)) %><br>
+  <%= link_to("Delete Product", "/admin_portal/#{@product.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
+
+</div>

@@ -22,9 +22,9 @@ class Order < ApplicationRecord
     count
   end
 
-  def self.last_dated
-    order('checkout_date DESC').where.not(:checkout_date => nil).first
-  end
+  # def self.last_dated
+  #   order('checkout_date DESC').where.not(:checkout_date => nil).limit(1)
+  # end
 
   def self.seven_days_revenue
     find_by_sql("
