@@ -17,11 +17,11 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(whitelisted_product_params)
     if @user.save
-      flash[:success] = "New Product has been added"
-      redirect_to admin_users_path
+      flash[:success] = "New User has been created"
+      redirect_to admin_user_path(@user.id)
     else
-      flash.now[:danger] = "The users could not be added. Try again."
-      render 'new', :locals => {:product => @user}
+      flash.now[:danger] = "The user could not be created. Try again."
+      render 'new', :locals => {:user => @user}
     end
   end
 

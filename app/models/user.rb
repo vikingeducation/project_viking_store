@@ -11,8 +11,12 @@ class User < ApplicationRecord
 
   validates :first_name, 
             :last_name, 
-            length: { maximum: 250 }, 
+            :email,
+            length: { in: 1..64 }, 
             presence: true
+
+  validates :email, 
+            format: { with: /@/}
 
   # REGIONS = Carmen::Country.named('United States').subregions
 
@@ -29,9 +33,9 @@ class User < ApplicationRecord
     when "shipping"
       u = self.default_shipping_address
     else
-      return
+      return nil
     end
-      "#{u.street_address}, #{u.secondary_address}, #{u.city.name}, #{u.state.name}"
+    "#{u.street_address}, #{u.secondary_address}, #{u.city.name}, #{u.state.name}" unless u.nil?
   end
 
   def joined_date

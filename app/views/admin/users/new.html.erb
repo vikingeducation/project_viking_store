@@ -1,4 +1,4 @@
-<H3>Add User <%= @user.id %>: <%= @user.first_name %><%= @user.last_name %></H3>
+<H3>Add User</H3>
 
 <div class="borders">
 
@@ -39,18 +39,20 @@
       <div class="form-group">
         <%= f.label :billing, "Default Billing Address:", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.collection_select :billing_id, Address.where(:user_id => @user.id), :id, :street_address, {}, :class => "form-control" %>
+          <%= f.collection_select :billing_id, Address.where(:user_id => @user.id), :id, :street_address, {}, :class => "form-control", disabled: 'disabled'%>
         </div>
       </div>
         <div class="form-group">
         <%= f.label :shipping, "Default Shipping Address:", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.collection_select :shipping_id, Address.where(:user_id => @user.id), :id, :street_address, {}, :class => "form-control" %>
-        </div>
+          <%= f.collection_select :shipping_id, Address.where(:user_id => @user.id), :id, :street_address, {}, :class => "form-control", disabled: 'disabled' %>
+        </div><br>
       </div>
-
+      <div>
+        <%= link_to("View Saved Addresses", "#") %><br>
+      </div>
       <div class="button-wrapper">
-        <%= f.submit "Create New User", class: "btn btn-primary btn-group btn-group-lg" %>
+        <%= f.submit "Save User", class: "btn btn-primary btn-group btn-group-lg" %>
       </div>
     <% end %>
 
