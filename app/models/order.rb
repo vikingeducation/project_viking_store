@@ -9,6 +9,25 @@ class Order < ApplicationRecord
   has_many :products, :through => :order_contents
   has_many :categories, :through => :products
 
+  def created_date
+    created_at.strftime("%m/%d/%y")
+  end
+
+  def total_value
+    total = 0
+    self.order_contents.each do |cont|
+      total += cont.quantity*cont.product.price
+    end
+    total
+  end
+
+  def check_status
+    if self.checkout_date == nil
+      "PLACED"
+    else
+      "UNPLACED"
+    end
+  end
 
   def self.seven_days_orders
     where('created_at > ?', (Time.zone.now.end_of_day - 7.days)).count

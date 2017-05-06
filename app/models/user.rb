@@ -22,6 +22,18 @@ class User < ApplicationRecord
     self.addresses.first.state.name
   end
 
+  def displayed_address(type)
+    case type
+    when "billing"
+      u = self.default_billing_address
+    when "shipping"
+      u = self.default_shipping_address
+    else
+      return
+    end
+      "#{u.street_address}, #{u.secondary_address}, #{u.city.name}, #{u.state.name}"
+  end
+
   def joined_date
     created_at.strftime("%m/%d/%y")
   end
@@ -29,6 +41,10 @@ class User < ApplicationRecord
   def last_order_dated
     sort_ord = self.orders.order('checkout_date DESC').where.not(:checkout_date => nil)
     sort_ord[0].checkout_date.strftime("%m/%d/%y") if sort_ord.any?
+  end
+
+  def check_cart
+    self.orders.where(:checkout_date => nil)
   end
 
   def self.seven_days_users

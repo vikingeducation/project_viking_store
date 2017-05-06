@@ -1,6 +1,6 @@
 <H3>User <%= @user.id %>: <%= @user.first_name %><%= @user.last_name %></H3>
 
-<div class="table-wrapper">
+<div class="table-wrapper borders">
   <table class="no-borders">
     <caption>Demographic Information</caption>
     <tbody>
@@ -14,7 +14,7 @@
       </tr>
       <tr>
         <td class="title-cell">Email:</td>
-        <td>$ <%= @user.email %></td>
+        <td><%= @user.email %></td>
       </tr>
       <tr>
         <td class="title-cell">Telephone:</td>
@@ -22,16 +22,94 @@
       </tr>
       <tr>
         <td class="title-cell">Default Billing Address:</td>
-        <td>555.123.4567</td>
+        <td><%= @user.displayed_address("billing") %></td>
       </tr>
       <tr>
         <td class="title-cell">Default Shipping Address:</td>
-        <td>555.123.4567</td>
+        <td><%= @user.displayed_address("shipping")  %></td>
       </tr>
     </tbody>
   </table>
 
-  <%= link_to("Edit Product", edit_admin_product_path(@product.id)) %><br>
-  <%= link_to("Delete Product", "/admin_portal/#{@product.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
+  <%= link_to("Edit #{@user.first_name}'s Information", edit_admin_user_path(@user.id)) %><br>
+  <%= link_to("Delete #{@user.first_name}", "/admin_portal/#{@user.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %><br>
+  <%= link_to("View Saved Addresses", "#") %><br>
+  <%= link_to_if(@user.check_cart.nil?, "View Unplaced Order (Cart)", "#") %>
 
+</div>
+
+
+<div class="table-wrapper borders">
+  <table class="no-borders">
+    <caption>Credit Card Information</caption>
+    <tbody>
+      <tr>
+        <td class="title-cell">First Name:</td>
+        <td><%= @user.first_name %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Last Name:</td>
+        <td><%= @user.last_name %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Number:</td>
+        <td><%= @user.credit_card.card_number %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Expiration:</td>
+        <td><%= @user.credit_card.expiration_str %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">CV2:</td>
+        <td><%= @user.credit_card.ccv %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= link_to("Remove Card", "/admin_portal/#{@user.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %><br>
+</div>
+
+
+<div class="table-wrapper borders">
+
+  <H3>Admin Actions for <%= @user.first_name %> <%= @user.last_name %></H3>
+
+  <div class="button-wrapper">
+    <%= link_to("Create Order", "#", :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
+  </div><br>
+  <div class="button-wrapper">
+    <%= link_to("Create Address", "#", :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
+  </div>
+
+</div>
+
+
+<div class="table-wrapper borders">
+  <table class="table table-striped">
+    <caption>Order History</caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Order Date</th>
+        <th>Order Value</th>
+        <th>Status</th>
+        <th>SHOW</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.orders.each do |u_o| %>
+        <tr>
+          <td><%= u_o.id %></td>
+          <td><%= u_o.created_date %></td>
+          <td>$ <%= u_o.total_value %></td>
+          <td><%= u_o.check_status %></td>
+          <td><%= link_to("show", "#") %></td>
+          <td><%= link_to("edit", "#") %></td>
+          <td><%= link_to("delete", "#", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

@@ -8,35 +8,32 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # @product_times_ordered = Product.times_ordered(params[:id])
-    # @product_times_in_carts = Product.times_in_carts(params[:id])
   end
 
-  # def new
-  #   @product = Product.new
-  # end
+  def new
+    @user = User.new
+  end
 
-  # def create
-  #   @product = Product.new(whitelisted_product_params)
-  #   strip_dollar_sign
-  #   if @product.save
-  #     flash[:success] = "New Product has been added"
-  #     redirect_to admin_users_path
-  #   else
-  #     flash.now[:danger] = "The users could not be added. Try again."
-  #     render 'new', :locals => {:product => @product}
-  #   end
-  # end
+  def create
+    @user = User.new(whitelisted_product_params)
+    if @user.save
+      flash[:success] = "New Product has been added"
+      redirect_to admin_users_path
+    else
+      flash.now[:danger] = "The users could not be added. Try again."
+      render 'new', :locals => {:product => @user}
+    end
+  end
 
   # def edit
-  #   @product = Product.find(params[:id])
+  #   @product = User.find(params[:id])
   # end
 
   # def update
-  #   @product = Product.find(params[:id])
-  #   price_dol = @product.price.to_s
-  #   @product.price = price_dol.match(/\d*\.\d*/)[0].to_s
-  #   if @product.update_attributes(whitelisted_product_params)
+  #   @product = User.find(params[:id])
+  #   price_dol = @User.price.to_s
+  #   @User.price = price_dol.match(/\d*\.\d*/)[0].to_s
+  #   if @User.update_attributes(whitelisted_product_params)
   #     flash[:success] = "The product has been successfully updated"
   #     redirect_to admin_users_path
   #   else
@@ -46,8 +43,8 @@ class Admin::UsersController < ApplicationController
   # end
 
   # def destroy
-  #   @product = Product.find(params[:id])
-  #   if @product.destroy
+  #   @product = User.find(params[:id])
+  #   if @User.destroy
   #     flash[:success] = "Product deleted successfully!"
   #     redirect_to admin_users_path
   #   else
@@ -58,9 +55,9 @@ class Admin::UsersController < ApplicationController
 
 
 
-  # private
-  # def whitelisted_product_params
-  #   params.require(:product).permit(:name, :price, :sku, :category_id )
-  # end
+  private
+  def whitelisted_product_params
+    params.require(:user).permit(:first_name, :last_name, :email)
+  end
 
 end
