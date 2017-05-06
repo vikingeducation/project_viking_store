@@ -1,0 +1,61 @@
+<H3><%= type = "Edit" ? type : "Add" %> User</H3>
+
+<div class="borders">
+
+  <div class="form-wrapper">
+  <h4>Demographic Information</h4>
+
+    <%= form_for( [:admin, user], html: { :class => "form-horizontal" } ) do |f| %>
+      <div class="form-group">
+        <%= f.label :id, "User ID:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <h4><%= "N.A" %></h4>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :first_name, "First Name:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :first_name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name, "Last Name:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :last_name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, "Email:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :email, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :telephone, "Telephone:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          123.123.123
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :billing, "Default Billing Address:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.collection_select :billing_id, Address.where(:user_id => @user.id), :id, :street_address, {}, :class => "form-control"%>
+        </div>
+      </div>
+        <div class="form-group">
+        <%= f.label :shipping, "Default Shipping Address:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.collection_select :shipping_id, Address.where(:user_id => @user.id), :id, :street_address, {}, :class => "form-control" %>
+        </div><br>
+      </div>
+      <div>
+        <%= link_to("View Saved Addresses", "#") %><br>
+      </div>
+      <div class="button-wrapper">
+        <%= f.submit "Save User", class: "btn btn-primary btn-group btn-group-lg" %>
+      </div>
+    <% end %>
+
+  </div>
+
+</div>

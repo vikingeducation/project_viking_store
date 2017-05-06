@@ -15,7 +15,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(whitelisted_product_params)
+    @user = User.new(whitelisted_user_params)
     if @user.save
       flash[:success] = "New User has been created"
       redirect_to admin_user_path(@user.id)
@@ -25,22 +25,20 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # def edit
-  #   @product = User.find(params[:id])
-  # end
+  def edit
+    @user = User.find(params[:id])
+  end
 
-  # def update
-  #   @product = User.find(params[:id])
-  #   price_dol = @User.price.to_s
-  #   @User.price = price_dol.match(/\d*\.\d*/)[0].to_s
-  #   if @User.update_attributes(whitelisted_product_params)
-  #     flash[:success] = "The product has been successfully updated"
-  #     redirect_to admin_users_path
-  #   else
-  #     flash.now[:danger] = "The product cannot be updated."
-  #     render 'edit', :locals => {:product => @product}
-  #   end
-  # end
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(whitelisted_user_params)
+      flash[:success] = "The user has been successfully updated"
+      redirect_to admin_user_path(@user.id)
+    else
+      flash.now[:danger] = "The user cannot be updated."
+      render 'edit', :locals => {:user => @user}
+    end
+  end
 
   # def destroy
   #   @product = User.find(params[:id])
@@ -56,8 +54,8 @@ class Admin::UsersController < ApplicationController
 
 
   private
-  def whitelisted_product_params
-    params.require(:user).permit(:first_name, :last_name, :email)
+  def whitelisted_user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :billing_id, :shipping_id)
   end
 
 end
