@@ -27,7 +27,7 @@
           <td><%= u.id %></td>
           <td><%= u.first_name %> <%= u.last_name %></td>
           <td><%= u.joined_date %></td>
-          <td><%= u.addresses.first.city.name %></td>
+          <td><%= u.city_name %></td>
           <td><%= u.state_abbrev %></td>
           <td><%= link_to("#{u.orders.count}", "#") %></td>
           <td><%= u.last_order_dated %></td>

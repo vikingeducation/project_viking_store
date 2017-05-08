@@ -1,15 +1,15 @@
-<H3><%= type = "Edit" ? type : "Add" %> User</H3>
+<H3><%= type == "Edit" ? type : "Add" %> User</H3>
 
 <div class="borders">
 
-  <div class="form-wrapper">
+  
   <h4>Demographic Information</h4>
-
+  <div class="form-wrapper">
     <%= form_for( [:admin, user], html: { :class => "form-horizontal" } ) do |f| %>
       <div class="form-group">
         <%= f.label :id, "User ID:", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <h4><%= "N.A" %></h4>
+          <h5><%= "N.A" %></h5>
         </div>
       </div>
       <div class="form-group">
@@ -42,20 +42,24 @@
           <%= f.collection_select :billing_id, Address.where(:user_id => @user.id), :id, :street_address, {}, :class => "form-control"%>
         </div>
       </div>
-        <div class="form-group">
+      <div class="form-group">
         <%= f.label :shipping, "Default Shipping Address:", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
           <%= f.collection_select :shipping_id, Address.where(:user_id => @user.id), :id, :street_address, {}, :class => "form-control" %>
         </div><br>
       </div>
-      <div>
-        <%= link_to("View Saved Addresses", "#") %><br>
+      <div class="form-group">
+      <div class="link-wrapper-left">
+        <%= link_to("View Saved Addresses", "#") %>
       </div>
-      <div class="button-wrapper">
-        <%= f.submit "Save User", class: "btn btn-primary btn-group btn-group-lg" %>
+        <div class="button-wrapper col-sm-12">
+          <%= f.submit "Save User", class: "btn btn-primary btn-group btn-group-lg" %>
+        </div>
+        <div class="link-wrapper-centre">
+          <%= link_to("Delete #{user.first_name}", "/admin/users/#{:id}", :method => "DELETE", data: {confirm: "Are you sure?"}) if type == "Edit" %>
+        </div>
       </div>
     <% end %>
-
   </div>
 
 </div>

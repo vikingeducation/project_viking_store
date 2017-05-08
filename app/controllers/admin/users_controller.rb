@@ -40,16 +40,16 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @product = User.find(params[:id])
-  #   if @User.destroy
-  #     flash[:success] = "Product deleted successfully!"
-  #     redirect_to admin_users_path
-  #   else
-  #     flash[:danger] = "Failed to delete product"
-  #     redirect_to request.referer
-  #   end
-  # end
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:success] = "User deleted successfully!"
+      redirect_to admin_users_path
+    else
+      flash[:danger] = "Failed to delete the user"
+      redirect_to request.referer
+    end
+  end
 
 
 

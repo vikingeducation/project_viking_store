@@ -16,7 +16,10 @@ class Order < ApplicationRecord
   def total_value
     total = 0
     self.order_contents.each do |cont|
-      total += cont.quantity*cont.product.price
+      idx = cont.product_id
+      unless Product.where(:id => '#{idx}').empty? #in case product was deleted
+        total += cont.quantity*self.products.find(cont.product_id).price
+      end
     end
     total
   end
