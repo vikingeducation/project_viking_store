@@ -36,30 +36,38 @@ class DashboardController < ApplicationController
   end
 
   def one_total
-    {
-      :users => User.count,
-      :orders => Order.count,
-      :products => Product.count,
-      :revenue => total_revenue
-    }
+    [
+      {:column_name => "New Users", :data => User.count},
+      {:column_name => "Orders", :data => Order.count},
+      {:column_name => "New Products", :data => Product.count},
+      {:column_name => "Revenue", :data => total_revenue}
+    ]
   end
 
   def one_seven_days
-    {
-      :users => User.where("created_at > ?", Time.now - 7.minute).count,
-      :orders => Order.where("created_at > ?", Time.now - 7.day).count,
-      :products => Product.where("created_at > ?", Time.now - 7.day).count,
-      :revenue => revenue_since(Time.now - 7.day)
-    }
+    [
+      {:column_name => "New Users",
+       :data => User.where("created_at > ?", Time.now - 7.minute).count},
+      {:column_name => "Orders",
+       :data => Order.where("created_at > ?", Time.now - 7.day).count},
+      {:column_name => "New Products",
+       :data => Product.where("created_at > ?", Time.now - 7.day).count},
+      {:column_name => "Revenue",
+       :data => revenue_since(Time.now - 7.day)}
+    ]
   end
 
   def one_thirty_days
-    {
-      :users => User.where("created_at > ?", Time.now - 30.day).count,
-      :orders => Order.where("created_at > ?", Time.now - 30.day).count,
-      :products => Product.where("created_at > ?", Time.now - 30.day).count,
-      :revenue => revenue_since(Time.now - 30.day)
-    }
+    [
+      {:column_name => "New Users",
+       :data => User.where("created_at > ?", Time.now - 30.day).count},
+      {:column_name => "Orders",
+       :data => Order.where("created_at > ?", Time.now - 30.day).count},
+      {:column_name => "New Products",
+       :data => Product.where("created_at > ?", Time.now - 30.day).count},
+      {:column_name => "Revenue",
+       :data => revenue_since(Time.now - 30.day)}
+    ]
   end
 
   def top_3_states_users_live
@@ -152,7 +160,6 @@ class DashboardController < ApplicationController
      :customer_name => r.customer_name,
      :quantity => r.quantity}
   end
-
 
   def top_user_with
     [

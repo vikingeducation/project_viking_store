@@ -15,22 +15,12 @@
               <th>Item</th>
               <th>Data</th>
             </tr>
+            <% @one[:thirty_days].each do |keyvals| %>
             <tr>
-              <td>New Users</td>
-              <td><%= @one[:seven_days][:users] %></td>
+              <td><%= keyvals[:column_name] %></td>
+              <td><%= keyvals[:data] %></td>
             </tr>
-            <tr>
-              <td>Orders</td>
-              <td><%= @one[:seven_days][:orders] %></td>
-            </tr>
-            <tr>
-              <td>New Products</td>
-              <td><%= @one[:seven_days][:products] %></td>
-            </tr>
-            <tr>
-              <td>Revenue</td>
-              <td>$<%= @one[:seven_days][:revenue] %></td>
-            </tr>
+            <% end %>
           </table>
 
           <h3>Last 30 Days</h3>
@@ -39,22 +29,12 @@
               <th>Item</th>
               <th>Data</th>
             </tr>
+            <% @one[:thirty_days].each do |keyvals| %>
             <tr>
-              <td>New Users</td>
-              <td><%= @one[:thirty_days][:users] %></td>
+              <td><%= keyvals[:column_name] %></td>
+              <td><%= keyvals[:data] %></td>
             </tr>
-            <tr>
-              <td>Orders</td>
-              <td><%= @one[:thirty_days][:orders] %></td>
-            </tr>
-            <tr>
-              <td>New Products</td>
-              <td><%= @one[:thirty_days][:products] %></td>
-            </tr>
-            <tr>
-              <td>Revenue</td>
-              <td>$<%= @one[:thirty_days][:revenue] %></td>
-            </tr>
+            <% end %>
           </table>
 
           <h3>Total</h3>
@@ -63,22 +43,12 @@
               <th>Item</th>
               <th>Data</th>
             </tr>
+            <% @one[:total].each do |keyvals| %>
             <tr>
-              <td>New Users</td>
-              <td><%= @one[:total][:users] %></td>
+              <td><%= keyvals[:column_name] %></td>
+              <td><%= keyvals[:data] %></td>
             </tr>
-            <tr>
-              <td>Orders</td>
-              <td><%= @one[:total][:orders] %></td>
-            </tr>
-            <tr>
-              <td>New Products</td>
-              <td><%= @one[:total][:products] %></td>
-            </tr>
-            <tr>
-              <td>Revenue</td>
-              <td>$<%= @one[:total][:revenue] %></td>
-            </tr>
+            <% end %>
           </table>
         </div>
       </div>
