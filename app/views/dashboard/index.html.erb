@@ -9,47 +9,23 @@
           <h2>1. Overall Platform</h2>
         </div>
         <div class="panel-body">
-          <h3>Last 7 Days</h3>
-          <table class="table table-bordered">
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-            <% @one[:thirty_days].each do |keyvals| %>
-            <tr>
-              <td><%= keyvals[:column_name] %></td>
-              <td><%= keyvals[:data] %></td>
-            </tr>
-            <% end %>
-          </table>
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Last 7 Days",
+                                 headers: ["Item", "Data"],
+                                 rows: @one[:seven_days]}
+          %>
 
-          <h3>Last 30 Days</h3>
-          <table class="table table-bordered">
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-            <% @one[:thirty_days].each do |keyvals| %>
-            <tr>
-              <td><%= keyvals[:column_name] %></td>
-              <td><%= keyvals[:data] %></td>
-            </tr>
-            <% end %>
-          </table>
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Last 30 Days",
+                                 headers: ["Item", "Data"],
+                                 rows: @one[:thirty_days]}
+          %>
 
-          <h3>Total</h3>
-          <table class="table table-bordered">
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-            <% @one[:total].each do |keyvals| %>
-            <tr>
-              <td><%= keyvals[:column_name] %></td>
-              <td><%= keyvals[:data] %></td>
-            </tr>
-            <% end %>
-          </table>
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Total",
+                                 headers: ["Item", "Data"],
+                                 rows: @one[:total]}
+          %>
         </div>
       </div>
 
@@ -62,35 +38,18 @@
           <h2>2. User Demographics and Behavior</h2>
         </div>
         <div class="panel-body">
-          <h3>Top 3 States Users Live In (billing)</h3>
-          <table class="table table-bordered">
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-            <% @two[:states].each do |keyvals| %>
-            <tr>
-              <td><%= keyvals[:name] %></td>
-              <td><%= keyvals[:total] %></td>
-            </tr>
-            <% end %>
 
-          </table>
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Top 3 States Users Live In (billing)",
+                                 headers: ["Name", "Total"],
+                                 rows: @two[:states]}
+          %>
 
-          <h3>Top 3 Cities Users Live In (billing)</h3>
-          <table class="table table-bordered">
-            <tr>
-              <th>Item</th>
-              <th>Data</th>
-            </tr>
-            <% @two[:cities].each do |keyvals| %>
-            <tr>
-              <td><%= keyvals[:name] %></td>
-              <td><%= keyvals[:total] %></td>
-            </tr>
-            <% end %>
-          </table>
-
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Top 3 Cities Users Live In (billing)",
+                                 headers: ["Name", "Total"],
+                                 rows: @two[:cities]}
+          %>
 
           <h3>Top User With...</h3>
           <table class="table table-bordered">

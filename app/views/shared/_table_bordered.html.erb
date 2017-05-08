@@ -1,0 +1,15 @@
+<h3><%= table_name %></h3>
+<table class="table table-bordered">
+  <tr>
+    <% headers.each do |th| %>
+    <th><%= th %></th>
+    <% end %>
+  </tr>
+  <% rows.each do |row| %>
+  <tr>
+    <% row.each do |col| %>
+    <td><%= col %></td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
