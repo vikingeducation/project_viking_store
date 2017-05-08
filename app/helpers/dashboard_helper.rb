@@ -30,9 +30,6 @@ module DashboardHelper
     ).where("checkout_date IS NOT NULL").group(:customer_name).order(
       "1 DESC"
     ).limit(1).first
-    {:column_name => "Highest Average Order Value",
-     :customer_name => r.customer_name,
-     :quantity => r.quantity}
   end
 
   def highest_lifetime_value
@@ -47,9 +44,6 @@ module DashboardHelper
     ).where("checkout_date IS NOT NULL").group(:customer_name).order(
       "1 DESC"
     ).limit(1).first
-    {:column_name => "Highest Lifetime Value",
-     :customer_name => r.customer_name,
-     :quantity => r.quantity}
   end
 
   def highest_order_value

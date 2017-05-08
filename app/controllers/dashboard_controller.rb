@@ -22,16 +22,6 @@ class DashboardController < ApplicationController
     }
   end
 
-  def two_states
-    r = top_3_states_users_live
-    r.map{ |state| [state.name, state.quantity] }
-  end
-
-  def two_cities
-    r = top_3_cities_users_live
-    r.map{ |city| [city.name, city.quantity] }
-  end
-
   # ------------------------------------------------------------
   # Helpers
   # ------------------------------------------------------------
@@ -63,12 +53,42 @@ class DashboardController < ApplicationController
     ]
   end
 
+  def two_states
+    r = top_3_states_users_live
+    r.map{ |state| [state.name, state.quantity] }
+  end
+
+  def two_cities
+    r = top_3_cities_users_live
+    r.map{ |city| [city.name, city.quantity] }
+  end
+
+  def three_highest_order_value
+    r = highest_order_value
+    ["Highest Order Value", r.customer_name, r.quantity]
+  end
+
+  def three_lifetime_value
+    r = highest_lifetime_value
+    ["Highest Lifetime Value", r.customer_name, r.quantity]
+  end
+
+  def three_highest_avg_order_value
+    r = highest_average_order_value
+    ["Highest Average Order Value", r.customer_name, r.quantity]
+  end
+
+  def three_most_orders_placed
+    r = most_orders_placed
+    ["Most Orders Placed", r.customer_name, r.quantity]
+  end
+
   def top_user_with
     [
-      highest_order_value,
-      highest_lifetime_value,
-      highest_average_order_value,
-      most_orders_placed
+      three_highest_order_value,
+      three_lifetime_value,
+      three_highest_avg_order_value,
+      three_most_orders_placed
     ]
   end
 

@@ -51,21 +51,12 @@
                                  rows: @two[:cities]}
           %>
 
-          <h3>Top User With...</h3>
-          <table class="table table-bordered">
-            <tr>
-              <th>Criteria</th>
-              <th>Customer Name</th>
-              <th>Quantity</th>
-            </tr>
-            <% @two[:top_user_with].each do |keyvals| %>
-            <tr>
-              <td><%= keyvals[:column_name] %></td>
-              <td><%= keyvals[:customer_name] %></td>
-              <td><%= keyvals[:quantity] %></td>
-            </tr>
-            <% end %>
-          </table>
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Top User With...",
+                                 headers: ["Criteria", "Customer Name", "Quantity"],
+                                 rows: @two[:top_user_with]}
+          %>
+
         </div>
       </div>
 
