@@ -125,30 +125,17 @@
           <h3>Top User With...</h3>
           <table class="table table-bordered">
             <tr>
-              <th>Item</th>
-              <th>User</th>
-              <th>Value</th>
+              <th>Criteria</th>
+              <th>Customer Name</th>
+              <th>Quantity</th>
             </tr>
+            <% @two[:top_user_with].each do |keyvals| %>
             <tr>
-              <td>Highest Single Order Value</td>
-              <td>Joe Smith</td>
-              <td>$23</td>
+              <td><%= keyvals[:column_name] %></td>
+              <td><%= keyvals[:customer_name] %></td>
+              <td><%= keyvals[:quantity] %></td>
             </tr>
-            <tr>
-              <td>Highest Lifetime Value</td>
-              <td>Jane Smith</td>
-              <td>$10</td>
-            </tr>
-            <tr>
-              <td>Highest Average Order Value</td>
-              <td>Jimmy Smith</td>
-              <td>$3</td>
-            </tr>
-            <tr>
-              <td>Most Orders Placed</td>
-              <td>Jill Smith</td>
-              <td>3</td>
-            </tr>
+            <% end %>
           </table>
         </div>
       </div>
