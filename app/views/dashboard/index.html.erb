@@ -127,22 +127,12 @@
               <th>Item</th>
               <th>Data</th>
             </tr>
+            <% @three[:seven_days].each do |keyvals| %>
             <tr>
-              <td>Number of Orders</td>
-              <td>100</td>
+              <td><%= keyvals[:column_name] %></td>
+              <td><%= keyvals[:data] %></td>
             </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td>150</td>
-            </tr>
-            <tr>
-              <td>Average Order Value</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>Largest Order Value</td>
-              <td>$13089471</td>
-            </tr>
+            <% end %>
           </table>
 
 
@@ -152,22 +142,12 @@
               <th>Item</th>
               <th>Data</th>
             </tr>
+            <% @three[:thirty_days].each do |keyvals| %>
             <tr>
-              <td>Number of Orders</td>
-              <td>100</td>
+              <td><%= keyvals[:column_name] %></td>
+              <td><%= keyvals[:data] %></td>
             </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td>150</td>
-            </tr>
-            <tr>
-              <td>Average Order Value</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>Largest Order Value</td>
-              <td>$13089471</td>
-            </tr>
+            <% end %>
           </table>
 
 
@@ -177,22 +157,12 @@
               <th>Item</th>
               <th>Data</th>
             </tr>
+            <% @three[:total].each do |keyvals| %>
             <tr>
-              <td>Number of Orders</td>
-              <td>100</td>
+              <td><%= keyvals[:column_name] %></td>
+              <td><%= keyvals[:data] %></td>
             </tr>
-            <tr>
-              <td>Total Revenue</td>
-              <td>150</td>
-            </tr>
-            <tr>
-              <td>Average Order Value</td>
-              <td>50</td>
-            </tr>
-            <tr>
-              <td>Largest Order Value</td>
-              <td>$13089471</td>
-            </tr>
+            <% end %>
           </table>
         </div>
       </div>

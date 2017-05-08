@@ -13,6 +13,12 @@ class DashboardController < ApplicationController
       :cities => top_3_cities_users_live,
       :top_user_with => top_user_with
     }
+
+    @three = {
+      :total => three_total,
+      :thirty_days => three_thirty_days,
+      :seven_days => three_seven_days
+    }
   end
 
   # ------------------------------------------------------------
@@ -167,6 +173,83 @@ class DashboardController < ApplicationController
       highest_lifetime_value,
       highest_average_order_value,
       most_orders_placed
+    ]
+  end
+
+  def average_order_value
+    r = Order.joins(
+      "JOIN order_contents oc ON oc.order_id = orders.id"
+    ).joins(
+      "JOIN products p ON oc.product_id = p.id"
+    ).where("orders.checkout_date IS NOT NULL").average("p.price")
+  end
+
+  def avg_order_value_since(d)
+    r = Order.joins(
+      "JOIN order_contents oc ON oc.order_id = orders.id"
+    ).joins(
+      "JOIN products p ON oc.product_id = p.id"
+    ).where(
+      "orders.checkout_date IS NOT NULL AND oc.created_at > ?", d
+    ).average("p.price")
+  end
+
+  def highest_order_value_since(d)
+    r = Order.select(
+      "SUM(p.price) AS quantity,
+       u.first_name || ' ' || u.last_name AS customer_name,
+       orders.id AS order_id"
+    ).joins(
+      "JOIN users u ON u.id = orders.user_id"
+    ).joins(
+      "JOIN order_contents oc ON oc.order_id = orders.id"
+    ).joins(
+      "JOIN products p ON oc.product_id = p.id"
+    ).where(
+      "checkout_date IS NOT NULL AND oc.created_at > ?", d
+    ).group("2, 3").order(
+      "1 DESC"
+    ).limit(1).first
+    if r
+      {:customer_name => r.customer_name,
+       :quantity => r.quantity}
+    else
+      {:customer_name => "No result",
+       :quantity => 0}
+    end
+  end
+
+  def three_total
+    [
+      {:column_name => "Orders", :data => Order.count},
+      {:column_name => "Revenue", :data => total_revenue},
+      {:column_name => "Average Order Value", :data => average_order_value.to_i},
+      {:column_name => "Largest Order Value", :data => highest_order_value[:quantity]}
+    ]
+  end
+
+  def three_thirty_days
+    [
+      {:column_name => "Orders",
+       :data => Order.where("created_at > ?", Time.now - 30.day).count},
+      {:column_name => "Revenue", :data => revenue_since(Time.now - 30.day)},
+      {:column_name => "Average Order Value",
+       :data => avg_order_value_since(Time.now - 30.day).to_i},
+      {:column_name => "Largest Order Value",
+       :data => highest_order_value_since(Time.now - 30.day)[:quantity]}
+    ]
+  end
+
+  def three_seven_days
+    [
+      {:column_name => "Orders",
+       :data => Order.where("created_at > ?", Time.now - 7.day).count},
+      {:column_name => "Revenue",
+       :data => revenue_since(Time.now - 7.day)},
+      {:column_name => "Average Order Value",
+       :data => avg_order_value_since(Time.now - 7.day).to_i},
+      {:column_name => "Largest Order Value",
+       :data => highest_order_value_since(Time.now - 7.day)[:quantity]}
     ]
   end
 
