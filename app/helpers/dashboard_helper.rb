@@ -1,143 +1,103 @@
 module DashboardHelper
-  def average_order_value
-    r = Order.joins(
-      "JOIN order_contents oc ON oc.order_id = orders.id"
-    ).joins(
-      "JOIN products p ON oc.product_id = p.id"
-    ).where("orders.checkout_date IS NOT NULL").average("p.price")
+
+  def one_total
+    [
+      ["New Users", User.count],
+      ["Orders", Order.count],
+      ["New Products", Product.count],
+      ["Revenue", OrderContent.total_revenue]
+    ]
   end
 
-  def avg_order_value_since(d)
-    r = Order.joins(
-      "JOIN order_contents oc ON oc.order_id = orders.id"
-    ).joins(
-      "JOIN products p ON oc.product_id = p.id"
-    ).where(
-      "orders.checkout_date IS NOT NULL AND oc.created_at > ?", d
-    ).average("p.price")
+  def one_seven_days
+    [
+      ["New Users", User.where("created_at > ?", Time.now - 7.minute).count],
+      ["Orders", Order.where("created_at > ?", Time.now - 7.day).count],
+      ["New Products", Product.where("created_at > ?", Time.now - 7.day).count],
+      ["Revenue", OrderContent.revenue_since(Time.now - 7.day)]
+    ]
   end
 
-
-  def highest_average_order_value
-    r = Order.select(
-      "AVG(p.price) AS quantity, u.first_name || ' ' || u.last_name AS customer_name"
-    ).joins(
-      "JOIN users u ON u.id = orders.user_id"
-    ).joins(
-      "JOIN order_contents oc ON oc.order_id = orders.id"
-    ).joins(
-      "JOIN products p ON oc.product_id = p.id"
-    ).where("checkout_date IS NOT NULL").group(:customer_name).order(
-      "1 DESC"
-    ).limit(1).first
+  def one_thirty_days
+    [
+      ["New Users", User.where("created_at > ?", Time.now - 30.day).count],
+      ["Orders", Order.where("created_at > ?", Time.now - 30.day).count],
+      ["New Products", Product.where("created_at > ?", Time.now - 30.day).count],
+      ["Revenue", OrderContent.revenue_since(Time.now - 30.day)]
+    ]
   end
 
-  def highest_lifetime_value
-    r = Order.select(
-      "SUM(p.price) AS quantity, u.first_name || ' ' || u.last_name AS customer_name"
-    ).joins(
-      "JOIN users u ON u.id = orders.user_id"
-    ).joins(
-      "JOIN order_contents oc ON oc.order_id = orders.id"
-    ).joins(
-      "JOIN products p ON oc.product_id = p.id"
-    ).where("checkout_date IS NOT NULL").group(:customer_name).order(
-      "1 DESC"
-    ).limit(1).first
+  def two_states
+    r = State.top_3_users_live_in
+    r.map{ |state| [state.name, state.quantity] }
   end
 
-  def highest_order_value
-    r = Order.select(
-      "SUM(p.price) AS quantity,
-       u.first_name || ' ' || u.last_name AS customer_name,
-       orders.id AS order_id"
-    ).joins(
-      "JOIN users u ON u.id = orders.user_id"
-    ).joins(
-      "JOIN order_contents oc ON oc.order_id = orders.id"
-    ).joins(
-      "JOIN products p ON oc.product_id = p.id"
-    ).where("checkout_date IS NOT NULL").group("2, 3").order(
-      "1 DESC"
-    ).limit(1).first
+  def two_cities
+    r = City.top_3_users_live_in
+    r.map{ |city| [city.name, city.quantity] }
   end
 
-  def highest_order_value_since(d)
-    r = Order.select(
-      "SUM(p.price) AS quantity,
-       u.first_name || ' ' || u.last_name AS customer_name,
-       orders.id AS order_id"
-    ).joins(
-      "JOIN users u ON u.id = orders.user_id"
-    ).joins(
-      "JOIN order_contents oc ON oc.order_id = orders.id"
-    ).joins(
-      "JOIN products p ON oc.product_id = p.id"
-    ).where(
-      "checkout_date IS NOT NULL AND oc.created_at > ?", d
-    ).group("2, 3").order(
-      "1 DESC"
-    ).limit(1).first
-    if r
-      {:customer_name => r.customer_name,
-       :quantity => r.quantity}
-    else
-      {:customer_name => "No result",
-       :quantity => 0}
-    end
+  def three_highest_order_value
+    r = Order.highest_value
+    ["Highest Order Value", r.customer_name, r.quantity]
   end
 
-
-  def most_orders_placed
-    r = Order.select(
-      "COUNT(orders.user_id) AS quantity,
-       u.first_name || ' ' || u.last_name AS customer_name"
-    ).joins(
-      "JOIN users u ON u.id = orders.user_id"
-    ).joins(
-      "JOIN order_contents oc ON oc.order_id = orders.id"
-    ).joins(
-      "JOIN products p ON oc.product_id = p.id"
-    ).where("checkout_date IS NOT NULL").group(:customer_name).order(
-      "1 DESC"
-    ).limit(1).first
+  def three_lifetime_value
+    r = Order.highest_lifetime_value
+    ["Highest Lifetime Value", r.customer_name, r.quantity]
   end
 
-  def revenue_since(d)
-    OrderContent.joins(
-      "JOIN orders ON orders.id = order_contents.order_id").joins(
-      "JOIN products ON products.id = order_contents.product_id").where(
-      "orders.checkout_date IS NOT NULL AND order_contents.created_at > ?", d).sum(
-      "products.price * order_contents.quantity")
+  def three_highest_avg_order_value
+    r = Order.highest_average_value
+    ["Highest Average Order Value", r.customer_name, r.quantity]
   end
 
-  def top_3_cities_users_live
-    City.select(
-      "cities.name, COUNT(cities.name) AS quantity"
-    ).joins(
-      "JOIN addresses a ON a.city_id = cities.id"
-    ).joins(
-      "JOIN users u ON u.billing_id = a.id"
-    ).group(:name).order("1 DESC").limit(3)
+  def three_most_orders_placed
+    r = Order.most_orders_placed
+    ["Most Orders Placed", r.customer_name, r.quantity]
   end
 
-  def top_3_states_users_live
-    State.select(
-      "states.name, COUNT(states.name) AS quantity"
-    ).joins(
-      "JOIN addresses a ON a.state_id = states.id"
-    ).joins(
-      "JOIN users u ON u.billing_id = a.id"
-    ).group("states.name").order("1 DESC").limit(3)
+  def top_user_with
+    [
+      three_highest_order_value,
+      three_lifetime_value,
+      three_highest_avg_order_value,
+      three_most_orders_placed
+    ]
   end
 
-  def total_revenue
-    OrderContent.joins(
-      "JOIN orders ON orders.id = order_contents.order_id").joins(
-      "JOIN products ON products.id = order_contents.product_id").where(
-      "orders.checkout_date IS NOT NULL").sum(
-      "products.price * order_contents.quantity")
+  def three_total
+    [
+      {:column_name => "Orders", :data => Order.count},
+      {:column_name => "Revenue", :data => OrderContent.total_revenue},
+      {:column_name => "Average Order Value", :data => Order.average_value.to_i},
+      {:column_name => "Largest Order Value", :data => Order.highest_value[:quantity]}
+    ]
   end
 
+  def three_thirty_days
+    [
+      {:column_name => "Orders",
+       :data => Order.where("created_at > ?", Time.now - 30.day).count},
+      {:column_name => "Revenue", :data => OrderContent.revenue_since(Time.now - 30.day)},
+      {:column_name => "Average Order Value",
+       :data => Order.average_value_since(Time.now - 30.day).to_i},
+      {:column_name => "Largest Order Value",
+       :data => Order.highest_value_since(Time.now - 30.day)[:quantity]}
+    ]
+  end
+
+  def three_seven_days
+    [
+      {:column_name => "Orders",
+       :data => Order.where("created_at > ?", Time.now - 7.day).count},
+      {:column_name => "Revenue",
+       :data => OrderContent.revenue_since(Time.now - 7.day)},
+      {:column_name => "Average Order Value",
+       :data => Order.average_value_since(Time.now - 7.day).to_i},
+      {:column_name => "Largest Order Value",
+       :data => Order.highest_value_since(Time.now - 7.day)[:quantity]}
+    ]
+  end
 
 end
