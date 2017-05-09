@@ -1,0 +1,39 @@
+<H3><%= @address.user.first_name %> <%= @address.user.last_name %>'s Address</H3>
+
+
+<table class="table no-borders">
+  <thead>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Owner ID:</td>
+      <td><%= @address.user.id %></td>
+    </tr>
+    <tr>
+      <td>Owner Name:</td>
+      <td><%= link_to("#{@address.user.first_name} #{@address.user.last_name} (click to view user)", admin_user_path(@address.user.id)) %></td>
+    </tr>
+    <tr>
+      <td>Street:</td>
+      <td><%= @address.street_address  %> <%= @address.secondary_address %></td>
+    </tr>
+    <tr>
+      <td>City</td>
+      <td><%= @address.city.name %></td>
+    </tr>
+    <tr>
+      <td>State</td>
+      <td><%= @address.state.name %></td>
+    </tr>
+    <tr>
+      <td>ZIP</td>
+      <td><%= @address.zip_code %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to("Edit Address", edit_admin_address_path(@address.id)) %><br>
+<%= link_to("Delete Product", "/admin/addresses/#{@address.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
+
+
+

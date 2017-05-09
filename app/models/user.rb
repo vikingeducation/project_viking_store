@@ -132,8 +132,8 @@ class User < ApplicationRecord
   private
 
   def delete_only_cart
-    if self.order.where.not(:checkout_date => nil)
-      self.order.destroy_all
+    if self.orders.where(:checkout_date => nil)
+      self.orders.where(:checkout_date => nil).destroy_all
     end
   end
 

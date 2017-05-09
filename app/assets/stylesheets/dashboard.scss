@@ -75,6 +75,9 @@ table td a{
 
 table.no-borders {
   border: none;
+  tr, th, td, tbody {
+    border: none;
+  }
 }
 
 div.borders {
