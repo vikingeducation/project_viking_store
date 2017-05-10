@@ -1,0 +1,51 @@
+<H3><%= :type %> <%= @address.user.first_name %><%= @address.user.last_name %> Address</H3>
+
+<div class="borders">
+
+  <div class="form-wrapper">
+    <%= form_for( [:admin, @address], html: { :class => "form-horizontal" } ) do |f| %>
+      <div class="form-group">
+        <%= f.label :id, "Owner ID:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <h5><%= @address.user_id %></h5>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :user, "Owner Name:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <h5><%= link_to "#{@address.user.first_name} #{@address.user.last_name} click to view", admin_user_path(@address.user_id) %></h5>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :city, "City:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :city, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :state, "State:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.collection_select :state, State.all, :id, :name, {}, :class => "form-control"%>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :zip_code, "ZIP:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :zip_code, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+      <div class="link-wrapper-left">
+        <%= link_to("View Saved Addresses", "#") %>
+      </div>
+        <div class="button-wrapper col-sm-12">
+          <%= f.submit "#{:type} User", class: "btn btn-primary btn-group btn-group-lg" %>
+        </div>
+        <div class="link-wrapper-centre">
+          <%= link_to("Delete Address", "/admin/addresses/#{id}", :method => "DELETE", data: {confirm: "Are you sure?"}) if :type == "Edit" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>

@@ -3,33 +3,35 @@ class Admin::AddressesController < ApplicationController
   layout 'admin_portal_layout'
 
   def index
-    @addresses = Address.all
+    if params[:user_id]
+      @addresses = Address.where(:user_id => params[:user_id])
+    else
+      @addresses = Address.all
+    end
   end
 
   def show
     @address = Address.find(params[:id])
   end
 
-  # def new
-  #   @category = Category.new
-  #   # render "/dashboard/new_categ", :locals => {:category => @category }
-  # end
+  def new
+    @address = Address.new
+  end
 
-  # def create
-  #   @category = Category.new(whitelisted_category_params)
-  #   if @category.save
-  #     flash[:success] = "New Category has been saved"
-  #     redirect_to admin_categories_path
-  #   else
-  #     flash.now[:danger] = "New Category WAS NOT saved. Try again."
-  #     render 'new', :locals => {:category => @category}
-  #   end
-  # end
+  def create
+    @address = Address.new(whitelisted_category_params)
+    if @address.save
+      flash[:success] = "New Address has been saved"
+      redirect_to admin_addresses_path
+    else
+      flash.now[:danger] = "New Address WAS NOT saved. Try again."
+      render 'new', :locals => {:address => @address}
+    end
+  end
 
-  # def edit
-  #   @category = Category.find(params[:id])
-  #   # render 'dashboard/edit_categ', :locals => {:category => @category}
-  # end
+  def edit
+    @address = Address.find(params[:id])
+  end
 
   # def update
   #   @category = Category.find(params[:id])
