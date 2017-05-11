@@ -1,0 +1,13 @@
+<h2>New Category</h2>
+
+<%= form_for @category do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.string :name, :class => "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text :description, :class => "form-control" %>
+  </div>
+  <%= f.button "Create" %>
+<% end %>
