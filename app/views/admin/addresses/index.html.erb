@@ -40,7 +40,7 @@
           <td><%= a.created_at %></td>
           <td><%= link_to("show", admin_address_path(a.id)) %></td>
           <td><%= link_to("edit", edit_admin_address_path(a.id)) %></td>
-          <td><%= link_to("delete", "/admin/users/#{a.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
+          <td><%= link_to("delete", "/admin/addresses/#{a.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
         </tr>
       <% end %>
     </tbody>

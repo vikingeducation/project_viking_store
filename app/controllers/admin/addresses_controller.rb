@@ -19,7 +19,7 @@ class Admin::AddressesController < ApplicationController
   end
 
   def create
-    @address = Address.new(whitelisted_category_params)
+    @address = Address.new(whitelisted_address_params)
     if @address.save
       flash[:success] = "New Address has been saved"
       redirect_to admin_addresses_path(:user_id => "#{@address.user_id}")
@@ -35,9 +35,9 @@ class Admin::AddressesController < ApplicationController
 
   def update
     @address = Address.find(params[:id])
-    if @address.update_attributes(whitelisted_category_params)
+    if @address.update_attributes(whitelisted_address_params)
       flash.now[:success] = "Address has been updated"
-      redirect_to admin_addresses_path
+      redirect_to admin_address_path
     else
       flash[:danger] = "Address hasn't been saved."
       render 'edit', :locals => {:address => @address}
@@ -56,7 +56,7 @@ class Admin::AddressesController < ApplicationController
   end
 
   private
-  def whitelisted_category_params
+  def whitelisted_address_params
     params.require(:address).permit(:street_address, :secondary_address, :zip_code, :city_id, :state_id, :user_id, :city_name)
   end
 

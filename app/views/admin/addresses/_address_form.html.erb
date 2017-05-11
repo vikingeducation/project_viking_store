@@ -2,7 +2,7 @@
 <% if @address.id.nil? %>
 <H3>Add New Address</H3>
 <% else %>
-<H3>Edit <%=@address.user.first_name %> <%= @address.user.last_name %> Address"</H3>
+<H3>Edit <%=@address.user.first_name %> <%= @address.user.last_name %>'s Address</H3>
 <% end %>
 
 <div class="borders">
@@ -56,10 +56,12 @@
         <%= link_to("View Saved Addresses", "#") %>
       </div>
         <div class="button-wrapper col-sm-12">
-          <%= f.submit "#{:type == 'Edit' ? 'Update' : 'Save'} Address", class: "btn btn-primary btn-group btn-group-lg" %>
+          <%= f.submit "Save Address", class: "btn btn-primary btn-group btn-group-lg" %>
         </div>
         <div class="link-wrapper-centre">
-          <%= link_to("Delete Address", "/admin/addresses/#{id}", :method => "DELETE", data: {confirm: "Are you sure?"}) if :type == "Edit" %>
+          <% unless @address.id.nil? %>
+            <%= link_to("Delete Address", "/admin/addresses/#{@address.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
+          <% end %>
         </div>
       </div>
     <% end %>
