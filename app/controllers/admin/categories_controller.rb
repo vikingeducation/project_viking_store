@@ -1,4 +1,4 @@
-class Admin::CategoryController < ApplicationController
+class Admin::CategoriesController < ApplicationController
 
   layout "admin"
 
@@ -12,4 +12,5 @@ class Admin::CategoryController < ApplicationController
 
   def show
   end
+
 end
