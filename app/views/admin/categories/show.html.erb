@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3>Category <%= "#{@category.id}: #{@category.name}" %></h3>
+  </div>
+  <div class="panel-body">
+    <%= render :partial => "shared/table_vertical_objs",
+               :locals => {:keys => ["id", "name", "description"],
+                           :objs => [@category]}
+    %>
+
+    <p>
+      <%= link_to "[Edit]", admin_category_path(@category.id),
+                  :method => :put
+       %>
+    </p>
+    <p>
+      <%= link_to "[Delete]", admin_category_path(@category.id),
+                  :method => :delete
+       %>
+    </p>
+
+    <h4>Products in <%= @category.name %></h4>
+
+    <table class="table table-bordered">
+      <tr>
+        <th>id</th>
+        <th>Name</th>
+      </tr>
+      <% @products.each do |product| %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= link_to product.name, "#" %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<table class="table">
+  <% objs.each do |obj| %>
+    <% obj.attributes.select{|k,v| keys.include?(k)}.each do |k, v| %>
+      <tr>
+        <th><%= k.capitalize %></th>
+        <td><%= v %></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+</table>

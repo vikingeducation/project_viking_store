@@ -1,0 +1,15 @@
+<table class="table table-bordered">
+  <tr>
+    <% keys.each do |k| %>
+    <th><%= k.capitalize %></th>
+    <% end %>
+  </tr>
+  <% objs.each do |obj| %>
+    <tr>
+      <% obj.attributes.select{|k,v| keys.include?(k)}.each do |k, v| %>
+        <td><%= v %></td>
+      <% end %>
+    </tr>
+  <% end %>
+
+</table>
