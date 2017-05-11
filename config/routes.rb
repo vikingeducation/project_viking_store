@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root "category#index"
 
   namespace :admin do
-    resources :category, :only => [:index]
+    resources :category
   end
   get "/dashboard" => "dashboard#index"
 end

@@ -6,6 +6,10 @@ class Admin::CategoryController < ApplicationController
     @categories = Category.all
   end
 
+  def new
+    @category = Category.new
+  end
+
   def show
   end
 end
