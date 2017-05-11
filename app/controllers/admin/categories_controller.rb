@@ -16,7 +16,7 @@ class Admin::CategoriesController < ApplicationController
       flash[:success] = "New category created"
       redirect_to admin_categories_path
     else
-      flash[:danger] = "Failed to create category"
+      flash.now[:danger] = "Failed to create category"
       render :new
     end
   end
