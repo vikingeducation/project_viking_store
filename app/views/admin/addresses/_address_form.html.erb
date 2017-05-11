@@ -1,4 +1,9 @@
-<H3><%= :type %> <%= @address.user.first_name %><%= @address.user.last_name %> Address</H3>
+<%= render partial: "shared/error_handler", locals: { object: @address } %>
+<% if @address.id.nil? %>
+<H3>Add New Address</H3>
+<% else %>
+<H3>Edit <%=@address.user.first_name %> <%= @address.user.last_name %> Address"</H3>
+<% end %>
 
 <div class="borders">
 
@@ -7,7 +12,9 @@
       <div class="form-group">
         <%= f.label :id, "Owner ID:", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
+          <%= f.hidden_field :user_id, :value => @address.user_id %>
           <h5><%= @address.user_id %></h5>
+
         </div>
       </div>
       <div class="form-group">
@@ -17,15 +24,25 @@
         </div>
       </div>
       <div class="form-group">
-        <%= f.label :city, "City:", class: "col-sm-4 control-label" %>
+        <%= f.label :street_address, "Street:", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.text_field :city, class: "form-control" %>
+          <%= f.text_field :street_address, class: "form-control" %>
         </div>
       </div>
       <div class="form-group">
-        <%= f.label :state, "State:", class: "col-sm-4 control-label" %>
+        <%= f.label :city_name, "City:", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.collection_select :state, State.all, :id, :name, {}, :class => "form-control"%>
+          <% if @address.city_id != nil %>
+            <%= f.text_field :city_name, class: "form-control", value: @address.city.name  %>
+          <% else %>
+            <%= f.text_field :city_name, class: "form-control" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :state_id, "State:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.collection_select :state_id, State.all, :id, :name, {}, :class => "form-control"%>
         </div>
       </div>
       <div class="form-group">
@@ -39,7 +56,7 @@
         <%= link_to("View Saved Addresses", "#") %>
       </div>
         <div class="button-wrapper col-sm-12">
-          <%= f.submit "#{:type} User", class: "btn btn-primary btn-group btn-group-lg" %>
+          <%= f.submit "#{:type == 'Edit' ? 'Update' : 'Save'} Address", class: "btn btn-primary btn-group btn-group-lg" %>
         </div>
         <div class="link-wrapper-centre">
           <%= link_to("Delete Address", "/admin/addresses/#{id}", :method => "DELETE", data: {confirm: "Are you sure?"}) if :type == "Edit" %>

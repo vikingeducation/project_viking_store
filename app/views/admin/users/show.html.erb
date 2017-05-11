@@ -35,7 +35,7 @@
   <%= link_to("Delete #{@user.first_name}", "/admin/users/#{@user.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %><br>
   <%= link_to("View Saved Addresses", admin_addresses_path(:user_id => "#{@user.id}")) %><br>
   <%= link_to_if(@user.check_cart.nil?, "View Unplaced Order (Cart)", "#") %>
-
+  
 </div>
 
 
@@ -78,7 +78,7 @@
     <%= link_to("Create Order", "#", :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
   </div><br>
   <div class="button-wrapper">
-    <%= link_to("Create Address", "#", :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
+    <%= link_to("Create Address", new_admin_address_path(:user_id => "#{@user.id}"), :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
   </div>
 
 </div>

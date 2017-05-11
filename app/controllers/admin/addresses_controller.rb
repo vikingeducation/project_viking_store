@@ -15,14 +15,14 @@ class Admin::AddressesController < ApplicationController
   end
 
   def new
-    @address = Address.new
+    @address = Address.new(:user_id => params[:user_id])
   end
 
   def create
     @address = Address.new(whitelisted_category_params)
     if @address.save
       flash[:success] = "New Address has been saved"
-      redirect_to admin_addresses_path
+      redirect_to admin_addresses_path(:user_id => "#{@address.user_id}")
     else
       flash.now[:danger] = "New Address WAS NOT saved. Try again."
       render 'new', :locals => {:address => @address}
@@ -33,32 +33,32 @@ class Admin::AddressesController < ApplicationController
     @address = Address.find(params[:id])
   end
 
-  # def update
-  #   @category = Category.find(params[:id])
-  #   if @category.update_attributes(whitelisted_category_params)
-  #     flash.now[:success] = "Category has been updated"
-  #     redirect_to admin_categories_path
-  #   else
-  #     flash[:danger] = "Category hasn't been saved."
-  #     render 'edit', :locals => {:category => @category}
-  #   end
-  # end
+  def update
+    @address = Address.find(params[:id])
+    if @address.update_attributes(whitelisted_category_params)
+      flash.now[:success] = "Address has been updated"
+      redirect_to admin_addresses_path
+    else
+      flash[:danger] = "Address hasn't been saved."
+      render 'edit', :locals => {:address => @address}
+    end
+  end
 
-  # def destroy
-  #   @category = Category.find(params[:id])
-  #   if @category.destroy
-  #     flash[:success] = "Category deleted successfully!"
-  #     redirect_to admin_categories_path
-  #   else
-  #     flash[:danger] = "Failed to delete category"
-  #     redirect_to request.referer
-  #   end
-  # end
+  def destroy
+    @address = Address.find(params[:id])
+    if @address.destroy
+      flash[:success] = "Address deleted successfully!"
+      redirect_to admin_addresses_path
+    else
+      flash[:danger] = "Failed to delete the address"
+      redirect_to request.referer
+    end
+  end
 
-  # private
-  # def whitelisted_category_params
-  #   params.require(:category).permit(:name )
-  # end
+  private
+  def whitelisted_category_params
+    params.require(:address).permit(:street_address, :secondary_address, :zip_code, :city_id, :state_id, :user_id, :city_name)
+  end
 
 
 end
