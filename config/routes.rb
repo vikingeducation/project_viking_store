@@ -3,5 +3,8 @@ Rails.application.routes.draw do
   root "admin#index"
 
   resources :admin
+  namespace :admin do
+    resources :category
+  end
   get "/dashboard" => "dashboard#index"
 end
