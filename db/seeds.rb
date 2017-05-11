@@ -221,8 +221,8 @@ puts "Created cities"
 
 # Create categories and products
  MULTIPLIER.times       { generate_category }
-
 puts "Created categories"
+
 (MULTIPLIER * 10).times { generate_product }
 puts "Created products"
 
@@ -236,3 +236,11 @@ puts "Created orders"
 generate_credit_cards_for_checked_out_orders
 puts "Created credit card orders"
 puts "DONE!"
+
+
+
+
+
+
+
+
