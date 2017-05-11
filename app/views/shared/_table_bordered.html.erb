@@ -1,4 +1,6 @@
-<h3><%= table_name %></h3>
+<% if table_name %>
+  <h3><%= table_name %></h3>
+<% end %>
 <table class="table table-bordered">
   <tr>
     <% headers.each do |th| %>
