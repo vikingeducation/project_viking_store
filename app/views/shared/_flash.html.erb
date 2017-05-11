@@ -1,5 +1,8 @@
 <% unless flash.empty? %>
+
   <% flash.each do |key, value| %>
-    <%= content_tag :div, value, class: "flash #{key}" %>
+    <div class="flash text-center bg-<%= key %>">
+      <%= value %>
+    </div>
   <% end %>
 <% end %>
