@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   validates :name, :price, :category_id, :presence => true
   validate :price_range
   validate :category_existence
+  validate :product_existence, :on => :edit
 
   # ----------------------------------------------------------------
   # Validation Methods
@@ -19,6 +20,12 @@ class Product < ApplicationRecord
   def category_existence
     unless Category.where(:id => category_id).first
       errors.add(:category_id, "The selected category must be a real one")
+    end
+  end
+
+  def product_existence
+    unless Product.where(:id => params[:id]).first
+      errors.add(:category_id, "The product to be edited must exist already")
     end
   end
 

@@ -28,6 +28,23 @@ class Admin::ProductsController < ApplicationController
     @carts_in = Product.carts_in(params[:id])
   end
 
+  def edit
+    @product = Product.find(params[:id])
+    @category_options = Category.all.map{ |c| [c.name, c.id] }
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    if @product.update_attributes(product_params)
+      flash[:success] = "Product updated successfully"
+      redirect_to admin_products_path
+    else
+      @category_options = Category.all.map{ |c| [c.name, c.id] }
+      flash.now[:danger] = "Failed to update product"
+      render :edit
+    end
+  end
+
   def product_params
     params.require(:product).permit(:name, :price, :category_id)
   end

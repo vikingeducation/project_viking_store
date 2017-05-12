@@ -34,7 +34,7 @@ class Admin::CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     if @category.update_attributes(category_params)
       flash[:success] = "Category updated"
-      redirect_to root_path
+      redirect_to admin_categories_path
     else
       flash.now[:danger] = "Failed to update category"
       render :edit
@@ -45,7 +45,7 @@ class Admin::CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     @category.destroy
     flash[:success] = "Category deleted"
-    redirect_to root_path
+    redirect_to admin_categories_path
   end
 
   # -----------------------------------------------------------------
