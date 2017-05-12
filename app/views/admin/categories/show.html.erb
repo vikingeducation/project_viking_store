@@ -9,9 +9,7 @@
     %>
 
     <p>
-      <%= link_to "[Edit]", admin_category_path(@category.id),
-                  :method => :put
-       %>
+      <%= link_to "[Edit]", edit_admin_category_path(@category.id) %>
     </p>
     <p>
       <%= link_to "[Delete]", admin_category_path(@category.id),
@@ -29,6 +27,7 @@
       <% @products.each do |product| %>
       <tr>
         <td><%= product.id %></td>
+        <!-- TODO: link to product url -->
         <td><%= link_to product.name, "#" %></td>
       </tr>
       <% end %>

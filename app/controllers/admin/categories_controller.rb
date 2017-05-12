@@ -26,6 +26,21 @@ class Admin::CategoriesController < ApplicationController
     @products = Product.where(:category_id => params[:id])
   end
 
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    if @category.update_attributes(category_params)
+      flash[:success] = "Category updated"
+      redirect_to root_path
+    else
+      flash.now[:danger] = "Failed to update category"
+      render :edit
+    end
+  end
+
   # -----------------------------------------------------------------
   # Helpers
   # -----------------------------------------------------------------
