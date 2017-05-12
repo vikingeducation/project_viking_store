@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3>Category <%= "#{@category.id}: #{@category.name}" %></h3>
+    <h3 class="text-center">Category <%= "#{@category.id}: #{@category.name}" %></h3>
   </div>
   <div class="panel-body">
     <%= render :partial => "shared/table_vertical_objs",
@@ -28,7 +28,7 @@
       <tr>
         <td><%= product.id %></td>
         <!-- TODO: link to product url -->
-        <td><%= link_to product.name, "#" %></td>
+        <td><%= link_to product.name, admin_product_path(product.id) %></td>
       </tr>
       <% end %>
     </table>
