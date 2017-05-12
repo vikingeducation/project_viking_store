@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>New Product</h2>
+  </div>
+  <div class="panel-body">
+    <%= form_for [:admin, @product] do |f| %>
+      <%= render :partial => "shared/form_errors",
+                 :locals => {obj: @product}
+      %>
+
+      <div class="form-group">
+        <%= f.label :id %>
+        <%= f.text_field :id, :class => "form-control", :disabled => true, :value => "N/A" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :price %>
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <%= f.number_field :price, :class => "form-control" %>
+        </div>
+      </div>
+      <!-- TODO: select a category -->
+      <div class="form-group">
+        <%= f.label :category_id %>
+        <%= f.select :category_id,
+                     @category_options,
+                     {},
+                     {:class => "form-control"}
+        %>
+      </div>
+      <%= f.button "Create", :class => "btn btn-primary btn-block btn-lg" %>
+    <% end %>
+  </div>
+</div>
