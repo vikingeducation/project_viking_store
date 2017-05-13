@@ -4,7 +4,7 @@ module ApplicationHelper
     created_at.strftime("%m/%d/%y")
   end
 
-  def format
+  def self.format
     strftime("%m/%d/%y")
   end
 

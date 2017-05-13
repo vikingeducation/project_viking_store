@@ -124,12 +124,8 @@
           <td><%= cont.product_id %></td>
           <td><%= cont.product.name %></td>
           <td><%= cont.quantity %></td>
+          <td><%= number_to_currency(cont.product.price, :unit => "$") %></td>
           <td><%= number_to_currency(cont.quantity*cont.product.price, :unit => "$") %></td>
-          <td><%= link_to("show", "#") %></td>
-          <td><%= link_to("edit", "#") %></td>
-          <td><%= link_to("delete", "#", 
-                          :method => "DELETE", 
-                          data: {confirm: "Are you sure?"}) %></td>
         </tr>
       <% end %>
     </tbody>

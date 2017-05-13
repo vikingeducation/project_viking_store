@@ -30,16 +30,16 @@ class Admin::OrdersController < ApplicationController
     @order.checkout_date ||= Time.now
     if @order.save
       flash[:success] = "New Order has been created"
-      redirect_to edit_admin_order_path(@order.id, :user_id => "#{@order.user_id}")
+      redirect_to edit_admin_order_path(@order.id)
     else
       flash.now[:danger] = "New Order WAS NOT saved. Try again."
       render 'new', :locals => {:order => @order}
     end
   end
 
-  # def edit
-  #   @order = Order.find(params[:id])
-  # end
+  def edit
+    @order = Order.find(params[:id])
+  end
 
   # def update
   #   @order = Order.find(params[:id])
