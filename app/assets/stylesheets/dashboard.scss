@@ -166,5 +166,24 @@ div.container.admin-layout {
   // .center-block();
 }
 
+// ==========================
+// ORDERS - FORMATS
+// ==========================
 
+
+td.placed-format {
+  text-align: center;
+  color: #1C1;
+  font-weight: 900;
+  font-size:  26px;
+  padding-top: 6px;
+}
+
+td.unplaced-format {
+  text-align: center;
+  color: #F2007B;
+  font-weight: 900;
+  font-size:  26px;
+  padding-top: 6px;
+}
 

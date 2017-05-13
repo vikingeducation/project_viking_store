@@ -75,7 +75,7 @@
   <H3>Admin Actions for <%= @user.first_name %> <%= @user.last_name %></H3>
 
   <div class="button-wrapper">
-    <%= link_to("Create Order", "#", :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
+    <%= link_to("Create Order", new_admin_order_path(:user_id => "#{@user.id}"), :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
   </div><br>
   <div class="button-wrapper">
     <%= link_to("Create Address", new_admin_address_path(:user_id => "#{@user.id}"), :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
@@ -105,7 +105,7 @@
           <td><%= u_o.created_date %></td>
           <td><%= number_to_currency(u_o.total_value, :unit => "$") %></td>
           <td><%= u_o.check_status %></td>
-          <td><%= link_to("show", "#") %></td>
+          <td><%= link_to("show", admin_order_path(u_o.id)) %></td>
           <td><%= link_to("edit", "#") %></td>
           <td><%= link_to("delete", "#", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
         </tr>
