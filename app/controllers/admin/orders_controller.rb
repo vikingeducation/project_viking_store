@@ -19,20 +19,23 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
-  # def new
-  #   @order = Order.new(:user_id => params[:user_id])
-  # end
+  def new
+    @user = User.find(params[:user_id])
+    @order = Order.new(:user_id => params[:user_id])
+    @order_content = OrderContent.new
+  end
 
-  # def create
-  #   @order = Order.new(whitelisted_orders_params)
-  #   if @order.save
-  #     flash[:success] = "New Address has been saved"
-  #     redirect_to admin_addresses_path(:user_id => "#{@order.user_id}")
-  #   else
-  #     flash.now[:danger] = "New Address WAS NOT saved. Try again."
-  #     render 'new', :locals => {:order => @order}
-  #   end
-  # end
+  def create
+    @order = Order.new(whitelisted_orders_params)
+    @order.checkout_date ||= Time.now
+    if @order.save
+      flash[:success] = "New Order has been created"
+      redirect_to edit_admin_order_path(@order.id, :user_id => "#{@order.user_id}")
+    else
+      flash.now[:danger] = "New Order WAS NOT saved. Try again."
+      render 'new', :locals => {:order => @order}
+    end
+  end
 
   # def edit
   #   @order = Order.find(params[:id])
@@ -60,9 +63,9 @@ class Admin::OrdersController < ApplicationController
   #   end
   # end
 
-  # private
-  # def whitelisted_orders_params
-  #   params.require(:order).permit(:street_address, :secondary_address, :zip_code, :city_id, :state_id, :user_id, :city_name)
-  # end
+  private
+  def whitelisted_orders_params
+    params.require(:order).permit(:checkout_date, :user_id, :shipping_id, :billing_id, :credit_card_id)
+  end
 
 end

@@ -53,15 +53,15 @@
       </tr>
       <tr>
         <td class="title-cell">Number:</td>
-        <td><%= @user.credit_card.card_number unless @user.credit_card.nil? %></td>
+        <td><%= @user.credit_cards.first.card_number unless @user.credit_cards.empty? %></td>
       </tr>
       <tr>
         <td class="title-cell">Expiration:</td>
-        <td><%= @user.credit_card.expiration_str unless @user.credit_card.nil?%></td>
+        <td><%= @user.credit_cards.first.expiration_str unless @user.credit_cards.empty?%></td>
       </tr>
       <tr>
         <td class="title-cell">CV2:</td>
-        <td><%= @user.credit_card.ccv unless @user.credit_card.nil? %></td>
+        <td><%= @user.credit_cards.first.ccv unless @user.credit_cards.empty? %></td>
       </tr>
     </tbody>
   </table>

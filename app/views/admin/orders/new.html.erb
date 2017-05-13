@@ -1,0 +1,55 @@
+<H3>New Order for <%= @order.user.first_name %> <%= @order.user.last_name %> </H3>
+
+<div class="table-wrapper borders">
+  <table class="no-borders">
+    <caption>Basic Information</caption>
+    <tbody>
+      <tr>
+        <td class="title-cell">Customer ID:</td>
+        <td><%= @order.user_id %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Customer:</td>
+        <td><%= link_to("#{@order.user.first_name} #{@order.user.last_name}", admin_user_path(@order.user_id)) %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Date Placed:</td>
+        <td><%= "N/A" %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= link_to("Edit Customer Profile", edit_admin_user_path(@order.user_id)) %><br>
+
+
+  <div class="form-wrapper">
+    <%= form_for( new_admin_order_path, html: { :class => "form-horizontal" } ) do |f| %>
+      <div class="form-group">
+        <%= f.label :shipping_id, "Shipping Address:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.collection_select :shiping_id, @user.addresses, :id, :street_address, {}, :class => "form-control"%>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :billing_id, "Billing Address:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.collection_select :billing_id, @user.addresses, :id, :street_address, {}, :class => "form-control"%>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :credit_card_id, "Billing Card:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.collection_select :credit_card_id, @user.credit_cards, :id, :card_number, {}, :class => "form-control"%>
+        </div>
+      </div>
+
+      <div class="button-wrapper col-sm-12">
+        <%= f.submit "Create Order in Shopping Cart", class: "btn btn-primary btn-group btn-group-lg" %>
+      </div>
+    <% end %>
+  </div>
+  <h5>
+    You can add products on the next screen, once it's been created.
+  </h5>
+
+</div>
