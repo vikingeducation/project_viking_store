@@ -1,8 +1,8 @@
 class User < ApplicationRecord
 
-  has_many :addresses, :dependent => :destroy
-  belongs_to :default_billing_address, class_name: "Address", :foreign_key => :billing_id, :dependent => :destroy
-  belongs_to :default_shipping_address, class_name: "Address", :foreign_key => :shipping_id, :dependent => :destroy
+  has_many :addresses
+  belongs_to :default_billing_address, class_name: "Address", :foreign_key => :billing_id
+  belongs_to :default_shipping_address, class_name: "Address", :foreign_key => :shipping_id
   has_one :credit_card, :dependent => :destroy
   before_destroy :delete_only_cart
   has_many :orders
@@ -24,7 +24,7 @@ class User < ApplicationRecord
   def state_abbrev
     # user_state = self.addresses.first.state.name
     # REGIONS.named(user_state).code
-    self.addresses.first.state.name unless self.addresses.first.nil?
+    self.addresses.first.state.abbrev_name unless self.addresses.first.nil?
   end
 
   def city_name

@@ -115,7 +115,7 @@ h1, h3, h6, td {
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-h2, h3 {
+h2, h3, h5 {
   text-align: center;
 }
 
@@ -154,6 +154,16 @@ table {
 th,
 td {
   border-left: 1px solid #cecfd5;
+}
+
+
+td.red-mark {
+  color: red;
+}
+
+div.container.admin-layout {
+  width: 1270px;
+  // .center-block();
 }
 
 
