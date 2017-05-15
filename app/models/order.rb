@@ -1,4 +1,11 @@
 class Order < ApplicationRecord
+  has_many :order_contents
+  has_many :products,
+           :through => :order_contents
+  has_many :categories,
+           :through => :products,
+           :source => :category
+  belongs_to :user
 
   def self.average_value
     joins(
