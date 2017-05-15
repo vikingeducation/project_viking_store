@@ -23,17 +23,16 @@
   <%= link_to("Edit Customer Profile", edit_admin_user_path(@order.user_id)) %><br>
 
 
-<%= form_for( [:admin, @order], html: { :class => "form-horizontal" } ) do |f| %>
-
-<%= radio_button_tag(:checkout_date, "") %>
-<%= label_tag(:checkout_date, "PLACED", class: "green-mark") %><br>
-<%= radio_button_tag(:checkout_date, "", :checked => true) %>
-<%= label_tag(:checkout_date, "NOT PLACED", class: "red-mark") %>
-
-<% end %>
-
   <div class="form-wrapper">
     <%= form_for( [:admin, @order], html: { :class => "form-horizontal" } ) do |f| %>
+      
+      <div class="form-group">
+        <%= radio_button_tag(:checkout_date, "") %>
+        <%= label_tag(:checkout_date, "PLACED", class: "green-mark") %><br>
+        <%= radio_button_tag(:checkout_date, "", :checked => true) %>
+        <%= label_tag(:checkout_date, "NOT PLACED", class: "red-mark") %>
+      </div>
+
       <div class="form-group">
         <%= f.label :shipping_id, "Shipping Address:", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
@@ -62,48 +61,59 @@
 
   <div class="link-wrapper-centre">
     <%= link_to("Delete Order", 
-                "/admin/users/#{@order.id}", 
+                "/admin/orders/#{@order.id}", 
                 :method => "DELETE", 
                 data: {confirm: "Are you sure?"}) %>
   </div>
 </div>
 
 
-
+<!-- =========EDIT ORDER========== -->
 <div class="table-wrapper borders">
-  <table class="table table-striped">
-    <caption>Edit Order Contents</caption>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Total Price</th>
-        <th>REMOVE</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @order.order_contents.each do |cont| %>
+<div class="form-wrapper">
+    <%= form_for( @order, :url => {:controller => 'admin/order_contents', :action => :edit, :action => :update}, html: { :class => "form-horizontal" } ) do |f| %>
+    <table class="table table-striped">
+      <caption>Edit Order Contents</caption>
+      <thead>
         <tr>
-          <td><%= cont.id %></td>
-          <td><%= cont.quantity %></td>
-          <td><%= cont.product.price %></td>
-          <td><%= number_to_currency(cont.quantity*cont.product.price, :unit => "$") %></td>
-          <td><%= link_to("delete", "#", 
-                          :method => "DELETE", 
-                          data: {confirm: "Are you sure?"}) %></td>
+          <th>ID</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total Price</th>
+          <th>REMOVE</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @order.order_contents.each do |cont| %>
+          <tr>
+            <td><%= cont.product_id %></td>
+            <%= f.hidden_field :order_contents_id, :value => cont.product_id %>
+            <%= f.hidden_field :quantity, :value => cont.quantity %>
+            <td><%= f.text_field :quantity, :value => cont.quantity, :class => "form-control"%></td>
+            <td><%= number_to_currency(cont.product.price, :unit => "$") %></td>
+            <td><%= number_to_currency(cont.quantity*cont.product.price, :unit => "$") %></td>
+            <td><%= link_to("delete", "/admin/order_contents/#{cont.id}", 
+                            :method => "DELETE", 
+                            data: {confirm: "Are you sure?"}) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="button-wrapper col-sm-12">
+      <%= f.submit "Update Order Contents", class: "btn btn-primary btn-group btn-group-lg" %>
+    </div>
+  <% end %>
+</div>
 </div>
 
-
+<!-- =========ADD PRODUCTS============= -->
 
 <div class="table-wrapper borders">
   <table class="table table-striped">
-    <caption>Add Products to Order</caption>
-    <p>Add Up to 5 products at a time</p>
+    <caption>
+      Add Products to Order
+      <h6>Add Up to 5 products at a time</h6>
+    </caption>
     <thead>
       <tr>
         <th>ProductID</th>

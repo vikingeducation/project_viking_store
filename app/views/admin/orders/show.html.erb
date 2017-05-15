@@ -100,7 +100,7 @@
   </table>
 
 
- <%= link_to("Edit Order", edit_admin_order_path(@order.user_id)) %><br>
+ <%= link_to("Edit Order", edit_admin_order_path(@order.id)) %><br>
   <%= link_to("Delete Order", "/admin/orders/#{@order.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %><br>
 
 </div>

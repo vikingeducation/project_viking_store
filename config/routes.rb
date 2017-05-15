@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :users
     resources :addresses
     resources :orders
+    resources :order_contents
   end
 
 end

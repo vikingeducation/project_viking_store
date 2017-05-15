@@ -40,6 +40,6 @@
   <br>
 
   <%= link_to("Edit Product", edit_admin_product_path(@product.id)) %><br>
-  <%= link_to("Delete Product", "/admin_portal/#{@product.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
+  <%= link_to("Delete Product", "/admin/product/#{@product.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
 
 </div>
