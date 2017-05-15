@@ -23,7 +23,13 @@
         <td><%= c.description %></td>
         <td><%= link_to "Show", admin_category_path(c.id) %></td>
         <td><%= link_to "Edit", edit_admin_category_path(c.id) %></td>
-        <td><%= link_to "Delete", admin_category_path(c.id), :method => :delete %></td>
+        <td>
+          <%= link_to "Delete",
+                      admin_category_path(c.id),
+                      :method => :delete,
+                      :data => {:confirm => "Are you sure?"}
+          %>
+        </td>
       </tr>
       <% end %>
     </table>

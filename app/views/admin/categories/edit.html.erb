@@ -22,8 +22,11 @@
       </div>
       <%= f.button "Update", :class => "btn btn-primary btn-block btn-lg" %>
     <% end %>
-    <%= link_to "Delete", admin_category_path(@category.id),
-                :method => :delete, :class => "btn btn-block btn-lg"
+    <%= link_to "Delete",
+                admin_category_path(@category.id),
+                :method => :delete,
+                :class => "btn btn-block btn-lg",
+                :data => {:confirm => "Are you sure?"}
     %>
   </div>
 </div>

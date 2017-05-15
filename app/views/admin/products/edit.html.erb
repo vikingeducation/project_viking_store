@@ -35,7 +35,8 @@
     <% end %>
     <%= link_to "Delete", admin_product_path(@product.id),
                 :method => :delete,
-                :class => "btn btn-block btn-lg"
+                :class => "btn btn-block btn-lg",
+                :data => {:confirm => "Are you sure?"}
     %>
   </div>
 </div>
