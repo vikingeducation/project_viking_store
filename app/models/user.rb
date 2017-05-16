@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   has_many :addresses
   has_many :orders
-  has_many :credit_cards
+  has_many :credit_cards,
+           :dependent => :destroy
   has_many :order_contents,
            :through => :orders
   has_many :products,
