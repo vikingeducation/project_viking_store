@@ -48,6 +48,9 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    carts = @user.orders.where(:checkout_date => nil)
+    # delete all shopping carts, but not completed orders
+    carts.destroy_all
     @user.destroy
     flash[:success] = "User deleted successfully"
     redirect_to admin_users_path
