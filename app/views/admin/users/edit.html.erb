@@ -1,0 +1,55 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="text-center">
+      <%= "Edit User #{@user.id}: #{@user.first_name} #{@user.last_name}" %>
+    </h2>
+  </div>
+  <div class="panel-body">
+    <h4>Demographic Information</h4>
+    <%= form_for [:admin, @user] do |f| %>
+      <%= render :partial => "shared/form_errors",
+                 :locals => {obj: @user}
+      %>
+
+      <div class="form-group">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.text_field :email, :class => "form-control" %>
+      </div>
+      <!-- TODO: no method telephone for user -->
+      <div class="form-group">
+        <%= f.label :billing_id, "Default Billing Address" %>
+        <%= f.select :billing_id,
+                     @address_options,
+                     {},
+                     {:class => "form-control"}
+        %>
+      </div>
+      <div class="form-group">
+        <%= f.label :shipping_id, "Default Shipping Address" %>
+        <%= f.select :shipping_id,
+                     @address_options,
+                     {},
+                     {:class => "form-control"}
+        %>
+      </div>
+      <!-- TODO: wire up -->
+      <%= link_to "View Saved Addresses", "#" %>
+
+      <%= f.button "Update", :class => "btn btn-primary btn-block btn-lg" %>
+      <%= link_to  "Delete",
+                   admin_user_path(@user.id),
+                   :class => "btn btn-block btn-lg",
+                   :method => :delete,
+                   :data => {:confirm => "Are you sure?"}
+      %>
+    <% end %>
+  </div>
+</div>

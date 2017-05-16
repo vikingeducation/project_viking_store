@@ -7,6 +7,14 @@ class Order < ApplicationRecord
            :source => :category
   belongs_to :user
 
+  def self.value_per_order
+    select(
+      "orders.id, orders.created_at, SUM(products.price) AS value,
+       orders.checkout_date"
+    ).joins(:order_contents).joins(:products).group(
+    "orders.id")
+  end
+
   def self.average_value
     joins(
       "JOIN order_contents oc ON oc.order_id = orders.id"

@@ -1,0 +1,55 @@
+<div class="panel panel-default text-center">
+  <div class="panel-heading">
+    <h2>Viking Store Users</h2>
+  </div>
+  <div class="panel-body">
+    <%= link_to "Create a New User", new_admin_user_path,
+                :class => "btn btn-primary btn-block btn-lg" %>
+    <br>
+
+    <table class="table table-bordered">
+      <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Joined</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Orders</th>
+        <th>Last Order Date</th>
+        <th>Show</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      <% @users.each do |u| %>
+      <tr>
+        <td><%= u.id %></td>
+        <td><%= "#{u.first_name} #{u.last_name}" %></td>
+        <td><%= u.created_at.strftime('%F') %></td>
+        <% unless u.default_billing_address.nil? %>
+        <td><%= u.default_billing_address.city.name %></td>
+        <td><%= u.default_billing_address.state.name %></td>
+        <% else %>
+        <td>No default address</td>
+        <td>No default address</td>
+        <% end %>
+        <!-- TODO: link to user's orders -->
+        <td><%= u.orders.count %></td>
+        <% if u.orders.last.nil? %>
+        <td>No orders</td>
+        <% else %>
+        <td><%= u.orders.last.created_at.strftime('%F') %></td>
+        <% end %>
+        <td><%= link_to "Show", admin_user_path(u.id) %></td>
+        <td><%= link_to "Edit", edit_admin_user_path(u.id) %></td>
+        <td>
+          <%= link_to "Delete",
+                      admin_user_path(u.id),
+                      :method => :delete,
+                      :data => {:confirm => "Are you sure?"}
+          %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

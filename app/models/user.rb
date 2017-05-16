@@ -1,6 +1,12 @@
 class User < ApplicationRecord
+  validates :first_name, :last_name, :email,
+            :length => {:in => 1..64}
+  validates :email,
+            :format => {:with => /.+@.+/}
+
   has_many :addresses
   has_many :orders
+  has_many :credit_cards
   has_many :order_contents,
            :through => :orders
   has_many :products,
