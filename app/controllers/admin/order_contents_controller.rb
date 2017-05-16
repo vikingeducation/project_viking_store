@@ -22,8 +22,7 @@ class Admin::OrderContentsController < ApplicationController
   # end
 
   def edit
-    @order = Order.find(params[:id])
-    @order_contents = OrderContent.where(:order_id => @order.id)
+    @order_contents = OrderContent.find(params[:id])
   end
 
   def update

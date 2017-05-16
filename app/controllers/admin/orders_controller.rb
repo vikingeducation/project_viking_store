@@ -38,12 +38,10 @@ class Admin::OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
-    @order_contents = OrderContent.where(:order_id => @order.id)
   end
 
   def update
-    # @order = Order.find(params[:id])
-    # @order_contents = OrderContent.new(:order_id => @order.id)
+    @order = Order.find(params[:id])
     if @order.update_attributes(whitelisted_orders_params)
       flash.now[:success] = "Order has been updated"
       redirect_to admin_order_path
@@ -66,7 +64,9 @@ class Admin::OrdersController < ApplicationController
 
   private
   def whitelisted_orders_params
-    params.require(:order).permit(:checkout_date, :user_id, :shipping_id, :billing_id, :credit_card_id)
+    params.require(:order).permit(:checkout_date, :user_id, :shipping_id, :billing_id, :credit_card_id, 
+      {:order_contents_attributes => [
+                                :quantity,
+                                :product_id, ] } )
   end
-
 end

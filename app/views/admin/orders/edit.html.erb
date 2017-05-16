@@ -27,10 +27,10 @@
     <%= form_for( [:admin, @order], html: { :class => "form-horizontal" } ) do |f| %>
       
       <div class="form-group">
-        <%= radio_button_tag(:checkout_date, "") %>
-        <%= label_tag(:checkout_date, "PLACED", class: "green-mark") %><br>
-        <%= radio_button_tag(:checkout_date, "", :checked => true) %>
-        <%= label_tag(:checkout_date, "NOT PLACED", class: "red-mark") %>
+        <%= f.radio_button(:checkout_date, true ) %>
+        <%= f.label(:checkout_date, "PLACED", class: "green-mark") %>
+        <%= f.radio_button(:checkout_date, false,:checked => true) %>
+        <%= f.label(:checkout_date, "NOT PLACED", class: "red-mark") %>
       </div>
 
       <div class="form-group">
@@ -71,7 +71,7 @@
 <!-- =========EDIT ORDER========== -->
 <div class="table-wrapper borders">
 <div class="form-wrapper">
-    <%= form_for( @order, :url => {:controller => 'admin/order_contents', :action => :edit, :action => :update}, html: { :class => "form-horizontal" } ) do |f| %>
+    <%= form_for( [:admin, @order] ) do |order_fields| %>
     <table class="table table-striped">
       <caption>Edit Order Contents</caption>
       <thead>
@@ -84,15 +84,13 @@
         </tr>
       </thead>
       <tbody>
-        <% @order.order_contents.each do |cont| %>
+        <%= order_fields.fields_for :order_contents do |ord_cont_field| %>
           <tr>
-            <td><%= cont.product_id %></td>
-            <%= f.hidden_field :order_contents_id, :value => cont.product_id %>
-            <%= f.hidden_field :quantity, :value => cont.quantity %>
-            <td><%= f.text_field :quantity, :value => cont.quantity, :class => "form-control"%></td>
-            <td><%= number_to_currency(cont.product.price, :unit => "$") %></td>
-            <td><%= number_to_currency(cont.quantity*cont.product.price, :unit => "$") %></td>
-            <td><%= link_to("delete", "/admin/order_contents/#{cont.id}", 
+            <td><%= ord_cont_field.object.product_id %></td>
+            <td><%= ord_cont_field.text_field :quantity, class: "form-control" %><%= ord_cont_field.hidden_field :id %></td>
+            <td><%= number_to_currency(ord_cont_field.object.product.price, :unit => "$") %></td>
+            <td><%= number_to_currency(ord_cont_field.object.quantity*ord_cont_field.object.product.price, :unit => "$") %></td>
+            <td><%= link_to("remove", "/admin/order_contents/#{ord_cont_field.object.id}", 
                             :method => "DELETE", 
                             data: {confirm: "Are you sure?"}) %></td>
           </tr>
@@ -100,7 +98,7 @@
       </tbody>
     </table>
     <div class="button-wrapper col-sm-12">
-      <%= f.submit "Update Order Contents", class: "btn btn-primary btn-group btn-group-lg" %>
+      <%= submit_tag "Update Order Contents", class: "btn btn-primary btn-group btn-group-lg" %>
     </div>
   <% end %>
 </div>
