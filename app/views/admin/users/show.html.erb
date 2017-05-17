@@ -29,15 +29,14 @@
                   :class => "btn btn-default"
       %>
     </p>
-    <% if @has_unplaced_orders %>
+
+    <% cls = @has_unplaced_orders ? "btn btn-default" : "btn btn-default disabled" %>
     <p>
       <%= link_to "View Unplaced Orders (Cart)",
                   admin_orders_path(:user_id => @user.id, :status => :unplaced),
-                  :class => "btn btn-default disabled"
+                  :class => cls
       %>
-
     </p>
-    <% end %>
 
     <h4>Credit Card Information</h4>
     <% @credit_cards.each do |cc| %>
