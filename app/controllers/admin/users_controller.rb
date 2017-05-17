@@ -10,6 +10,7 @@ class Admin::UsersController < ApplicationController
     @demographic_info = demographic_info(@user)
     @credit_cards = @user.credit_cards
     @order_history = Order.value_per_order.where(:user_id => params[:id])
+    @has_unplaced_orders = @order_history.where(:checkout_date => nil)
   end
 
   def new

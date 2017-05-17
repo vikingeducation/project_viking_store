@@ -12,21 +12,32 @@
     %>
 
     <p>
-      <%= link_to "[Edit]", edit_admin_user_path(@user.id) %>
+      <%= link_to "Edit",
+                  edit_admin_user_path(@user.id),
+                  :class => "btn btn-default"
+      %>
     </p>
     <p>
-      <%= link_to "[Delete]", admin_user_path(@user.id),
-                  :method => :delete
+      <%= link_to "Delete", admin_user_path(@user.id),
+                  :method => :delete,
+                  :class => "btn btn-default"
        %>
     </p>
     <p>
-      <%= link_to "[View Saved Addresses]", admin_addresses_path(:user_id => @user.id) %>
+      <%= link_to "View Saved Addresses",
+                  admin_addresses_path(:user_id => @user.id),
+                  :class => "btn btn-default"
+      %>
     </p>
+    <% if @has_unplaced_orders %>
     <p>
-      <!-- TODO (only clickable if the user has a cart) -->
-      <!-- TODO if he doesnt have an open cart, then the link is not clickable -->
-      <%= link_to "[View Unplaced Order (Cart)]", edit_admin_user_path(@user.id) %>
+      <%= link_to "View Unplaced Orders (Cart)",
+                  admin_orders_path(:user_id => @user.id, :status => :unplaced),
+                  :class => "btn btn-default disabled"
+      %>
+
     </p>
+    <% end %>
 
     <h4>Credit Card Information</h4>
     <% @credit_cards.each do |cc| %>

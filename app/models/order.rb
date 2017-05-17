@@ -10,8 +10,7 @@ class Order < ApplicationRecord
 
   def self.value_per_order
     select(
-      "orders.id, orders.created_at, SUM(products.price) AS value,
-       orders.checkout_date"
+      "orders.*, SUM(products.price) AS value"
     ).joins(:order_contents).joins(:products).group(
     "orders.id")
   end

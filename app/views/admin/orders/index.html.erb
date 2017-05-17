@@ -1,0 +1,64 @@
+<div class="panel panel-default text-center">
+  <div class="panel-heading">
+    <% if @user %>
+    <h2><%= "#{@user.first_name} #{@user.last_name}'s" %> Orders</h2>
+    <% else %>
+    <h2>All Orders</h2>
+    <% end %>
+  </div>
+
+  <div class="panel-body">
+    <% if @user %>
+      <%= link_to "Create an Order for #{@user.first_name} #{@user.last_name}",
+                  new_admin_order_path({:user_id => @user.id}),
+                  :class => "btn btn-primary btn-block btn-lg"
+      %>
+      <br>
+    <% else %>
+      <p>Create new orders from within
+        <%= link_to "User", admin_users_path %>
+        profiles.</p>
+    <% end %>
+
+
+    <table class="table table-bordered">
+      <tr>
+        <% ["ID", "UserID", "Address", "City", "State", "Total Value", "Status",
+              "Date Placed", "Show", "Edit", "Index"].each do |header| %>
+        <th><%= header %></th>
+        <% end %>
+      </tr>
+      <% @orders.each do |o| %>
+        <% address = o.user.default_billing_address %>
+      <tr>
+        <td><%= o.id %></td>
+        <td><%= link_to o.user.id, admin_user_path(o.user.id) %></td>
+        <% if address %>
+          <td><%= [address.street_address, address.secondary_address].select{|i| !i.nil?}.join(", ") %></td>
+          <td><%= address.city.name %></td>
+          <td><%= address.state.name %></td>
+        <% else %>
+          <td>No address</td>
+          <td>No address</td>
+          <td>No address</td>
+        <% end %>
+        <td><%= o.value %></td>
+        <% if o.checkout_date %>
+          <td>PLACED</td>
+        <% else %>
+          <td><span class="alert-danger">UNPLACED</span></td>
+        <% end %>
+        <td><%= o.created_at.strftime('%F') %></td>
+        <td><%= link_to "Show", admin_order_path(o.id) %></td>
+        <td><%= link_to "Edit", edit_admin_order_path(o.id) %></td>
+        <td><%= link_to "Delete",
+                    admin_order_path(o.id),
+                    :method => :delete,
+                    :data => {:confirm => "Are you sure?"}
+            %></td>
+      </tr>
+      <% end %>
+    </table>
+
+  </div>
+</div>
