@@ -7,6 +7,11 @@ class Admin::OrdersController < ApplicationController
     @orders = @orders.limit(100)
   end
 
+  def show
+    @order = Order.value_per_order.find(params[:id])
+    @order_contents = @order.order_contents.includes(:product)
+  end
+
   # ------------------------------------------------------------------------
   # Helpers
   # ------------------------------------------------------------------------

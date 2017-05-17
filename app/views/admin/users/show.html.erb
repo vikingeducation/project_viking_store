@@ -65,10 +65,8 @@
     <% end %>
 
     <h4>Admin Actions for <%= @demographic_info["full_name"] %></h4>
-    <!-- TODO Order: Wire up; link to the create pages for these resources but will
-    make them scoped just to this user -->
-    <!-- TODO create childs with the foreign key already filled in -->
-    <%= link_to "Create Order", "#",
+    <%= link_to "Create Order",
+                new_admin_order_path(:user_id => @user.id),
                 :class => "btn btn-primary btn-block btn-lg"
     %>
     <%= link_to "Create Address",
@@ -79,13 +77,9 @@
     <h4>Order History</h4>
     <table class="table table-bordered">
       <tr>
-        <th>id</th>
-        <th>Order Date</th>
-        <th>Order Value</th>
-        <th>Status</th>
-        <th>Show</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <% ["id", "Order Date", "Order Value", "Status", "Show", "Edit", "Delete"].each do |header| %>
+          <th><%= header %></th>
+        <% end %>
       </tr>
       <% @order_history.each do |order| %>
       <tr>
@@ -97,10 +91,9 @@
         <% else %>
         <td>PLACED</td>
         <% end %>
-        <!-- TODO wire up -->
-        <td><%= link_to "show", "#" %></td>
-        <td><%= link_to "edit", "#" %></td>
-        <td><%= link_to "delete", "#" %></td>
+        <td><%= link_to "show", admin_order_path(order.id) %></td>
+        <td><%= link_to "edit", edit_admin_order_path(order.id) %></td>
+        <td><%= link_to "delete", admin_order_path(order.id), :method => :delete %></td>
       </tr>
       <% end %>
     </table>

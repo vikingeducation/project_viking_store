@@ -7,6 +7,7 @@ class Order < ApplicationRecord
            :through => :products,
            :source => :category
   belongs_to :user
+  belongs_to :credit_card
 
   def self.value_per_order
     select(
