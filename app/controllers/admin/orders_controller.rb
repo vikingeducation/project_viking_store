@@ -65,8 +65,9 @@ class Admin::OrdersController < ApplicationController
   private
   def whitelisted_orders_params
     params.require(:order).permit(:checkout_date, :user_id, :shipping_id, :billing_id, :credit_card_id, 
-      {:order_contents_attributes => [
+      {:order_contents_attributes => [:id,
                                 :quantity,
-                                :product_id, ] } )
+                                :product_id,
+                                :_destroy ] } )
   end
 end

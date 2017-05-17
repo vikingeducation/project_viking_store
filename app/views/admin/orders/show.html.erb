@@ -40,13 +40,13 @@
     <tbody>
       <tr>
         <% if @order.checkout_date.nil? %>
-        <td class="placed-format">
-          PLACED
-        </td>
+          <td class="unplaced-format">
+            UNPLACED
+          </td>
         <% else %>
-        <td class="unplaced-format">
-          UNPLACED
-        </td>
+          <td class="placed-format">
+            PLACED
+          </td>
         <% end %>
       </tr>
     </tbody>
@@ -131,9 +131,8 @@
     </tbody>
   </table>
 
-
   <%= link_to("Edit Order", 
-              edit_admin_user_path(@order.user_id)) %><br>
+              edit_admin_order_path(@order.id)) %><br>
   <%= link_to("Delete Order", 
               "/admin/users/#{@order.id}", 
               :method => "DELETE", 

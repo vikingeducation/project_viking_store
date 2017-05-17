@@ -30,6 +30,7 @@ group :development, :test do
   gem 'faker'
   gem 'jazz_fingers'
   gem 'pry-rails'
+  gem 'better_errors'
 end
 
 
