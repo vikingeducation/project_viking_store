@@ -62,6 +62,17 @@ class Admin::AddressesController < ApplicationController
     end
   end
 
+  def destroy
+    @address = Address.find(params[:id])
+    if @address.destroy
+      flash[:success] = "Address deleted successfully"
+      redirect_to admin_addresses_path
+    else
+      flash[:danger] = "Failed to delete address"
+      redirect_back
+    end
+  end
+
   # ------------------------------------------------------------------
   # Helpers
   # ------------------------------------------------------------------
