@@ -21,7 +21,7 @@ class Order < ApplicationRecord
     user = User.find(user_id)
     puts "How many orders? => #{user.orders.where(:checkout_date => nil).count}"
     if user.orders.where(:checkout_date => nil).count > 1
-      errors.add("orders:", "Only one unplaced order is allowed.")
+      errors.add(:orders, "Only one unplaced order is allowed.")
     end
   end
 

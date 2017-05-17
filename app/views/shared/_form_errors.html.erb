@@ -1,5 +1,8 @@
 <% if obj.errors %>
-  <% obj.errors.full_messages.each do |err| %>
-    <p class="alert alert-danger"><%= err %></p>
+  <% obj.errors.each do |field, err_msg| %>
+    <p class="alert alert-danger">
+      <strong><%= "#{field.capitalize}:" %></strong>
+      <%= "#{err_msg}" %>
+    </p>
   <% end %>
 <% end %>
