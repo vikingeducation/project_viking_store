@@ -41,6 +41,27 @@ class Admin::AddressesController < ApplicationController
     end
   end
 
+  def edit
+    @address = Address.find(params[:id])
+    @user = @address.user
+    @city = @address.city
+    @state_options = State.all.map{|s| [s.name, s.id]}
+  end
+
+  def update
+    @address = Address.find(params[:id])
+    @city = get_or_create_city(params[:city])
+    if @address.update(address_params.merge({:city_id => @city.id}))
+      flash[:success] = "Address updated successfully"
+      redirect_to admin_address_path(@address.id)
+    else
+      @user = @address.user
+      @state_options = State.all.map{|s| [s.name, s.id]}
+      flash[:danger] = "Failed to update address"
+      render :edit
+    end
+  end
+
   # ------------------------------------------------------------------
   # Helpers
   # ------------------------------------------------------------------

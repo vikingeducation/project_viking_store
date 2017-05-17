@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="text-center">
+      <%= "Edit #{@user.first_name} #{@user.last_name}'s Address" %>
+    </h2>
+  </div>
+  <div class="panel-body">
+    <table class="table">
+      <tr>
+        <th>Owner ID</th>
+        <td><%= @user.id %></td>
+      </tr>
+      <tr>
+        <th>Owner Name</th>
+        <td><%= link_to "#{@user.first_name} #{@user.last_name}",
+                        admin_user_path(@user.id)
+         %></td>
+      </tr>
+    </table>
+
+    <%= form_for [:admin, @address] do |f| %>
+      <%= render :partial => "shared/form_errors",
+                 :locals => {obj: @address}
+      %>
+
+      <%= hidden_field_tag :user_id, @user.id %>
+
+      <div class="form-group">
+        <%= f.label :street_address %>
+        <%= f.text_field :street_address, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :city %>
+        <%= text_field_tag :city, @city.name, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :state_id %>
+        <%= f.select :state_id,
+                     @state_options,
+                     {},
+                     {:class => "form-control"}
+        %>
+      </div>
+      <div class="form-group">
+        <%= f.label :zip_code, "Zip" %>
+        <%= f.text_field :zip_code, :class => "form-control" %>
+      </div>
+
+      <%= f.button "Update", :class => "btn btn-primary btn-block btn-lg" %>
+      <%= link_to  "Delete",
+                   admin_address_path(@address.id),
+                   :class => "btn btn-block btn-lg",
+                   :method => :delete,
+                   :data => {:confirm => "Are you sure?"}
+      %>
+    <% end %>
+  </div>
+</div>
