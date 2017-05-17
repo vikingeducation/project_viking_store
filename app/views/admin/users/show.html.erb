@@ -39,29 +39,33 @@
     </p>
 
     <h4>Credit Card Information</h4>
-    <% @credit_cards.each do |cc| %>
-    <table class="table">
-      <tr>
-        <th>nickname</th>
-        <td><%= cc.nickname %></td>
-      </tr>
-      <tr>
-        <th>Number</th>
-        <td><%= cc.card_number %></td>
-      </tr>
-      <tr>
-        <th>Expiration</th>
-        <td><%= "#{cc.exp_year}-#{cc.exp_month}" %></td>
-      </tr>
-      <tr>
-        <th>CCV</th>
-        <td><%= cc.ccv %></td>
-      </tr>
-      <tr>
-        <!-- TODO link to destroy card with confirmation msg -->
-        <th><%= link_to "Remove Card", "#" %></th>
-      </tr>
-    </table>
+    <% unless @credit_cards.blank? %>
+      <% @credit_cards.each do |cc| %>
+      <table class="table">
+        <tr>
+          <th>nickname</th>
+          <td><%= cc.nickname %></td>
+        </tr>
+        <tr>
+          <th>Number</th>
+          <td><%= cc.card_number %></td>
+        </tr>
+        <tr>
+          <th>Expiration</th>
+          <td><%= "#{cc.exp_year}-#{cc.exp_month}" %></td>
+        </tr>
+        <tr>
+          <th>CCV</th>
+          <td><%= cc.ccv %></td>
+        </tr>
+        <tr>
+          <!-- TODO link to destroy card with confirmation msg -->
+          <th><%= link_to "Remove Card", "#" %></th>
+        </tr>
+      </table>
+      <% end %>
+    <% else %>
+      <p class="alert alert-danger">No credit cards registered</p>
     <% end %>
 
     <h4>Admin Actions for <%= @demographic_info["full_name"] %></h4>

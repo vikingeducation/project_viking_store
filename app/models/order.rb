@@ -9,6 +9,26 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :credit_card
 
+  # ----------------------------------------------------------------
+  # Validations
+  # ----------------------------------------------------------------
+
+  validates :shipping_id, :billing_id, :credit_card_id,
+            :presence => true
+  validate :unplaced_orders_constraint
+
+  def unplaced_orders_constraint
+    user = User.find(user_id)
+    puts "How many orders? => #{user.orders.where(:checkout_date => nil).count}"
+    if user.orders.where(:checkout_date => nil).count > 1
+      errors.add("orders:", "Only one unplaced order is allowed.")
+    end
+  end
+
+  # ----------------------------------------------------------------
+  # Queries
+  # ----------------------------------------------------------------
+
   def self.value_per_order
     select(
       "orders.*, SUM(products.price) AS value"
