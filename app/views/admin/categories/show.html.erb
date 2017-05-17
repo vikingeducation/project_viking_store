@@ -9,11 +9,15 @@
     %>
 
     <p>
-      <%= link_to "[Edit]", edit_admin_category_path(@category.id) %>
+      <%= link_to "Edit",
+                  edit_admin_category_path(@category.id),
+                  :class => "btn btn-default"
+      %>
     </p>
     <p>
-      <%= link_to "[Delete]", admin_category_path(@category.id),
-                  :method => :delete
+      <%= link_to "Delete", admin_category_path(@category.id),
+                  :method => :delete,
+                  :class => "btn btn-default"
        %>
     </p>
 
@@ -27,7 +31,6 @@
       <% @products.each do |product| %>
       <tr>
         <td><%= product.id %></td>
-        <!-- TODO: link to product url -->
         <td><%= link_to product.name, admin_product_path(product.id) %></td>
       </tr>
       <% end %>
