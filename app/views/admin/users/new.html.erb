@@ -38,9 +38,10 @@
                      {:class => "form-control"}
         %>
       </div>
-      <!-- TODO: wire up -->
-      <%= link_to "View Saved Addresses", "#" %>
-      
+      <%= link_to "View Saved Addresses",
+                  admin_addresses_path
+      %>
+
       <%= f.button "Create", :class => "btn btn-primary btn-block btn-lg" %>
     <% end %>
   </div>

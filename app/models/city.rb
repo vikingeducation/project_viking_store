@@ -1,4 +1,7 @@
 class City < ApplicationRecord
+  validates :name,
+            :presence => true,
+            :length => {:in => 1..64}
 
   def self.top_3_users_live_in
     select(
