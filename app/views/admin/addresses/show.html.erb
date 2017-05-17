@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="text-center">
+      <%= "#{@address.user.first_name} #{@address.user.last_name}'s Address" %>
+    </h3>
+  </div>
+  <div class="panel-body">
+
+    <table class="table">
+      <tr>
+        <th>Owner ID</th>
+        <td><%= @address.user.id %></td>
+      </tr>
+      <tr>
+        <th>Owner Name</th>
+        <td><%= link_to "#{@address.user.first_name} #{@address.user.last_name}",
+                        admin_user_path(@address.user.id)
+         %></td>
+      </tr>
+      <tr>
+        <th>Street</th>
+        <td><%= @address.street_address %></td>
+      </tr>
+      <tr>
+        <th>City</th>
+        <td><%= @address.city.name %></td>
+      </tr>
+      <tr>
+        <th>State</th>
+        <td><%= @address.state.name %></td>
+      </tr>
+      <tr>
+        <th>Zip</th>
+        <td><%= @address.zip_code %></td>
+      </tr>
+    </table>
+
+    <p>
+      <%= link_to "[Edit]", edit_admin_address_path(@address.id) %>
+    </p>
+    <p>
+      <%= link_to "[Delete]", admin_address_path(@address.id),
+                  :method => :delete
+       %>
+    </p>
+
+
+  </div>
+</div>

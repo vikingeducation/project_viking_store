@@ -20,8 +20,7 @@
        %>
     </p>
     <p>
-      <!-- TODO should go to a page with only this user's addresses -->
-      <%= link_to "[View Saved Addresses]", edit_admin_user_path(@user.id) %>
+      <%= link_to "[View Saved Addresses]", admin_addresses_path(:user_id => @user.id) %>
     </p>
     <p>
       <!-- TODO (only clickable if the user has a cart) -->
@@ -62,7 +61,8 @@
     <%= link_to "Create Order", "#",
                 :class => "btn btn-primary btn-block btn-lg"
     %>
-    <%= link_to "Create Address", "#",
+    <%= link_to "Create Address",
+                new_admin_address_path(:user_id => @user.id),
                 :class => "btn btn-primary btn-block btn-lg"
     %>
 
