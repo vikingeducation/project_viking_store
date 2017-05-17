@@ -106,7 +106,7 @@
         </div>
       </div>
     <% end %>
-  </div><br>
+  </div><br><br>
   <div class="link-wrapper-centre">
     <%= link_to("Delete Order", 
                 "/admin/orders/#{@order.id}", 
@@ -135,8 +135,8 @@
         <tbody>
           <%= order_fields.fields_for :order_contents do |ord_cont_field| %>
             <tr>
-              <td><%= ord_cont_field.product_id %></td>
-              <td><%= ord_cont_field.quantity %></td>
+              <td><%= ord_cont_field.text_field :product_id, class: "form-control"  %></td>
+              <td><%= ord_cont_field.text_field :quantity, class: "form-control"  %></td>
             </tr>
           <% end %>
         </tbody>
@@ -144,16 +144,9 @@
 
       <div class="form-group">
         <div class="button-wrapper col-sm-12">
-          <%= order_fields.submit "Create Order in Shopping Cart", class: "btn btn-primary btn-group btn-group-lg" %>
+          <%= order_fields.submit "Add Products", class: "btn btn-primary btn-group btn-group-lg" %>
         </div>
       </div>
     <% end %>
-  </div><br>
-  <div class="link-wrapper-centre">
-    <%= link_to("Delete Order", 
-                "/admin/orders/#{@order.id}", 
-                :method => "DELETE", 
-                data: {confirm: "Are you sure?"}) %>
- 
   </div>
 </div>
