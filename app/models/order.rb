@@ -10,7 +10,7 @@ class Order < ApplicationRecord
   has_many :categories, :through => :products
 
   accepts_nested_attributes_for :order_contents,
-                                :reject_if => proc { |attributes| attributes['quantity'].to_i == 0 },
+                                :reject_if => :all_blank,
                                 :allow_destroy => true
 
   def created_date

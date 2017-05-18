@@ -22,6 +22,7 @@ class Admin::OrdersController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @order = Order.new(:user_id => params[:user_id])
+    5.times { @order.order_contents.build(:quantity => nil)}
   end
 
   def create
@@ -38,11 +39,13 @@ class Admin::OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    5.times { @order.order_contents.build(:quantity => nil)}
   end
 
   def update
     @order = Order.find(params[:id])
     if @order.update_attributes(whitelisted_orders_params)
+      @order.order_contents.where(:quantity => 0).destroy_all
       flash.now[:success] = "Order has been updated"
       redirect_to admin_order_path
     else
@@ -68,6 +71,7 @@ class Admin::OrdersController < ApplicationController
       {:order_contents_attributes => [:id,
                                 :quantity,
                                 :product_id,
+                                :order_id,
                                 :_destroy ] } )
   end
 end

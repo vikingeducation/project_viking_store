@@ -86,11 +86,14 @@
         </thead>
         <tbody>
           <%= order_fields.fields_for :order_contents do |ord_cont_field| %>
+          <% next if ord_cont_field.object.id.nil? %>
             <tr>
+
               <td><%= ord_cont_field.object.product_id %></td>
               <td><%= ord_cont_field.text_field :quantity, class: "form-control" %><%= ord_cont_field.hidden_field :id %></td>
               <td><%= number_to_currency(ord_cont_field.object.product.price, :unit => "$") %></td>
               <td><%= number_to_currency(ord_cont_field.object.quantity*ord_cont_field.object.product.price, :unit => "$") %></td>
+  
 
               <td><%= link_to("remove", "/admin/order_contents/#{ord_cont_field.object.id}", 
                               :method => "DELETE", 
@@ -120,7 +123,7 @@
 
 <div class="table-wrapper borders">
   <div class="form-wrapper">
-    <%= form_for( [:admin, @order] ) do |order_fields| %>
+    <%= form_for( [:admin, @order], url: {:action => :create}, html: { :class => "form-horizontal" } ) do |order_fields| %>
       <table class="table table-striped">
         <caption>
           Add Products to Order
@@ -134,8 +137,12 @@
         </thead>
         <tbody>
           <%= order_fields.fields_for :order_contents do |ord_cont_field| %>
+          <% next if ord_cont_field.object.id.present? %>
             <tr>
-              <td><%= ord_cont_field.text_field :product_id, class: "form-control"  %></td>
+              <td>
+                <%= ord_cont_field.text_field :product_id, class: "form-control"  %>
+                <%= ord_cont_field.hidden_field :id %>
+              </td>
               <td><%= ord_cont_field.text_field :quantity, class: "form-control"  %></td>
             </tr>
           <% end %>
