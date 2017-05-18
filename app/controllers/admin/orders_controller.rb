@@ -51,7 +51,25 @@ class Admin::OrdersController < ApplicationController
   end
 
   def edit
+    puts "Typeof => #{params[:id].class}"
     @order = Order.find(params[:id])
+    @user = @order.user
+    @order_contents = @order.order_contents
+    @address_options = @user.addresses.map{ |a| [full_address(a), a.id] }
+    @credit_card_options = credit_card_options(@user.credit_cards)
+  end
+
+  def update_order_contents
+    # "Update Order Contents" button will update the quantities of the orders
+    # loop through order contents
+    params[:order_content].each do |oc_id, quantity|
+      order_content = OrderContent.find(oc_id)
+      if quantity == 0
+
+      end
+      # update quantity
+      # if quantity == 0, destroy order content
+    end
   end
 
 

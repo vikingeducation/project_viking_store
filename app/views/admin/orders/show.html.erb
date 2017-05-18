@@ -107,13 +107,13 @@
 
     <p>
       <%= link_to "Edit Order",
-                  edit_admin_order_path(@order.user.id),
+                  edit_admin_order_path(@order.id),
                   :class => "btn btn-default"
       %>
     </p>
     <p>
       <%= link_to "Delete Order",
-                  admin_order_path(@order.user.id),
+                  admin_order_path(@order.id),
                   :class => "btn btn-default"
       %>
     </p>

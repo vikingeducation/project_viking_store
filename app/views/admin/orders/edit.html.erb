@@ -1,0 +1,167 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="text-center">
+      <%= "Edit Order ##{@order.id}" %>
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <h3 class="text-center">Logistical Information</h3>
+
+    <h4>Basic Information</h4>
+
+    <table class="table">
+      <tr>
+        <th>Customer ID</th>
+        <td><%= @user.id %></td>
+      </tr>
+      <tr>
+        <th>Customer</th>
+        <td><%= link_to "#{@user.first_name} #{@user.last_name}",
+                        admin_user_path(@user.id)
+         %></td>
+      </tr>
+      <tr>
+        <th>Date Placed</th>
+        <td>N/A</td>
+      </tr>
+    </table>
+
+    <p>
+      <%= link_to "Edit Customer Profile",
+                  edit_admin_user_path(@order.user.id),
+                  :class => "btn btn-default"
+      %>
+    </p>
+
+    <%= form_for [:admin, @order]  do |f| %>
+      <%= render :partial => "shared/form_errors",
+                 :locals => {obj: @order}
+      %>
+
+      <h4>Order Status</h4>
+      <div class="radio">
+        <label>
+          <%= f.radio_button :checkout_date, :placed, :checked=>!@order.checkout_date.nil? %>
+          <span class="alert-success">PLACED</span>
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <%= f.radio_button :checkout_date, :unplaced, :checked=>@order.checkout_date.nil? %>
+          <span class="alert-danger">UNPLACED</span>
+          <span class="text-muted">-- Only one unplaced order is allowed!</span>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :shipping_id, "Shipping Address" %>
+        <%= f.select :shipping_id,
+                     @address_options,
+                     {},
+                     {:class => "form-control"}
+        %>
+      </div>
+      <div class="form-group">
+        <%= f.label :billing_id, "Billing Address" %>
+        <%= f.select :billing_id,
+                     @address_options,
+                     {},
+                     {:class => "form-control"}
+        %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :credit_card_id, "Billing Card" %>
+        <% unless @credit_card_options.blank? %>
+          <%= f.select :credit_card_id,
+                       @credit_card_options,
+                       {},
+                       {:class => "form-control"}
+          %>
+        <% else %>
+          <p class="alert alert-danger">No registered credit cards.</p>
+          <!-- TODO: wire up once the credit card controller is up -->
+          <%= link_to "Add a credit card before continuing",
+                      "#",
+                      :class => "btn btn-warning"
+          %>
+        <% end %>
+      </div>
+
+      <%= f.button "Update Order Information", :class => "btn btn-primary btn-block btn-lg" %>
+      <%= link_to  "Delete Order",
+                   admin_order_path(@order.id),
+                   :class => "btn btn-block btn-lg",
+                   :method => :delete,
+                   :data => {:confirm => "Are you sure?"}
+      %>
+    <% end %>
+
+    <hr>
+
+    <h3 class="text-center">Edit Order Contents</h3>
+    <% unless @order_contents.blank? %>
+      <%= form_tag({:controller=>"admin/orders", :action=>"update_order_contents"}, :method=>"put") do %>
+        <%= render :partial => "shared/form_errors",
+                   :locals => {obj: @order}
+        %>
+
+        <table class="table table-bordered">
+          <tr>
+            <% ["id", "Quantity", "Price", "Total Price", "Remove"].each do |header| %>
+              <th><%= header %></th>
+            <% end %>
+          </tr>
+          <% @order_contents.each do |oc| %>
+          <tr>
+            <td><%= oc.id %></td>
+            <td><%= number_field_tag "order_content[#{oc.id}]", oc.quantity, :class=>"form-control" %></td>
+            <td><%= oc.product.price %></td>
+            <td><%= oc.quantity * oc.product.price %></td>
+            <!-- TODO: Once order_contents.controller is up, wire up -->
+            <td><%= link_to "remove",
+                            admin_order_content_path(oc.id),
+                            :method => :delete,
+                            :data => {:confirm => "Are you sure?"}
+              %></td>
+          </tr>
+          <% end %>
+        </table>
+
+        <%= button_tag "Update Order Contents", :class => "btn btn-primary btn-block btn-lg" %>
+        <%= link_to  "Delete Order",
+                     admin_order_path(@order.id),
+                     :class => "btn btn-block btn-lg",
+                     :method => :delete,
+                     :data => {:confirm => "Are you sure?"}
+        %>
+      <% end %>
+    <% else %>
+      <p class="alert alert-info">No contents yet</p>
+    <% end %>
+
+    <hr>
+    
+    <h3 class="text-center">
+      Add Products To Order <br>
+      <small>Add up to 5 products at a time</small>
+    </h3>
+
+    <%= form_tag({:controller=>"admin/orders", :action=>"create_order_contents"}, :method=>"post") do %>
+      <table class="table table-bordered">
+        <tr>
+          <th>ProductID</th>
+          <th>Quantity</th>
+        </tr>
+        <% 5.times do |i| %>
+        <tr>
+          <td><%= number_field_tag "order_content[#{i}][product_id]", nil, :class=>"form-control" %></td>
+          <td><%= number_field_tag "order_content[#{i}][quantity]", nil, :class=>"form-control" %></td>
+        </tr>
+        <% end %>
+      </table>
+    <% end %>
+
+  </div>
+</div>
