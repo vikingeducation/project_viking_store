@@ -2,6 +2,18 @@ class OrderContent < ApplicationRecord
   belongs_to :order
   belongs_to :product
 
+  # ---------------------------------------------------------------
+  # Validations
+  # ---------------------------------------------------------------
+
+  validates :quantity,
+            :numericality => {:only_integer => true,
+                              :greater_than => 0}
+
+  # ---------------------------------------------------------------
+  # Queries
+  # ---------------------------------------------------------------
+
   def self.revenue_since(d)
     joins(
       "JOIN orders ON orders.id = order_contents.order_id").joins(
