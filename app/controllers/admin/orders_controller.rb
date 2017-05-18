@@ -60,16 +60,17 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update_order_contents
-    # "Update Order Contents" button will update the quantities of the orders
-    # loop through order contents
+    # loop through order contents to update them
     params[:order_content].each do |oc_id, quantity|
       order_content = OrderContent.find(oc_id)
-      if quantity == 0
-
+      if quantity.to_i == 0
+        order_content.destroy
+      else
+        order_content.update(:quantity=>quantity)
       end
-      # update quantity
-      # if quantity == 0, destroy order content
     end
+    flash[:success] = "Order Contents updated successfully"
+    redirect_to admin_order_path(params[:id])
   end
 
 
