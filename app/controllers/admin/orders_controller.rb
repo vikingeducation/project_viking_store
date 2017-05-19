@@ -2,6 +2,8 @@ class Admin::OrdersController < ApplicationController
 
   layout 'admin_portal_layout'
 
+  around_action :rescue_from_fk_contraint, only: [:update]
+
   def index
     if params[:user_id]
       if User.exists?(params[:user_id])
@@ -49,7 +51,7 @@ class Admin::OrdersController < ApplicationController
       flash.now[:success] = "Order has been updated"
       redirect_to admin_order_path
     else
-      flash[:danger] = "Order hasn't been saved."
+      flash[:danger] = "Order hasn't been saved." + @order.errors.full_messages.join(', ')
       render 'edit', :locals => {:order => @order}
     end
   end
@@ -74,4 +76,15 @@ class Admin::OrdersController < ApplicationController
                                 :order_id,
                                 :_destroy ] } )
   end
+
+  def rescue_from_fk_contraint
+    begin
+      yield
+    rescue ActiveRecord::InvalidForeignKey
+      flash[:danger] = "Order hasn't been saved. Provided invalid Product ID."
+      redirect_to :back
+    end
+  end
+
+
 end

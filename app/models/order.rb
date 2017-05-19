@@ -13,6 +13,7 @@ class Order < ApplicationRecord
                                 :reject_if => :all_blank,
                                 :allow_destroy => true
 
+
   def created_date
     created_at.strftime("%m/%d/%y")
   end

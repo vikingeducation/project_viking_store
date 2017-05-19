@@ -1,12 +1,12 @@
 class Product < ApplicationRecord
 
   belongs_to :category
-  has_many :order_contents
+  has_many :order_contents, :dependent => :destroy
   has_many :orders, :through => :order_contents
 
   validates :price,
             :presence => true,
-            numericality: { less_than_or_equal_to: 10000,     greater_than: 0 }
+            numericality: { less_than_or_equal_to: 10000, greater_than: 0 }
 
   def self.seven_days_products
     where('created_at > ?', (Time.zone.now.end_of_day - 7.days)).count
