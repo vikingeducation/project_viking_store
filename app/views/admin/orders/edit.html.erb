@@ -28,7 +28,7 @@
       
       <div class="form-group">
        <div class="col-xs-2">
-          <%= f.radio_button(:checkout_date, true, checked: @order.checkout_date.nil? ) %>
+          <%= f.radio_button(:checkout_date, @order.checked_out, checked: @order.checkout_date.nil? ) %>
           <%= f.label(:checkout_date, "PLACED", class: "green-mark") %>
         </div>
          <div class="col-xs-3">
@@ -104,7 +104,6 @@
           <% end %>
         </tbody>
       </table>
-       <%=  order_fields.hidden_field :checkout_date, :value => @order.checkout_date.present?  %>
 
       <div class="form-group">
         <div class="button-wrapper col-sm-12">

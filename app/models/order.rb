@@ -20,6 +20,10 @@ class Order < ApplicationRecord
     created_at.strftime("%m/%d/%y")
   end
 
+  def checked_out
+    Time.now
+  end
+
   def total_value
     total = 0
     self.order_contents.each do |cont|

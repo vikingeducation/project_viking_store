@@ -49,9 +49,12 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order.combine_duplicate_products(whitelisted_orders_params) if params[:order][:order_contents_attributes]
-    if @order.update_attributes(whitelisted_orders_params)
+    # if eval(params[:order][:checkout_date].to_s) && @order.user.orders.where(:checkout_date => nil).count <= 1
+    #   binding.pry
+    #     @order.update(:checkout_date => Time.now)
+    # end
+    if @order.update(whitelisted_orders_params)
       @order.order_contents.where(:quantity => 0).destroy_all
-      @order.checkout_date ||= Time.now if eval(params[:order][:checkout_date].to_s) && @order.user.orders.where(:checkout_date => nil).count <= 1
       flash.now[:success] = "Order has been updated"
       redirect_to admin_order_path
     else
