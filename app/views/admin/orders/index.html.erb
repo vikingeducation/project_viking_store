@@ -7,7 +7,7 @@
 <% else %>
   <H3><%= @orders.first.user.first_name %> <%= @orders.first.user.last_name %>'s Orders</H3>
   <div class="button-wrapper">
-    <%= link_to "Create an Order for #{@orders.first.user.first_name} #{@orders.first.user.last_name}", new_admin_order_path(:user_id => 'params[:user_id]'),class: "btn btn-primary btn-group btn-group-lg" %>
+    <%= link_to "Create an Order for #{@orders.first.user.first_name} #{@orders.first.user.last_name}", new_admin_order_path(:user_id => params[:user_id]),class: "btn btn-primary btn-group btn-group-lg" %>
   </div>
 <% end %>
 

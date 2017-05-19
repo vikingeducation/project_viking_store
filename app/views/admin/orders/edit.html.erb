@@ -27,10 +27,14 @@
     <%= form_for( [:admin, @order], html: { :class => "form-horizontal" } ) do |f| %>
       
       <div class="form-group">
-        <%= f.radio_button(:checkout_date, true ) %>
-        <%= f.label(:checkout_date, "PLACED", class: "green-mark") %>
-        <%= f.radio_button(:checkout_date, false,:checked => true) %>
-        <%= f.label(:checkout_date, "NOT PLACED", class: "red-mark") %>
+       <div class="col-xs-2">
+          <%= f.radio_button(:checkout_date, true, checked: @order.checkout_date.nil? ) %>
+          <%= f.label(:checkout_date, "PLACED", class: "green-mark") %>
+        </div>
+         <div class="col-xs-3">
+          <%= f.radio_button(:checkout_date, false, checked: @order.checkout_date.nil? ) %>
+          <%= f.label(:checkout_date, "NOT PLACED", class: "red-mark") %>
+        </div>
       </div>
 
       <div class="form-group">

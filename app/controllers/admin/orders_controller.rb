@@ -1,3 +1,5 @@
+require 'pry'
+
 class Admin::OrdersController < ApplicationController
 
   layout 'admin_portal_layout'
@@ -46,8 +48,10 @@ class Admin::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    if @order.update_attributes_extra(whitelisted_orders_params)
+    @order.combine_duplicate_products(whitelisted_orders_params) if params[:order][:order_contents_attributes]
+    if @order.update_attributes(whitelisted_orders_params)
       @order.order_contents.where(:quantity => 0).destroy_all
+      @order.checkout_date ||= Time.now if eval(params[:order][:checkout_date].to_s)
       flash.now[:success] = "Order has been updated"
       redirect_to admin_order_path
     else
@@ -58,9 +62,10 @@ class Admin::OrdersController < ApplicationController
 
   def destroy
     @order = Order.find(params[:id])
+    take_user = @order.user_id
     if @order.destroy
       flash[:success] = "Order deleted successfully!"
-      redirect_to admin_orders_path(:user_id => @order.user)
+      redirect_to admin_orders_path, :locals => {:user_id => '#{take_user}' }
     else
       flash[:danger] = "Failed to delete the address"
       redirect_to :back

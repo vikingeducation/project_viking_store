@@ -31,11 +31,7 @@ class Order < ApplicationRecord
   end
 
   def check_status
-    if self.checkout_date == nil
-      "PLACED"
-    else
-      "UNPLACED"
-    end
+    self.checkout_date.nil? ? "UNPLACED" : "PLACED"
   end
 
   def self.seven_days_orders
