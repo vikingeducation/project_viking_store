@@ -51,7 +51,7 @@ class Admin::OrdersController < ApplicationController
     @order.combine_duplicate_products(whitelisted_orders_params) if params[:order][:order_contents_attributes]
     if @order.update_attributes(whitelisted_orders_params)
       @order.order_contents.where(:quantity => 0).destroy_all
-      @order.checkout_date ||= Time.now if eval(params[:order][:checkout_date].to_s)
+      @order.checkout_date ||= Time.now if eval(params[:order][:checkout_date].to_s) && @order.user.orders.where(:checkout_date => nil).count <= 1
       flash.now[:success] = "Order has been updated"
       redirect_to admin_order_path
     else
@@ -65,7 +65,7 @@ class Admin::OrdersController < ApplicationController
     take_user = @order.user_id
     if @order.destroy
       flash[:success] = "Order deleted successfully!"
-      redirect_to admin_orders_path, :locals => {:user_id => '#{take_user}' }
+      redirect_to admin_orders_path, :locals => {:user_id => take_user }
     else
       flash[:danger] = "Failed to delete the address"
       redirect_to :back
