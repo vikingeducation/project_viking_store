@@ -1,3 +1,5 @@
+require 'pry'
+
 class Order < ApplicationRecord
 
   belongs_to :billing, class_name: "Address", :foreign_key => :billing_id
@@ -48,9 +50,6 @@ class Order < ApplicationRecord
     count
   end
 
-  # def self.last_dated
-  #   order('checkout_date DESC').where.not(:checkout_date => nil).limit(1)
-  # end
 
   def self.seven_days_revenue
     find_by_sql("
@@ -144,6 +143,27 @@ class Order < ApplicationRecord
       order("order_value desc").
       limit(1)
     end
+  end
+
+
+  def update_attributes_extra(whitelisted_orders_params)
+    self.combine_duplicate_products(whitelisted_orders_params)
+    self.update_attributes(whitelisted_orders_params)
+  end
+
+  def combine_duplicate_products(whitelisted_orders_params)
+    # binding.pry
+    whitelisted_orders_params["order_contents_attributes"].each do |idx,param_cont|
+      self.order_contents.each do |order_cont| 
+        if param_cont["product_id"].to_i == order_cont.product_id
+          order_cont.quantity += param_cont["quantity"].to_i
+          order_cont.save
+          param_cont["quantity"] = ""
+          param_cont["product_id"] = ""
+        end
+      end
+    end
+
   end
 
 end

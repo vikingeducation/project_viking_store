@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :users
     resources :addresses
     resources :orders
-    resources :order_contents
+    resources :order_contents, :only => [:destroy]
   end
 
 end

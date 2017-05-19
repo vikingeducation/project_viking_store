@@ -46,7 +46,7 @@ class Admin::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    if @order.update_attributes(whitelisted_orders_params)
+    if @order.update_attributes_extra(whitelisted_orders_params)
       @order.order_contents.where(:quantity => 0).destroy_all
       flash.now[:success] = "Order has been updated"
       redirect_to admin_order_path
