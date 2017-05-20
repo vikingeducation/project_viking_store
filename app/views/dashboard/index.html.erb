@@ -1,0 +1,213 @@
+<div class="container">
+  <h1 class="text-center">Viking Store Analytics Dashboard</h1>
+
+  <div class="row">
+    <!-- Aggregate data -->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <h2>1. Overall Platform</h2>
+        </div>
+        <div class="panel-body">
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Last 7 Days",
+                                 headers: ["Item", "Data"],
+                                 rows: @one[:seven_days]}
+          %>
+
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Last 30 Days",
+                                 headers: ["Item", "Data"],
+                                 rows: @one[:thirty_days]}
+          %>
+
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Total",
+                                 headers: ["Item", "Data"],
+                                 rows: @one[:total]}
+          %>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- User demographics -->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <h2>2. User Demographics and Behavior</h2>
+        </div>
+        <div class="panel-body">
+
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Top 3 States Users Live In (billing)",
+                                 headers: ["Name", "Total"],
+                                 rows: @two[:states]}
+          %>
+
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Top 3 Cities Users Live In (billing)",
+                                 headers: ["Name", "Total"],
+                                 rows: @two[:cities]}
+          %>
+
+          <%= render :partial => "shared/table_bordered",
+                     :locals => {table_name: "Top User With...",
+                                 headers: ["Criteria", "Customer Name", "Quantity"],
+                                 rows: @two[:top_user_with]}
+          %>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Order statistics -->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <h2>3. Order Statistics</h2>
+        </div>
+        <div class="panel-body">
+          <h3>Last 7 Days</h3>
+          <table class="table table-bordered">
+            <tr>
+              <th>Item</th>
+              <th>Data</th>
+            </tr>
+            <% @three[:seven_days].each do |keyvals| %>
+            <tr>
+              <td><%= keyvals[:column_name] %></td>
+              <td><%= keyvals[:data] %></td>
+            </tr>
+            <% end %>
+          </table>
+
+
+          <h3>Last 30 Days</h3>
+          <table class="table table-bordered">
+            <tr>
+              <th>Item</th>
+              <th>Data</th>
+            </tr>
+            <% @three[:thirty_days].each do |keyvals| %>
+            <tr>
+              <td><%= keyvals[:column_name] %></td>
+              <td><%= keyvals[:data] %></td>
+            </tr>
+            <% end %>
+          </table>
+
+
+          <h3>Total</h3>
+          <table class="table table-bordered">
+            <tr>
+              <th>Item</th>
+              <th>Data</th>
+            </tr>
+            <% @three[:total].each do |keyvals| %>
+            <tr>
+              <td><%= keyvals[:column_name] %></td>
+              <td><%= keyvals[:data] %></td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Time series data -->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <h2>4. Time Series Data</h2>
+        </div>
+        <div class="panel-body">
+          <h3>Orders by Day</h3>
+          <table class="table table-bordered">
+            <tr>
+              <th>Date</th>
+              <th>Quantity</th>
+              <th>Value</th>
+            </tr>
+            <tr>
+              <td>Today</td>
+              <td>3</td>
+              <td>$500</td>
+            </tr>
+            <tr>
+              <td>Yesterday</td>
+              <td>5</td>
+              <td>$500</td>
+            </tr>
+            <tr>
+              <td>5/22</td>
+              <td>5</td>
+              <td>$500</td>
+            </tr>
+            <tr>
+              <td>7/22</td>
+              <td>5</td>
+              <td>$500</td>
+            </tr>
+            <tr>
+              <td>7/29</td>
+              <td>5</td>
+              <td>$500</td>
+            </tr>
+            <tr>
+              <td>8/22</td>
+              <td>5</td>
+              <td>$500</td>
+            </tr>
+          </table>
+
+          <h3>Order by Week</h3>
+          <table class="table table-bordered">
+            <tr>
+              <th>Date</th>
+              <th>Quantity</th>
+              <th>Value</th>
+            </tr>
+            <tr>
+              <td>Today</td>
+              <td>3</td>
+              <td>$500</td>
+            </tr>
+            <tr>
+              <td>Yesterday</td>
+              <td>5</td>
+              <td>$500</td>
+            </tr>
+            <tr>
+              <td>5/22</td>
+              <td>5</td>
+              <td>$500</td>
+            </tr>
+            <tr>
+              <td>7/22</td>
+              <td>5</td>
+              <td>$500</td>
+            </tr>
+            <tr>
+              <td>7/29</td>
+              <td>5</td>
+              <td>$500</td>
+            </tr>
+            <tr>
+              <td>8/22</td>
+              <td>5</td>
+              <td>$500</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

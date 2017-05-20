@@ -1,0 +1,106 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="text-center">
+      <%= "User #{@user.id}: #{@user.first_name} #{@user.last_name}" %>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <h4>Demographic Information</h4>
+    <%= render :partial => "shared/table_vertical",
+               :locals => {:keys => @demographic_info.keys,
+                           :objs => [@demographic_info]}
+    %>
+
+    <p>
+      <%= link_to "Edit",
+                  edit_admin_user_path(@user.id),
+                  :class => "btn btn-default"
+      %>
+    </p>
+    <p>
+      <%= link_to "Delete", admin_user_path(@user.id),
+                  :method => :delete,
+                  :class => "btn btn-default"
+       %>
+    </p>
+    <p>
+      <%= link_to "View Saved Addresses",
+                  admin_addresses_path(:user_id => @user.id),
+                  :class => "btn btn-default"
+      %>
+    </p>
+
+    <% cls = @has_unplaced_orders ? "btn btn-default" : "btn btn-default disabled" %>
+    <p>
+      <%= link_to "View Unplaced Orders (Cart)",
+                  admin_orders_path(:user_id => @user.id, :status => :unplaced),
+                  :class => cls
+      %>
+    </p>
+
+    <h4>Credit Card Information</h4>
+    <% unless @credit_cards.blank? %>
+      <% @credit_cards.each do |cc| %>
+      <table class="table">
+        <tr>
+          <th>nickname</th>
+          <td><%= cc.nickname %></td>
+        </tr>
+        <tr>
+          <th>Number</th>
+          <td><%= cc.card_number %></td>
+        </tr>
+        <tr>
+          <th>Expiration</th>
+          <td><%= "#{cc.exp_year}-#{cc.exp_month}" %></td>
+        </tr>
+        <tr>
+          <th>CCV</th>
+          <td><%= cc.ccv %></td>
+        </tr>
+        <tr>
+          <!-- TODO link to destroy card with confirmation msg -->
+          <th><%= link_to "Remove Card", "#" %></th>
+        </tr>
+      </table>
+      <% end %>
+    <% else %>
+      <p class="alert alert-danger">No credit cards registered</p>
+    <% end %>
+
+    <h4>Admin Actions for <%= @demographic_info["full_name"] %></h4>
+    <%= link_to "Create Order",
+                new_admin_order_path(:user_id => @user.id),
+                :class => "btn btn-primary btn-block btn-lg"
+    %>
+    <%= link_to "Create Address",
+                new_admin_address_path(:user_id => @user.id),
+                :class => "btn btn-primary btn-block btn-lg"
+    %>
+
+    <h4>Order History</h4>
+    <table class="table table-bordered">
+      <tr>
+        <% ["id", "Order Date", "Order Value", "Status", "Show", "Edit", "Delete"].each do |header| %>
+          <th><%= header %></th>
+        <% end %>
+      </tr>
+      <% @order_history.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.created_at.strftime('%F') %></td>
+        <td><%= order.value %></td>
+        <% if order.checkout_date.nil? %>
+        <td><span class="alert-danger">UNPLACED</span></td>
+        <% else %>
+        <td>PLACED</td>
+        <% end %>
+        <td><%= link_to "show", admin_order_path(order.id) %></td>
+        <td><%= link_to "edit", edit_admin_order_path(order.id) %></td>
+        <td><%= link_to "delete", admin_order_path(order.id), :method => :delete %></td>
+      </tr>
+      <% end %>
+    </table>
+
+  </div>
+</div>

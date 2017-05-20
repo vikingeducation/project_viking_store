@@ -1,0 +1,157 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="text-center">
+      <%= "Order #{@order.id}" %>
+      <%= @order.checkout_date ? "" : "(Shopping Cart)" %>
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <h3 class="text-center">Logistical Information</h3>
+
+    <h4>Basic Information</h4>
+
+    <table class="table">
+      <tr>
+        <th>Customer ID</th>
+        <td><%= @order.user.id %></td>
+      </tr>
+      <tr>
+        <th>Customer</th>
+        <td><%= link_to "#{@order.user.first_name} #{@order.user.last_name}",
+                        admin_user_path(@order.user.id)
+         %></td>
+      </tr>
+      <tr>
+        <th>Date Placed</th>
+        <td><%= @order.created_at.strftime("%F") %></td>
+      </tr>
+      <tr>
+        <th># Products</th>
+        <td><%= @order.products.count %></td>
+      </tr>
+      <tr>
+        <th>Order Value</th>
+        <td><%= @order.value %></td>
+      </tr>
+    </table>
+
+    <p>
+      <%= link_to "Edit Customer Profile",
+                  edit_admin_user_path(@order.user.id),
+                  :class => "btn btn-default"
+      %>
+    </p>
+
+    <h4>Order Status</h4>
+    <% if @order.checkout_date %>
+    <p class="alert alert-success">PLACED</p>
+    <% else %>
+    <p class="alert alert-danger">UNPLACED</p>
+    <% end %>
+
+    <h4>Shipping Address</h4>
+    <% shipping = @order.user.default_shipping_address %>
+    <% if shipping %>
+    <table class="table">
+      <tr>
+        <th>Street</th>
+        <td><%= shipping.street_address %></td>
+      </tr>
+      <tr>
+        <th>City</th>
+        <td><%= shipping.city.name %></td>
+      </tr>
+      <tr>
+        <th>State</th>
+        <td><%= shipping.state.name %></td>
+      </tr>
+    </table>
+    <% else %>
+    <p class="alert alert-danger">No shipping address registered</p>
+    <% end %>
+
+    <h4>Billing Address</h4>
+    <% billing = @order.user.default_billing_address %>
+    <% if billing %>
+    <table class="table">
+      <tr>
+        <th>Street</th>
+        <td><%= billing.street_address %></td>
+      </tr>
+      <tr>
+        <th>City</th>
+        <td><%= billing.city.name %></td>
+      </tr>
+      <tr>
+        <th>State</th>
+        <td><%= billing.state.name %></td>
+      </tr>
+    </table>
+    <% else %>
+    <p class="alert alert-danger">No billing address registered</p>
+    <% end %>
+
+    <h4>Billing Card</h4>
+    <% if @order.credit_card %>
+    <table class="table">
+      <tr>
+        <th>Last 4 digits</th>
+        <td><%= @order.credit_card.ccv %></td>
+        <td>No credit card registered</td>
+      </tr>
+    </table>
+    <% else %>
+    <p class="alert alert-danger">No credit card registered</p>
+    <% end %>
+
+    <p>
+      <%= link_to "Edit Order",
+                  edit_admin_order_path(@order.id),
+                  :class => "btn btn-default"
+      %>
+    </p>
+    <p>
+      <%= link_to "Delete Order",
+                  admin_order_path(@order.id),
+                  :class => "btn btn-default"
+      %>
+    </p>
+
+    <hr>
+
+    <h3 class="text-center">Order Contents</h3>
+
+    <table class="table table-bordered">
+      <tr>
+        <% ["ProductID", "Product", "Quantity", "Price", "Total Price"].each do |header| %>
+          <th><%= header %></th>
+        <% end %>
+      </tr>
+      <% @order_contents.each do |oc| %>
+      <tr>
+        <td><%= oc.product.id %></td>
+        <td><%= link_to oc.product.name, admin_product_path(oc.product.id) %></td>
+        <td><%= oc.quantity %></td>
+        <td><%= oc.product.price %></td>
+        <td><%= oc.product.price * oc.quantity %></td>
+      </tr>
+      <% end %>
+    </table>
+
+    <!-- TODO: wire up after creating order_contents controller -->
+    <p>
+      <%= link_to "Edit Order Contents",
+                  edit_admin_order_path(@order.id),
+                  :class => "btn btn-default"
+      %>
+    </p>
+    <p>
+      <%= link_to "Delete Order Contents",
+                  admin_order_path(@order.id),
+                  :class => "btn btn-default"
+      %>
+    </p>
+
+  </div>
+</div>

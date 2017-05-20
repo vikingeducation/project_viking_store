@@ -1,0 +1,50 @@
+<div class="panel panel-default text-center">
+  <div class="panel-heading">
+    <% if @user %>
+    <h2><%= "#{@user.first_name} #{@user.last_name}'s" %> Addresses</h2>
+    <% else %>
+    <h2>Addresses</h2>
+    <% end %>
+  </div>
+  <div class="panel-body">
+    <% if @user %>
+      <%= link_to "Create a #{@user.first_name} #{@user.last_name} Address",
+                  new_admin_address_path({:user_id => @user.id}),
+                  :class => "btn btn-primary btn-block btn-lg"
+      %>
+      <br>
+    <% else %>
+      <p>Create new addresses from within
+        <%= link_to "User", admin_users_path %>
+        profiles.</p>
+    <% end %>
+
+
+    <table class="table table-bordered">
+      <tr>
+        <% %w(ID User Address City State Orders Created Show Edit Index).each do |header| %>
+        <th><%= header %></th>
+        <% end %>
+      </tr>
+      <% @addresses.each do |a| %>
+      <tr>
+        <td><%= a.id %></td>
+        <td><%= link_to a.user.first_name, admin_user_path(a.user.id) %></td>
+        <td><%= [a.street_address, a.secondary_address].select{|i| !i.nil?}.join(", ") %></td>
+        <td><%= a.city.name %></td>
+        <td><%= a.state.name %></td>
+        <td><%= a.orders.count %></td>
+        <td><%= a.created_at.strftime('%F') %></td>
+        <td><%= link_to "Show", admin_address_path(a.id) %></td>
+        <td><%= link_to "Edit", edit_admin_address_path(a.id) %></td>
+        <td><%= link_to "Delete",
+                    admin_address_path(a.id),
+                    :method => :delete,
+                    :data => {:confirm => "Are you sure?"}
+            %></td>
+      </tr>
+      <% end %>
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SolutionVikingStore</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="text-center">Viking Store Admin Portal</h1>
+
+    <%= render :partial => "shared/flash" %>
+
+    <div class="row">
+      <!-- Navigation -->
+      <div class="col-sm-3">
+        <%= render :partial => "admin/navbar" %>
+      </div>
+      <!-- Panels -->
+      <div class="col-sm-9">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
