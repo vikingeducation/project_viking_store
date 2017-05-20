@@ -27,11 +27,6 @@ class Admin::OrdersController < ApplicationController
     # valid (belong to that user)
     if @user.address_ids.include?(order_params[:shipping_id].to_i) &&
        @user.address_ids.include?(order_params[:billing_id].to_i)
-      # if @user.orders.where(:checkout_date => nil).count > 1
-      #   flash[:danger] = "Failed to create order. Only one unplaced order is allowed."
-      #   @address_options = @user.addresses.map{ |a| [full_address(a), a.id] }
-      #   @credit_card_options = credit_card_options(@user.credit_cards)
-      #   render :new
       if @order.save
         flash[:success] = "Order created successfully"
         redirect_to edit_admin_order_path(@order.id)
@@ -51,12 +46,7 @@ class Admin::OrdersController < ApplicationController
   end
 
   def edit
-    puts "Typeof => #{params[:id].class}"
-    @order = Order.find(params[:id])
-    @user = @order.user
-    @order_contents = @order.order_contents
-    @address_options = @user.addresses.map{ |a| [full_address(a), a.id] }
-    @credit_card_options = credit_card_options(@user.credit_cards)
+    set_edit_variables
   end
 
   def update_order_contents
@@ -71,6 +61,43 @@ class Admin::OrdersController < ApplicationController
     end
     flash[:success] = "Order Contents updated successfully"
     redirect_to admin_order_path(params[:id])
+  end
+
+  def create_order_contents
+    # loop  through product_id and quantity
+    @order = Order.find(params[:id])
+    sanitized_params = params[:order_content].map do |i, keyvals|
+      keyvals
+    end.select do |keyvals|
+      !keyvals[:product_id].blank? || !keyvals[:quantity].blank?
+    end
+    # if there's an invalid product id, cancel, show error msg
+    product_ids = sanitized_params.map{|kv| kv[:product_id]}
+    invalid_product_ids = product_ids.select{ |id| Product.find_by(:id=>id).nil? }
+    if !invalid_product_ids.empty?
+      flash[:warning] = "Invalid Product ID: #{invalid_product_ids}"
+      set_edit_variables
+      render :edit
+    else
+      # create an order content
+      OrderContent.transaction do
+        sanitized_params.each do |kv|
+          # if there's an order_content for that product id, update that
+          # TODO: check quantity is a positive integer; handle when it's not
+          order_content = @order.order_contents.find_by(:product_id => kv[:product_id])
+          if order_content
+            new_quantity = order_content.quantity + kv[:quantity].to_i
+            order_content.update(:quantity => new_quantity)
+          else
+            params_ = {:product_id => kv[:product_id], :quantity => kv[:quantity]}
+            @order.order_contents.build(params_)
+            @order.save!
+          end
+        end
+        flash[:success] = "Product added with success"
+        redirect_to admin_order_path(@order.id)
+      end
+    end
   end
 
 
@@ -103,6 +130,14 @@ class Admin::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(
     :user_id, :shipping_id, :billing_id, :credit_card_id)
+  end
+
+  def set_edit_variables
+    @order = Order.find(params[:id]) unless @order
+    @user = @order.user unless @user
+    @order_contents = @order.order_contents
+    @address_options = @user.addresses.map{ |a| [full_address(a), a.id] } unless @address_options
+    @credit_card_options = credit_card_options(@user.credit_cards) unless @credit_card_options
   end
 
 end

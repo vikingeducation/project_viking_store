@@ -13,7 +13,7 @@ class Order < ApplicationRecord
   # Validations
   # ----------------------------------------------------------------
 
-  validates :shipping_id, :billing_id, :credit_card_id,
+  validates :shipping_id, :billing_id,
             :presence => true
   validate :unplaced_orders_constraint
 
