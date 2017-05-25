@@ -174,7 +174,9 @@ def generate_order
     # first generated order is a shopping cart
     # all since then are placed orders with checkout dates
     if has_cart?(user.id)
-      o[:checkout_date] = placement_date(user)
+      p_date = placement_date(user)
+      o[:checkout_date] = p_date
+      o[:checkout_date_dateformat] = p_date
     end
 
     o.save

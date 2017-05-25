@@ -1,0 +1,52 @@
+<div class = "col-md-12">
+  <h2>Edit Category <%= @category.id %>: <%=@category.name%></h2>
+</div>
+
+
+<%= form_for @category do |f| %>
+
+  <div class = "row">
+    <div class = "col-md-2">
+      <strong>Category ID:</strong>
+    </div>
+    <div class = "col-md-10">
+      <span><%= @category.id %></span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-2">
+      <strong>Name:</strong>
+    </div>
+
+    <div class = "col-md-10">
+      <%= f.text_field :name, class: "form-control", value: @category.name %>
+    </div>
+  </div>
+
+  <% unless @category.errors[:name].empty? %>
+  <div class = "row">
+    <div class="col-md-10 col-md-offset-2 error">
+      <%= "Category #{@category.errors[:name].first}" %>
+    </div>
+  </div>
+  <% end %>
+
+
+  <div class ="row">
+    <div class = "col-md-12">
+      <%= f.submit "Edit Category",
+           class: "btn btn-primary btn-lg btn-block btn-create"  %>
+    </div>
+  </div>
+
+  <div class ="row">
+    <div class = "col-md-12 delete-wrapper">
+      <%=link_to "Delete Category", category_path(@category),
+                  data: { confirm: "Are you sure?" }, method: :delete %>
+    </div>
+  </div>
+
+
+<% end %>
+

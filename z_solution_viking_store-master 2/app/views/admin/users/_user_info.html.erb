@@ -1,0 +1,12 @@
+<div class="panel">
+	<h4>User Information</h4>
+	<p>First Name: <%= @user.first_name %></p>
+	<p>Last Name: <%= @user.last_name %></p>
+	<p>Email: <%= @user.email %></p>
+	<p>Default Billing Address: <%= @user.billing_address.nil? ? "N/A" : @user.billing_address.full_address %></p>
+	<p>Default Shipping Address: <%= @user.shipping_address.nil? ? "N/A" : @user.shipping_address.full_address %></p>
+<%= link_to "Edit #{@user.name}'s Information", edit_admin_user_path(@user.id) %><br>
+<%= link_to "Delete #{@user.name}", [:admin, @user], :method => :delete, :data => { confirm: "Are you sure?" } %><br>
+<%= link_to "View Saved Addresses", admin_user_addresses_path(@user.id) %><br>
+<%= cart_link(@user) %>
+</div>

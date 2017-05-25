@@ -1,0 +1,130 @@
+// Place all the styles related to the products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@import 'colors';
+
+.ugly-banner {
+  text-align: center;
+  color: #aaa;
+  border-bottom: 1px solid $dark-grey;
+  padding: 10px;
+}
+
+#store-row {
+  position: relative;
+}
+#store-headline {
+  h1 {
+    font-size: 56px;
+    margin: 0;
+    line-height:2em;
+  }
+
+  position: absolute;
+  width: 50%;
+  top: 35%;
+  right: 25%;
+  color: black;
+  opacity: 1.0;
+  background-color: rgba(255, 255, 255, 1.0);
+  line-height: 2em;
+  z-index: 50;
+
+  @media(max-width: 992px){
+    width: 100%;
+    left: 0;
+  }
+}
+
+#store-banner {
+  background-image: url("http://s3.amazonaws.com/viking_education/demos/viking_store_app/viking_ship_background_medium.jpg");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  min-height: 500px;
+  margin-bottom: 0;
+}
+
+#store-subhed {
+  background-color: #333;
+  border-radius: 0;
+  height: 6em;
+  h3 {
+    color: white;
+    font-size: 2em;
+    margin: 0;
+    line-height: 3em;
+    height: 3em;
+  }
+}
+
+.products {
+  padding-top: 15px;
+}
+
+article.product-panel {
+  margin-top: 15px;
+  min-height: 450px;
+
+  .product-wrapper {
+    padding: 15px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: $white;
+  }
+
+  .product-header {
+    text-align: center;
+    color: $white;
+    background: $normal-dark;
+    border-radius: 5px 5px 0 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .middle {
+    background-color: #eee;
+    border-left: 1px solid $dark-grey;
+    border-right: 1px solid $dark-grey;
+    min-height: 300px;
+    position: relative;
+
+    .price-ribbon {
+      padding: 3px;
+      border: 2px solid #333;
+      border-radius: 2px;
+      position: absolute;
+      top: 2em;
+      right: 2em;
+    }
+
+    .description {
+
+    }
+
+    .image-wrapper {
+      img {
+        border: 1px solid #333;
+      }
+      padding: 10px;
+    }
+  }
+
+  .product-footer {
+    text-align: center;
+    background: $dark-normal;
+    border-radius: 0 0 5px 5px;
+    padding: 10px;
+    input {
+      color: $orange-accent;
+    }
+  }
+}

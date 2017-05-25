@@ -45,7 +45,7 @@
           <tr>
             <td>Revenue</td>
             <td>
-              <%= @revenue_seven_days || "No revenue!"  %>
+              <%= "$#{@revenue_seven_days.round(2)}" || "No revenue!"  %>
             </td>
           </tr>
         </tbody>
@@ -82,7 +82,7 @@
           <tr>
             <td>Revenue</td>
             <td>
-              <%= @revenue_thirty_days || "No revenue!" %>
+              <%= "$#{@revenue_thirty_days.round(2)}" || "No revenue!" %>
             </td>
           </tr>
         </tbody>
@@ -119,7 +119,7 @@
           <tr>
             <td>Revenue</td>
             <td>
-              <%= @revenue_total || "No revenue!" %>
+              <%= "$#{@revenue_total.round(2)}" || "No revenue!" %>
             </td>
           </tr>
         </tbody>
@@ -135,7 +135,7 @@
 
       <!-- 2. User Demographics and Behavior-->
 
-      <h4>Top 3 States Users Live In (billing)</h4>
+      <h4>Top 3 States Users Live In (Billing)</h4>
       <table class="table table-striped table-bordered">  <!-- first table -->
         <thead>
           <tr>
@@ -158,7 +158,7 @@
       </table> <!-- end first table -->
       <br>
 
-      <h4>Top 3 Cities Users Live In (billing)</h4>
+      <h4>Top 3 Cities Users Live In (Billing)</h4>
       <table class="table table-striped table-bordered">  <!-- first table -->
         <thead>
           <tr>
@@ -200,7 +200,7 @@
                 <%= value.user_name %>
               </td>
               <td>
-                <%= "$#{value.order_value}" %> 
+                <%= "$#{value.order_value.round(2)}" %> 
               </td>
             </tr>
           <% end %>
@@ -213,7 +213,7 @@
                 <%= value.user_name %>
               </td>
               <td>
-                <%= "$#{value.lifetime_order_value}" %> 
+                <%= "$#{value.lifetime_order_value.round(2)}" %> 
               </td>
             </tr>
           <% end %>
@@ -226,7 +226,7 @@
                 <%= value.user_name %>
               </td>
               <td>
-                <%= "$#{value.average_order_value}" %> 
+                <%= "$#{value.average_order_value.round(2)}" %> 
               </td>
             </tr>
           <% end %>
@@ -239,7 +239,7 @@
                 <%= value.user_name %>
               </td>
               <td>
-                <%= "$#{value.most_orders_placed}" %>
+                <%= value.most_orders_placed %>
               </td>
             </tr>
           <% end %>
@@ -276,22 +276,22 @@
           <tr>
             <td>Total Revenue</td>
             <td>
-              <%= @revenue_seven_days || "No revenue!" %>
+              <%= "$#{@revenue_seven_days.round(2)}" || "No revenue!" %>
             </td>
           </tr>
           <tr>
             <td>Average Order Value</td>
               <% @average_seven_days.each do |value| %>
                 <td>
-                  <%= "$#{value.average_order_value}" || "No orders!"  %>
+                  <%= "$#{value.average_order_value.round(2)}" || "No orders!"  %>
                 </td>
               <% end %>
           </tr>
           <tr>
             <td>Largest Order Value</td>
               <% @max_seven_days.each do |value| %>
-                <td>AAAAA
-                  <!-- <%= "$#{value.largest_order_value}" || "No orders!"  %> -->
+                <td>
+                  <%= "$#{value.largest_order_value.round(2)}" || "No orders!"  %>
                 </td>
               <% end %>
           </tr>
@@ -317,14 +317,14 @@
           <tr>
             <td>Total Revenue</td>
             <td>
-              <%= @revenue_thirty_days || "No revenue!" %>
+              <%= "$#{@revenue_thirty_days.round(2)}" || "No revenue!" %>
             </td>
           </tr>
           <tr>
             <td>Average Order Value</td>
             <% @average_thirty_days.each do |value| %>
               <td>
-                <%= "$#{value.average_order_value}" || "No orders!"  %>
+                <%= "$#{value.average_order_value.round(2)}" || "No orders!"  %>
               </td>
             <% end %>
           </tr>
@@ -332,7 +332,7 @@
             <td>Largest Order Value</td>
             <% @max_thirty_days.each do |value| %>
               <td>
-                <%= "$#{value.largest_order_value}" || "No orders!"  %>
+                <%= "$#{value.largest_order_value.round(2)}" || "No orders!"  %>
               </td>
             <% end %>
           </tr>
@@ -358,14 +358,14 @@
           <tr>
             <td>Total Revenue</td>
             <td>
-              <%= @revenue_total || "No revenue!" %>
+              <%= "$#{@revenue_total.round(2)}" || "No revenue!" %>
             </td>
           </tr>
           <tr>
             <td>Average Order Value</td>
             <% @average_total.each do |value| %>
               <td>
-                <%= "$#{value.average_order_value}" || "No orders!"  %>
+                <%= "$#{value.average_order_value.round(2)}" || "No orders!"  %>
               </td>
             <% end %>
           </tr>
@@ -373,7 +373,7 @@
             <td>Largest Order Value</td>
             <% @max_total.each do |value| %>
               <td>
-                <%= "$#{value.largest_order_value}" || "No orders!"  %>
+                <%= "$#{value.largest_order_value.round(2)}" || "No orders!"  %>
               </td>
             <% end %>
           </tr>
@@ -390,7 +390,7 @@
       <!-- 4. Time Series Data -->
       <!-- to complete -->
       
-      <h4>Orders by Day</h4>
+      <h4>Orders by Day (Past 7 Days)</h4>
       <table class="table table-striped table-bordered">  <!-- second table -->
         <thead>
           <tr>
@@ -400,40 +400,55 @@
           </tr>
         </thead>
         <tbody>
-          <% @orders_by_day.each do |item| %>
+          <% @orders_by_day.each.with_index(1) do |item, index| %>
             <tr>
               <td>
-                <% if days_ago == 0 %>
-                  Today
-                <% if days_ago == 1 %>
-                  Yesterday
+                <% if index == 1 %>
+                    Today
+                <% elsif index == 2 %>
+                    Yesterday
                 <% else %>
-                  <%= (Time.now - item.days_ago.days).beginning_of_day.strftime('%_m/%-d') %>
+                  <%= item.date.strftime('%_m/%-d') %>
+                <% end %>
               </td>
               <td>
                 <%= item.quantity %> 
               </td>
               <td>
-                <%= "$#{item.value}" %> 
+                <%= "$#{item.value.round(2)}" %> 
               </td>
             </tr>
           <% end %>
         </tbody>
+      </table>
+      <br><br>
+
+      <h4>Orders by Week (Past 7 Weeks)</h4>
+      <table class="table table-striped table-bordered">  <!-- second table -->
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Quantity</th>
+            <th>Value</th>
+          </tr>
+        </thead>
         <tbody>
           <% @orders_by_week.each do |item| %>
             <tr>
               <td>
-                <%= Time.now - item.weeks_ago.weeks).beginning_of_week.strftime('%_m/%-d') %>
+                <%= item.date.strftime('%_m/%-d') %>
               </td>
               <td>
                 <%= item.quantity %> 
               </td>
               <td>
-                <%= "$#{item.value}" %> 
+                <%= "$#{item.value.round(2)}" %> 
               </td>
             </tr>
           <% end %>
         </tbody>
+      </table>
+      <br><br>
 
     </div> <!-- end right col -->
   </div>  <!-- end second row -->

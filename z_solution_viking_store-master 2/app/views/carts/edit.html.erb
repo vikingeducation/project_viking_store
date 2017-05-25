@@ -1,0 +1,61 @@
+<h1>Shopping Cart Contents</h1>
+
+<%= form_tag cart_path, {:method => "PUT"} do %>
+  <div class ="panel">
+
+    <% @cart.each do |product_id, quantity| %>
+
+      <div class="row">
+
+        <div class="panel col-xs-8">
+          <div class="product-image col-xs-3"></div>
+
+          <div class="product-name col-xs-6 pull-left">
+            <div class="col-md-">
+              <h5><%= get_product(product_id).name %></h5>
+            </div>
+            <div class="category">
+              <p><%= get_product(product_id).category.name %></p>
+            </div>
+            <div class="col-xs-3">
+              <%= number_to_currency(get_product(product_id).price) %>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel col-xs-4">
+          <div class="col-xs-6">
+            <%= label_tag :quantity %>
+            <%= text_field_tag "[order]#{product_id}", quantity, class: "form-control" %><br>
+          </div>
+          <div class="col-xs-6">
+            <%= label_tag :total_price %>
+            <span><%=number_to_currency(get_product(product_id).price * quantity)%><span><br>
+          </div>
+            <%= label_tag "Remove Product" %>
+            <%= check_box_tag "[remove]#{product_id}" %>
+        </div>
+
+      </div>
+
+    <% end if @cart %>
+
+    <div class="row">
+      <div class="panel cart-total col-xs-12 col-sm-8">
+        <h4>Total</h4>
+        <%= number_to_currency(@total) %>
+      </div>
+
+      <div class="checkout-buttons col-xs-12 col-sm-4">
+        <div class="update-contents">
+          <%= submit_tag "Update Cart", class: "btn btn-block btn-default" %>
+        </div><br>
+        <div class="check-out">
+          <%= link_to "Check Out", '/orders', method: 'post', class: "btn btn-block btn-swedish" %><br>
+          <p><em>Make sure to click "Update Cart" on any changes before checking out!</em></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<% end %>

@@ -1,0 +1,42 @@
+<div class = "col-md-8 col-md-offset-4">
+  <h2>New Category</h2>
+</div>
+
+
+<%= form_for  @category do |f| %>
+
+  <div class = "row">
+    <div class = "col-md-2">
+      <strong>Category ID:</strong>
+    </div>
+    <div class = "col-md-6">
+      <span>N/A</span>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-2">
+      <strong>Name:</strong>
+    </div>
+
+    <div class = "col-md-6">
+      <%= f.text_field :name, class: "form-control", placeholder: "Enter the category name here" %>
+    </div>
+  </div>
+
+  <% unless @category.errors[:name].empty? %>
+  <div class = "row">
+    <div class="col-md-10 col-md-offset-2 error">
+      <%= "Category #{@category.errors[:name].first}" %>
+    </div>
+  </div>
+  <% end %>
+
+
+  <div class ="row">
+    <div class = "col-md-8">
+      <%= f.submit "Create Category",
+           class: "btn btn-primary btn-lg btn-block btn-create"  %>
+    </div>
+  </div>
+<% end %>

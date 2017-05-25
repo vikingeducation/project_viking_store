@@ -1,0 +1,33 @@
+<%  @user.orders.each do |order|  %>
+
+<tr>
+  <td>
+    <%= order.id %>
+  </td>
+
+  <td>
+    <%= order_date(order) %>
+  </td>
+
+  <td>
+    <%= number_to_currency(order.products.sum("quantity * price")) %>
+  </td>
+  
+  <td>
+    <%= status(order) %>
+  </td>
+
+  <td>
+    <%= link_to "show", "#" %>
+  </td>
+
+  <td>
+    <%= link_to "edit", "#" %>
+  </td>
+
+  <td>
+    <%= link_to "delete", "#" %>
+  </td>
+</tr>
+
+<% end %>

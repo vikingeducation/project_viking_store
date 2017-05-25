@@ -126,6 +126,9 @@ module Accessor
     .limit(1)
   end
 
+
+
+
   # ###################################################################
   # 3. Order statistics # totals for past 7 days, 30 days, and all time
 
@@ -154,39 +157,37 @@ module Accessor
     .limit(1)
   end
 
+
   # ###################
   # 4. Time series data
 
   def orders_by_day
-    
-    daily_orders = []
-    days_ago = 14
-    # 6.times do |days_ago|
-     # binding.pry 
-      daily_orders << 
       join_table_ord_ordcont_prod 
-      .where("checkout_date >= ?", 
-        (Time.now - days_ago.days).beginning_of_day)
-      .where("checkout_date <= ?", 
-        (Time.now - days_ago.days).end_of_day)
-      .select("days_ago, COUNT(DISTINCT orders.id) AS quantity, SUM(products.price * order_contents.quantity) AS value")
-    # end
-    daily_orders
+      .select("date_trunc('day', orders.checkout_date) AS date, COUNT(DISTINCT orders.id) AS quantity, SUM(products.price * order_contents.quantity) AS value")
+      .where("orders.checkout_date > ?", 7.days.ago)
+      .group("date_trunc('day', orders.checkout_date)")
+      .order("date_trunc('day', orders.checkout_date) DESC")
   end
 
   def orders_by_week
-    weekly_orders = []
-    6.times do |weeks_ago| 
-      weekly_orders <<  
-      join_table_ord_ordcont_prod
-      .where("checkout_date >= ?", 
-        (Time.now - weeks_ago.days).beginning_of_week)
-      .where("checkout_date <= ?",      
-        (Time.now - weeks_ago.days).end_of_week)
-      .select("weeks_ago AS weeks_ago, COUNT(DISTINCT orders.id) AS quantity, SUM(products.price * order_contents.quantity) AS value") 
-    end
-    weekly_orders
+      join_table_ord_ordcont_prod 
+      .select("date_trunc('week', orders.checkout_date) AS date, COUNT(DISTINCT orders.id) AS quantity, SUM(products.price * order_contents.quantity) AS value")
+      .where("orders.checkout_date > ?", 7.weeks.ago)
+      .group("date_trunc('week', orders.checkout_date)")
+      .order("date_trunc('week', orders.checkout_date) DESC")
   end
+
+
+# Testing
+
+# Order.joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON products.id = order_contents.product_id")
+
+
+# Order.joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON products.id = order_contents.product_id").select("date_trunc('day', orders.checkout_date) AS date, COUNT(DISTINCT orders.id) AS quantity, SUM(products.price * order_contents.quantity) AS value").group("date_trunc('day', orders.checkout_date)").order("date_trunc('day', orders.checkout_date) DESC").where("orders.checkout_date > ?", 7.days.ago).limit(20)
+
+
+# Order.joins("JOIN order_contents ON orders.id = order_contents.order_id").joins("JOIN products ON products.id = order_contents.product_id").select("date_trunc('week', orders.checkout_date) AS date, COUNT(DISTINCT orders.id) AS quantity, SUM(products.price * order_contents.quantity) AS value").group("date_trunc('week', orders.checkout_date)").order("date_trunc('week', orders.checkout_date) DESC").where("orders.checkout_date > ?", 7.weeks.ago).limit(20)
+
 
 
 # Order.where("created_at IN (?)", (Time.now - 30.days .. Time.now) ).all.limit(10)
@@ -219,7 +220,7 @@ module Accessor
 
 
   # Note. One cannot convert date to string here in SQL ... do it in view (erb file)
-  #      .select("(Time.now - days_ago.days).strftime('%_m/%-d') ...") 
+  #      .select("(strftimeTime.now - days_ago.days).('%_m/%-d') ...") 
   #      .select("(Time.now - weeks_ago.weeks).beginning_of_week().strftime('%_m/%-d'), COUNT(id)")  
   # but one can convert to a string AFTER the select item ... 
   # eg select( .... ).strftime('%_m/%-d')

@@ -1,0 +1,85 @@
+<h1>Check out</h1>
+
+<%= render "shared/errors", :object => @order %>
+<% if @order.credit_card %>
+  <%= render "shared/errors", :object => @order.credit_card %>
+<% end %>
+
+<%= form_for @order do |order_fields| %>
+  <div class="panel col-xs-12 col-sm-6">
+    <h2>Shipping + Billing</h2>
+
+    <div class="form-group">
+      <%= order_fields.label :shipping_address %>
+      <%= order_fields.collection_select :shipping_id, @order.user.addresses, :id, :street_address, {}, {class: "form-control"} %>
+    </div>
+    <div class="form-group">
+      <%= order_fields.label :billing_address %>
+      <%= order_fields.collection_select :billing_id, @order.user.addresses, :id, :street_address, {}, {class: "form-control"} %><br>
+      <%= link_to("Edit Saved Addresses", edit_user_path(@order.user)) %>
+    </div>
+    <br>
+    <br>
+  <%= fields_for @order.credit_card do |credit_fields|%>
+    <div class="form-group">
+      <%= credit_fields.label :id, "Card Number" %>
+      <%= credit_fields.text_field :card_number, class: "col-xs-6 form-control" %>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-12">
+        <%= credit_fields.label :exp_month, "Month" %>
+        <%= credit_fields.text_field :exp_month, class: "form-control"%>
+        <%= credit_fields.label :exp_year, "Year" %>
+        <%= credit_fields.text_field :exp_year, class: "form-control"%>
+        <br>
+        <%= credit_fields.label :ccv, "CCV" %>
+        <%= credit_fields.text_field :ccv, class: "form-control"%>
+        <p><em>Be sure to input your CCV so you can complete this order.</em></p>
+        <%= delete_credit_card(@order.credit_card) %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="panel col-xs-12 col-sm-6">
+    <h2>Review + Complete</h2>
+
+    <div class="col-xs-12">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Item Price</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render 'order', :contents => @order.order_contents %>
+        </tbody>
+      </table>
+
+      <div class="col-xs-6">
+        <%= link_to("Edit Order", edit_cart_path(0) ) %>
+        <%= link_to("Delete Order", cart_path, method: "delete", data: { confirm: "Are you sure you want to delete this order? This will clear your whole cart." }) %>
+      </div>
+
+      <div class="col-xs-6">
+        <p>Shipping: <%= number_to_currency(@order.value * 0.1) %></p> <!-- @shipping -->
+        <p>Tax: <%= number_to_currency(@order.value * 0.1) %></p> <!-- @tax -->
+        <h4>Total: <%= number_to_currency(@order.value * 1.2) %></h4>  <!-- @total -->
+      </div>
+
+    </div>
+
+    <div class="order-total">
+    </div>
+
+  </div>
+
+  <div class="panel col-xs-12 col-sm-6 pull-right">
+    <h2>Place Order</h2>
+    <%= order_fields.submit "Place Your Order", class: "btn btn-block btn-swedish" %>
+  </div>
+
+<% end %>

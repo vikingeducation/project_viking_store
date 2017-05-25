@@ -1,0 +1,32 @@
+<div class="row" id = "store-row">
+  <div class="col-md-12 jumbotron" id = "store-banner">
+  </div>
+  <div class = "row" id = "store-headline">
+    <div class = "col-md-12">
+      <h1>The Viking Store</h1>
+    </div>
+  </div>
+  <div class="col-md-12 text-center" id = "store-subhed">
+    <h3>The Best Viking Gear on the Whole Web</h3>
+  </div>
+  <div class = "col-md-12 ugly-banner">
+    <h5><em>Choose from among our lineup of fine items below</em></h5>
+  </div>
+</div>
+
+<div class = "row products">
+  <div class="col-sm-6 col-md-3 pull-right">
+    <form action="<%= products_path %>" method="GET" class="form-inline">
+      <div class="form-group">
+        <%= select_tag(:products_filter, options_for_select(Category.all.map { |category| [category.name, category.id]}, @filter) , {include_blank: true, prompt: "Filter by Category", :class => "form-control"}) %>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-swedish btn-submit">Apply Filter</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <%= render @products %>
+</div>
