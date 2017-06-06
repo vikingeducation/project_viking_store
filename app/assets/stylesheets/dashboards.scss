@@ -1,0 +1,30 @@
+// Place all the styles related to the Dashboards controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+main {
+  margin: 50px;
+}
+h1{
+  text-align: center;
+  padding-bottom: 50px;
+}
+.box {
+  border: 5px solid #ddd;
+  margin: 10px;
+  width: 47%;
+  padding: 15px;
+
+}
+#Platform {
+  float: left;
+}
+#Demographics {
+  float: right;
+}
+#Statistics {
+  clear: both;
+  float: left;
+}
+#Time {
+  float: right;
+}
