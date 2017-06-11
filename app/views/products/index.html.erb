@@ -1,0 +1,97 @@
+<div class="container col-sm-3">
+  <h3>Navigation Options</h3>
+  <ul class="nav nav-pills nav-stacked" role="tablist">
+    <li class="active"><a href="#">categorys</a></li>
+    <li><a href="#">Addresses</a></li>
+    <li><a href="#">Orders</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">products</a></li>
+    <hr />
+    <li><a href="#">Analytics Dashboard</a></li>
+  </ul>
+</div>
+
+<div class="container col-sm-9">
+  <main>
+    <h2>Viking Store Products</h2>
+    <button type="submit">Create a New Product</button>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            ID
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            SKU
+          </th>
+          <th>
+            Description
+          </th>
+          <th>
+            Price
+          </th>
+          <th>
+            Category ID
+          </th>
+          <th>
+            Created At
+          </th>
+          <th>
+            Updated At
+          </th>
+          <th>
+            SHOW
+          </th>
+          <th>
+            EDIT
+          </th>
+          <th>
+            DELETE
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td>
+              NA
+            </td>
+            <td>
+              Prod 1
+            </td>
+            <td>
+              1561650135
+            </td>
+            <td>
+              text about prod 1
+            </td>
+            <td>
+              24.99
+            </td>
+            <td>
+              <%= link_to "#{product.category}" %>
+            </td>
+            <td>
+              10/18/77
+            </td>
+            <td>
+              10/18/17
+            </td>
+            <td>
+              <%= link_to 'Show', product_path(:id => product.id)%>
+            </td>
+            <td>
+              <%= link_to 'Edit', edit_product_path(:id => product.id) %>
+            </td>
+            <td>
+              <%= link_to 'Delete', method: :delete,  :confirm => 'Are you sure?' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </main>
+</div>

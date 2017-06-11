@@ -1,0 +1,92 @@
+<h1>Viking Store Admin Portal</h1>
+<div class="container col-sm-3">
+  <h3>Navigation Options</h3>
+  <ul class="nav nav-pills nav-stacked" role="tablist">
+    <li class="active"><a href="#">Users</a></li>
+    <li><a href="#">Addresses</a></li>
+    <li><a href="#">Orders</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Categories</a></li>
+    <hr />
+    <li><a href="#">Analytics Dashboard</a></li>
+  </ul>
+</div>
+
+<div class="container col-sm-9">
+  <main>
+    <h2>Viking Store Users</h2>
+    <button type="submit">Create a New User</button>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            ID
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Joined
+          </th>
+          <th>
+            City
+          </th>
+          <th>
+            State
+          </th>
+          <th>
+            Orders
+          </th>
+          <th>
+            Last Order Date
+          </th>
+          <th>
+            SHOW
+          </th>
+          <th>
+            EDIT
+          </th>
+          <th>
+            DELETE
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              ex 1
+            </td>
+            <td>
+              ex Name
+            </td>
+            <td>
+              ex Joined
+            </td>
+            <td>
+              ex City
+            </td>
+            <td>
+              ex State
+            </td>
+            <td>
+              ex Orders
+            </td>
+            <td>
+              ex Order Date
+            </td>
+            <td>
+              <%= link_to 'Show', dashboard_path(:id => user.id)%>
+            </td>
+            <td>
+              <%= link_to 'Edit', edit_dashboard_path(:id => user.id) %>
+            </td>
+            <td>
+              <%= link_to 'Delete', method: :delete %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </main>
+</div>

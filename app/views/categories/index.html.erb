@@ -1,0 +1,79 @@
+<div class="container col-sm-3">
+  <h3>Navigation Options</h3>
+  <ul class="nav nav-pills nav-stacked" role="tablist">
+    <li class="active"><a href="#">categorys</a></li>
+    <li><a href="#">Addresses</a></li>
+    <li><a href="#">Orders</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Categories</a></li>
+    <hr />
+    <li><a href="#">Analytics Dashboard</a></li>
+  </ul>
+</div>
+
+<div class="container col-sm-9">
+  <main>
+    <h2>Viking Store Categories</h2>
+    <button type="submit">Create a New Category</button>
+    <table>
+      <thead>
+        <tr>
+          <th>
+            ID
+          </th>
+          <th>
+            Name
+          </th>
+          <th>
+            Description
+          </th>
+          <th>
+            Created At
+          </th>
+          <th>
+            Updated At
+          </th>
+          <th>
+            SHOW
+          </th>
+          <th>
+            EDIT
+          </th>
+          <th>
+            DELETE
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td>
+              NA
+            </td>
+            <td>
+              Cat 1
+            </td>
+            <td>
+              text about cat 1
+            </td>
+            <td>
+              10/18/77
+            </td>
+            <td>
+              10/18/17
+            </td>
+            <td>
+              <%= link_to 'Show', category_path(:id => category.id)%>
+            </td>
+            <td>
+              <%= link_to 'Edit', edit_category_path(:id => category.id) %>
+            </td>
+            <td>
+              <%= link_to 'Delete', method: :delete,  :confirm => 'Are you sure?' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </main>
+</div>

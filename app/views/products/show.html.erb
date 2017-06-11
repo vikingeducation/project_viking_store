@@ -1,0 +1,16 @@
+<h1>Product Information</h1>
+<h3>Product ID</h3>
+<%= @product.id %>
+<h3>Name</h3>
+<%= @product.name %>
+<h3>Category</h3>
+<%= @product.category %>
+<h3>Order Statistic</h3>
+<%= Product.product_by_days(0) %>
+<h3>Number Current Carts</h3>
+<%= Product.count_current_carts %>
+<%= link_to 'Edit', edit_product_path(:id => product.id) %>
+<%= link_to 'Delete', method: :delete, :confirm => 'Are you sure?'%>
+<% @products.each do |product| %>
+  <%= link_to "#{product.name}", product_path(:id => product.id) %>
+<% end %>

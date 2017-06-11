@@ -1,0 +1,51 @@
+<h3>Product ID</h3>
+<%= @product.id %>
+<%= form_for @product do |f| %>
+  <%= label_tag(:name, "Name") %>
+  <br />
+  <%= form_field_error_message(@product, :name) %>
+  <br />
+  <%= f.text_field :name %>
+  <br />
+  <br />
+  <br />
+
+  <%= label_tag(:sku, "Sku") %>
+  <br />
+  <%= form_field_error_message(@product, :sku) %>
+  <br />
+  <%= f.text_field :sku %>
+  <br />
+  <br />
+  <br />
+
+
+  <%= label_tag(:description, "Description") %>
+  <br />
+  <%= form_field_error_message(@product, :description) %>
+  <br />
+  <%= f.text_area :description %>
+  <br />
+  <br />
+  <br />
+
+  <%= label_tag(:price, "Price") %>
+  <br />
+  <%= form_field_error_message(@product, :price) %>
+  <br />
+  <%= f.text_field :price %>
+  <br />
+  <br />
+  <br />
+
+  <%= label_tag(:category_id, "Category ID") %>
+  <br />
+  <%= form_field_error_message(@product, :category_id) %>
+  <br />
+  <%= f.text_field :category_id %>
+  <br />
+  <br />
+  <br />
+
+  <%= f.submit "Update product" %>
+<% end %>

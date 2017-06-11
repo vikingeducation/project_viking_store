@@ -1,0 +1,10 @@
+<h1>Category Information</h1>
+<h3>Category ID</h3>
+<%= @category.id %>
+<h3>Name</h3>
+<%= @category.name %>
+<%= link_to 'Edit', edit_category_path(:id => category.id) %>
+<%= link_to 'Delete', method: :delete, :confirm => 'Are you sure?'%>
+<% @products.each do |product| %>
+  <%= link_to "#{product.name}", product_path(:id => product.id) %>
+<% end %>
