@@ -10,7 +10,12 @@ class OrderContent < ApplicationRecord
             ON order_contents.product_id = products.id
             where order_contents.created_at >= current_date - interval '" + days.to_s + " days'"
     end
-    return ActiveRecord::Base.connection.exec_query(sql).rows[0][0]
+    result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[0][0] || 0
+    else
+      return 0
+    end
   end
 
   def self.average_order_value_by_days(days)
@@ -28,7 +33,12 @@ class OrderContent < ApplicationRecord
               WHERE order_contents.created_at >= current_date - interval '" + days.to_s + " days'
               GROUP BY order_contents.order_id) as t"
     end
-    return ActiveRecord::Base.connection.exec_query(sql).rows[0][0]
+    result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[0][0] || 0
+    else
+      return 0
+    end
   end
 
   def self.highest_order_value_by_days(days)
@@ -48,6 +58,11 @@ class OrderContent < ApplicationRecord
               ORDER BY total DESC
               LIMIT 1"
     end
-    return ActiveRecord::Base.connection.exec_query(sql).rows[0][0]
+    result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[0][0] || 0
+    else
+      return 0
+    end
   end
 end

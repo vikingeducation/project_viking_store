@@ -8,7 +8,12 @@ class User < ApplicationRecord
       from users
       where created_at >= current_date - interval '" + days.to_s + " days'"
     end
-    return ActiveRecord::Base.connection.exec_query(sql).rows[0][0]
+    result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[0][0] || 0
+    else
+      return 0
+    end
   end
 
   def self.top_three_user_states(row, col)
@@ -20,7 +25,12 @@ class User < ApplicationRecord
           group by states.name
           order by count_by_star DESC
           limit 3"
-    return ActiveRecord::Base.connection.exec_query(sql).rows[row][col]
+          result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[0][0] || 0
+    else
+      return 0
+    end
   end
 
   def self.top_three_user_cities(row, col)
@@ -32,7 +42,12 @@ class User < ApplicationRecord
           group by cities.name
           order by count_by_star DESC
           limit 3"
-    return ActiveRecord::Base.connection.exec_query(sql).rows[row][col]
+          result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[0][0] || 0
+    else
+      return 0
+    end
   end
 
 end

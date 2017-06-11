@@ -8,7 +8,12 @@ class Order < ApplicationRecord
       from orders
       where created_at >= current_date - interval '" + days.to_s + " days'"
     end
-    return ActiveRecord::Base.connection.exec_query(sql).rows[0][0]
+    result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[0][0] || 0
+    else
+      return 0
+    end
   end
 
   def self.highest_single_order(row, col)
@@ -22,7 +27,12 @@ class Order < ApplicationRecord
           GROUP BY orders.id, users.last_name, users.first_name
           ORDER BY total DESC
           LIMIT 1"
-    return ActiveRecord::Base.connection.exec_query(sql).rows[row][col]
+    result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[row][col] || 0
+    else
+      return 0
+    end
   end
 
   def self.hightest_life_value(row, col)
@@ -38,8 +48,12 @@ class Order < ApplicationRecord
           GROUP BY t.last_name, t. first_name
           ORDER BY total DESC
           LIMIT 1"
-    return ActiveRecord::Base.connection.exec_query(sql).rows[row][col]
-
+    result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[row][col] || 0
+    else
+      return 0
+    end
   end
 
   def self.highest_average_order(row,col)
@@ -57,7 +71,12 @@ class Order < ApplicationRecord
           GROUP BY u.last_name, u.first_name, u.total, u.num_orders
           ORDER BY avg DESC
           LIMIT 1"
-    return ActiveRecord::Base.connection.exec_query(sql).rows[row][col]
+    result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[row][col] || 0
+    else
+      return 0
+    end
   end
 
   def self.most_orders_places(row, col)
@@ -67,7 +86,12 @@ class Order < ApplicationRecord
             GROUP BY users.last_name, users.first_name, orders.id
             ORDER BY num_orders DESC
             LIMIT 1"
-    return ActiveRecord::Base.connection.exec_query(sql).rows[row][col]
+    result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[row][col] || 0
+    else
+      return 0
+    end
   end
 
   def self.new_order_by_days(days)
@@ -79,7 +103,12 @@ class Order < ApplicationRecord
       from orders
       where created_at >= current_date - interval '" + days.to_s + " days'"
     end
-    return ActiveRecord::Base.connection.exec_query(sql).rows[0][0]
+    result =  ActiveRecord::Base.connection.exec_query(sql)
+    if result.rows.count > 0
+      return result.rows[0][0] || 0
+    else
+      return 0
+    end
   end
 
 end
