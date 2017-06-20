@@ -1,0 +1,60 @@
+<div class = "col-md-12">
+  <h2><%= "Create Address" %> </h2>
+</div>
+
+<%= form_for [@user, @address] do |f| %>
+<div class = "wrapper panel">
+  <table>
+    <tr>
+      <td>Owner ID:
+      </td>
+      <td>
+        <%= @user.id %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Owner Name:
+      </td>
+      <td><%= link_to name(@user), user_path(@user) %>
+      </td>
+    </tr>
+
+    <tr>
+    <td>Street
+    </td>
+    <td><%= f.text_field :street_address, placeholder: "Street Address" %>
+    </td>
+    </tr>
+
+    <tr>
+    <td>City
+    </td>
+    <td><%= f.text_field :city, placeholder: "City Name" %>
+    </td>
+    </tr>
+
+    <tr>
+    <td>State
+    </td>
+    <td><%= f.collection_select :state_id, State.all, :id, :name, prompt: "Please pick a state!" %>
+    </td>
+    </tr>
+
+    <tr>
+    <td>
+      ZIP Code
+    </td>
+    <td><%= f.text_field :zip_code, placeholder: "Please pick a ZIP!" %>
+        <%= f.hidden_field :user_id, value: @user.id %>
+    </td>
+    </tr>
+
+
+  </table>
+</div>
+
+<%= f.submit "Create Address", class: "btn btn-primary btn-lg btn-block btn-create"%>
+
+<% end %>
+

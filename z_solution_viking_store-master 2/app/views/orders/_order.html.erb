@@ -1,0 +1,8 @@
+<% contents.each do |order_contents| %>
+  <tr>
+    <td><%= order_contents.product.name %></td>
+    <td><%= order_contents.quantity %></td>
+    <td><%= number_to_currency(order_contents.product.price) %></td>
+    <td><%= number_to_currency(order_contents.value) %></td>
+  </tr>
+<% end %>

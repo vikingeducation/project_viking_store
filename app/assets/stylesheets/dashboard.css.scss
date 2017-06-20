@@ -1,0 +1,39 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.table {
+  border: 2px solid black;
+}
+
+.portal-headline {
+ font-size: 350%; 
+}
+
+.data_cols{
+  height: 600px;
+  border: 2px gray;
+  border-style: dashed;
+}
+
+.navbar-col {
+  border: 2px lightgray;
+  border-style: solid;
+}
+
+a {
+  text-decoration: underline;
+}
+
+.data-line {
+  text-align: left;
+  background-color: lightblue;
+  border: 2px #00bcd4;
+  border-style: dashed;
+  border-radius: 5px;
+  padding: 0px 5px;
+  margin: 5px;
+}

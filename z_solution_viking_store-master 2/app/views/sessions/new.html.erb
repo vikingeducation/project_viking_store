@@ -1,0 +1,14 @@
+<h1> Sign Up or Sign In </h1>
+
+<div class="panel col-sm-6 col-xs-12">
+	<%= form_tag sessions_path, method: "post" do %>
+	  <%= text_field_tag :email, nil, placeholder: "Enter your email", class: "form-control form-group" %>
+	  <%= text_field_tag :password, nil, placeholder: "Enter your password", class: "form-control form-group" %>
+	  <%= submit_tag "Sign In", class: "btn btn-swedish btn-lg btn-block btn-create" %>
+  <% end %>
+</div>
+<div class="panel col-sm-6 col-xs-12">
+	<%= link_to "Sign Up", new_user_path, class: "btn btn-swedish btn-lg btn-block btn-create" %>
+</div>
+
+

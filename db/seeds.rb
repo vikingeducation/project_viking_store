@@ -19,8 +19,8 @@ City.destroy_all
 puts "Old records destroyed"
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
-MULTIPLIER = 10
-
+# MULTIPLIER = 10
+MULTIPLIER = 1 # for testing
 
 
 # Because seeds.rb is run as a script, you'll need to put helper methods ABOVE where they are used to generate records.
@@ -47,6 +47,7 @@ def generate_product
   p[:description] = Faker::Lorem.sentence
   p[:sku]         = Faker::Code.ean
   p[:price]       = random_price
+  p[:created_at]  = creation_date # for testing
   p.save
 end
 
@@ -94,7 +95,8 @@ end
 # This method returns a random date
 def creation_date
   time_frames = []
-  (MULTIPLIER**2).times do |x|
+  # (MULTIPLIER**2).times do |x|
+  4.times do |x|   # for testing
      time_frames << midnight_tonight - ((x*3) + 1).month
   end
   date_range = (time_frames.sample..midnight_tonight)
@@ -110,6 +112,9 @@ def generate_user
   u[:last_name]   = last_name
   u[:email]       = Faker::Internet.email("#{first_name} #{last_name}")
   u[:created_at]  = creation_date
+  puts "Users"
+  puts "-----"
+  puts "creation_date = #{creation_date}"
   u.save
 
   # Create affilliated addresses and select billing and shipping addresses.
@@ -169,7 +174,9 @@ def generate_order
     # first generated order is a shopping cart
     # all since then are placed orders with checkout dates
     if has_cart?(user.id)
-      o[:checkout_date] = placement_date(user)
+      p_date = placement_date(user)
+      o[:checkout_date] = p_date
+      o[:checkout_date_dateformat] = p_date
     end
 
     o.save
@@ -221,7 +228,6 @@ puts "Created cities"
 
 # Create categories and products
  MULTIPLIER.times       { generate_category }
-
 puts "Created categories"
 (MULTIPLIER * 10).times { generate_product }
 puts "Created products"
@@ -236,3 +242,11 @@ puts "Created orders"
 generate_credit_cards_for_checked_out_orders
 puts "Created credit card orders"
 puts "DONE!"
+
+
+
+
+
+
+
+

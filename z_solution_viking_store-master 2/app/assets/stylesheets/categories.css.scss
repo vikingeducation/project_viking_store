@@ -1,0 +1,24 @@
+// Place all the styles related to the categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.btn-create {
+  margin-bottom: 15px;
+}
+
+form {
+  .row {
+    margin-top: 15px;
+  }
+}
+
+
+
+.error {
+  color: #AA0000;
+  font-weight: bold;
+}
+
+.delete-wrapper {
+  text-align: center;
+}

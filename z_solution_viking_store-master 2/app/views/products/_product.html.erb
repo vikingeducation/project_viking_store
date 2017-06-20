@@ -1,0 +1,37 @@
+<article class="col-md-4 col-sm-6 col-xs-12 product-panel">
+  <div class = "product-wrapper">
+    <header class="row product-header">
+      <div class="col-md-12">
+        <h4><%= link_to product.name, "#" %></h4>
+      </div>
+    </header>
+
+    <div class="row middle">
+      <div class="col-md-12 description">
+        <p><strong>Category: </strong><%=product.category.name if product.category %></p>
+        <p><strong>Description: </strong><%= product.description %></p>
+      </div>
+      <div class = "col-md-12 image-wrapper">
+        <%= image_tag "https://s3.amazonaws.com/viking_education/demos/viking_store_app/axe_whispering_wind_small.jpg",
+          class: "img-responsive" %>
+        <!-- this is position absolute -->
+        <div class="price-ribbon col-md-2">
+          <%= number_to_currency(product.price) %>
+        </div>
+      </div>
+    </div>
+
+    <footer class="row product-footer">
+      <div class="col-md-12">
+
+
+        <!-- note all the hidden fields here! -->
+        <%= form_tag carts_path(0), method: "POST" do %>
+          <%= hidden_field_tag(:item, product.id) %>
+          <%= hidden_field_tag(:products_filter, @filter) %>
+          <%=submit_tag "Add to Cart", class: "btn btn-swedish btn-submit" %>
+        <% end %>
+      </div>
+    </footer>
+  </div>
+</article>
