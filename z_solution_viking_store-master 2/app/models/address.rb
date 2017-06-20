@@ -13,7 +13,6 @@ class Address < ApplicationRecord
            foreign_key: :shipping_id
 
 
-
   validates :street_address, length: { maximum: 128 },
                             presence: true
 

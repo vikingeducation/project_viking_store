@@ -227,7 +227,7 @@ puts "Created categories"
 puts "Created products"
 
 # Create users
-(MULTIPLIER * 10).times { generate_user }
+(MULTIPLIER * 100).times { generate_user }
 puts "Created users"
 
 # Create orders and add the credit card records.

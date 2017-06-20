@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   include Accessor
 
-  def index
+  def index # display analytics
 
     # ###############################################################
     # 1. Overall Platform # totals for past 7 days, 30 days, all time
@@ -50,5 +50,11 @@ class DashboardController < ApplicationController
     @orders_by_week = orders_by_week
 
   end
+
+  def basic_admin_template
+
+  end
+
+
 
 end

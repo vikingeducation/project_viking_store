@@ -4,6 +4,9 @@ class Admin::AddressesController < AdminController
 
   def index
     if params[:user_id]
+      if params[:user_id] > 100
+        binding.pry
+      end
       if User.exists?(params[:user_id])
         @user = User.find(params[:user_id])
         @addresses = Address.where(user_id: @user.id)
