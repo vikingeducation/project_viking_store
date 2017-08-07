@@ -41,4 +41,38 @@ class Order < ApplicationRecord
    ")
   end
 
+   def orders_by_day
+    Order.find_by_sql("
+      SELECT
+      DATE(days) AS day,
+      COUNT(orders.*) AS num_orders,
+      SUM(price * quantity) AS sum
+      FROM GENERATE_SERIES((
+        SELECT DATE(MIN(checkout_date)) FROM orders
+      ), CURRENT_DATE, '1 DAY'::INTERVAL) days
+      LEFT JOIN orders ON DATE(orders.checkout_date) = days
+      LEFT JOIN order_contents ON orders.id = order_contents.order_id
+      LEFT JOIN products on products.id = order_contents.product_id
+      GROUP BY days
+      ORDER BY days DESC
+    ")
+  end
+
+
+  def orders_by_week
+    Order.find_by_sql("
+      SELECT
+      DATE(weeks) AS week,
+      COUNT(orders.*) AS num_orders,
+      SUM(price * quantity) AS sum
+      FROM GENERATE_SERIES((
+        SELECT DATE(DATE_TRUNC('WEEK', MIN(checkout_date))) 
+        FROM orders), CURRENT_DATE, '1 WEEK'::INTERVAL) weeks
+      LEFT JOIN orders ON DATE(DATE_TRUNC('WEEK', orders.checkout_date)) = weeks
+      LEFT JOIN order_contents ON orders.id = order_contents.order_id
+      LEFT JOIN products on products.id = order_contents.product_id
+      GROUP BY weeks
+      ORDER BY weeks DESC
+    ")
+  end
 end

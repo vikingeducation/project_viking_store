@@ -36,7 +36,6 @@ class User < ApplicationRecord
       ORDER BY order_value DESC
       LIMIT 1;
       ")
-
   end
 
    def highest_average_order
@@ -50,7 +49,6 @@ class User < ApplicationRecord
       ORDER BY order_value DESC
       LIMIT 1;
       ")
-
   end
 
   def most_orders_placed
@@ -63,7 +61,5 @@ class User < ApplicationRecord
       ORDER BY order_count DESC
       LIMIT 1;
       ")
-
   end
-
 end
