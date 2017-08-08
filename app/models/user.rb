@@ -1,18 +1,18 @@
 class User < ApplicationRecord
 
-  def user_created_seven_days
+  def self.user_created_seven_days
     User.where('created_at > ?',(Time.now - 7.days)).count 
   end
 
-  def user_created_thirty_days
+  def self.user_created_thirty_days
     User.where('created_at > ?',(Time.now - 30.days)).count 
   end
 
-  def user_count
+  def self.user_count
     User.count 
   end
 
-  def highest_single_order_value
+  def self.highest_single_order_value
     User.find_by_sql("
       SELECT price * quantity AS order_value, users.first_name, orders.id, users.last_name FROM orders
       JOIN order_contents ON orders.id = order_contents.order_id
@@ -22,10 +22,9 @@ class User < ApplicationRecord
       ORDER BY order_value DESC
       LIMIT 1;
       ")
-
   end
 
-  def highest_lifetime_value
+  def self.highest_lifetime_value
     User.find_by_sql("
       SELECT SUM(price * quantity) AS order_value, users.first_name, orders.id, users.last_name FROM orders
       JOIN order_contents ON orders.id = order_contents.order_id
@@ -38,7 +37,7 @@ class User < ApplicationRecord
       ")
   end
 
-   def highest_average_order
+   def self.highest_average_order
     User.find_by_sql("
       SELECT AVG(price * quantity) AS order_value, users.first_name, orders.id, users.last_name FROM orders
       JOIN order_contents ON orders.id = order_contents.order_id
@@ -51,7 +50,7 @@ class User < ApplicationRecord
       ")
   end
 
-  def most_orders_placed
+  def self.most_orders_placed
     User.find_by_sql("
       SELECT COUNT(orders.id) AS order_count, users.first_name, users.last_name FROM orders
       JOIN order_contents ON orders.id = order_contents.order_id

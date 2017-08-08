@@ -1,5 +1,5 @@
 class City < ApplicationRecord
-   def top_three_states
+   def self.top_three_cities
     City.find_by_sql("
       SELECT cities.name, COUNT(users.id) as num_users FROM users
       JOIN orders on users.id = orders.user_id

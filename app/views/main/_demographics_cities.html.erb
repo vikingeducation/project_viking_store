@@ -1,0 +1,16 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <td><strong>Item</strong></td>
+      <td><strong>Data</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+     <% @top_three_cities.each do |city| %>
+      <tr>
+        <td><%= city.name %></td>
+        <td><%= city.num_users %></td>
+      <tr>
+    <% end %>
+  </tbody>
+</table>

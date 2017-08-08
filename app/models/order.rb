@@ -1,18 +1,18 @@
 class Order < ApplicationRecord
 
-  def order_created_seven_days
+  def self.order_created_seven_days
     Order.where('created_at > ?',(Time.now - 7.days)).count 
   end
 
-  def order_created_thirty_days
+  def self.order_created_thirty_days
     Order.where('created_at > ?',(Time.now - 30.days)).count 
   end
 
-  def order_count
+  def self.order_count
     Order.count 
   end
 
-  def revenue_in_seven_days
+  def self.revenue_in_seven_days
    Order.find_by_sql("
      SELECT SUM(price * quantity) AS sum FROM orders
      JOIN order_contents ON orders.id = order_contents.order_id
@@ -22,7 +22,7 @@ class Order < ApplicationRecord
    ")
   end
 
-   def revenue_in_thirty_days
+   def self.revenue_in_thirty_days
    Order.find_by_sql("
      SELECT SUM(price * quantity) AS sum FROM orders
      JOIN order_contents ON orders.id = order_contents.order_id
@@ -32,7 +32,7 @@ class Order < ApplicationRecord
    ")
   end
 
-   def total_revenue
+   def self.total_revenue
    Order.find_by_sql("
      SELECT SUM(price * quantity) AS sum FROM orders
      JOIN order_contents ON orders.id = order_contents.order_id
@@ -41,7 +41,7 @@ class Order < ApplicationRecord
    ")
   end
 
-   def orders_by_day
+   def self.orders_by_day
     Order.find_by_sql("
       SELECT
       DATE(days) AS day,
@@ -59,7 +59,7 @@ class Order < ApplicationRecord
   end
 
 
-  def orders_by_week
+  def self.orders_by_week
     Order.find_by_sql("
       SELECT
       DATE(weeks) AS week,

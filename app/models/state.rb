@@ -1,5 +1,5 @@
 class State < ApplicationRecord
-  def top_three_states
+  def self.top_three_states
     State.find_by_sql("
       SELECT states.name, COUNT(users.id) as num_users FROM users
       JOIN orders on users.id = orders.user_id
