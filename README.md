@@ -8,6 +8,9 @@ Project: Viking Store Admin
 - run `rake db:migrate`
 - run `rake db:seed`
 
+- run `rails s`
+- In the browser run `localhost:3000`
+
 
 The Viking Store e-commerce application for Viking Commerce Inc
 from the [Viking Code School](http://vikingcodeschool.com)
