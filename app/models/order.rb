@@ -1,36 +1,72 @@
 class Order < ApplicationRecord
-
-  def self.order_created_seven_days
-    Order.where('created_at > ?',(Time.now - 7.days)).count 
-  end
-
-  def self.order_created_thirty_days
-    Order.where('created_at > ?',(Time.now - 30.days)).count 
-  end
+  # include CreatedDays
 
   def self.order_count
     Order.count 
   end
 
-  def self.revenue_in_seven_days
+  def self.order_created(days)
+    Order.where('created_at > ?',(Time.now - days.days)).count 
+  end
+
+  def self.revenue_created(days)
    Order.find_by_sql("
      SELECT SUM(price * quantity) AS sum FROM orders
      JOIN order_contents ON orders.id = order_contents.order_id
      JOIN products on products.id = order_contents.product_id
      WHERE checkout_date IS NOT NULL
-     AND orders.created_at > '#{Time.now - 7.days}'
+     AND orders.created_at > '#{Time.now - days.days}'
    ")
   end
 
-   def self.revenue_in_thirty_days
-   Order.find_by_sql("
-     SELECT SUM(price * quantity) AS sum FROM orders
-     JOIN order_contents ON orders.id = order_contents.order_id
-     JOIN products on products.id = order_contents.product_id
-     WHERE checkout_date IS NOT NULL
-     AND orders.created_at > '#{Time.now - 30.days}'
-   ")
+  def self.average_order(days)
+    User.find_by_sql("
+      SELECT AVG(price * quantity) AS order_value FROM orders
+      JOIN order_contents ON orders.id = order_contents.order_id
+      JOIN products on products.id = order_contents.product_id
+      WHERE checkout_date IS NOT NULL
+      AND orders.created_at > '#{Time.now - days.days}'
+      ")
   end
+
+  def self.avg_order
+    User.find_by_sql("
+      SELECT AVG(price * quantity) AS order_value FROM orders
+      JOIN order_contents ON orders.id = order_contents.order_id
+      JOIN products on products.id = order_contents.product_id
+      WHERE checkout_date IS NOT NULL
+      ")
+  end
+
+  def self.max_order(days)
+    User.find_by_sql("
+      SELECT MAX(price * quantity) AS order_value FROM orders
+      JOIN order_contents ON orders.id = order_contents.order_id
+      JOIN products on products.id = order_contents.product_id
+      WHERE checkout_date IS NOT NULL
+      AND orders.created_at > '#{Time.now - days.days}'
+      ")
+  end
+
+   def self.max_ord
+    User.find_by_sql("
+      SELECT MAX(price * quantity) AS order_value FROM orders
+      JOIN order_contents ON orders.id = order_contents.order_id
+      JOIN products on products.id = order_contents.product_id
+      WHERE checkout_date IS NOT NULL
+      ")
+  end
+
+
+  #  def self.revenue(days)
+  #  Order.find_by_sql("
+  #    SELECT SUM(price * quantity) AS sum FROM orders
+  #    JOIN order_contents ON orders.id = order_contents.order_id
+  #    JOIN products on products.id = order_contents.product_id
+  #    WHERE checkout_date IS NOT NULL
+  #    AND orders.created_at > '#{Time.now - days.days}'
+  #  ")
+  # end
 
    def self.total_revenue
    Order.find_by_sql("

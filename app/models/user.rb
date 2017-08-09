@@ -1,16 +1,17 @@
 class User < ApplicationRecord
 
-  def self.user_created_seven_days
-    User.where('created_at > ?',(Time.now - 7.days)).count 
-  end
-
-  def self.user_created_thirty_days
-    User.where('created_at > ?',(Time.now - 30.days)).count 
-  end
-
   def self.user_count
     User.count 
   end
+
+  def self.user_created(days)
+    User.where('created_at > ?',(Time.now - days.days)).count 
+  end
+
+  # def self.user_created_thirty_days
+  #   User.where('created_at > ?',(Time.now - 30.days)).count 
+  # end
+
 
   def self.highest_single_order_value
     User.find_by_sql("
