@@ -3,7 +3,7 @@ Project: Viking Store Admin
 
 [Andrea A](https://github.com/andie5/project_viking_store)
 
-##To Get Going On This Assignment
+## To Get Going 
 - run `rake db:create`
 - run `rake db:migrate`
 - run `rake db:seed`
