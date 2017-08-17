@@ -16,7 +16,8 @@ class DashboardController < ApplicationController
       new_products_within_7_days: Product.new_products(7),
       revenue_within_7_days: OrderContent.revenue(7),
 
-      top_3_states_by_billing_address: State.top_3_states_by_billing_address
+      top_3_states_by_billing_address: State.top_3_states_by_billing_address,
+      top_3_cities_by_billing_address: City.top_3_cities_by_billing_address
     }
   end
 end

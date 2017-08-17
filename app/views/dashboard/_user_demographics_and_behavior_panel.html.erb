@@ -2,7 +2,7 @@
 
   <h2 class="text-center text-primary mt-4">2. User Demographics and Behavior</h2>
 
-  <!-- table with dummy data -->
+  <!-- Top 3 States that Users live in by billing address -->
   <h4 class="text-left text-secondary mt-4">Top 3 States Users Live In (Billing)</h4>
   <table class="table table-striped mt-4">
     <thead class="table-inverse">
@@ -22,7 +22,7 @@
     </tbody>
   </table>
 
-  <!-- table with dummy data -->
+  <!-- Top 3 Cities that Users live in by billing address -->
   <h4 class="text-left text-secondary mt-4">Top 3 Cities Users Live In (Billing)</h4>
   <table class="table table-striped mt-4">
     <thead class="table-inverse">
@@ -33,18 +33,12 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td>Los Angeles</td>
-        <td>8</td>
-      </tr>
-      <tr>
-        <td>San Francisco</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>Austin</td>
-        <td>3</td>
-      </tr>
+      <% locals[:top_3_cities_by_billing_address].each do |city| %>
+        <tr>
+          <td><%= city.name %></td>
+          <td><%= city.count %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 
