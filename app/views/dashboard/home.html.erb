@@ -11,7 +11,12 @@
 
     <!-- Overall Platform panel -->
     <%= render "overall_platform_panel",
-    locals: { total_revenue: total_revenue } %>
+    locals: {
+      total_users: User.count,
+      total_orders: Order.count,
+      total_products: Product.count,
+      total_revenue: total_revenue
+    } %>
 
     <!-- User Demographics and Behavior panel -->
     <%= render "user_demographics_and_behavior_panel" %>

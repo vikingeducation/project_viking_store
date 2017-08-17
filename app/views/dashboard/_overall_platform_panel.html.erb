@@ -74,15 +74,15 @@
     <tbody>
       <tr>
         <td>Total Users</td>
-        <td><%= User.count %></td>
+        <td><%= locals[:total_users] %></td>
       </tr>
       <tr>
         <td>Total Orders</td>
-        <td><%= Order.count %></td>
+        <td><%= locals[:total_orders] %></td>
       </tr>
       <tr>
         <td>Total Products</td>
-        <td><%= Product.count %></td>
+        <td><%= locals[:total_products] %></td>
       </tr>
       <tr>
         <td>Total Revenue</td>
