@@ -8,7 +8,7 @@ class OrderContent < ApplicationRecord
     .sum("order_contents.quantity * products.price")
   end
 
-  # calculates revenue within a number of days
+  # calculates the revenue within a number of days from the current day
   def self.revenue(within_days)
     OrderContent
     .where("orders.checkout_date IS NOT NULL AND order_contents.created_at >= ?", Time.now - within_days.days)
