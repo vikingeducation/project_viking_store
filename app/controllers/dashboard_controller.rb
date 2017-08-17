@@ -15,6 +15,8 @@ class DashboardController < ApplicationController
       orders_placed_within_7_days: Order.orders_placed(7),
       new_products_within_7_days: Product.new_products(7),
       revenue_within_7_days: OrderContent.revenue(7),
+
+      top_3_states_by_billing_address: State.top_3_states_by_billing_address
     }
   end
 end

@@ -13,18 +13,12 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td>California</td>
-        <td>23</td>
-      </tr>
-      <tr>
-        <td>Texas</td>
-        <td>10</td>
-      </tr>
-      <tr>
-        <td>Oregon</td>
-        <td>3</td>
-      </tr>
+      <% locals[:top_3_states_by_billing_address].each do |state| %>
+        <tr>
+          <td><%= state.name %></td>
+          <td><%= state.count %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 

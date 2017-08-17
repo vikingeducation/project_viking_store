@@ -29,7 +29,11 @@
     } %>
 
     <!-- User Demographics and Behavior panel -->
-    <%= render "user_demographics_and_behavior_panel" %>
+    <%= render "user_demographics_and_behavior_panel",
+      locals: {
+        top_3_states_by_billing_address: top_3_states_by_billing_address
+      }
+    %>
 
   </div>
 
