@@ -14,19 +14,19 @@
     <tbody>
       <tr>
         <td>New Users</td>
-        <td>100</td>
+        <td><%= locals[:new_users_within_7_days] %></td>
       </tr>
       <tr>
-        <td>Orders</td>
-        <td>150</td>
+        <td>Orders Placed</td>
+        <td><%= locals[:orders_placed_within_7_days] %></td>
       </tr>
       <tr>
         <td>New Products</td>
-        <td>10</td>
+        <td><%= locals[:new_products_within_7_days] %></td>
       </tr>
       <tr>
         <td>Revenue</td>
-        <td>$50000</td>
+        <td><%= locals[:revenue_within_7_days] %></td>
       </tr>
     </tbody>
   </table>
