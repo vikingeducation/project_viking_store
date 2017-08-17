@@ -31,7 +31,7 @@
     </tbody>
   </table>
 
-  <!-- table with dummy data -->
+  <!-- Metrics within the last 30 days -->
   <h4 class="text-left text-secondary mt-4">Last 30 Days</h4>
   <table class="table table-striped mt-4">
     <thead class="table-inverse">
@@ -44,19 +44,19 @@
     <tbody>
       <tr>
         <td>New Users</td>
-        <td>100</td>
+        <td><%= locals[:new_users_within_30_days] %></td>
       </tr>
       <tr>
-        <td>Orders</td>
-        <td>150</td>
+        <td>Orders Placed</td>
+        <td><%= locals[:orders_placed_within_30_days] %></td>
       </tr>
       <tr>
         <td>New Products</td>
-        <td>10</td>
+        <td><%= locals[:new_products_within_30_days] %></td>
       </tr>
       <tr>
         <td>Revenue</td>
-        <td>$50000</td>
+        <td><%= number_to_currency(locals[:revenue_within_30_days]) %></td>
       </tr>
     </tbody>
   </table>
