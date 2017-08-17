@@ -61,8 +61,8 @@
     </tbody>
   </table>
 
-  <!-- table with dummy data -->
-  <h4 class="text-left text-secondary mt-4">Total</h4>
+  <!-- Totals for key platform metrics -->
+  <h4 class="text-left text-secondary mt-4">Totals</h4>
   <table class="table table-striped mt-4">
     <thead class="table-inverse">
       <tr>
@@ -73,20 +73,20 @@
 
     <tbody>
       <tr>
-        <td>New Users</td>
-        <td>100</td>
+        <td>Total Users</td>
+        <td><%= User.count %></td>
       </tr>
       <tr>
-        <td>Orders</td>
-        <td>150</td>
+        <td>Total Orders</td>
+        <td><%= Order.count %></td>
       </tr>
       <tr>
-        <td>New Products</td>
-        <td>10</td>
+        <td>Total Products</td>
+        <td><%= Product.count %></td>
       </tr>
       <tr>
-        <td>Revenue</td>
-        <td>$50000</td>
+        <td>Total Revenue</td>
+        <td><%= number_to_currency(locals[:total_revenue]) %></td>
       </tr>
     </tbody>
   </table>
