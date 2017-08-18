@@ -1,4 +1,5 @@
 <div class="container">
+
   <!-- Main page header -->
   <div class="row mt-4 mb-4">
     <div class="col-md-12">
@@ -32,12 +33,15 @@
     <%= render "user_demographics_and_behavior_panel",
       locals: {
         top_3_states_by_billing_address: top_3_states_by_billing_address,
-        top_3_cities_by_billing_address: top_3_cities_by_billing_address
+        top_3_cities_by_billing_address: top_3_cities_by_billing_address,
+        highest_single_order_value: highest_single_order_value,
+        highest_lifetime_value: highest_lifetime_value,
+        highest_average_order_value: highest_average_order_value,
+        user_with_most_orders_placed: user_with_most_orders_placed
       }
     %>
 
   </div>
-
 
   <!-- second row of 2 dashboard panels -->
   <div class="row mt-4">
@@ -49,4 +53,5 @@
     <%= render "time_series_data_panel" %>
 
   </div>
+
 </div>
