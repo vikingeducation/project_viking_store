@@ -18,12 +18,12 @@ class Order < ApplicationRecord
     .first
   end
 
-  # finds the total number of Orders placed
+  # finds the total number of Orders placed across all time
   def self.total_orders
     Order.where("checkout_date IS NOT NULL").count
   end
 
-  # calculates the total revenue over all time
+  # calculates the total revenue across all time
   def self.total_revenue
     OrderContent
     .where("orders.checkout_date IS NOT NULL")
