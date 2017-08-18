@@ -31,6 +31,9 @@ class DashboardController < ApplicationController
 
       average_order_value_within_7_days: Order.average_order_value_within(7),
       largest_order_value_within_7_days: Order.largest_order_value_within(7),
+
+      orders_by_day: Order.format_orders(Order.orders_by_day),
+      orders_by_week: Order.format_orders(Order.orders_by_week)
     }
   end
 end

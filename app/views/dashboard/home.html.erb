@@ -67,7 +67,12 @@
     %>
 
     <!-- Time Series Data panel -->
-    <%= render "time_series_data_panel" %>
+    <%= render "time_series_data_panel",
+      locals: {
+        orders_by_day: orders_by_day,
+        orders_by_week: orders_by_week
+      }
+    %>
 
   </div>
 
