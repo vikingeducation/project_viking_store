@@ -13,9 +13,9 @@
     <!-- Overall Platform panel -->
     <%= render "overall_platform_panel",
     locals: {
-      total_users: User.count,
-      total_orders: Order.count,
-      total_products: Product.count,
+      total_users: total_users,
+      total_orders: total_orders,
+      total_products: total_products,
       total_revenue: total_revenue,
 
       new_users_within_30_days: new_users_within_30_days,
@@ -47,7 +47,14 @@
   <div class="row mt-4">
 
     <!-- Order Statistics panel -->
-    <%= render "order_statistics_panel" %>
+    <%= render "order_statistics_panel",
+      locals: {
+        total_orders: total_orders,
+        total_revenue: total_revenue,
+        total_largest_order_value: highest_lifetime_value,
+        total_average_order_value: total_average_order_value
+      }
+    %>
 
     <!-- Time Series Data panel -->
     <%= render "time_series_data_panel" %>

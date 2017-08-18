@@ -62,7 +62,7 @@
     </tbody>
   </table>
 
-  <!-- table with dummy data -->
+  <!-- Totals table -->
   <h4 class="text-left text-secondary mt-4">Total</h4>
   <table class="table table-striped mt-4">
     <thead class="table-inverse">
@@ -75,19 +75,19 @@
     <tbody>
       <tr>
         <td>Number of Orders</td>
-        <td>100</td>
+        <td><%= locals[:total_orders] %></td>
       </tr>
       <tr>
         <td>Total Revenue</td>
-        <td>$50000</td>
+        <td><%= number_to_currency(locals[:total_revenue]) %></td>
       </tr>
       <tr>
         <td>Average Order Value</td>
-        <td>$150</td>
+        <td><%= number_to_currency(locals[:total_average_order_value]) %></td>
       </tr>
       <tr>
         <td>Largest Order Value</td>
-        <td>$600</td>
+        <td><%= number_to_currency(locals[:total_largest_order_value].revenue) %></td>
       </tr>
     </tbody>
   </table>
