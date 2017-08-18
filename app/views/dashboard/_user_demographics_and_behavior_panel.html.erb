@@ -56,18 +56,18 @@
     <tbody>
       <tr>
         <td>Highest Single Order Value</td>
-        <td><%= "#{locals[:highest_single_order_value].first_name} #{locals[:highest_single_order_value].last_name}" %></td>
-        <td><%= number_to_currency(locals[:highest_single_order_value].revenue) %></td>
+        <td><%= "#{locals[:user_with_highest_single_order_value].first_name} #{locals[:user_with_highest_single_order_value].last_name}" %></td>
+        <td><%= number_to_currency(locals[:user_with_highest_single_order_value].revenue) %></td>
       </tr>
       <tr>
         <td>Highest Lifetime Value</td>
-        <td><%= "#{locals[:highest_lifetime_value].first_name} #{locals[:highest_lifetime_value].last_name}" %></td>
-        <td><%= number_to_currency(locals[:highest_lifetime_value].revenue) %></td>
+        <td><%= "#{locals[:user_with_highest_lifetime_value].first_name} #{locals[:user_with_highest_lifetime_value].last_name}" %></td>
+        <td><%= number_to_currency(locals[:user_with_highest_lifetime_value].revenue) %></td>
       </tr>
       <tr>
         <td>Highest Average Order Value</td>
-        <td><%= "#{locals[:highest_average_order_value].first_name} #{locals[:highest_average_order_value].last_name}" %></td>
-        <td><%= number_to_currency(locals[:highest_average_order_value].average_order_value) %>
+        <td><%= "#{locals[:user_with_highest_average_order_value].first_name} #{locals[:user_with_highest_average_order_value].last_name}" %></td>
+        <td><%= number_to_currency(locals[:user_with_highest_average_order_value].average_order_value) %>
       </tr>
       <tr>
         <td>Most Orders Placed</td>

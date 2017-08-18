@@ -64,17 +64,17 @@ class Order < ApplicationRecord
   end
 
   # finds the User with the highest single Order value.
-  def self.highest_single_order_value
+  def self.user_with_highest_single_order_value
     self.revenue_per_order.order("revenue DESC").limit(1).first
   end
 
   # finds the User with the highest lifetime revenue value.
-  def self.highest_lifetime_value
+  def self.user_with_highest_lifetime_value
     self.total_revenue_per_user.order("revenue DESC").limit(1).first
   end
 
   # finds the User with the highest average Order value.
-  def self.highest_average_order_value
+  def self.user_with_highest_average_order_value
     OrderContent.find_by_sql(
       "
       SELECT users.first_name, users.last_name, ROUND(SUM(order_contents.quantity * products.price) / (SELECT COUNT(orders.id) FROM orders WHERE orders.checkout_date IS NOT NULL AND orders.user_id = users.id), 2) AS average_order_value
