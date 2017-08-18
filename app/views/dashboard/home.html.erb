@@ -19,12 +19,12 @@
       total_revenue: total_revenue,
 
       new_users_within_30_days: new_users_within_30_days,
-      orders_placed_within_30_days: orders_placed_within_30_days,
+      orders_within_30_days: orders_within_30_days,
       new_products_within_30_days: new_products_within_30_days,
       revenue_within_30_days: revenue_within_30_days,
 
       new_users_within_7_days: new_users_within_7_days,
-      orders_placed_within_7_days: orders_placed_within_7_days,
+      orders_within_7_days: orders_within_7_days,
       new_products_within_7_days: new_products_within_7_days,
       revenue_within_7_days: revenue_within_7_days
     } %>
@@ -51,10 +51,18 @@
       locals: {
         total_orders: total_orders,
         total_revenue: total_revenue,
-        total_largest_order_value: user_with_highest_lifetime_value,
-        total_average_order_value: total_average_order_value,
+        largest_order_value_across_all_time: largest_order_value_across_all_time,
+        average_order_value_across_all_time: average_order_value_across_all_time,
 
-        orders_placed_within_30_days: orders_placed_within_30_days
+        orders_within_30_days: orders_within_30_days,
+        revenue_within_30_days: revenue_within_30_days,
+        largest_order_value_within_30_days: largest_order_value_within_30_days,
+        average_order_value_within_30_days: average_order_value_within_30_days,
+
+        orders_within_7_days: orders_within_7_days,
+        revenue_within_7_days: revenue_within_7_days,
+        largest_order_value_within_7_days: largest_order_value_within_7_days,
+        average_order_value_within_7_days: average_order_value_within_7_days
       }
     %>
 
