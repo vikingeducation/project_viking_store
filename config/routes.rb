@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   root to: 'dashboard#home'
 
-  get '/dashboard', to: 'dashboard#home', as: :home
+  get '/dashboard', to: 'dashboard#home'
 end
