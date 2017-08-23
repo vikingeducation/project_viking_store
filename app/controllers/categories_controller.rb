@@ -4,4 +4,10 @@ class CategoriesController < ApplicationController
 
     render layout: "admin_portal"
   end
+
+  def new
+    @category = Category.new
+
+    render layout: "admin_portal"
+  end
 end

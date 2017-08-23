@@ -1,6 +1,6 @@
 <h2 class="text-center">Product Categories</h2>
 
-<button type="button" class="btn btn-primary btn-lg btn-block border rounded mt-4">Add a New Category</button>
+<%= button_to "Add a New Category", { action: "new" }, { method: :get, class: "btn btn-primary btn-lg btn-block border rounded mt-4" }%>
 
 <table class="table table-striped mt-4">
   <thead>
