@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root to: 'dashboard#home'
+  root to: 'admin_portal#home'
 
   get '/dashboard', to: 'dashboard#home'
+  get '/adminportal', to: 'admin_portal#home'
 end
