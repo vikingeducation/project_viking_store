@@ -1,1 +1,29 @@
 <h2 class="text-center">Product Categories</h2>
+
+<button type="button" class="btn btn-primary btn-lg btn-block border rounded mt-4">Add a New Category</button>
+
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>SHOW</th>
+      <th>EDIT</th>
+      <th>DELETE</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.id %></td>
+        <td><%= category.name %></td>
+        <td><%= category.description %></td>
+        <td><%= link_to "show", "#" %></td>
+        <td><%= link_to "edit", "#" %></td>
+        <td><%= link_to "delete", "#" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
