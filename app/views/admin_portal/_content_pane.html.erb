@@ -1,8 +1,5 @@
 <div class="col-7 ml-4 border">
-  <div class="flash mt-2 pl-2 border-0 rounded">
-    <% flash.each do |type, message| %>
-      <%= message %>
-    <% end %>
-  </div>
+  <%= render "flash" %>
+
   <p class="pt-4">Content starts here</p>
 </div>
