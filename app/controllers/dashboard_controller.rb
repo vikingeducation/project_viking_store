@@ -18,10 +18,10 @@ class DashboardController < ApplicationController
 
       top_3_states_by_billing_address: State.top_3_states_by_billing_address,
       top_3_cities_by_billing_address: City.top_3_cities_by_billing_address,
-      user_with_highest_single_order_value: Order.user_with_highest_single_order_value,
-      user_with_highest_lifetime_value: Order.user_with_highest_lifetime_value,
-      user_with_highest_average_order_value: Order.user_with_highest_average_order_value,
-      user_with_most_orders_placed: Order.user_with_most_orders_placed,
+      user_with_highest_single_order_value: User.user_with_highest_single_order_value,
+      user_with_highest_lifetime_value: User.user_with_highest_lifetime_value,
+      user_with_highest_average_order_value: User.user_with_highest_average_order_value,
+      user_with_most_orders_placed: User.user_with_most_orders_placed,
 
       average_order_value_across_all_time: Order.average_order_value_across_all_time,
       largest_order_value_across_all_time: Order.largest_order_value_across_all_time,
