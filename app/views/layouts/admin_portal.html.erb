@@ -17,7 +17,18 @@
 
   <body>
     <div class="container-fluid">
-      <%= yield %>
+      <%= render "shared/header" %>
+
+      <!-- main page row -->
+      <div class="row justify-content-center mt-4">
+
+        <!-- Left vertical navbar -->
+        <%= render "shared/navbar" %>
+
+        <!-- content pane -->
+        <%= render "shared/content_pane" %>
+
+      </div>
     </div>
 
     <!-- Optional JavaScript -->
