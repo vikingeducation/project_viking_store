@@ -5,6 +5,13 @@ class CategoriesController < ApplicationController
     render layout: "admin_portal"
   end
 
+  def show
+    @category = Category.find(params[:id])
+    @products_in_category = Category.products_in_category(@category.id)
+
+    render layout: "admin_portal"
+  end
+
   def new
     @category = Category.new
 

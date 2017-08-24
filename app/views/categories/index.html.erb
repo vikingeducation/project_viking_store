@@ -20,7 +20,7 @@
         <td><%= category.id %></td>
         <td><%= category.name %></td>
         <td><%= category.description %></td>
-        <td><%= link_to "show", "#" %></td>
+        <td><%= link_to "show", category_path(category.id) %></td>
         <td><%= link_to "edit", "#" %></td>
         <td><%= link_to "delete", "#" %></td>
       </tr>
