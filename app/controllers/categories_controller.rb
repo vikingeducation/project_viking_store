@@ -63,11 +63,7 @@ class CategoriesController < ApplicationController
   def find_category
     @category = Category.find(params[:id])
   end
-
-  def render_layout
-    render layout: "admin_portal"
-  end
-
+  
   def whitelisted_category_params
     params.require(:category).permit(:name, :description)
   end
