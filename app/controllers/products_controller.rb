@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :edit, :update]
+  before_action :find_product, only: [:show, :edit, :update, :destroy]
 
   def index
     @products = Product.all.order(:name)
@@ -48,6 +48,16 @@ class ProductsController < ApplicationController
     else
       flash.now[:error] = "Error updating Product."
       render layout: "admin_portal", template: "products/edit"
+    end
+  end
+
+  def destroy
+    if @product.destroy
+      flash[:success] = "Product successfully deleted."
+      redirect_to products_path
+    else
+      flash[:error] = "Error deleting Product."
+      redirect_to :back
     end
   end
 

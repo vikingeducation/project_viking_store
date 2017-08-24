@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'dashboard#home'
 
-  resources :categories
-
-  resources :products, except: [:destroy]
+  resources :categories,
+            :products
 end
