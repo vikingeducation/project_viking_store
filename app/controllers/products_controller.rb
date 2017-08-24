@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
     @products = Product.all.order(:name)
     @product_categories = {}
     @products.each do |product|
-      @product_categories[product.id.to_s] = Category.category_name(product)
+      @product_categories[product.id.to_s] = Product.category_name(product)
     end
 
     render layout: "admin_portal"
@@ -20,11 +20,31 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @product = Product.new
+
+    render layout: "admin_portal"
+  end
+
+  def create
+    @product = Product.new(whitelisted_product_params)
+    @product.price = @product.price.to_s.delete("$") unless @product.price.nil?
+
+    if @product.save
+      flash[:success] = "New Product successfully created."
+      redirect_to products_path
+    else
+      flash.now[:error] = "Error creating Product."
+      render layout: "admin_portal", template: "products/new"
+    end
   end
 
   private
 
   def find_product
     @product = Product.find(params[:id])
+  end
+
+  def whitelisted_product_params
+    params.require(:product).permit(:name, :sku, :price, :category_id)
   end
 end

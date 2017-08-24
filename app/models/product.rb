@@ -1,4 +1,26 @@
 class Product < ApplicationRecord
+  validates :name,
+            :price,
+            :category_id,
+            :sku,
+            presence: true
+
+  validates :name,
+            :sku,
+            uniqueness: true
+
+  validates :sku,
+            numericality: { only_integer: true },
+            length: { is: 13 }
+
+  validates :price,
+            numericality: {
+              greater_than_or_equal_to: 0,
+              less_than_or_equal_to: 10000
+            }
+
+  validates :category_id, inclusion: { in: Category.pluck(:id) }
+
   # calculates the number of new Products that were added within a number of
   # days from the current day
   def self.new_products(within_days)
