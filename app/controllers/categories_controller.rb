@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   def index
-    @categories = Category.all
+    @categories = Category.all.order(:name)
 
     render layout: "admin_portal"
   end
@@ -27,6 +27,24 @@ class CategoriesController < ApplicationController
     else
       flash.now[:error] = "Error creating Category. See detailed messages below."
       render layout: "admin_portal", template: "categories/new"
+    end
+  end
+
+  def edit
+    @category = Category.find(params[:id])
+
+    render layout: "admin_portal"
+  end
+
+  def update
+    @category = Category.find(params[:id])
+
+    if @category.update(whitelisted_category_params)
+      flash[:success] = "Category successfully updated."
+      redirect_to categories_path
+    else
+      flash.now[:error] = "Error updating Category. See detailed messages below."
+      render layout: "admin_portal", template: "categories/edit"
     end
   end
 

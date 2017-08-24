@@ -8,8 +8,9 @@ class Category < ApplicationRecord
             presence: true,
             length: { minimum: 4, maximum: 140 }
 
-  # finds all Products that belong to a particular Category
+  # finds all Products that belong to a particular Category.
+  # orders by Product name.
   def self.products_in_category(category_id)
-    Product.where(category_id: category_id)
+    Product.where(category_id: category_id).order(:name)
   end
 end
