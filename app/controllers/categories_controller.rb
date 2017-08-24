@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @products_in_category = Category.products_in_category(@category.id)
+    @products_in_category = Product.products_in_category(@category.id)
 
     render layout: "admin_portal"
   end
@@ -54,7 +54,7 @@ class CategoriesController < ApplicationController
     if @category.destroy
       flash[:success] = "Category successfully deleted."
 
-      Category.clear_products_category(params[:id])
+      Product.clear_products_category(params[:id])
 
       redirect_to categories_path
     else
