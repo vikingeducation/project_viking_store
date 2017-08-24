@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product_category = Category.category_name(@product)
+    @product_category = Product.category_name(@product)
     @in_num_orders = Product.in_num_orders(@product)
     @in_num_shopping_carts = Product.in_num_shopping_carts(@product)
 

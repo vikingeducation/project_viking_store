@@ -20,6 +20,11 @@ class Product < ApplicationRecord
     products.map { |product| product.update(category_id: nil) }
   end
 
+  # finds the Category name of a specific Product.
+  def self.category_name(product)
+    Category.find_by(id: product.category_id).name
+  end
+
   # finds the number of Orders this Product appears in.
   def self.in_num_orders(product)
     self.in_orders_or_carts(product)
