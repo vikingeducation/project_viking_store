@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show]
+  before_action :find_product, only: [:show, :edit, :update]
 
   def index
     @products = Product.all.order(:name)
@@ -34,6 +34,20 @@ class ProductsController < ApplicationController
     else
       flash.now[:error] = "Error creating Product."
       render layout: "admin_portal", template: "products/new"
+    end
+  end
+
+  def edit
+    render layout: "admin_portal"
+  end
+
+  def update
+    if @product.update(whitelisted_product_params)
+      flash[:success] = "Product successfully updated."
+      redirect_to products_path
+    else
+      flash.now[:error] = "Error updating Product."
+      render layout: "admin_portal", template: "products/edit"
     end
   end
 
