@@ -5,5 +5,5 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'dashboard#home'
 
-  resources :categories, only: [:index, :show, :new, :create, :edit, :update]
+  resources :categories
 end

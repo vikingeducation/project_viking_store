@@ -48,6 +48,21 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def destroy
+    @category = Category.find(params[:id])
+
+    if @category.destroy
+      flash[:success] = "Category successfully deleted."
+
+      Category.clear_products_category(params[:id])
+
+      redirect_to categories_path
+    else
+      flash[:error] = "Error deleting Category."
+      redirect_to :back
+    end
+  end
+
   private
 
   def whitelisted_category_params
