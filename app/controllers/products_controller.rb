@@ -27,7 +27,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(whitelisted_product_params)
-    @product.price = @product.price.to_s.delete("$") unless @product.price.nil?
 
     if @product.save
       flash[:success] = "New Product successfully created."
