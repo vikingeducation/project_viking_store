@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  before_action :find_category, only: [:show, :edit, :update, :destroy]
+
   def index
     @categories = Category.all.order(:name)
 
@@ -6,7 +8,6 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
     @products_in_category = Product.products_in_category(@category.id)
 
     render layout: "admin_portal"
@@ -31,14 +32,10 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
-
     render layout: "admin_portal"
   end
 
   def update
-    @category = Category.find(params[:id])
-
     if @category.update(whitelisted_category_params)
       flash[:success] = "Category successfully updated."
       redirect_to categories_path
@@ -49,8 +46,6 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:id])
-
     if @category.destroy
       flash[:success] = "Category successfully deleted."
 
@@ -64,6 +59,14 @@ class CategoriesController < ApplicationController
   end
 
   private
+
+  def find_category
+    @category = Category.find(params[:id])
+  end
+
+  def render_layout
+    render layout: "admin_portal"
+  end
 
   def whitelisted_category_params
     params.require(:category).permit(:name, :description)
