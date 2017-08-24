@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">Product <%= @product.id %></h2>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-10 border mb-4">
+
+    <div class="row mt-2">
+      <div class="col">
+        <h4>Product Information</h4>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-4">
+        <span class="font-weight-bold">Product ID</span>
+      </div>
+      <div class="col">
+        <%= @product.id %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <span class="font-weight-bold">Name</span>
+      </div>
+      <div class="col">
+        <%= @product.name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <span class="font-weight-bold">Price</span>
+      </div>
+      <div class="col">
+        <%= number_to_currency(@product.id) %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <span class="font-weight-bold">Category</span>
+      </div>
+      <div class="col">
+        <%= @product_category %>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <h4>Product Statistics</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <span class="font-weight-bold">Times Ordered</span>
+      </div>
+      <div class="col">
+        <%= @in_num_orders %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <span class="font-weight-bold">Carts In</span>
+      </div>
+      <div class="col">
+        <%= @in_num_shopping_carts %>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <%= link_to "Edit Product", "#" %>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <%= link_to "Delete Product", "#" %>
+      </div>
+    </div>
+
+  </div>
+</div>

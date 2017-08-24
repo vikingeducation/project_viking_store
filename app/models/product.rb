@@ -19,4 +19,29 @@ class Product < ApplicationRecord
 
     products.map { |product| product.update(category_id: nil) }
   end
+
+  # finds the number of Orders this Product appears in.
+  def self.in_num_orders(product)
+    self.in_orders_or_carts(product)
+    .where("orders.checkout_date IS NOT NULL")
+    .count
+  end
+
+  # finds the number of shopping carts this Product appears in.
+  def self.in_num_shopping_carts(product)
+    self.in_orders_or_carts(product)
+    .where("orders.checkout_date IS NULL")
+    .count
+  end
+
+  private
+
+  # finds the Orders OR shopping carts this Product appears in.
+  def self.in_orders_or_carts(product)
+    Product
+    .joins("JOIN order_contents ON products.id = order_contents.product_id")
+    .joins("JOIN orders ON orders.id = order_contents.order_id")
+    .where("products.id = ?", product.id)
+    .select("DISTINCT orders.id")
+  end
 end
