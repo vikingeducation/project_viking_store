@@ -19,16 +19,12 @@ class Product < ApplicationRecord
               less_than_or_equal_to: 10000
             }
 
-  validates :category_id, inclusion: { in: Category.pluck(:id) }
-
   # A Product belongs to a single Category.
   belongs_to :category
 
   # A Product can belong to many Orders through OrderContents.
-  # If a Product is destroyed, do we want to nullify or destroy all associated rows in OrderContents?
-  # It seems that if we nullify the product_id in a OrderContent row, we won't be able to know what Product in that Order.
-  # If we destroy the relevant row, that seems to have the same effect?
-  has_many :order_contents, dependent: :nullify
+  # If a Product is destroyed, do we want to nullify / destroy all associated OrderContents?
+  has_many :order_contents, dependent: :destroy
   has_many :orders, through: :order_contents
 
 
