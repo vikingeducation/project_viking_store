@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">Viking Store Users</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= button_to "Create a New User", { action: "new" }, { method: :get, class: "btn btn-primary btn-lg btn-block border rounded mt-4" } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+
+    <table class="table table-sm table-responsive table-striped mt-4">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Joined</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Orders</th>
+          <th>Last Order Date</th>
+          <th>SHOW</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <% key = user.id.to_s %>
+          <tr>
+            <td><%= key %></td>
+            <td><%= "#{user.first_name} #{user.last_name}" %></td>
+            <td><%= user.created_at %></td>
+            <td><%= @users_data[key][:city] %></td>
+            <td><%= @users_data[key][:state] %></td>
+            <td><%= @users_data[key][:num_placed_orders] %></td>
+            <td><%= @users_data[key][:last_order_date] %></td>
+            <td><%= link_to "Show", "#" %></td>
+            <td><%= link_to "Edit", "#" %></td>
+            <td><%= link_to "Delete", "#" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

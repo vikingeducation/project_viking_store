@@ -23,6 +23,30 @@ class User < ApplicationRecord
   has_many :products, through: :order_contents, source: :product
 
 
+
+  # finds all Orders placed by a User
+  def placed_orders
+    self.orders.where("checkout_date IS NOT NULL")
+  end
+
+  # finds the number of Orders a User has placed (excluding the existing shopping cart)
+  def num_placed_orders
+    placed_orders.count
+  end
+
+  # finds the date of the last Order the User placed
+  def last_order_date
+    unless placed_orders.empty?
+      placed_orders.order("checkout_date DESC").first.checkout_date
+    else
+      "N/A"
+    end
+  end
+
+
+
+  ### Analytic Dashboard methods ###
+
   # calculates the number of new Users that signed up within a number of
   # days from the current day
   def self.new_users(within_days)
