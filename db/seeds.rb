@@ -220,9 +220,9 @@ puts "Created states"
 puts "Created cities"
 
 # Create categories and products
- MULTIPLIER.times       { generate_category }
-
+MULTIPLIER.times       { generate_category }
 puts "Created categories"
+
 (MULTIPLIER * 10).times { generate_product }
 puts "Created products"
 
