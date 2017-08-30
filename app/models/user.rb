@@ -1,13 +1,13 @@
 class User < ApplicationRecord
   # A User has many Addresses, and one default billing and shipping Address.
-  # If a User is destroyed, we want to keep the Addresses so that they will still be associated with Orders.
-  has_many :addresses, dependent: :nullify
+  # If a User is destroyed, we also destroy all associated Addresses.
+  has_many :addresses, dependent: :destroy
   belongs_to :default_billing_address, class_name: "Address", foreign_key: :billing_id
   belongs_to :default_shipping_address, class_name: "Address", foreign_key: :shipping_id
 
   # a User has many Orders.
-  # If a User is destroyed, we still want to keep his previous Orders.
-  has_many :orders, dependent: :nullify
+  # If a User is destroyed, we also destroy his Orders.
+  has_many :orders, dependent: :destroy
 
   # a User has many CreditCards through Orders.
   # If a User is destroyed, we will also destroy associated CreditCards.
