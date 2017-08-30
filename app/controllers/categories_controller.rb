@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @products_in_category = Product.products_in_category(@category.id)
+    @products_in_category = @category.products_in_category
 
     render layout: "admin_portal"
   end
@@ -49,8 +49,6 @@ class CategoriesController < ApplicationController
     if @category.destroy
       flash[:success] = "Category successfully deleted."
 
-      Product.clear_products_category(params[:id])
-
       redirect_to categories_path
     else
       flash[:error] = "Error deleting Category."
@@ -63,7 +61,7 @@ class CategoriesController < ApplicationController
   def find_category
     @category = Category.find(params[:id])
   end
-  
+
   def whitelisted_category_params
     params.require(:category).permit(:name, :description)
   end

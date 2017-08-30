@@ -14,7 +14,15 @@ class Category < ApplicationRecord
   has_many :products, dependent: :nullify
 
   # A Category has many OrderContents through its associated Products.
-  # A Category thus has many Orders through OrderContents. 
+  # A Category thus has many Orders through OrderContents.
   has_many :order_contents, through: :products
   has_many :orders, through: :order_contents
+
+
+
+  # Finds all Products that belong to a particular Category.
+  # Orders by Product name.
+  def products_in_category
+    self.products.order(:name)
+  end
 end

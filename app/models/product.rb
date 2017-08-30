@@ -34,12 +34,6 @@ class Product < ApplicationRecord
     Product.where("created_at >= ? ", Time.now - within_days.days).count
   end
 
-  # finds all Products that belong to a particular Category.
-  # orders by Product name.
-  def self.products_in_category(category_id)
-    Product.where(category_id: category_id).order(:name)
-  end
-
   # sets the category_id of all Products that belong to a
   # particular Category to nil, to disassociate the Product
   # from the Category when the Category is deleted
