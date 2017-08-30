@@ -5,6 +5,10 @@ class User < ApplicationRecord
   belongs_to :default_billing_address, class_name: "Address", foreign_key: :billing_id
   belongs_to :default_shipping_address, class_name: "Address", foreign_key: :shipping_id
 
+  # A User has many Cities / States through his Addresses.
+  has_many :cities, through: :addresses
+  has_many :states, through: :addresses
+
   # a User has many Orders.
   # If a User is destroyed, we also destroy his Orders.
   has_many :orders, dependent: :destroy
