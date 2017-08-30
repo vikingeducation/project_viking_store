@@ -1,4 +1,20 @@
 class Order < ApplicationRecord
+  # An Order has an associated User and CreditCard.
+  belongs_to :user
+  belongs_to :credit_card
+
+  # An Order has an associated billing and shipping Address.
+  belongs_to :billing_address, class_name: "Address", foreign_key: :billing_id
+  belongs_to :shipping_address, class_name: "Address", foreign_key: :shipping_id
+
+  # An Order can have many Products through OrderContents.
+  # If an Order is destroyed, we should also destroy all associated rows in OrderContents.
+  has_many :order_contents, dependent: :destroy
+  has_many :products, through: :order_contents
+
+  # An Order can have many Categories through its associated Products.
+  has_many :categories, through: :products, source: :category
+
   ########## Methods for Orders ##########
 
   # finds the number of new Orders that were placed within a number of days from the current day
