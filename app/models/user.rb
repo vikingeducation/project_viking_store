@@ -64,7 +64,43 @@ class User < ApplicationRecord
     "N/A"
   end
 
+  # returns the number of the User's first CreditCard, if it exists
+  def card_number
+    if self.has_credit_cards?
+      self.credit_cards.first.card_number.scan(/[0-9]{4}/).join(" ")
+    else
+      "N/A"
+    end
+  end
 
+  # returns the expiration date of the User's first CreditCard, if it exists
+  def card_expiration_date
+    if self.has_credit_cards?
+      exp_month = self.credit_cards.first.exp_month.to_s
+      exp_month = "0" + exp_month if exp_month.length == 1
+      "#{exp_month}-#{self.credit_cards.first.exp_year}"
+    else
+      "N/A"
+    end
+  end
+
+  # returns the CCV number of the User's first CreditCard, if it exists
+  def card_cvv_number
+    if self.has_credit_cards?
+      if self.credit_cards.first.cvv
+        self.credit_cards.first.cvv.to_s
+      else
+        "N/A"
+      end
+    else
+      "N/A"
+    end
+  end
+
+  # checks if the User has any CreditCards
+  def has_credit_cards?
+    !self.credit_cards.empty?
+  end
 
   ### Analytic Dashboard methods ###
 
