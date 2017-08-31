@@ -15,6 +15,8 @@ class Order < ApplicationRecord
   # An Order can have many Categories through its associated Products.
   has_many :categories, through: :products, source: :category
 
+
+
   ########## Methods for Orders ##########
 
   # finds the number of new Orders that were placed within a number of days from the current day
@@ -89,7 +91,7 @@ class Order < ApplicationRecord
     .group("orders.id, users.first_name, users.last_name")
   end
 
-  # calculates the revenue for each User.
+  # calculates the total revenue for each User.
   def self.revenue_per_user
     self.base_revenue_query
     .joins("JOIN users ON orders.user_id = users.id")
