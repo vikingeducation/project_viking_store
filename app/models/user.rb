@@ -21,6 +21,8 @@ class User < ApplicationRecord
       ")
   end
 
+
+
   def self.highest_lifetime_value
     User.find_by_sql("
       SELECT SUM(price * quantity) AS order_value, users.first_name, orders.id, users.last_name FROM orders
@@ -57,5 +59,18 @@ class User < ApplicationRecord
       ORDER BY order_count DESC
       LIMIT 1;
       ")
+  end
+  
+  def self.admin_info
+    User.find_by_sql("
+        SELECT users.id, first_name, users.created_at AS joined, cities.name AS city, states.name AS state, SUM(orders.id) AS orders, MAX(orders.created_at) AS last_order_date FROM users
+        JOIN addresses on addresses.user_id = users.id
+        JOIN cities on cities.id = addresses.city_id
+        JOIN states on states.id = addresses.state_id
+        JOIN orders on orders.user_id = users.id
+        WHERE checkout_date IS NOT NULL
+          GROUP BY users.id, first_name, joined, city, state
+          ORDER BY users.id;
+        ")
   end
 end
