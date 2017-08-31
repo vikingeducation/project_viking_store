@@ -43,6 +43,24 @@ class User < ApplicationRecord
     end
   end
 
+  # returns the phone number of the User's default billing or shipping
+  # Address (in that order), or the phone number in the User's first Address
+  def phone_number
+    unless self.default_billing_address.phone_number.nil?
+      return self.default_billing_address.phone_number
+    end
+
+    unless self.default_shipping_address.phone_number.nil?
+      return self.default_shipping_address.phone_number
+    end
+
+    self.addresses.each do |address|
+      return address.phone_number unless phone_number.nil?
+    end
+
+    "N/A"
+  end
+
 
 
   ### Analytic Dashboard methods ###
