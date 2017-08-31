@@ -1,6 +1,9 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+# set Faker gem's locale
+Faker::Config.locale = "en-US"
+
 # You'll see little puts statements in the file to give you status updates as the file runs.
 puts "Destroying old records"
 
@@ -76,6 +79,7 @@ def generate_address(user_id)
   a[:city_id] = City.pluck(:id).sample
   a[:state_id] = State.pluck(:id).sample
   a[:zip_code] = Faker::Address.zip.to_i
+  a[:phone_number] = Faker::PhoneNumber.phone_number
   a.save! #just to check if anything fails here
 end
 
