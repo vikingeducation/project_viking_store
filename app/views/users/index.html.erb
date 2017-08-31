@@ -40,7 +40,7 @@
             <td><%= @users_data[key][:state] %></td>
             <td><%= @users_data[key][:num_placed_orders] %></td>
             <td><%= @users_data[key][:last_order_date] %></td>
-            <td><%= link_to "Show", "#" %></td>
+            <td><%= link_to "Show", user_path(user) %></td>
             <td><%= link_to "Edit", "#" %></td>
             <td><%= link_to "Delete", "#" %></td>
           </tr>

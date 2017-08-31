@@ -1,0 +1,224 @@
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">User <%= @user.id %>: <%= "#{@user.first_name} #{@user.last_name}" %>
+  </div>
+</div>
+
+<!-- Demographic Information panel -->
+<div class="row justify-content-center">
+  <div class="col-11 border">
+
+    <div class="row mt-2">
+      <div class="col">
+        <h4 class="text-center"><u>Demographic Information</u></h4>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-2">
+        <span class="font-weight-bold">First Name:</span>
+      </div>
+      <div class="col">
+        <%= @user.first_name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">Last Name:</span>
+      </div>
+      <div class="col">
+        <%= @user.last_name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">Email:</span>
+      </div>
+      <div class="col">
+        <%= mail_to @user.email %>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-2">
+        <span class="font-weight-bold">Telephone:</span>
+      </div>
+      <div class="col">
+        [Insert User's phone number here]
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col">
+        <span class="font-weight-bold">Default Billing Address:</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        [User's default billing address here]
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col">
+        <span class="font-weight-bold">Default Shipping Address:</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        [User's default shipping address here]
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <%= link_to "Edit #{@user.first_name} #{@user.last_name}'s Information", "#" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to "Delete #{@user.first_name} #{@user.last_name}", "#" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to "View Saved Addresses", "#" %>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <%= link_to "View Unplaced Order (Cart)", "#" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Credit Card Information panel -->
+<div class="row justify-content-center mt-3">
+  <div class="col-11 border">
+
+    <div class="row mt-2">
+      <div class="col">
+        <h4 class="text-center"><u>Credit Card Information</u></h4>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-2">
+        <span class="font-weight-bold">First Name:</span>
+      </div>
+      <div class="col">
+        <%= @user.first_name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">Last Name:</span>
+      </div>
+      <div class="col">
+        <%= @user.last_name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">Number:</span>
+      </div>
+      <div class="col">
+        [User Credit Card number here]
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">Expiration:</span>
+      </div>
+      <div class="col">
+        [User Credit Card expiration date here]
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">CV2:</span>
+      </div>
+      <div class="col">
+        [User Credit Card CV2 code here]
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <%= link_to "Remove Card", "#" %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Admin Actions panel -->
+<div class="row justify-content-center mt-3">
+  <div class="col-11 border">
+
+    <div class="row mt-2">
+      <div class="col">
+        <h4 class="text-center">Admin Actions for <%= "#{@user.first_name} #{@user.last_name}" %></h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= button_to "Create Order", "#", html_options = { class: "btn btn-lg btn-primary btn-block border rounded mt-2" } %>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <%= button_to "Create Address", "#", html_options = { class: "btn btn-lg btn-primary btn-block border rounded mt-2" } %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Order History panel -->
+<div class="row justify-content-center mt-3 mb-3">
+  <div class="col-11 border">
+
+    <div class="row mt-2">
+      <div class="col">
+        <h4 class="text-center"><u>Order History</u></h4>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Order Date</th>
+              <th>Order Value</th>
+              <th>Status</th>
+              <th>SHOW</th>
+              <th>EDIT</th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+</div>

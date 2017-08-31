@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :find_user, only: [:show]
+
   def index
     @users = User.all
     @users_data = {}
@@ -13,5 +15,15 @@ class UsersController < ApplicationController
     end
 
     render layout: "admin_portal"
+  end
+
+  def show
+    render layout: "admin_portal", template: "users/show"
+  end
+
+  private
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end
