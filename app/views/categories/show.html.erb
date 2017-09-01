@@ -1,0 +1,32 @@
+<% content_for :title do %>
+  <title>Viking Store Admin Portal</title>
+<% end %>
+
+<div class="row">
+  <div class="col-md-9 main-content">
+    <h2 class="text-center">Category <%=@category.id %>: <%=@category.name %> </h2>
+
+<p><%= link_to "Edit Category", edit_category_path(@category) %></p>
+<p><%= link_to "Delete Catgerory", category_path(@category) %></p>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <td><strong>ID</strong></td>
+          <td><strong>Name</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+
+         <% @category.products.each do |product| %>
+          <tr>
+            <td><%= product.id %></td>
+            <td><%= link_to product.name %></td>
+          </tr>
+        <% end %>
+          
+      </tbody>
+    </table>
+
+  </div>
+</div>

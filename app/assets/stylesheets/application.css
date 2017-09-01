@@ -18,5 +18,8 @@
  .admin-nav {
    text-align: center;
    border: 2px solid #d3d3d3;
-   list-style-type: none;
+ }
+
+ .main-content {
+   border: 2px solid #d3d3d3;
  }

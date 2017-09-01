@@ -1,0 +1,36 @@
+<% content_for :title do %>
+  <title>Viking Store Admin Portal</title>
+<% end %>
+<div class="row">
+  <h1 class="text-center">Viking Store Admin Portal</h>
+</div>
+<div class="row">
+  <%= render partial: "shared/admin_navbar" %>
+   
+  <div class="col-md-9 main-content">
+    <h2 class="text-center">Edit Category <%=@category.id %>: <%=@category.name %></h2>
+
+    <%= form_for(@category) do |t| %>
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>Category ID:</strong></td>
+            <td> N/A</td>
+          </tr>
+          <tr>
+            <td><strong>Name</strong></td>
+            <td>
+              <%= t.text_field :name %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+
+      <p><%= t.submit "Update Category", class: "btn btn-primary btn-lg btn-block" %></p>
+
+    <% end %> 
+
+    <%= link_to "Delete Category", category_path(@category) %>
+  </div>
+</div>

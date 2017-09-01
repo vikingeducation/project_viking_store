@@ -2,10 +2,14 @@
   <title>Viking Store Admin Portal</title>
 <% end %>
 <div class="row">
+  <h1 class="text-center">Viking Store Admin Portal</h>
+</div>
+<br />
+<div class="row">
   <%= render partial: "shared/admin_navbar" %>
    
-  <div class="col-md-9">
-    <h2 class="text-center">Viking Store Admin Portal</h2>
+  <div class="col-md-9 main-content">
+    <h2 class="text-center">Viking Store Users</h2>
     <p><%= link_to "Create a New User", "#", class: "btn btn-primary btn-lg btn-block" %></p>
 
     <table class="table table-striped table-bordered">
