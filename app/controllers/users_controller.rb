@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show]
+  before_action :find_user, only: [:show, :edit, :update]
 
   def index
     @users = User.all
@@ -39,6 +39,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    render layout: "admin_portal", template: "users/edit"
+  end
+
+  def update
+    if @user.update(whitelisted_user_params)
+      flash[:success] = "User successfully updated."
+      redirect_to @user
+    else
+      flash.now[:error] = "Error updating User."
+      render layout: "admin_portal", template: "users/edit"
+    end
+  end
+
   private
 
   def find_user
@@ -46,6 +60,6 @@ class UsersController < ApplicationController
   end
 
   def whitelisted_user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :phone_number)
+    params.require(:user).permit(:first_name, :last_name, :email, :phone_number, :billing_id, :shipping_id)
   end
 end

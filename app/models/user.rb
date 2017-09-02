@@ -53,7 +53,6 @@ class User < ApplicationRecord
     end
   end
 
-
   # finds all Orders placed by a User
   def placed_orders
     self.orders.where("checkout_date IS NOT NULL")

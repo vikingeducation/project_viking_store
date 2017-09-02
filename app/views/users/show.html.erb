@@ -82,7 +82,7 @@
 
     <div class="row mt-4">
       <div class="col">
-        <%= link_to "Edit #{@user.first_name} #{@user.last_name}'s Information", "#" %>
+        <%= link_to "Edit #{@user.first_name} #{@user.last_name}'s Information", edit_user_path(@user.id) %>
       </div>
     </div>
 
