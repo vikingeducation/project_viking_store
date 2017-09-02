@@ -35,6 +35,24 @@ class User < ApplicationRecord
   has_many :products, through: :order_contents, source: :product
 
 
+  # returns the City name of the User's first address
+  def first_city
+    unless self.addresses.empty?
+      self.addresses.first.city.name
+    else
+      "N/A"
+    end
+  end
+
+  # returns the State abbreviation of the User's first address
+  def first_state
+    unless self.addresses.empty?
+      StatesHelper::STATE_POSTAL_CODES.key(self.addresses.first.state.name)
+    else
+      "N/A"
+    end
+  end
+
 
   # finds all Orders placed by a User
   def placed_orders
