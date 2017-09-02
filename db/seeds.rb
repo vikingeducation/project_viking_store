@@ -79,7 +79,6 @@ def generate_address(user_id)
   a[:city_id] = City.pluck(:id).sample
   a[:state_id] = State.pluck(:id).sample
   a[:zip_code] = Faker::Address.zip.to_i
-  a[:phone_number] = Faker::PhoneNumber.phone_number
   a.save! #just to check if anything fails here
 end
 
@@ -110,10 +109,11 @@ def generate_user
   last_name = Faker::Name.last_name
 
   u = User.new
-  u[:first_name]  = first_name
-  u[:last_name]   = last_name
-  u[:email]       = Faker::Internet.email("#{first_name} #{last_name}")
-  u[:created_at]  = creation_date
+  u[:first_name]   = first_name
+  u[:last_name]    = last_name
+  u[:email]        = Faker::Internet.email("#{first_name} #{last_name}")
+  u[:phone_number] = Faker::PhoneNumber.phone_number
+  u[:created_at]   = creation_date
   u.save
 
   # Create affilliated addresses and select billing and shipping addresses.

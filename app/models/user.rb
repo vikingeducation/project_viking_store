@@ -48,22 +48,6 @@ class User < ApplicationRecord
     !self.orders.where("checkout_date IS NULL").empty?
   end
 
-  # returns the phone number of the User's default billing or shipping
-  # Address (in that order), or the phone number in the User's first Address
-  def phone_number
-    if self.default_billing_address
-      return self.default_billing_address.phone_number unless self.default_billing_address.phone_number.nil?
-    elsif self.default_shipping_address
-      return self.default_shipping_address.phone_number unless self.default_shipping_address.phone_number.nil?
-    end
-
-    self.addresses.each do |address|
-      return address.phone_number unless address.phone_number.nil?
-    end
-
-    "N/A"
-  end
-
   # returns the number of the User's first CreditCard, if it exists
   def card_number
     if self.has_credit_cards?
