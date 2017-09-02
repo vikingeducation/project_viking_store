@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show, :edit, :update]
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -40,6 +40,18 @@ class UsersController < ApplicationController
     else
       flash.now[:error] = "Error updating User."
       render layout: "admin_portal", template: "users/edit"
+    end
+  end
+
+  def destroy
+    @user.shopping_cart.destroy! if @user.has_shopping_cart?
+
+    if @user.destroy
+      flash[:success] = "User (and shopping cart) successfully deleted."
+      redirect_to users_path
+    else
+      flash[:error] = "Error deleting User."
+      redirect_to :back
     end
   end
 

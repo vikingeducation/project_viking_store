@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :products
-  resources :users, only: [:index, :show, :new, :create, :edit, :update]
+  resources :users
 end

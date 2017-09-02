@@ -22,12 +22,12 @@ class User < ApplicationRecord
   has_many :states, through: :addresses
 
   # a User has many Orders.
-  # If a User is destroyed, we also destroy his Orders.
-  has_many :orders, dependent: :destroy
+  # If a User is destroyed, we want to keep his Orders.
+  has_many :orders, dependent: :nullify
 
   # a User has many CreditCards through Orders.
   # If a User is destroyed, we will also destroy associated CreditCards.
-  has_many :credit_cards, -> { distinct }, through: :orders, source: :credit_card, dependent: :destroy
+  has_many :credit_cards, dependent: :destroy
 
   # a User has many OrderContents through Orders.
   # a User thus also has many Products through OrderContents.
@@ -77,6 +77,11 @@ class User < ApplicationRecord
     !self.orders.where("checkout_date IS NULL").empty?
   end
 
+  # returns the Order that corresponds to a User's shopping cart
+  def shopping_cart
+    self.orders.where("checkout_date IS NULL").first
+  end
+
   # returns the number of the User's first CreditCard, if it exists
   def card_number
     if self.has_credit_cards?
@@ -115,7 +120,7 @@ class User < ApplicationRecord
     !self.credit_cards.empty?
   end
 
-  # gets the User's order history
+  # gets the User's Order history
   def order_history
     OrderContent
     .joins("JOIN orders ON orders.id = order_contents.order_id")
