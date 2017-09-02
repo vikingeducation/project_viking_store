@@ -40,7 +40,7 @@ class User < ApplicationRecord
     unless self.addresses.empty?
       self.addresses.first.city.name
     else
-      "N/A"
+      '<span class="text-secondary">N/A</span>'.html_safe
     end
   end
 
@@ -49,7 +49,7 @@ class User < ApplicationRecord
     unless self.addresses.empty?
       StatesHelper::STATE_POSTAL_CODES.key(self.addresses.first.state.name)
     else
-      "N/A"
+      '<span class="text-secondary">N/A</span>'.html_safe
     end
   end
 
