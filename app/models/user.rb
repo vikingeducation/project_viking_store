@@ -1,4 +1,16 @@
 class User < ApplicationRecord
+  validates :first_name,
+            :last_name,
+            :email,
+            presence: true,
+            length: { in: 1..64 }
+
+  validates :email,
+            uniqueness: true,
+            format: { with: /@/ }
+
+
+
   # A User has many Addresses, and one default billing and shipping Address.
   # If a User is destroyed, we also destroy all associated Addresses.
   has_many :addresses, dependent: :destroy
