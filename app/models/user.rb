@@ -102,6 +102,19 @@ class User < ApplicationRecord
     !self.credit_cards.empty?
   end
 
+  # gets the User's order history
+  def order_history
+    OrderContent
+    .joins("JOIN orders ON orders.id = order_contents.order_id")
+    .joins("JOIN products ON products.id = order_contents.product_id")
+    .select("orders.id, orders.checkout_date, SUM(order_contents.quantity * products.price) AS value")
+    .group("orders.id, orders.checkout_date")
+    .where("orders.user_id = ?", self.id)
+    .order("orders.checkout_date DESC")
+  end
+
+
+
   ### Analytic Dashboard methods ###
 
   # calculates the number of new Users that signed up within a number of

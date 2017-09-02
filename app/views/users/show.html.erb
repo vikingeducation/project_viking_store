@@ -226,6 +226,29 @@
           </thead>
 
           <tbody>
+            <% @user.order_history.each do |order| %>
+              <tr>
+                <td><%= order.id %></td>
+                <td>
+                  <% if order.checkout_date %>
+                    <%= order.checkout_date %>
+                  <% else %>
+                    N/A
+                  <% end %>
+                </td>
+                <td><%= number_to_currency(order.value) %></td>
+                <td>
+                  <% if order.checkout_date %>
+                    <span class="text-success">PLACED</span>
+                  <% else %>
+                    <span class="text-danger">UNPLACED</span>
+                  <% end %>
+                </td>
+                <td><%= link_to "show", "#" %></td>
+                <td><%= link_to "edit", "#" %></td>
+                <td><%= link_to "delete", "#" %></td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
 
