@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">Addresses</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <h5 class="text-center font-italic">Create new Addresses from within <%= link_to "User", users_path %> profiles</h5>
+  </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+  <div class="col">
+
+    <table class="table tabled-striped table-sm">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Orders</th>
+          <th>Created</th>
+          <th>SHOW</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @addresses.each do |address| %>
+          <tr>
+            <td><%= address.id %></td>
+            <td><%= link_to "#{address.user.first_name} #{address.user.last_name}", user_path(address.user) %></td>
+            <td><%= address.street_address %></td>
+            <td><%= address.city.name %></td>
+            <td><%= StatesHelper::STATE_POSTAL_CODES.key(address.state.name) %></td>
+            <td><%= address.user.num_placed_orders %></td>
+            <td><%= address.created_at %></td>
+            <td><%= link_to "show", "#" %></td>
+            <td><%= link_to "edit", "#" %></td>
+            <td><%= link_to "delete", "#" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
