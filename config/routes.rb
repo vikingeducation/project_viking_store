@@ -6,7 +6,15 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboard#home'
 
   resources :categories,
-            :products,
-            :users,
-            :addresses
+            :products
+
+  resources :users do
+    resources :addresses
+  end
+
+  resources :addresses, only: [] do
+    collection do
+      get 'all'
+    end
+  end
 end

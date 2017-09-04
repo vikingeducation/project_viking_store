@@ -4,15 +4,14 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col">
-    <% if @user %>
+
+<% if @user %>
+  <div class="row">
+    <div class="col">
       <%= button_to "Create a #{@user.first_name} #{@user.last_name} Address", { action: "new" }, { method: :get, class: "btn btn-primary btn-lg btn-block border rounded mt-4", params: { user_id: @user.id } } %>
-    <% else %>
-      <h5 class="text-center font-italic">Create new Addresses from within <%= link_to "User", users_path %> profiles</h5>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <div class="row justify-content-center mt-4">
   <div class="col">
@@ -44,7 +43,7 @@
             <td><%= StatesHelper::STATE_POSTAL_CODES.key(address.state.name) %></td>
             <td><%= user.num_placed_orders %></td>
             <td><%= address.created_at %></td>
-            <td><%= link_to "show", address_path(address, user_id: user.id) %></td>
+            <td><%= link_to "show", user_address_path(user, address) %></td>
             <td><%= link_to "edit", "#" %></td>
             <td><%= link_to "delete", "#" %></td>
           </tr>
