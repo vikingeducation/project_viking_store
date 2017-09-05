@@ -16,6 +16,6 @@ class Address < ApplicationRecord
   belongs_to :state
 
   def to_s
-    [self.street_address, self.city.name, StatesHelper::STATE_POSTAL_CODES.key(self.state.name)].join(", ")
+    [self.street_address, self.city.name, self.state.to_s].join(", ")
   end
 end

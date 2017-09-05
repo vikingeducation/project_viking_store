@@ -40,7 +40,7 @@
             <td><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></td>
             <td><%= address.street_address %></td>
             <td><%= address.city.name %></td>
-            <td><%= StatesHelper::STATE_POSTAL_CODES.key(address.state.name) %></td>
+            <td><%= address.state.to_s %></td>
             <td><%= user.num_placed_orders %></td>
             <td><%= address.created_at %></td>
             <td><%= link_to "show", user_address_path(user, address) %></td>

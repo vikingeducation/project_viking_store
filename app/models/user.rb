@@ -47,7 +47,7 @@ class User < ApplicationRecord
   # returns the State abbreviation of the User's first address
   def first_state
     unless self.addresses.empty?
-      StatesHelper::STATE_POSTAL_CODES.key(self.addresses.first.state.name)
+      self.addresses.first.state.to_s
     else
       '<span class="text-secondary">N/A</span>'.html_safe
     end
