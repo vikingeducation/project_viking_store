@@ -1,0 +1,17 @@
+<div class="row mt-2">
+  <div class="col-3">
+    <span class="font-weight-bold">Owner ID:</span>
+  </div>
+  <div class="col">
+    <%= @user.id %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3">
+    <span class="font-weight-bold">Owner Name:</span>
+  </div>
+  <div class="col">
+    <%= link_to "#{@user.first_name} #{@user.last_name} (click to view User)", user_path(@user) %>
+  </div>
+</div>
