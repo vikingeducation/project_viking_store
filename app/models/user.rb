@@ -90,7 +90,7 @@ class User < ApplicationRecord
   # returns the number of the User's first CreditCard, if it exists
   def card_number
     if self.has_credit_cards?
-      self.credit_cards.first.card_number.scan(/[0-9]{4}/).join(" ")
+      self.credit_cards.first.to_s
     else
       "N/A"
     end
