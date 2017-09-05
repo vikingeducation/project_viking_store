@@ -12,9 +12,5 @@ Rails.application.routes.draw do
     resources :addresses
   end
 
-  resources :addresses, only: [] do
-    collection do
-      get 'all'
-    end
-  end
+  get 'addresses/all', to: 'addresses#all'
 end

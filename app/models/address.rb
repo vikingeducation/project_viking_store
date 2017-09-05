@@ -1,4 +1,13 @@
 class Address < ApplicationRecord
+  validates :street_address,
+            :state_id,
+            presence: true
+
+  validates :street_address,
+            length: { maximum: 64 }
+
+  validates_presence_of :city_id, message: "can't be blank or is too long (maximum is #{City::MAX_NAME_LENGTH} characters)"
+
   # An Address belongs to a single User.
   belongs_to :user
 

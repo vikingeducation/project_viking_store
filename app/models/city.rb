@@ -1,4 +1,10 @@
 class City < ApplicationRecord
+  MAX_NAME_LENGTH = 64
+
+  validates :name,
+            presence: true,
+            length: { maximum: MAX_NAME_LENGTH }
+
   # determines the top 3 Cities that Users live in by billing address
   def self.top_3_cities_by_billing_address
     City
