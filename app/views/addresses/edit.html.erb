@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">Edit <%= "#{@user.first_name} #{@user.last_name}'s"%> Address<h2>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-11 border mt-2 mb-4">
+
+    <%= render "shared_elements_for_new_and_edit" %>
+
+    <!-- form -->
+    <div class="row mt-4">
+      <div class="col">
+
+        <%= form_for [@user, @address] do |f| %>
+          <%= render partial: "shared_form_elements", locals: { f: f } %>
+
+
+          <div class="form-group form-row">
+            <div class="col">
+              <%= f.submit "Update Address", class: "btn btn-primary btn-lg btn-block border rounded mt-4 mb-2" %>
+            </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col text-center">
+        <%= link_to "Delete Address", user_address_path(@user, @address), method: :delete, data: { confirm: "Are you sure you want to delete this Address?" } %>
+      </div>
+    </div>
+
+  </div>
+</div>
