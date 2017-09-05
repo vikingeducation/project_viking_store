@@ -1,4 +1,8 @@
 class State < ApplicationRecord
+  def to_s
+    StatesHelper::STATE_POSTAL_CODES.key(self.name)
+  end
+
   # determines the top 3 States that Users live in by billing address
   def self.top_3_states_by_billing_address
     State

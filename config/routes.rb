@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboard#home'
 
   resources :categories,
-            :products
+            :products,
+            :orders
 
   resources :users do
     resources :addresses

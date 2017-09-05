@@ -17,6 +17,35 @@ class Order < ApplicationRecord
 
 
 
+  # calculates the value of an Order
+  def value
+    Order
+    .joins("JOIN order_contents ON orders.id = order_contents.order_id")
+    .joins("JOIN products ON products.id = order_contents.product_id")
+    .where("orders.id = ?", self.id)
+    .select("SUM(order_contents.quantity * products.price) AS amount")
+    .group("orders.id")
+    .first
+    .amount
+  end
+
+  # checks if an Order is actually a shopping cart
+  def is_shopping_cart?
+    self.checkout_date.nil?
+  end
+
+  # returns HTML elements depicting the status of an Order:
+  # "UNPLACED" if Order is a shopping cart,
+  # "PLACED" if Order has a checkout_date
+  def status
+    if self.is_shopping_cart?
+      '<span class="text-danger">UNPLACED</span>'.html_safe
+    else
+      "PLACED".html_safe
+    end
+  end
+
+
   ########## Methods for Orders ##########
 
   # finds the number of new Orders that were placed within a number of days from the current day
