@@ -1,0 +1,49 @@
+<% content_for :title do %>
+  <title>Viking Store Admin Portal</title>
+<% end %>
+<div class="row">
+  <%= render partial: "shared/admin_navbar" %>
+   
+  <div class="col-md-9 main-content">
+    <h2 class="text-center">New Product</h2>
+
+    <%= form_for(@product) do |t| %>
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>Product ID:</strong></td>
+            <td> N/A</td>
+          </tr>
+           <tr>
+            <td><strong>SKU</strong></td>
+            <td><%= t.text_field :sku %></td>
+          </tr>
+          <tr>
+            <td><strong>Name</strong></td>
+            <td><%= t.text_field :name %></td>
+          </tr>
+          <tr>
+            <td><strong>Price</strong></td>
+            <td><%= t.text_field :price %></td>
+          </tr>
+          <tr>
+            <td><strong>Category</strong></td>
+            <td><%= options_for_select([['Lisbon', 1], ['Madrid', 2]], 2) %></td>
+
+
+             <!--  <%= options_for_select (
+               @categories.each do |category| %>
+              [category.name] 
+              <% end %> -->
+          </tr>
+        </tbody>
+      </table>
+      <br />
+
+      <p><%= t.submit "Create Product", class: "btn btn-primary btn-lg btn-block" %></p>
+
+    <% end %> 
+
+    
+  </div>
+</div>

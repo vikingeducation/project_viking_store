@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    @product = Product.where(:category_id => params[:id])
   end
 
   def edit
@@ -19,8 +20,10 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(params[:id])
     if @category.update_attributes(category_form_params)
+      flash[:success] = "Category updated successfully."
       redirect_to category_path(@category)
     else
+      flash[:error] = "Category not created"
       render :show
     end
   end
@@ -28,13 +31,16 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_form_params)
     if @category.save
+      flash[:success] = "Category created successfully."
       redirect_to category_path(@category)
     else
-      render :show
+      flash[:error] = "Category not created"
+      render :index
     end
   end
 
+private
   def category_form_params
-    params.require(:category).permit(:name, :description, :created_at, :updated_at)
+    params.require(:category).permit(:name, :description)
   end
 end
