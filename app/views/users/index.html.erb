@@ -31,14 +31,13 @@
 
       <tbody>
         <% @users.each do |user| %>
-          <% key = user.id.to_s %>
           <tr>
-            <td><%= key %></td>
-            <td><%= "#{user.first_name} #{user.last_name}" %></td>
+            <td><%= user.id %></td>
+            <td><%= "#{user}" %></td>
             <td><%= user.created_at %></td>
             <td><%= user.first_city %></td>
             <td><%= user.first_state %></td>
-            <td><%= user.num_placed_orders %></td>
+            <td><%= link_to user.num_placed_orders, orders_path(user_id: user.id) %></td>
             <td><%= user.last_order_date %></td>
             <td><%= link_to "Show", user_path(user) %></td>
             <td><%= link_to "Edit", edit_user_path(user.id) %></td>

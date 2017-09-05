@@ -35,6 +35,11 @@ class User < ApplicationRecord
   has_many :products, through: :order_contents, source: :product
 
 
+
+  def to_s
+    "#{self.first_name} #{self.last_name}"
+  end
+
   # returns the City name of the User's first address
   def first_city
     unless self.addresses.empty?
