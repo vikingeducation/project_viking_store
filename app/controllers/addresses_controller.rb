@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
-  before_action :find_address, only: [:show, :edit, :update]
-  before_action :find_user, only: [:show, :new, :create, :edit, :update]
+  before_action :find_address, only: [:show, :edit, :update, :destroy]
+  before_action :find_user, only: [:show, :new, :create, :edit, :update, :destroy]
 
   def all
     @addresses = Address.all
@@ -78,6 +78,18 @@ class AddressesController < ApplicationController
       @address.city_id = city_name
 
       render "new", layout: "admin_portal"
+    end
+  end
+
+  def destroy
+    if @address.destroy
+      flash[:success] = "Address successfully deleted."
+      @user.update(billing_id: nil) if @address.id == @user.billing_id
+      @user.update(shipping_id: nil) if @address.id == @user.shipping_id
+      redirect_to user_addresses_path(@user)
+    else
+      flash[:error] = "Error deleting Address."
+      redirect_to :back
     end
   end
 
