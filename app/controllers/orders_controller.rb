@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @user = @order.user
-    @products_in_order = @order.products
+    # @products_in_order = @order.products
     @order_line_items = @order.line_items
 
     render layout: "admin_portal"
