@@ -17,12 +17,21 @@ class Order < ApplicationRecord
 
 
 
-  # calculates the value of an Order
-  def value
+  private
+
+  def show_order_base_query
     Order
     .joins("JOIN order_contents ON orders.id = order_contents.order_id")
     .joins("JOIN products ON products.id = order_contents.product_id")
     .where("orders.id = ?", self.id)
+  end
+
+
+  public
+
+  # calculates the value of an Order
+  def value
+    show_order_base_query
     .select("SUM(order_contents.quantity * products.price) AS amount")
     .group("orders.id")
     .first
@@ -41,10 +50,20 @@ class Order < ApplicationRecord
     if self.is_shopping_cart?
       '<span class="text-danger">UNPLACED</span>'.html_safe
     else
-      "PLACED".html_safe
+      '<span class="text-success">PLACED</span>'.html_safe
     end
   end
 
+  # returns the line items of an Order - which products were in the
+  # Order, along with quantity and price of each Product
+  def line_items
+    show_order_base_query
+    .select("order_contents.order_id, order_contents.product_id, products.name, products.price, order_contents.quantity, products.price * order_contents.quantity AS total_price")
+  end
+
+
+
+  ##### TODO: Methods for Analytics Dashboard to be refactored #####
 
   ########## Methods for Orders ##########
 
