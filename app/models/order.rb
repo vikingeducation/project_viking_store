@@ -1,4 +1,10 @@
 class Order < ApplicationRecord
+  validates :user_id,
+            :shipping_id,
+            :billing_id,
+            :credit_card_id,
+            presence: true
+
   # An Order has an associated User and CreditCard.
   belongs_to :user
   belongs_to :credit_card
@@ -31,11 +37,15 @@ class Order < ApplicationRecord
 
   # calculates the value of an Order
   def value
-    show_order_base_query
-    .select("SUM(order_contents.quantity * products.price) AS amount")
-    .group("orders.id")
-    .first
-    .amount
+    if show_order_base_query.present?
+      show_order_base_query
+      .select("SUM(order_contents.quantity * products.price) AS amount")
+      .group("orders.id")
+      .first
+      .amount
+    else
+      0
+    end
   end
 
   # checks if an Order is actually a shopping cart

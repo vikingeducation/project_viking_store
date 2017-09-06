@@ -29,7 +29,16 @@
             </div>
             <div class="form-row">
               <div class="col">
-                <%= f.collection_select :shipping_id, @user.addresses, :id, :to_s, { prompt: "Select a Shipping Address" }, { class: "form-control" } %>
+                <div class="row">
+                  <div class="col">
+                    <%= field_with_errors(@order, :shipping_id) %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <%= f.collection_select :shipping_id, @user.addresses, :id, :to_s, { prompt: "Select a Shipping Address" }, { class: "form-control" } %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -42,7 +51,16 @@
             </div>
             <div class="form-row">
               <div class="col">
-                <%= f.collection_select :billing_id, @user.addresses, :id, :to_s, { prompt: "Select a Billing Address" }, { class: "form-control" } %>
+                <div class="row">
+                  <div class="col">
+                    <%= field_with_errors(@order, :billing_id) %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <%= f.collection_select :billing_id, @user.addresses, :id, :to_s, { prompt: "Select a Billing Address" }, { class: "form-control" } %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -55,10 +73,21 @@
             </div>
             <div class="form-row">
               <div class="col">
-                <%= f.collection_select :credit_card_id, @user.credit_cards, :id, :last_4_digits_text, { prompt: "Select a Billing Card" }, { class: "form-control" } %>
+                <div class="row">
+                  <div class="col">
+                    <%= field_with_errors(@order, :credit_card_id) %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <%= f.collection_select :credit_card_id, @user.credit_cards, :id, :last_4_digits_text, { prompt: "Select a Billing Card" }, { class: "form-control" } %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+
+          <%= f.hidden_field :user_id, value: @user.id %>
 
           <div class="form-group">
             <div class="form-row">

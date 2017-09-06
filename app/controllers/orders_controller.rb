@@ -34,4 +34,28 @@ class OrdersController < ApplicationController
       redirect_to users_path
     end
   end
+
+  def create
+    @user = User.find(params[:order][:user_id])
+
+    if @user.has_shopping_cart?
+      flash[:error] = "This User already has a shopping cart. Edit that Order instead of creating a new one."
+      redirect_to user_path(@user)
+    else
+      @order = Order.new(whitelisted_order_params)
+      if @order.save
+        flash[:success] = "Order successfully created."
+        redirect_to user_path(@user)
+      else
+        flash.now[:error] = "Error creating Order."
+        render "new", layout: "admin_portal"
+      end
+    end
+  end
+
+  private
+
+  def whitelisted_order_params
+    params.require(:order).permit(:user_id, :shipping_id, :billing_id, :credit_card_id)
+  end
 end
