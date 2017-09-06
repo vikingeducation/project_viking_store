@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @credit_card = @user.credit_cards.first
     render layout: "admin_portal", template: "users/show"
   end
 

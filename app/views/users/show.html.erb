@@ -125,7 +125,11 @@
         <span class="font-weight-bold">First Name:</span>
       </div>
       <div class="col">
-        <%= @user.first_name %>
+        <% if @credit_card %>
+          <%= @credit_card.holder_first_name %>
+        <% else %>
+          N/A
+        <% end %>
       </div>
     </div>
 
@@ -134,7 +138,11 @@
         <span class="font-weight-bold">Last Name:</span>
       </div>
       <div class="col">
-        <%= @user.last_name %>
+        <% if @credit_card %>
+          <%= @credit_card.holder_last_name %>
+        <% else %>
+          N/A
+        <% end %>
       </div>
     </div>
 
@@ -143,7 +151,11 @@
         <span class="font-weight-bold">Number:</span>
       </div>
       <div class="col">
-        <%= @user.card_number %>
+        <% if @credit_card %>
+          <%= "#{@credit_card}" %>
+        <% else %>
+          N/A
+        <% end %>
       </div>
     </div>
 
@@ -152,7 +164,11 @@
         <span class="font-weight-bold">Expiration:</span>
       </div>
       <div class="col">
-        <%= @user.card_expiration_date %>
+        <% if @credit_card %>
+          <%= @credit_card.expiration_date %>
+        <% else %>
+          N/A
+        <% end %>
       </div>
     </div>
 
@@ -161,7 +177,11 @@
         <span class="font-weight-bold">CVV:</span>
       </div>
       <div class="col">
-        <%= @user.card_cvv_number %>
+        <% if @credit_card && !@credit_card.cvv.nil? %>
+          <%= @credit_card.cvv %>
+        <% else %>
+          N/A
+        <% end %>
       </div>
     </div>
 
