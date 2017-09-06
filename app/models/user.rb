@@ -89,12 +89,12 @@ class User < ApplicationRecord
 
   # gets the User's Order history
   def order_history
-    OrderContent
-    .joins("JOIN orders ON orders.id = order_contents.order_id")
-    .joins("JOIN products ON products.id = order_contents.product_id")
+    Order
+    .joins("LEFT JOIN order_contents ON orders.id = order_contents.order_id")
+    .joins("LEFT JOIN products ON products.id = order_contents.product_id")
+    .where("orders.user_id = ?", self.id)
     .select("orders.id, orders.checkout_date, SUM(order_contents.quantity * products.price) AS value")
     .group("orders.id, orders.checkout_date")
-    .where("orders.user_id = ?", self.id)
     .order("orders.checkout_date DESC")
   end
 
