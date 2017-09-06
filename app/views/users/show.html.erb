@@ -101,7 +101,7 @@
     <div class="row mb-2">
       <div class="col">
         <% if @user.has_shopping_cart? %>
-          <%= link_to "View Unplaced Order (Cart)", "#" %>
+          <%= link_to "View Unplaced Order (Cart)", order_path(@user.shopping_cart) %>
         <% else %>
           <span class="text-secondary">View Unplaced Order (Cart)</span>
         <% end %>

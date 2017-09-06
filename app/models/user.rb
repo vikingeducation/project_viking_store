@@ -79,7 +79,7 @@ class User < ApplicationRecord
 
   # checks if the User has an active shopping cart
   def has_shopping_cart?
-    !self.orders.where("checkout_date IS NULL").empty?
+    self.orders.where("checkout_date IS NULL").present?
   end
 
   # returns the Order that corresponds to a User's shopping cart
