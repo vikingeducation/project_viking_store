@@ -186,7 +186,7 @@
 
     <div class="row">
       <div class="col">
-        <%= button_to "Create Order", "#", html_options = { class: "btn btn-lg btn-primary btn-block border rounded mt-2" } %>
+        <%= button_to "Create Order", new_order_path, html_options = { method: :get, class: "btn btn-lg btn-primary btn-block border rounded mt-2", params: { user_id: @user.id } } %>
       </div>
     </div>
 

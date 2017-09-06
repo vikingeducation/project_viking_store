@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">New Order for <%= "#{@user}" %></h2>
+  </div>
+</div>
+
+<!-- Logistical Information panel -->
+<div class="row justify-content-center mb-3">
+  <div class="col-10 border">
+
+    <%= render partial: "shared_view_elements", locals: { order: @order, user: @user } %>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to "Edit Customer Profile", edit_user_path(@user) %>
+      </div>
+    </div>
+
+    <!-- form -->
+    <div class="row mt-3">
+      <div class="col">
+
+        <%= form_for @order do |f| %>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <%= f.label :shipping_id, "Shipping Address", class: "form-control-label font-weight-bold" %>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <%= f.collection_select :shipping_id, @user.addresses, :id, :to_s, { prompt: "Select a Shipping Address" }, { class: "form-control" } %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <%= f.label :billing_id, "Billing Address", class: "form-control-label font-weight-bold" %>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <%= f.collection_select :billing_id, @user.addresses, :id, :to_s, { prompt: "Select a Billing Address" }, { class: "form-control" } %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <%= f.label :credit_card_id, "Billing Card", class: "form-control-label font-weight-bold" %>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <%= f.collection_select :credit_card_id, @user.credit_cards, :id, :last_4_digits_text, { prompt: "Select a Billing Card" }, { class: "form-control" } %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <%= f.submit "Create Order in Shopping Cart", method: :post, class: "btn btn-primary btn-lg btn-block border rounded mt-4 mb-2" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col text-center mb-3">
+        <span class="text-secondary">You can add products on the next screen, once it's been created.</span>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -14,46 +14,8 @@
 <div class="row justify-content-center">
   <div class="col-10 border">
 
-    <div class="row mt-3">
-      <div class="col">
-        <h3 class="text-center">Logistical Information</h3>
-      </div>
-    </div>
+    <%= render partial: "shared_view_elements", locals: { order: @order, user: @user } %>
 
-    <!-- Basic Information -->
-    <div class="row">
-      <div class="col">
-        <h4>Basic Information<h4>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">
-        <span class="font-weight-bold">Customer ID:</span>
-      </div>
-      <div class="col">
-        <%= @user.id %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">
-        <span class="font-weight-bold">Customer:</span>
-      </div>
-      <div class="col">
-        <%= "#{@user}" %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">
-        <span class="font-weight-bold">Date Placed:</span>
-      </div>
-      <div class="col">
-        <% if @order.checkout_date %>
-          <%= @order.checkout_date.strftime("%Y-%m-%d") %>
-        <% else %>
-          N/A
-        <% end %>
-      </div>
-    </div>
     <div class="row">
       <div class="col-3">
         <span class="font-weight-bold"># Products:</span>

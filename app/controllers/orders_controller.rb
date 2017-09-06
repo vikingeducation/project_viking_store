@@ -18,9 +18,20 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @user = @order.user
-    # @products_in_order = @order.products
     @order_line_items = @order.line_items
 
     render layout: "admin_portal"
+  end
+
+  def new
+    if params[:user_id] && User.exists?(params[:user_id])
+      @user = User.find(params[:user_id])
+      @order = Order.new
+
+      render layout: "admin_portal"
+    else
+      flash[:error] = "Invalid User ID provided. Redirecting you to the Users page."
+      redirect_to users_path
+    end
   end
 end
