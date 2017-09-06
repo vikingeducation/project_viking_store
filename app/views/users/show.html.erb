@@ -187,7 +187,9 @@
 
     <div class="row mb-2">
       <div class="col">
-        <%= link_to "Remove Card", "#" %>
+        <% if @credit_card %>
+          <%= link_to "Remove Card", credit_card_path(@credit_card.id), method: :delete, data: { confirm: "Are you sure you want to delete this credit card?" } %>
+        <% end %>
       </div>
     </div>
 
