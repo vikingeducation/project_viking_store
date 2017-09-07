@@ -48,6 +48,11 @@ class Order < ApplicationRecord
     end
   end
 
+  # checks if an Order has been placed
+  def placed?
+    !self.checkout_date.nil?
+  end
+
   # checks if an Order is actually a shopping cart
   def is_shopping_cart?
     self.checkout_date.nil?

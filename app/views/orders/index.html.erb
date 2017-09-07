@@ -61,7 +61,7 @@
             <td><%= order.status %></td>
             <td><%= order.checkout_date ? order.checkout_date.strftime("%Y-%m-%d") : "N/A" %></td>
             <td><%= link_to "show", order_path(order) %></td>
-            <td><%= link_to "edit", "#" %></td>
+            <td><%= link_to "edit", edit_order_path(order) %></td>
             <td><%= link_to "delete", "#" %></td>
           </tr>
         <% end %>
