@@ -17,7 +17,7 @@
         <tr>
           <td><%= order[:date] %></td>
           <td><%= order[:num_orders] %></td>
-          <td><%= number_to_currency(order[:value]) %></td>
+          <td><%= number_to_currency(order[:amount]) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -39,7 +39,7 @@
         <tr>
           <td><%= order[:date] %></td>
           <td><%= order[:num_orders] %></td>
-          <td><%= number_to_currency(order[:value]) %></td>
+          <td><%= number_to_currency(order[:amount]) %></td>
         </tr>
       <% end %>
     </tbody>

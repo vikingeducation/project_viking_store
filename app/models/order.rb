@@ -165,13 +165,13 @@ class Order < ApplicationRecord
 
   ########## methods to generate time series data ##########
 
-  # calculates the number of Orders and their value for the past 7 days
+  # calculates the number of Orders and their amount for the past 7 days
   def self.orders_by_day(num_days = 7)
     Order.find_by_sql(
       "
       SELECT DATE(dates) AS date,
       COUNT(orders.*) AS num_orders,
-      COALESCE(SUM(order_contents.quantity * products.price), 0) AS value
+      COALESCE(SUM(order_contents.quantity * products.price), 0) AS amount
       FROM GENERATE_SERIES((
         SELECT DATE(MIN(orders.checkout_date)) FROM orders),
         CURRENT_DATE, '1 DAY'::INTERVAL) dates
@@ -184,13 +184,13 @@ class Order < ApplicationRecord
     )[0..num_days - 1]
   end
 
-  # calculates the number of Orders and their value for the past 7 weeks
+  # calculates the number of Orders and their amount for the past 7 weeks
   def self.orders_by_week(num_weeks = 7)
     Order.find_by_sql(
     "
     SELECT DATE(weeks) AS date,
     COUNT(orders.*) AS num_orders,
-    COALESCE(SUM(order_contents.quantity * products.price), 0) AS value
+    COALESCE(SUM(order_contents.quantity * products.price), 0) AS amount
     FROM GENERATE_SERIES((
       SELECT DATE(DATE_TRUNC('WEEK', MIN(orders.checkout_date))) FROM orders),
       CURRENT_DATE, '1 WEEK'::INTERVAL) weeks
@@ -224,7 +224,7 @@ class Order < ApplicationRecord
         {
           date: self.format_date(order.date),
           num_orders: order.num_orders,
-          value: order.value
+          amount: order.amount
         }
       )
     end
