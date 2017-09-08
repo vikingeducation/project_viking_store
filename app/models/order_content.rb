@@ -4,4 +4,8 @@ class OrderContent < ApplicationRecord
   belongs_to :product
 
   validates :order_id, uniqueness: { scope: :product_id }
+
+  validates :order_id,
+            :product_id,
+            presence: true
 end

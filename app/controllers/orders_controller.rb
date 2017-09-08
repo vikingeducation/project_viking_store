@@ -56,6 +56,7 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @user = @order.user
+    @products = Product.all.order(:name)
 
     render layout: "admin_portal"
   end
