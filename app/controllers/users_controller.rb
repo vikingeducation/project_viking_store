@@ -45,6 +45,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    session[:return_to] ||= request.referer
+
     @user.shopping_cart.destroy! if @user.has_shopping_cart?
 
     if @user.destroy
@@ -52,7 +54,7 @@ class UsersController < ApplicationController
       redirect_to users_path
     else
       flash[:error] = "Error deleting User."
-      redirect_to :back
+      redirect_to session.delete(:return_to)
     end
   end
 

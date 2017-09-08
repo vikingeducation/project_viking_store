@@ -82,6 +82,8 @@ class AddressesController < ApplicationController
   end
 
   def destroy
+    session[:return_to] ||= request.referer
+
     if @address.destroy
       flash[:success] = "Address successfully deleted."
       @user.update(billing_id: nil) if @address.id == @user.billing_id
@@ -89,7 +91,7 @@ class AddressesController < ApplicationController
       redirect_to user_addresses_path(@user)
     else
       flash[:error] = "Error deleting Address."
-      redirect_to :back
+      redirect_to session.delete(:return_to)
     end
   end
 

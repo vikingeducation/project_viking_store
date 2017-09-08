@@ -52,12 +52,14 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    session[:return_to] ||= request.referer
+
     if @product.destroy
       flash[:success] = "Product successfully deleted."
       redirect_to products_path
     else
       flash[:error] = "Error deleting Product."
-      redirect_to :back
+      redirect_to session.delete(:return_to)
     end
   end
 
