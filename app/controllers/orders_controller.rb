@@ -96,6 +96,19 @@ class OrdersController < ApplicationController
     end
   end
 
+  def destroy
+    @order = Order.find(params[:id])
+    @user = @order.user
+
+    if @order.destroy
+      flash[:success] = "Order successfully removed."
+      redirect_to @user
+    else
+      flash.now[:failure] = "Error removing Order."
+      redirect_to :back
+    end
+  end
+
   private
 
   def whitelisted_order_params
