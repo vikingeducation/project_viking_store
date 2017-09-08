@@ -62,7 +62,7 @@
             <td><%= order.checkout_date ? order.checkout_date.strftime("%Y-%m-%d") : "N/A" %></td>
             <td><%= link_to "show", order_path(order) %></td>
             <td><%= link_to "edit", edit_order_path(order) %></td>
-            <td><%= link_to "delete", "#" %></td>
+            <td><%= link_to "delete", order_path(order), method: :delete, data: { confirm: "Are you sure you want to remove this Order?" } %></td>
           </tr>
         <% end %>
       </tbody>
