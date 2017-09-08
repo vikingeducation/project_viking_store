@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-   validates :title, 
+   validates :name, 
             :length =>{ :minimum => 4,
                         :maximum => 16 }, 
             :presence => true

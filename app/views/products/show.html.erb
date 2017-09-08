@@ -34,14 +34,13 @@
         </tr>
         <tr>
           <td><strong>Times Ordered</strong></td>
-          <td><%=@order_contents.quantity %></td>
+          <td><%=@order_contents.reduce(0) {|sum, oc| sum + oc.quantity } %></td>
         </tr>
         <tr>
           <td><strong>Carts In</strong></td>
-          <!-- <td> -</td>
+          <td><%=@order_contents.length %></td>
         </tr>
 
-        <!-- Need to change last 2 queries -->
           
       </tbody>
     </table>

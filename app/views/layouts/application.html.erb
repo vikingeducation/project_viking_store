@@ -19,7 +19,9 @@
 </head>
 <body>
   <div class="container">
-
+    <!-- <p class="flash"><%= flash.notice %></p> -->
+     <%= flash[:error] %><br>
+    <%= flash[:success] %><br>
     <%= yield %>
   </div>
 </body>
