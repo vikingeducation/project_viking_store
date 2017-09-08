@@ -1,4 +1,5 @@
 class OrderContentsController < ApplicationController
+  # TODO: refactor this into a non-RESTful action
   def create
     @order = Order.find(params[:order_id])
 
@@ -34,6 +35,42 @@ class OrderContentsController < ApplicationController
     redirect_to order_path(params[:order_id])
   end
 
+  def update_order
+    if OrderContent.update(update_order_contents_params.keys, update_order_contents_params.values)
+
+
+      update_order_contents_params.each do |order_content_id, order_details|
+        if order_details[:quantity].to_i == 0
+          unless OrderContent.destroy(order_content_id)
+            flash[:error] = "An error occurred when removing a Product with 0 quantity from this Order."
+            redirect_to edit_order_path(params[:order_id])
+          end
+        end
+      end
+
+      flash[:success] = "Order successfully updated with new Product quantities."
+      redirect_to order_path(params[:order_id])
+    else
+      flash.now[:error] = "Error updating Order with new Product quantities."
+      render "orders/edit", template: "admin_layout"
+    end
+
+    # flash[:success] = update_order_contents_params
+    # redirect_to edit_order_path(params[:order_id])
+  end
+
+  def destroy
+    @order_content = OrderContent.find(params[:id])
+
+    if @order_content.destroy
+      flash.now[:success] = "Product successfully removed from Order."
+      redirect_to edit_order_path(@order_content.order_id)
+    else
+      flash.now[:error] = "An error occurred while removing Product from Order."
+      render "orders/edit", template: "admin_layout"
+    end
+  end
+
   private
 
   def whitelisted_order_contents_params
@@ -44,5 +81,9 @@ class OrderContentsController < ApplicationController
             product_3: [:id, :quantity],
             product_4: [:id, :quantity],
             product_5: [:id, :quantity])
+  end
+
+  def update_order_contents_params
+    params.require(:order_contents)
   end
 end

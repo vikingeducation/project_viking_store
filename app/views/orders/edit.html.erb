@@ -8,7 +8,7 @@
 <div class="row justify-content-center mb-3">
   <div class="col-10 border">
 
-    <%= render partial: "shared_view_elements", locals: { order: @order, user: @user } %>
+    <%= render partial: "orders/shared_view_elements", locals: { order: @order, user: @user } %>
 
     <div class="row">
       <div class="col">
@@ -141,5 +141,8 @@
 </div>
 <!-- End of Logistical Information panel -->
 
+<!-- Edit Order Contents Panel -->
+<%= render partial: "order_contents/edit_order_contents_form", locals: { line_items: @line_items, order: @order }%>
+
 <!-- Add Products to Order panel -->
-<%= render partial: "add_products_to_order_form", locals: { order: @order } %>
+<%= render partial: "order_contents/add_products_to_order_form", locals: { order: @order } %>

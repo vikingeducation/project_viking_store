@@ -1,0 +1,49 @@
+<div class="row justify-content-center mb-3">
+  <div class="col-10 border">
+
+    <div class="row mt-3">
+      <div class="col">
+        <h3 class="text-center">Edit Order Contents</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+
+        <%= form_tag(order_contents_update_order_path) do %>
+          <table class="table table-striped">
+            <thead>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total Price</th>
+              <th>REMOVE</th>
+            </thead>
+
+            <tbody>
+              <% line_items.each do |line_item| %>
+                <tr>
+                  <div class="form-group">
+                    <td><%= line_item.product_id %></td>
+                    <td><%= line_item.name %></td>
+                    <td><%= text_field_tag "order_contents[#{line_item.id}][quantity]", line_item.quantity, class: "form-control" %></td>
+                    <td><%= number_to_currency(line_item.price) %></td>
+                    <td><%= number_to_currency(line_item.total_price) %></td>
+                    <td><%= link_to "remove", order_content_path(line_item.id), method: :delete, data: { confirm: "Are you sure you want to remove this Product from this Order?" } %></td>
+                  </div>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <%= hidden_field_tag "order_id", order.id %>
+
+          <%= submit_tag "Update Order Contents", class: "btn btn-primary btn-lg btn-block border rounded mt-4 mb-4"%>
+        <% end %>
+
+      </div>
+    </div>
+
+  </div>
+</div>

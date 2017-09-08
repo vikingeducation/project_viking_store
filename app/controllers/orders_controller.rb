@@ -56,6 +56,7 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @user = @order.user
+    @line_items = @order.line_items
     @products = Product.all.order(:name)
 
     render layout: "admin_portal"
@@ -78,7 +79,7 @@ class OrdersController < ApplicationController
       elsif @user.has_shopping_cart? && @order != @user.shopping_cart
         # check if we're attempting to create a second unplaced Order for this User
         flash[:error] = "This User already has an unplaced order."
-        redirect_to edit_order_path(@order) and return
+        redirect_to @order and return
       else
         order_params[:checkout_date] = nil
       end

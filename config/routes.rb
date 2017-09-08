@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   end
 
   resources :credit_cards, only: [:destroy]
-  resources :order_contents, only: [:create, :update, :destroy]
+  resources :order_contents, only: [:create, :destroy]
+
+  post 'order_contents/update_order', to: 'order_contents#update_order'
 
   get 'addresses/all', to: 'addresses#all'
   get '/dashboard', to: 'dashboard#home'

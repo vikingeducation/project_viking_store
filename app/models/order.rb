@@ -74,7 +74,7 @@ class Order < ApplicationRecord
   def line_items
     show_order_base_query
     .order("order_contents.quantity DESC")
-    .select("order_contents.order_id, order_contents.product_id, products.name, products.price, order_contents.quantity, products.price * order_contents.quantity AS total_price")
+    .select("order_contents.id, order_contents.order_id, order_contents.product_id, products.name, products.price, order_contents.quantity, products.price * order_contents.quantity AS total_price")
   end
 
 
