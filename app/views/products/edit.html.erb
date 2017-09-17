@@ -28,10 +28,10 @@
           </tr>
           <tr>
             <td><strong>Category</strong></td>
-            
-
-            options_for_select([['Lisbon', 1], ['Madrid', 2]], 2) 
-
+            <td>
+              <%= t.select :category_id, 
+                  @categories.map {|c| [c.name, c.id]}  %> 
+            </td>
           </tr>
         </tbody>
       </table>
@@ -41,6 +41,8 @@
 
     <% end %> 
 
-    <%= link_to "Delete product", product_path(@product) %>
+    <%= link_to "Delete product", product_path(@product),
+                      data: { confirm: "Are you sure?" },
+                      method: :delete %>
   </div>
 </div>

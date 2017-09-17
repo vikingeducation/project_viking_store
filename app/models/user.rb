@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+
+
   def self.user_count
     User.count 
   end

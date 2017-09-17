@@ -2,6 +2,8 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    # @products.each do
+    # @category = Category.where(:id => @product.category_id)
   end
 
   def new
@@ -17,6 +19,7 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+    @categories = Category.all
   end
 
   def update
@@ -38,6 +41,19 @@ class ProductsController < ApplicationController
     else
       flash[:error] = "Product not created"
       render :show
+    end
+  end
+
+  def destroy
+    session[:return_to] ||= request.referer
+
+    @product = Product.find(params[:id])
+    if @product.destroy
+      flash[:success] = "Product deleted successfully."
+      redirect_to products_path
+    else
+      flash[:error] = "Product not deleted"
+      redirect_to session.delete(:return_to)
     end
   end
 

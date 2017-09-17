@@ -31,6 +31,8 @@
 
     <% end %> 
 
-    <%= link_to "Delete Category", category_path(@category) %>
+    <%= link_to "Delete Category", category_path(@category),
+                      data: { confirm: "Are you sure?" },
+                      method: :delete %>
   </div>
 </div>

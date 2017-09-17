@@ -17,6 +17,7 @@
           <td><strong>ID</strong></td>
           <td><strong>Name</strong></td>
           <td><strong>Price</strong></td>
+          <td><strong>Category</strong></td>
           <td><strong>SHOW</strong></td>
           <td><strong>EDIT</strong></td>
           <td><strong>DELETE</strong></td>
@@ -28,9 +29,12 @@
             <td><%= product.id %></td>
             <td><%= product.name %></td>
             <td><%= product.price %></td>
-            <td><%= link_to "show", "#" %></td>
-            <td><%= link_to "edit", "#" %></td>
-            <td><%= link_to "delete", "#" %></td>
+            <td><%= product.category_id %></td>
+            <td><%= link_to "show", product_path(product) %></td>
+            <td><%= link_to "edit", edit_product_path(product) %></td>
+            <td><%= link_to "delete", product_path(product),
+                      data: { confirm: "Are you sure?" },
+                      method: :delete %></td>
           </tr>
         <% end %>
       </tbody>

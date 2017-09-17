@@ -21,9 +21,9 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     if @category.update_attributes(category_form_params)
       flash[:success] = "Category updated successfully."
-      redirect_to category_path(@category)
+      redirect_to categories_path
     else
-      flash[:error] = "Category not created"
+      flash[:error] = "Category not updated"
       render :show
     end
   end
@@ -36,6 +36,18 @@ class CategoriesController < ApplicationController
     else
       flash[:error] = "Category not created"
       render :index
+    end
+  end
+
+  def destroy
+    session[:return_to] ||= request.referer
+    @category = Category.find(params[:id])
+    if @category.destroy
+      flash[:success] = "Category deleted successfully."
+      redirect_to categories_path
+    else
+      flash[:error] = "Category not deleted"
+      redirect_to session.delete(:return_to)
     end
   end
 
