@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @categories = Category.all
-  end
+  endproduct
 
   def show
     @product = Product.find(params[:id])
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_form_params)
     if @product.save
-      redirect_to product_path(@product)
+      redirect_to products_path
       flash[:success] = "Product created"
     else
       flash[:error] = "Product not created"

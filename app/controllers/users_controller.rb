@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @address = Address.where(:user_id => @user.id)
   end
 
   def edit
@@ -35,6 +36,18 @@ class UsersController < ApplicationController
     else
       flash[:error] = "User not updated"
       render :show
+    end
+  end
+
+  def destroy
+    session[:return_to] ||= request.referer
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:success] = "User deleted successfully."
+      redirect_to users_path
+    else
+      flash[:error] = "User not deleted"
+      redirect_to session.delete(:return_to)
     end
   end
 

@@ -1,0 +1,54 @@
+<% content_for :title do %>
+  <title>Viking Store Admin Portal</title>
+<% end %>
+<div class="row">
+ 
+  <div class="col-md-9 main-content">
+     <h2 class="text-center">Edit User <%=@user.id %>: <%=@user.first_name %> <%=@user.last_name %></h2>
+
+    <%= form_for(@user) do |t| %>
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>First Name:</strong></td>
+            <td></td>
+          </tr>
+           <tr>
+            <td><strong>Last Name:</strong></td>
+            <td><%= t.text_field :first_name %></td>
+          </tr>
+          <tr>
+            <td><strong>Email:</strong></td>
+            <td><%= t.text_field :last_name %></td>
+          </tr>
+          <tr>
+            <td><strong>Telephone</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Default Billing Address</strong></td>
+              <td>
+               
+
+              </td>
+             <td><strong>Default Shipping Address</strong></td>
+              <td>
+               
+               
+              </td>
+
+          </tr>
+        </tbody>
+      </table>
+      <br />
+
+      <p><%= t.submit "Update User", class: "btn btn-primary btn-lg btn-block" %></p>
+
+       <p><%= link_to "Delete", user_path(@user),
+                      data: { confirm: "Are you sure?" },
+                      method: :delete %></p>
+
+    <% end %> 
+
+    
+  </div>
+</div>

@@ -1,5 +1,10 @@
 class Order < ApplicationRecord
 
+  belongs_to :user
+
+  has_many :order_contents
+  has_many :products, :through => :order_contents
+
   def self.order_count
     Order.count 
   end

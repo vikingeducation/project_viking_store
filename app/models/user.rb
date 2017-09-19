@@ -1,7 +1,12 @@
 class User < ApplicationRecord
 
+  has_many :addresses
+  has_many :orders
 
+  has_many :order_contents
+  has_many :products, :through => :order_contents
 
+  belongs_to :default_billing_address_id
   def self.user_count
     User.count 
   end
