@@ -9,11 +9,10 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @categories = Category.all
-  endproduct
+  end
 
   def show
     @product = Product.find(params[:id])
-    @category = Category.where(:id => @product.category_id)
     @order_contents = OrderContent.where(:product_id => params[:id])
   end
 

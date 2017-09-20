@@ -5,8 +5,7 @@ class Product < ApplicationRecord
 
   has_many :order_contents
   has_many :orders, :through => :order_contents
-  # ,
-                    # :source => :product
+  
 
   validates :price,
             :numericality => { :less_than_or_equal_to => 10_000 }
