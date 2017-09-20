@@ -4,51 +4,45 @@
 <div class="row">
  
   <div class="col-md-9 main-content">
-     <h2 class="text-center">Edit User <%=@user.id %>: <%=@user.first_name %> <%=@user.last_name %></h2>
+     <h2 class="text-center">New User <%=@user.id %>: <%=@user.first_name %> <%=@user.last_name %></h2>
 
     <%= form_for(@user) do |t| %>
       <table>
         <tbody>
           <tr>
             <td><strong>First Name:</strong></td>
-            <td></td>
-          </tr>
-           <tr>
-            <td><strong>Last Name:</strong></td>
             <td><%= t.text_field :first_name %></td>
           </tr>
           <tr>
-            <td><strong>Email:</strong></td>
+            <td><strong>Last Name:</strong></td>
             <td><%= t.text_field :last_name %></td>
           </tr>
           <tr>
-            <td><strong>Telephone</strong></td>
+            <td><strong>Email:</strong></td>
+            <td><%= t.text_field :email %></td>
           </tr>
           <tr>
             <td><strong>Default Billing Address</strong></td>
               <td>
-               
-
+                <%= t.select :billing_id, 
+                  @addresses.map {|a| [a.street_address, a.id]}  %>
               </td>
+            </tr>
+            <tr>
              <td><strong>Default Shipping Address</strong></td>
               <td>
-               
-               
+               <%= t.select :shipping_id, 
+                  @addresses.map {|a| [a.street_address, a.id]}  %>
               </td>
-
-          </tr>
-        </tbody>
-      </table>
+            </tr>
+          </tbody>
+        </table>
       <br />
+      <p><%= link_to "View Saved Addresses", "#" %>
 
-      <p><%= t.submit "Update User", class: "btn btn-primary btn-lg btn-block" %></p>
-
-       <p><%= link_to "Delete", user_path(@user),
-                      data: { confirm: "Are you sure?" },
-                      method: :delete %></p>
+      <p><%= t.submit "Create User", class: "btn btn-primary btn-lg btn-block" %></p>
 
     <% end %> 
-
     
   </div>
 </div>

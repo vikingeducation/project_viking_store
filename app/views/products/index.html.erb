@@ -29,7 +29,7 @@
             <td><%= product.id %></td>
             <td><%= product.name %></td>
             <td><%= product.price %></td>
-            <td><%= product.category_id %></td>
+            <td><%= product.category.name %></td>
             <td><%= link_to "show", product_path(product) %></td>
             <td><%= link_to "edit", edit_product_path(product) %></td>
             <td><%= link_to "delete", product_path(product),

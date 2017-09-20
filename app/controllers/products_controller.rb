@@ -2,8 +2,6 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    # @products.each do
-    # @category = Category.where(:id => @product.category_id)
   end
 
   def new
@@ -13,7 +11,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @order_contents = OrderContent.where(:product_id => params[:id])
+    # @order_contents = OrderContent.where(:product_id => params[:id])
   end
 
   def edit

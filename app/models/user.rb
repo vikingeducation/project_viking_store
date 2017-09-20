@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
   has_many :addresses
+
   has_many :orders
 
   has_many :order_contents, through: :orders
@@ -12,7 +13,9 @@ class User < ApplicationRecord
   belongs_to :default_shipping_address, :foreign_key => :shipping_id,
             :class_name => "Address"
 
-
+  validates :first_name, :last_name, length: {minimum: 1, maximum: 64}
+  validates :email, length: {minimum: 1, maximum: 64},
+            format: { with: /@/}
 
 
   def self.user_count
@@ -78,7 +81,7 @@ class User < ApplicationRecord
   
   def self.admin_info
     User.find_by_sql("
-        SELECT users.id, first_name, users.created_at AS joined, cities.name AS city, states.name AS state, SUM(orders.id) AS orders, MAX(orders.created_at) AS last_order_date FROM users
+        SELECT users.id, first_name, users.created_at AS joined, cities.name AS city, states.name AS state, SUM(orders.id) AS orders_sum, MAX(orders.created_at) AS last_order_date FROM users
         JOIN addresses on addresses.user_id = users.id
         JOIN cities on cities.id = addresses.city_id
         JOIN states on states.id = addresses.state_id
