@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :order_contents, through: :orders
   has_many :products, :through => :order_contents
 
+  has_many :credit_cards
+
   belongs_to :default_billing_address, :foreign_key => :billing_id,
             :class_name => "Address"
 
@@ -16,6 +18,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, length: {minimum: 1, maximum: 64}
   validates :email, length: {minimum: 1, maximum: 64},
             format: { with: /@/}
+
 
 
   def self.user_count

@@ -25,27 +25,32 @@
           <td><%=@user.email %></td>
         </tr>
         <tr>
-          <td><strong>Default Billing Address</strong></td>
-            <td>
-              <%= @user.default_billing_address.street_address%>
-            </td>
-        </tr>
+        <td><strong>Default Billing Address</strong></td>
+          <td>
+            <%= @user.addresses.first.street_address%>
+          </td>
+       </tr>
         <tr>
            <td><strong>Default Shipping Address</strong></td>
-            <td>
-              <%= @user.default_shipping_address.street_address %>
-            </td>
-        </tr>
+           <td>
+            <%= @user.addresses.first.street_address %>
+          </td>
+      </tr>
+          <%= render partial: "user_addresses", locals: { user: @user } %>
       </tbody>
     </table>
-    <table class="table table-striped table-bordered">
+    <br/>
+    <%= render "user_credit_card_details" %>
+
+
+    <!-- <table class="table table-striped table-bordered"> -->
     
     <p><%= link_to "Edit", edit_user_path(@user) %></p>
-    <ps><%= link_to "Delete", user_path(@user),
+    <p><%= link_to "Delete", user_path(@user),
                       data: { confirm: "Are you sure?" },
                       method: :delete %></p>
 
-    <p><%= link_to "View Saved Addresses", "#" %></p>
+    <p><%= link_to "View Saved Addresses", "" %></p>
     <p><%= link_to "View Unplaced Order (Cart)", "#" %></p>
 
   </div>
