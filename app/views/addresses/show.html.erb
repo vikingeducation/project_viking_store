@@ -1,0 +1,50 @@
+<% content_for :title do %>
+  <title>Viking Store Admin Portal</title>
+<% end %>
+
+<div class="row">
+  <div class="col-md-9 main-content">
+    <h2 class="text-center">User <%=@address.user.first_name %>: <%=@address.user.last_name %>'s Address</h2>
+
+
+    <table class="table table-striped table-bordered">
+      <tbody>
+       
+        <tr>
+          <td><strong>Owner ID:</strong></td>
+          <td><%=@address.user.id %></td>
+        </tr>
+        <tr>
+          <td><strong>Owner Name:</strong></td>
+          <td><%= link to @address.user.first_name @address.user.last_name %> (click to view user)</td>
+        </tr>
+        <tr>
+          <td><strong>Street</strong></td>
+          <td><%=@address.street_address %></td>
+        </tr>
+        <tr>
+        <td><strong>City</strong></td>
+          <td>
+            <%= @address.city.name%>
+          </td>
+       </tr>
+        <tr>
+           <td><strong>State</strong></td>
+           <td><%= @address.state.name %></td>
+        </tr>
+        <tr>
+        <td><strong>Zip</strong></td>
+          <td><%= @address.zip_code%></td>
+       </tr>
+      </tbody>
+    </table>
+    <br/>
+
+    
+    <p><%= link_to "Edit Address", edit_user_address_path(@address) %></p>
+    <p><%= link_to "Delete Address", user_address_path(@address),
+                      data: { confirm: "Are you sure?" },
+                      method: :delete %></p>
+
+  </div>
+</div>

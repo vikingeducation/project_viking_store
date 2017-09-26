@@ -1,0 +1,51 @@
+<% content_for :title do %>
+  <title>Viking Store Admin Portal</title>
+<% end %>
+<div class="row">
+  <h1 class="text-center">Viking Store Admin Portal</h>
+</div>
+<br />
+<div class="row">
+  <%= render partial: "shared/admin_navbar" %>
+   
+  <div class="col-md-9 main-content">
+    <h2 class="text-center">Addresses</h2>
+    <p class="text-center">Create new addresses from within <%=link_to "User", users_path %> profiles</h2>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <td><strong>ID</strong></td>
+          <td><strong>User</strong></td>
+          <td><strong>Address</strong></td>
+          <td><strong>City</strong></td>
+          <td><strong>State</strong></td>
+          <td><strong>Orders</strong></td>
+          <td><strong>Created</strong></td>
+          <td><strong>SHOW</strong></td>
+          <td><strong>EDIT</strong></td>
+          <td><strong>DELETE</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+         <% @addresses.each do |address| %>
+          <tr>
+            <td><%= address.id %></td>
+            <td><%= link_to address.user.first_name, user_path(@address.user) %></td>
+            <td><%= address.street_address %></td>
+            <td><%= address.city.name %></td>
+            <td><%= address.state.name %></td>
+            <td><%= address.user.orders.count %></td>
+            <td><%= address.created_on %></td>
+            <td><%= link_to "show", address_path(address)%></td>
+            <td><%= link_to "edit", edit_address_path(address) %></td>
+            <td><%= link_to "delete", address_path(address),
+                      data: { confirm: "Are you sure?" },
+                      method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

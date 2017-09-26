@@ -1,4 +1,6 @@
 class City < ApplicationRecord
+
+  validates :name, length: {minimum: 1, maximum: 64 }
    def self.top_three_cities
     City.find_by_sql("
       SELECT cities.name, COUNT(users.id) as num_users FROM users
