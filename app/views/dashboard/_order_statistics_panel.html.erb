@@ -1,0 +1,95 @@
+<div class="col-md-5 border">
+
+  <h2 class="text-center text-primary mt-4">3. Order Statistics</h2>
+
+  <!-- Last 7 days Orders Statistics table -->
+  <h4 class="text-left text-secondary mt-4">Last 7 Days</h4>
+  <table class="table table-striped mt-4">
+    <thead class="table-inverse">
+      <tr>
+        <td>Item</td>
+        <td>Data</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Number of Orders</td>
+        <td><%= locals[:orders_within_7_days] %></td>
+      </tr>
+      <tr>
+        <td>Total Revenue</td>
+        <td><%= number_to_currency(locals[:revenue_within_7_days]) %></td>
+      </tr>
+      <tr>
+        <td>Average Order Value</td>
+        <td><%= number_to_currency(locals[:average_order_value_within_7_days]) %></td>
+      </tr>
+      <tr>
+        <td>Largest Order Value</td>
+        <td><%= number_to_currency(locals[:largest_order_value_within_7_days]) %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Last 30 days Orders Statistics table -->
+  <h4 class="text-left text-secondary mt-4">Last 30 Days</h4>
+  <table class="table table-striped mt-4">
+    <thead class="table-inverse">
+      <tr>
+        <td>Item</td>
+        <td>Data</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Number of Orders</td>
+        <td><%= locals[:orders_within_30_days] %></td>
+      </tr>
+      <tr>
+        <td>Total Revenue</td>
+        <td><%= number_to_currency(locals[:revenue_within_30_days]) %></td>
+      </tr>
+      <tr>
+        <td>Average Order Value</td>
+        <td><%= number_to_currency(locals[:average_order_value_within_30_days]) %></td>
+      </tr>
+      <tr>
+        <td>Largest Order Value</td>
+        <td><%= number_to_currency(locals[:largest_order_value_within_30_days]) %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Total Order Statistics table -->
+  <h4 class="text-left text-secondary mt-4">Total</h4>
+  <table class="table table-striped mt-4">
+    <thead class="table-inverse">
+      <tr>
+        <td>Item</td>
+        <td>Data</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Number of Orders</td>
+        <td><%= locals[:total_orders] %></td>
+      </tr>
+      <tr>
+        <td>Total Revenue</td>
+        <td><%= number_to_currency(locals[:total_revenue]) %></td>
+      </tr>
+      <tr>
+        <td>Average Order Value</td>
+        <td><%= number_to_currency(locals[:average_order_value_across_all_time]) %></td>
+      </tr>
+      <tr>
+        <td>Largest Order Value</td>
+        <td><%= number_to_currency(locals[:largest_order_value_across_all_time]) %></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

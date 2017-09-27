@@ -1,6 +1,9 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+# set Faker gem's locale
+Faker::Config.locale = "en-US"
+
 # You'll see little puts statements in the file to give you status updates as the file runs.
 puts "Destroying old records"
 
@@ -106,10 +109,11 @@ def generate_user
   last_name = Faker::Name.last_name
 
   u = User.new
-  u[:first_name]  = first_name
-  u[:last_name]   = last_name
-  u[:email]       = Faker::Internet.email("#{first_name} #{last_name}")
-  u[:created_at]  = creation_date
+  u[:first_name]   = first_name
+  u[:last_name]    = last_name
+  u[:email]        = Faker::Internet.email("#{first_name} #{last_name}")
+  u[:phone_number] = Faker::PhoneNumber.phone_number
+  u[:created_at]   = creation_date
   u.save
 
   # Create affilliated addresses and select billing and shipping addresses.
@@ -161,10 +165,18 @@ def generate_order
   # a user with a billing address is one
   # a user who still needs a shopping cart built is the other
   if user[:billing_id] || !has_cart?(user[:id])
+    # create credit card for user if required
+    if user.credit_cards.present?
+      credit_card = user.credit_cards.first
+    else
+      credit_card = create_credit_card(user)
+    end
+
     o = Order.new
-    o[:user_id]       = user.id
-    o[:shipping_id]   = random_user_address(user.id)
-    o[:billing_id]    = random_user_address(user.id)
+    o[:user_id]         = user.id
+    o[:shipping_id]     = random_user_address(user.id)
+    o[:billing_id]      = random_user_address(user.id)
+    o[:credit_card_id]  = credit_card.id
 
     # first generated order is a shopping cart
     # all since then are placed orders with checkout dates
@@ -177,31 +189,22 @@ def generate_order
   end
 end
 
-# Create some CreditCard records for users who have an order.
-def generate_credit_cards_for_checked_out_orders
-  checked_out_orders = Order.all.select("DISTINCT user_id").
-                                where("checkout_date IS NOT NULL")
+# Creates a credit card for a user.
+def create_credit_card(user)
+  card = CreditCard.new
+  card[:user_id] = user.id
 
-  checked_out_orders.each do |order|
-    card = CreditCard.new
-    card[:user_id] = order.user_id
+  # last 4 digits only
+  card[:card_number] = Faker::Number.number(16)
+  card[:exp_month] = rand(12) + 1
 
-    # last 4 digits only
-    card[:card_number] = Faker::Number.number(16)
-    card[:exp_month] = rand(12) + 1
+  #so far, only good cards
+  card[:exp_year] = Time.now.year + rand(5)
+  card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
 
-    #so far, only good cards
-    card[:exp_year] = Time.now.year + rand(5)
-    card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
+  card.save!
 
-    card.save
-
-    affiliated_orders = Order.where("user_id = ?", order.user_id).where("checkout_date IS NOT NULL")
-    affiliated_orders.each do |aff_ord|
-      aff_ord.credit_card_id = card.id
-      aff_ord.save
-    end
-  end
+  card
 end
 
 
@@ -220,9 +223,9 @@ puts "Created states"
 puts "Created cities"
 
 # Create categories and products
- MULTIPLIER.times       { generate_category }
-
+MULTIPLIER.times       { generate_category }
 puts "Created categories"
+
 (MULTIPLIER * 10).times { generate_product }
 puts "Created products"
 
@@ -232,7 +235,5 @@ puts "Created users"
 
 # Create orders and add the credit card records.
 (MULTIPLIER * 30).times { generate_order }
-puts "Created orders"
-generate_credit_cards_for_checked_out_orders
-puts "Created credit card orders"
+puts "Created orders (with credit cards)"
 puts "DONE!"

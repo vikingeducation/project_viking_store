@@ -1,0 +1,84 @@
+<div class="row justify-content-center mb-3">
+  <div class="col-10 border">
+
+    <div class="row mt-3">
+      <div class="col">
+        <h3 class="text-center">Add Products to Order</h3>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col text-center">
+        <span class="text-secondary">Add up to 5 Products at a time</span>
+      </div>
+    </div>
+
+    <%= form_tag(order_contents_path) do %>
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-6">
+            <%= select_tag "order_contents[product_1][id]", options_from_collection_for_select(@products, "id", "name"), class: "form-control", prompt: "Select a Product" %>
+          </div>
+          <div class="col">
+            <%= text_field_tag 'order_contents[product_1][quantity]', nil, placeholder: "Enter a quantity", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-6">
+            <%= select_tag "order_contents[product_2][id]", options_from_collection_for_select(@products, "id", "name"), class: "form-control", prompt: "Select a Product" %>
+          </div>
+          <div class="col">
+            <%= text_field_tag 'order_contents[product_2][quantity]', nil, placeholder: "Enter a quantity", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-6">
+            <%= select_tag "order_contents[product_3][id]", options_from_collection_for_select(@products, "id", "name"), class: "form-control", prompt: "Select a Product" %>
+          </div>
+          <div class="col">
+            <%= text_field_tag 'order_contents[product_3][quantity]', nil, placeholder: "Enter a quantity", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-6">
+            <%= select_tag "order_contents[product_4][id]", options_from_collection_for_select(@products, "id", "name"), class: "form-control", prompt: "Select a Product" %>
+          </div>
+          <div class="col">
+            <%= text_field_tag 'order_contents[product_4][quantity]', nil, placeholder: "Enter a quantity", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col-6">
+            <%= select_tag "order_contents[product_5][id]", options_from_collection_for_select(@products, "id", "name"), class: "form-control", prompt: "Select a Product" %>
+          </div>
+          <div class="col">
+            <%= text_field_tag 'order_contents[product_5][quantity]', nil, placeholder: "Enter a quantity", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col">
+            <%= hidden_field_tag "order_id", order.id %>
+
+            <%= button_tag "Add Products", class: "btn btn-primary btn-lg btn-block border rounded mt-4 mb-2" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

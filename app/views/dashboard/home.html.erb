@@ -1,0 +1,79 @@
+<div class="container">
+
+  <!-- Main page header -->
+  <div class="row mt-4 mb-4">
+    <div class="col-md-12">
+      <h1 class="text-center">Viking Store Analytics Dashboard</h1>
+    </div>
+  </div>
+
+  <!-- first row of 2 dashboard panels -->
+  <div class="row">
+
+    <!-- Overall Platform panel -->
+    <%= render "overall_platform_panel",
+    locals: {
+      total_users: total_users,
+      total_orders: total_orders,
+      total_products: total_products,
+      total_revenue: total_revenue,
+
+      new_users_within_30_days: new_users_within_30_days,
+      orders_within_30_days: orders_within_30_days,
+      new_products_within_30_days: new_products_within_30_days,
+      revenue_within_30_days: revenue_within_30_days,
+
+      new_users_within_7_days: new_users_within_7_days,
+      orders_within_7_days: orders_within_7_days,
+      new_products_within_7_days: new_products_within_7_days,
+      revenue_within_7_days: revenue_within_7_days
+    } %>
+
+    <!-- User Demographics and Behavior panel -->
+    <%= render "user_demographics_and_behavior_panel",
+      locals: {
+        top_3_states_by_billing_address: top_3_states_by_billing_address,
+        top_3_cities_by_billing_address: top_3_cities_by_billing_address,
+        user_with_highest_single_order_value: user_with_highest_single_order_value,
+        user_with_highest_lifetime_value: user_with_highest_lifetime_value,
+        user_with_highest_average_order_value: user_with_highest_average_order_value,
+        user_with_most_orders_placed: user_with_most_orders_placed
+      }
+    %>
+
+  </div>
+
+  <!-- second row of 2 dashboard panels -->
+  <div class="row mt-4">
+
+    <!-- Order Statistics panel -->
+    <%= render "order_statistics_panel",
+      locals: {
+        total_orders: total_orders,
+        total_revenue: total_revenue,
+        largest_order_value_across_all_time: largest_order_value_across_all_time,
+        average_order_value_across_all_time: average_order_value_across_all_time,
+
+        orders_within_30_days: orders_within_30_days,
+        revenue_within_30_days: revenue_within_30_days,
+        largest_order_value_within_30_days: largest_order_value_within_30_days,
+        average_order_value_within_30_days: average_order_value_within_30_days,
+
+        orders_within_7_days: orders_within_7_days,
+        revenue_within_7_days: revenue_within_7_days,
+        largest_order_value_within_7_days: largest_order_value_within_7_days,
+        average_order_value_within_7_days: average_order_value_within_7_days
+      }
+    %>
+
+    <!-- Time Series Data panel -->
+    <%= render "time_series_data_panel",
+      locals: {
+        orders_by_day: orders_by_day,
+        orders_by_week: orders_by_week
+      }
+    %>
+
+  </div>
+
+</div>

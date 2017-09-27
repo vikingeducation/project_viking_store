@@ -1,0 +1,287 @@
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">User <%= @user.id %>: <%= "#{@user}" %></h2>
+  </div>
+</div>
+
+<!-- Demographic Information panel -->
+<div class="row justify-content-center">
+  <div class="col-11 border">
+
+    <div class="row mt-2">
+      <div class="col">
+        <h4 class="text-center"><u>Demographic Information</u></h4>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-2">
+        <span class="font-weight-bold">First Name:</span>
+      </div>
+      <div class="col">
+        <%= @user.first_name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">Last Name:</span>
+      </div>
+      <div class="col">
+        <%= @user.last_name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">Email:</span>
+      </div>
+      <div class="col">
+        <%= mail_to @user.email %>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-2">
+        <span class="font-weight-bold">Telephone:</span>
+      </div>
+      <div class="col">
+        <%= @user.phone_number %>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col">
+        <span class="font-weight-bold">Default Billing Address:</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <% if @user.default_billing_address %>
+          <%= @user.default_billing_address.to_s %>
+        <% else %>
+          <span class="text-secondary">N/A</span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col">
+        <span class="font-weight-bold">Default Shipping Address:</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <% if @user.default_shipping_address %>
+          <%= @user.default_shipping_address.to_s %>
+        <% else %>
+          <span class="text-secondary">N/A</span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <%= link_to "Edit #{@user}'s Information", edit_user_path(@user.id) %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to "Delete #{@user}", user_path(@user.id), method: :delete, data: { confirm: "Are you sure you want to remove this User?" } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= link_to "View Saved Addresses", user_addresses_path(@user) %>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <% if @user.has_shopping_cart? %>
+          <%= link_to "View Unplaced Order (Cart)", order_path(@user.shopping_cart) %>
+        <% else %>
+          <span class="text-secondary">View Unplaced Order (Cart)</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Credit Card Information panel -->
+<div class="row justify-content-center mt-3">
+  <div class="col-11 border">
+
+    <div class="row mt-2">
+      <div class="col">
+        <h4 class="text-center"><u>Credit Card Information</u></h4>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-2">
+        <span class="font-weight-bold">First Name:</span>
+      </div>
+      <div class="col">
+        <% if @credit_card %>
+          <%= @credit_card.holder_first_name %>
+        <% else %>
+          N/A
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">Last Name:</span>
+      </div>
+      <div class="col">
+        <% if @credit_card %>
+          <%= @credit_card.holder_last_name %>
+        <% else %>
+          N/A
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">Number:</span>
+      </div>
+      <div class="col">
+        <% if @credit_card %>
+          <%= "#{@credit_card}" %>
+        <% else %>
+          N/A
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">Expiration:</span>
+      </div>
+      <div class="col">
+        <% if @credit_card %>
+          <%= @credit_card.expiration_date %>
+        <% else %>
+          N/A
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <span class="font-weight-bold">CVV:</span>
+      </div>
+      <div class="col">
+        <% if @credit_card && !@credit_card.cvv.nil? %>
+          <%= @credit_card.cvv %>
+        <% else %>
+          N/A
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <% if @credit_card %>
+          <%= link_to "Remove Card", credit_card_path(@credit_card.id), method: :delete, data: { confirm: "Are you sure you want to remove this credit card?" } %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Admin Actions panel -->
+<div class="row justify-content-center mt-3">
+  <div class="col-11 border">
+
+    <div class="row mt-2">
+      <div class="col">
+        <h4 class="text-center">Admin Actions for <%= "#{@user}" %></h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= button_to "Create Order", new_order_path, html_options = { method: :get, class: "btn btn-lg btn-primary btn-block border rounded mt-2", params: { user_id: @user.id } } %>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col">
+        <%= button_to "Create Address", new_user_address_path(@user), html_options = { method: :get, class: "btn btn-lg btn-primary btn-block border rounded mt-2" } %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Order History panel -->
+<div class="row justify-content-center mt-3 mb-3">
+  <div class="col-11 border">
+
+    <div class="row mt-2">
+      <div class="col">
+        <h4 class="text-center"><u>Order History</u></h4>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Order Date</th>
+              <th>Order Value</th>
+              <th>Status</th>
+              <th>SHOW</th>
+              <th>EDIT</th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @user.order_history.each do |order| %>
+              <tr>
+                <td><%= order.id %></td>
+                <td>
+                  <% if order.checkout_date %>
+                    <%= order.checkout_date %>
+                  <% else %>
+                    N/A
+                  <% end %>
+                </td>
+                <td>
+                  <% if order.value %>
+                    <%= number_to_currency(order.value) %>
+                  <% else %>
+                    <%= number_to_currency(0) %>
+                  <% end %>
+                </td>
+                <td>
+                  <% if order.checkout_date %>
+                    <span class="text-success">PLACED</span>
+                  <% else %>
+                    <span class="text-danger">UNPLACED</span>
+                  <% end %>
+                </td>
+                <td><%= link_to "show", order_path(order) %></td>
+                <td><%= link_to "edit", edit_order_path(order) %></td>
+                <td><%= link_to "delete", order_path(order), method: :delete, data: { confirm: "Are you sure you want to remove this Order?" } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+</div>

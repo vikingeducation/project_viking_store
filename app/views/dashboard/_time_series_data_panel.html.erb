@@ -1,0 +1,48 @@
+<div class="col-md-5 border ml-md-auto">
+  <h2 class="text-center text-primary mt-4">4. Time Series Data</h2>
+
+  <!-- Orders by Day table -->
+  <h4 class="text-left text-secondary mt-4">Orders by Day</h4>
+  <table class="table table-striped mt-4">
+    <thead class="table-inverse">
+      <tr>
+        <td>Date</td>
+        <td>Quantity</td>
+        <td>Value</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% locals[:orders_by_day].each do |order| %>
+        <tr>
+          <td><%= order[:date] %></td>
+          <td><%= order[:num_orders] %></td>
+          <td><%= number_to_currency(order[:amount]) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- Orders by Week table -->
+  <h4 class="text-left text-secondary mt-4">Orders by Week</h4>
+  <table class="table table-striped mt-4">
+    <thead class="table-inverse">
+      <tr>
+        <td>Date</td>
+        <td>Quantity</td>
+        <td>Value</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% locals[:orders_by_week].each do |order| %>
+        <tr>
+          <td><%= order[:date] %></td>
+          <td><%= order[:num_orders] %></td>
+          <td><%= number_to_currency(order[:amount]) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

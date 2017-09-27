@@ -1,0 +1,94 @@
+<div class="col-md-5 border">
+  <h2 class="text-center text-primary mt-4">1. Overall Platform</h2>
+
+  <!-- table with dummy data -->
+  <h4 class="text-left text-secondary mt-4">Last 7 Days</h4>
+  <table class="table table-striped mt-4">
+    <thead class="table-inverse">
+      <tr>
+        <td>Item</td>
+        <td>Data</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>New Users</td>
+        <td><%= locals[:new_users_within_7_days] %></td>
+      </tr>
+      <tr>
+        <td>Orders Placed</td>
+        <td><%= locals[:orders_within_7_days] %></td>
+      </tr>
+      <tr>
+        <td>New Products</td>
+        <td><%= locals[:new_products_within_7_days] %></td>
+      </tr>
+      <tr>
+        <td>Revenue</td>
+        <td><%= number_to_currency(locals[:revenue_within_7_days]) %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Metrics within the last 30 days -->
+  <h4 class="text-left text-secondary mt-4">Last 30 Days</h4>
+  <table class="table table-striped mt-4">
+    <thead class="table-inverse">
+      <tr>
+        <td>Item</td>
+        <td>Data</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>New Users</td>
+        <td><%= locals[:new_users_within_30_days] %></td>
+      </tr>
+      <tr>
+        <td>Orders Placed</td>
+        <td><%= locals[:orders_within_30_days] %></td>
+      </tr>
+      <tr>
+        <td>New Products</td>
+        <td><%= locals[:new_products_within_30_days] %></td>
+      </tr>
+      <tr>
+        <td>Revenue</td>
+        <td><%= number_to_currency(locals[:revenue_within_30_days]) %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Totals for key platform metrics -->
+  <h4 class="text-left text-secondary mt-4">Totals</h4>
+  <table class="table table-striped mt-4">
+    <thead class="table-inverse">
+      <tr>
+        <td>Item</td>
+        <td>Data</td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Total Users</td>
+        <td><%= locals[:total_users] %></td>
+      </tr>
+      <tr>
+        <td>Total Orders</td>
+        <td><%= locals[:total_orders] %></td>
+      </tr>
+      <tr>
+        <td>Total Products</td>
+        <td><%= locals[:total_products] %></td>
+      </tr>
+      <tr>
+        <td>Total Revenue</td>
+        <td><%= number_to_currency(locals[:total_revenue]) %></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

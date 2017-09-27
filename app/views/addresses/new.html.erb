@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col">
+    <h2 class="text-center">Create <%= "#{@user}'s"%> Address<h2>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-11 border mt-2 mb-4">
+
+    <%= render "shared_elements_for_new_and_edit" %>
+
+    <!-- form -->
+    <div class="row mt-4">
+      <div class="col">
+
+        <%= form_for [@user, @address] do |f| %>
+          <%= render partial: "shared_form_elements", locals: { f: f } %>
+
+
+          <div class="form-group form-row">
+            <div class="col">
+              <%= f.submit "Create Address", class: "btn btn-primary btn-lg btn-block border rounded mt-4 mb-2" %>
+            </div>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

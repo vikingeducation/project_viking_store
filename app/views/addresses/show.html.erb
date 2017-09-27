@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col">
+    <h2 class="text-center"><%= "#{@user}'s Address" %>
+  </div>
+</div>
+
+<div class="row justify-content-center mb-3">
+  <div class="col-11 border">
+
+    <div class="row mt-3">
+      <div class="col-3">
+        <span class="font-weight-bold">Owner ID:</span>
+      </div>
+      <div class="col">
+        <%= @user.id %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <span class="font-weight-bold">Owner Name:</span>
+      </div>
+      <div class="col">
+        <%= link_to "#{@user} (click to view User)", user_path(@user) %>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-3">
+        <span class="font-weight-bold">Street</span>
+      </div>
+      <div class="col">
+        <%= @address.street_address %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <span class="font-weight-bold">City</span>
+      </div>
+      <div class="col">
+        <%= @address.city.name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <span class="font-weight-bold">State</span>
+      </div>
+      <div class="col">
+        <%= @address.state.name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <span class="font-weight-bold">Zip</span>
+      </div>
+      <div class="col">
+        <%= @address.zip_code %>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col">
+        <%= link_to "Edit Address", edit_user_address_path(@user, @address) %>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <%= link_to "Delete Address", user_address_path(@address), method: :delete, data: { confirm: "Are you sure you want to remove this Address?" } %>
+      </div>
+    </div>
+
+  </div>
+</div>
