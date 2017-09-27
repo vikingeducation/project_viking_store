@@ -51,10 +51,10 @@ class AddressesController < ApplicationController
   end
 
   
-private
-  def address_form_params
-    params.require(:user).permit(:street_address, :secondary_address, :zip_code, :city_id, :state_id, :user_id)
-  end
-end
+  private
+    def address_form_params
+      params.require(:user).permit(:street_address, :secondary_address, :zip_code, :city_id, :state_id, :user_id)
+    end
+  
 
 end
