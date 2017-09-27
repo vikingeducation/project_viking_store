@@ -98,12 +98,13 @@ class Order < ApplicationRecord
 
   # finds the value of the largest Order within a number of days from the current day
   def self.largest_order_value_within(days)
-    self.revenue_per_order
-    .where("orders.created_at >= ?", Time.now - days.days)
-    .order("revenue DESC")
-    .limit(1)
-    .first
-    .revenue
+    largest_order = self.revenue_per_order
+                    .where("orders.created_at >= ?", Time.now - days.days)
+                    .order("revenue DESC")
+                    .limit(1)
+                    .first
+
+    largest_order ? largest_order.revenue : 0
   end
 
   # finds the value of the largest Order across all time
@@ -117,7 +118,9 @@ class Order < ApplicationRecord
 
   # determines the average Order value within a number of days from the current day
   def self.average_order_value_within(days)
-    self.revenue_within(days) / self.orders_within(days)
+    num_orders = self.orders_within(days)
+
+    num_orders == 0 ? 0 : self.revenue_within(days) / self.orders_within(days)
   end
 
   # determines the average Order value across all time
