@@ -104,5 +104,9 @@ class Order < ApplicationRecord
       GROUP BY weeks
       ORDER BY weeks DESC
     ")
+
+    def self.order_placed?
+      Order.where.not(checkout_date: nil)
+    end
   end
 end
