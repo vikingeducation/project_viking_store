@@ -15,7 +15,6 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <td><strong>ID</strong></td>
           <td><strong>UserID</strong></td>
           <td><strong>Address</strong></td>
           <td><strong>City</strong></td>
@@ -32,15 +31,15 @@
          <% @orders.each do |order| %>
           <tr>
             <td><%= order.id %></td>
-            <td><%= link_to order.user.first_name, user_path(@order.user) %></td>
+            <td><%= link_to "#{order.user.first_name}",user_path(order.user) %></td>
             <td><%= order.user.default_shipping_address.street_address %></td>
             <td><%= order.user.default_shipping_address.city.name %></td>
             <td><%= order.user.default_shipping_address.state.name %></td>
             <td><%= order.user.orders.count %></td>
-            <td><%= order.created_on %></td>
-            <td><%= link_to "show", order_path(order)%></td>
-            <td><%= link_to "edit", edit_user_order_path(order) %></td>
-            <td><%= link_to "delete", user_order_path(order),
+            <td><%= order.created_at %></td>
+            <td><%= link_to "show", user_order_path(order.user,order)%></td>
+            <td><%= link_to "edit", edit_user_order_path(order.user, order) %></td>
+            <td><%= link_to "delete", user_order_path(order.user, order),
                       data: { confirm: "Are you sure?" },
                       method: :delete %></td>
           </tr>

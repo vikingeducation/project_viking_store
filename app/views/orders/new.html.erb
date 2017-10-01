@@ -1,0 +1,72 @@
+<% content_for :title do %>
+  <title>Viking Store Admin Portal</title>
+<% end %>
+
+<div class="row">
+  <div class="col-md-9 main-content">
+    <h2 class="text-center">New Order for <%=@order.user.first_name%> <%=@order.user.last_name%></h2>
+    <h2 class="text-center">Logistical Information</h2>
+    <h3>Basic Information</h3>
+    <table class="table table-striped table-bordered">
+      <tbody>
+        <tr>
+          <td><strong>Customer ID:</strong></td>
+          <td><%=@order.user.id %></td>
+        </tr>
+        <tr>
+          <td><strong>Customer:</strong></td>
+          <td><%= link_to "#{@order.user.first_name} #{@order.user.last_name} (click to view user)", user_path(@order.user)%></td>
+        </tr>
+        <tr>
+          <td><strong>Date Placed</strong></td>
+          <td>N/A</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><%= link_to "Edit Customer Profile", edit_user_path(@order.user) %></p>
+     <br/>
+
+     <%= form_for(@order) do |t| %>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td>
+              <h3>Shipping Address</h3>
+            </td>
+          </tr>
+          <tr>
+            <td>
+             <%= t.select :shipping_id, 
+                @order.user.addresses.map {|a| [a.street_address, a.id]}  %>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <h3>Billing Address</h3>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= t.select :billing_id, 
+                @order.user.addresses.map {|a| [a.street_address, a.id]}  %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h3>Billing Card</h3>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <%= t.select :credit_card_id, 
+                  @order.user.credit_cards.map {|a| [a.card_number, a.id]}  %>
+            </td>
+          </tr>
+        </tbody>
+      </table> 
+      <br/>
+      <p><%= t.submit "Create Order in Shopping Cart", class: "btn btn-primary btn-lg btn-block" %></p>   
+    <% end %> 
+  </div>
+</div>

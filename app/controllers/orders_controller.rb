@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.new
+    @order = Order.new(user_id: params[:user_id])
   end
 
   def create
@@ -26,13 +26,14 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    @user = @order.user
   end
 
   def update
      @order = Order.find(params[:id])
     if @order.update_attributes(order_form_params)
     flash[:success] = "Order updated successfully."
-    redirect_to user_order_path(@order)
+    redirect_to user_order_path(@order.user, order)
     else
       flash[:error] = "Order not updated"
       render :show

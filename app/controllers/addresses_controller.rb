@@ -5,7 +5,8 @@ class AddressesController < ApplicationController
   end
 
   def new
-    # @address = Address.new
+    @address = Address.new(user_id: params[:user_id])
+    @addresses = Address.all
   end
 
   def create
@@ -25,6 +26,7 @@ class AddressesController < ApplicationController
 
   def edit
     @address = Address.find(params[:id])
+    @user = @address.user
   end
 
   def update

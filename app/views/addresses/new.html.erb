@@ -4,18 +4,18 @@
 <div class="row">
  
   <div class="col-md-9 main-content">
-     <h2 class="text-center">Edit User <%=@address.user.first_name %> <%=@address.user.last_name %></h2>
+     <h2 class="text-center"> New User Address for <%=@address.user.first_name %> <%=@address.user.last_name %></h2>
 
     <%= form_for(@address) do |t| %>
       <table>
         <tbody>
           <tr>
-            <td><strong>Owner ID:</strong></td>
+            <td><strong>Owner ID: </strong></td>
             <td><%=@address.user.id %></td>
           </tr>
           <tr>
             <td><strong>Owner Name:</strong></td>
-            <td><%= link to @address.user.first_name @address.user.last_name %> (click to view user)</td>
+            <td><%= link_to "#{@address.user.first_name} #{@address.user.last_name} (click to view user)", user_path(@address.user) %> </td>
           </tr>
           <tr>
             <td><strong>Street</strong></td>

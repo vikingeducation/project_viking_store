@@ -51,7 +51,10 @@
     <p><%= link_to "Delete #{@user.first_name} #{@user.last_name}", user_path(@user),
                       data: { confirm: "Are you sure?" },
                       method: :delete %></p>
-    <p><%= link_to "View Saved Addresses", user_address_path(@user) %></p>
+    <p>
+      <!-- link_to "View Saved Addresses", render partial: "user_addresses", locals: {user: @user} %>  -->
+        
+    </p>
     <p><%= link_to "View Unplaced Order (Cart)", "#" %></p>
   </div>
 </div>
