@@ -82,10 +82,10 @@
           <td><strong>Last 4 digits</strong></td>
           <td>
             <% if @order.user.credit_cards.empty? %>
-              <p>No Credit Card details</p>
-            <% else 
-                 @order.user.credit_cards.first.card_number 
-              end %>
+              No Credit Card details
+            <% else %>
+                 <%= @order.user.credit_cards.first.card_number %> 
+              <% end %>
           </td>
         </tr>
       </tbody>

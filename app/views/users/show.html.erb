@@ -52,9 +52,12 @@
                       data: { confirm: "Are you sure?" },
                       method: :delete %></p>
     <p>
-      <!-- link_to "View Saved Addresses", render partial: "user_addresses", locals: {user: @user} %>  -->
+     <%= link_to render(:partial => "user_addresses", locals: {user: @user} ) %>
+        <!-- link_to "View Saved Addresses", user_addresses_path(@user) %>    -->
         
+
+
     </p>
-    <p><%= link_to "View Unplaced Order (Cart)", "#" %></p>
+    <p><%= link_to "View Unplaced Order (Cart)", user_order_path(@user, @user.orders) %></p>
   </div>
 </div>

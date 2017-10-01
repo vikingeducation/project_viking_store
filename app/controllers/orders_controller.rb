@@ -27,13 +27,14 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @user = @order.user
+    @order_contents = @order.order_contents
   end
 
   def update
      @order = Order.find(params[:id])
     if @order.update_attributes(order_form_params)
     flash[:success] = "Order updated successfully."
-    redirect_to user_order_path(@order.user, order)
+    redirect_to user_order_path(@order.user, @order)
     else
       flash[:error] = "Order not updated"
       render :show
