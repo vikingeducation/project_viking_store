@@ -12,5 +12,7 @@ Project: Viking Store Admin
 - In the browser run `localhost:3000`
 
 
+[Deployed here](https://viking-store-aa.herokuapp.com/)
+
 The Viking Store e-commerce application for Viking Commerce Inc
 from the [Viking Code School](http://vikingcodeschool.com)
