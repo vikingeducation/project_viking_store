@@ -1,0 +1,94 @@
+<% content_for :title do %>
+  <title>Analytics Dashboard Home</title>
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-center">Viking Store Analytics Dashboard</h2>
+  </div>
+  <div class="row"> 
+    <div class="col-md-6"> <!-- Panel 1 -->
+       <h4 class="text-center">1. Overall Platform</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Last 7 days</label>
+          <%= render partial: "overall_7days" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Last 30 days</label>
+          <%= render partial: "overall_30days" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Total</label>
+          <%= render partial: "overall" %>
+        </div>
+      </div>
+    </div> <!-- Panel 1 -->
+
+    <div class="col-md-6"> <!--Panel 2-->
+      <h4 class="text-center">2. User Demographics and Behaviour</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Top 3 States Users Live In (billing)</label>
+          <%= render partial: "demographics_states" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Top 3 Cities Users Live In (billing)</label>
+          <%= render partial: "demographics_cities" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Top User With...</label>
+          <%= render partial: "demographics_topuser" %>
+        </div>
+      </div>
+    </div> <!-- Panel 2 -->
+  </div>
+
+
+  <div class="row"> 
+    <div class="col-md-6"> <!-- Panel 3-->
+      <h4 class="text-center">3. Order Statistics</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Last 7 days</label>
+          <%= render partial: "stats_7days" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Last 30 days</label>
+          <%= render partial: "stats_30days" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Total</label>
+          <%= render partial: "stats_overall" %>
+        </div>
+      </div>
+    </div> <!-- Panel 3-->
+
+    <div class="col-md-6"> <!-- Panel 4-->
+      <h4 class="text-center">4. Time Series Data</h4>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Orders by day</label>
+          <%= render partial: "order_by_day" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <label>Orders by Week</label>
+          <%= render partial: "order_by_week" %>
+        </div>
+      </div>
+    </div> <!-- Panel 4-->
+  </div> 
+</div>

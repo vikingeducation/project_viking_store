@@ -1,0 +1,32 @@
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <td><strong>Item</strong></td>
+      <td><strong>Data</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Number of Orders</td>
+      <td><%= @order_count %></td>
+    </tr>
+    <tr>
+      <td>Total Revenue</td>
+      <% @total_revenue.each do |revenue| %>
+        <td><%= revenue.sum %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Average Order Value</td>
+      <% @average_order.each do |avg| %>
+        <td><%= avg.order_value %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>Largest Order Value</td>
+      <% @max_order.each do |max| %>
+        <td><%= max.order_value %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

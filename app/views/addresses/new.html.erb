@@ -1,0 +1,51 @@
+<% content_for :title do %>
+  <title>Viking Store Admin Portal</title>
+<% end %>
+<div class="row">
+ 
+  <div class="col-md-9 main-content">
+     <h2 class="text-center"> New User Address for <%=@address.user.first_name %> <%=@address.user.last_name %></h2>
+
+    <%= form_for(@address) do |t| %>
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>Owner ID: </strong></td>
+            <td><%=@address.user.id %></td>
+          </tr>
+          <tr>
+            <td><strong>Owner Name:</strong></td>
+            <td><%= link_to "#{@address.user.first_name} #{@address.user.last_name} (click to view user)", user_path(@address.user) %> </td>
+          </tr>
+          <tr>
+            <td><strong>Street</strong></td>
+            <td><%= t.text_field :street_address %></td>
+          </tr>
+          <tr>
+            <td><strong>City</strong></td>
+              <td>
+                <%= t.select :city_id, 
+                  @addresses.map {|a| [a.city.name, a.city.id]}  %>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>State</strong></td>
+              <td>
+                <%= t.select :state_id, 
+                  @addresses.map {|a| [a.state.name, a.state.id]}  %>
+              </td>
+            </tr>
+            <tr>
+            <td><strong>Zip</strong></td>
+            <td><%= t.text_field :zip_code %></td>
+          </tr>
+          </tbody>
+        </table>
+      <br />
+
+      <p><%= t.submit "Create Address", class: "btn btn-primary btn-lg btn-block" %></p>
+
+    <% end %> 
+    
+  </div>
+</div>
