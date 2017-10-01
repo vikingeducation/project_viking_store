@@ -1,7 +1,9 @@
 Project: Viking Store Admin
 ========================
 
-##To Get Going On This Assignment
+### [Sean Luckett](https://github.com/SeanLuckett)
+
+## To Get Going On This Assignment
 - run `rake db:create`
 - run `rake db:migrate`
 - run `rake db:seed`
