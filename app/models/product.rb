@@ -7,4 +7,11 @@ class Product < ApplicationRecord
     begin_date = eval("#{num_days}.days.ago")
     listed_since(begin_date)
   end
+
+  def self.revenue
+    joins('JOIN order_contents ON products.id = order_contents.product_id')
+      .joins('JOIN orders ON order_contents.order_id = orders.id')
+      .sum('products.price * order_contents.quantity')
+      .to_f
+  end
 end
