@@ -2,26 +2,9 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 # You'll see little puts statements in the file to give you status updates as the file runs.
-puts "Destroying old records"
-
-# Blow away all the existing records every time.
-
-User.destroy_all
-Address.destroy_all
-Order.destroy_all
-OrderContent.destroy_all
-Category.destroy_all
-CreditCard.destroy_all
-Product.destroy_all
-State.destroy_all
-City.destroy_all
-
-puts "Old records destroyed"
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
 MULTIPLIER = 10
-
-
 
 # Because seeds.rb is run as a script, you'll need to put helper methods ABOVE where they are used to generate records.
 # This file defines all the methods and data first, then runs all the procedural stuff at the end.
