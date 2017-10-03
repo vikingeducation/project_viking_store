@@ -14,6 +14,27 @@
     <h5>Top 3 cities users live in (billing)</h5>
     <%= render partial: 'most_lived_in_table', locals: { areas: @top_cities } %>
 
+    <h5>Top users with...</h5>
+    <table class="table table-striped table-bordered table-sm">
+      <thead class="thead-default">
+      <tr>
+        <th>Criteria</th>
+        <th>User</th>
+        <th>Quantity</th>
+      </tr>
+      </thead>
+
+      <tr>
+        <td>Most orders placed</td>
+        <td><%= @top_orderer.name %></td>
+        <td><%= @top_orderer.order_count %></td>
+      </tr>
+      <tr>
+        <td>Highest single order</td>
+        <td><%= @max_order.name %></td>
+        <td>&dollar;<%= @max_order.order_amount %></td>
+      </tr>
+    </table>
   </section>
 </div>
 

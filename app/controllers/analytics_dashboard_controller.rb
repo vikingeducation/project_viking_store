@@ -17,5 +17,8 @@ class AnalyticsDashboardController < ApplicationController
 
     @top_states = State.most_lived_in(3)
     @top_cities = City.most_lived_in(3)
+
+    @top_orderer = Order.user_with_most_orders
+    @max_order = User.largest_order_to_date
   end
 end
