@@ -1,0 +1,28 @@
+<section class="overall-platform col-sm-6 border border-primary rounded">
+  <h2 class="text-center">1. Overall Platform</h2>
+
+  <h3>Last 7 days</h3>
+  <%= render partial: 'platform_table', locals: {
+      new_users: @new_users_7,
+      orders: @orders_7,
+      new_products: @new_products_7,
+      revenue: @revenue
+  } %>
+
+  <h3>Last 30 days</h3>
+  <%= render partial: 'platform_table', locals: {
+      new_users: @new_users_30,
+      orders: @orders_30,
+      new_products: @new_products_30,
+      revenue: @revenue
+  } %>
+
+  <h3>Total</h3>
+  <%= render partial: 'platform_table', locals: {
+      new_users: @users_total,
+      orders: @orders_total,
+      new_products: @products_total,
+      revenue: @revenue
+  } %>
+</section>
+
