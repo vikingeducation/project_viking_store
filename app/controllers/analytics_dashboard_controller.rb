@@ -16,5 +16,6 @@ class AnalyticsDashboardController < ApplicationController
     @revenue = Order.revenue
 
     @top_states = State.most_lived_in(3)
+    @top_cities = City.most_lived_in(3)
   end
 end
