@@ -22,5 +22,8 @@ class AnalyticsDashboardController < ApplicationController
     @max_order = User.with_largest_order
     @biggest_spender = User.highest_value_by_revenue
     @largest_avg_orderer = User.highest_average_order
+
+    @average_order_7 = Order.average_total_since 7
+    @largest_order_7 = Order.largest_total_since 7
   end
 end

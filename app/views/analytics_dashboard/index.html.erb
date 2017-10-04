@@ -20,4 +20,16 @@
   </section>
 </div>
 
-<div class="row"></div>
+<div class="row">
+  <section class="order-stats col-sm-6 border border-primary rounded">
+    <h4 class="text-center">3. Orders statistics</h4>
+
+    <h5>Last 7 days</h5>
+    <%= render partial: 'order_statistics_table', locals: {
+        orders: @orders_7,
+        revenue: @revenue_7,
+        average_order: @average_order_7,
+        largest_order: @largest_order_7
+    } %>
+  </section>
+</div>
