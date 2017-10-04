@@ -29,13 +29,4 @@ class Order < ApplicationRecord
       .sum('products.price * order_contents.quantity')
       .to_f
   end
-
-  def self.user_with_most_orders
-    select("CONCAT(users.first_name, ' ', users.last_name) as name, COUNT(orders.*) as order_count")
-      .joins('JOIN users ON orders.user_id = users.id')
-      .group('users.first_name, users.last_name')
-      .where('orders.checkout_date IS NOT NULL')
-      .order('order_count DESC')
-      .first
-  end
 end

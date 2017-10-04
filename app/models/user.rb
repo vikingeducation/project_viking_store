@@ -8,7 +8,16 @@ class User < ApplicationRecord
     signed_up_since(begin_date)
   end
 
-  def self.largest_order_to_date
+  def self.with_most_orders
+    select("CONCAT(users.first_name, ' ', users.last_name) as name, COUNT(orders.*) as order_count")
+      .joins('JOIN orders ON orders.user_id = users.id')
+      .group('users.first_name, users.last_name')
+      .where('orders.checkout_date IS NOT NULL')
+      .order('order_count DESC')
+      .first
+  end
+
+  def self.with_largest_order
     find_by_sql(
       "SELECT CONCAT(users.first_name, ' ', users.last_name) as name, MAX(order_totals.totals) as order_amount
         FROM users
