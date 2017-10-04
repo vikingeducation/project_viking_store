@@ -25,14 +25,20 @@
       </thead>
 
       <tr>
-        <td>Most orders placed</td>
-        <td><%= @top_orderer.name %></td>
-        <td><%= @top_orderer.order_count %></td>
-      </tr>
-      <tr>
         <td>Highest single order</td>
         <td><%= @max_order.name %></td>
         <td>&dollar;<%= @max_order.order_amount %></td>
+      </tr>
+      <tr>
+        <td>Highest lifetime value</td>
+        <td><%= @biggest_spender.name %></td>
+        <td>&dollar;<%= @biggest_spender.revenue %></td>
+      </tr>
+
+      <tr>
+        <td>Most orders placed</td>
+        <td><%= @top_orderer.name %></td>
+        <td><%= @top_orderer.order_count %></td>
       </tr>
     </table>
   </section>

@@ -3,6 +3,17 @@ class User < ApplicationRecord
     where('created_at > ? AND created_at < ?', begin_date, Time.zone.now)
   }
 
+  def self.highest_value_by_revenue
+    select("CONCAT(users.first_name, ' ', users.last_name) as name," \
+           'SUM(products.price * order_contents.quantity) as revenue')
+      .joins('JOIN orders ON orders.user_id = users.id')
+      .joins('JOIN order_contents ON orders.id = order_contents.order_id')
+      .joins('JOIN products ON order_contents.product_id = products.id')
+      .group('users.first_name, users.last_name')
+      .order('revenue DESC')
+      .first
+  end
+
   def self.signed_up_in_last(num_days)
     begin_date = eval("#{num_days}.days.ago")
     signed_up_since(begin_date)
