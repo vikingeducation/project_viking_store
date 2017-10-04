@@ -25,5 +25,8 @@ class AnalyticsDashboardController < ApplicationController
 
     @average_order_7 = Order.average_total_since 7
     @largest_order_7 = Order.largest_total_since 7
+
+    @average_order_30 = Order.average_total_since 30
+    @largest_order_30 = Order.largest_total_since 30
   end
 end

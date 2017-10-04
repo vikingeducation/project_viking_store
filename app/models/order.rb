@@ -31,6 +31,7 @@ class Order < ApplicationRecord
     )
       .first
       .average
+      .round(2)
   end
 
   def self.largest_total_since(num_days)
