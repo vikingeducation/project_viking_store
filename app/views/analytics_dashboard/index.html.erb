@@ -34,7 +34,11 @@
         <td><%= @biggest_spender.name %></td>
         <td>&dollar;<%= @biggest_spender.revenue %></td>
       </tr>
-
+      <tr>
+        <td>Highest average order</td>
+        <td><%= @largest_avg_orderer.name %></td>
+        <td>&dollar;<%= @largest_avg_orderer.average %></td>
+      </tr>
       <tr>
         <td>Most orders placed</td>
         <td><%= @top_orderer.name %></td>

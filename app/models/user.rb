@@ -14,18 +14,31 @@ class User < ApplicationRecord
       .first
   end
 
+  def self.highest_average_order
+    find_by_sql(
+      "SELECT CONCAT(users.first_name, ' ', users.last_name) as name, MAX(order_totals.averages) as average
+        FROM users
+          JOIN orders
+            ON orders.user_id = users.id
+          JOIN (
+                 SELECT
+                   orders.id,
+                   AVG(products.price * order_contents.quantity) as averages
+                 FROM orders
+                   JOIN order_contents ON orders.id = order_contents.order_id
+                   JOIN products ON order_contents.product_id = products.id
+                 GROUP BY orders.id
+               ) as order_totals
+            ON order_totals.id = orders.id
+        GROUP BY users.first_name, users.last_name
+        ORDER BY average DESC
+        LIMIT 1"
+    ).first
+  end
+
   def self.signed_up_in_last(num_days)
     begin_date = eval("#{num_days}.days.ago")
     signed_up_since(begin_date)
-  end
-
-  def self.with_most_orders
-    select("CONCAT(users.first_name, ' ', users.last_name) as name, COUNT(orders.*) as order_count")
-      .joins('JOIN orders ON orders.user_id = users.id')
-      .group('users.first_name, users.last_name')
-      .where('orders.checkout_date IS NOT NULL')
-      .order('order_count DESC')
-      .first
   end
 
   def self.with_largest_order
@@ -48,5 +61,14 @@ class User < ApplicationRecord
         ORDER BY order_amount DESC
         LIMIT 1"
     ).first
+  end
+
+  def self.with_most_orders
+    select("CONCAT(users.first_name, ' ', users.last_name) as name, COUNT(orders.*) as order_count")
+      .joins('JOIN orders ON orders.user_id = users.id')
+      .group('users.first_name, users.last_name')
+      .where('orders.checkout_date IS NOT NULL')
+      .order('order_count DESC')
+      .first
   end
 end
