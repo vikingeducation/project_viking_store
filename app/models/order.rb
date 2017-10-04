@@ -17,7 +17,6 @@ class Order < ApplicationRecord
   def self.revenue
     product_orders
       .sum('products.price * order_contents.quantity')
-      .to_f
   end
 
   def self.revenue_since(num_days)
@@ -27,6 +26,5 @@ class Order < ApplicationRecord
       .where('checkout_date > ? AND checkout_date < ?',
              begin_date, Time.zone.now)
       .sum('products.price * order_contents.quantity')
-      .to_f
   end
 end
