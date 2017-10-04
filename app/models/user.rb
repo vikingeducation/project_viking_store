@@ -36,11 +36,6 @@ class User < ApplicationRecord
     ).first
   end
 
-  def self.signed_up_in_last(num_days)
-    begin_date = eval("#{num_days}.days.ago")
-    signed_up_since(begin_date)
-  end
-
   def self.with_largest_order
     find_by_sql(
       "SELECT CONCAT(users.first_name, ' ', users.last_name) as name, MAX(order_totals.totals) as order_amount
