@@ -9,10 +9,12 @@ class Order < ApplicationRecord
       .joins('JOIN products ON order_contents.product_id = products.id')
   }
 
+  def self.average_total
+    first_order = product_orders.placed.order(:checkout_date).first
+    average_total_since(first_order.checkout_date)
+  end
 
-  def self.average_total_since(num_days)
-    begin_date = eval("#{num_days}.days.ago").to_date
-
+  def self.average_total_since(begin_date)
     find_by_sql(
       "SELECT AVG(order_totals.totals) as average
         FROM orders
@@ -24,7 +26,7 @@ class Order < ApplicationRecord
                  FROM orders
                    JOIN order_contents ON orders.id = order_contents.order_id
                    JOIN products ON order_contents.product_id = products.id
-                   WHERE orders.checkout_date BETWEEN date '#{begin_date}' AND current_timestamp
+                   WHERE orders.checkout_date BETWEEN date '#{begin_date.to_date}' AND current_timestamp
                  GROUP BY orders.id
                ) as order_totals
             ON order_totals.id = orders.id"
@@ -34,9 +36,12 @@ class Order < ApplicationRecord
       .round(2)
   end
 
-  def self.largest_total_since(num_days)
-    begin_date = eval("#{num_days}.days.ago").to_date
+  def self.largest_total
+    first_order = product_orders.placed.order(:checkout_date).first
+    largest_total_since(first_order.checkout_date)
+  end
 
+  def self.largest_total_since(begin_date)
     find_by_sql(
       "SELECT MAX(order_totals.totals) as largest_total
         FROM orders
@@ -48,7 +53,7 @@ class Order < ApplicationRecord
                  FROM orders
                    JOIN order_contents ON orders.id = order_contents.order_id
                    JOIN products ON order_contents.product_id = products.id
-                   WHERE orders.checkout_date BETWEEN date '#{begin_date}' AND current_timestamp
+                   WHERE orders.checkout_date BETWEEN date '#{begin_date.to_date}' AND current_timestamp
                  GROUP BY orders.id
                ) as order_totals
             ON order_totals.id = orders.id"
@@ -57,19 +62,12 @@ class Order < ApplicationRecord
       .largest_total
   end
 
-  def self.placed_in_last(num_days)
-    begin_date = eval("#{num_days}.days.ago")
-    placed_since(begin_date)
-  end
-
   def self.revenue
     product_orders
       .sum('products.price * order_contents.quantity')
   end
 
-  def self.revenue_since(num_days)
-    begin_date = eval("#{num_days}.days.ago")
-
+  def self.revenue_since(begin_date)
     product_orders
       .where('checkout_date > ? AND checkout_date < ?',
              begin_date, Time.zone.now)

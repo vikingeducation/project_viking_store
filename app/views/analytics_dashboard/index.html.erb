@@ -39,5 +39,13 @@
         average_order: @average_order_30,
         largest_order: @largest_order_30
     } %>
+
+    <h5>Total</h5>
+    <%= render partial: 'order_statistics_table', locals: {
+        orders: @orders,
+        revenue: @revenue,
+        average_order: @average_order,
+        largest_order: @largest_order
+    } %>
   </section>
 </div>

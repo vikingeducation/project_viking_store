@@ -30,6 +30,6 @@ class AnalyticsDashboardController < ApplicationController
     @largest_order_30 = Order.largest_total_since 30.days.ago
 
     @average_order = Order.average_total
-    @largest_order = 'TBD'
+    @largest_order = Order.largest_total
   end
 end
