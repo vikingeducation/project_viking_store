@@ -62,6 +62,33 @@ class Order < ApplicationRecord
       .largest_total
   end
 
+  def self.by_day
+    begin_date = 1.week.ago.to_date
+    find_by_sql(
+      "SELECT
+        orders_and_dates.date,
+        COUNT(orders_and_dates.*) as quantity,
+        SUM(total) as value
+      FROM (SELECT date(orders.checkout_date), order_totals.totals as total
+            FROM orders
+              JOIN (
+                     SELECT
+                       orders.id,
+                       orders.checkout_date,
+                       SUM(products.price * order_contents.quantity) as totals
+                     FROM orders
+                       JOIN order_contents ON orders.id = order_contents.order_id
+                       JOIN products ON order_contents.product_id = products.id
+                     WHERE orders.checkout_date BETWEEN date '#{begin_date}' AND current_timestamp
+                     GROUP BY orders.checkout_date, orders.id
+                   ) as order_totals
+                ON order_totals.id = orders.id
+            ) orders_and_dates
+      GROUP BY orders_and_dates.date
+      ORDER BY orders_and_dates.date DESC"
+    )
+  end
+
   def self.revenue
     product_orders
       .sum('products.price * order_contents.quantity')

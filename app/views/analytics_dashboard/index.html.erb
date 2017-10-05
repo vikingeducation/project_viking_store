@@ -45,7 +45,30 @@
         orders: @orders,
         revenue: @revenue,
         average_order: @average_order,
-        largest_order: @largest_order
+        largest_order: @largest_order_30
     } %>
+  </section>
+
+  <section class="order-stats col-sm-6 border border-primary rounded">
+    <h4 class="text-center">4. Time series data</h4>
+
+    <h5>Orders by day</h5>
+    <table class="table table-striped table-bordered table-sm">
+      <thead class="thead-default">
+      <tr>
+        <th>Date</th>
+        <th>Quantity</th>
+        <th>Value</th>
+      </tr>
+      </thead>
+
+      <% @orders_by_day.each_with_index do |day, i| %>
+        <tr>
+          <td><%= formatted_date(day) %></td>
+          <td><%= day.quantity %></td>
+          <td><%= day.value %></td>
+        </tr>
+      <% end %>
+    </table>
   </section>
 </div>

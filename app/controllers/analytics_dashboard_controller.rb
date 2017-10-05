@@ -31,5 +31,7 @@ class AnalyticsDashboardController < ApplicationController
 
     @average_order = Order.average_total
     @largest_order = Order.largest_total
+
+    @orders_by_day = Order.by_day
   end
 end
