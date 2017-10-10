@@ -1,3 +1,39 @@
 // Place all the styles related to the Dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+h1, h2 {
+  text-align: center;
+}
+
+section {
+  border: 1px black solid;
+  padding: 20px 50px 50px 50px;
+  height: 950px;
+  margin: 20px 0px;
+}
+
+.heading {
+  padding-bottom: 40px;
+}
+
+.fat-heading {
+  padding-bottom: 8px;
+}
+
+.info-display-table {
+  margin-top: 10px;
+  border-top: 1px black solid;
+  border-bottom: 1px black solid;
+  border-right: 1px black solid;
+  border-collapse: initial;
+}
+
+caption {
+  text-align: left;
+  font-size: 25px;
+  padding-bottom: 15px;
+}
+
+td, th {
+  border-left: 1px black solid;
+}
