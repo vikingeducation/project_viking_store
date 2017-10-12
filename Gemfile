@@ -41,3 +41,5 @@ gem 'faker'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Use Hirb for console display/debugging
+gem 'hirb'
