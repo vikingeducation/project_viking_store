@@ -1,17 +1,15 @@
 class State < ApplicationRecord
 
+
   def top_three_states
-    State.select(:name).join_addresses_onto_states
-                       .join_orders_onto_addresses
-                       .group_top_three('states.name')
+    State.select(:name).joins('JOIN addresses ON states.id = addresses.state_id')
+                       .joins('JOIN orders ON orders.billing_id = addresses.id')
+                       .group('states.name')
+                       .order("count(states.name) DESC")
+                       .limit(3)
+                       .count
   end
 
 
-  private
-
-
-  def join_addresses_onto_states
-    joins('JOIN addresses ON states.id = addresses.state_id')
-  end
 
 end
