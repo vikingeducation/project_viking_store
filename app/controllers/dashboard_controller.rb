@@ -1,9 +1,8 @@
 class DashboardController < ApplicationController
 
-
   def index
-    @user = User.new
-    @user_stats = @user.user_statistics
+
+    @user_stats = User.new.user_statistics
 
     @order = Order.new
     @order_stats = @order.order_statistics
@@ -12,19 +11,16 @@ class DashboardController < ApplicationController
     @order_demo = @order.order_demographics
 
 
-    @product = Product.new
-    @product_stats = @product.product_statistics
+    @product_stats = Product.new.product_statistics
 
-    @revenue = OrderContent.new
-    @rev_stats = @revenue.revenue_statistics
+    @rev_stats = OrderContent.new.revenue_statistics
 
-    @state = State.new
-    @state_stats = @state.top_three_states
+    @state_stats = State.new.top_three_states
 
-    @city = City.new
-    @city_stats = @city.top_three_cities
+    @city_stats = City.new.top_three_cities
 
     render 'dashboard'
+    
   end
 
 

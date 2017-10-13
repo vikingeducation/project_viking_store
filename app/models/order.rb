@@ -45,6 +45,7 @@ class Order < ApplicationRecord
 
   private
 
+
   def overall_count(model, num_days_ago)
     model.where('created_at >= ?', num_days_ago).count
   end
@@ -52,12 +53,12 @@ class Order < ApplicationRecord
 
   def average_order_value(num_days_ago)
     order_values = []
-    order_and_value = Order.joins('JOIN order_contents ON orders.id = order_contents.order_id')
-                           .joins('JOIN products ON products.id = order_contents.product_id')
-                           .group('order_contents.order_id')
-                           .where('orders.created_at >= ?', num_days_ago)
-                           .sum(REVENUE)
-                           .map{|k,v| [k, v.to_f.round(2)] }
+    order_and_value = Order.joins_ordercontents_onto_orders.
+                           joins_products_onto_ordercontents.
+                           group('order_contents.order_id').
+                           where('orders.created_at >= ?', num_days_ago).
+                           sum(REVENUE).
+                           map{|k,v| [k, v.to_f.round(2)] }
 
      order_and_value.each do |arr|
        order_values << arr[1]
@@ -67,22 +68,22 @@ class Order < ApplicationRecord
 
 
   def largest_order_value(num_days_ago)
-    order_and_value = Order.joins('JOIN order_contents ON orders.id = order_contents.order_id')
-                           .joins('JOIN products ON products.id = order_contents.product_id')
-                           .group('order_contents.order_id').where('orders.created_at >= ?', num_days_ago)
-                           .order('sum(products.price * order_contents.quantity) DESC')
-                           .limit(1)
-                           .sum(REVENUE)
-                           .map{|k,v| [k, v.to_f.round(2)] }.flatten
+    order_and_value = Order.joins_ordercontents_onto_orders.
+                           joins_products_onto_ordercontents.
+                           group('order_contents.order_id').where('orders.created_at >= ?', num_days_ago).
+                           order('sum(products.price * order_contents.quantity) DESC').
+                           limit(1).
+                           sum(REVENUE).
+                           map{|k,v| [k, v.to_f.round(2)] }.flatten
 
    largest_order_value = order_and_value[1]
   end
 
 
   def orders_today
-    todays_orders = Order.joins('JOIN order_contents ON orders.id = order_contents.order_id')
-                          .joins('JOIN products ON products.id = order_contents.product_id')
-                          .where('orders.created_at BETWEEN ? AND ?',
+    todays_orders = Order.joins_ordercontents_onto_orders.
+                          joins_products_onto_ordercontents.
+                          where('orders.created_at BETWEEN ? AND ?',
                             Date.today.beginning_of_day,
                             Date.today.end_of_day)
     date_quantity_value(todays_orders, 0)
@@ -90,9 +91,9 @@ class Order < ApplicationRecord
 
 
   def orders_days_ago(num_days_ago)
-    orders = Order.joins('JOIN order_contents ON orders.id = order_contents.order_id')
-                  .joins('JOIN products ON products.id = order_contents.product_id')
-                  .where('orders.created_at BETWEEN ? AND ?',
+    orders = Order.joins_ordercontents_onto_orders.
+                   joins_products_onto_ordercontents.
+                   where('orders.created_at BETWEEN ? AND ?',
                           num_days_ago.day.ago.beginning_of_day,
                           num_days_ago.day.ago.end_of_day)
     date_quantity_value(orders, num_days_ago)
@@ -100,9 +101,9 @@ class Order < ApplicationRecord
 
 
   def orders_this_week
-    this_week = Order.joins('JOIN order_contents ON orders.id = order_contents.order_id')
-                     .joins('JOIN products ON products.id = order_contents.product_id')
-                     .where('orders.created_at BETWEEN ? AND ?',
+    this_week = Order.joins_ordercontents_onto_orders.
+                      joins_products_onto_ordercontents.
+                     where('orders.created_at BETWEEN ? AND ?',
                              1.week.ago.beginning_of_day,
                              Date.today.end_of_day)
     date_quantity_value(this_week, 0)
@@ -110,9 +111,9 @@ class Order < ApplicationRecord
 
 
   def orders_weeks_ago(num_weeks_ago)
-    orders = Order.joins('JOIN order_contents ON orders.id = order_contents.order_id')
-                  .joins('JOIN products ON products.id = order_contents.product_id')
-                  .where('orders.created_at BETWEEN ? AND ?',
+    orders = Order.joins_ordercontents_onto_orders.
+                   joins_products_onto_ordercontents.
+                   where('orders.created_at BETWEEN ? AND ?',
                           num_weeks_ago.week.ago.beginning_of_day,
                           (num_weeks_ago - 1).week.ago.end_of_day)
     date_quantity_value(orders, num_weeks_ago)
@@ -130,40 +131,40 @@ class Order < ApplicationRecord
 
 
   def total_value(orders)
-    total_value = orders.sum('products.price * order_contents.quantity').to_f
+    total_value = orders.sum(REVENUE).to_f
   end
 
+
   def highest_single_value_order
-    id_and_value = Order.joins('JOIN order_contents ON orders.id = order_contents.order_id')
-                        .joins('JOIN products ON products.id = order_contents.product_id')
-                        .group('order_contents.order_id, orders.user_id')
-                        .order('sum(products.price * order_contents.quantity) DESC')
-                        .limit(1)
-                        .sum(REVENUE)
-                        .map{|k,v| [k, v.to_f.round(2)] }
-                        .flatten
+    id_and_value = Order.joins_ordercontents_onto_orders.
+                         joins_products_onto_ordercontents.
+                         group('order_contents.order_id, orders.user_id').
+                         order('sum(products.price * order_contents.quantity) DESC').
+                         limit(1).
+                         sum(REVENUE).
+                         map{|k,v| [k, v.to_f.round(2)] }.flatten
     value_and_name(id_and_value)
   end
 
 
   def highest_lifetime_value_order
-    id_and_value = Order.joins('JOIN order_contents ON orders.id = order_contents.order_id')
-                        .joins('JOIN products ON products.id = order_contents.product_id')
-                        .group('orders.user_id').limit(1)
-                        .sum(REVENUE)
-                        .map{|k,v| [k, v.to_f.round(2)] }.flatten
+    id_and_value = Order.joins_ordercontents_onto_orders.
+                         joins_products_onto_ordercontents.
+                         group('orders.user_id').
+                         limit(1).
+                         sum(REVENUE).
+                         map{|k,v| [k, v.to_f.round(2)] }.flatten
     value_and_name(id_and_value)
   end
 
 
   def highest_average_value_order
-    id_and_value = Order.joins('JOIN order_contents ON orders.id = order_contents.order_id')
-                        .joins('JOIN products ON products.id = order_contents.product_id')
-                        .group('order_contents.order_id, orders.user_id')
-                        .limit(1)
-                        .average(REVENUE)
-                        .map{|k,v| [k, v.to_f.round(2)] }
-                        .flatten
+    id_and_value = Order.joins_ordercontents_onto_orders.
+                         joins_products_onto_ordercontents.
+                         group('order_contents.order_id, orders.user_id').
+                         limit(1).
+                         average(REVENUE).
+                         map{|k,v| [k, v.to_f.round(2)] }.flatten
     value_and_name(id_and_value)
   end
 
@@ -171,12 +172,11 @@ class Order < ApplicationRecord
   def most_orders_placed
     user_id_relation = Order.select(:user_id).group(:user_id).order('count(user_id) DESC').limit(1)
 
-    id_and_value = Order.joins('JOIN order_contents ON orders.id = order_contents.order_id')
-                        .joins('JOIN products ON products.id = order_contents.product_id')
-                        .group(:user_id).where(:user_id => user_id_relation)
-                        .sum(REVENUE)
-                        .map{|k,v| [k, v.to_f.round(2)] }
-                        .flatten
+    id_and_value = Order.joins_ordercontents_onto_orders.
+                         joins_products_onto_ordercontents.
+                         group(:user_id).where(:user_id => user_id_relation).
+                         sum(REVENUE).
+                         map{|k,v| [k, v.to_f.round(2)] }.flatten
     value_and_name(id_and_value)
   end
 
@@ -209,5 +209,16 @@ class Order < ApplicationRecord
       time_series_hash["#{(Date.today - i.weeks).strftime("%m/%d")}"] = orders_weeks_ago(i)
     end
   end
+
+
+  def self.joins_ordercontents_onto_orders
+    joins('JOIN order_contents ON orders.id = order_contents.order_id')
+  end
+
+
+  def self.joins_products_onto_ordercontents
+    joins('JOIN products ON products.id = order_contents.product_id')
+  end
+
 
 end

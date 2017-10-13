@@ -4,8 +4,6 @@ class User < ApplicationRecord
   SEVEN_DAYS = 7.days.ago
   THIRTY_DAYS = 30.days.ago
 
-  attr_accessor :user_statistics, :user_demographics
-
   def user_statistics
     user_stats_hash = {}
     user_stats_hash[:sevendays] = overall_count(User, SEVEN_DAYS)
