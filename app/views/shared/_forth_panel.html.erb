@@ -1,0 +1,47 @@
+<section>
+  <div class="heading">
+    <h2>4. Time Series Data</h2>
+  </div>
+  <article>
+    <table class="info-display-table table table-striped">
+      <thead>
+        <caption>Orders By Day</caption>
+        <tr>
+          <th>Date</th>
+          <th>Quantity</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% @order_day_stats.each do |key, value| %>
+          <td><%= key %></td>
+          <td><%= value[:quantity] %></td>
+          <td><%= value[:value] %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+  <article>
+    <table class="info-display-table table table-striped">
+      <thead>
+        <caption>Orders By Week</caption>
+        <tr>
+          <th>Date</th>
+          <th>Quantity</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% @order_week_stats.each do |key, value| %>
+          <td><%= key %></td>
+          <td><%= value[:quantity] %></td>
+          <td><%= value[:value] %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+</section>

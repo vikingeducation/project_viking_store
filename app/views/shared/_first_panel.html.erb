@@ -1,0 +1,92 @@
+<section>
+  <div class="heading">
+    <h2>1.Overall Platform</h2>
+  </div>
+  <article>
+    <table class="info-display-table table table-striped">
+      <thead>
+        <caption>Last 7 Days</caption>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>New Users</td>
+          <td><%= @user_stats[:sevendays] %></td>
+        </tr>
+        <tr>
+          <td>Orders</td>
+          <td><%= @order_stats[:sevendays_count] %> </td>
+        </tr>
+        <tr>
+          <td>New Products</td>
+          <td><%= @product_stats[:sevendays] %></td>
+        </tr>
+        <tr>
+          <td>Revenue</td>
+          <td><%= @rev_stats[:sevendays] %></td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+  <article>
+    <table class="info-display-table table table-striped">
+      <thead>
+        <caption>Last 30 Days</caption>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>New Users</td>
+          <td><%= @user_stats[:thirtydays] %></td>
+        </tr>
+        <tr>
+          <td>Orders</td>
+          <td><%= @order_stats[:thirtydays_count] %> </td>
+        </tr>
+        <tr>
+          <td>New Products</td>
+          <td><%= @product_stats[:thirtydays] %></td>
+        </tr>
+        <tr>
+          <td>Revenue</td>
+          <td><%= @rev_stats[:thirtydays] %></td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+  <article>
+    <table class="info-display-table table table-striped">
+      <thead>
+        <caption>Total</caption>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>New Users</td>
+          <td><%= @user_stats[:total] %></td>
+        </tr>
+        <tr>
+          <td>Orders</td>
+          <td><%= @order_stats[:total_count] %> </td>
+        </tr>
+        <tr>
+          <td>New Products</td>
+          <td><%= @product_stats[:total] %></td>
+        </tr>
+        <tr>
+          <td>Revenue</td>
+          <td><%= @rev_stats[:total] %></td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+</section>

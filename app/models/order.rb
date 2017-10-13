@@ -57,7 +57,7 @@ class Order < ApplicationRecord
                            .group('order_contents.order_id')
                            .where('orders.created_at >= ?', num_days_ago)
                            .sum(REVENUE)
-                           .map{|k,v| [k, v.to_f] }
+                           .map{|k,v| [k, v.to_f.round(2)] }
 
      order_and_value.each do |arr|
        order_values << arr[1]
@@ -73,7 +73,7 @@ class Order < ApplicationRecord
                            .order('sum(products.price * order_contents.quantity) DESC')
                            .limit(1)
                            .sum(REVENUE)
-                           .map{|k,v| [k, v.to_f] }.flatten
+                           .map{|k,v| [k, v.to_f.round(2)] }.flatten
 
    largest_order_value = order_and_value[1]
   end
@@ -140,7 +140,7 @@ class Order < ApplicationRecord
                         .order('sum(products.price * order_contents.quantity) DESC')
                         .limit(1)
                         .sum(REVENUE)
-                        .map{|k,v| [k, v.to_f] }
+                        .map{|k,v| [k, v.to_f.round(2)] }
                         .flatten
     value_and_name(id_and_value)
   end
@@ -151,7 +151,7 @@ class Order < ApplicationRecord
                         .joins('JOIN products ON products.id = order_contents.product_id')
                         .group('orders.user_id').limit(1)
                         .sum(REVENUE)
-                        .map{|k,v| [k, v.to_f] }.flatten
+                        .map{|k,v| [k, v.to_f.round(2)] }.flatten
     value_and_name(id_and_value)
   end
 
@@ -162,7 +162,7 @@ class Order < ApplicationRecord
                         .group('order_contents.order_id, orders.user_id')
                         .limit(1)
                         .average(REVENUE)
-                        .map{|k,v| [k, v.to_f] }
+                        .map{|k,v| [k, v.to_f.round(2)] }
                         .flatten
     value_and_name(id_and_value)
   end
@@ -175,7 +175,7 @@ class Order < ApplicationRecord
                         .joins('JOIN products ON products.id = order_contents.product_id')
                         .group(:user_id).where(:user_id => user_id_relation)
                         .sum(REVENUE)
-                        .map{|k,v| [k, v.to_f] }
+                        .map{|k,v| [k, v.to_f.round(2)] }
                         .flatten
     value_and_name(id_and_value)
   end
