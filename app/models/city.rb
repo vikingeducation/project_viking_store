@@ -1,7 +1,7 @@
 class City < ApplicationRecord
 
 
-  def top_three_cities
+  def self.top_three_cities
     City.select(:name).joins_addresses_onto_cities.
                       joins_orders_onto_addresses.
                       group('cities.name').

@@ -1,21 +1,15 @@
 class User < ApplicationRecord
 
+  include CountSince
+
   FIRST_ORDER_DATE = Order.select(:created_at).first
-  SEVEN_DAYS = 7.days.ago
-  THIRTY_DAYS = 30.days.ago
 
-  def user_statistics
+  def self.user_statistics
     user_stats_hash = {}
-    user_stats_hash[:sevendays] = overall_count(User, SEVEN_DAYS)
-    user_stats_hash[:thirtydays] = overall_count(User, THIRTY_DAYS)
-    user_stats_hash[:total] = overall_count(User, FIRST_ORDER_DATE.created_at)
+    user_stats_hash[:sevendays] = count_since(7.days.ago)
+    user_stats_hash[:thirtydays] = count_since(30.days.ago)
+    user_stats_hash[:total] = count_since(FIRST_ORDER_DATE.created_at)
     user_stats_hash
-  end
-
-  private
-
-  def overall_count(model, num_days_ago)
-    model.where('created_at >= ?', num_days_ago).count
   end
 
 

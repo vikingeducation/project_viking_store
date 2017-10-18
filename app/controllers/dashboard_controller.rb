@@ -2,25 +2,24 @@ class DashboardController < ApplicationController
 
   def index
 
-    @user_stats = User.new.user_statistics
+    @user_stats = User.user_statistics
 
-    @order = Order.new
-    @order_stats = @order.order_statistics
-    @order_day_stats = @order.by_day_statistics
-    @order_week_stats = @order.by_week_statistics
-    @order_demo = @order.order_demographics
+    @order_stats = Order.order_statistics
+    @order_day_stats = Order.by_day_statistics
+    @order_week_stats = Order.by_week_statistics
+    @order_demo = Order.order_demographics
 
 
-    @product_stats = Product.new.product_statistics
+    @product_stats = Product.product_statistics
 
-    @rev_stats = OrderContent.new.revenue_statistics
+    @rev_stats = OrderContent.revenue_statistics
 
-    @state_stats = State.new.top_three_states
+    @state_stats = State.top_three_states
 
-    @city_stats = City.new.top_three_cities
+    @city_stats = City.top_three_cities
 
     render 'dashboard'
-    
+
   end
 
 
