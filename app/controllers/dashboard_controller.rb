@@ -25,20 +25,20 @@ class DashboardController < ApplicationController
     @highest_avg_order_val = User.highest_avg_order_val[0]
     @most_orders = User.most_orders[0]
 
-    @num_of_orders_by_days = {7 => num_of_orders(7), 
-                            30 => num_of_orders(30), 
+    @num_of_orders_by_days = {7 => num_of_orders(7),
+                            30 => num_of_orders(30),
                             'all_time' => num_of_orders}
 
-    @total_revenue = {7 => total_revenue(7), 
-                    30 => total_revenue(30), 
+    @total_revenue = {7 => total_revenue(7),
+                    30 => total_revenue(30),
                     'all_time' => total_revenue}
 
-    @avg_order_val = {7 => avg_order_val(7), 
-                    30 => avg_order_val(30), 
+    @avg_order_val = {7 => avg_order_val(7),
+                    30 => avg_order_val(30),
                     'all_time' => avg_order_val}
 
-    @large_order_val = {7 => large_order_val(7), 
-                        30 => large_order_val(30), 
+    @large_order_val = {7 => large_order_val(7),
+                        30 => large_order_val(30),
                         'all_time' => large_order_val}
 
   end
@@ -54,7 +54,7 @@ class DashboardController < ApplicationController
     end
 
     def avg_order_val(period = nil)
-        Order.avg_order_val(period)[0].avg_orders unless Order.avg_order_val(period)[0].nil?
+      Order.avg_order_val(period)[0] ? 0 : Order.avg_order_val(period)[0].avg_orders.round(2)
     end
 
     def large_order_val(period = nil)
@@ -62,4 +62,3 @@ class DashboardController < ApplicationController
     end
 
 end
-

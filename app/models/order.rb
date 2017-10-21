@@ -145,6 +145,8 @@ class Order < ApplicationRecord
     end
   end
 
+  # Order.select("TO_CHAR(checkout_date,'DD-Mon') AS time_format, SUM(billing_id) as sum").group('time_format').order('time_format desc').limit(30)
+
 
   def update_attributes_extra(whitelisted_orders_params)
     self.combine_duplicate_products(whitelisted_orders_params)
