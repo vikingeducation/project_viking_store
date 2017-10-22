@@ -9,9 +9,7 @@ Viking Store Admin is rails web application designed for shop owners. It is the 
 ## Getting Started
 
 Live version of the app available on Heroku -> here:
-[Viking Store Admin Portal](https://sheltered-sea-58865.herokuapp.com/)
-
-If you like to play around you can set up your own account. If you use your real email, you will receive welcome email an notifications whenever someone else commented any of your posts. If you want to see all the users in the network - just press enter in the search bar on the top.
+[Viking Store Admin Portal LIVE ](https://sheltered-sea-58865.herokuapp.com/)
 
 
 ### Overview
