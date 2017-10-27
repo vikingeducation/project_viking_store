@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>VikingStore</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- need to include jquery  -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <div class="container">
+    <body>
+      <div class="row">
+        <h1 class="portal-heading">Viking Store Admin Portal</h1>
+      </div>
+      <div class="row">
+
+        <%= render 'shared/navbar' %>
+
+        <section class="col-xs-9 col-xs-offset-2">
+
+          <div class="flash-msgs">
+            <% flash.each do |key, value| %>
+              <div class="alert alert-<%= key %>"><%= value %></div>
+            <% end %>
+          </div>
+
+          <div class="portal">
+            <%= yield %>  
+          </div>
+
+
+        </section>
+
+      </div>
+    </body>
+  </div>
+</html>

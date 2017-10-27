@@ -1,0 +1,21 @@
+<h1>Category <%= @category.id %>: <%= @category.name %></h1>
+<h3>Category ID: <%= @category.id %></h3>
+<h3>Name: <%= @category.name %></h3>
+
+<h4><%= link_to "Edit Category", edit_admin_category_path(@category) %></h4>
+<h4><%= link_to "Delete Category", admin_category_path(@category), method: "delete" %></h4>
+
+<h3>Products in <%= @category.name %>:</h3>
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+  </thead>
+  <tbody>
+    <tr>
+      <!-- need to query product table with this category id to get list of products in this category -->
+      <td>product id</td>
+      <td><%= link_to "product name", "#" %></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,4 +1,9 @@
-class DashboardController < ApplicationController
+class Admin::DashboardController < ApplicationController
+
+  layout "admin_portal_layout"
+
+  def home
+  end
 
   def index
 
@@ -8,7 +13,6 @@ class DashboardController < ApplicationController
     @order_day_stats = Order.by_day_statistics
     @order_week_stats = Order.by_week_statistics
     @order_demo = Order.order_demographics
-
 
     @product_stats = Product.product_statistics
 

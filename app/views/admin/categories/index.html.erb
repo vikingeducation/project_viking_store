@@ -1,0 +1,23 @@
+<h1>Product Categories</h1>
+<%= link_to "Add A New Category", new_admin_category_path, class: "btn-block btn-primary btn-lg new-cat-btn" %>
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>SHOW</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  </thead>
+  <tbody>
+    <tr>
+      <% @categories.each do |cat| %>
+        <td><%= cat.id %></td>
+        <td><%= cat.name %></td>
+        <td><%= link_to "show", admin_category_path(cat) %></td>
+        <td><%= link_to "edit", edit_admin_category_path(cat) %></td>
+        <td><%= link_to "delete", admin_category_path(cat), method: 'delete' %></td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>

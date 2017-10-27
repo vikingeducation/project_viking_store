@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root :to => 'dashboard#index'
 
-  get '/' => 'dashboard#index'
+  root to: redirect('/admin')
+
+  namespace :admin do
+    get '/' => 'dashboard#home'
+    get '/dashboard' => 'dashboard#index'
+    resources :categories
+    resources :products
+  end
+
 end
