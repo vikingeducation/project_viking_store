@@ -16,7 +16,7 @@
       <td><%= prod[:id] %></td>
       <td><%= prod[:name] %></td>
       <td><%= prod[:price] %></td>
-      <td><%= prod[:category_id] %></td>
+      <td><%= link_to "#{prod[:category_name]}", admin_category_path(prod[:category_id]) %></td>
       <td><%= link_to "SHOW", admin_product_path(prod) %></td>
       <td><%= link_to "EDIT", edit_admin_product_path(prod) %></td>
       <td><%= link_to "DELETE", admin_product_path(prod), method: "delete" %></td>

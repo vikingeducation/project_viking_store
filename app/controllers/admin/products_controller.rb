@@ -3,7 +3,12 @@ class Admin::ProductsController < ApplicationController
   layout 'admin_portal_layout'
 
   def index
-    @products = Product.all
+    @products = Product.joins('JOIN categories ON products.category_id = categories.id').
+                        select("categories.name AS category_name,
+                                categories.id AS category_id,
+                                products.id,
+                                products.name,
+                                products.price")
   end
 
   def new
@@ -27,7 +32,14 @@ class Admin::ProductsController < ApplicationController
 
 
   def show
-    set_product
+    @product  = Product.joins('JOIN order_contents ON products.id = order_contents.product_id').
+                        select('products.id AS products_id,
+                                order_contents.order_id AS order_id,
+                                order_contents.quantity AS qty,
+                                name,
+                                price,
+                                category_id')
+    # set_product
   end
 
 
