@@ -14,8 +14,10 @@ class Admin::CategoriesController < ApplicationController
   def create
     @category = Category.new(whitelisted_params)
     if @category.save
-      redirect_to admin_category_path(@category)
+      flash[:success] = "Category Successfully Saved!"
+      redirect_to admin_categories_path
     else
+      flash[:danger] = "Category Could Not Be Created See Errors On Form"
       render :new
     end
   end
@@ -28,14 +30,17 @@ class Admin::CategoriesController < ApplicationController
 
   def show
     set_category
+    @products = Product.all
   end
 
 
   def update
     set_category
     if @category.update(whitelisted_params)
-      redirect_to admin_category_path(@category)
+      flash[:success] = "Category Successfully Updated"
+      redirect_to admin_categories_path
     else
+      flash[:danger] = "Category Could Not Be Updated - See Errors On Form"
       render :edit
     end
   end
@@ -43,8 +48,12 @@ class Admin::CategoriesController < ApplicationController
 
   def destroy
     set_category
-    @category.destroy
-    redirect_to admin_categories_path
+    if @category.destroy
+      flash[:success] = "Category Successfully Deleted"
+      redirect_to admin_categories_path
+    else
+      flash[:danger] = "Category Could Not Be Destroyed"
+    end
   end
 
   private
