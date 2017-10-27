@@ -1,15 +1,15 @@
-<h1>Product <%= @product[:products_id]%></h1>
+<h1>Product <%= @product.id %></h1>
 <section>
   <article>
     <h2>Product Information</h2>
-    <h3>Product ID: <%= @product.id %></h3>
-    <h3>Name: <%= @product.name %></h3>
-    <h3>Price: $<%= @product.price %></h3>
-    <h3>Category: <%= @product.category_id %></h3>
+    <h3>Product ID:  <%= @product.id %></h3>
+    <h3>Name:  <%= @product.name %></h3>
+    <h3>Price:  $<%= @product.price %></h3>
+    <h3>Category:  <%= @product.category_id %></h3>
   </article>
   <article>
     <h2>Product Statistics</h2>
-    <h3>Times Ordered:<%= %></h3>
+    <h3>Times Ordered:  <%= @product_volumn[@product.id] %></h3>
     <h3>Carts In: <%= %></h3>
   </article>
 

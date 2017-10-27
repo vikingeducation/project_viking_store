@@ -13,6 +13,7 @@ class Admin::ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @categories = Category.all
   end
 
 
@@ -28,18 +29,13 @@ class Admin::ProductsController < ApplicationController
 
   def edit
     set_product
+    @categories = Category.all
   end
 
 
   def show
-    @product  = Product.joins('JOIN order_contents ON products.id = order_contents.product_id').
-                        select('products.id AS products_id,
-                                order_contents.order_id AS order_id,
-                                order_contents.quantity AS qty,
-                                name,
-                                price,
-                                category_id')
-    # set_product
+    set_product
+    @product_volumn = times_product_ordered
   end
 
 
@@ -68,8 +64,16 @@ class Admin::ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+
   def whitelisted_params
-    params.require(:product).permit(:name, :price, :category_id)
+    params.require(:product).permit(:name, :price, :category_id, :sku)
+  end
+
+
+  def times_product_ordered
+     Product.joins("JOIN order_contents ON products.id = order_contents.product_id").
+             group("products.id").
+             count
   end
 
 end

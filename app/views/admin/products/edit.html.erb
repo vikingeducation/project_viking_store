@@ -1,3 +1,4 @@
 <h1>Edit Product <%= @product.id %></h1>
-<%= render partial: 'form', locals: { product: @product } %>
+<%= render partial: 'form', locals: { product: @product,
+                                      categories: @categories } %>
 <%= link_to "Delete Product", admin_product_path(@product), method: "delete" %>
