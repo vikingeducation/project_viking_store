@@ -3,7 +3,10 @@ class Product < ApplicationRecord
   include CountSince
 
   validates :price,
+            presence: true,
             format: { with: /[^$]/ }
+  validates :name, 
+            presence: true
 
 
   def self.product_statistics

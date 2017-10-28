@@ -1,10 +1,13 @@
 <h4>Product ID: <%= product.persisted? ? product.id : "N/A" %> </h4>
 <%= form_for [:admin, product] do |f| %>
   <%= f.label :name %>
+  <%= display_product_form_errors(product, :name) %>
   <%= f.text_field :name %><br>
   <%= f.label :price %>
+  <%= display_product_form_errors(product, :price) %>
   <%= f.text_field :price %><br>
-  <%= f.label :category %>
+  <%= f.label :category_id %>
+  <%= display_product_form_errors(product, :category_id) %>
   <%= f.select :category_id, @categories.map {|c| [c.name, c.id]} %>
   <%= f.hidden_field :sku, value: "#{Random.new.rand(1_000_000000_000..10_000_000_000_000-1) }" %>
   <%= f.submit "#{(product.persisted? ? 'Update' : 'Create')} Product", class: "btn btn-lg btn-primary btn-block" %>

@@ -13,15 +13,17 @@ class Admin::ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    @categories = Category.all
+    set_categories
   end
 
 
   def create
     @product = Product.new(whitelisted_params)
     if @product.save
-      redirect_to admin_product_path(@product)
+      flash[:success] = "Product Successfully Saved!"
+      redirect_to admin_products_path
     else
+      flash[:danger] = "Product Could Not Be Saved See Errors On Form"
       render :new
     end
   end
@@ -29,7 +31,7 @@ class Admin::ProductsController < ApplicationController
 
   def edit
     set_product
-    @categories = Category.all
+    set_categories
   end
 
 
@@ -42,8 +44,10 @@ class Admin::ProductsController < ApplicationController
   def update
     set_product
     if @product.update(whitelisted_params)
-      redirect_to admin_product_path(@product)
+      flash[:success] = "Product Successfully Updated!"
+      redirect_to admin_products_path
     else
+      flash[:danger] = "Product Could Not Be Updated See Errors On Form"
       render :edit
     end
   end
@@ -51,8 +55,13 @@ class Admin::ProductsController < ApplicationController
 
   def destroy
     set_product
-    @product.destroy
-    redirect_to admin_products_path
+    if @product.destroy
+      flash[:success] = "Product Successfully Deleted"
+      redirect_to admin_products_path
+    else
+      flash[:danger] = "Could Not Delete Product"
+      redirect_to admin_product_path(@product)
+    end
   end
 
 
@@ -74,6 +83,11 @@ class Admin::ProductsController < ApplicationController
      Product.joins("JOIN order_contents ON products.id = order_contents.product_id").
              group("products.id").
              count
+  end
+
+
+  def set_categories
+    @categories = Category.all
   end
 
 end
