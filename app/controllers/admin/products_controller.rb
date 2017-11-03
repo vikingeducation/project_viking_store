@@ -2,6 +2,9 @@ class Admin::ProductsController < ApplicationController
 
   layout 'admin_portal_layout'
 
+  before_filter :set_categories, only: [:new, :create, :edit, :update]
+  before_filter :set_product, except: [:new, :create, :index]
+
   def index
     @products = Product.joins('JOIN categories ON products.category_id = categories.id').
                         select("categories.name AS category_name,
@@ -13,7 +16,6 @@ class Admin::ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    set_categories
   end
 
 
@@ -30,19 +32,16 @@ class Admin::ProductsController < ApplicationController
 
 
   def edit
-    set_product
-    set_categories
   end
 
 
   def show
-    set_product
     @product_volumn = times_product_ordered
+    @in_cart = number_in_carts
   end
 
 
   def update
-    set_product
     if @product.update(whitelisted_params)
       flash[:success] = "Product Successfully Updated!"
       redirect_to admin_products_path
@@ -54,7 +53,6 @@ class Admin::ProductsController < ApplicationController
 
 
   def destroy
-    set_product
     if @product.destroy
       flash[:success] = "Product Successfully Deleted"
       redirect_to admin_products_path
@@ -80,9 +78,18 @@ class Admin::ProductsController < ApplicationController
 
 
   def times_product_ordered
-     Product.joins("JOIN order_contents ON products.id = order_contents.product_id").
-             group("products.id").
-             count
+     Order.joins(:order_contents).
+           where.not(checkout_date: nil).
+           group("order_contents.product_id").
+           count
+  end
+
+
+  def number_in_carts
+    Order.joins(:order_contents).
+          where(checkout_date: nil).
+          group("order_contents.product_id").
+          count
   end
 
 

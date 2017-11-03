@@ -1,4 +1,4 @@
-module ProductsHelper
+module Admin::ProductsHelper
 
   def display_product_form_errors(resource, field)
     unless resource.errors[field].empty?

@@ -13,7 +13,7 @@
   </thead>
   <tbody>
     <tr>
-      <%= @products.where( "category_id = #{@category.id}").each do |prod| %>
+      <% @products.where( "category_id = #{@category.id}").each do |prod| %>
       <td><%= prod[:id] %></td>
       <td><%= link_to "#{prod[:name]}", admin_product_path(prod) %></td>
     </tr>

@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+.portal-heading {
+  font-size: 90px;
+}

@@ -1,4 +1,4 @@
-module CategoryHelper
+module Admin::CategoryHelper
 
   def display_category_form_errors(resource, field)
     unless resource.errors[field].empty?

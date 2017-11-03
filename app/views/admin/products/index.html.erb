@@ -11,7 +11,7 @@
     <th>DELETE</th>
   </thead>
   <tbody>
-    <%= @products.each do |prod| %>
+    <% @products.each do |prod| %>
       <tr>
         <td><%= prod[:id] %></td>
         <td><%= prod[:name] %></td>
