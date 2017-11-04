@@ -1,0 +1,31 @@
+<h1>User <%= @user.id %>: <%= @user.first_name + " " + @user.last_name %></h1>
+
+<article>
+  <h1>Demographic Information</h1>
+  <%= form_for [:admin, @user] do |f| %>
+    <%= f.label :first_name, "First Name" %>
+    <%= f.text_field :first_name, disabled: true %><br>
+    <%= f.label :last_name, "Last Name" %>
+    <%= f.text_field :last_name, disabled: true %><br>
+    <%= f.label :email, "Email" %>
+    <%= link_to f.text_field :email, disabled: true %><br>
+    <%= f.label :telephone, "Telephone" %>
+    <%= f.text_field :telephone, disabled: true %><br>
+  <% end %>
+
+</article>
+
+
+<article>
+
+</article>
+
+
+<article>
+
+</article>
+
+
+<article>
+
+</article>

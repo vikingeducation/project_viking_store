@@ -22,7 +22,7 @@
     <td><%= user_state(user[:id])[:name] %></td>
     <td><%= link_to user_orders(user[:id]).nil? ? 0 : user_orders(user[:id]), "#" %></td>
     <td><%= user_last_order(user[:id]) %></td>
-    <td><%= link_to "SHOW", "#" %></td>
+    <td><%= link_to "SHOW", admin_user_path(user[:id]) %></td>
     <td><%= link_to "EDIT", "#" %></td>
     <td><%= link_to "DELETE", "#" %></td>
     <% end %>
