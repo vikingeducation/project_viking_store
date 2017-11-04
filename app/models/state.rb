@@ -1,5 +1,6 @@
 class State < ApplicationRecord
 
+  has_many :addresses
 
   def self.top_three_states
     State.select(:name).joins_addresses_onto_states.

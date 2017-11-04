@@ -31,4 +31,7 @@ class Admin::UsersController < ApplicationController
   end
 
 
+  private
+
+
 end

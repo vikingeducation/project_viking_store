@@ -1,5 +1,6 @@
 class City < ApplicationRecord
 
+  has_many :addresses
 
   def self.top_three_cities
     City.select(:name).joins_addresses_onto_cities.

@@ -2,6 +2,8 @@ class User < ApplicationRecord
 
   include CountSince
 
+  has_many :addresses
+
   FIRST_ORDER_DATE = Order.select(:created_at).first
 
   def self.user_statistics
