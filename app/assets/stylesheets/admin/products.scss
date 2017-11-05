@@ -2,12 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#product-info-table td,
-#product-stats-table td {
+#product-stats-table td,
+#product-info-table td {
   border: none;
   font-size: 26px;
-  width: 50%;
 }
+
+
+#product-info-table tr {
+  :first-child {
+    width: 45%;
+  }
+}
+
+#product-stats-table tr {
+  :first-child {
+    width: 88%;
+  }
+}
+
 
 #product-stats-table h1,
 #product-info-table h1 {
