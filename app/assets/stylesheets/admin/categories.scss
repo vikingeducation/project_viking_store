@@ -27,8 +27,27 @@ h4 {
   }
 }
 
-.category-form {
-  h1 {
-    
-  }
+#create-div,
+.edit-delete-div {
+  width: 100%;
+  margin: 0 auto 30px auto;
+  text-align: center;
+}
+
+#create-button {
+  width: 70%;
+  font-size: 25px;
+  border: 1px solid black;
+}
+
+.row {
+  font-size: 20px;
+}
+
+.edit-delete-link {
+  text-decoration: underline;
+}
+
+.edit-delete-div {
+  margin-bottom: 30px;
 }

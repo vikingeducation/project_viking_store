@@ -23,7 +23,7 @@
     <tr>
       <% @products.where( "category_id = #{@category.id}").each do |prod| %>
       <td><%= prod[:id] %></td>
-      <td><%= link_to "#{prod[:name]}", admin_product_path(prod) %></td>
+      <td><%= link_to "#{prod[:name]}", admin_product_path(prod), id: "index-link" %></td>
     </tr>
     <% end %>
   </tbody>

@@ -54,6 +54,7 @@
   width: 70%;
   margin: 0 auto;
   border: 2px solid black;
+  font-size: 20px;
 }
 
 #index-header {
@@ -73,9 +74,11 @@
   thead {
     background-color: #eee;
   }
-  a {
-    text-decoration: underline;
-  }
+}
+
+#index-link,
+#index-table a {
+  text-decoration: underline;
 }
 
 .heading {
