@@ -1,3 +1,34 @@
 // Place all the styles related to the Category controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#show-top-table {
+  width: 40%;
+  td {
+    border: none;
+  }
+}
+
+h1 {
+  font-size: 80px;
+}
+
+h4 {
+  text-decoration: underline;
+}
+
+#product-table {
+  width: 25%;
+  margin-left: 40px;
+  border: 1px solid black;
+  thead {
+    background-color: lightgrey;
+  }
+}
+
+.category-form {
+  h1 {
+    
+  }
+}

@@ -3,7 +3,7 @@ class Admin::CategoriesController < ApplicationController
   layout 'admin_portal_layout'
 
   def index
-    @categories = Category.all
+    @categories = Category.all.order(:id)
   end
 
   def new

@@ -17,3 +17,67 @@
 .portal-heading {
   font-size: 90px;
 }
+
+* {
+  border-radius: 0 !important;
+}
+
+.portal-window,
+#nav-bar {
+  border: 2px solid grey;
+}
+
+#nav-bar {
+  text-align: center;
+  padding: 10px 0 20px 0;
+}
+
+#nav-bar p {
+  font-size: 22px;
+}
+
+#nav-bar a {
+  font-size: 16px;
+}
+
+.nav-link  {
+    text-decoration: underline;
+  }
+
+
+.dashboard-link {
+  border-top: 2px solid grey;
+}
+
+#new-btn {
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+  border: 2px solid black;
+}
+
+#index-header {
+  margin-bottom: 30px;
+}
+
+#index-table td,
+#index-table th {
+  border-left: 0;
+  text-align: center;
+}
+
+#index-table {
+  width: 80%;
+  margin: 30px auto;
+  border: 2px solid black;
+  thead {
+    background-color: #eee;
+  }
+  a {
+    text-decoration: underline;
+  }
+}
+
+.heading {
+  font-size: 55px;
+}

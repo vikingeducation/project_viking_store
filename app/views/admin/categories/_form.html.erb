@@ -1,8 +1,16 @@
 <%= form_for [:admin, category] do |f| %>
-  <%= f.label :category_id, "Category ID" %>
-  <%= ( @category.persisted? ? @category.id : "N/A") %><br>
-  <%= f.label :name %>
-  <%= display_category_form_errors(category, :name) %>
-  <%= f.text_field :name, placeholder: "enter category name here" %>
-  <%= f.submit "#{(category.persisted? ? 'Update' : 'Create')} Category", class: "btn btn-lg btn-primary btn-block" %>
+<div class="form-group">
+  <%= f.label :category_id, "Category ID:", class: "col-sm-2 control-label" %>
+  <div class="col-sm-6">
+    <%=  @category.persisted? ? @category.id : "N/A" %>
+  </div>
+</div>
+<div class="form-group">
+  <%= f.label :name, "Name:", class: "col-sm-2 control-label" %>
+  <div class="col-sm-6">
+      <%= display_category_form_errors(category, :name) %>
+      <%= f.text_field :name, placeholder: "enter category name here", class: "form-control",autofocus: true %>
+  </div>
+</div>
+  <%= f.submit "#{(category.persisted? ? 'Update' : 'Create')} Category", class: "btn-lg btn-primary new-btn" %>
 <% end %>

@@ -1,6 +1,6 @@
-<h1>Product Categories</h1>
-<%= link_to "Add A New Category", new_admin_category_path, class: "btn-block btn-primary btn-lg new-cat-btn" %>
-<table>
+<h1 class="heading">Product Categories</h1>
+<%= link_to "Add A New Category", new_admin_category_path, class: "btn-block btn-primary btn-lg", id: "new-btn" %>
+<table class="table table-striped" id="index-table">
   <thead>
     <th>ID</th>
     <th>Name</th>

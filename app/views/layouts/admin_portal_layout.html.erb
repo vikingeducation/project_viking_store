@@ -18,9 +18,13 @@
       </div>
       <div class="row">
 
-        <%= render 'shared/navbar' %>
+        <div class="col-xs-3">
 
-        <section class="col-xs-9 col-xs-offset-2">
+          <%= render 'shared/navbar' %>
+
+        </div>
+
+        <div class="col-xs-9 portal-window">
 
           <div class="flash-msgs">
             <% flash.each do |key, value| %>
@@ -29,11 +33,11 @@
           </div>
 
           <div class="portal">
-            <%= yield %>  
+            <%= yield %>
           </div>
 
 
-        </section>
+        </div>
 
       </div>
     </body>
