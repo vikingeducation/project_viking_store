@@ -84,3 +84,17 @@
 .heading {
   font-size: 55px;
 }
+
+#create-div,
+#edit-delete-div {
+  width: 100%;
+  margin: 30px auto 30px auto;
+  text-align: center;
+  text-decoration: underline;
+}
+
+#create-button {
+  width: 70%;
+  font-size: 25px;
+  border: 1px solid black;
+}

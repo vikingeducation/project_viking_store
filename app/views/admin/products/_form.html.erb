@@ -1,14 +1,34 @@
-<h4>Product ID: <%= product.persisted? ? product.id : "N/A" %> </h4>
+<!-- <h4>Product ID: <%= product.persisted? ? product.id : "N/A" %> </h4> -->
 <%= form_for [:admin, product] do |f| %>
-  <%= f.label :name %>
-  <%= display_product_form_errors(product, :name) %>
-  <%= f.text_field :name %><br>
-  <%= f.label :price %>
-  <%= display_product_form_errors(product, :price) %>
-  <%= f.text_field :price %><br>
-  <%= f.label :category_id %>
-  <%= display_product_form_errors(product, :category_id) %>
-  <%= f.select :category_id, @categories.map {|c| [c.name, c.id]} %>
+  <div class="row">
+  <%= f.label :product_id, "Product ID: ", class: "col-sm-3 control-label" %>
+    <div class="col-sm-6">
+      <%= product.persisted? ? product.id : "N/A" %><br>
+    </div>
+  </div>
+  <div class="row">
+  <%= f.label :name, "Name: ", class: "col-sm-3 control-label" %>
+    <div class="col-sm-6">
+      <%= display_product_form_errors(product, :name) %>
+      <%= f.text_field :name, class: "form-control", autofocus: true %><br>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.label :price, "Price: ", class: "col-sm-3 control-label" %>
+    <div class="col-sm-6">
+      <%= display_product_form_errors(product, :price) %>
+      <%= f.text_field :price, class: "form-control",autofocus: true  %><br>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.label :category_id, "Category:", class: "col-sm-3 control-label" %>
+    <div class="col-sm-6">
+      <%= display_product_form_errors(product, :category_id) %>
+      <%= f.select :category_id, @categories.map {|c| [c.name, c.id]} %>
+    </div>
+  </div>
   <%= f.hidden_field :sku, value: "#{Random.new.rand(1_000_000000_000..10_000_000_000_000-1) }" %>
-  <%= f.submit "#{(product.persisted? ? 'Update' : 'Create')} Product", class: "btn btn-lg btn-primary btn-block" %>
+  <div id="create-div">
+    <%= f.submit "#{(product.persisted? ? 'Update' : 'Create')} Product", class: "btn-lg btn-primary",  id: "create-button"  %>
+  </div>
 <% end %>
