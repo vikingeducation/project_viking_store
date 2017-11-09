@@ -1,0 +1,16 @@
+.container
+  h1 Viking Store Analytics Dashboard
+
+  .ui.menu
+    a class="active item" data-tab="overall_platform" Overall Platform
+    a class="item" data-tab="user_demographics" User Demographics
+    a class="item" data-tab="order_statistics" Order Statistics
+    a class="item" data-tab="time_series_data" Time Series Data
+
+  = render partial: "overall_platform", locals: {overall_analysis: @overall_analysis}
+  .ui.bottom.tab.segment data-tab="user_demographics"
+    | User Demographics
+  .ui.bottom.tab.segment data-tab="order_statistics"
+    |Order Statistics
+  .ui.bottom.tab.segment data-tab="time_series_data"
+    |Time Series Data

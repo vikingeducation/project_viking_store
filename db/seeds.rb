@@ -36,7 +36,7 @@ end
 
 # Creates a random two-digit number between 0 and 100. You probably used Faker::Commerce.price, which is great, but that method doesn't let us seed the database and it gave us inconsistent pricing.
 def random_price
-  (rand(0..100.0) * 100).floor/100.0
+  (rand(0..100.0) * 100).floor / 100.0
 end
 
 # Generate Product records and assign them each to a random Category.
@@ -65,7 +65,7 @@ end
 
 # This method selects one of a users several addresses for use setting shipping address and billing address.
 def random_user_address(user_id)
-  Address.where("user_id = ?", user_id).sample[:id]
+  Address.where(user_id: user_id).pluck(:id).sample
 end
 
 # This method creates a single address affiliated with a user.
@@ -144,7 +144,7 @@ end
 #  #present? is a Rails method that's the opposite of #empty?
 
 def has_cart?(user_id)
-  Order.where("user_id = ? AND checkout_date IS NULL ", user_id).present?
+  Order.where(user_id: user_id, checkout_date: nil).present?
 end
 
 

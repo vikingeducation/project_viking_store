@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require semantic-ui
+$(document).ready(function() {
+  $('.menu .item').tab();
+})
