@@ -1,0 +1,4 @@
+.ui.bottom.active.tab.segment data-tab="overall_platform"
+  .ui.two.cards
+    - platform_analysis.each do |analysis|
+      = render partial: "dashboards/analytics/platform/card", locals: {analysis: analysis}

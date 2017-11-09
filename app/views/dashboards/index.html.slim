@@ -7,7 +7,7 @@
     a class="item" data-tab="order_statistics" Order Statistics
     a class="item" data-tab="time_series_data" Time Series Data
 
-  = render partial: "overall_platform", locals: {overall_analysis: @overall_analysis}
+  = render partial: "dashboards/analytics/platform/platform", locals: {platform_analysis: @platform_analysis}
   .ui.bottom.tab.segment data-tab="user_demographics"
     | User Demographics
   .ui.bottom.tab.segment data-tab="order_statistics"
