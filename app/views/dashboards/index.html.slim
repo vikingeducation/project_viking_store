@@ -3,13 +3,18 @@
 
   .ui.menu
     a class="active item" data-tab="overall_platform" Overall Platform
-    a class="item" data-tab="user_demographics" User Demographics
+    a class="item" data-tab="user_demographics" User Demographics and Behavior
     a class="item" data-tab="order_statistics" Order Statistics
     a class="item" data-tab="time_series_data" Time Series Data
 
   = render partial: "dashboards/analytics/platform/platform", locals: {platform_analysis: @platform_analysis}
-  .ui.bottom.tab.segment data-tab="user_demographics"
-    | User Demographics
+  = render partial: "dashboards/analytics/demographics/demographics",
+    locals: {top_three_states: @top_three_states,
+              top_three_cities: @top_three_cities,
+              highest_single_order_value: @highest_single_order_value,
+              highest_lifetime_value_customer: @highest_lifetime_value_customer,
+            must_orders_placed: @must_orders_placed,
+          highest_average_order: @highest_average_order}
   .ui.bottom.tab.segment data-tab="order_statistics"
     |Order Statistics
   .ui.bottom.tab.segment data-tab="time_series_data"

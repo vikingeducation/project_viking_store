@@ -1,0 +1,33 @@
+.ui.bottom.tab.segment data-tab="user_demographics"
+  .ui.two.cards
+    .ui.card
+      .content
+        .header Top 3 States Users Live In (billing)
+        table{class="ui celled table"}
+          thead
+            tr
+              th State
+              th Number of Users
+          tbody
+            - top_three_states.each do |state, users|
+                tr
+                  td = state
+                  td = users
+
+    .ui.card
+      .content
+        .header Top 3 Cities Users Live In (billing)
+        table{class="ui celled table"}
+          thead
+            tr
+            th City
+            th Number of Users
+          tbody
+            - top_three_cities.each do |state, users|
+                tr
+                  td = state
+                  td = users
+    = render partial: "dashboards/analytics/demographics/top_users", locals: {highest_single_order: highest_single_order_value,
+      highest_lifetime_value_customer: highest_lifetime_value_customer,
+    must_orders_placed: must_orders_placed,
+  highest_average_order: highest_average_order}

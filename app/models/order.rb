@@ -6,13 +6,20 @@ class Order < ApplicationRecord
       from(date, "checkout_date")
     end
 
-    def total_revenue(&block)
+    def total_revenue
       joined_products.where.
         not(orders: {checkout_date: nil}).
         sum("products.price")
     end
 
-    private
+    # def highest_order
+    #   joined_products.
+    #     select("concat(users.first_name, ' ', users.last_name) AS customer_name, SUM(products.price) AS total").
+    #     joins("INNER JOIN users ON orders.user_id = users.id").
+    #     group("customer_name").order("total DESC").limit(1).first
+    # end
+    #
+    # private
 
     def joined_products
       joins("INNER JOIN order_contents ON orders.id = order_contents.order_id").

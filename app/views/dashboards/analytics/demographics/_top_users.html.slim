@@ -1,0 +1,26 @@
+.ui.card
+  .content
+    .header Top Users With...
+    table{class="ui celled table"}
+      thead
+        tr
+          th Item
+          th User
+          th Quantity
+      tbody
+        tr
+          td Highest Single Order Value
+          td = highest_single_order.customer_name
+          td = number_to_currency highest_single_order.total
+        tr
+          td Highest Lifetime Value
+          td = highest_lifetime_value_customer.customer_name
+          td = number_to_currency highest_lifetime_value_customer.total
+        tr
+          td Highest Average Order Value
+          td = highest_average_order.customer_name
+          td = number_to_currency highest_average_order.average
+        tr
+          td Most Orders Placed
+          td = must_orders_placed.customer_name
+          td = must_orders_placed.count
