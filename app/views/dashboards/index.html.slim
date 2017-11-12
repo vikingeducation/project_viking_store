@@ -15,7 +15,6 @@
               highest_lifetime_value_customer: @highest_lifetime_value_customer,
             must_orders_placed: @must_orders_placed,
           highest_average_order: @highest_average_order}
-  .ui.bottom.tab.segment data-tab="order_statistics"
-    |Order Statistics
+  = render partial: "dashboards/analytics/order_statistics/order_statistics", locals: {order_statistics: @order_statistics}
   .ui.bottom.tab.segment data-tab="time_series_data"
     |Time Series Data

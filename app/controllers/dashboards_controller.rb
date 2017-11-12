@@ -9,6 +9,8 @@ class DashboardsController < ApplicationController
     @highest_lifetime_value_customer = TopCustomer.highest_lifetime_value_customer
     @highest_average_order = TopCustomer.highest_average_order
     @must_orders_placed = TopCustomer.must_orders_placed
+
+    @order_statistics = order_statistics
   end
 
   private
@@ -16,6 +18,12 @@ class DashboardsController < ApplicationController
   def platform_analysis
     [7.days.ago, 30.days.ago, Time.at(0)].map do |date|
       PlatformAnalysis.new(from_day: date)
+    end
+  end
+
+  def order_statistics
+    [7.days.ago, 30.days.ago, Time.at(0)].map do |date|
+      OrderStatistic.new(from_day: date)
     end
   end
 

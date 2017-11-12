@@ -11,27 +11,24 @@ class TopCustomer
   end
 
   def self.highest_average_order
-    fetch(Order.select("customer_name, AVG(total) AS average").
-      from(orders_and_grouped_by_user.
-              group("orders.id").
-              order("total DESC")).
+    fetch Order.select("customer_name, AVG(total) AS average").
+      from(orders_and_grouped_by_user.group("orders.id")).
       group("customer_name").
-      order("average DESC"))
+      order("average DESC")
 
   end
 
   def self.must_orders_placed
-    orders_and_grouped_by_user.
+    fetch orders_and_grouped_by_user.
       select("COUNT(*) AS count").
       group("orders.id").
-      order("count DESC").limit(1).first
+      order("count DESC")
   end
 
   def self.orders_and_grouped_by_user
-    Order.joined_products.
+    Order.with_products_and_users.
       select("concat(users.first_name, ' ', users.last_name) AS customer_name, SUM(products.price) AS total").
       where.not(orders: {checkout_date: nil}).
-      joins("INNER JOIN users ON orders.user_id = users.id").
       group("users.id")
   end
 
