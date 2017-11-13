@@ -16,5 +16,4 @@
             must_orders_placed: @must_orders_placed,
           highest_average_order: @highest_average_order}
   = render partial: "dashboards/analytics/order_statistics/order_statistics", locals: {order_statistics: @order_statistics}
-  .ui.bottom.tab.segment data-tab="time_series_data"
-    |Time Series Data
+  = render partial: "dashboards/analytics/time_series/time_series", locals: {orders_by_day: @orders_by_day, orders_by_week: @orders_by_week}

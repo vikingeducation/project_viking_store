@@ -8,4 +8,14 @@ module DashboardHelper
   def title_for(name, number_of_days)
     (number_of_days <= 30 ? "new #{name}" : name).titleize
   end
+
+  def today_yesderday(date)
+    if date.today?
+      "Today"
+    elsif date.tomorrow.today?
+      "Yesterday"
+    else
+      date
+    end
+  end
 end

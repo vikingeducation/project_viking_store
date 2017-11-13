@@ -11,6 +11,8 @@ class DashboardsController < ApplicationController
     @must_orders_placed = TopCustomer.must_orders_placed
 
     @order_statistics = order_statistics
+    @orders_by_day = OrderTimeSeries.orders_by_day
+    @orders_by_week = OrderTimeSeries.orders_by_week
   end
 
   private
