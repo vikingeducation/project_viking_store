@@ -1,0 +1,19 @@
+.container
+  h1 Viking Store Analytics Dashboard
+
+  .ui.menu
+    a class="active item" data-tab="overall_platform" Overall Platform
+    a class="item" data-tab="user_demographics" User Demographics and Behavior
+    a class="item" data-tab="order_statistics" Order Statistics
+    a class="item" data-tab="time_series_data" Time Series Data
+
+  = render partial: "admin/dashboards/analytics/platform/platform", locals: {platform: @platform}
+  / = render partial: "dashboards/analytics/demographics/demographics",
+  /   locals: {top_three_states: @top_three_states,
+  /             top_three_cities: @top_three_cities,
+  /             highest_single_order_value: @highest_single_order_value,
+  /             highest_lifetime_value_customer: @highest_lifetime_value_customer,
+  /           must_orders_placed: @must_orders_placed,
+  /         highest_average_order: @highest_average_order}
+  / = render partial: "dashboards/analytics/order_statistics/order_statistics", locals: {order_statistics: @order_statistics}
+  / = render partial: "dashboards/analytics/time_series/time_series", locals: {orders_by_day: @orders_by_day, orders_by_week: @orders_by_week}

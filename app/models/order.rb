@@ -7,9 +7,13 @@ class Order < ApplicationRecord
     end
 
     def total_revenue
-      with_products.where.
-        not(orders: {checkout_date: nil}).
+      with_products.
+        checked_out.
         sum("products.price")
+    end
+
+    def checked_out
+      where.not(orders: {checkout_date: nil})
     end
 
     def with_products
