@@ -1,5 +1,5 @@
 class City < ApplicationRecord
-  def self.top_three_of_users
+  def self.three_with_most_users
     joins("INNER JOIN addresses ON cities.id = addresses.city_id").
       joins("INNER JOIN users ON users.billing_id = addresses.id").
       group("cities.name").

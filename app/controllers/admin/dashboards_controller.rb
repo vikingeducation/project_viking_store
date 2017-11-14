@@ -4,12 +4,11 @@ module Admin
       @platform = platform
 
       # demographics
-      @top_three_states = State.top_three_of_users
-      @top_three_cities = City.top_three_of_users
-      @highest_single_order_value = highest_single_order_value
-      @highest_lifetime_value_customer = TopCustomer.highest_lifetime_value_customer
-      @highest_average_order = TopCustomer.highest_average_order
-      @must_orders_placed = TopCustomer.must_orders_placed
+      @top_states = State.three_with_most_users
+      @top_cities = City.three_with_most_users
+
+      # top customers
+      @top_customers = Admin::Analysis::TopCustomer.all
 
       @order_statistics = order_statistics
       @orders_by_day = OrderTimeSeries.orders_by_day
@@ -28,10 +27,6 @@ module Admin
       [7.days.ago, 30.days.ago, Time.at(0)].map do |date|
         OrderStatistic.new(from_day: date)
       end
-    end
-
-    def highest_single_order_value
-      TopCustomer.highest_order
     end
   end
 end

@@ -1,15 +1,21 @@
 class Order < ApplicationRecord
   extend Dateable
 
+  def total
+    self.class.where(orders: {id: self}).total
+  end
+
   class << self
     def checkout_from(date)
       from(date, "checkout_date")
     end
 
     def total_revenue
-      with_products.
-        checked_out.
-        sum("products.price")
+      checked_out.total
+    end
+
+    def total
+      with_products.sum("products.price * order_contents.quantity")
     end
 
     def checked_out

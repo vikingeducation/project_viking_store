@@ -18,4 +18,8 @@ module DashboardHelper
       date
     end
   end
+
+  def sum_or_count(customer)
+    customer.try(:count) || number_to_currency(customer.sum)
+  end
 end

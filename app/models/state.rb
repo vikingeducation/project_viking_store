@@ -1,5 +1,5 @@
 class State < ApplicationRecord
-  def self.top_three_of_users
+  def self.three_with_most_users
     joins("INNER JOIN addresses ON states.id = addresses.state_id").
       joins("INNER JOIN users ON users.billing_id = addresses.id").
       group("states.name").
