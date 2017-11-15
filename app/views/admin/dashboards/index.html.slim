@@ -12,5 +12,5 @@
     locals: {top_states: @top_states,
               top_cities: @top_cities,
               top_customers: @top_customers}
-  / = render partial: "dashboards/analytics/order_statistics/order_statistics", locals: {order_statistics: @order_statistics}
-  / = render partial: "dashboards/analytics/time_series/time_series", locals: {orders_by_day: @orders_by_day, orders_by_week: @orders_by_week}
+  = render partial: "admin/dashboards/analytics/order_statistics/order_statistics", locals: {order_statistics: @order_statistics}
+  = render partial: "admin/dashboards/analytics/time_series/time_series", locals: {orders_by_day: @orders_by_day, orders_by_week: @orders_by_week}

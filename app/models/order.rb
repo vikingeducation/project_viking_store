@@ -15,7 +15,7 @@ class Order < ApplicationRecord
     end
 
     def total
-      with_products.sum("products.price * order_contents.quantity")
+      with_products.pluck("SUM(products.price * order_contents.quantity) AS sum").first
     end
 
     def checked_out

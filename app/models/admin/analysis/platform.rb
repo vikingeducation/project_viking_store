@@ -1,19 +1,24 @@
 module Admin
   module Analysis
     class Platform
+      def self.from(*times)
+        result = times.flatten.map { |time| new(from_day: time) }
+        result.one? ? result.first : result
+      end
+
       def initialize(from_day: Time.at(0))
         @from_day = from_day
       end
 
-      def users_count
+      def number_of_users
         User.from(@from_day).count
       end
 
-      def orders_count
+      def number_of_orders
         Order.checkout_from(@from_day).count
       end
 
-      def products_count
+      def number_of_products
         Product.from(@from_day).count
       end
 

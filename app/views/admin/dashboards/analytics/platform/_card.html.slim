@@ -9,13 +9,13 @@
       tbody
         tr
           td = title_for('users', analysis.number_of_days)
-          td = analysis.users_count
+          td = analysis.number_of_users
         tr
           td Orders
-          td = analysis.orders_count
+          td = analysis.number_of_orders
         tr
           td = title_for('products', analysis.number_of_days)
-          td = analysis.products_count
+          td = analysis.number_of_products
         tr
           td Revenue
           td = number_to_currency analysis.revenue

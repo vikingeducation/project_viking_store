@@ -1,4 +1,4 @@
-class OrderTimeSeries
+class Admin::Analysis::OrderTimeSeries
   include Virtus.model
 
   attribute :date, Date
@@ -38,6 +38,7 @@ class OrderTimeSeries
   def self.query(&block)
     Result.new ActiveRecord::Base.connection.exec_query(yield)
   end
+  
   class Result
     def initialize(result)
       @result = result
@@ -49,7 +50,7 @@ class OrderTimeSeries
 
     def to_a
       @result.to_hash.map do |h|
-        OrderTimeSeries.new(h)
+        Admin::Analysis::OrderTimeSeries.new(h)
       end
     end
   end

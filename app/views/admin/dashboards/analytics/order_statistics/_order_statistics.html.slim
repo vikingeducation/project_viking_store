@@ -1,4 +1,4 @@
 .ui.bottom.tab.segment data-tab="order_statistics"
   .ui.two.cards
     - order_statistics.each do |statistic|
-      = render partial: "dashboards/analytics/order_statistics/card", locals: {statistic: statistic}
+      = render partial: "admin/dashboards/analytics/order_statistics/card", locals: {statistic: statistic}
