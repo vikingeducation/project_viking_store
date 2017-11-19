@@ -1,0 +1,16 @@
+.admin {
+  .container {
+    main {
+      display: flex;
+      padding-top: 20px;
+
+      .site-nav {
+        width: 25%;
+      }
+
+      .main-content {
+        width: 75%;
+      }
+    }
+  }
+}
