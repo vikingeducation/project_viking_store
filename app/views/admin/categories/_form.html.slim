@@ -1,0 +1,13 @@
+= form_errors category
+h2.ui.header.center.aligned = header
+
+.form-contanier
+  = form_for category, url: admin_categories_path, html: {class: "ui form"} do |f|
+    .field
+      = f.label :id
+      = f.text_field :id, class: "disabled field", disabled: true
+    .field
+      = f.label :name
+      = f.text_field :name
+    = f.submit nil, class: "ui button primary large"
+  = content_for :delete_link

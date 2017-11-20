@@ -1,0 +1,25 @@
+h2.ui.header.center.aligned Category #{@category.id}: #{@category.name}
+
+dl
+  dt Category ID:
+  dd = @category.id
+
+dl
+  dt Name:
+  dd = @category.name
+= link_to "Edit Category ", edit_admin_category_path(@category)
+= link_to "Delete Category", admin_category_path(@category), method: 'delete', confirm: "Are you sure?"
+
+
+table{class="ui collapsing table"}
+  h3.header Products in #{@category.name}
+  thead
+    tr
+      th ID
+      th Name
+
+  tbody
+    - @category.products.each do |product|
+      tr
+        td = product.id
+        td = link_to product.name, ''

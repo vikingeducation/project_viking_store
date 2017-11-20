@@ -1,0 +1,18 @@
+h3.ui.header Product Catagories
+
+table{class="ui table"}
+    thead
+      tr
+        th ID
+        th Name
+        th SHOW
+        th Edit
+        th DELETE
+    tbody
+      = render @categories
+
+    tfoot.full-width
+      th
+      th colspan="4"
+        div class="ui right floated small primary button"
+          = link_to "Add Category", new_admin_category_path, class: 'add'

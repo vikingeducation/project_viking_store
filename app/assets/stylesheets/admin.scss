@@ -11,6 +11,21 @@
       .main-content {
         width: 75%;
       }
+
+      a.add {
+        color: #fff !important;
+      }
+    }
+
+    .form-contanier {
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    dd, dt {display: inline-block;}
+    dt {
+      width: 80px;
+      font-weight: bold;
     }
   }
 }

@@ -9,8 +9,9 @@ body
   .admin
     .container
       h1 Viking Store Admin Portal
+
       main
         = render "layouts/admin/nav"
         .main-content
-          h2 hello
+          = semantic_flash
           = yield
