@@ -1,0 +1,13 @@
+.ui.card
+  .content
+    .header Top 3 #{area.capitalize.pluralize} Users Live In (billing)
+    table{class="ui celled table"}
+      thead
+        tr
+        th = area.capitalize
+        th Number of Users
+      tbody
+        - top_areas.each do |area, users|
+            tr
+              td = area
+              td = users

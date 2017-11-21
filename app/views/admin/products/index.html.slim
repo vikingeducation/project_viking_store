@@ -1,0 +1,20 @@
+h3.ui.header Products
+
+table{class="ui table"}
+    thead
+      tr
+        th ID
+        th Name
+        th Price
+        th Category
+        th SHOW
+        th Edit
+        th DELETE
+    tbody
+      = render @products
+
+    tfoot.full-width
+      th
+      th colspan="6"
+        div class="ui right floated small primary button"
+          = link_to "Add a New Product", new_admin_product_path, class: 'add'

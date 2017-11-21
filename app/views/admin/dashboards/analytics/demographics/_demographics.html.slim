@@ -1,0 +1,5 @@
+.ui.bottom.tab.segment data-tab="user_demographics"
+  .ui.two.cards
+    = render partial: "admin/dashboards/analytics/demographics/area", locals: {top_areas: top_states, area: 'state'}
+    = render partial: "admin/dashboards/analytics/demographics/area", locals: {top_areas: top_cities, area: 'city'}
+    = render partial: "admin/dashboards/analytics/demographics/top_users", locals: {top_customers: top_customers}

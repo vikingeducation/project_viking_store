@@ -1,0 +1,15 @@
+.ui.card
+  .content
+    .header = header
+    table{class="ui celled table"}
+      thead
+        tr
+          th Date
+          th Quantity
+          th Value
+      tbody
+        - data.each do |order_info|
+          tr
+            td = today_yesderday order_info.date
+            td = order_info.quantity
+            td = number_to_currency order_info.value

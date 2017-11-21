@@ -1,0 +1,12 @@
+.site-nav
+  .ui.vertical.menu
+    .item
+      .header Navigation Options
+      .menu
+        a.item Users
+        a.item Addresses
+        a.item Orders
+        = link_to 'Products', admin_products_path, class: 'item'
+        = link_to 'Categories', admin_categories_path, class: 'item'
+
+    = link_to 'Analytics Dashboard', admin_dashboard_path, class: 'item'

@@ -1,0 +1,24 @@
+.product.header {
+  text-align: center;
+}
+
+div.product {
+  width: 75%;
+  margin: 10px auto;
+  padding: 10px;
+  border: 2px solid black;
+
+  .info {
+    margin-bottom: 20px;
+  }
+
+  .ui.button.primary {
+    width: 400px;
+    display: block;
+  }
+  .ui.form {
+    input[type="text"], select {
+      width: 265px;
+    }
+  }
+}

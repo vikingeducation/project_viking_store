@@ -1,0 +1,19 @@
+= form_errors product
+h2.product.header = header
+
+.product
+  = form_for [:admin, product], html: {class: "ui form"} do |f|
+    dl
+      dt = f.label :id, "Product ID"
+      dd = f.text_field :id, class: "disabled field"
+    dl
+      dt = f.label :name
+      dd = f.text_field :name, placeholder: 'Enter a Name'
+    dl
+      dt = f.label :price
+      dd = f.text_field :price, placeholder: "$price"
+    dl
+      dt = label_tag('Category')
+      dd = f.collection_select :category_id,Category.all, :id, :name, {prompt: "Select a Category"}, {class: "ui selection dropdown"}
+    = f.submit class: "ui button primary"
+  = content_for :delete_link

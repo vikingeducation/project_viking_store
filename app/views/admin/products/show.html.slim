@@ -1,0 +1,30 @@
+h2.product.header Product #{@product.id}
+.product
+  .info
+    h3.header Product Information
+
+    dl
+      dt Product ID
+      dd = @product.id
+    dl
+      dt Name
+      dd = @product.name
+    dl
+      dt Price
+      dd = number_to_currency @product.price
+    dl
+      dt Category
+      dd = @product.category_name
+
+  .statistics
+    h3.header Products Statistics
+    dl
+      dt Times Ordered
+      dd = @product.times_ordered
+    dl
+      dt Carts in
+      dd = @product.carts_in
+
+  .links
+    = link_to "Edit Product ", admin_product_path(@product)
+    = link_to "Delete Product", admin_product_path(@product), method: 'delete', confirm: 'Are you sure?'

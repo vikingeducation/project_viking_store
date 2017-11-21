@@ -1,0 +1,21 @@
+.ui.card
+  .content
+    .header = analysis_days_in_words(statistic.number_of_days)
+    table{class="ui celled table"}
+      thead
+        tr
+          th Item
+          th Data
+      tbody
+        tr
+          td Number of Orders
+          td = statistic.number_of_orders
+        tr
+          td Total Revenue
+          td = number_to_currency statistic.total_revenue
+        tr
+          td Average Order Value
+          td = number_to_currency statistic.avarage_order_value
+        tr
+          td Largest Order Value
+          td = number_to_currency statistic.largest_order_value

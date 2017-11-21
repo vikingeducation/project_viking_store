@@ -1,0 +1,21 @@
+.ui.card
+  .content
+    .header = analysis_days_in_words(analysis.number_of_days)
+    table{class="ui celled table"}
+      thead
+        tr
+          th Item
+          th Data
+      tbody
+        tr
+          td = title_for('users', analysis.number_of_days)
+          td = analysis.number_of_users
+        tr
+          td Orders
+          td = analysis.number_of_orders
+        tr
+          td = title_for('products', analysis.number_of_days)
+          td = analysis.number_of_products
+        tr
+          td Revenue
+          td = number_to_currency analysis.revenue

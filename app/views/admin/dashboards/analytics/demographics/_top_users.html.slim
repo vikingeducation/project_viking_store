@@ -1,0 +1,15 @@
+.ui.card
+  .content
+    .header Top Users With...
+    table{class="ui celled table"}
+      thead
+        tr
+          th Item
+          th User
+          th Quantity
+      tbody
+        - top_customers.each do |type, customer|
+          tr
+            td = type.to_s.humanize
+            td = customer.customer_name
+            td = sum_or_count(customer)

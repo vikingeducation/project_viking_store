@@ -1,0 +1,7 @@
+.ui.bottom.tab.segment data-tab="time_series_data"
+  .ui.two.cards
+    = render partial: "admin/dashboards/analytics/time_series/card", locals: {data: orders_by_day,
+      header: "Orders by day"}
+
+    = render partial: "admin/dashboards/analytics/time_series/card", locals: {data: orders_by_week,
+      header: "Orders by week"}

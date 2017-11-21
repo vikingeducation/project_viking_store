@@ -1,0 +1,5 @@
+- content_for :delete_link do
+  = link_to "Delete Category", admin_category_path(@category), method: 'delete'
+
+= render partial: 'form', locals: {header: "Edit Category #{@category.id}:  #{@category.name} ",
+  category: @category}
