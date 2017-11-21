@@ -22,6 +22,7 @@
     <%= f.label :exp_year, "Expiration Year:" %>
     <%= cc.exp_year %><br>
     <%= f.label :ccv, "CCV:" %>
-    <%= cc.ccv %>
+    <%= cc.ccv %><br>
   <% end %>
+  <%= link_to "Remove Card", "#", method: :delete, data: {confirm: "Are you sure you want to remove this card?"} %>
 <% end %>

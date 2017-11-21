@@ -8,17 +8,16 @@
   <%= link_to f.text_field :email, disabled: true %><br>
   <%= f.label :telephone, "Telephone" %>
   <%= f.text_field :telephone, disabled: true %><br>
-  <%= f.label :billing_address, "Default Billing Address"%><br>
   <% unless current_page?(action: 'show') %>
+    <%= f.label :billing_address, "Default Billing Address"%><br>
     <%= f.select :billing_id, user.addresses.map {|c| [c.street_address, c.id]} %><br>
-  <% else %>
-    <%= display_address(user.billing_id) %><br>
-  <% end %>
-  <%= f.label :shipping_address, "Default Shipping Address"%><br>
-  <% unless current_page?(action: 'show') %>
+    <%= f.label :shipping_address, "Default Shipping Address"%><br>
     <%= f.select :shipping_id, user.addresses.map {|c| [c.street_address, c.id]} %><br>
   <% else %>
-    <%= display_address(user.shipping_id) %><br>
+    <%= f.label :billing_address, "Default Billing Address"%><br>
+    <%= user.billing_id.nil? ? "No default address selected" : display_address(user.billing_id) %><br>
+    <%= f.label :shipping_address, "Default Shipping Address"%><br>
+    <%= user.shipping_id.nil? ? "No defaut address selected" : display_address(user.shipping_id) %><br>
   <% end %>
   <% unless current_page?(action: 'show') %>
     <%= link_to "View Saved Addresses", "#" %><br>
