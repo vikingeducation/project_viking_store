@@ -1,0 +1,27 @@
+<h2>Credit Card Information</h2>
+<%= form_for [:admin, user] do |f| %>
+  <%= f.label :first_name, "First Name:" %>
+  <%= f.text_field :first_name, disabled: true %><br>
+  <%= f.label :last_name, "Last Name:" %>
+  <%= f.text_field :last_name, disabled: true %><br>
+  <% unless current_page?(action: 'show') %>
+    <%= f.label :card_number, "Number:" %>
+    <%= f.text_field "#"%><br>
+    <%= f.label :exp_month, "Experation Month:" %>
+    <%= f.text_field "#" %><br>
+    <%= f.label :exp_year, "Experation Year:" %>
+    <%= f.text_field "#" %><br>
+    <%= f.label :ccv, "CCV:" %>
+    <%= f.text_field "#" %>
+  <% else %>
+    <% cc = user_cc_info(user.id) %>
+    <%= f.label :number, "Number:" %>
+    <%= cc.card_number %><br>
+    <%= f.label :exp_month, "Expiration Month:" %>
+    <%= cc.exp_month %><br>
+    <%= f.label :exp_year, "Expiration Year:" %>
+    <%= cc.exp_year %><br>
+    <%= f.label :ccv, "CCV:" %>
+    <%= cc.ccv %>
+  <% end %>
+<% end %>

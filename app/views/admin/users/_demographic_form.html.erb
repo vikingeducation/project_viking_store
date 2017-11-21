@@ -1,0 +1,32 @@
+<h2>Demographic Information</h2>
+<%= form_for [:admin, user] do |f| %>
+  <%= f.label :first_name, "First Name" %>
+  <%= f.text_field :first_name, disabled: true %><br>
+  <%= f.label :last_name, "Last Name" %>
+  <%= f.text_field :last_name, disabled: true %><br>
+  <%= f.label :email, "Email" %>
+  <%= link_to f.text_field :email, disabled: true %><br>
+  <%= f.label :telephone, "Telephone" %>
+  <%= f.text_field :telephone, disabled: true %><br>
+  <%= f.label :billing_address, "Default Billing Address"%><br>
+  <% unless current_page?(action: 'show') %>
+    <%= f.select :billing_id, user.addresses.map {|c| [c.street_address, c.id]} %><br>
+  <% else %>
+    <%= display_address(user.billing_id) %><br>
+  <% end %>
+  <%= f.label :shipping_address, "Default Shipping Address"%><br>
+  <% unless current_page?(action: 'show') %>
+    <%= f.select :shipping_id, user.addresses.map {|c| [c.street_address, c.id]} %><br>
+  <% else %>
+    <%= display_address(user.shipping_id) %><br>
+  <% end %>
+  <% unless current_page?(action: 'show') %>
+    <%= link_to "View Saved Addresses", "#" %><br>
+    <%= f.submit "#{(user.persisted? ? 'Update' : 'Create')} User", class: "btn-lg btn-primary",  id: "create-button"  %><br>
+  <% else %>
+    <%= link_to "Edit #{user.first_name + " " + user.last_name}'s Information", "#" %><br>
+    <%= link_to "Delete #{user.first_name + " " + user.last_name}", "#" %><br>
+    <%= link_to "View Saved Addresses", "#" %><br>
+    <%= link_to "View Unplaced Order (Cart)", "#" %><br>
+  <% end %>
+<% end %>

@@ -32,4 +32,26 @@ module Admin::UsersHelper
     @order.nil? ? "N/A" : @order[:checkout_date].strftime("%F")
   end
 
+
+  def display_address(address_id)
+    address = Address.find(address_id)
+    city = City.find(address.city_id)
+    state = State.find(address.state_id)
+    address.street_address + ", " + city.name + ", " + state.name
+  end
+
+
+  def user_cc_info(user_id)
+    @cc = CreditCard.find(user_id)
+  end
+
+
+  def order_value(order)
+    sum = 0
+    order.order_contents.each do |f|
+      sum += (Product.find(f.product_id).price * f.quantity)
+    end
+    sum.to_s
+  end
+
 end
