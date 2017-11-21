@@ -1,7 +1,7 @@
 module Admin
   class ProductsController < ApplicationController
     layout "admin"
-    before_action :set_product, only: [:show]
+    before_action :set_product, only: [:show, :edit, :destroy, :update]
 
     def index
       @products = Product.all
@@ -22,6 +22,27 @@ module Admin
       else
         render :new
       end
+    end
+
+    def update
+      @product.price = clean_price
+      if @product.update(product_params)
+        flash[:success] = "Product #{@product.name} Has Been Updated!!!"
+        redirect_to admin_products_path
+      else
+        flash.now[:error] = "Something Went Wrong!"
+        render :edit
+      end
+    end
+
+    def destroy
+      if @product.destroy
+        flash[:success] = "Product #{@product.name} Has Been Deleted!!!"
+      else
+        flash.now[:error] = "Something Went Wrong!"
+      end
+
+      redirect_to admin_products_path
     end
 
     private
