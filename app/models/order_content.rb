@@ -2,7 +2,8 @@ class OrderContent < ApplicationRecord
 
   FIRST_ORDER_DATE = Order.select(:created_at).first
 
-  belongs_to :order 
+  belongs_to :order
+  belongs_to :product
 
   def self.revenue_statistics
     revenue_hash = {}

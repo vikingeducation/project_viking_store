@@ -43,3 +43,9 @@ gem 'faker'
 
 # Use Hirb for console display/debugging
 gem 'hirb'
+
+# Better Errors for debugging
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end

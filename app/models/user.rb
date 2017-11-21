@@ -2,7 +2,11 @@ class User < ApplicationRecord
 
   include CountSince
 
-  has_many :addresses
+  has_many :addresses 
+  has_many :orders
+  has_many :products, through: :orders
+  has_many :credit_cards
+
 
   FIRST_ORDER_DATE = Order.select(:created_at).first
 
