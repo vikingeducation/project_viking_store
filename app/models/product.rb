@@ -19,8 +19,8 @@ class Product < ApplicationRecord
   end
 
   private
-  
+
   def set_sku
-    Faker::Code.ean
+    self.sku = Faker::Code.ean
   end
 end

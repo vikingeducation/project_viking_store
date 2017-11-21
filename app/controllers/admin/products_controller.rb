@@ -16,9 +16,9 @@ module Admin
       @product.price = clean_price
 
       if @product.save
-        flash[:success] = "#{@product} Created!!"
+        flash[:success] = "#{@product.name} Created!!"
 
-        redirect_to products_path
+        redirect_to admin_products_path
       else
         render :new
       end

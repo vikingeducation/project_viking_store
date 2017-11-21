@@ -2,7 +2,7 @@
 h2.product.header = header
 
 .product
-  = form_for product, url: url, html: {class: "ui form"} do |f|
+  = form_for [:admin, product], html: {class: "ui form"} do |f|
     dl
       dt = f.label :id, "Product ID"
       dd = f.text_field :id, class: "disabled field"

@@ -1,5 +1,5 @@
 - content_for :delete_link do
   = link_to "Delete Product", admin_product_path(@product), method: 'delete', confirm: "Are You Sure?"
 
-= render partial: 'form', locals: {product: @product, url: admin_product_path(@product),
+= render partial: 'form', locals: {product: @product,
    header: "Edit Product #{@product.id}"}
