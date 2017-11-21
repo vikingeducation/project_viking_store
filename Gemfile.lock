@@ -56,6 +56,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.2)
+    database_cleaner (1.6.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     equalizer (0.0.11)
@@ -187,6 +188,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.2)
+  database_cleaner
   faker
   hirb
   jbuilder (~> 2.0)

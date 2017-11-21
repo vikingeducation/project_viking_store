@@ -6,7 +6,7 @@
         a.item Users
         a.item Addresses
         a.item Orders
-        a.item Products
-        a.item Categories
+        = link_to 'Products', admin_products_path, class: 'item'
+        = link_to 'Categories', admin_categories_path, class: 'item'
 
     = link_to 'Analytics Dashboard', admin_dashboard_path, class: 'item'

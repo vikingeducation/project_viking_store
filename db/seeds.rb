@@ -2,21 +2,11 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 # You'll see little puts statements in the file to give you status updates as the file runs.
-puts "Destroying old records"
+puts "Cleaning the Database"
 
 # Blow away all the existing records every time.
-
-User.destroy_all
-Address.destroy_all
-Order.destroy_all
-OrderContent.destroy_all
-Category.destroy_all
-CreditCard.destroy_all
-Product.destroy_all
-State.destroy_all
-City.destroy_all
-
-puts "Old records destroyed"
+DatabaseCleaner.clean_with :truncation
+puts "Database cleaned"
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
 MULTIPLIER = 10
