@@ -18,7 +18,7 @@ class OrderContent < ApplicationRecord
 
 
   def self.revenue_for(num_days_ago)
-    OrderContent.joins('JOIN products ON products.id = order_contents.product_id')
+    OrderContent.joins(:product)
                 .where('order_contents.created_at >= ?', num_days_ago)
                 .sum('order_contents.quantity * products.price')
                 .round

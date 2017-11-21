@@ -52,7 +52,7 @@ class Order < ApplicationRecord
 
   def self.average_order_value(num_days_ago)
     order_values = []
-    order_and_value = Order.joins_products_onto_ordercontents_onto_orders.
+    order_and_value = Order.joins(:products).
                            group('order_contents.order_id').
                            where('orders.created_at >= ?', num_days_ago).
                            sum(REVENUE).
@@ -66,7 +66,7 @@ class Order < ApplicationRecord
 
 
   def self.largest_order_value(num_days_ago)
-    order_and_value = Order.joins_products_onto_ordercontents_onto_orders.
+    order_and_value = Order.joins(:products).
                            group('order_contents.order_id').where('orders.created_at >= ?', num_days_ago).
                            order('sum(products.price * order_contents.quantity) DESC').
                            limit(1).
@@ -78,7 +78,7 @@ class Order < ApplicationRecord
 
 
   def self.orders_today
-    todays_orders = Order.joins_products_onto_ordercontents_onto_orders.
+    todays_orders = Order.joins(:products).
                           where('orders.created_at BETWEEN ? AND ?',
                             Date.today.beginning_of_day,
                             Date.today.end_of_day)
@@ -87,7 +87,7 @@ class Order < ApplicationRecord
 
 
   def self.orders_days_ago(num_days_ago)
-    orders = Order.joins_products_onto_ordercontents_onto_orders.
+    orders = Order.joins(:products).
                    where('orders.created_at BETWEEN ? AND ?',
                           num_days_ago.day.ago.beginning_of_day,
                           num_days_ago.day.ago.end_of_day)
@@ -96,7 +96,7 @@ class Order < ApplicationRecord
 
 
   def self.orders_this_week
-    this_week = Order.joins_products_onto_ordercontents_onto_orders.
+    this_week = Order.joins(:products).
                       where('orders.created_at BETWEEN ? AND ?',
                              1.week.ago.beginning_of_day,
                              Date.today.end_of_day)
@@ -105,7 +105,7 @@ class Order < ApplicationRecord
 
 
   def self.orders_weeks_ago(num_weeks_ago)
-    orders = Order.joins_products_onto_ordercontents_onto_orders.
+    orders = Order.joins(:products).
                    where('orders.created_at BETWEEN ? AND ?',
                           num_weeks_ago.week.ago.beginning_of_day,
                           (num_weeks_ago - 1).week.ago.end_of_day)
@@ -129,7 +129,7 @@ class Order < ApplicationRecord
 
 
   def self.highest_single_value_order
-    id_and_value = Order.joins_products_onto_ordercontents_onto_orders.
+    id_and_value = Order.joins(:products).
                          group('order_contents.order_id, orders.user_id').
                          order('sum(products.price * order_contents.quantity) DESC').
                          limit(1).
@@ -140,7 +140,7 @@ class Order < ApplicationRecord
 
 
   def self.highest_lifetime_value_order
-    id_and_value = Order.joins_products_onto_ordercontents_onto_orders.
+    id_and_value = Order.joins(:products).
                          group('orders.user_id').
                          limit(1).
                          sum(REVENUE).
@@ -150,7 +150,7 @@ class Order < ApplicationRecord
 
 
   def self.highest_average_value_order
-    id_and_value = Order.joins_products_onto_ordercontents_onto_orders.
+    id_and_value = Order.joins(:products).
                          group('order_contents.order_id, orders.user_id').
                          limit(1).
                          average(REVENUE).
@@ -162,7 +162,7 @@ class Order < ApplicationRecord
   def self.most_orders_placed
     user_id_relation = Order.select(:user_id).group(:user_id).order('count(user_id) DESC').limit(1)
 
-    id_and_value = Order.joins_products_onto_ordercontents_onto_orders.
+    id_and_value = Order.joins(:products).
                          group(:user_id).where(:user_id => user_id_relation).
                          sum(REVENUE).
                          map{|k,v| [k, v.to_f.round(2)] }.flatten
@@ -197,12 +197,6 @@ class Order < ApplicationRecord
     2.upto(7) do |i|
       time_series["#{(Date.today - i.weeks).strftime("%m/%d")}"] = orders_weeks_ago(i)
     end
-  end
-
-
-  def self.joins_products_onto_ordercontents_onto_orders
-    joins('JOIN order_contents ON orders.id = order_contents.order_id').
-    joins('JOIN products ON products.id = order_contents.product_id')
   end
 
 

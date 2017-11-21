@@ -6,12 +6,7 @@ class Admin::ProductsController < ApplicationController
   before_filter :set_product, except: [:new, :create, :index]
 
   def index
-    @products = Product.joins('JOIN categories ON products.category_id = categories.id').
-                        select("categories.name AS category_name,
-                                categories.id AS category_id,
-                                products.id,
-                                products.name,
-                                products.price")
+    @products = Product.joins(:category)
   end
 
   def new
