@@ -7,6 +7,13 @@ class User < ApplicationRecord
   has_many :products, through: :orders
   has_many :credit_cards
 
+  validates :last_name, :first_name, :email,
+            presence: true,
+            length: { maximum: 64,
+                      minimum: 1  }
+  validates :email,
+            format: { with: /@/ }
+
 
 
   FIRST_ORDER_DATE = Order.select(:created_at).first

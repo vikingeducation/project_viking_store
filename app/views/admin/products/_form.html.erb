@@ -9,21 +9,21 @@
   <div class="row">
   <%= f.label :name, "Name: ", class: "col-sm-3 control-label" %>
     <div class="col-sm-6">
-      <%= display_product_form_errors(product, :name) %>
+      <%= display_form_errors(product, :name) %>
       <%= f.text_field :name, class: "form-control", autofocus: true %><br>
     </div>
   </div>
   <div class="row">
     <%= f.label :price, "Price: ", class: "col-sm-3 control-label" %>
     <div class="col-sm-6">
-      <%= display_product_form_errors(product, :price) %>
+      <%= display_form_errors(product, :price) %>
       <%= f.text_field :price, class: "form-control",autofocus: true  %><br>
     </div>
   </div>
   <div class="row">
     <%= f.label :category_id, "Category:", class: "col-sm-3 control-label" %>
     <div class="col-sm-6">
-      <%= display_product_form_errors(product, :category_id) %>
+      <%= display_form_errors(product, :category_id) %>
       <%= f.select :category_id, @categories.map {|c| [c.name, c.id]} %>
     </div>
   </div>
