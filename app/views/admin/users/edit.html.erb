@@ -1,3 +1,7 @@
 <h1>Edit User <%= @user.id %>: <%= @user.first_name + " " + @user.last_name %></h1>
-<%= render partial: 'demographic_form', locals: { user: @user } %>
-<%= link_to "Delete #{@user.first_name} #{@user.last_name}", "#"%> 
+<div class="demo-info-container">
+  <%= render partial: 'demographic_form', locals: { user: @user } %>
+  <div class="align-center">
+    <%= link_to "Delete #{@user.first_name} #{@user.last_name}", admin_user_path(params[:id]), method: 'delete', data: { confirm: "Are you sure you want to delete user: #{@user.first_name} #{@user.last_name}"}, class: "delete-user"%>
+  </div>
+</div>

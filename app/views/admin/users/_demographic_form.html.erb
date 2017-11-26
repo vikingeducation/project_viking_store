@@ -1,36 +1,36 @@
 <h2>Demographic Information</h2>
-<%= form_for [:admin, user] do |f| %>
-  <%= f.label :first_name, "First Name" %>
+<%= form_for [:admin, user], html: {class: "demo-info-form"} do |f| %>
+  <%= f.label :first_name, "First Name: " %>
   <%= display_form_errors(user, :first_name) %>
   <%= f.text_field :first_name %><br>
-  <%= f.label :last_name, "Last Name" %>
+  <%= f.label :last_name, "Last Name: " %>
   <%= display_form_errors(user, :last_name) %>
   <%= f.text_field :last_name %><br>
-  <%= f.label :email, "Email" %>
+  <%= f.label :email, "Email: " %>
   <%= display_form_errors(user, :email) %>
-  <%= link_to f.text_field :email %><br>
-  <%= f.label :telephone, "Telephone" %>
+  <%= f.text_field :email %><br>
+  <%= f.label :telephone, "Telephone: " %>
   <%= display_form_errors(user, :telephone) %>
   <%= f.text_field :telephone %><br>
   <% if current_page?(new_admin_user_path) %>
   <!-- Need to figure out how to save addrss to addresses table? -->
-  <%= f.label :billing_id, "Default Billing Address"%><br>
+  <%= f.label :billing_id, "Default Billing Address: ", id: "address-input" %><br>
   <%= display_form_errors(user, :billing_id) %>
-
-
-  <%= f.label :shipping_id, "Default Shipping Address"%><br>
+  <%= f.label :shipping_id, "Default Shipping Address: ", id: "address-input"%><br>
   <%= display_form_errors(user, :shipping_id) %>
-
-
-  <%= f.submit "#{(user.persisted? ? 'Update' : 'Create')} User", class: "btn-lg btn-primary",  id: "create-button"  %><br>
+  <div class="align-center">
+    <%= f.submit "#{(user.persisted? ? 'Update' : 'Create')} #{user.first_name} #{user.last_name}", class: "btn-lg btn-primary align-center",  id: "user-create-btn"  %><br>
+  </div>
   <% else %>
-    <%= f.label :billing_id, "Default Billing Address"%><br>
+    <%= f.label :billing_id, "Default Billing Address: ", id: "address-input"%><br>
     <%= display_form_errors(user, :billing_id) %>
     <%= f.select :billing_id, user.addresses.map {|c| [c.street_address, c.id]} %><br>
-    <%= f.label :shipping_id, "Default Shipping Address"%><br>
+    <%= f.label :shipping_id, "Default Shipping Address: ", id: "address-input"%><br>
     <%= display_form_errors(user, :shipping_id) %>
     <%= f.select :shipping_id, user.addresses.map {|c| [c.street_address, c.id]} %><br>
     <%= link_to "View Saved Addresses", "#" %><br>
-    <%= f.submit "#{(user.persisted? ? 'Update' : 'Create')} User", class: "btn-lg btn-primary",  id: "create-button"  %><br>
+    <div class="align-center">
+      <%= f.submit "#{(user.persisted? ? 'Update' : 'Create')} #{user.first_name} #{user.last_name}", class: "btn-lg btn-primary align-center", id: "user-create-btn" %><br>
+    <div>
   <% end %>
 <% end %>

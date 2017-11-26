@@ -1,66 +1,74 @@
-<h1>User <%= @user.id %>: <%= @user.first_name + " " + @user.last_name %></h1>
+<div class="row">
+  <h1>User <%= @user.id %>: <%= @user.first_name + " " + @user.last_name %></h1>
 
-<article class="demo-info">
-  <%= form_for [:admin, @user] do |f| %>
-    <%= f.label :first_name, "First Name: " %>
-    <%= f.text_field :first_name, disabled: true %><br>
-    <%= f.label :last_name, "Last Name: " %>
-    <%= f.text_field :last_name, disabled: true %><br>
-    <%= f.label :email, "Email: " %>
-    <%= f.text_field :email, disabled: true %><br>
-    <%= f.label :telephone, "Telephone: " %>
-    <%= f.text_field :telephone, disabled: true %>
-  <% end %>
-  <h3>Default Billing Address:</h3>
-  <%= @user.billing_id.nil? ? "No default address selected" : display_address(@user.billing_id) %><br>
-  <h3>Default Shipping Address:</h3>
-  <%= @user.shipping_id.nil? ? "No defaut address selected" : display_address(@user.shipping_id) %><br>
-  <%= link_to "Edit #{@user.first_name + " " + @user.last_name}'s Information", edit_admin_user_path %><br>
-  <%= link_to "Delete #{@user.first_name + " " + @user.last_name}", admin_user_path, method: "delete", data: {confirm: "Are you sure you want to delete #{@user.first_name} #{@user.last_name}?"} %><br>
-  <%= link_to "View Saved Addresses", "#" %><br>
-  <%= link_to "View Unplaced Order (Cart)", "#" %><br>
-</article>
-
-
-<article class="cc-info">
-  <%= render partial: 'cc_form', locals: { user: @user } %>
-</article>
-
-<!-- need to create child objects with their foreign keys pre-filled in -->
-<article class="admin-actions">
-  <h2>Admin Actions for <%= @user.first_name + " " + @user.last_name %></h2>
-  <%= form_for [:admin, @user] do |f|%>
-  <%= f.submit "Create Order", class: "btn-lg btn-primary"  %><br>
-  <%= f.submit "Create Address", class: "btn-lg btn-primary" %> <br>
-  <% end %>
-</article>
+  <article class="demo-info">
+    <h2>Demographic Information</h2>
+    <%= form_for [:admin, @user] do |f| %>
+      <%= f.label :first_name, "First Name: "%>
+      <%= f.text_field :first_name, disabled: true %><br>
+      <%= f.label :last_name, "Last Name: " %>
+      <%= f.text_field :last_name, disabled: true %><br>
+      <%= f.label :email, "Email: ", class: "email-field" %>
+      <%= f.text_field :email, disabled: true %><br>
+      <%= f.label :telephone, "Telephone: " %>
+      <%= f.text_field :telephone, disabled: true %>
+    <% end %>
+    <h3>Default Billing Address:</h3>
+    <%= @user.billing_id.nil? ? "No default address selected" : display_address(@user.billing_id) %><br>
+    <h3>Default Shipping Address:</h3>
+    <%= @user.shipping_id.nil? ? "No defaut address selected" : display_address(@user.shipping_id) %><br>
+    <%= link_to "Edit #{@user.first_name + " " + @user.last_name}'s Information", edit_admin_user_path %><br>
+    <%= link_to "Delete #{@user.first_name + " " + @user.last_name}", admin_user_path, method: "delete", data: {confirm: "Are you sure you want to delete user: #{@user.first_name} #{@user.last_name}?"} %><br>
+    <%= link_to "View Saved Addresses", "#" %><br>
+    <%= link_to "View Unplaced Order (Cart)", "#" %><br>
+  </article>
 
 
-<article class="order-history">
-  <h2>Order History</h2>
-  <% @orders = Order.where(user_id: @user.id) %>
-  <table>
-    <thead>
-      <th>ID</th>
-      <th>Order Date</th>
-      <th>Order Value</th>
-      <th>Status</th>
-      <th>SHOW</th>
-      <th>EDIT</th>
-      <th>DELETE</th>
-    </thead>
-    <tbody>
-      <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.id %></td>
-        <td><%= order.created_at.strftime "%F" %></td>
-        <td>$<%= order_value(order) %></td>
-        <td><%= order.checkout_date.nil? ? "UNPLACED" : "PLACED" %></td>
-        <td><%= link_to "SHOW", "#" %></td>
-        <td><%= link_to "EDIT", "#" %></td>
-        <td><%= link_to "DELETE", "#" %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</article>
+  <article class="cc-info">
+    <h2>Credit Card Information</h2>
+    <%= render partial: 'cc_form', locals: { user: @user } %>
+  </article>
+
+  <!-- need to create child objects with their foreign keys pre-filled in -->
+  <article class="admin-actions">
+    <h2>Admin Actions for <%= @user.first_name + " " + @user.last_name %></h2>
+    <%= form_for [:admin, @user] do |f|%>
+    <%= f.submit "Create Order", class: "btn-lg btn-primary admin-action-btn"  %><br>
+    <%= f.submit "Create Address", class: "btn-lg btn-primary admin-action-btn" %> <br>
+    <% end %>
+  </article>
+
+
+  <article class="order-history">
+    <h2>Order History</h2>
+    <% @orders = Order.where(user_id: @user.id) %>
+    <% if @orders.empty? %>
+      <h3>No Orders Placed</h3>
+    <% else %>
+      <table class="table table-striped user-table" id="index-table">
+        <thead>
+          <th>ID</th>
+          <th>Order Date</th>
+          <th>Order Value</th>
+          <th>Status</th>
+          <th>SHOW</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.created_at.strftime "%F" %></td>
+            <td>$<%= order_value(order) %></td>
+            <td><%= order.checkout_date.nil? ? "UNPLACED" : "PLACED" %></td>
+            <td><%= link_to "Show", "#" %></td>
+            <td><%= link_to "Edit", "#" %></td>
+            <td><%= link_to "Delete", "#" %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </article>
+</div>
