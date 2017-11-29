@@ -1,5 +1,12 @@
+<% if User.exists?(params[:user_id]) %>
+  <div class="center">
+    <h1 class="heading"><%= @user[:first_name] %>'s Addresses</h1>
+    <%= link_to "Create New Address #{@user[:first_name]}", "#", class: "btn-primary btn-lg", id: "new-btn"%>
+  </div>
+<% else %>
 <h1 class="heading">Addresses</h1>
-<p><em>Create new addresses from within <%= link_to "User", "#" %> profiles</em></p>
+  <p><em>Create new addresses from within <%= link_to "User", "#" %> profiles</em></p>
+<% end %>
 <table class="table table-striped" id="index-table">
   <thead>
     <th>ID</th>
@@ -17,13 +24,13 @@
     <% @addresses.each do |address| %>
       <tr>
         <td><%= address[:id] %></td>
-        <td><%= link_to User.find(address[:user_id])[:first_name], "#" %></td>
+        <td><%= link_to address.user.first_name, admin_user_path(address.user) %></td>
         <td><%= address[:street_address] %></td>
-        <td><%= City.find(address[:city_id])[:name]%></td>
-        <td><%= State.find(address[:state_id])[:name]%></td>
-        <td><%= link_to orders_to_this_address(address[:user_id]).nil? ? 0 : orders_to_this_address(address[:user_id]), "#" %></td>
-        <td><%= address[:created_at].strftime("%F")%></td>
-        <td><%= link_to "show", "#" %></td>
+        <td><%= address.city.name %></td>
+        <td><%= address.state.name %></td>
+        <td><%= link_to address.orders.nil? ? 0 : address.orders.count, "#" %></td>
+        <td><%= address[:created_at].strftime("%F") %></td>
+        <td><%= link_to "show", admin_address_path(address[:id]) %></td>
         <td><%= link_to "edit", "#" %></td>
         <td><%= link_to "delete", "#" %></td>
       </tr>

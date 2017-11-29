@@ -4,12 +4,14 @@ Rails.application.routes.draw do
   root to: redirect('/admin')
 
   namespace :admin do
-    get '/' => 'dashboard#home'
-    get '/dashboard' => 'dashboard#index'
+    get '/', to: 'dashboard#home'
+    get '/dashboard', to: 'dashboard#index'
     resources :categories
     resources :products
     resources :orders
-    resources :users
+    resources :users do
+      resources :addresses, only: [:index]
+    end
     resources :addresses
   end
 

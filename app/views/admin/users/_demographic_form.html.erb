@@ -13,14 +13,15 @@
   <%= display_form_errors(user, :telephone) %>
   <%= f.text_field :telephone %><br>
   <% if current_page?(new_admin_user_path) %>
-  <!-- Need to figure out how to save addrss to addresses table? -->
-  <%= f.label :billing_id, "Default Billing Address: ", id: "address-input" %><br>
-  <%= display_form_errors(user, :billing_id) %>
-  <%= f.label :shipping_id, "Default Shipping Address: ", id: "address-input"%><br>
-  <%= display_form_errors(user, :shipping_id) %>
-  <div class="align-center">
-    <%= f.submit "#{(user.persisted? ? 'Update' : 'Create')} #{user.first_name} #{user.last_name}", class: "btn-lg btn-primary align-center",  id: "user-create-btn"  %><br>
-  </div>
+    <!-- Need to figure out how to save addrss to addresses table? -->
+    <%= %> 
+    <%= f.label :billing_id, "Default Billing Address: ", id: "address-input" %><br>
+    <%= display_form_errors(user, :billing_id) %>
+    <%= f.label :shipping_id, "Default Shipping Address: ", id: "address-input"%><br>
+    <%= display_form_errors(user, :shipping_id) %>
+    <div class="align-center">
+      <%= f.submit "#{(user.persisted? ? 'Update' : 'Create')} #{user.first_name} #{user.last_name}", class: "btn-lg btn-primary align-center",  id: "user-create-btn"  %><br>
+    </div>
   <% else %>
     <%= f.label :billing_id, "Default Billing Address: ", id: "address-input"%><br>
     <%= display_form_errors(user, :billing_id) %>

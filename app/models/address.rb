@@ -1,8 +1,9 @@
 class Address < ApplicationRecord
 
   belongs_to :user
-  has_one :state
-  has_one :city
+  belongs_to :state
+  belongs_to :city
   has_many :orders, foreign_key: :billing_id
+
 
 end

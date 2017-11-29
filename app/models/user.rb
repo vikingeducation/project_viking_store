@@ -3,6 +3,7 @@ class User < ApplicationRecord
   include CountSince
 
   has_many :addresses
+  accepts_nested_attributes_for :addresses
   has_many :orders
   has_many :products, through: :orders
   has_many :credit_cards

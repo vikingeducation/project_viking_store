@@ -1,0 +1,34 @@
+<article>
+  <h1><%= @user_name %>'s Addresses</h1>
+  <div class="show-address-section">
+    <table id="address-info-table">
+      <tr>
+        <td>Owner ID: </td>
+        <td><%= @address.user_id %></td>
+      </tr>
+      <tr>
+        <td>Owner Name: </td>
+        <td><%= @user_name %></td>
+      </tr>
+      <tr>
+        <td>Street Address: </td>
+        <td><%= @address.street_address %></td>
+      </tr>
+      <tr>
+        <td>City: </td>
+        <td><%= @address.city.name %></td>
+      </tr>
+      <tr>
+        <td>State: </td>
+        <td><%= @address.state.name %></td>
+      </tr>
+      <tr>
+        <td>Zip Code: </td>
+        <td><%= @address.zip_code %></td>
+      </tr>
+
+    </table>
+
+    <%= link_to "Edit Address", "#" %><br>
+    <%= link_to "Delete Address", "#" %>
+  </div>

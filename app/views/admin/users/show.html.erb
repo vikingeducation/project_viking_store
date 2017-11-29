@@ -19,7 +19,7 @@
     <%= @user.shipping_id.nil? ? "No defaut address selected" : display_address(@user.shipping_id) %><br>
     <%= link_to "Edit #{@user.first_name + " " + @user.last_name}'s Information", edit_admin_user_path %><br>
     <%= link_to "Delete #{@user.first_name + " " + @user.last_name}", admin_user_path, method: "delete", data: {confirm: "Are you sure you want to delete user: #{@user.first_name} #{@user.last_name}?"} %><br>
-    <%= link_to "View Saved Addresses", "#" %><br>
+    <%= link_to "View Saved Addresses", admin_user_addresses_path(@user.id) %><br>
     <%= link_to "View Unplaced Order (Cart)", "#" %><br>
   </article>
 
