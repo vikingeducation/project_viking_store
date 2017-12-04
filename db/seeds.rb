@@ -20,7 +20,7 @@ puts "Old records destroyed"
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
 MULTIPLIER = 10
-
+puts "Multiplying seeds by #{MULTIPLIER}"
 
 
 # Because seeds.rb is run as a script, you'll need to put helper methods ABOVE where they are used to generate records.

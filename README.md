@@ -1,7 +1,12 @@
 Project: Viking Store Admin
 ========================
 
-##To Get Going On This Assignment
+Anne Richardson
+
+## To Get Going On This Assignment
+- add `gem 'json', github: 'flori/json', branch: 'v1.8'` to gemfile
+- run `bundle`
+- remove `.sqlite` from `database.yml` line 62
 - run `rake db:create`
 - run `rake db:migrate`
 - run `rake db:seed`
