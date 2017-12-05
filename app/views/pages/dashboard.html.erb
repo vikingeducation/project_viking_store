@@ -1,3 +1,4 @@
+<p class="brand">--- Project Viking Store ---</p>
 <h1>Dashboard</h1>
 <div class="row">
   <div class="<%= column_classes %>">
@@ -14,19 +15,19 @@
         <tbody>
           <tr>
             <td>New Users</td>
-            <td>TBD</td>
+            <td><%= @dashboard.last_n_days_count(7, User) %></td>
           </tr>
           <tr>
             <td>Orders</td>
-            <td>TBD</td>
+            <td><%= @dashboard.last_n_days_count(7, Order) %></td>
           </tr>
           <tr>
             <td>New Products</td>
-            <td>TBD</td>
+            <td><%= @dashboard.last_n_days_count(7, Product) %></td>
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>TBD</td>
+            <td>$<%= @dashboard.total_revenue_last_n_days(7) %></td>
           </tr>
         </tbody>
       </table>
@@ -42,19 +43,19 @@
         <tbody>
           <tr>
             <td>New Users</td>
-            <td>TBD</td>
+            <td><%= @dashboard.last_n_days_count(30, User) %></td>
           </tr>
           <tr>
             <td>Orders</td>
-            <td>TBD</td>
+            <td><%= @dashboard.last_n_days_count(30, Order) %></td>
           </tr>
           <tr>
             <td>New Products</td>
-            <td>TBD</td>
+            <td><%= @dashboard.last_n_days_count(30, Product) %></td>
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>TBD</td>
+            <td>$<%= @dashboard.total_revenue_last_n_days(30) %></td>
           </tr>
         </tbody>
       </table>
@@ -70,19 +71,19 @@
         <tbody>
           <tr>
             <td>Users</td>
-            <td>TBD</td>
+            <td><%= @dashboard.total_count(User) %></td>
           </tr>
           <tr>
             <td>Orders</td>
-            <td>TBD</td>
+            <td><%= @dashboard.total_count(Order) %></td>
           </tr>
           <tr>
             <td>Products</td>
-            <td>TBD</td>
+            <td><%= @dashboard.total_count(Product) %></td>
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>TBD</td>
+            <td>$<%= @dashboard.total_revenue %></td>
           </tr>
         </tbody>
       </table>

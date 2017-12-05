@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_one :shipping_address, :class_name => 'Address'
   has_many :credit_cards
 
+
+  include SharedQueries
+
+
 end

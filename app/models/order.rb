@@ -10,4 +10,16 @@ class Order < ApplicationRecord
 
   has_many :products, through: :order_contents
 
+  include SharedQueries
+
+
+  def self.last_n_days(n)
+    past = Date.today - n.days
+    where("checkout_date > ?", past)
+  end
+
+  def self.total_revenue
+    where("checkout_date IS NOT NULL").includes(:products).pluck(:price).reduce(&:+).to_f
+  end
+
 end
