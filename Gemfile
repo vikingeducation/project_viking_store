@@ -29,6 +29,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',  '~> 1.3.6',      group: :development
 
 gem 'pry-rails'
+gem 'better_errors' #creates console in browser for errors
+gem 'binding_of_caller' #goes with better_errors
 
 gem 'faker'
 # Use ActiveModel has_secure_password
