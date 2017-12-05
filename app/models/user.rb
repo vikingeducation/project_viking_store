@@ -11,4 +11,6 @@ class User < ApplicationRecord
   include SharedQueries
 
 
+
+
 end

@@ -97,15 +97,17 @@
       <table class="<%= table_classes %>">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Item</th>
-            <th scope="col">Data</th>
+            <th scope="col">State</th>
+            <th scope="col">User Count</th>
           </tr>
         </thead>
         <tbody>
+          <% @dashboard.top_states.each do |state| %>
           <tr>
-            <td>TBD: State Name</td>
-            <td>TBD: count</td>
+            <td><%= state.name %></td>
+            <td><%= state.user_count %></td>
           </tr>
+          <% end %>
         </tbody>
       </table>
 
@@ -113,15 +115,17 @@
       <table class="<%= table_classes %>">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Item</th>
-            <th scope="col">Data</th>
+            <th scope="col">City</th>
+            <th scope="col">User Count</th>
           </tr>
         </thead>
         <tbody>
+          <% @dashboard.top_cities.each do |city| %>
           <tr>
-            <td>TBD: City Name</td>
-            <td>TBD: count</td>
+            <td><%= city.name %></td>
+            <td><%= city.user_count %></td>
           </tr>
+          <% end %>
         </tbody>
       </table>
 
@@ -138,7 +142,7 @@
           <tr>
             <td>Highest Single Order Value</td>
             <td>TBD: user name</td>
-            <td>TBD: $</td>
+            <td>$<%= @dashboard.highest_value_order %></td>
           </tr>
           <tr>
             <td>Highest Lifetime Value</td>

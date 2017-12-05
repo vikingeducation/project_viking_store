@@ -16,5 +16,17 @@ class Dashboard
     Order.last_n_days(n).total_revenue
   end
 
+  def top_states
+    Address.top_3_states
+  end
+
+  def top_cities
+    Address.top_3_cities
+  end
+
+  def highest_value_order
+    Order.highest_value
+  end
+
 
 end
