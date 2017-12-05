@@ -1,0 +1,48 @@
+<%= form_for [:admin, address] do |f| %>
+<div class="row">
+  <div class="col-sm-3">
+    <%= f.label :user_id, "Owner ID: " %>
+  </div>
+  <%= f.number_field :user_id, value: user['id'], disabled: true, required: true %><br>
+  <%= f.hidden_field :user_id, value: user['id']  %>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <%= f.label :full_name, "Owner Name: " %>
+  </div>
+  <%= display_form_errors(address, :name) %>
+  <%= f.text_field :full_name, value: user['first_name'] + " " + user['last_name'], disabled: true %><br>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <%= f.label :street_address, "Street: " %>
+  </div>
+  <%= display_form_errors(address, :street_address) %>
+  <%= f.text_field :street_address %><br>
+</div>
+  <%= fields_for @city do |c| %>
+    <div class="row">
+      <div class="col-sm-3">
+        <%= c.label :name, "City: "%>
+      </div>
+      <%= display_form_errors(@city, :name) %>
+      <%= c.text_field :name %><br>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-sm-3">
+      <%= f.label :state_id, "State: "%>
+    </div>
+    <%= display_form_errors(address, :state_id) %>
+    <%= f.select :state_id, State.all.map { |s| [s.name, s.id] } %><br>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <%= f.label :zip_code, "Zip Code: " %>
+    </div>
+    <%= display_form_errors(address, :zip_code) %>
+    <%= f.number_field :zip_code %>
+  </div>
+  <%= f.submit "#{address.persisted? ? "Update" : "Create New"}",  class: "btn-lg btn-primary align-center"%>
+
+<% end %>

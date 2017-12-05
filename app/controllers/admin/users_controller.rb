@@ -27,6 +27,10 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @cc = CreditCard.find(@user.id)
+    @orders = Order.where(user_id: @user.id)
+    @billing_addy = Address.find(@user.billing_id)
+    @shipping_addy = Address.find(@user.shipping_id)
   end
 
 
@@ -64,5 +68,6 @@ class Admin::UsersController < ApplicationController
   def whitelisted_params
     params.require(:user).permit(:first_name, :last_name, :email, :billing_id, :shipping_id, :telephone)
   end
+
 
 end

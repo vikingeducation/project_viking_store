@@ -1,0 +1,8 @@
+<h1>New Address For: <%= @user['first_name'] +  " " + @user['last_name']%></h1>
+<%= render partial: 'form', locals: { address: @address,
+                                         user: @user,
+                                         city: @city } %>
+<!--
+http://guides.rubyonrails.org/form_helpers.html#nested-forms
+http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html
+-->

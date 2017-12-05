@@ -14,11 +14,26 @@
   <%= f.text_field :telephone %><br>
   <% if current_page?(new_admin_user_path) %>
     <!-- Need to figure out how to save addrss to addresses table? -->
-    <%= %> 
-    <%= f.label :billing_id, "Default Billing Address: ", id: "address-input" %><br>
-    <%= display_form_errors(user, :billing_id) %>
-    <%= f.label :shipping_id, "Default Shipping Address: ", id: "address-input"%><br>
-    <%= display_form_errors(user, :shipping_id) %>
+    <%= f.fields_for :addresses do |address_form| %>
+      Default Billing Address: <br>
+      <%= address_form.label :street_address, "Street Address: " %>
+      <%= address_form.text_field :street_address %>
+      <%= address_form.label :city_id, "City: "%>
+      <%= address_form.select :city_id, City.all.map { |c| [c.name, c.id] } %>
+      <%= address_form.label :state_id, "State: " %>
+      <%= address_form.select :state_id, State.all.map { |s| [s.name, s.id] } %>
+      <%= address_form.label :zip_code %>
+      <%= address_form.text_field :zip_code %><br>
+      Default Shipping Address: <br>
+      <%= address_form.label :street_address, "Street Address: " %>
+      <%= address_form.text_field :street_address %>
+      <%= address_form.label :city_id, "City: "%>
+      <%= address_form.text_field :city_id, City.all.map { |c| [c.name, c.id] } %>
+      <%= address_form.label :state_id, "State: " %>
+      <%= address_form.select :state_id, State.all.map { |s| [s.name, s.id] } %>
+      <%= address_form.label :zip_code %>
+      <%= address_form.text_field :zip_code %>
+    <% end %>
     <div class="align-center">
       <%= f.submit "#{(user.persisted? ? 'Update' : 'Create')} #{user.first_name} #{user.last_name}", class: "btn-lg btn-primary align-center",  id: "user-create-btn"  %><br>
     </div>

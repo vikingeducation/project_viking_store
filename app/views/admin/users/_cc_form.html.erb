@@ -13,15 +13,15 @@
     <%= f.label :ccv, "CCV:" %>
     <%= f.text_field "#" %>
   <% else %>
-    <% cc = user_cc_info(user.id) %>
+    <% credit_card %>
     <%= f.label :number, "Number:" %>
-    <%= cc.card_number %><br>
+    <%= credit_card.card_number %><br>
     <%= f.label :exp_month, "Expiration Month:" %>
-    <%= cc.exp_month %><br>
+    <%= credit_card.exp_month %><br>
     <%= f.label :exp_year, "Expiration Year:" %>
-    <%= cc.exp_year %><br>
+    <%= credit_card.exp_year %><br>
     <%= f.label :ccv, "CCV:" %>
-    <%= cc.ccv %><br>
+    <%= credit_card.ccv %><br>
   <% end %>
   <%= link_to "Remove Card", "#", method: :delete, data: {confirm: "Are you sure you want to remove this card?"} %>
 <% end %>

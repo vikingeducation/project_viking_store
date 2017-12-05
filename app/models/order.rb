@@ -48,6 +48,14 @@ class Order < ApplicationRecord
   end
 
 
+  def order_value
+    sum = 0
+    self.order_contents.each do |f|
+      sum += (Product.find(f.product_id).price * f.quantity)
+    end
+    sum.to_s
+  end
+
   private
 
   def self.average_order_value(num_days_ago)

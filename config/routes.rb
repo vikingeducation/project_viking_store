@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :products
     resources :orders
     resources :users do
-      resources :addresses, only: [:index]
+      resources :addresses, only: [:index, :new]
     end
     resources :addresses
   end
