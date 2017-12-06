@@ -82,12 +82,15 @@ class Admin::AddressesController < ApplicationController
 
   def destroy
     @address = Address.find(params[:id])
-    if @address.destroy
-      flash[:success] = "Address Successfully Deleted"
-      redirect_to admin_user_addresses_path(@address.user_id)
+    if @address.orders.empty?
+      if @address.destroy
+        flash[:success] = "Address Successfully Deleted"
+        redirect_to admin_user_addresses_path(@address.user_id)
+      else
+        flash[:danger] = "Could Not Delete Address"
+        redirect_to admin_user_addresses_path(@address.user_id)
+      end
     else
-      flash[:danger] = "Could Not Delete Address"
-      redirect_to admin_user_addresses_path(@address.user_id)
     end
   end
 

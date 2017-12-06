@@ -3,7 +3,12 @@ class Admin::OrdersController < ApplicationController
   layout 'admin_portal_layout'
 
   def index
-    @orders = Order.all
+    unless params[:user_id].nil?
+      @orders = Order.where(user_id: params[:user_id]).includes(:user)
+      @user = User.find(params[:user_id])
+    else
+      @orders = Order.all.includes(:user)
+    end
   end
 
   def new
