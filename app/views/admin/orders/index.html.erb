@@ -1,5 +1,11 @@
 <h1>All Orders</h1>
-<p><em>Create new orders within <%= link_to "User", "#" %> profiles</em></p>
+<% unless params[:user_id].nil? %>
+<div class="center">
+  <%= link_to "Create an Order for #{User.find(params[:user_id]).first_name} #{User.find(params[:user_id]).last_name}", "#", id: "new-btn", class: "btn btn-primary btn-lg" %>
+</div>
+<% else %>
+  <p><em>Create new orders within <%= link_to "User", "#" %> profiles</em></p>
+<% end %>
 <table class="table table-striped" id="index-table">
   <thead>
     <th>ID</th>
@@ -18,14 +24,14 @@
     <% @orders.each do |order| %>
     <tr>
       <td><%= order.id %></td>
-      <td><%= link_to order.user.id, "#" %></td>
+      <td><%= link_to order.user.id, admin_user_path(order.user) %></td>
       <td><%= Address.find(order.shipping_id).street_address %></td>
       <td><%= Address.find(order.shipping_id).city.name %></td>
       <td><%= Address.find(order.shipping_id).state.name %></td>
       <td>$<%= order.order_value %></td>
       <td><%= order.checkout_date.nil? ? "UNPLACED" : "PLACED" %></td>
       <td><%= order.checkout_date.nil? ? "N/A" : order.checkout_date.strftime("%F") %></td>
-      <td><%= link_to "show", "#" %></td>
+      <td><%= link_to "show", admin_order_path(order) %></td>
       <td><%= link_to "edit", "#" %></td>
       <td><%= link_to "delete", "#" %></td>
     </tr>

@@ -25,29 +25,30 @@ class Admin::AddressesController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @address = Address.new
-    @city = City.new
+    @city = @address.build_city
   end
 
 
   def create
     @user = User.find(params['address']['user_id'])
-    @city = City.new(city_params)
+    # @city = City.new(city_params)
     @address = @user.addresses.new(whitelisted_params)
-    if params['city']['name'].empty?
-      flash[:danger] = "Could NOT save City - See form errors"
-      render :new
-    elsif City.where(name: params['city']['name']).exists?
-      @address[:city_id] = City.where(name: params['city']['name']).first.id
+    binding.pry
+     # if params['city']['name'].empty?
+    #   flash[:danger] = "Could NOT save City - See form errors"
+    #   render :new
+    # elsif City.where(name: params['city']['name']).exists?
+    #   @address[:city_id] = City.where(name: params['city']['name']).first.id
+    #   save_address(@address)
+    # else
+      # if @city.save
+      #   @address[:city_id] = @city.id
       save_address(@address)
-    else
-      if @city.save
-        @address[:city_id] = @city.id
-        save_address(@address)
-      else
-        flash[:danger] = "Could NOT save City - See form Errors"
-        render :new
-      end
-    end
+    #   else
+    #     flash[:danger] = "Could NOT save City - See form Errors"
+    #     render :new
+    #   end
+    # end
   end
 
 
@@ -99,7 +100,7 @@ class Admin::AddressesController < ApplicationController
 
 
   def whitelisted_params
-    params.require(:address).permit(:user_id, :street_address, :city_id, :state_id, :zip_code, { city: [:name] })
+    params.require(:address).permit(:user_id, :street_address, :state_id, :zip_code, { city_attributes: [:name] })
   end
 
 

@@ -6,8 +6,8 @@ class Address < ApplicationRecord
   has_many :orders, foreign_key: :billing_id
   accepts_nested_attributes_for :city
 
-  validates :state_id, :user_id, :zip_code, presence: true
-  validates :street_address, :city,
+  validates :state_id, :user_id, :city, :zip_code, presence: true
+  validates :street_address,
             presence: true,
             length: { maximum: 64,
                       minimum: 2 }

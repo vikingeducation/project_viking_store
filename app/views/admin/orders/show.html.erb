@@ -1,0 +1,23 @@
+<h1><%= @order.checkout_date.nil? ? "Shopping Cart #{@order[:id]}" : "Order #{@order[:id]}"%></h1>
+
+  <section>
+    <span>
+      <h1>Basic Information:</h1>
+    </span>
+    <span>
+      <h1>Order Status:</h1>
+    </span>
+    <span>
+      <h1>Shipping Address:</h1>
+    </span>
+    <span>
+      <h1>Billing Address:</h1>
+    </span>
+    <span>
+      <h1>Billing Card:</h1>
+    </span>
+    <span>
+      <%= link_to "Edit Order", "#" %><br>
+      <%= link_to "Delete Order", "#" %>
+    </span>
+  </section>

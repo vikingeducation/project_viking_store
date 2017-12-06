@@ -20,12 +20,12 @@
   <%= display_form_errors(address, :street_address) %>
   <%= f.text_field :street_address %><br>
 </div>
-  <%= fields_for @city do |c| %>
+  <%= f.fields_for :city_attributes do |c| %>
     <div class="row">
       <div class="col-sm-3">
         <%= c.label :name, "City: "%>
       </div>
-      <%= display_form_errors(@city, :name) %>
+      <%= display_form_errors(address.city, :name) %>
       <%= c.text_field :name %><br>
     </div>
   <% end %>
