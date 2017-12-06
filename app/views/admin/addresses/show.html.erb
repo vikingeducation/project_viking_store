@@ -1,34 +1,45 @@
-<article>
-  <h1><%= @user_name %>'s Addresses</h1>
-  <div class="show-address-section">
-    <table id="address-info-table">
-      <tr>
-        <td>Owner ID: </td>
-        <td><%= @address.user_id %></td>
-      </tr>
-      <tr>
-        <td>Owner Name: </td>
-        <td><%= @user_name %></td>
-      </tr>
-      <tr>
-        <td>Street Address: </td>
-        <td><%= @address.street_address %></td>
-      </tr>
-      <tr>
-        <td>City: </td>
-        <td><%= @address.city.name %></td>
-      </tr>
-      <tr>
-        <td>State: </td>
-        <td><%= @address.state.name %></td>
-      </tr>
-      <tr>
-        <td>Zip Code: </td>
-        <td><%= @address.zip_code %></td>
-      </tr>
-
-    </table>
-
-    <%= link_to "Edit Address", edit_admin_address_path(@address) %><br>
-    <%= link_to "Delete Address", "#" %>
+<h1><%= @user_name %>'s Addresses</h1>
+<%= form_for [:admin, @address], html: {class: "address-form"} do |f| %>
+<div class="row">
+  <div class="col-sm-3">
+    <%= f.label :user_id, "Owner ID: " %>
   </div>
+  <%= f.number_field :user_id, value: @user['id'], disabled: true, required: true %><br>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <%= f.label :full_name, "Owner Name: " %>
+  </div>
+  <%= f.text_field :full_name, value: @user['first_name'] + " " + @user['last_name'], disabled: true %><br>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <%= f.label :street_address, "Street: " %>
+  </div>
+  <%= f.text_field :street_address, disabled: true %><br>
+</div>
+  <%= fields_for @city do |c| %>
+    <div class="row">
+      <div class="col-sm-3">
+        <%= c.label :name, "City: "%>
+      </div>
+      <%= c.text_field :name, disabled: true %><br>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col-sm-3">
+      <%= f.label :state_id, "State: "%>
+    </div>
+    <%= f.text_field :state_id, value: @address.state.name, disabled: true %><br>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <%= f.label :zip_code, "Zip Code: " %>
+    </div>
+    <%= f.number_field :zip_code, disabled: true %>
+  </div>
+  <div class="underline links">
+    <%= link_to "Edit Address", edit_admin_address_path(@address) %><br>
+    <%= link_to "Delete Address", admin_address_path(@address), method: 'delete', data: { confirm: "Are you sure you want to delete this address" } %>
+  </div>
+  <% end %>

@@ -1,4 +1,4 @@
-<%= form_for [:admin, address] do |f| %>
+<%= form_for [:admin, address], html: {class: "address-form"} do |f| %>
 <div class="row">
   <div class="col-sm-3">
     <%= f.label :user_id, "Owner ID: " %>
@@ -43,6 +43,12 @@
     <%= display_form_errors(address, :zip_code) %>
     <%= f.number_field :zip_code %>
   </div>
-  <%= f.submit "#{address.persisted? ? "Update" : "Create New"}",  class: "btn-lg btn-primary align-center"%>
-
+  <div class="center">
+    <%= f.submit "#{address.persisted? ? "Update" : "Create New"}",  class: "btn-lg btn-primary align-center", id: "submit-btn"%>
+    <% if address.persisted? %>
+      <br>
+      <br>
+      <%= link_to "Delete Address", admin_address_path(@address), method: 'delete', data: { confirm: "Are you sure you want to delete this address" }, class: "underline links" %>
+    <% end %>
+  </div>
 <% end %>

@@ -33,10 +33,8 @@
   <!-- need to create child objects with their foreign keys pre-filled in -->
   <article class="admin-actions">
     <h2>Admin Actions for <%= @user.first_name + " " + @user.last_name %></h2>
-    <%= form_for [:admin, @user] do |f|%>
-    <%= f.submit "Create Order", class: "btn-lg btn-primary admin-action-btn"  %><br>
-    <%= f.submit "Create Address", class: "btn-lg btn-primary admin-action-btn" %> <br>
-    <% end %>
+      <%= link_to "Create Order", "#", class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn"  %><br>
+      <%= link_to "Create Address", new_admin_user_address_path(@user), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn" %> <br>
   </article>
 
 

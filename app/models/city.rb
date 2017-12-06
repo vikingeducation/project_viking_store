@@ -4,7 +4,8 @@ class City < ApplicationRecord
 
   validates :name,
             presence: true,
-            length: { maximum: 64 }
+            length: { maximum: 64,
+                      minimum: 2 }
 
   def self.top_three_cities
     City.select(:name).joins(:addresses).
