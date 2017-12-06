@@ -10,7 +10,14 @@ class User < ApplicationRecord
 
   include SharedQueries
 
-
+  def self.highest_lifetime_value
+    select("users.*, SUM(price * quantity) AS value").
+    joins("JOIN orders ON user_id = users.id JOIN order_contents ON order_id = orders.id JOIN products ON product_id = products.id").
+    where("checkout_date IS NOT NULL").
+    group("users.id").
+    order("SUM(price * quantity) DESC").
+    limit(1)
+  end
 
 
 end

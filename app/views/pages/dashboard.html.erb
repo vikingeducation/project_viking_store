@@ -15,19 +15,19 @@
         <tbody>
           <tr>
             <td>New Users</td>
-            <td><%= @dashboard.last_n_days_count(7, User) %></td>
+            <td><%= new_users_past_7_days %></td>
           </tr>
           <tr>
             <td>Orders</td>
-            <td><%= @dashboard.last_n_days_count(7, Order) %></td>
+            <td><%= new_orders_past_7_days %></td>
           </tr>
           <tr>
             <td>New Products</td>
-            <td><%= @dashboard.last_n_days_count(7, Product) %></td>
+            <td><%= new_products_past_7_days %></td>
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>$<%= @dashboard.total_revenue_last_n_days(7) %></td>
+            <td>$<%= @total_revenue_past_7_days %></td>
           </tr>
         </tbody>
       </table>
@@ -43,19 +43,19 @@
         <tbody>
           <tr>
             <td>New Users</td>
-            <td><%= @dashboard.last_n_days_count(30, User) %></td>
+            <td><%= new_users_past_30_days %></td>
           </tr>
           <tr>
             <td>Orders</td>
-            <td><%= @dashboard.last_n_days_count(30, Order) %></td>
+            <td><%= new_orders_past_30_days %></td>
           </tr>
           <tr>
             <td>New Products</td>
-            <td><%= @dashboard.last_n_days_count(30, Product) %></td>
+            <td><%= new_products_past_30_days %></td>
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>$<%= @dashboard.total_revenue_last_n_days(30) %></td>
+            <td>$<%= @total_revenue_past_30_days %></td>
           </tr>
         </tbody>
       </table>
@@ -71,19 +71,19 @@
         <tbody>
           <tr>
             <td>Users</td>
-            <td><%= @dashboard.total_count(User) %></td>
+            <td><%= @total_user_count %></td>
           </tr>
           <tr>
             <td>Orders</td>
-            <td><%= @dashboard.total_count(Order) %></td>
+            <td><%= @total_order_count %></td>
           </tr>
           <tr>
             <td>Products</td>
-            <td><%= @dashboard.total_count(Product) %></td>
+            <td><%= @total_product_count %></td>
           </tr>
           <tr>
             <td>Revenue</td>
-            <td>$<%= @dashboard.total_revenue %></td>
+            <td>$<%= total_revenue %></td>
           </tr>
         </tbody>
       </table>
@@ -102,7 +102,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @dashboard.top_states.each do |state| %>
+          <% top_states.each do |state| %>
           <tr>
             <td><%= state.name %></td>
             <td><%= state.user_count %></td>
@@ -120,7 +120,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @dashboard.top_cities.each do |city| %>
+          <% top_cities.each do |city| %>
           <tr>
             <td><%= city.name %></td>
             <td><%= city.user_count %></td>
@@ -141,13 +141,13 @@
         <tbody>
           <tr>
             <td>Highest Single Order Value</td>
-            <td>TBD: user name</td>
-            <td>$<%= @dashboard.highest_value_order %></td>
+            <td><%= @highest_value_order.name %></td>
+            <td>$<%= @highest_value_order.value %></td>
           </tr>
           <tr>
             <td>Highest Lifetime Value</td>
-            <td>TBD: user name</td>
-            <td>TBD: $</td>
+            <td><%= user_lifetime_highest %></td>
+            <td><%= user_lifetime_highest %></td>
           </tr>
           <tr>
             <td>Highest Avg Order Value</td>
@@ -178,11 +178,11 @@
         <tbody>
           <tr>
             <td>Number of Orders</td>
-            <td>TBD</td>
+            <td><%= new_orders_past_7_days %></td>
           </tr>
           <tr>
             <td>Total Revenue</td>
-            <td>TBD</td>
+            <td><%= total_revenue %></td>
           </tr>
           <tr>
             <td>Average Order Value</td>
@@ -190,7 +190,7 @@
           </tr>
           <tr>
             <td>Largest Order Value</td>
-            <td>TBD</td>
+            <td><%= @highest_value_order.value %></td>
           </tr>
         </tbody>
       </table>
@@ -206,7 +206,7 @@
         <tbody>
           <tr>
             <td>Number of Orders</td>
-            <td>TBD</td>
+            <td><%= new_orders_past_30_days %></td>
           </tr>
           <tr>
             <td>Total Revenue</td>
@@ -218,7 +218,7 @@
           </tr>
           <tr>
             <td>Largest Order Value</td>
-            <td>TBD</td>
+            <td><%= @highest_value_order.value %></td>
           </tr>
         </tbody>
       </table>
@@ -234,11 +234,11 @@
         <tbody>
           <tr>
             <td>Number of Orders</td>
-            <td>TBD</td>
+            <td><%= @total_order_count %></td>
           </tr>
           <tr>
             <td>Total Revenue</td>
-            <td>TBD</td>
+            <td><%= total_revenue %></td>
           </tr>
           <tr>
             <td>Average Order Value</td>
@@ -246,7 +246,7 @@
           </tr>
           <tr>
             <td>Largest Order Value</td>
-            <td>TBD</td>
+            <td><%= @highest_value_order.value %></td>
           </tr>
         </tbody>
       </table>

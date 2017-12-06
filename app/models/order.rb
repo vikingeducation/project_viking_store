@@ -22,4 +22,17 @@ class Order < ApplicationRecord
     where("checkout_date IS NOT NULL").includes(:products).pluck(:price).reduce(&:+).to_f
   end
 
+  def self.highest_value
+      select("orders.id, textcat(textcat(users.first_name, ' '), users.last_name) AS name, SUM(order_contents.quantity * products.price) AS value").
+      joins("JOIN users ON orders.user_id = users.id JOIN order_contents ON orders.id = order_contents.order_id JOIN products ON products.id = order_contents.product_id").
+      where("checkout_date IS NOT NULL").
+      order("value DESC").
+      group("orders.id, textcat(textcat(users.first_name, ' '), users.last_name)").
+      limit(1).first
+  end
+
+  def value
+    products.sum("quantity * price")
+  end
+
 end
