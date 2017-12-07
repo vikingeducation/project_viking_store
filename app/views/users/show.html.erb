@@ -1,2 +1,21 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<p class="right"><%= link_to 'Edit', edit_user_path(@user) %></p>
+<h1>User Details</h1>
+
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <td><%= @user.name %></td>
+  </tr>
+  <tr>
+    <th>Email</th>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <th>Billing Address</th>
+    <td><%= address(@user.billing_address) %></td>
+  </tr>
+  <tr>
+    <th>Shipping Address</th>
+    <td><%= address(@user.shipping_address) %></td>
+  </tr>
+</table>
