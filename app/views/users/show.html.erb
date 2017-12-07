@@ -12,10 +12,18 @@
   </tr>
   <tr>
     <th>Billing Address</th>
-    <td><%= address(@user.billing_address) %></td>
+    <td><%= address(@user.billing_id) %></br>
+    <%= @user.billing_address %></td>
   </tr>
   <tr>
     <th>Shipping Address</th>
-    <td><%= address(@user.shipping_address) %></td>
+    <td><%= address(@user.shipping_id) %></br>
+    <%= @user.shipping_address %></td>
+  </tr>
+<!-- TO DO: fix weird address glitch -->
+  <tr>
+    <th>Test Billing</th>
+    <td><%= @user.billing_address.street_address if @user.billing_address %></br>
+    <%= @user.billing_address %></td>
   </tr>
 </table>

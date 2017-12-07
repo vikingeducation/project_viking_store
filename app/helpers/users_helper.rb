@@ -1,6 +1,7 @@
 module UsersHelper
 
-  def address(add)
+  def address(id)
+    add = Address.find_by(id: id)
     base = "#{add.city.name}, #{add.state.name} #{add.zip_code}"
     if add.secondary_address.blank?
       "#{add.street_address}, " + base
