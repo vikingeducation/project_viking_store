@@ -39,6 +39,9 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    @category.destroy
+    flash[:alert] = "#{@category.name} has been deleted along with any related products. Never to return again. I hope you're happy."
+    redirect_to categories_path
   end
 
   private
