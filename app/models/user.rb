@@ -20,5 +20,8 @@ class User < ApplicationRecord
     limit(1)
   end
 
+  def name
+    "#{first_name} #{last_name}"
+  end
 
 end
