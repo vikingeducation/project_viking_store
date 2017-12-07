@@ -9,4 +9,10 @@ module ApplicationHelper
     end
   end
 
+  def display_error(object, field)
+    unless object.errors.empty?
+      "#{object.errors[field].first}"
+    end
+  end
+
 end

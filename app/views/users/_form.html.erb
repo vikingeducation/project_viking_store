@@ -1,1 +1,27 @@
-_form.html.erb
+<%= form_for(user) do |f| %>
+  <%= f.label :first_name %>
+  <%= display_error(user, :first_name) %>
+  <%= f.text_field :first_name, class: 'form-control' %>
+
+  <%= f.label :last_name %>
+  <%= display_error(user, :last_name) %>
+  <%= f.text_field :last_name, class: 'form-control' %>
+
+  <%= f.label :email %>
+  <%= display_error(user, :email) %>
+  <%= f.text_field :email, class: 'form-control' %>
+
+  <%= f.label :billing_id, "Billing Address" %>
+  <%= display_error(user, :billing_id) %>
+  <%= f.collection_select :billing_id, user.addresses, :id, :street_address, prompt: '-- Select an Address --', class: 'form-control' %>
+
+  <%= f.label :billing_id, "Shipping Address" %>
+  <%= display_error(user, :shipping_id) %>
+  <%= f.collection_select :shipping_id, user.addresses, :id, :street_address, prompt: '-- Select an Address --', class: 'form-control' %>
+
+  <%= f.label :password %>
+  <%= display_error(user, :password) %>
+  <%= f.password_field :password, class: 'form-control' %>
+
+  <%= f.submit %>
+<% end %> <!-- form_for user -->
