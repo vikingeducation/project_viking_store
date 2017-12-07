@@ -1,5 +1,9 @@
 class ProductsController < ApplicationController
+
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
+
   def index
+    @products = Product.all.order('name')
   end
 
   def new
@@ -13,4 +17,12 @@ class ProductsController < ApplicationController
 
   def show
   end
+
+  private
+
+  def set_product
+    @product = Product.find_by(id: params[:id])
+  end
+
+
 end

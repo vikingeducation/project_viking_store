@@ -6,5 +6,9 @@ class Product < ApplicationRecord
 
   include SharedQueries
 
+  def category_name
+    category.name
+  end
+
 
 end
