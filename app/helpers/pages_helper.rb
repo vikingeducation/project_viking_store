@@ -5,6 +5,6 @@ module PagesHelper
   end
 
   def column_classes
-    "col-md-4 col-lg-3"
+    "col-lg-6"
   end
 end

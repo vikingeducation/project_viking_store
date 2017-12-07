@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
 
+  def admin
+  end
+
   def dashboard
 
     @total_user_count = User.count

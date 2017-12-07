@@ -1,0 +1,30 @@
+header {
+  margin: 0 auto;
+  overflow: auto;
+  margin-bottom: 50px;
+  img {
+    width: 60px;
+    float: left;
+    margin-right: 20px;
+  }
+  h1 {
+    float: left;
+  }
+}
+
+nav {
+  text-align: center;
+  h1 {
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: gray;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    text-align: center;
+  }
+} /* nav */

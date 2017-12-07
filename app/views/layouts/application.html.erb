@@ -15,11 +15,39 @@
 </head>
 <body>
 
-  <div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <%= render 'shared/header' %>
 
-    <%= yield %>
+        <% flash.each do |type, message| %>
+          <div class="alert alert-<%= bootstrap_flash_class(type) %> fadein">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden=true>&times;</span><span class="sr-only">Close</span></button>
+            <%= message %>
+          </div>
+        <% end %>
 
-  </div> <!-- content -->
+
+      </div> <!-- col-sm-12 -->
+    </div> <!-- row -->
+
+    <div class="row">
+
+      <div class="col-md-3">
+        <%= render 'shared/navbar' %>
+      </div> <!-- col-md-3 -->
+
+      <div class="col-md-9">
+        <main>
+          <%= yield %>
+        </main>
+      </div> <!-- col-md-9 -->
+
+    </div> <!-- row -->
+  </div> <!-- container -->
+
+
+
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
