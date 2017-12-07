@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :addresses, only: [:index]
   resources :orders, only: [:index]
   resources :products, only: [:index]
-  resources :categories, only: [:index]
+  resources :categories
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
