@@ -24,4 +24,23 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def city
+    billing_address.city.name if billing_address
+  end
+
+  def state
+    billing_address.state.abbreviation if shipping_address
+  end
+
+  def orders_count
+    orders.where('checkout_date IS NOT NULL').count
+  end
+
+  def last_order_date
+    unless orders.empty?
+      o = orders.where('checkout_date IS NOT NULL').order('checkout_date DESC')
+      o.first.checkout_date.to_date unless o.empty?
+    end
+  end
+
 end
