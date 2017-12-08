@@ -4,6 +4,10 @@ class Product < ApplicationRecord
   has_many :order_contents
   has_many :orders, through: :order_contents
 
+  validates :name, :sku, :description, :category, presence: true
+  validates :price, numericality: { less_than_or_equal_to: 10_000 }
+
+
   include SharedQueries
 
   def category_name

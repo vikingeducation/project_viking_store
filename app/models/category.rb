@@ -6,4 +6,8 @@ class Category < ApplicationRecord
             presence: true,
             length: {:in => 4..16}
 
+  def self.dropdown
+    all.order('name')
+  end
+
 end
