@@ -21,10 +21,20 @@ class ProductsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def edit
   end
 
-  def show
+  def update
+    if @product.update(product_params)
+      flash[:notice] = "Product #{@product.name} has been updated. pew! pew! pew!"
+      redirect_to products_path
+    else
+      flash.now[:error] = 'Aw crap. Fix that stuff below.'
+      render :edit
+    end
   end
 
   private
