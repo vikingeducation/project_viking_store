@@ -24,9 +24,6 @@ class ProductsController < ApplicationController
   def edit
   end
 
-  def _form
-  end
-
   def show
   end
 
