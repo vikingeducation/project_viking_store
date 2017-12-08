@@ -25,16 +25,23 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    session[:return_to] ||= request.referer
   end
 
   def update
     if @product.update(product_params)
       flash[:notice] = "Product #{@product.name} has been updated. pew! pew! pew!"
-      redirect_to products_path
+      redirect_to session.delete(:return_to)
     else
       flash.now[:error] = 'Aw crap. Fix that stuff below.'
       render :edit
     end
+  end
+
+  def destroy
+    @product.destroy
+    flash[:alert] = "#{@product.name} has been deleted. I hope you're happy, 'cause, there's no undo."
+    redirect_to products_path
   end
 
   private

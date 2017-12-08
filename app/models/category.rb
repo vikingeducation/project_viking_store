@@ -7,7 +7,7 @@ class Category < ApplicationRecord
             length: {:in => 4..16}
 
   def self.dropdown
-    all.order('name')
+    names = all.order('name')
   end
 
 end

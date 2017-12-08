@@ -7,6 +7,7 @@ class CategoriesController < ApplicationController
   end
 
   def new
+    session[:return_to] ||= request.referer
     @category = Category.new
   end
 
@@ -14,7 +15,8 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     if @category.save
       flash[:notice] = "Category #{@category.name} has been created. Beeeewm."
-      redirect_to categories_path
+      # redirect_to categories_path
+      redirect_to session.delete(:return_to)
     else
       flash.now[:alert] = "Ah crap. Something went wrong."
       render :new
