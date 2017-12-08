@@ -2,5 +2,4 @@
 
 <%= render 'form', product: @product %>
 
-<%= link_to 'Delete', edit_product_path(@product) %> |
-<%= link_to 'Cancel', @product %>
+<%= link_to 'Delete', @product, method: :delete, data: { confirm: "Are you sure you want to delete #{@product.name}? There is no getting it back." } %> | <%= link_to 'Cancel', @product %>

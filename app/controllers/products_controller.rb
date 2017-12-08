@@ -7,6 +7,18 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @product = Product.new
+  end
+
+  def create
+    @product = Product.new(product_params)
+    if @product.save
+      flash[:notice] = "Product #{@product.name} has been created. Beeeewm."
+      redirect_to products_path
+    else
+      flash.now[:alert] = "Ah crap. Something went wrong."
+      render :new
+    end
   end
 
   def edit

@@ -1,2 +1,7 @@
-<h1>Products#_form</h1>
-<p>Find me in app/views/products/_form.html.erb</p>
+<%= form_for(product) do |f| %>
+  <%= f.label :name %>
+  <%= display_error(product, :name) %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.submit %>
+<% end %> <!-- form_for product -->
