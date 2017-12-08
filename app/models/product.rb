@@ -15,21 +15,23 @@ class Product < ApplicationRecord
   end
 
   def times_purchased
-    p_id = self.id
-    Product.joins('JOIN order_contents ON products.id = order_contents.product_id').
-            joins('JOIN orders on order_contents.order_id = orders.id').
+    Product.joins_product_to_orders(self.id).
             where('orders.checkout_date IS NOT NULL').
-            where('products.id = ?', p_id).
             count
   end
 
   def current_cart_count
-    p_id = self.id
-    Product.joins('JOIN order_contents ON products.id = order_contents.product_id').
-            joins('JOIN orders on order_contents.order_id = orders.id').
+    Product.joins_product_to_orders(self.id).
             where('orders.checkout_date IS NULL').
-            where('products.id = ?', p_id).
             count
+  end
+
+  private
+
+  def self.joins_product_to_orders(id)
+    joins('JOIN order_contents ON products.id = order_contents.product_id').
+    joins('JOIN orders on order_contents.order_id = orders.id').
+    where('products.id = ?', id)
   end
 
 end
