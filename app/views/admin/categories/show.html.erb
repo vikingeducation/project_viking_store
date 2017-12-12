@@ -1,4 +1,4 @@
-<p class="right"><%= link_to 'Edit', edit_category_path(@category) %></p>
+<p class="right"><%= link_to 'Edit', edit_admin_category_path(@category) %></p>
 <h1>Category Details</h1>
 
 <h3><%= @category.name %> (#<%= @category.id %>)</h3>
@@ -13,7 +13,7 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= link_to product.name, product %></td>
+        <td><%= link_to product.name, admin_product_path(product) %></td>
       </tr>
     <% end %>
   </tbody>

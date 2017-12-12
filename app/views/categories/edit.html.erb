@@ -1,5 +1,0 @@
-<h1>Editing Category</h1>
-
-<%= render 'form', category: @category %>
-
-<%= link_to 'Delete', @category, method: :delete, data: { confirm: "Are you sure you want to delete #{@category.name}? There is no getting it back. Oh, also it will delete every product associated with it. So there's that. Be sure you're willing to commit to this hugely destructive act." } %> | <%= link_to 'Cancel', @category %>
