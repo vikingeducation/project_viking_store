@@ -1,7 +1,7 @@
-class PagesController < ApplicationController
+class AdminController < ApplicationController
 
-  def admin
-  end
+  layout "admin"
+
 
   def dashboard
 
@@ -76,6 +76,5 @@ class PagesController < ApplicationController
     @user_lifetime_highest ||= User.highest_lifetime_value
   end
   helper_method :user_lifetime_highest
-
 
 end
