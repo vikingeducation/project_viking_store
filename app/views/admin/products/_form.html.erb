@@ -3,7 +3,7 @@
   <%= display_error(product, :name) %>
   <%= f.text_field :name, class: 'form-control' %>
 
-  <%= f.label :category_id %>  <%= link_to 'Create New Category', new_category_path %>
+  <%= f.label :category_id %>  <%= link_to 'Create New Category', new_admin_category_path %>
   <%= display_error(product, :category_id) %>
   <%= f.collection_select :category_id, Category.dropdown, :id, :name, prompt: '-- Choose a Category --', class: 'form-control' %>
 

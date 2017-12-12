@@ -1,6 +1,7 @@
-class ProductsController < ApplicationController
+class Admin::ProductsController < AdminController
 
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+
 
   def index
     @products = Product.all.order('name')
@@ -14,7 +15,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       flash[:notice] = "Product #{@product.name} has been created. Beeeewm."
-      redirect_to products_path
+      redirect_to admin_products_path
     else
       flash.now[:alert] = "Ah crap. Something went wrong."
       render :new
@@ -41,7 +42,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     flash[:alert] = "#{@product.name} has been deleted. I hope you're happy, 'cause, there's no undo."
-    redirect_to products_path
+    redirect_to admin_products_path
   end
 
   private

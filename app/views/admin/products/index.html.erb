@@ -1,4 +1,4 @@
-<p class="right"><%= link_to 'New', new_product_path %></p>
+<p class="right"><%= link_to 'New', new_admin_product_path %></p>
 <h1>Products</h1>
 
 <table class="<%= table_classes %>">
@@ -14,13 +14,13 @@
     <% @products.each do |product| %>
       <tr>
         <td>
-          <%= link_to product.name, product %><br>
+          <%= link_to product.name, admin_product_path(product) %><br>
           <span class="sku-display">SKU: <%= product.sku %></span>
 
         </td>
         <td><%= product.price %></td>
-        <td><%= link_to product.category_name, category_path(product.category) %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to product.category_name, admin_category_path(product.category) %></td>
+        <td><%= link_to 'Edit', edit_admin_product_path(product) %></td>
       </tr>
     <% end %>
   </tbody>
