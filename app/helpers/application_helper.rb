@@ -11,6 +11,7 @@ module ApplicationHelper
   end
 
   def display_error(object, field)
+    object = object[-1]
     unless object.errors.empty?
       content_tag(:span, class: "error-message") do
         "#{object.errors.full_messages_for(field).first}"
