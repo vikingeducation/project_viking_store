@@ -1,9 +1,13 @@
 class User < ApplicationRecord
 
   has_many :orders
+
+  has_many :purchased_products, through: :orders, source: :products
+  has_many :products, through: :orders, source: :products
+
   has_many :order_contents, through: :orders
 
-  has_many :addresses
+  has_many :addresses, dependent: :destroy
   has_one :billing_address, :class_name => 'Address'
   has_one :shipping_address, :class_name => 'Address'
   has_many :credit_cards

@@ -9,6 +9,7 @@ class Order < ApplicationRecord
   has_many :contents, foreign_key: 'order_id', class_name: 'OrderContent'
 
   has_many :products, through: :order_contents
+  has_many :categories, through: :products, source: :category
 
   include SharedQueries
 
