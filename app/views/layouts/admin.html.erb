@@ -18,14 +18,9 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <%= render 'shared/admin_header' %>
+        <%= render 'admin/shared/header' %>
 
-        <% flash.each do |type, message| %>
-          <div class="alert alert-<%= bootstrap_flash_class(type) %> fadein">
-            <button type="button" class="close" data-dismiss="alert"><span aria-hidden=true>&times;</span><span class="sr-only">Close</span></button>
-            <%= message %>
-          </div>
-        <% end %>
+        <%= render "shared/flashes" %>
 
 
       </div> <!-- col-sm-12 -->
@@ -34,7 +29,7 @@
     <div class="row">
 
       <div class="col-md-3">
-        <%= render 'shared/admin_navbar' %>
+        <%= render 'admin/shared/navbar' %>
       </div> <!-- col-md-3 -->
 
       <div class="col-md-9">
