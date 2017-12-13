@@ -1,14 +1,21 @@
 Rails.application.routes.draw do
 
+  get 'credit_cards/new'
+
   root 'admin#dashboard'
 
   get 'admin/dashboard', to: 'admin#dashboard', as: 'dashboard'
   namespace :admin do
     resources :users
     resources :addresses, only: [:index]
-    resources :orders, only: [:index]
+    resources :orders, only: [:show, :edit, :index]
     resources :products
     resources :categories
+    resources :credit_cards, only: [:destroy]
+  end
+
+  resources :users do
+    resources :credit_cards, only: [:new, :create, :destroy]
   end
 
   # resources :users

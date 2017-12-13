@@ -11,19 +11,32 @@
     <td><%= @user.email %></td>
   </tr>
   <tr>
-    <th>Billing Address</th>
-    <td><%= address(@user.billing_id) %></br>
-    <%= @user.billing_address %></td>
+    <th>
+      Addresses<br>
+      <%= link_to 'See All Addresses', '#' %>
+    </th>
+    <td>
+      <p><strong>Billing:</strong><br> <%= address(@user.billing_id) %></p>
+      <p><strong>Shipping:</strong><br> <%= address(@user.shipping_id) %></p>
+    </td>
   </tr>
   <tr>
-    <th>Shipping Address</th>
-    <td><%= address(@user.shipping_id) %></br>
-    <%= @user.shipping_address %></td>
+    <th>Payment Info</th>
+    <td>
+      <% @user.credit_cards.each do |card| %>
+        <p><%= card.nickname %> | <%= card.brand %> | <%= card.exp_month %>/<%= card.exp_year %> | <%= link_to 'Delete', admin_credit_card_path(card, user_id: @user), method: :delete, data: { confirm: "Are you sure you want to delete #{card.nickname}? There is no getting it back." } %></p>
+      <% end %>
+    </td>
   </tr>
-<!-- TO DO: fix weird address glitch -->
   <tr>
-    <th>Test Billing</th>
-    <td><%= @user.billing_address.street_address if @user.billing_address %></br>
-    <%= @user.billing_address %></td>
+    <th>
+      Order History<br>
+      <%= link_to 'View Cart', '#' if @user.cart? %>
+    </th>
+    <td>
+      <% @user.purchased_orders.each do |order| %>
+      <p>#<%= link_to order.id, admin_order_path(order) %>: <%= order.checkout_date.to_date %>, $<%= order.value %> | <%= link_to 'Edit', edit_admin_order_path(order) %> | <%= link_to 'Delete', admin_order_path(order), method: :delete, data: { confirm: "Are you sure?" } %></p>
+      <% end %>
+    </td>
   </tr>
 </table>
