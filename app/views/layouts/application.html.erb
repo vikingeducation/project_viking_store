@@ -20,12 +20,7 @@
       <div class="col-sm-12">
         <%= render 'shared/header' %>
 
-        <% flash.each do |type, message| %>
-          <div class="alert alert-<%= bootstrap_flash_class(type) %> fadein">
-            <button type="button" class="close" data-dismiss="alert"><span aria-hidden=true>&times;</span><span class="sr-only">Close</span></button>
-            <%= message %>
-          </div>
-        <% end %>
+        <%= render "shared/flashes" %>
 
       </div> <!-- col-sm-12 -->
     </div> <!-- row -->
