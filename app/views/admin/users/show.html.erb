@@ -13,7 +13,8 @@
   <tr>
     <th>
       Addresses<br>
-      <%= link_to 'See All Addresses', '#' %>
+      <%= link_to 'See All Addresses', '#' %><br>
+      <%= link_to 'Create Address', '#' %>
     </th>
     <td>
       <p><strong>Billing:</strong><br> <%= address(@user.billing_id) %></p>
@@ -31,7 +32,8 @@
   <tr>
     <th>
       Order History<br>
-      <%= link_to 'View Cart', '#' if @user.cart? %>
+      <%= link_to 'View Cart', '#' if @user.cart? %><br>
+      <%= link_to 'Create Order', '#' %>
     </th>
     <td>
       <% @user.purchased_orders.each do |order| %>

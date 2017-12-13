@@ -8,8 +8,14 @@ class User < ApplicationRecord
   has_many :order_contents, through: :orders
 
   has_many :addresses, dependent: :destroy
-  has_one :billing_address, :class_name => 'Address'
-  has_one :shipping_address, :class_name => 'Address'
+  belongs_to :billing_address,
+             class_name: 'Address',
+             foreign_key: :billing_id
+
+  belongs_to :shipping_address,
+             class_name: 'Address',
+             foreign_key: :shipping_id
+
   has_many :credit_cards
 
 
@@ -40,11 +46,19 @@ class User < ApplicationRecord
     orders.where('checkout_date IS NOT NULL').count
   end
 
+  def purchased_orders
+    orders.where('checkout_date IS NOT NULL').order('checkout_date DESC')
+  end
+
   def last_order_date
     unless orders.empty?
       o = orders.where('checkout_date IS NOT NULL').order('checkout_date DESC')
       o.first.checkout_date.to_date unless o.empty?
     end
+  end
+
+  def cart?
+    orders.where('checkout_date IS NULL').count > 0
   end
 
 end
