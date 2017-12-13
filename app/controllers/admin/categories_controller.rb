@@ -34,7 +34,7 @@ class Admin::CategoriesController < AdminController
   def update
     if @category.update(category_params)
       flash[:notice] = "#{@category.name} has been updated."
-      redirect_to @category
+      redirect_to admin_category_path(@category)
     else
       flash.now[:error] = "Whoopsie doopers"
       render :edit
@@ -44,7 +44,7 @@ class Admin::CategoriesController < AdminController
   def destroy
     @category.destroy
     flash[:alert] = "#{@category.name} has been deleted along with any related products. Never to return again. I hope you're happy."
-    redirect_to categories_path
+    redirect_to admin_categories_path
   end
 
   private
