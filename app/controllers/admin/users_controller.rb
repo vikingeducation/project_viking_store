@@ -38,6 +38,15 @@ class Admin::UsersController < AdminController
   end
 
   def destroy
+    session[:return_to] ||= request.referer
+    if @user.destroy
+      flash[:success] = "#{@user.name} deleted successfully."
+      redirect_to admin_users_path
+    else
+      flash[:error] = "Failed to delete #{@user.name}."
+      redirect_to session.delete(:return_to)
+    end
+
   end
 
   private
