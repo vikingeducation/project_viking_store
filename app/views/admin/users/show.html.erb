@@ -13,12 +13,12 @@
   <tr>
     <th>
       Addresses<br>
+      <%= link_to 'Create Address', new_admin_user_address_path(@user) %>
       <%= link_to 'See All Addresses', '#' %><br>
-      <%= link_to 'Create Address', '#' %>
     </th>
     <td>
-      <p><strong>Billing:</strong><br> <%= address(@user.billing_id) %></p>
-      <p><strong>Shipping:</strong><br> <%= address(@user.shipping_id) %></p>
+      <p><strong>Billing:</strong><br> <%= address(@user, @user.billing_id) %></p>
+      <p><strong>Shipping:</strong><br> <%= address(@user, @user.shipping_id) %></p>
     </td>
   </tr>
   <tr>

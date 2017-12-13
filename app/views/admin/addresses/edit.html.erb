@@ -1,0 +1,6 @@
+<h1>Edit Address</h1>
+<h2>for <%= @user.name %></h2>
+
+<%= render 'form', user: @user, address: @address %>
+
+<%= link_to 'Cancel', admin_user_path(@user) %>

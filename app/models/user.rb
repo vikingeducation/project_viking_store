@@ -18,6 +18,15 @@ class User < ApplicationRecord
 
   has_many :credit_cards
 
+  validates :first_name, :last_name,
+            presence: true,
+            length: {in: 1..64}
+
+  validates :email,
+            presence: true,
+            format: { :with => /@/ }
+
+
 
   include SharedQueries
 

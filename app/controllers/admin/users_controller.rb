@@ -14,7 +14,7 @@ class Admin::UsersController < AdminController
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = 'User created!'
-      redirect_to users_path
+      redirect_to admin_users_path
     else
       flash.now[:alert] = 'Error: user not created'
       render :new
@@ -27,7 +27,7 @@ class Admin::UsersController < AdminController
   def update
     if @user.update(user_params)
       flash[:notice] = 'User updated!'
-      redirect_to @user
+      redirect_to admin_user_path(@user)
     else
       flash.now[:alert] = 'Error: user not updated'
       render :edit

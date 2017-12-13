@@ -10,4 +10,8 @@ class City < ApplicationRecord
     limit(3)
   end
 
+  def self.dropdown
+    all.order('name ASC')
+  end
+
 end

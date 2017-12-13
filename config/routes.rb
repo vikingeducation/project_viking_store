@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   get 'admin/dashboard', to: 'admin#dashboard', as: 'dashboard'
   namespace :admin do
-    resources :users
+    resources :users do
+      resources :addresses
+    end
     resources :addresses, only: [:index]
     resources :orders, only: [:show, :edit, :index]
     resources :products

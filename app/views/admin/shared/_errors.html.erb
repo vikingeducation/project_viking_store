@@ -3,8 +3,8 @@
     <% if object.errors.any? %>
       <div id="error_explanation">
         <ul>
-        <% object.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+        <% object.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
         </ul>
       </div>

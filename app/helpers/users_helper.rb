@@ -1,9 +1,9 @@
 module UsersHelper
 
-  def address(id)
-    add = Address.find_by(id: id)
+  def address(user, address_id)
+    add = Address.find_by(id: address_id)
     if add == nil
-      "Create an address ... TBD"
+      link_to 'Create Address', new_admin_user_address_path(@user)
     else
       base = "#{add.city.name}, #{add.state.name} #{add.zip_code}"
       if add.secondary_address.blank?
