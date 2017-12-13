@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'credit_cards/new'
-
   root 'admin#dashboard'
 
   get 'admin/dashboard', to: 'admin#dashboard', as: 'dashboard'
