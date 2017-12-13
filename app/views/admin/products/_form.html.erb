@@ -1,4 +1,6 @@
-<%= form_for(product) do |f| %>
+<%= render "admin/shared/errors", :object => product %>
+
+<%= form_for([:admin, product]) do |f| %>
   <%= f.label :name %>
   <%= display_error(product, :name) %>
   <%= f.text_field :name, class: 'form-control' %>
