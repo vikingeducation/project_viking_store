@@ -13,7 +13,7 @@ class Admin::UsersController < AdminController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = 'User created!'
+      flash[:notice] = "User #{@user.name} created!"
       redirect_to admin_users_path
     else
       flash.now[:alert] = 'Error: user not created'

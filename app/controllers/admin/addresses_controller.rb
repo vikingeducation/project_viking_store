@@ -1,7 +1,6 @@
 class Admin::AddressesController < AdminController
 
   before_action :set_address, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:new, :create]
 
   def index
     @addresses = Address.all
@@ -31,14 +30,13 @@ class Admin::AddressesController < AdminController
 
   def edit
     @user = User.find(params[:user_id])
-    binding.pry
   end
 
   def update
     binding.pry
     @user = User.find(params[:user_id])
     if @address.update(address_params)
-      flash[:success] = "Address updated successfully."
+      flash[:notice] = "#{@address.street_address} was updated."
       redirect_to admin_user_path(@user)
     else
       flash.now[:error] = "Failed to update Address."
@@ -47,10 +45,15 @@ class Admin::AddressesController < AdminController
 
   end
 
-  def index
-  end
-
   def destroy
+    session[:return_to] ||= request.referer
+    if @address.destroy
+      flash[:notice] = "#{@address.street_address} was deleted."
+      redirect_to admin_user_addresses_path
+    else
+      flash[:error] = "Failed to delete #{@address.street_address}."
+      redirect_to session.delete(:return_to)
+    end
   end
 
 
@@ -58,10 +61,6 @@ class Admin::AddressesController < AdminController
 
   def set_address
     @address = Address.find(params[:id])
-  end
-
-  def set_user
-    @user = User.find(params[:user_id])
   end
 
   def address_params
