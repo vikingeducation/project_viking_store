@@ -15,12 +15,12 @@
   <tr>
     <th>
       Addresses<br>
-      <%= link_to 'Create Address', new_admin_user_address_path(@user) %>
       <%= link_to 'See All Addresses', '#' %><br>
     </th>
     <td>
       <p><strong>Billing:</strong><br> <%= address_or_create(@user, @user.billing_id) %></p>
       <p><strong>Shipping:</strong><br> <%= address_or_create(@user, @user.shipping_id) %></p>
+      <%= link_to 'Create Address', new_admin_user_address_path(@user), class: button_classes %>
     </td>
   </tr>
   <tr>

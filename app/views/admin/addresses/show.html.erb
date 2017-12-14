@@ -2,11 +2,13 @@
   <%= link_to 'Edit', edit_admin_user_address_path(@user, @address), class: "btn btn-sm btn-primary" %>
 </div> <!-- right -->
 
-<h1>Address</h1>
+<h1><%= @user.first_name %>'s Address Details</h1>
 
 <p>
-  <%= link_to @user.name, admin_user_path(@user)%><br>
+  <%= @user.name %> (<%= link_to 'See Profile', admin_user_path(@user)%>)<br>
   <%= display_address(@address) %>
 </p>
 
-<%= link_to 'User Profile', admin_user_path(@user), class: "btn btn-primary" %>
+<div class="right">
+  <%= link_to 'Delete', admin_user_address_path(@user, @address), method: :delete, data: {confirm: "Are you sure?"}, class: button_classes('danger') %>
+</div> <!-- right -->
