@@ -3,7 +3,14 @@ class Admin::AddressesController < AdminController
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
   def index
-    @addresses = Address.all
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @addresses = @user.addresses
+
+      # @addresses = Address.where(user_id: params[:user_id])
+    else
+      @addresses = Address.all
+    end
   end
 
   def new

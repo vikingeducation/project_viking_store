@@ -1,3 +1,7 @@
+<div class="right">
+  <%= user_address_index_buttons %>
+</div> <!-- right -->
+
 <h1>All Addresses</h1>
 
 <table class="#{<%= table_classes %>}, table-responsive">
@@ -16,7 +20,6 @@
       <tr>
         <td>
           <%= link_to address.user.name, admin_user_path(address.user) %><br>
-          <%= link_to "(New Address)", new_admin_user_address_path(address.user) %>
         </td>
         <td>
           <%= address.street_address %><br>

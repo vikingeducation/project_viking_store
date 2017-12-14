@@ -15,7 +15,7 @@
   <tr>
     <th>
       Addresses<br>
-      <%= link_to 'See All Addresses', '#' %><br>
+      <%= link_to 'See All Addresses', admin_user_addresses_path(user_id: @user.id) %><br>
     </th>
     <td>
       <p><strong>Billing:</strong><br> <%= address_or_create(@user, @user.billing_id) %></p>
