@@ -52,9 +52,10 @@ class Admin::AddressesController < AdminController
 
   def destroy
     session[:return_to] ||= request.referer
+    @user = User.find(params[:user_id])
     if @address.destroy
-      flash[:notice] = "#{@address.street_address} was deleted."
-      redirect_to admin_user_addresses_path
+      flash[:notice] = "#{@address.street_address} was deleted for #{@user.name}."
+      redirect_to admin_user_addresses_path(@user)
     else
       flash[:error] = "Failed to delete #{@address.street_address}."
       redirect_to session.delete(:return_to)
