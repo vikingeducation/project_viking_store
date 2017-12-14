@@ -1,4 +1,5 @@
-<p class="right"><%= link_to 'Edit', edit_admin_category_path(@category) %></p>
+<div class="right"><%= link_to 'Edit', edit_admin_category_path(@category), class: button_classes %></div>
+
 <h1>Category Details</h1>
 
 <h3><%= @category.name %> (#<%= @category.id %>)</h3>

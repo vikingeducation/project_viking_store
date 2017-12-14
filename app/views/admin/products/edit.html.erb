@@ -1,5 +1,8 @@
+<div class="right">
+  <%= link_to 'Cancel', admin_product_path(@product), class: button_classes %>
+</div> <!-- right -->
 <h1>Editing Product</h1>
 
 <%= render 'form', product: @product %>
 
-<%= link_to 'Delete', admin_product_path(@product), method: :delete, data: { confirm: "Are you sure you want to delete #{@product.name}? There is no getting it back." } %> | <%= link_to 'Cancel', admin_product_path(@product) %>
+<%= link_to 'Delete', admin_product_path(@product), method: :delete, data: { confirm: "Are you sure you want to delete #{@product.name}? There is no getting it back." }, class: button_classes('danger') %>

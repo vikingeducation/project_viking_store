@@ -25,6 +25,7 @@ class Admin::AddressesController < AdminController
   end
 
   def show
+    @user = @address.user
 
   end
 

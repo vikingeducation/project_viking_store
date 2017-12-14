@@ -1,3 +1,7 @@
+<div class="right">
+  <%= link_to 'Cancel', admin_categories_path, class: button_classes %>
+</div> <!-- right -->
+
 <h1>New Category</h1>
 
-<%= render 'form', category: [:admin, @category] %>
+<%= render 'form', category: @category %>
