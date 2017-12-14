@@ -1,5 +1,9 @@
+<div class="right">
+  <%= user_order_index_buttons %>
+</div> <!-- right -->
 <h1>All Orders</h1>
-<p><em>Create new orders from within <%= link_to 'User', admin_users_path %> profiles.</em></p>
+<%= user_orders_header %>
+<p><em>Create new orders from within <%= link_to 'User', admin_users_path %> profiles.</em> Table shows max <%= @order_limit %> of <%= @order_count %> total orders.</p>
 
 <table class="<%= table_classes %> table-responsive">
   <thead>

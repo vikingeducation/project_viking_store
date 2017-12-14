@@ -3,7 +3,14 @@ class Admin::OrdersController < AdminController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def index
-    @orders = Order.all.limit(100)
+    @order_limit = 100
+    @order_count = Order.count
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @orders = @user.orders.limit(@order_limit)
+    else
+      @orders = Order.all.limit(@order_limit)
+    end
   end
 
   def show
