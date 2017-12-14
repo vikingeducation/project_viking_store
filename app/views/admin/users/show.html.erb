@@ -20,8 +20,8 @@
       <%= link_to 'See All Addresses', '#' %><br>
     </th>
     <td>
-      <p><strong>Billing:</strong><br> <%= address(@user, @user.billing_id) %></p>
-      <p><strong>Shipping:</strong><br> <%= address(@user, @user.shipping_id) %></p>
+      <p><strong>Billing:</strong><br> <%= address_or_create(@user, @user.billing_id) %></p>
+      <p><strong>Shipping:</strong><br> <%= address_or_create(@user, @user.shipping_id) %></p>
     </td>
   </tr>
   <tr>

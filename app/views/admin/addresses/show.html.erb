@@ -1,2 +1,8 @@
-<h1>Addresses#show</h1>
-<p>Find me in app/views/addresses/show.html.erb</p>
+<h1>Address</h1>
+
+<p>
+  <%= @user.name %><br>
+  <%= display_address(@address) %>
+</p>
+
+<%= link_to 'Edit', edit_admin_user_address_path(@user, @address) %>

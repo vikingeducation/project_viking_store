@@ -33,7 +33,6 @@ class Admin::AddressesController < AdminController
   end
 
   def update
-    binding.pry
     @user = User.find(params[:user_id])
     if @address.update(address_params)
       flash[:notice] = "#{@address.street_address} was updated."

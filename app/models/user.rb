@@ -51,7 +51,7 @@ class User < ApplicationRecord
   end
 
   def state
-    billing_address.state.abbreviation if shipping_address
+    billing_address.state.abbreviation if billing_address
   end
 
   def orders_count
