@@ -1,7 +1,7 @@
 module OrdersHelper
 
   def display_status(order)
-    order.placed? ? "PLACED" : raw("<span class='unplaced'>UNPLACED</span>")
+    order.placed? ? raw("<span class='placed'>PLACED</span>") : raw("<span class='unplaced'>UNPLACED</span>")
   end
 
   def user_order_index_buttons

@@ -14,6 +14,10 @@ class Admin::OrdersController < AdminController
   end
 
   def show
+    @user = @order.user
+    @qty_products = @order.products.uniq.count
+    @card = @order.credit_card
+    @items = @order.contents
   end
 
   def new
@@ -23,12 +27,16 @@ class Admin::OrdersController < AdminController
   end
 
   def edit
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    end
   end
 
   def update
   end
 
   def destroy
+    user = User.find(params[:user_id])
   end
 
   private

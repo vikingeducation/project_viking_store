@@ -1,89 +1,91 @@
-<div class="row separator">
-  <div class="col-sm-12">
-    <div class="right">
-      <%= link_to 'Edit', edit_admin_user_path(@user), class: button_classes %>
-    </div>
-    <h1>User Details</h1>
-  </div> <!-- col-sm-12 -->
-</div> <!-- row -->
+<div class="profile">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="right">
+        <%= link_to 'Edit', edit_admin_user_path(@user), class: button_classes %>
+      </div>
+      <h1>User Details</h1>
+    </div> <!-- col-sm-12 -->
+  </div> <!-- row -->
 
-<div class="row separator">
-  <div class="col-sm-4">
-    <p><strong>Name</strong></p>
-  </div> <!-- col-sm-4 -->
-  <div class="col-sm-8">
-    <p><%= @user.name %></p>
-  </div> <!-- col-sm-8 -->
-</div> <!-- row -->
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Name</strong></p>
+    </div> <!-- col-sm-4 -->
+    <div class="col-sm-8">
+      <p><%= @user.name %></p>
+    </div> <!-- col-sm-8 -->
+  </div> <!-- row -->
 
-<div class="row separator">
-  <div class="col-sm-4">
-    <p><strong>Email</strong></p>
-  </div> <!-- col-sm-4 -->
-  <div class="col-sm-8">
-    <p><%= @user.email %></p>
-  </div> <!-- col-sm-8 -->
-</div> <!-- row -->
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Email</strong></p>
+    </div> <!-- col-sm-4 -->
+    <div class="col-sm-8">
+      <p><%= @user.email %></p>
+    </div> <!-- col-sm-8 -->
+  </div> <!-- row -->
 
-<div class="row separator">
-  <div class="col-sm-4">
-    <p><strong>Addresses</strong></p>
-    <p><%= link_to 'All Addresses', admin_user_addresses_path(user_id: @user.id) %></p>
-  </div> <!-- col-sm-4 -->
-  <div class="col-sm-8">
-    <p><strong>Billing:</strong><br> <%= address_or_create(@user, @user.billing_id) %></p>
-    <p><strong>Shipping:</strong><br> <%= address_or_create(@user, @user.shipping_id) %></p>
-    <%= link_to 'Create Address', new_admin_user_address_path(@user), class: button_classes('success') %>
-  </div> <!-- col-sm-8 -->
-</div> <!-- row -->
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Addresses</strong></p>
+      <p><%= link_to 'All Addresses', admin_user_addresses_path(user_id: @user.id) %></p>
+    </div> <!-- col-sm-4 -->
+    <div class="col-sm-8">
+      <p><strong>Billing:</strong><br> <%= address_or_create(@user, @user.billing_id) %></p>
+      <p><strong>Shipping:</strong><br> <%= address_or_create(@user, @user.shipping_id) %></p>
+      <%= link_to 'Create Address', new_admin_user_address_path(@user), class: button_classes('success') %>
+    </div> <!-- col-sm-8 -->
+  </div> <!-- row -->
 
-<div class="row separator">
-  <div class="col-sm-4">
-    <p><strong>Payment Info</strong></p>
-  </div> <!-- col-sm-4 -->
-  <div class="col-sm-8">
-    <% @user.credit_cards.each do |card| %>
-      <p><%= card.nickname %> | <%= card.brand %> | <%= card.exp_month %>/<%= card.exp_year %> | <%= link_to 'Delete', admin_credit_card_path(card, user_id: @user), method: :delete, data: { confirm: "Are you sure you want to delete #{card.nickname}? There is no getting it back." } %></p>
-    <% end %>
-  </div> <!-- col-sm-8 -->
-</div> <!-- row -->
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Payment Info</strong></p>
+    </div> <!-- col-sm-4 -->
+    <div class="col-sm-8">
+      <% @user.credit_cards.each do |card| %>
+        <p><%= card.nickname %> | <%= card.brand %> | <%= card.exp_month %>/<%= card.exp_year %> | <%= link_to 'Delete', admin_credit_card_path(card, user_id: @user), method: :delete, data: { confirm: "Are you sure you want to delete #{card.nickname}? There is no getting it back." } %></p>
+      <% end %>
+    </div> <!-- col-sm-8 -->
+  </div> <!-- row -->
 
-<div class="row separator">
-  <div class="col-sm-4">
-    <p><strong>Order History</strong></p>
-    <p><%= link_to 'All Orders', admin_user_orders_path(@user) %></p>
-    <p><%= link_to 'View Cart', '#' if @user.cart? %></p>
-  </div> <!-- col-sm-4 -->
-  <div class="col-sm-8">
-    <table class="<%= table_classes %>">
-        <thead>
-          <tr>
-            <th>Order #</th>
-            <th>Total</th>
-            <th>Placed</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @user.purchased_orders.each do |order| %>
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Order History</strong></p>
+      <p><%= link_to 'All Orders', admin_user_orders_path(@user) %></p>
+      <p><%= link_to 'View Cart', '#' if @user.cart? %></p>
+    </div> <!-- col-sm-4 -->
+    <div class="col-sm-8">
+      <table class="<%= table_classes %>">
+          <thead>
             <tr>
-              <td>#<%= link_to order.id, admin_order_path(order) %></td>
-              <td>$<%= order.value %></td>
-              <td><%= order.checkout_date.to_date if order.checkout_date %></td>
+              <th>Order #</th>
+              <th>Total</th>
+              <th>Placed</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <%= link_to 'Create Order', new_admin_user_order_path(@user), class: button_classes('success') %>
+          </thead>
+          <tbody>
+            <% @user.purchased_orders.each do |order| %>
+              <tr>
+                <td>#<%= link_to order.id, admin_order_path(order) %></td>
+                <td>$<%= order.value %></td>
+                <td><%= order.checkout_date.to_date if order.placed? %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= link_to 'Create Order', new_admin_user_order_path(@user), class: button_classes('success') %>
 
-  </div> <!-- col-sm-8 -->
-</div> <!-- row -->
+    </div> <!-- col-sm-8 -->
+  </div> <!-- row -->
 
-<div class="row">
-  <div class="col-sm-12">
-    <div class="right">
-    <%= link_to 'Delete', admin_user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete #{@user.name}? There is no getting it back." }, class: button_classes('danger') %>
-</div> <!-- right -->
-  </div> <!-- col-sm-12 -->
-</div> <!-- row -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="right">
+      <%= link_to 'Delete', admin_user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete #{@user.name}? There is no getting it back." }, class: button_classes('danger') %>
+  </div> <!-- right -->
+    </div> <!-- col-sm-12 -->
+  </div> <!-- row -->
+</div> <!-- profile -->
 
 
