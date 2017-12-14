@@ -6,8 +6,6 @@ class Admin::AddressesController < AdminController
     if params[:user_id]
       @user = User.find(params[:user_id])
       @addresses = @user.addresses
-
-      # @addresses = Address.where(user_id: params[:user_id])
     else
       @addresses = Address.all
     end
@@ -23,7 +21,7 @@ class Admin::AddressesController < AdminController
     @address = @user.addresses.new(address_params)
     if @address.save
       flash[:notice] = "Address #{@address.street_address} has been created. Beeeewm."
-      redirect_to admin_user_path(@user)
+      redirect_to admin_user_addresses_path(@user)
     else
       flash.now[:alert] = "Ah crap. Something went wrong."
       render :new
