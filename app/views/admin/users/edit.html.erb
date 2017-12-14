@@ -1,5 +1,9 @@
+<div class="right">
+  <%= link_to 'Cancel', admin_user_path(@user), class: button_classes %>
+</div> <!-- right -->
+
 <h1>Edit <%= @user.name %> (#<%= @user.id %>)</h1>
 
 <%= render 'form', user: @user %>
 
-<%= link_to 'Delete', admin_user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete #{@user.name}? There is no getting it back." } %> | <%= link_to 'Cancel', admin_user_path(@user) %>
+<%= link_to 'Delete', admin_user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete #{@user.name}? There is no getting it back." }, class: button_classes('danger') %>
