@@ -1,6 +1,9 @@
+<div class="right">
+  <%= link_to 'Cancel', admin_user_path(@user), class: button_classes %>
+</div> <!-- right -->
+
 <h1>New Address</h1>
-<h2>for <%= @user.name %></h2>
+<h2>for <%= link_to @user.name, admin_user_path(@user) %></h2>
 
 <%= render 'form', user: @user, address: @address %>
 
-<%= link_to 'Cancel', admin_user_path(@user) %>
