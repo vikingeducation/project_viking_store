@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :addresses, only: [:index]
     resources :users do
       resources :addresses
+      resources :orders
     end
     resources :orders, only: [:show, :edit, :index]
     resources :products

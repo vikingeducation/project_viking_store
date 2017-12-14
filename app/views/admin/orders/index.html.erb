@@ -1,0 +1,31 @@
+<h1>All Orders</h1>
+<p><em>Create new orders from within <%= link_to 'User', admin_users_path %> profiles.</em></p>
+
+<table class="<%= table_classes %> table-responsive">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User ID</th>
+      <th>Address</th>
+      <th>Total Value</th>
+      <th>Status</th>
+      <th>Date Placed</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= link_to order.user.id, admin_user_path(order.user) %></td>
+        <td><%= display_address(order.shipping_address) %></td>
+        <td>$<%= order.value %></td>
+        <td><%= display_status(order) %></td>
+        <td><%= order.checkout_date.to_date if order.checkout_date %></td>
+        <td><%= link_to 'Show', admin_order_path(order) %></td>
+        <td><%= link_to 'Edit', edit_admin_order_path(order) %></td>
+        <td><%= link_to 'Delete', admin_order_path(order), method: :delete, data: {confirm: "Are you sure?"}  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
