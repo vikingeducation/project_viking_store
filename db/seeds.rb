@@ -239,6 +239,7 @@ def generate_credit_cards_for_checked_out_orders
     #so far, only good cards
     card[:exp_year] = Time.now.year + rand(5)
     card[:brand] = ['VISA', 'MasterCard', 'Discover', 'Amex'].sample
+    card[:ccv] = rand(999)
 
     card.save
 
@@ -249,7 +250,6 @@ def generate_credit_cards_for_checked_out_orders
     end
   end
 end
-
 
 
 # This seeds the random number generator so the rest of this file behaves predictably. (This was definitely not part of your assignment.)
