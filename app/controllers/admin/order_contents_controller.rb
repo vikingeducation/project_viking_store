@@ -2,13 +2,22 @@ class Admin::OrderContentsController < AdminController
 
   def create
     @order = Order.find(params[:order_id])
-    @order_content = @order.order_contents.new(new_order_contents_params)
-    if @order_content.save
-      flash[:notice] = "#{@order_content.quantity} #{@order_content.product.name.pluralize(@order_content.quantity)} was added to your order."
+    @existing_contents = @order.contents
+
+    if @existing_contents.find_by(product_id: new_order_contents_params[:product_id])
+      existing_product = @existing_contents.find_by(product_id: new_order_contents_params[:product_id])
+      existing_product.quantity += new_order_contents_params[:quantity].to_i
+      existing_product.save
       redirect_to edit_admin_user_order_path(@order.user, @order)
     else
-      render 'admin/orders/edit'
-      flash.new[:error] = "Whoops."
+      @order_content = @order.order_contents.new(new_order_contents_params)
+      if @order_content.save
+        flash[:notice] = "#{@order_content.quantity} #{@order_content.product.name.pluralize(@order_content.quantity)} was added to your order."
+        redirect_to edit_admin_user_order_path(@order.user, @order)
+      else
+        render 'admin/orders/edit'
+        flash.new[:error] = "Whoops."
+      end
     end
   end
 
