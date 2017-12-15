@@ -73,4 +73,8 @@ class User < ApplicationRecord
     orders.where('checkout_date IS NULL').count > 0
   end
 
+  def cart
+    orders.open
+  end
+
 end

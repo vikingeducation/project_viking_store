@@ -22,7 +22,14 @@ class Admin::OrdersController < AdminController
 
   def new
     @user = User.find(params[:user_id])
-    @order = @user.orders.new
+
+    if @user.cart?
+      order = @user.cart
+      redirect_to edit_admin_user_order_path(@user, order)
+    else
+      @order = @user.orders.new
+      3.times { @order.order_contents.build({quantity: nil}) }
+    end
   end
 
   def create
@@ -50,7 +57,15 @@ class Admin::OrdersController < AdminController
   def destroy
     user = User.find(params[:user_id])
     order = user.orders.find(params[:id])
-    order.destroy
+
+    session[:return_to] ||= request.referer
+    if order.destroy
+      flash[:notice] = "Order #{order.id} deleted successfully."
+      redirect_to admin_user_orders_path(user)
+    else
+      flash.now[:alert] = "Failed to delete Order #{order.id}."
+      redirect_to session.delete(:return_to)
+    end
   end
 
   private

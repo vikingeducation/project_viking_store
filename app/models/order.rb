@@ -35,6 +35,10 @@ class Order < ApplicationRecord
       limit(1).first
   end
 
+  def self.open
+    find_by(checkout_date: nil)
+  end
+
   def value
     products.sum("quantity * price")
   end
