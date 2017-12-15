@@ -17,8 +17,8 @@ class Address < ApplicationRecord
 
   after_create :assign_as_default
 
-  def self.dropdown
-    all.order('street_address ASC')
+  def dropdown
+    "#{street_address}, #{city.name}, #{state.abbreviation} #{zip_code}"
   end
 
   def assign_as_default

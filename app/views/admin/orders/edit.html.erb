@@ -1,2 +1,9 @@
-<h1>Orders#edit</h1>
-<p>Find me in app/views/orders/edit.html.erb</p>
+<div class="right">
+  <%= link_to 'Cancel', admin_user_path(@user), class: button_classes %>
+</div> <!-- right -->
+
+<h1>Editing Order #<%= @order.id %></h1>
+
+<%= render 'form', user: @user, order: @order %>
+
+<%= link_to 'Delete', admin_user_order_path(@user, @order), method: :delete, data: {confirm: "Are you sure?"}, class: button_classes('danger') %>

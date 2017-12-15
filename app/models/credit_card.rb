@@ -6,4 +6,8 @@ class CreditCard < ApplicationRecord
     card_number.chars.pop(4).join('')
   end
 
+  def dropdown
+    "#{nickname}: #{last_four}"
+  end
+
 end

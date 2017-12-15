@@ -21,9 +21,21 @@ class Admin::OrdersController < AdminController
   end
 
   def new
+    @user = User.find(params[:user_id])
+    @order = @user.orders.new
   end
 
   def create
+    user = User.find(params[:user_id])
+    order = user.orders.new(order_params)
+    if order.save
+      flash[:notice] = "Order #{order.id} has been created. Beeeewm."
+      redirect_to edit_admin_user_order_path(user, order)
+    else
+      flash.now[:alert] = "Booooo. Something went wrong."
+      render :new
+    end
+
   end
 
   def edit
@@ -37,6 +49,8 @@ class Admin::OrdersController < AdminController
 
   def destroy
     user = User.find(params[:user_id])
+    order = user.orders.find(params[:id])
+    order.destroy
   end
 
   private

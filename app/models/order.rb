@@ -12,6 +12,8 @@ class Order < ApplicationRecord
   has_many :products, through: :order_contents
   has_many :categories, through: :products, source: :category
 
+  validates :billing_id, :shipping_id, :credit_card_id, presence: :true
+
   include SharedQueries
 
 

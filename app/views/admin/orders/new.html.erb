@@ -1,2 +1,9 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<div class="right">
+  <%= link_to 'Cancel', admin_user_path(@user), class: button_classes %>
+</div> <!-- right -->
+
+<h1>New Order for <%= @user.name %></h1>
+
+<%= render 'form', user: @user, order: @order %>
+
+<p><em>You can add products in the next screen once this order has been set up.</em></p>
