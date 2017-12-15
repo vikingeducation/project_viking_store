@@ -54,7 +54,7 @@ class Admin::OrdersController < AdminController
   def update
     if @order.update(order_params)
       flash[:notice] = "Order #{@order.id} has been updated. pew! pew! pew!"
-      redirect_to session.delete(:return_to)
+      redirect_to admin_user_order_path(@order.user, @order)
     else
       flash.now[:error] = 'Aw crap. Fix that stuff below.'
       render :edit

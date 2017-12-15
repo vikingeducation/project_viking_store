@@ -8,11 +8,12 @@ class Admin::OrderContentsController < AdminController
       existing_product = @existing_contents.find_by(product_id: new_order_contents_params[:product_id])
       existing_product.quantity += new_order_contents_params[:quantity].to_i
       existing_product.save
+      flash[:notice] = "Order Updated"
       redirect_to edit_admin_user_order_path(@order.user, @order)
     else
       @order_content = @order.order_contents.new(new_order_contents_params)
       if @order_content.save
-        flash[:notice] = "#{@order_content.quantity} #{@order_content.product.name.pluralize(@order_content.quantity)} was added to your order."
+        flash[:notice] = "Your order was updated with #{@order_content.quantity} #{@order_content.product.name.pluralize(@order_content.quantity)}."
         redirect_to edit_admin_user_order_path(@order.user, @order)
       else
         render 'admin/orders/edit'
