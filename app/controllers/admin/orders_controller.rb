@@ -52,6 +52,13 @@ class Admin::OrdersController < AdminController
   end
 
   def update
+    if @order.update(order_params)
+      flash[:notice] = "Order #{@order.id} has been updated. pew! pew! pew!"
+      redirect_to session.delete(:return_to)
+    else
+      flash.now[:error] = 'Aw crap. Fix that stuff below.'
+      render :edit
+    end
   end
 
   def destroy

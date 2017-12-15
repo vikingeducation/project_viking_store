@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       resources :addresses
       resources :orders
     end
-    resources :orders, only: [:show, :edit, :index]
+    resources :orders, only: [:show, :edit, :index] do
+      resources :order_contents, only: [:create, :destroy]
+    end
     post 'order_contents/update' => 'order_contents#update'
     resources :products
     resources :categories

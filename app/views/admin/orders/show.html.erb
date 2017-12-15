@@ -85,9 +85,13 @@
     </div> <!-- col-sm-12 -->
   </div> <!-- row -->
 
+
   <div class="row">
     <div class="col-sm-12">
-      <h2>Order Contents</h2>
+      <header class="order-form">
+        <h2 class="left">Order Contents</h2>
+        <h3 class="right">Order Value: $<%= @order.value %></h3>
+      </header>
       <table class="<%= table_classes %>">
         <thead>
           <tr>

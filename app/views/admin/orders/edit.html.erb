@@ -6,6 +6,8 @@
 
 <%= render 'form', user: @user, order: @order %>
 
-<%= render 'order_contents_form', order_contents: @order.order_contents %>
+<%= render 'edit_order_contents_form', order_contents: @order.order_contents %>
+
+<%= render 'add_product_form', order: @order, order_content: @order.order_contents.new %>
 
 <%= link_to 'Delete Order', admin_user_order_path(@user, @order), method: :delete, data: {confirm: "Are you sure?"}, class: button_classes('danger') %>

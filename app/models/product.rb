@@ -28,7 +28,7 @@ class Product < ApplicationRecord
             count
   end
 
-  def dropdown
+  def self.dropdown
     all.order('name ASC')
   end
 
