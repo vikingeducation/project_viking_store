@@ -35,6 +35,7 @@ class Admin::UsersController < AdminController
   end
 
   def show
+    @cart = @user.cart
   end
 
   def destroy
