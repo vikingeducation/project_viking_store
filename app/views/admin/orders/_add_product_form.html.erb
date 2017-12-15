@@ -1,6 +1,5 @@
 <header class="order-form">
-  <h2 class="left">Add A Product</h2>
-  <h3 class="right">Order Value: $tbd</h3>
+  <h2>Add A Product</h2>
 </header>
 
 <%= form_for [:admin, order, order_content] do |f| %>
@@ -16,7 +15,7 @@
       <%= f.collection_select :product_id, Product.dropdown, :id, :name, prompt: '-- Choose a Product --', class: 'form-control' %>
     </div> <!-- col-sm-8 -->
     <div class="col-sm-1">
-      <%= f.submit '+ Add', class: button_classes('success'), id: 'submit-nudge' %>
+      <%= f.submit '+ Add', class: button_classes, id: 'submit-nudge' %>
     </div> <!-- col-sm-1 -->
   </div> <!-- row -->
 <% end %> <!-- form_for order_content -->

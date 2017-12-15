@@ -52,5 +52,5 @@
   <%= display_error(order, :credit_card_id) %>
   <%= f.collection_select :credit_card_id, user.credit_cards, :id, :dropdown, prompt: "-- Select an Credit Card --", class: 'form-control' %>
 
-  <%= f.submit class: button_classes('success') %>
+  <%= f.submit 'Update Logistical Info', class: button_classes %>
 <% end %> <!-- form_for order -->

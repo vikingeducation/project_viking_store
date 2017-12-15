@@ -10,4 +10,15 @@
 
 <%= render 'add_product_form', order: @order, order_content: @order.order_contents.new %>
 
-<%= link_to 'Delete Order', admin_user_order_path(@user, @order), method: :delete, data: {confirm: "Are you sure?"}, class: button_classes('danger') %>
+<hr>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="left">
+      <%= link_to 'Place Order -- WIP', '#', class: button_classes('success') %>
+    </div> <!-- left -->
+    <div class="right">
+      <%= link_to 'Delete Order', admin_user_order_path(@user, @order), method: :delete, data: {confirm: "Are you sure?"}, class: button_classes('danger') %> <br>
+    </div> <!-- right -->
+  </div> <!-- col-sm-12 -->
+</div> <!-- row -->
