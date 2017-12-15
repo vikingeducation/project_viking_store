@@ -26,6 +26,12 @@ class Admin::OrderContentsController < AdminController
 
   def update
     if OrderContent.update(update_order_contents_params.keys, update_order_contents_params.values)
+      updated_contents = OrderContent.where('id IN (?)', update_order_contents_params.keys)
+      if items_with_zero = updated_contents.where(quantity: 0)
+        items_with_zero.each do |item|
+          item.destroy
+        end
+      end
       flash[:notice] = "Order contents updated!"
       redirect_to :back
     else
