@@ -17,27 +17,15 @@ class Product < ApplicationRecord
   end
 
   def times_purchased
-    Product.joins_product_to_orders(self.id).
-            where('orders.checkout_date IS NOT NULL').
-            count
+    orders.where('orders.checkout_date IS NOT NULL').count
   end
 
   def current_cart_count
-    Product.joins_product_to_orders(self.id).
-            where('orders.checkout_date IS NULL').
-            count
+    orders.where('orders.checkout_date IS NULL').count
   end
 
   def self.dropdown
     all.order('name ASC')
-  end
-
-  private
-
-  def self.joins_product_to_orders(id)
-    joins('JOIN order_contents ON products.id = order_contents.product_id').
-    joins('JOIN orders on order_contents.order_id = orders.id').
-    where('products.id = ?', id)
   end
 
 end
