@@ -81,7 +81,7 @@
   <div class="row">
     <div class="col-sm-12">
       <h3>Payment Method</h3>
-      <p><%= @card.nickname %>: ending <%= @card.last_four %></p>
+      <p><%= @card.nickname if @card %>: ending <%= @card.last_four if @card%></p>
     </div> <!-- col-sm-12 -->
   </div> <!-- row -->
 

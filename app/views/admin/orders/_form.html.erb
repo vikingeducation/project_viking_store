@@ -39,9 +39,9 @@
   <%= display_error(order, :billing_id) %>
   <%= f.collection_select :billing_id, user.addresses, :id, :dropdown, prompt: "-- Select an Address --", class: 'form-control' %>
 
-  <%= f.label :credit_card, 'Payment Method' %>
-  <%= display_error(order, :credit_card) %>
-  <%= f.collection_select :credit_card, user.credit_cards, :id, :dropdown, prompt: "-- Select an Credit Card --", class: 'form-control' %>
+  <%= f.label :credit_card_id, 'Payment Method' %>
+  <%= display_error(order, :credit_card_id) %>
+  <%= f.collection_select :credit_card_id, user.credit_cards, :id, :dropdown, prompt: "-- Select an Credit Card --", class: 'form-control' %>
 
   <%= f.submit class: button_classes('success') %>
 <% end %> <!-- form_for order -->
