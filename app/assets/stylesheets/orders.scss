@@ -9,3 +9,11 @@
 .unplaced {
   color: red;
 } /* .placed */
+
+header.order-form {
+  margin: 20px 0px 10px 0px;
+  clear: both;
+  h2, h3 {
+    margin: 0;
+  } /* h2, h3 */
+} /* .order-form */

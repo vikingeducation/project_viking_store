@@ -28,6 +28,10 @@ class Product < ApplicationRecord
             count
   end
 
+  def dropdown
+    all.order('name ASC')
+  end
+
   private
 
   def self.joins_product_to_orders(id)

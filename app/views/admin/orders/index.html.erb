@@ -26,9 +26,9 @@
         <td>$<%= order.value %></td>
         <td><%= display_status(order) %></td>
         <td><%= order.checkout_date.to_date if order.placed? %></td>
-        <td><%= link_to 'Show', admin_user_order_path(@user, order) %></td>
-        <td><%= link_to 'Edit', edit_admin_user_order_path(@user, order) %></td>
-        <td><%= link_to 'Delete', admin_user_order_path(@user, order), method: :delete, data: {confirm: "Are you sure?"}  %></td>
+        <td><%= link_to 'Show', admin_user_order_path(order.user, order) %></td>
+        <td><%= link_to 'Edit', edit_admin_user_order_path(order.user, order) %></td>
+        <td><%= link_to 'Delete', admin_user_order_path(order.user, order), method: :delete, data: {confirm: "Are you sure?"}  %></td>
       </tr>
     <% end %>
   </tbody>

@@ -30,6 +30,15 @@
   </div> <!-- col-sm-8 -->
 </div> <!-- row -->
 
+<div class="row">
+  <div class="col-sm-4">
+    <p><strong>Order Value:</strong></p>
+  </div> <!-- col-sm-4 -->
+  <div class="col-sm-8">
+    <p>$<%= @order.value %></p>
+  </div> <!-- col-sm-8 -->
+</div> <!-- row -->
+
 <%= form_for [:admin, user, order] do |f| %>
   <%= f.label :shipping_id, 'Shipping Address' %>
   <%= display_error(order, :shipping_id) %>

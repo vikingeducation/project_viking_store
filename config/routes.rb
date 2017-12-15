@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :orders
     end
     resources :orders, only: [:show, :edit, :index]
+    post 'order_contents/update' => 'order_contents#update'
     resources :products
     resources :categories
     resources :credit_cards, only: [:destroy]

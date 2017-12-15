@@ -1,0 +1,36 @@
+<header class="order-form">
+  <h2 class="left">Edit Content Quantities</h2>
+  <h3 class="right">Order Value: $<%= order_contents.first.order.value %></h3>
+</header>
+
+<%= form_tag '/admin/order_contents/update' do %>
+  <table class="<%= table_classes %>">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Qty</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Total Price</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% order_contents.each do |order_content| %>
+        <tr>
+          <td><%= order_content.id %></td>
+          <td>
+            <%= display_error(order_content, :quantity) %>
+            <%= number_field_tag "order_content[#{order_content.id}][quantity]", order_content.quantity %>
+          </td>
+          <td><%= label_tag order_content.product.name %></td>
+          <td>$<%= order_content.price %></td>
+          <td>$<%= order_content.total_price %></td>
+          <td>remove</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= submit_tag 'Update Quantities', class: button_classes('success') %>
+<% end %><!-- form_tag -->
+
