@@ -3,16 +3,23 @@ p, li, th, td {font-size: 14px;}
 h1 { font-size: 34px; }
 
 header {
-  margin: 0 auto;
+  background-color: #313131;
   overflow: auto;
+  padding: 5px 0px;
   margin-bottom: 50px;
-  img {
-    width: 60px;
-    float: left;
-    margin-right: 20px;
-  }
-  h1 {
-    float: left;
+  section {
+    overflow: auto;
+    margin: 0 auto;
+    width: 70%;
+    img {
+      height: 40px;
+      float: left;
+      margin-right: 20px;
+    }
+    h1 {
+      float: left;
+      color: white;
+    }
   }
 }
 
