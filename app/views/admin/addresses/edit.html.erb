@@ -1,0 +1,11 @@
+<div class="right">
+  <%= link_to 'Cancel', admin_user_path(@user), class: button_classes %>
+</div> <!-- right -->
+
+<h1>Edit Address (#<%= @address.id %>)</h1>
+<h2>for <%= link_to @user.name, admin_user_path(@user) %> (#<%= @user.id %>)</h2>
+
+<%= render 'form', user: @user, address: @address %>
+
+<%= link_to 'Delete Address', admin_user_address_path(@user, @address), method: :delete, data: {confirm: "Are you sure?"}, class: button_classes('danger') %>
+

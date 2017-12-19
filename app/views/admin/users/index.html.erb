@@ -1,0 +1,28 @@
+<p class="right"><%= link_to 'New', new_admin_user_path, class: button_classes %></p>
+
+<h1>Users</h1>
+
+<table class="<%= table_classes %> table-responsive">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Signup Date</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Orders</th>
+      <th>Last Order Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, admin_user_path(user) %></td>
+        <td><%= user.created_at.to_date %></td>
+        <td><%= user.city %></td>
+        <td><%= user.state %></td>
+        <td><%= user.orders_count %></td>
+        <td><%= user.last_order_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

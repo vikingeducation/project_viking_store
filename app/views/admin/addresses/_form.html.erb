@@ -1,0 +1,25 @@
+<%= render "admin/shared/errors", object: address %>
+
+<%= form_for [:admin, user, address] do |f| %>
+  <%= f.label :street_address, 'Street Address' %>
+  <%= display_error(address, :street_address) %>
+  <%= f.text_field :street_address, class: 'form-control' %>
+
+  <%= f.label :secondary_address, 'Secondary Address (Optional)' %>
+  <%= display_error(address, :secondary_address) %>
+  <%= f.text_field :secondary_address, class: 'form-control' %>
+
+  <%= f.label :city_id, 'City' %>
+  <%= display_error(address, :city_id) %>
+  <%= f.collection_select :city_id, City.dropdown, :id, :name, prompt: '-- Select a City --', class: 'form-control' %>
+
+  <%= f.label :state_id, 'State' %>
+  <%= display_error(address, :state_id) %>
+  <%= f.collection_select :state_id, State.dropdown, :id, :name, prompt: '-- Select a State --', class: 'form-control' %>
+
+  <%= f.label :zip_code %>
+  <%= display_error(address, :zip_code) %>
+  <%= f.text_field :zip_code, class: 'form-control' %>
+
+  <%= f.submit class: button_classes('success') %>
+<% end %> <!-- form_for address -->

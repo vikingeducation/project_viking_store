@@ -1,0 +1,56 @@
+<%= render "admin/shared/errors", object: user %>
+
+<h2>Logistical Information</h2>
+
+<h3>Basic Information</h3>
+<div class="row">
+  <div class="col-sm-4">
+    <p><strong>Customer ID:</strong></p>
+  </div> <!-- col-sm-4 -->
+  <div class="col-sm-8">
+    <%= @user.id %>
+  </div> <!-- col-sm-8 -->
+</div> <!-- row -->
+
+<div class="row">
+  <div class="col-sm-4">
+    <p><strong>Customer</strong></p>
+  </div> <!-- col-sm-4 -->
+  <div class="col-sm-8">
+    <%= @user.name %>: <%= link_to 'User Profile', admin_user_path(@user) %> | <%= link_to 'Edit User', edit_admin_user_path(@user) %>
+  </div> <!-- col-sm-8 -->
+</div> <!-- row -->
+
+<div class="row">
+  <div class="col-sm-4">
+    <p><strong>Date Placed:</strong></p>
+  </div> <!-- col-sm-4 -->
+  <div class="col-sm-8">
+    <p><%= display_status(@order) %></p>
+  </div> <!-- col-sm-8 -->
+</div> <!-- row -->
+
+<div class="row">
+  <div class="col-sm-4">
+    <p><strong>Order Value:</strong></p>
+  </div> <!-- col-sm-4 -->
+  <div class="col-sm-8">
+    <p>$<%= @order.value %></p>
+  </div> <!-- col-sm-8 -->
+</div> <!-- row -->
+
+<%= form_for [:admin, user, order] do |f| %>
+  <%= f.label :shipping_id, 'Shipping Address' %>
+  <%= display_error(order, :shipping_id) %>
+  <%= f.collection_select :shipping_id, user.addresses, :id, :dropdown, prompt: "-- Select an Address --", class: 'form-control' %>
+
+  <%= f.label :billing_id, 'Billing Address' %>
+  <%= display_error(order, :billing_id) %>
+  <%= f.collection_select :billing_id, user.addresses, :id, :dropdown, prompt: "-- Select an Address --", class: 'form-control' %>
+
+  <%= f.label :credit_card_id, 'Payment Method' %>
+  <%= display_error(order, :credit_card_id) %>
+  <%= f.collection_select :credit_card_id, user.credit_cards, :id, :dropdown, prompt: "-- Select an Credit Card --", class: 'form-control' %>
+
+  <%= f.submit 'Update Logistical Info', class: button_classes %>
+<% end %> <!-- form_for order -->

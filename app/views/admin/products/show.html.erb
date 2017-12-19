@@ -1,0 +1,15 @@
+<div class="right">
+<%= link_to 'Edit', edit_admin_product_path(@product), class: button_classes %>
+</div> <!-- right -->
+
+<h1>Product Info</h1>
+
+<h3><%= @product.name %> Details</h3>
+<p><%= @product.sku %></p>
+<p>Price: $<%= @product.price %></p>
+<p>Category: <%= link_to @product.category_name, admin_category_path(@product.category) %></p>
+<p><%= @product.description %></p>
+
+<h2>Shopping Stats</h2>
+<p>Purchased <%= @product.times_purchased %> times</p>
+<p>Currently in <%= @product.current_cart_count %> carts</p>

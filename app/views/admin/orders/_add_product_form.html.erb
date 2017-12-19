@@ -1,0 +1,19 @@
+<h2>Add A Product</h2>
+
+<%= form_for [:admin, order, order_content] do |f| %>
+  <div class="row">
+    <div class="col-sm-2">
+      <%= f.label :quantity %>
+      <%= display_error(order_content, :name) %>
+      <%= f.text_field :quantity, class: 'form-control' %>
+    </div> <!-- col-sm-2 -->
+    <div class="col-sm-8">
+      <%= f.label :product_id %>
+      <%= display_error(order_content, :product_id) %>
+      <%= f.collection_select :product_id, Product.dropdown, :id, :name, prompt: '-- Choose a Product --', class: 'form-control' %>
+    </div> <!-- col-sm-8 -->
+    <div class="col-sm-1">
+      <%= f.submit '+ Add', class: button_classes, id: 'submit-nudge' %>
+    </div> <!-- col-sm-1 -->
+  </div> <!-- row -->
+<% end %> <!-- form_for order_content -->

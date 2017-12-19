@@ -1,0 +1,11 @@
+<%= form_for [:admin, category] do |f| %>
+  <%= f.label :name %>
+  <%= display_error(category, :name) %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :description %>
+  <%= display_error(category, :description) %>
+  <%= f.text_field :description, class: 'form-control' %>
+
+  <%= f.submit class: button_classes('success') %>
+<% end %> <!-- form_for category -->

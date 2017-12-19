@@ -1,0 +1,123 @@
+<div class="profile">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="right">
+        <%= link_to 'Edit Order', edit_admin_user_order_path(@user, @order),class: button_classes %>
+      </div> <!-- right -->
+      <h1>Order #<%= @order.id %></h1>
+    </div> <!-- col-sm-12 -->
+  </div> <!-- row -->
+
+  <div class="row no-line">
+    <div class="col-sm-12">
+      <h2>Logistical Information</h2>
+    </div> <!-- col-sm-12 -->
+  </div> <!-- row -->
+
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Customer ID:</strong></p>
+    </div> <!-- col-sm-4 -->
+    <div class="col-sm-8">
+      <p><%= @user.id %></p>
+    </div> <!-- col-sm-8 -->
+  </div> <!-- row -->
+
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Customer:</strong></p>
+    </div> <!-- col-sm-4 -->
+    <div class="col-sm-8">
+      <p>
+        <%= @user.name %><br>
+        <%= link_to 'User Profile', admin_user_path(@user) %> | <%= link_to 'Edit User',  edit_admin_user_path(@user) %>
+      </p>
+    </div> <!-- col-sm-8 -->
+  </div> <!-- row -->
+
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Date Placed:</strong></p>
+    </div> <!-- col-sm-4 -->
+    <div class="col-sm-8">
+      <p><%= @order.checkout_date.to_date if @order.placed? %></p>
+    </div> <!-- col-sm-8 -->
+  </div> <!-- row -->
+
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Qty Products:</strong></p>
+    </div> <!-- col-sm-4 -->
+    <div class="col-sm-8">
+      <p><%= @qty_products %></p>
+    </div> <!-- col-sm-8 -->
+  </div> <!-- row -->
+
+  <div class="row">
+    <div class="col-sm-4">
+      <p><strong>Order Value:</strong></p>
+    </div> <!-- col-sm-4 -->
+    <div class="col-sm-8">
+      <p>$<%= @order.value %></p>
+    </div> <!-- col-sm-8 -->
+  </div> <!-- row -->
+
+  <div class="row no-line">
+    <div class="col-sm-12">
+      <h2>Order Status: <%= display_status(@order) %></h2>
+    </div> <!-- col-sm-12 -->
+  </div> <!-- row -->
+
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>Shipping Address</h3>
+      <p><%= display_address(@order.shipping_address) %></p>
+    </div> <!-- col-sm-6 -->
+    <div class="col-sm-6">
+      <h3>Billing Address</h3>
+      <p><%= display_address(@order.billing_address) %></p>
+    </div> <!-- col-sm-6 -->
+  </div> <!-- row -->
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Payment Method</h3>
+      <p><%= @card.nickname if @card %>: ending <%= @card.last_four if @card%></p>
+    </div> <!-- col-sm-12 -->
+  </div> <!-- row -->
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      <header class="order-form">
+        <h2 class="left">Order Contents</h2>
+        <h3 class="right">Order Value: $<%= @order.value %></h3>
+      </header>
+      <table class="<%= table_classes %>">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.product_id %></td>
+              <td><%= link_to item.product.name, admin_product_path(item.product) %></td>
+              <td><%= item.quantity %></td>
+              <td><%= item.price %></td>
+              <td><%= item.total_price %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div> <!-- col-sm-12 -->
+  </div> <!-- row -->
+
+
+  <%= link_to 'Delete Order', admin_user_order_path(@user, @order), method: :delete, data: {confirm: "Are you sure?"}, class: button_classes('danger') %>
+</div> <!-- profile -->
+

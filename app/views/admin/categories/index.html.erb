@@ -1,0 +1,24 @@
+<div class="right"><%= link_to 'New', new_admin_category_path, class: button_classes %></div>
+<h1>Categories</h1>
+
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Products</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= link_to category.name, admin_category_path(category) %></td>
+        <td><%= truncate(category.description, length: 20) %></td>
+        <td><%= category.products.count %></td>
+        <td><%= link_to 'Show', admin_category_path(category) %></td>
+        <td><%= link_to 'Edit', edit_admin_category_path(category) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

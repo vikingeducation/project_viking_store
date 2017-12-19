@@ -1,0 +1,29 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  background-color: #f3f3f3;
+}
+article {
+  border: 1px solid #f1f1f1;
+  padding: 5%;
+  margin-bottom: 20px;
+  border-radius: 10px;
+} /* article */
+
+th {
+  width: 33%;
+}
+
+h2 {
+  font-size: 20pt;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+h3 {
+  margin-top: 25px;
+  font-size: 15pt;
+}

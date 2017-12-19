@@ -20,7 +20,7 @@ puts "Old records destroyed"
 
 # MULTIPLIER is used to create a predictable ratio of records. For instance, we will have 10 Product records for every Category.
 MULTIPLIER = 10
-
+puts "Multiplying seeds by #{MULTIPLIER}"
 
 
 # Because seeds.rb is run as a script, you'll need to put helper methods ABOVE where they are used to generate records.
@@ -51,12 +51,58 @@ def generate_product
 end
 
 # A list of states.
-STATES = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
-
-def generate_state(state)
-  state = State.new({:name => state})
-  state.save
-end
+states = [
+  {name: 'Alabama', abbv: 'AL'},
+  {name: 'Alaska', abbv: 'AK'},
+  {name: 'Arizona', abbv: 'AZ'},
+  {name: 'Arkansas', abbv: 'AR'},
+  {name: 'California', abbv: 'CA'},
+  {name: 'Colorado', abbv: 'CO'},
+  {name: 'Connecticut', abbv: 'CT'},
+  {name: 'Delaware', abbv: 'DE'},
+  {name: 'Florida', abbv: 'FL'},
+  {name: 'Georgia', abbv: 'GA'},
+  {name: 'Hawaii', abbv: 'HI'},
+  {name: 'Idaho', abbv: 'ID'},
+  {name: 'Illinois', abbv: 'IL'},
+  {name: 'Indiana', abbv: 'IN'},
+  {name: 'Iowa', abbv: 'IA'},
+  {name: 'Kansas', abbv: 'KS'},
+  {name: 'Kentucky', abbv: 'KY'},
+  {name: 'Louisiana', abbv: 'LA'},
+  {name: 'Maine', abbv: 'ME'},
+  {name: 'Maryland', abbv: 'MD'},
+  {name: 'Massachusetts', abbv: 'MA'},
+  {name: 'Michigan', abbv: 'MI'},
+  {name: 'Minnesota', abbv: 'MN'},
+  {name: 'Mississippi', abbv: 'MS'},
+  {name: 'Missouri', abbv: 'MO'},
+  {name: 'Montana', abbv: 'MT'},
+  {name: 'Nebraska', abbv: 'NE'},
+  {name: 'Nevada', abbv: 'NV'},
+  {name: 'New Hampshire', abbv: 'NH'},
+  {name: 'New Jersey', abbv: 'NJ'},
+  {name: 'New Mexico', abbv: 'NM'},
+  {name: 'New York', abbv: 'NY'},
+  {name: 'North Carolina', abbv: 'NC'},
+  {name: 'North Dakota', abbv: 'ND'},
+  {name: 'Ohio', abbv: 'OH'},
+  {name: 'Oklahoma', abbv: 'OK'},
+  {name: 'Oregon', abbv: 'OR'},
+  {name: 'Pennsylvania', abbv: 'PA'},
+  {name: 'Rhode Island', abbv: 'RI'},
+  {name: 'South Carolina', abbv: 'SC'},
+  {name: 'South Dakota', abbv: 'SD'},
+  {name: 'Tennessee', abbv: 'TN'},
+  {name: 'Texas', abbv: 'TX'},
+  {name: 'Utah', abbv: 'UT'},
+  {name: 'Vermont', abbv: 'VT'},
+  {name: 'Virginia', abbv: 'VA'},
+  {name: 'Washington', abbv: 'WA'},
+  {name: 'West Virginia', abbv: 'WV'},
+  {name: 'Wisconsin', abbv: 'WI'},
+  {name: 'Wyoming', abbv: 'WY'}
+]
 
 # Generate some City records. Your Address model could have also included "city" as a string instead of a foreign key.
 def generate_city
@@ -205,7 +251,6 @@ def generate_credit_cards_for_checked_out_orders
 end
 
 
-
 # This seeds the random number generator so the rest of this file behaves predictably. (This was definitely not part of your assignment.)
 srand(42)
 
@@ -213,8 +258,9 @@ srand(42)
 # Now, at last, we are going to run all these methods to create our data!
 
 # Create states and cities
-STATES.each { |state| generate_state state }
-puts "Created states"
+states.each do |state|
+  State.find_or_create_by!(name: state[:name] ){ |s| s.abbreviation = state[:abbv]}
+end
 
 (MULTIPLIER * 10).times { generate_city }
 puts "Created cities"

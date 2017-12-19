@@ -1,0 +1,28 @@
+// Place all the styles related to the orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.placed {
+  color: green;
+} /* .placed */
+
+.unplaced {
+  color: red;
+} /* .placed */
+
+.order-form {
+  .table > tbody > tr > td {
+     vertical-align: middle;
+  }
+  header {
+    margin: 20px 0px 10px 0px;
+    clear: both;
+    h3 {
+      margin: 0;
+    } /* h2, h3 */
+  } /* header*/
+} /* .order-form */
+
+#submit-nudge {
+  margin-top: 36px;
+} /* .submit-nudge */

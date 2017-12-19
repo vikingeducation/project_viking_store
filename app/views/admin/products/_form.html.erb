@@ -1,0 +1,25 @@
+<%= render "admin/shared/errors", object: product %>
+
+<%= form_for [:admin, product] do |f| %>
+  <%= f.label :name %>
+  <%= display_error(product, :name) %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :category_id %>  <%= link_to 'Create New Category', new_admin_category_path %>
+  <%= display_error(product, :category_id) %>
+  <%= f.collection_select :category_id, Category.dropdown, :id, :name, prompt: '-- Choose a Category --', class: 'form-control' %>
+
+  <%= f.label :sku %>
+  <%= display_error(product, :sku) %>
+  <%= f.text_field :sku, class: 'form-control' %>
+
+  <%= f.label :price %>
+  <%= display_error(product, :price) %>
+  <%= f.number_field :price, step: :any, class: 'form-control' %>
+
+  <%= f.label :description %>
+  <%= display_error(product, :description) %>
+  <%= f.text_area :description, class: 'form-control' %>
+
+  <%= f.submit class: button_classes('success') %>
+<% end %> <!-- form_for product -->

@@ -1,0 +1,9 @@
+<div class="right">
+  <%= link_to 'Cancel', admin_category_path(@category), class: button_classes %>
+</div> <!-- right -->
+
+<h1>Editing Category</h1>
+
+<%= render 'form', category: @category %>
+
+<%= link_to 'Delete', admin_category_path(@category), method: :delete, data: { confirm: "Are you sure you want to delete #{@category.name}? There is no getting it back. Oh, also it will disassociate every product associated with it. NULLS EVERYWHERE. So there's that. Be sure you're willing to commit to this hugely destructive act." }, class: button_classes('danger') %>

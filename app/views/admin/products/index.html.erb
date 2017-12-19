@@ -1,0 +1,28 @@
+<div class="right"><%= link_to 'New', new_admin_product_path, class: button_classes %></div>
+
+<h1>Products</h1>
+
+<table class="<%= table_classes %>">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td>
+          <%= link_to product.name, admin_product_path(product) %><br>
+          <span class="sku-display">SKU: <%= product.sku %></span>
+
+        </td>
+        <td><%= product.price %></td>
+        <td><%= link_to product.category_name, admin_category_path(product.category) if product.category %></td>
+        <td><%= link_to 'Edit', edit_admin_product_path(product) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+<div class="right"><%= link_to 'Edit', edit_admin_category_path(@category), class: button_classes %></div>
+
+<h1>Category Details</h1>
+
+<h3><%= @category.name %> (#<%= @category.id %>)</h3>
+<p><%= @category.description %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Products</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= link_to product.name, admin_product_path(product) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
