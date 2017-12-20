@@ -16,7 +16,6 @@ class User < ApplicationRecord
             format: { with: /@/ }
 
 
-
   FIRST_ORDER_DATE = Order.select(:created_at).first
 
   def self.user_statistics
@@ -35,6 +34,11 @@ class User < ApplicationRecord
 
   def default_shipping_address_id
     shipping_id
+  end
+
+
+  def full_name
+    self.first_name + " " + self.last_name
   end
 
 

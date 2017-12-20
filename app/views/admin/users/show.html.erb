@@ -1,5 +1,5 @@
 <div class="row">
-  <h1>User <%= @user.id %>: <%= @user.first_name + " " + @user.last_name %></h1>
+  <h1>User <%= @user.id %>: <%= @user.full_name %></h1>
 
   <article class="demo-info">
     <h2>Demographic Information</h2>
@@ -17,8 +17,8 @@
     <%= @user.billing_id.nil? ? "No default address selected" : full_address(@billing_addy) %><br>
     <h3>Default Shipping Address:</h3>
     <%= @user.shipping_id.nil? ? "No defaut address selected" : full_address(@shipping_addy) %><br>
-    <%= link_to "Edit #{@user.first_name + " " + @user.last_name}'s Information", edit_admin_user_path %><br>
-    <%= link_to "Delete #{@user.first_name + " " + @user.last_name}", admin_user_path, method: "delete", data: {confirm: "Are you sure you want to delete user: #{@user.first_name} #{@user.last_name}?"} %><br>
+    <%= link_to "Edit #{@user.full_name}'s Information", edit_admin_user_path %><br>
+    <%= link_to "Delete #{@user.full_name}", admin_user_path, method: "delete", data: {confirm: "Are you sure you want to delete user: #{@user.full_name}?"} %><br>
     <%= link_to "View Saved Addresses", admin_user_addresses_path(@user.id) %><br>
     <%= link_to "View Unplaced Order (Cart)", "#" %><br>
   </article>
@@ -30,11 +30,15 @@
                                              credit_card: @cc } %>
   </article>
 
-  <!-- need to create child objects with their foreign keys pre-filled in -->
+
   <article class="admin-actions">
-    <h2>Admin Actions for <%= @user.first_name + " " + @user.last_name %></h2>
-      <%= link_to "Create Order", "#", class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn"  %><br>
-      <%= link_to "Create Address", new_admin_user_address_path(@user), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn" %> <br>
+    <h2>Admin Actions for <%= @user.full_name %></h2>
+    <% if @user.orders.where(checkout_date: nil).any? %>
+      <%= link_to "Edit Shopping Cart", edit_admin_order_path(@shopping_cart), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn" %><br>
+    <% else %>
+      <%= link_to "Create Order", new_admin_user_order_path(@user), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn"  %><br>
+    <% end %>
+    <%= link_to "Create Address", new_admin_user_address_path(@user), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn" %> <br>
   </article>
 
 
@@ -59,10 +63,10 @@
             <td><%= order.id %></td>
             <td><%= order.created_at.strftime "%F" %></td>
             <td>$<%= order.order_value %></td>
-            <td><%= order.checkout_date.nil? ? "UNPLACED" : "PLACED" %></td>
-            <td><%= link_to "Show", "#" %></td>
-            <td><%= link_to "Edit", "#" %></td>
-            <td><%= link_to "Delete", "#" %></td>
+            <td class="<%= order.checkout_date.nil? ? 'unplaced' : 'placed' %>"><%= order.checkout_date.nil? ? "UNPLACED" : "PLACED" %></td>
+            <td><%= link_to "Show", admin_order_path(order) %></td>
+            <td><%= link_to "Edit", edit_admin_order_path(order) %></td>
+            <td><%= link_to "Delete", admin_order_path(order), method: "delete", data: { confirm: "Are you sure you want to delete order # #{order.id}?" } %></td>
           </tr>
           <% end %>
         </tbody>

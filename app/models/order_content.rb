@@ -5,6 +5,10 @@ class OrderContent < ApplicationRecord
   belongs_to :order
   belongs_to :product
 
+  validates :quantity, :product_id, presence: true
+
+  validates_numericality_of :quantity, :product_id, greater_than: 0
+
   def self.revenue_statistics
     revenue_hash = {}
       revenue_hash[:sevendays] = revenue_for(7.days.ago)

@@ -11,4 +11,7 @@ class Address < ApplicationRecord
             presence: true,
             length: { maximum: 64,
                       minimum: 2 }
+
+
+  
 end

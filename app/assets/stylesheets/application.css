@@ -68,14 +68,14 @@
 }
 
 #index-table {
-  width: 80%;
   margin: 30px auto;
-  border: 2px solid black;
+  border: 1px solid black;
   font-size: 16px;
-  thead {
-    background-color: #eee;
-  }
 }
+
+#index-table thead {
+    background-color: #aaa;
+  }
 
 #index-link,
 #index-table a {

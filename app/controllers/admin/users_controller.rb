@@ -29,6 +29,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @cc = CreditCard.find(@user.id)
     @orders = Order.where(user_id: @user.id)
+    @shopping_cart = @orders.where(checkout_date: nil).ids
     @billing_addy = Address.find(@user.billing_id)
     @shipping_addy = Address.find(@user.shipping_id)
   end

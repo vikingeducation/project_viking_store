@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
 
   has_many :order_contents
+  accepts_nested_attributes_for :order_contents
   has_many :products, through: :order_contents
   has_many :categories, through: :products
   belongs_to :user

@@ -31,52 +31,32 @@ class Admin::AddressesController < ApplicationController
 
   def create
     @user = User.find(params['address']['user_id'])
-    # @city = City.new(city_params)
-    @address = @user.addresses.new(whitelisted_params)
-    binding.pry
-     # if params['city']['name'].empty?
-    #   flash[:danger] = "Could NOT save City - See form errors"
-    #   render :new
-    # elsif City.where(name: params['city']['name']).exists?
-    #   @address[:city_id] = City.where(name: params['city']['name']).first.id
-    #   save_address(@address)
-    # else
-      # if @city.save
-      #   @address[:city_id] = @city.id
-      save_address(@address)
-    #   else
-    #     flash[:danger] = "Could NOT save City - See form Errors"
-    #     render :new
-    #   end
-    # end
+    @address = create_address_from_params
+    save_address(@address)
   end
 
 
   def edit
     @address = Address.find(params[:id])
-    @user = User.find(@address[:user_id])
-    @city = City.find(@address[:city_id])
+    @city = @address.city
+    @user = @address.user
   end
 
 
   def update
     @address = Address.find(params[:id])
-    @user = User.find(@address[:user_id])
-    if params['city']['name'].empty?
-      flash[:danger] = "Could NOT save City - See form errors"
-      render :new
-    elsif City.where(name: params['city']['name']).exists?
-      @address[:city_id] = City.where(name: params['city']['name']).id
-      save_address(@address)
-    else
-      @city = City.find(@address[:city_id])
-      if @city.update(city_params)
-        @address[:city_id] = @city.id
-        save_address(@address)
+    if @city = City.find_or_create_by(name: whitelisted_params['city_attributes']['name'])
+      if update_address_with_city(@address, @city)
+        flash[:success] = "Address Successfully Updated!"
+        redirect_to admin_address_path(@address)
       else
-        flash[:danger] = "Could NOT save City - See form Errors"
-        render :new
+        flash[:danger] = "Address Could Not Be Updated See Errors On Form"
+        render :edit
       end
+    else
+      @address.city = @city
+      flash[:danger] = "Address Could Not Be Updated See Errors On Form"
+      render :edit
     end
   end
 
@@ -97,6 +77,27 @@ class Admin::AddressesController < ApplicationController
 
 
   private
+
+
+  def create_address_from_params
+    Address.create(
+       user_id: whitelisted_params[:user_id],
+       street_address: whitelisted_params[:street_address],
+       state_id: whitelisted_params[:state_id],
+       zip_code: whitelisted_params[:zip_code],
+       city_id: City.find_or_create_by(name: whitelisted_params['city_attributes']['name']).id
+     )
+  end
+
+  def update_address_with_city(address, city)
+    address.update(
+      user_id: whitelisted_params[:user_id],
+      street_address: whitelisted_params[:street_address],
+      state_id: whitelisted_params[:state_id],
+      zip_code: whitelisted_params[:zip_code],
+      city_id: city.id
+    )
+  end
 
 
   def whitelisted_params
