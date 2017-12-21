@@ -9,7 +9,7 @@ class Admin::OrdersController < ApplicationController
         @user = User.find(params[:user_id])
         @user_full_name = @user.full_name
       else
-        flash[:danger] = "No User with that ID"
+        flash[:danger] = "No User with ID: #{params[:user_id]}"
         @orders = Order.all.includes(:user).limit(100)
       end
     else

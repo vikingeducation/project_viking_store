@@ -1,4 +1,4 @@
-<h1 class="heading">Products</h1>
+<h1 class="heading">All Products</h1>
 <%= link_to "Add A New Product", new_admin_product_path, class: "btn-block btn-primary btn-lg", id: "new-btn" %>
 <table class="table table-striped" id="index-table">
   <thead>
@@ -17,9 +17,9 @@
         <td><%= prod[:name] %></td>
         <td><%= prod[:price] %></td>
         <td><%= link_to display_category_name(prod[:category_id]), admin_category_path(prod[:category_id]) %></td>
-        <td><%= link_to "SHOW", admin_product_path(prod) %></td>
-        <td><%= link_to "EDIT", edit_admin_product_path(prod) %></td>
-        <td><%= link_to "DELETE", admin_product_path(prod), method: "delete", data: { confirm: "Are you sure you want to delete this product?" }%></td>
+        <td><%= link_to "Show", admin_product_path(prod) %></td>
+        <td><%= link_to "Edit", edit_admin_product_path(prod) %></td>
+        <td><%= link_to "Delete", admin_product_path(prod), method: "delete", data: { confirm: "Are you sure you want to delete this product?" }%></td>
       </tr>
     <% end %>
   </tbody>

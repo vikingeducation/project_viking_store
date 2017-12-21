@@ -17,7 +17,7 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = Product.new(whitelisted_params)
     if @product.save
-      flash[:success] = "Product Successfully Saved!"
+      flash[:success] = "Product##{@product.id} Successfully Saved!"
       redirect_to admin_products_path
     else
       flash[:danger] = "Product Could Not Be Saved See Errors On Form"
@@ -38,10 +38,10 @@ class Admin::ProductsController < ApplicationController
 
   def update
     if @product.update(whitelisted_params)
-      flash[:success] = "Product Successfully Updated!"
+      flash[:success] = "Product##{@product.id} Successfully Updated!"
       redirect_to admin_products_path
     else
-      flash[:danger] = "Product Could Not Be Updated See Errors On Form"
+      flash[:danger] = "Product##{@product.id} Could Not Be Updated See Errors On Form"
       render :edit
     end
   end
@@ -49,10 +49,10 @@ class Admin::ProductsController < ApplicationController
 
   def destroy
     if @product.destroy
-      flash[:success] = "Product Successfully Deleted"
+      flash[:success] = "Product##{@product.id} Successfully Deleted"
       redirect_to admin_products_path
     else
-      flash[:danger] = "Could Not Delete Product"
+      flash[:danger] = "Product##{@product.id} Could Not be Deleted"
       redirect_to admin_product_path(@product)
     end
   end

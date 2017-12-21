@@ -16,7 +16,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(whitelisted_params)
     if @user.save
-      flash[:success] = "User Successfully Saved!"
+      flash[:success] = "User ##{@user.id} Successfully Saved!"
       redirect_to admin_users_path
     else
       flash[:danger] = "User Could Not Be Saved See Errors On Form"
@@ -43,10 +43,10 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(whitelisted_params)
-      flash[:success] = "User Successfully Updated!"
+      flash[:success] = "User ##{@user.id} Successfully Updated!"
       redirect_to admin_user_path(params[:id])
     else
-      flash[:danger] = "User Could Not Be Updated See Errors On Form"
+      flash[:danger] = "User ##{@user.id} Could Not Be Updated See Errors On Form"
       render :edit
     end
   end
@@ -55,10 +55,10 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      flash[:success] = "User Successfully Deleted"
+      flash[:success] = "User ##{@user.id} Successfully Deleted"
       redirect_to admin_users_path
     else
-      flash[:danger] = "Could Not Delete User"
+      flash[:danger] = "User ##{@user.id} Could Not be Deleted"
       redirect_to admin_user_path(@user)
     end
   end

@@ -1,8 +1,8 @@
 <section>
-  <div class="heading">
+  <div  class="row panel-heading heading">
     <h2>4. Time Series Data</h2>
   </div>
-  <article>
+  <article class="row section-half">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Orders By Day</caption>
@@ -17,13 +17,13 @@
           <% @order_day_stats.each do |key, value| %>
           <td><%= key %></td>
           <td><%= value[:quantity] %></td>
-          <td><%= value[:value] %></td>
+          <td>$<%= value[:value] %></td>
         </tr>
         <% end %>
       </tbody>
     </table>
   </article>
-  <article>
+  <article class="row section-half">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Orders By Week</caption>
@@ -38,7 +38,7 @@
           <% @order_week_stats.each do |key, value| %>
           <td><%= key %></td>
           <td><%= value[:quantity] %></td>
-          <td><%= value[:value] %></td>
+          <td>$<%= value[:value] %></td>
         </tr>
         <% end %>
       </tbody>

@@ -20,7 +20,9 @@
     <%= link_to "Edit #{@user.full_name}'s Information", edit_admin_user_path %><br>
     <%= link_to "Delete #{@user.full_name}", admin_user_path, method: "delete", data: {confirm: "Are you sure you want to delete user: #{@user.full_name}?"} %><br>
     <%= link_to "View Saved Addresses", admin_user_addresses_path(@user.id) %><br>
-    <%= link_to "View Unplaced Order (Cart)", "#" %><br>
+    <% if Order.find_by(user_id: @user.id, checkout_date: nil) %>
+      <%= link_to "View Unplaced Order (Cart)", admin_order_path(Order.find_by(user_id: @user.id, checkout_date: nil))%><br>
+    <% end %>
   </article>
 
 
@@ -36,7 +38,7 @@
     <% if @user.orders.where(checkout_date: nil).any? %>
       <%= link_to "Edit Shopping Cart", edit_admin_order_path(@shopping_cart), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn" %><br>
     <% else %>
-      <%= link_to "Create Order", new_admin_user_order_path(@user), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn"  %><br>
+      <%= link_to "Create Order In Shopping Cart", new_admin_user_order_path(@user), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn"  %><br>
     <% end %>
     <%= link_to "Create Address", new_admin_user_address_path(@user), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn" %> <br>
   </article>

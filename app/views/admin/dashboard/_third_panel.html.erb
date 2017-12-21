@@ -1,8 +1,8 @@
 <section>
-  <div class="heading">
+  <div  class="row panel-heading heading">
     <h2>3. Order Statistics</h2>
   </div>
-  <article>
+  <article class="row section-thirds">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Last 7 Days</caption>
@@ -18,20 +18,20 @@
         </tr>
         <tr>
           <td>Total Revenue</td>
-          <td><%= @rev_stats[:sevendays] %></td>
+          <td>$<%= @rev_stats[:sevendays] %></td>
         </tr>
         <tr>
           <td>Average Order Value</td>
-          <td><%= @order_stats[:sevendays_average] %></td>
+          <td>$<%= @order_stats[:sevendays_average] %></td>
         </tr>
         <tr>
           <td>Largest Order Value</td>
-          <td><%= @order_stats[:sevendays_largest] %></td>
+          <td>$<%= @order_stats[:sevendays_largest] %></td>
         </tr>
       </tbody>
     </table>
   </article>
-  <article>
+  <article class="row section-thirds">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Last 30 Days</caption>
@@ -47,20 +47,20 @@
         </tr>
         <tr>
           <td>Total Revenue</td>
-          <td><%= @rev_stats[:thirtydays] %></td>
+          <td>$<%= @rev_stats[:thirtydays] %></td>
         </tr>
         <tr>
           <td>Average Order Value</td>
-          <td><%= @order_stats[:thirtydays_average] %></td>
+          <td>$<%= @order_stats[:thirtydays_average] %></td>
         </tr>
         <tr>
           <td>Largest Order Value</td>
-          <td><%= @order_stats[:thirtydays_largest] %></td>
+          <td>$<%= @order_stats[:thirtydays_largest] %></td>
         </tr>
       </tbody>
     </table>
   </article>
-  <article>
+  <article class="row section-thirds">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Total</caption>
@@ -76,15 +76,15 @@
         </tr>
         <tr>
           <td>Total Revenue</td>
-          <td><%= @rev_stats[:total] %></td>
+          <td>$<%= @rev_stats[:total] %></td>
         </tr>
         <tr>
           <td>Average Order Value</td>
-          <td><%= @order_stats[:total_average] %></td>
+          <td>$<%= @order_stats[:total_average] %></td>
         </tr>
         <tr>
           <td>Largest Order Value</td>
-          <td><%= @order_stats[:total_largest] %></td>
+          <td>$<%= @order_stats[:total_largest] %></td>
         </tr>
       </tbody>
     </table>

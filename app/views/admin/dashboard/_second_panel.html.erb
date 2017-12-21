@@ -1,8 +1,8 @@
 <section>
-  <div class="fat-heading">
+  <div class="row panel-heading heading">
     <h2>2. User Demographics and Behavior</h2>
   </div>
-  <article>
+  <article class="row section-thirds">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Top 3 States Users Live In (billing)</caption>
@@ -21,7 +21,7 @@
       </tbody>
     </table>
   </article>
-  <article>
+  <article class="row section-thirds">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Top 3 Cities Users Live In (billing)</caption>
@@ -40,14 +40,14 @@
       </tbody>
     </table>
   </article>
-  <article>
+  <article class="row section-thirds">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Top Users With...</caption>
         <tr>
           <th>...</th>
           <th>User</th>
-          <th>Quantity</th>
+          <th>Order Value</th>
         </tr>
       </thead>
       <tbody>
@@ -55,7 +55,7 @@
           <% @order_demo.each do |key, value| %>
           <td><%= key.to_s.split("_").map(&:capitalize).join(' ') %></td>
           <td><%= value[:customer_name] %></td>
-          <td><%= value[:order_value] %></td>
+          <td>$<%= value[:order_value] %></td>
         </tr>
         <% end %>
       </tbody>

@@ -47,15 +47,15 @@ class Admin::AddressesController < ApplicationController
     @address = Address.find(params[:id])
     if @city = City.find_or_create_by(name: whitelisted_params['city_attributes']['name'])
       if update_address_with_city(@address, @city)
-        flash[:success] = "Address Successfully Updated!"
+        flash[:success] = "Address##{@address.id} Successfully Updated!"
         redirect_to admin_address_path(@address)
       else
-        flash[:danger] = "Address Could Not Be Updated See Errors On Form"
+        flash[:danger] = "Address##{@address.id} Could Not Be Updated See Errors On Form"
         render :edit
       end
     else
       @address.city = @city
-      flash[:danger] = "Address Could Not Be Updated See Errors On Form"
+      flash[:danger] = "Address##{@address.id} Could Not Be Updated - See Errors On Form"
       render :edit
     end
   end
@@ -65,10 +65,10 @@ class Admin::AddressesController < ApplicationController
     @address = Address.find(params[:id])
     if @address.orders.empty?
       if @address.destroy
-        flash[:success] = "Address Successfully Deleted"
+        flash[:success] = "Address##{@address.id} Successfully Deleted"
         redirect_to admin_user_addresses_path(@address.user_id)
       else
-        flash[:danger] = "Could Not Delete Address"
+        flash[:danger] = "Address##{@address.id} Could Not be Deleted"
         redirect_to admin_user_addresses_path(@address.user_id)
       end
     else

@@ -7,7 +7,7 @@ class OrderContent < ApplicationRecord
 
   validates :quantity, :product_id, presence: true
 
-  validates_numericality_of :quantity, :product_id, greater_than: 0
+  validates_numericality_of :product_id, greater_than: 0
 
   def self.revenue_statistics
     revenue_hash = {}

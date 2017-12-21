@@ -8,16 +8,13 @@ h1, h2 {
 section {
   border: 1px black solid;
   padding: 20px 50px 50px 50px;
-  height: 950px;
-  margin: 20px 0px;
+  height: 98%;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .heading {
   padding-bottom: 40px;
-}
-
-.fat-heading {
-  padding-bottom: 8px;
 }
 
 .info-display-table {
@@ -26,6 +23,7 @@ section {
   border-bottom: 1px black solid;
   border-right: 1px black solid;
   border-collapse: initial;
+  font-size: 14px;
 }
 
 caption {
@@ -36,4 +34,25 @@ caption {
 
 td, th {
   border-left: 1px black solid;
+}
+
+.two-panel-container {
+  margin-bottom: 20px;
+  display: flex;
+  div {
+    align-items: stretch;
+  }
+}
+
+.section-thirds {
+  height: 28%;
+}
+
+.panel-heading {
+  height: 12%;
+
+}
+
+.section-half {
+  height: 44%;
 }

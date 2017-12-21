@@ -70,7 +70,7 @@
     <br>
     <article>
       <%= link_to "Edit Order", edit_admin_order_path(@order) %><br>
-      <%= link_to "Delete Order", "#" %>
+      <%= link_to "Delete Order", admin_order_path(@order), method: "delete", data: { confirm: "Are you sure you want to delete order # #{@order.id}?" } %>
     </article>
   </section>
 
@@ -99,7 +99,7 @@
       </table>
       <article>
         <%= link_to "Edit Order", edit_admin_order_path(@order) %><br>
-        <%= link_to "Delete Order", "#" %>
+        <%= link_to "Delete Order", admin_order_path(@order), method: "delete", data: { confirm: "Are you sure you want to delete order # #{@order.id}?" } %>
       </article>
     </div>
   </section>

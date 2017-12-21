@@ -1,8 +1,8 @@
 <section>
-  <div class="heading">
+  <div class="row panel-heading heading">
     <h2>1.Overall Platform</h2>
   </div>
-  <article>
+  <article class="row section-thirds">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Last 7 Days</caption>
@@ -26,12 +26,12 @@
         </tr>
         <tr>
           <td>Revenue</td>
-          <td><%= @rev_stats[:sevendays] %></td>
+          <td>$<%= @rev_stats[:sevendays] %></td>
         </tr>
       </tbody>
     </table>
   </article>
-  <article>
+  <article class="row section-thirds">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Last 30 Days</caption>
@@ -55,12 +55,12 @@
         </tr>
         <tr>
           <td>Revenue</td>
-          <td><%= @rev_stats[:thirtydays] %></td>
+          <td>$<%= @rev_stats[:thirtydays] %></td>
         </tr>
       </tbody>
     </table>
   </article>
-  <article>
+  <article class="row section-thirds">
     <table class="info-display-table table table-striped">
       <thead>
         <caption>Total</caption>
@@ -84,7 +84,7 @@
         </tr>
         <tr>
           <td>Revenue</td>
-          <td><%= @rev_stats[:total] %></td>
+          <td>$<%= @rev_stats[:total] %></td>
         </tr>
       </tbody>
     </table>
