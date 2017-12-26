@@ -9,12 +9,17 @@ class Admin::UsersController < ApplicationController
 
   def new
     @user = User.new
-    @user.addresses.build
+    @address = @user.addresses.build
   end
 
 
   def create
     @user = User.new(whitelisted_params)
+    @user.save
+    shipping = @user.addresses.create(whitelisted_params[:shipping_id])
+    billing = @user.addresses.create(whitelisted_params[:billing_id])
+    @user.billing_id = billing.id
+    @user.shipping_id = shipping.id
     if @user.save
       flash[:success] = "User ##{@user.id} Successfully Saved!"
       redirect_to admin_users_path
@@ -27,7 +32,9 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @cc = CreditCard.find(@user.id)
+    if CreditCard.exists?(id: @user.id)
+      @cc = CreditCard.find(@user.id)
+    end
     @orders = Order.where(user_id: @user.id)
     @shopping_cart = @orders.where(checkout_date: nil).ids
     @billing_addy = Address.find(@user.billing_id)
@@ -42,7 +49,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(whitelisted_params)
+    if @user.update_attributes(whitelisted_params)
       flash[:success] = "User ##{@user.id} Successfully Updated!"
       redirect_to admin_user_path(params[:id])
     else
@@ -66,8 +73,19 @@ class Admin::UsersController < ApplicationController
 
   private
 
+
+  def create_address_from_params(user, params)
+    Address.new(user_id: user.id,
+                   street_address: params[:street_address],
+                   zip_code: params[:zip_code],
+                   city_id: params[:city_id],
+                   state_id: params[:state_id],
+                 ).save
+  end
+
   def whitelisted_params
-    params.require(:user).permit(:first_name, :last_name, :email, :billing_id, :shipping_id, :telephone)
+    params.require(:user).permit(:first_name, :last_name, :email, :telephone, { shipping_id: [:id, :street_address, :city_id, :state_id, :zip_code, :_destroy] },
+                                                                              { billing_id: [:id, :street_address, :city_id, :state_id, :zip_code, :_destroy] })
   end
 
 

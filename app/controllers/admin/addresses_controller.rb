@@ -101,7 +101,7 @@ class Admin::AddressesController < ApplicationController
 
 
   def whitelisted_params
-    params.require(:address).permit(:user_id, :street_address, :state_id, :zip_code, { city_attributes: [:name] })
+    params.require(:address).permit(:user_id, :street_address, :state_id, :zip_code, { city_attributes: [:name] } )
   end
 
 

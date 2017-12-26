@@ -2,12 +2,11 @@ class User < ApplicationRecord
 
   include CountSince
 
-  has_many :addresses
+  has_many :addresses, inverse_of: :user
   accepts_nested_attributes_for :addresses
   has_many :orders
   has_many :products, through: :orders
   has_many :credit_cards
-
   validates :last_name, :first_name, :email,
             presence: true,
             length: { maximum: 64,

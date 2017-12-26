@@ -28,8 +28,12 @@
 
   <article class="cc-info">
     <h2>Credit Card Information</h2>
-    <%= render partial: 'cc_form', locals: { user: @user,
-                                             credit_card: @cc } %>
+    <% if @user.credit_cards.empty? %>
+      <p>This user has no credit cards</p>
+    <% else  %>
+      <%= render partial: 'cc_form', locals: { user: @user,
+                                               credit_card: @cc } %>
+    <% end %>
   </article>
 
 

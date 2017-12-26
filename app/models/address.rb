@@ -1,6 +1,6 @@
 class Address < ApplicationRecord
 
-  belongs_to :user
+  belongs_to :user, inverse_of: :addresses
   belongs_to :state
   belongs_to :city
   has_many :orders, foreign_key: :billing_id
@@ -13,5 +13,5 @@ class Address < ApplicationRecord
                       minimum: 2 }
 
 
-  
+
 end
