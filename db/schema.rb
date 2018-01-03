@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20171104012858) do
     t.string   "first_name",  null: false
     t.string   "last_name",   null: false
     t.string   "email",       null: false
-    t.integer  "billing_id"   
+    t.integer  "billing_id"
     t.integer  "shipping_id"
     t.datetime "created_at"
     t.datetime "updated_at"

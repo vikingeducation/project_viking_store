@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr>
-          <% @state_stats.each do |key, value| %>
+          <% @dashboard_stats[:state_stats].each do |key, value| %>
           <td><%= key %></td>
           <td><%= value %></td>
         </tr>
@@ -32,7 +32,7 @@
       </thead>
       <tbody>
         <tr>
-          <% @city_stats.each do |key, value| %>
+          <% @dashboard_stats[:city_stats].each do |key, value| %>
           <td><%= key %></td>
           <td><%= value %></td>
         </tr>
@@ -52,7 +52,7 @@
       </thead>
       <tbody>
         <tr>
-          <% @order_demo.each do |key, value| %>
+          <% @dashboard_stats[:order_demo].each do |key, value| %>
           <td><%= key.to_s.split("_").map(&:capitalize).join(' ') %></td>
           <td><%= value[:customer_name] %></td>
           <td>$<%= value[:order_value] %></td>

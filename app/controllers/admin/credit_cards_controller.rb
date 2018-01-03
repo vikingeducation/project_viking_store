@@ -13,10 +13,10 @@ class Admin::CreditCardsController < ApplicationController
   def create
     @cc = CreditCard.new(whitelisted_params)
     if @cc.save
-      render 'show'
+      render 'user/:id/show'
     else
       redirect_to :new
-    end     
+    end
   end
 
 

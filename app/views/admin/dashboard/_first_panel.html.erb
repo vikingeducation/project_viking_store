@@ -14,19 +14,19 @@
       <tbody>
         <tr>
           <td>New Users</td>
-          <td><%= @user_stats[:sevendays] %></td>
+          <td><%= @dashboard_stats[:user_stats][:sevendays] %></td>
         </tr>
         <tr>
           <td>Orders</td>
-          <td><%= @order_stats[:sevendays_count] %> </td>
+          <td><%= @dashboard_stats[:order_stats][:sevendays_count] %> </td>
         </tr>
         <tr>
           <td>New Products</td>
-          <td><%= @product_stats[:sevendays] %></td>
+          <td><%= @dashboard_stats[:product_stats][:sevendays] %></td>
         </tr>
         <tr>
           <td>Revenue</td>
-          <td>$<%= @rev_stats[:sevendays] %></td>
+          <td>$<%= @dashboard_stats[:rev_stats][:sevendays] %></td>
         </tr>
       </tbody>
     </table>
@@ -43,19 +43,19 @@
       <tbody>
         <tr>
           <td>New Users</td>
-          <td><%= @user_stats[:thirtydays] %></td>
+          <td><%= @dashboard_stats[:user_stats][:thirtydays] %></td>
         </tr>
         <tr>
           <td>Orders</td>
-          <td><%= @order_stats[:thirtydays_count] %> </td>
+          <td><%= @dashboard_stats[:order_stats][:thirtydays_count] %> </td>
         </tr>
         <tr>
           <td>New Products</td>
-          <td><%= @product_stats[:thirtydays] %></td>
+          <td><%= @dashboard_stats[:product_stats][:thirtydays] %></td>
         </tr>
         <tr>
           <td>Revenue</td>
-          <td>$<%= @rev_stats[:thirtydays] %></td>
+          <td>$<%= @dashboard_stats[:rev_stats][:thirtydays] %></td>
         </tr>
       </tbody>
     </table>
@@ -72,19 +72,19 @@
       <tbody>
         <tr>
           <td>New Users</td>
-          <td><%= @user_stats[:total] %></td>
+          <td><%= @dashboard_stats[:user_stats][:total] %></td>
         </tr>
         <tr>
           <td>Orders</td>
-          <td><%= @order_stats[:total_count] %> </td>
+          <td><%= @dashboard_stats[:order_stats][:total_count] %> </td>
         </tr>
         <tr>
           <td>New Products</td>
-          <td><%= @product_stats[:total] %></td>
+          <td><%= @dashboard_stats[:product_stats][:total] %></td>
         </tr>
         <tr>
           <td>Revenue</td>
-          <td>$<%= @rev_stats[:total] %></td>
+          <td>$<%= @dashboard_stats[:rev_stats][:total] %></td>
         </tr>
       </tbody>
     </table>
