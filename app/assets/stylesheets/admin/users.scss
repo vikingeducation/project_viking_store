@@ -1,0 +1,65 @@
+// Place all the styles related to the admin/users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.user-table {
+  font-size: 18px;
+}
+
+.demo-info,
+.cc-info,
+.admin-actions,
+.order-history,
+.demo-info-container  {
+  border: 1px solid black;
+  padding: 20px;
+  margin: 20px;
+  line-height: 2em;
+}
+
+
+.demo-info label,
+.cc-info label,
+.demo-info-form label {
+  width: 200px;
+}
+
+
+.demo-info-container a {
+  text-decoration: underline;
+}
+
+
+.align-center {
+  text-align: center;
+}
+
+
+#address-input {
+  width: 100%;
+}
+
+
+#user-create-btn {
+  width: 100%;
+  height: 2em;
+  border: 1px solid black;
+  font-size: 25px;
+}
+
+
+
+body input {
+  width: 50%;
+}
+
+.admin-actions {
+  text-align: center;
+  input {
+    border: 2px solid black;
+
+  }
+}
+.admin-action-btn {
+  width: 80%;
+  margin: 10px auto;
+}

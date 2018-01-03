@@ -13,3 +13,89 @@
  *= require_tree .
  *= require_self
  */
+
+.portal-heading {
+  font-size: 90px;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+.portal-window,
+#nav-bar {
+  border: 2px solid grey;
+}
+
+#nav-bar {
+  text-align: center;
+  padding: 10px 0 20px 0;
+}
+
+#nav-bar p {
+  font-size: 22px;
+}
+
+#nav-bar a {
+  font-size: 16px;
+}
+
+.nav-link  {
+    text-decoration: underline;
+  }
+
+
+.dashboard-link {
+  border-top: 2px solid grey;
+}
+
+#new-btn {
+  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+  border: 1px solid black;
+  font-size: 20px;
+}
+
+#index-header {
+  margin-bottom: 30px;
+}
+
+#index-table td,
+#index-table th {
+  border-left: 0;
+  text-align: center;
+}
+
+#index-table {
+  margin: 30px auto;
+  border: 1px solid black;
+  font-size: 16px;
+}
+
+#index-table thead {
+    background-color: #aaa;
+  }
+
+#index-link,
+#index-table a {
+  text-decoration: underline;
+}
+
+.heading {
+  font-size: 55px;
+}
+
+#create-div,
+#edit-delete-div {
+  width: 100%;
+  margin: 30px auto 30px auto;
+  text-align: center;
+  text-decoration: underline;
+}
+
+#create-button {
+  width: 70%;
+  font-size: 25px;
+  border: 1px solid black;
+}

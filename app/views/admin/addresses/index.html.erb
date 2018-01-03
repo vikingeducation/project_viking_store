@@ -1,0 +1,39 @@
+<% if User.exists?(params[:user_id]) %>
+  <div class="center">
+    <h1 class="heading"><%= @user[:first_name] %>'s Addresses</h1>
+    <%= link_to "Create New Address #{@user[:first_name]}", new_admin_user_address_path, class: "btn-primary btn-lg", id: "new-btn"%>
+  </div>
+<% else %>
+<h1 class="heading">All Addresses</h1>
+  <p><em>Create new addresses from within <%= link_to "User", "#" %> profiles</em></p>
+<% end %>
+<table class="table table-striped" id="index-table">
+  <thead>
+    <th>ID</th>
+    <th>User</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Orders</th>
+    <th>Created</th>
+    <th>SHOW</th>
+    <th>EDIT</th>
+    <th>DELETE</th>
+  <thead>
+  <tbody>
+    <% @addresses.each do |address| %>
+      <tr>
+        <td><%= address[:id] %></td>
+        <td><%= link_to address.user.first_name, admin_user_path(address.user) %></td>
+        <td><%= address[:street_address] %></td>
+        <td><%= address.city.name %></td>
+        <td><%= address.state.name %></td>
+        <td><%= address.orders.count %></td>
+        <td><%= address[:created_at].strftime("%F") %></td>
+        <td><%= link_to "Show", admin_address_path(address) %></td>
+        <td><%= link_to "Edit", edit_admin_address_path(address) %></td>
+        <td><%= link_to "Delete", admin_address_path(address), method: 'delete', data: { confirm: "Are you sure you want to delete this address" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

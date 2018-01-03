@@ -1,0 +1,41 @@
+// Place all the styles related to the admin/orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.order-article-headings {
+  text-align: left;
+}
+
+.border {
+  border: 1px solid black;
+  padding: 30px;
+}
+
+.edit-container {
+  padding: 20px;
+}
+
+#order-index-table {
+  margin: 30px auto;
+  border: 1px solid black;
+  font-size: 15px;
+}
+
+#order-index-table td,
+#order-index-table th {
+  border-left: 0;
+  text-align: center;
+}
+
+#order-index-table thead {
+    background-color: #aaa;
+  }
+
+.unplaced {
+  color: red;
+}
+
+
+.order-show-top,
+.order-show-bottom {
+  height: auto;
+}

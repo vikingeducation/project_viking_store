@@ -1,0 +1,6 @@
+<h1>New Order For <%= @user.first_name %> <%= @user.last_name %></h1>
+<section class="order-show-top">
+  <%= render partial: 'form', locals: { order: @order,
+                                         user: @user } %>
+  <p style="color:grey;"><em>You can add products on the next screen, once it's been created.</em></p>
+</section>

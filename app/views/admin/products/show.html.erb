@@ -1,0 +1,38 @@
+<article>
+  <h1 class="heading">Product <%= @product.id %></h1>
+    <table id="product-info-table">
+    <h1 class="product-table-heading">Product Information</h1>
+      <tr>
+        <td>Product ID:  </td>
+        <td><%= @product.id %></td>
+      </tr>
+      <tr>
+        <td>Name:  </td>
+        <td><%= @product.name %></td>
+      </tr>
+      <tr>
+        <td>Price: </td>
+        <td>$<%= @product.price %></td>
+      </tr>
+      <tr>
+        <td>Category:  </td>
+        <td><%= @product.category_id %></td>
+      </tr>
+    </table>
+
+    <table id="product-stats-table">
+    <h1 class="product-table-heading">Product Statistics</h1>
+      <tr>
+        <td>Times Ordered:  </td>
+        <td><%= @product_volumn[@product.id].nil? ? "N/A" : @product_volumn[@product.id] %></td>
+      </tr>
+      <tr>
+        <td>Carts In: </td>
+        <td><%= @in_cart[@product.id].nil? ? "N/A" : @in_cart[@product.id] %></td>
+      </tr>
+    </table>
+    <div class="edit-delete-link-div">
+      <%= link_to "Edit Product", edit_admin_product_path %><br>
+      <%= link_to "Delete Product", admin_product_path, method: "delete", data: {confirm: "Are you sure you want to delete this product?"}%>
+    </div>
+</article>

@@ -1,0 +1,28 @@
+<div class="row">
+  <h1 class="heading">Viking Store Analytics Dashboard</h1>
+</div>
+
+<% unless @dashboard_stats.nil? %>
+  <div class="row two-panel-container">
+    <div class="col-xs-6">
+      <%= render 'first_panel' %>
+    </div>
+
+    <div class="col-xs-6">
+      <%= render 'second_panel' %>
+    </div>
+  </div>
+
+  <div class="row two-panel-container">
+    <div class="col-xs-6">
+      <%= render 'third_panel' %>
+    </div>
+
+    <div class="col-xs-6">
+      <%= render 'forth_panel' %>
+    </div>
+  </div>
+
+<% else %>
+  <h2>NO Data in Database</h2>
+<% end %>

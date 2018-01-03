@@ -1,0 +1,13 @@
+<h2 class="order-article-headings">Shipping Address:</h2>
+<div class="row">
+  <%= form_builder.select :shipping_id, user.addresses.map { |a| [a.street_address, a.id] } %>
+</div>
+<h2 class="order-article-headings">Billing Address:</h2>
+<div class="row">
+  <%= form_builder.select :billing_id, user.addresses.map { |a| [a.street_address, a.id] } %>
+</div>
+
+<h2 class="order-article-headings">Billing Card:</h2>
+<div class="row">
+  <%= form_builder.select :credit_card_id, user.credit_cards.map { |a| ["Ending in #{a.card_number.chars.last(4).join}", a.id] } %>
+</div>

@@ -1,0 +1,92 @@
+<section>
+  <div class="row panel-heading heading">
+    <h2>1.Overall Platform</h2>
+  </div>
+  <article class="row section-thirds">
+    <table class="info-display-table table table-striped">
+      <thead>
+        <caption>Last 7 Days</caption>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>New Users</td>
+          <td><%= @dashboard_stats[:user_stats][:sevendays] %></td>
+        </tr>
+        <tr>
+          <td>Orders</td>
+          <td><%= @dashboard_stats[:order_stats][:sevendays_count] %> </td>
+        </tr>
+        <tr>
+          <td>New Products</td>
+          <td><%= @dashboard_stats[:product_stats][:sevendays] %></td>
+        </tr>
+        <tr>
+          <td>Revenue</td>
+          <td>$<%= @dashboard_stats[:rev_stats][:sevendays] %></td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+  <article class="row section-thirds">
+    <table class="info-display-table table table-striped">
+      <thead>
+        <caption>Last 30 Days</caption>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>New Users</td>
+          <td><%= @dashboard_stats[:user_stats][:thirtydays] %></td>
+        </tr>
+        <tr>
+          <td>Orders</td>
+          <td><%= @dashboard_stats[:order_stats][:thirtydays_count] %> </td>
+        </tr>
+        <tr>
+          <td>New Products</td>
+          <td><%= @dashboard_stats[:product_stats][:thirtydays] %></td>
+        </tr>
+        <tr>
+          <td>Revenue</td>
+          <td>$<%= @dashboard_stats[:rev_stats][:thirtydays] %></td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+  <article class="row section-thirds">
+    <table class="info-display-table table table-striped">
+      <thead>
+        <caption>Total</caption>
+        <tr>
+          <th>Item</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>New Users</td>
+          <td><%= @dashboard_stats[:user_stats][:total] %></td>
+        </tr>
+        <tr>
+          <td>Orders</td>
+          <td><%= @dashboard_stats[:order_stats][:total_count] %> </td>
+        </tr>
+        <tr>
+          <td>New Products</td>
+          <td><%= @dashboard_stats[:product_stats][:total] %></td>
+        </tr>
+        <tr>
+          <td>Revenue</td>
+          <td>$<%= @dashboard_stats[:rev_stats][:total] %></td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+</section>

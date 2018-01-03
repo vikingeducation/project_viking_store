@@ -1,0 +1,30 @@
+<h1 class="heading">Category <%= @category.id %>: <%= @category.name %></h1>
+<table class="table" id="show-top-table">
+  <tr>
+    <td><h3>Category ID: </h3></td>
+    <td><h3><%= @category.id %></h3></td>
+  </tr>
+  <tr>
+    <td><h3>Name: </h3></td>
+    <td><h3><%= @category.name %></h3></td>
+  </tr>
+  <table>
+
+<h4><%= link_to "Edit Category", edit_admin_category_path(@category) %></h4>
+<h4><%= link_to "Delete Category", admin_category_path(@category), data: {confirm: "Are you sure you'd like to delete this category?"}, method: "delete" %></h4>
+
+<h3>Products in <%= @category.name %>:</h3>
+<table class="table table-striped" id="product-table">
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+  </thead>
+  <tbody>
+    <tr>
+      <% @products.where( "category_id = #{@category.id}").each do |prod| %>
+      <td><%= prod[:id] %></td>
+      <td><%= link_to "#{prod[:name]}", admin_product_path(prod), id: "index-link" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

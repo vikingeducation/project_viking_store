@@ -1,0 +1,43 @@
+// Place all the styles related to the admin/products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#product-stats-table td,
+#product-info-table td {
+  border: none;
+  font-size: 26px;
+}
+
+
+#product-info-table tr {
+  :first-child {
+    width: 45%;
+  }
+}
+
+#product-stats-table tr {
+  :first-child {
+    width: 88%;
+  }
+}
+
+
+#product-stats-table h1,
+#product-info-table h1 {
+  text-align: right;
+}
+
+
+.edit-delete-link-div {
+  margin: 20px 0;
+  text-decoration: underline;
+}
+
+.product-table-heading {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+select#product_category_id {
+  width: 100%;
+}

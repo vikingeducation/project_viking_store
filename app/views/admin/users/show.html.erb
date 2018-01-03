@@ -1,0 +1,83 @@
+<div class="row">
+  <h1>User <%= @user.id %>: <%= @user.full_name %></h1>
+
+  <article class="demo-info">
+    <h2>Demographic Information</h2>
+    <%= form_for [:admin, @user] do |f| %>
+      <%= f.label :first_name, "First Name: "%>
+      <%= f.text_field :first_name, disabled: true %><br>
+      <%= f.label :last_name, "Last Name: " %>
+      <%= f.text_field :last_name, disabled: true %><br>
+      <%= f.label :email, "Email: ", class: "email-field" %>
+      <%= f.text_field :email, disabled: true %><br>
+      <%= f.label :telephone, "Telephone: " %>
+      <%= f.text_field :telephone, disabled: true %>
+    <% end %>
+    <h3>Default Billing Address:</h3>
+    <%= @user.billing_id.nil? ? "No default address selected" : full_address(@billing_addy) %><br>
+    <h3>Default Shipping Address:</h3>
+    <%= @user.shipping_id.nil? ? "No defaut address selected" : full_address(@shipping_addy) %><br>
+    <%= link_to "Edit #{@user.full_name}'s Information", edit_admin_user_path %><br>
+    <%= link_to "Delete #{@user.full_name}", admin_user_path, method: "delete", data: {confirm: "Are you sure you want to delete user: #{@user.full_name}?"} %><br>
+    <%= link_to "View Saved Addresses", admin_user_addresses_path(@user.id) %><br>
+    <% if Order.find_by(user_id: @user.id, checkout_date: nil) %>
+      <%= link_to "View Unplaced Order (Cart)", admin_order_path(Order.find_by(user_id: @user.id, checkout_date: nil))%><br>
+    <% end %>
+  </article>
+
+
+  <article class="cc-info">
+    <h2>Credit Card Information</h2>
+    <% if @user.credit_cards.empty? %>
+      <p>This user has no credit cards</p>
+      <%= link_to "Add Credit Card for this User", new_admin_user_credit_card_path(@user) %>
+    <% else  %>
+      <%= render partial: 'shared/cc_form', locals: { user: @user,
+                                               credit_card: @cc } %>
+    <% end %>
+  </article>
+
+
+  <article class="admin-actions">
+    <h2>Admin Actions for <%= @user.full_name %></h2>
+    <% if @user.orders.where(checkout_date: nil).any? %>
+      <%= link_to "Edit Shopping Cart", edit_admin_order_path(@shopping_cart), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn" %><br>
+    <% else %>
+      <%= link_to "Create Order In Shopping Cart", new_admin_user_order_path(@user), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn"  %><br>
+    <% end %>
+    <%= link_to "Create Address", new_admin_user_address_path(@user), class: "btn btn-lg btn-primary admin-action-btn", id: "submit-btn" %> <br>
+  </article>
+
+
+  <article class="order-history">
+    <h2>Order History</h2>
+    <% if @orders.empty? %>
+      <h3>No Orders Placed</h3>
+    <% else %>
+      <table class="table table-striped user-table" id="index-table">
+        <thead>
+          <th>ID</th>
+          <th>Order Date</th>
+          <th>Order Value</th>
+          <th>Status</th>
+          <th>SHOW</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.created_at.strftime "%F" %></td>
+            <td>$<%= order.order_value %></td>
+            <td class="<%= order.checkout_date.nil? ? 'unplaced' : 'placed' %>"><%= order.checkout_date.nil? ? "UNPLACED" : "PLACED" %></td>
+            <td><%= link_to "Show", admin_order_path(order) %></td>
+            <td><%= link_to "Edit", edit_admin_order_path(order) %></td>
+            <td><%= link_to "Delete", admin_order_path(order), method: "delete", data: { confirm: "Are you sure you want to delete order # #{order.id}?" } %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </article>
+</div>

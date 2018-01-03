@@ -1,0 +1,66 @@
+ <div class="edit-container">
+
+  <h1>Edit <%= @order.checkout_date.nil? ? "Shopping Cart" : "Order" %> #<%= @order.id %></h1>
+  <article class="border">
+    <%= render partial: 'form', locals: { order: @order,
+                                           user: @user } %>
+    <%= link_to "Delete Order", "#" %>
+  </article>
+
+<% if !@order.order_contents.empty? %>
+  <article class="border">
+    <h1>Edit Order Contents</h1>
+    <%= form_tag update_multiple_admin_order_order_contents_path(@order) do %>
+    <%= display_form_errors(@order, :quantity) %>
+      <table class="table table-striped" id="order-index-table">
+        <thead>
+          <th>ID</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total Price</th>
+          <th>REMOVE</th>
+        </thead>
+        <tbody>
+            <% @order_contents.each do |content| %>
+          <tr>
+            <td><%= number_field_tag "order_contents[#{content.id}][product_id]", content.product_id, disabled: true %></td>
+            <td><%= number_field_tag "order_contents[#{content.id}]", content.quantity %></td>
+            <td><%= number_field_tag :price, Product.find(content.product_id).price, disabled: true, class: "form-control" %></td>
+            <td><%= Product.find(content.product_id).price * content.quantity %></td>
+            <td><%= link_to "remove", "#"  %></td>
+          </tr>
+            <% end %>
+        </tbody>
+      </table>
+      <div class="actions">
+        <%= submit_tag %>
+      </div>
+      <% end %>
+  </article>
+<% end %>
+
+  <article class="border">
+    <h1>Add Products to Order Contents</h1>
+    <%= form_tag create_multiple_admin_order_order_contents_path(@order) do %>
+      <table class="table table-striped" id="order-index-table">
+        <thead>
+          <th>ID</th>
+          <th>Quantity</th>
+        </thead>
+        <tbody>
+          <tr>
+            <% 5.times do |x| %>
+              <td><%= number_field_tag "order_contents[#{x}][product_id]" %></td>
+              <td><%= number_field_tag "order_contents[#{x}][quantity]" %></td>
+          </tr>
+          <% end %>
+
+        </tbody>
+      </table>
+      <div class="actions">
+        <%= submit_tag "Save Changes", disabled: false %>
+      </div>
+      <% end %>
+  </article>
+
+</div>

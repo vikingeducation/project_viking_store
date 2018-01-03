@@ -1,0 +1,105 @@
+<h1><%= @order.checkout_date.nil? ? "Shopping Cart #{@order[:id]}" : "Order #{@order[:id]}"%></h1>
+
+  <section class="order-show-top">
+    <%= render partial: 'form', locals: { order: @order,
+                                          user: @order.user} %>
+
+    <article>
+      <h2 class="order-article-headings">Order Status:</h2>
+      <% if @order.checkout_date.nil?  %>
+        <p style="color:purple;font-size:50px;">UNPLACED</p>
+      <% else %>
+        <p style="color:green;font-size:50px;">PLACED</p>
+      <% end %>
+    </article>
+
+    <article>
+      <h2 class="order-article-headings">Shipping Address:</h2>
+      <%= form_for [:admin, @shipping_address] do |a| %>
+      <div class="row">
+        <%= a.label :street_address, "Street Address: ", class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= a.text_field :street_address %><br>
+        </div>
+      </div>
+      <div class="row">
+        <%= a.label :city, "City: ", class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= a.text_field :city, value: @shipping_address.city.name %><br>
+        </div>
+      </div>
+      <div class="row">
+        <%= a.label :state, "State: ", class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= a.text_field :state, value: @shipping_address.state.name %><br>
+        </div>
+      </div>
+      <% end %>
+    </article>
+
+    <article>
+      <h2 class="order-article-headings">Billing Address:</h2>
+      <%= form_for [:admin, @billing_address] do |a| %>
+      <div class="row">
+        <%= a.label :street_address, "Street Address: ", class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= a.text_field :street_address %><br>
+        </div>
+      </div>
+      <div class="row">
+        <%= a.label :city, "City: ", class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= a.text_field :city, value: @billing_address.city.name %><br>
+        </div>
+      </div>
+      <div class="row">
+        <%= a.label :state, "State: ", class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= a.text_field :state, value: @billing_address.state.name %><br>
+        </div>
+      </div>
+      <% end %>
+    </article>
+
+    <article>
+      <h2 class="order-article-headings">Billing Card:</h2>
+
+      <p>Last 4 Digits: <%= @credit_card_last_four %></p>
+    </article>
+    <br>
+    <br>
+    <article>
+      <%= link_to "Edit Order", edit_admin_order_path(@order) %><br>
+      <%= link_to "Delete Order", admin_order_path(@order), method: "delete", data: { confirm: "Are you sure you want to delete order # #{@order.id}?" } %>
+    </article>
+  </section>
+
+  <section class="order-show-bottom">
+    <h1>Order Contents</h1>
+    <div class="row">
+      <table class="table table-striped user-table" id="index-table">
+        <thead>
+          <th>Product ID</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total Price</th>
+        </thead>
+        <tbody>
+          <tr>
+            <% @order_contents.each do |prod| %>
+            <td><%= prod['product_id'] %></td>
+            <td><%= link_to Product.find(prod.product_id).name, admin_product_path(prod.product_id)%></td>
+            <td><%= prod['quantity'] %></td>
+            <td>$<%= Product.find(prod.product_id).price %></td>
+            <td>$<%=  Product.find(prod.product_id).price * prod['quantity'] %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <article>
+        <%= link_to "Edit Order", edit_admin_order_path(@order) %><br>
+        <%= link_to "Delete Order", admin_order_path(@order), method: "delete", data: { confirm: "Are you sure you want to delete order # #{@order.id}?" } %>
+      </article>
+    </div>
+  </section>
