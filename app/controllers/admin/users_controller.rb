@@ -32,13 +32,17 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if CreditCard.exists?(id: @user.id)
+    if CreditCard.exists?(user_id: @user.id)
       @cc = CreditCard.find(@user.id)
     end
     @orders = Order.where(user_id: @user.id)
     @shopping_cart = @orders.where(checkout_date: nil).ids
-    @billing_addy = Address.find(@user.billing_id)
-    @shipping_addy = Address.find(@user.shipping_id)
+    unless @user.billing_id.nil?
+      @billing_addy = Address.find(@user.billing_id)
+    end
+    unless @user.shipping_id.nil?
+      @shipping_addy = Address.find(@user.shipping_id)
+    end
   end
 
 

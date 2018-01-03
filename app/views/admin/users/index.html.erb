@@ -18,8 +18,8 @@
     <td><%= user[:id] %></td>
     <td><%= user[:first_name] + " " + user[:last_name]%></td>
     <td><%= user[:created_at].strftime("%F") %></td>
-    <td><%= user.addresses.first.city.name %></td>
-    <td><%= user.addresses.first.state.name %></td>
+    <td><%= user.addresses.first.nil? ? "N/A" : user.addresses.first.city.name %></td>
+    <td><%= user.addresses.first.nil? ? "N/A" : user.addresses.first.state.name %></td>
     <td><%= link_to user.orders.where.not(checkout_date: nil).count, admin_user_orders_path(user) %></td>
     <td><%= user.orders.empty? || user.orders.last.checkout_date.nil? ? "N/A" : user.orders.order(checkout_date: :desc).where.not(checkout_date: nil).first.checkout_date.strftime("%F") %></td>
     <td><%= link_to "Show", admin_user_path(user[:id]) %></td>

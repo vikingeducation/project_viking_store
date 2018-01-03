@@ -63,7 +63,8 @@ class Admin::AddressesController < ApplicationController
 
   def destroy
     @address = Address.find(params[:id])
-    if @address.orders.empty?
+    binding.pry
+        if @address.orders.empty?
       if @address.destroy
         flash[:success] = "Address##{@address.id} Successfully Deleted"
         redirect_to admin_user_addresses_path(@address.user_id)
@@ -72,6 +73,27 @@ class Admin::AddressesController < ApplicationController
         redirect_to admin_user_addresses_path(@address.user_id)
       end
     else
+      @user = User.find(@address.user_id)
+      if @address.id == @user.billing_id
+        @user.billing_id = nil
+        if @address.destroy && @user.save
+          flash[:success] = "Address##{@address.id} Successfully Deleted"
+          redirect_to admin_user_addresses_path(@address.user_id)
+        else
+          flash[:danger] = "Address##{@address.id} Could Not be Deleted"
+          redirect_to admin_user_addresses_path(@address.user_id)
+        end
+      end
+      if @address.id == @user.shipping_id
+        @user.shipping_id = nil
+        if @address.destroy && @user.save
+          flash[:success] = "Address##{@address.id} Successfully Deleted"
+          redirect_to admin_user_addresses_path(@address.user_id)
+        else
+          flash[:danger] = "Address##{@address.id} Could Not be Deleted"
+          redirect_to admin_user_addresses_path(@address.user_id)
+        end
+      end
     end
   end
 

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :addresses, only: [:index, :new]
       resources :orders, only: [:index, :new]
+      resources :credit_cards, only: [:new, :create, :edit, :update, :destroy]
     end
     resources :addresses
   end

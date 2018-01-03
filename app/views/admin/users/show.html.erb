@@ -30,8 +30,9 @@
     <h2>Credit Card Information</h2>
     <% if @user.credit_cards.empty? %>
       <p>This user has no credit cards</p>
+      <%= link_to "Add Credit Card for this User", new_admin_user_credit_card_path(@user) %>
     <% else  %>
-      <%= render partial: 'cc_form', locals: { user: @user,
+      <%= render partial: 'shared/cc_form', locals: { user: @user,
                                                credit_card: @cc } %>
     <% end %>
   </article>
