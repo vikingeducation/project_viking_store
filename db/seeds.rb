@@ -208,7 +208,6 @@ end
 
 
 
-# This seeds the random number generator so the rest of this file behaves predictably. (This was definitely not part of your assignment.)
 srand(42)
 
 

@@ -1,22 +1,24 @@
 class User < ApplicationRecord
 
-  has_many :addresses
+  has_many :addresses, dependent: :destroy
   belongs_to :default_billing_address, class_name: "Address", :foreign_key => :billing_id
   belongs_to :default_shipping_address, class_name: "Address", :foreign_key => :shipping_id
-  has_many :credit_cards, :dependent => :destroy
+  has_many :credit_cards, dependent: :destroy
   before_destroy :delete_only_cart
   has_many :orders
   has_many :order_contents, :through => :orders
   has_many :products, :through => :order_contents, :source => :order
+  has_one :city, through: :default_shipping_address
+  has_one :state, through: :default_shipping_address
 
 
-  validates :first_name, 
-            :last_name, 
+  validates :first_name,
+            :last_name,
             :email,
-            length: { in: 1..64 }, 
+            length: { in: 1..64 },
             presence: true
 
-  validates :email, 
+  validates :email,
             format: { with: /@/}
 
   # REGIONS = Carmen::Country.named('United States').subregions
@@ -24,11 +26,13 @@ class User < ApplicationRecord
   def state_abbrev
     # user_state = self.addresses.first.state.name
     # REGIONS.named(user_state).code
-    self.addresses.first.state.abbrev_name unless self.addresses.first.nil?
+    return self.addresses.first.state.abbrev_name unless self.addresses.first.nil?
+    '-'
   end
 
   def city_name
-    self.addresses.first.city.name unless self.addresses.first.nil?
+    return self.city.name if self.city
+    '-'
   end
 
   def displayed_address(type)
@@ -82,10 +86,11 @@ class User < ApplicationRecord
     select("count(users.*) AS num_users, cities.name").
     joins("JOIN orders ON orders.user_id = users.id").
     joins("JOIN addresses ON addresses.id = orders.billing_id").
-    joins("JOIN cities ON cities.id = addresses.state_id").
+    joins("JOIN cities ON cities.id = addresses.city_id").
     group('cities.id').
     order('num_users desc').
     limit(3).distinct
+    # find_by_sql("SELECT COUNT(cities.name) as count, cities.name as name FROM users JOIN addresses ON users.billing_id = addresses.id JOIN cities ON cities.id = addresses.city_id GROUP BY cities.name ORDER BY count DESC LIMIT 3")
   end
 
   def self.highest_order_val

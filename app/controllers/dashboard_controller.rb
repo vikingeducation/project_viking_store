@@ -40,8 +40,8 @@ class DashboardController < ApplicationController
     @large_order_val = {7 => large_order_val(7),
                         30 => large_order_val(30),
                         'all_time' => large_order_val}
-
   end
+
 
 
   private
