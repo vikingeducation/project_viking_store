@@ -1,9 +1,9 @@
 <H1>Viking Store Analytics Dashboard</H1>
 
-<div class="container">
+<div class="container admin-layout">
 
   <div class="row">
-                  <!-- COLUMN 1 \| -->
+    <!-- COLUMN 1 \| -->
     <div class="col-md-6">
       <div class="stat-window">
         <div class="inner-content">
@@ -75,7 +75,7 @@
         </div>
       </div>
     </div>
-                  <!-- COLUMN 2 |/ -->
+    <!-- COLUMN 2 |/ -->
     <div class="col-md-6">
       <div class="stat-window">
         <div class="inner-content">
@@ -102,20 +102,20 @@
                 <th scope="col">Data</th>
               </tr>
             </thead>
-              <tbody>
-                <tr>
-                  <td><%= @top_three_cities[0].name %></td>
-                  <td><%= @top_three_cities[0].num_users %></td>
-                </tr>
-                <tr>
-                  <td><%= @top_three_cities[1].name %></td>
-                  <td><%= @top_three_cities[1].num_users %></td>
-                </tr>
-                <tr>
-                  <td><%= @top_three_cities[2].name %></td>
-                  <td><%= @top_three_cities[2].num_users %></td>
-                </tr>
-              </tbody>
+            <tbody>
+              <tr>
+                <td><%= @top_three_cities[0].name %></td>
+                <td><%= @top_three_cities[0].num_users %></td>
+              </tr>
+              <tr>
+                <td><%= @top_three_cities[1].name %></td>
+                <td><%= @top_three_cities[1].num_users %></td>
+              </tr>
+              <tr>
+                <td><%= @top_three_cities[2].name %></td>
+                <td><%= @top_three_cities[2].num_users %></td>
+              </tr>
+            </tbody>
           </table>
 
           <table class="table table-striped">
@@ -154,11 +154,10 @@
         </div>
       </div>
     </div>
-
   </div>
-
   <div class="row">
-                  <!-- COLUMN 3 /| -->
+
+    <!-- COLUMN 3 /| -->
     <div class="col-md-6">
       <div class="stat-window">
         <div class="inner-content">
@@ -186,18 +185,13 @@
 
           <table class="table table-striped">
             <caption>Total</caption>
-            <%= render partial: "shared/order_stats", locals: {
-              number: @num_of_orders_by_days['all_time'],
-              revenue: @total_revenue['all_time'],
-              avg_ord_val: @avg_order_val['all_time'],
-              lrg_ord_val: @large_order_val['all_time']} %>
+            <%= render partial: "shared/order_stats", locals: { number: @num_of_orders_by_days['all_time'], revenue: @total_revenue['all_time'], avg_ord_val: @avg_order_val['all_time'], lrg_ord_val: @large_order_val['all_time']} %>
           </table>
-
 
         </div>
       </div>
     </div>
-                  <!-- COLUMN 4 |\ -->
+    <!-- COLUMN 4 |\ -->
     <div class="col-md-6">
       <div class="stat-window">
         <div class="inner-content">
@@ -291,11 +285,9 @@
             </tbody>
           </table>
 
-
         </div>
       </div>
     </div>
 
   </div>
-
 </div>

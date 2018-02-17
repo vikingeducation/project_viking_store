@@ -129,11 +129,14 @@ h1 {
 
 div.row {
   margin-bottom: 30px;
+
 }
+
 
 div.stat-window {
   border: 3px solid #999;
   padding: 15px;
+  min-height: 846px;
 }
 
 
@@ -166,7 +169,7 @@ td {
 }
 
 div.container.admin-layout {
-  width: 1270px;
+  // width: 1170px;
   // .center-block();
 }
 
@@ -190,4 +193,3 @@ td.unplaced-format {
   font-size:  26px;
   padding-top: 6px;
 }
-
