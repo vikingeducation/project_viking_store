@@ -1,0 +1,195 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// ==========================
+// ADMIN - LAYOUT
+// ==========================
+
+
+
+.nav-wrapper, .admin-wrapper{
+  margin: 10px;
+  border: 3px solid #ccc;
+}
+
+.nav-holder {
+  margin: 10px;
+  text-align: center;
+  ul {
+    list-style-type: none;
+    margin-left: -40px;
+    li a {
+      text-decoration: underline;
+    }
+    li {
+            padding-bottom: 3px;
+    }
+    hr {
+      border: 1px solid #666;
+    }
+  }
+}
+
+.admin-holder {
+  margin: 10px;
+}
+
+// ==========================
+// ADMIN - CATEGORIES
+// ==========================
+
+div.button-wrapper {
+  // max-width: 250px;
+  text-align: center;
+  a.btn-primary, input.btn-primary {
+    width: 70%;
+    padding: 7px 30px;
+    font-size: 16px;
+  }
+}
+@media (min-width: 750px) {
+  form div.button-wrapper {
+  margin-right: 15%;
+  }
+}
+
+div.table-wrapper {
+  // padding: 50px 30px;
+  padding-bottom: 60px !important;
+}
+
+div.form-wrapper {
+  // margin: 0 auto;
+
+  form {
+    // max-width: 600px;
+    // padding: 10px;
+  }
+}
+
+table td a{
+  text-decoration: underline;
+}
+
+table.no-borders {
+  border: none;
+  tr, th, td, tbody {
+    border: none;
+  }
+}
+
+div.borders {
+  border: 3px solid #666;
+  margin: 25px 45px;
+  padding: 20px;
+  h4 {
+  text-align: center;
+  }
+}
+
+div.link-wrapper-centre {
+  display: block;
+  text-align: center;
+}
+
+div.link-wrapper-left {
+  padding: 10px 0 20px 0px;
+  margin-left: 7%;
+}
+
+td.title-cell {
+  max-width: 100%;
+  padding: 5px 10px;
+}
+
+
+
+// ==========================
+// ADMIN - ANALYTICS DASHBOARD
+// ==========================
+
+h1, h4, h6, td {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+h2, h3, h5 {
+  text-align: center;
+  line-height: 2.0;
+}
+
+h1 {
+  text-align: center;
+  padding-bottom: 40px;
+  padding-top: 30px;
+}
+
+
+
+div.row {
+  margin-bottom: 30px;
+
+}
+
+
+div.stat-window {
+  border: 3px solid #999;
+  padding: 15px;
+  min-height: 846px;
+}
+
+
+div.inner-content {
+  margin: auto 30px;
+}
+
+table caption {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border-left: 1px solid #cecfd5;
+}
+
+
+.red-mark {
+  color: red;
+}
+
+.green-mark {
+  color: green;
+}
+
+div.container.admin-layout {
+  // width: 1170px;
+  // .center-block();
+}
+
+// ==========================
+// ORDERS - FORMATS
+// ==========================
+
+
+td.placed-format {
+  text-align: center;
+  color: #1C1;
+  font-weight: 900;
+  font-size:  26px;
+  padding-top: 6px;
+}
+
+td.unplaced-format {
+  text-align: center;
+  color: #F2007B;
+  font-weight: 900;
+  font-size:  26px;
+  padding-top: 6px;
+}

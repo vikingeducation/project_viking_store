@@ -1,0 +1,70 @@
+<%= render partial: "shared/error_handler", locals: { object: @address } %>
+<% if @address.id.nil? %>
+<H3>Add New Address</H3>
+<% else %>
+<H3>Edit <%=@address.user.first_name %> <%= @address.user.last_name %>'s Address</H3>
+<% end %>
+
+<div class="borders">
+
+  <div class="form-wrapper">
+    <%= form_for( [:admin, @address], html: { :class => "form-horizontal" } ) do |f| %>
+      <div class="form-group">
+        <%= f.label :id, "Owner ID:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.hidden_field :user_id, :value => @address.user_id %>
+          <h5><%= @address.user_id %></h5>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :user, "Owner Name:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <h5><%= link_to "#{@address.user.first_name} #{@address.user.last_name} click to view", admin_user_path(@address.user_id) %></h5>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :street_address, "Street:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :street_address, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :city_name, "City:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <% if @address.city_id != nil %>
+            <%= f.text_field :city_name, class: "form-control", value: @address.city.name  %>
+          <% else %>
+            <%= f.text_field :city_name, class: "form-control" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :state_id, "State:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.collection_select :state_id, State.all, :id, :name, {}, :class => "form-control"%>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :zip_code, "ZIP:", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :zip_code, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+      <div class="link-wrapper-left">
+        <%= link_to("View Saved Addresses", "#") %>
+      </div>
+        <div class="button-wrapper col-sm-12">
+          <%= f.submit "Save Address", class: "btn btn-primary btn-group btn-group-lg" %>
+        </div>
+        <div class="link-wrapper-centre">
+          <% unless @address.id.nil? %>
+            <%= link_to("Delete Address", "/admin/addresses/#{@address.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>

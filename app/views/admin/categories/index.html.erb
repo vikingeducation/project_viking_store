@@ -1,0 +1,32 @@
+
+<H3>Product Categories</H3>
+
+<div class="button-wrapper">
+  <%= link_to("Add a New Category", new_admin_category_path, :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
+</div>
+
+<div class="table-wrapper table-responsive">
+  <table class="table table-striped">
+    <caption></caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>SHOW</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @categories.each do |categ| %>
+        <tr>
+          <td><%= categ.id %></td>
+          <td><%= categ.name %></td>
+          <td><%= link_to("show", admin_category_path(categ.id)) %></td>
+          <td><%= link_to("edit", edit_admin_category_path(categ.id)) %></td>
+          <td><%= link_to("delete", "/admin/categories/#{categ.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,25 @@
+<H3>Category <%= @category.id %>: <%= @category.name %></H3>
+
+
+<H5>Category ID:  <%= @category.id %></H5>
+<H5>Name: <%= @category.name %></H5> <br>
+<%= link_to("Edit Category", edit_admin_category_path) %><br>
+<%= link_to("Delete Category", "/admin/products/#{@category.id}", method: :delete) %>
+
+<table class="table">
+  <caption>Products in <%= @category.name %></caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @products.each do |product| %>
+    <tr>
+      <td><%= product.id %></td>
+      <td><%= link_to("#{product.name}", "#") %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

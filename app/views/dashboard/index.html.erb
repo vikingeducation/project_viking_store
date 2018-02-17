@@ -1,0 +1,293 @@
+<H1>Viking Store Analytics Dashboard</H1>
+
+<div class="container admin-layout">
+
+  <div class="row">
+    <!-- COLUMN 1 \| -->
+    <div class="col-md-6">
+      <div class="stat-window">
+        <div class="inner-content">
+          <H2>
+            1. Overall Platform
+          </H2>
+          <%= render "shared/overall_platform_stats" %>
+
+          <table class="table table-striped">
+            <caption>Last 30 Days</caption>
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>New Users</td>
+                <td><%=@month_users %></td>
+              </tr>
+              <tr>
+                <td>Orders</td>
+                <td><%=@month_orders %></td>
+              </tr>
+              <tr>
+                <td>New Products</td>
+                <td><%=@month_products %></td>
+              </tr>
+              <tfoot>
+                <tr>
+                  <td>Revenue</td>
+                  <td>$<%=@month_revenue %></td>
+                </tr>
+              </tfoot>
+            </tbody>
+          </table>
+
+          <table class="table table-striped">
+            <caption>Total</caption>
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Users</td>
+                <td><%=@total_users %></td>
+              </tr>
+              <tr>
+                <td>Orders</td>
+                <td><%=@total_orders %></td>
+              </tr>
+              <tr>
+                <td>Products</td>
+                <td><%=@total_products %></td>
+              </tr>
+              <tfoot>
+                <tr>
+                  <td>Revenue</td>
+                  <td>$<%=@total_revenue_checked %></td>
+                </tr>
+              </tfoot>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+    <!-- COLUMN 2 |/ -->
+    <div class="col-md-6">
+      <div class="stat-window">
+        <div class="inner-content">
+          <H2>
+            2. User Demographics and Behavior
+          </H2>
+
+          <table class="table table-striped">
+            <caption>Top 3 States Users Live in (billing)</caption>
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Data</th>
+              </tr>
+            </thead>
+            <%= render "shared/user_demographics" %>
+          </table>
+
+          <table class="table table-striped">
+            <caption>Top 3 Cities Users Live In (billing)</caption>
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @top_three_cities[0].name %></td>
+                <td><%= @top_three_cities[0].num_users %></td>
+              </tr>
+              <tr>
+                <td><%= @top_three_cities[1].name %></td>
+                <td><%= @top_three_cities[1].num_users %></td>
+              </tr>
+              <tr>
+                <td><%= @top_three_cities[2].name %></td>
+                <td><%= @top_three_cities[2].num_users %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-striped">
+            <caption>Total Users With...</caption>
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">User</th>
+                <th scope="col">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Highest Single Order Value</td>
+                <td><%= @highest_order_val.first_name + " " + @highest_order_val.last_name %></td>
+                <td>$<%= @highest_order_val.order_value %></td>
+              </tr>
+              <tr>
+                <td>Highest Lifetime Value</td>
+                <td><%= @highest_lifetime_val.first_name  + " " + @highest_lifetime_val.last_name %></td>
+                <td>$<%= @highest_lifetime_val.all_orders_value %></td>
+              </tr>
+              <tr>
+                <td>Highest Average Order Value</td>
+                <td><%= @highest_avg_order_val.first_name + " " +  @highest_avg_order_val.last_name %></td>
+                <td>$<%= @highest_avg_order_val.avg_value %></td>
+              </tr>
+              <tr>
+                <td>Most Orders Placed</td>
+                <td><%= @most_orders.first_name + " " +  @most_orders.last_name %></td>
+                <td><%= @most_orders.no_of_orders %></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+    <!-- COLUMN 3 /| -->
+    <div class="col-md-6">
+      <div class="stat-window">
+        <div class="inner-content">
+          <H2>
+            3. Order Statistics
+          </H2>
+
+          <table class="table table-striped">
+            <caption>Last 7 Days</caption>
+            <%= render partial: "shared/order_stats", locals: {
+              number: @num_of_orders_by_days[7],
+              revenue: @total_revenue[7],
+              avg_ord_val: @avg_order_val[7],
+              lrg_ord_val: @large_order_val[7]} %>
+          </table>
+
+          <table class="table table-striped">
+            <caption>Last 30 Days</caption>
+            <%= render partial: "shared/order_stats", locals: {
+              number: @num_of_orders_by_days[30],
+              revenue: @total_revenue[30],
+              avg_ord_val: @avg_order_val[30],
+              lrg_ord_val: @large_order_val[30]} %>
+          </table>
+
+          <table class="table table-striped">
+            <caption>Total</caption>
+            <%= render partial: "shared/order_stats", locals: { number: @num_of_orders_by_days['all_time'], revenue: @total_revenue['all_time'], avg_ord_val: @avg_order_val['all_time'], lrg_ord_val: @large_order_val['all_time']} %>
+          </table>
+
+        </div>
+      </div>
+    </div>
+    <!-- COLUMN 4 |\ -->
+    <div class="col-md-6">
+      <div class="stat-window">
+        <div class="inner-content">
+          <H2>
+            4. Time Series Data
+          </H2>
+
+          <table class="table table-striped">
+            <caption>Orders by Day</caption>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Today</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>Yesterday</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>8/22</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>8/21</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>8/21</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>8/20</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-striped">
+            <caption>Orders by Week</caption>
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Today</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>Yesterday</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>8/22</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>8/21</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>8/21</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>8/20</td>
+                <td>100</td>
+                <td>100</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

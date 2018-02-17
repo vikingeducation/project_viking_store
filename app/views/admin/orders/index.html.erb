@@ -1,0 +1,50 @@
+<% if params[:user_id] == nil %>
+  <H3>All Orders</H3>
+  <h5>Create new orders from within 
+    <%= link_to("User", admin_users_path) %> 
+      profiles
+  </h5>
+<% else %>
+  <H3><%= @orders.first.user.first_name %> <%= @orders.first.user.last_name %>'s Orders</H3>
+  <div class="button-wrapper">
+    <%= link_to "Create an Order for #{@orders.first.user.first_name} #{@orders.first.user.last_name}", new_admin_order_path(:user_id => params[:user_id]),class: "btn btn-primary btn-group btn-group-lg" %>
+  </div>
+<% end %>
+
+<div class="table-wrapper table-responsive">
+  <table class="table table-striped">
+    <caption></caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>UserID</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Total Value</th>
+        <th>Status</th>
+        <th>Date Placed</th>
+        <th>SHOW</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |o| %>
+        <tr>
+          <td><%= o.id %></td>
+          <td><%= o.user ? (link_to("#{o.user_id}", admin_user_path(o.user_id))) : "N/A" %></td>
+          <td><%= o.billing.nil? ? "N/A" : o.billing.street_address %></td>
+          <td><%= o.billing.nil? ? "N/A" : o.billing.city.name %></td>
+          <td><%= o.billing.nil? ? "N/A" : o.billing.state.abbrev_name %></td>
+          <td><%= number_to_currency(o.total_value, :unit => "$") %></td>
+          <td class="<%= 'red-mark' if o.check_status == 'UNPLACED' %>"><%= o.check_status %></td>
+          <td><%= o.created_date %></td>
+          <td><%= link_to("show", admin_order_path(o.id)) %></td>
+          <td><%= link_to("edit", edit_admin_order_path(o.id)) %></td>
+          <td><%= link_to("delete", "/admin/orders/#{o.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

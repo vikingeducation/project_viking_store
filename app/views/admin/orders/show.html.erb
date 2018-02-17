@@ -1,0 +1,143 @@
+<H3>
+<% if @order.checkout_date.nil? %>
+  Shopping Cart
+<% else %>
+  Order
+<% end %>
+      <%= @order.id %></H3>
+
+<div class="table-wrapper borders">
+  <table class="no-borders">
+    <caption>Basic Information</caption>
+    <tbody>
+      <tr>
+        <td class="title-cell">Customer ID:</td>
+        <td><%= @order.user_id %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Customer:</td>
+        <td><%= link_to("#{@order.user.first_name} #{@order.user.last_name}", admin_user_path(@order.user_id)) %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Date Placed:</td>
+        <td><%= @order.checkout_date %></td>
+      </tr>
+      <tr>
+        <td class="title-cell"># Products:</td>
+        <td> <%= @order.products.count  %> </td>
+      </tr>
+      <tr>
+        <td class="title-cell">Order Value:</td>
+        <td><%= number_to_currency(@order.total_value, :unit => "$") %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= link_to("Edit Customer Profile", edit_admin_user_path(@order.user_id)) %><br>
+
+  <table class="no-borders">
+    <caption>Order Status</caption>
+    <tbody>
+      <tr>
+        <% if @order.checkout_date.nil? %>
+          <td class="unplaced-format">
+            UNPLACED
+          </td>
+        <% else %>
+          <td class="placed-format">
+            PLACED
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <table class="no-borders">
+    <caption>Shipping Address</caption>
+    <tbody>
+      <tr>
+        <td class="title-cell">Street:</td>
+        <td><%= @order.shipping.nil? ? "N/A" : @order.shipping.street_address %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">City:</td>
+        <td><%= @order.shipping.nil? ? "N/A" : @order.shipping.city.name %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">State:</td>
+        <td><%= @order.shipping.nil? ? "N/A" : @order.shipping.state.name %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="no-borders">
+    <caption>Billing Address</caption>
+    <tbody>
+      <tr>
+        <td class="title-cell">Street:</td>
+        <td><%= @order.billing.nil? ? "N/A" : @order.billing.street_address %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">City:</td>
+        <td><%= @order.billing.nil? ? "N/A" : @order.billing.city.name %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">State:</td>
+        <td><%= @order.billing.nil? ? "N/A" : @order.billing.state.name %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="no-borders">
+    <caption>Billing Card</caption>
+    <tbody>
+      <tr>
+        <td class="title-cell">Last 4 Digits:</td>
+        <td><%= @order.credit_card.nil? ? "N/A" : @order.credit_card.card_number[-4..-1] %></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+ <%= link_to("Edit Order", edit_admin_order_path(@order.id)) %><br>
+  <%= link_to("Delete Order", "/admin/orders/#{@order.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %><br>
+
+</div>
+
+
+<div class="table-wrapper borders">
+  <table class="table table-striped">
+    <caption>Order Contents</caption>
+    <thead>
+      <tr>
+        <th>ProductID</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_contents.each do |cont| %>
+        <tr>
+          <td><%= cont.product_id %></td>
+          <td><%= cont.product.name %></td>
+          <td><%= cont.quantity %></td>
+          <td><%= number_to_currency(cont.product.price, :unit => "$") %></td>
+          <td><%= number_to_currency(cont.quantity*cont.product.price, :unit => "$") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to("Edit Order", 
+              edit_admin_order_path(@order.id)) %><br>
+  <%= link_to("Delete Order", 
+              "/admin/users/#{@order.id}", 
+              :method => "DELETE", 
+              data: {confirm: "Are you sure?"}) %><br>
+
+
+
+</div>

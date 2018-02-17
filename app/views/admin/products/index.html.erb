@@ -1,0 +1,35 @@
+<H3>Products</H3>
+
+<div class="button-wrapper">
+  <%= link_to("Add a New Product", new_admin_product_path, :class => "btn btn-primary btn-group btn-group-lg", :role => "group") %>
+</div>
+
+<div class="table-wrapper table-responsive">
+  <table class="table table-striped">
+    <caption></caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>SHOW</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |prod| %>
+        <tr>
+          <td><%= prod.id %></td>
+          <td><%= prod.name %></td>
+          <td>$<%= prod.price %></td>
+          <td><%= prod.category.nil? ? "N.A." : (link_to("#{prod.category.name}", "/admin_portal/#{prod.category_id}")) %></td>
+          <td><%= link_to("show", admin_product_path(prod.id)) %></td>
+          <td><%= link_to("edit", edit_admin_product_path(prod.id)) %></td>
+          <td><%= link_to("delete", "/admin/products/#{prod.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

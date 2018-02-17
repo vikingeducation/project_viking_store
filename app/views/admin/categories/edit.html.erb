@@ -1,0 +1,25 @@
+<H3>Edit Category <%= @category.id %>: <%= @category.name %></H3>
+
+<div class="form-wrapper">
+
+  <%= form_for @category, url: "/admin/categories/#{@category.id}", html: { :class => "form-horizontal" } do |f| %>
+    <div class="form-group">
+      <%= f.label :id, "Category ID:", class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+<!--         <%= f.text_field :id, class: "form-control", disabled: 'disabled'%> -->
+        <h4><%= @category.id %></h4>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :name, "Name:", class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+    <div class="button-wrapper">
+      <%= f.submit "Update Category", class: "btn btn-primary btn-group btn-group-lg" %>
+      <%= link_to("Delete Category", "/admin/categories/#{:id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
+    </div>
+  <% end %>
+
+</div>

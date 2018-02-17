@@ -1,0 +1,45 @@
+<H3>Product <%= @product.id %></H3>
+
+<div class="table-wrapper">
+  <table class="no-borders">
+    <caption>Product Information</caption>
+    <tbody>
+      <tr>
+        <td class="title-cell">Product ID:</td>
+        <td><%= @product.id %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Name:</td>
+        <td><%= @product.name %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Price: </td>
+        <td>$ <%= @product.price %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Category:</td>
+        <td><%= @product.category.name %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="no-borders">
+    <caption>Product Statistics</caption>
+    <tbody>
+      <tr>
+        <td class="title-cell">Times Ordered:</td>
+        <td><%= @product_times_ordered %></td>
+      </tr>
+      <tr>
+        <td class="title-cell">Carts In:</td>
+        <td><%= @product_times_in_carts %></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <br>
+
+  <%= link_to("Edit Product", edit_admin_product_path(@product.id)) %><br>
+  <%= link_to("Delete Product", "/admin/product/#{@product.id}", :method => "DELETE", data: {confirm: "Are you sure?"}) %>
+
+</div>

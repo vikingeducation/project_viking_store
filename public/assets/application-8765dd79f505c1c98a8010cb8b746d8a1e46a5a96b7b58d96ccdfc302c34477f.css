@@ -1,0 +1,195 @@
+/* line 12, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+.nav-wrapper, .admin-wrapper {
+  margin: 10px;
+  border: 3px solid #ccc;
+}
+
+/* line 17, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+.nav-holder {
+  margin: 10px;
+  text-align: center;
+}
+/* line 20, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+.nav-holder ul {
+  list-style-type: none;
+  margin-left: -40px;
+}
+/* line 23, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+.nav-holder ul li a {
+  text-decoration: underline;
+}
+/* line 26, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+.nav-holder ul li {
+  padding-bottom: 3px;
+}
+/* line 29, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+.nav-holder ul hr {
+  border: 1px solid #666;
+}
+
+/* line 35, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+.admin-holder {
+  margin: 10px;
+}
+
+/* line 43, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+div.button-wrapper {
+  text-align: center;
+}
+/* line 46, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+div.button-wrapper a.btn-primary, div.button-wrapper input.btn-primary {
+  width: 70%;
+  padding: 7px 30px;
+  font-size: 16px;
+}
+
+@media (min-width: 750px) {
+  /* line 53, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+  form div.button-wrapper {
+    margin-right: 15%;
+  }
+}
+/* line 58, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+div.table-wrapper {
+  padding-bottom: 60px !important;
+}
+
+/* line 72, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+table td a {
+  text-decoration: underline;
+}
+
+/* line 76, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+table.no-borders {
+  border: none;
+}
+/* line 78, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+table.no-borders tr, table.no-borders th, table.no-borders td, table.no-borders tbody {
+  border: none;
+}
+
+/* line 83, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+div.borders {
+  border: 3px solid #666;
+  margin: 25px 45px;
+  padding: 20px;
+}
+/* line 87, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+div.borders h4 {
+  text-align: center;
+}
+
+/* line 92, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+div.link-wrapper-centre {
+  display: block;
+  text-align: center;
+}
+
+/* line 97, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+div.link-wrapper-left {
+  padding: 10px 0 20px 0px;
+  margin-left: 7%;
+}
+
+/* line 102, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+td.title-cell {
+  max-width: 100%;
+  padding: 5px 10px;
+}
+
+/* line 113, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+h1, h4, h6, td {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+/* line 117, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+h2, h3, h5 {
+  text-align: center;
+  line-height: 2.0;
+}
+
+/* line 122, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+h1 {
+  text-align: center;
+  padding-bottom: 40px;
+  padding-top: 30px;
+}
+
+/* line 130, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+div.row {
+  margin-bottom: 30px;
+}
+
+/* line 136, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+div.stat-window {
+  border: 3px solid #999;
+  padding: 15px;
+  min-height: 846px;
+}
+
+/* line 143, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+div.inner-content {
+  margin: auto 30px;
+}
+
+/* line 147, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+table caption {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* line 153, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+table {
+  border-collapse: collapse;
+}
+
+/* line 157, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+th,
+td {
+  border-left: 1px solid #cecfd5;
+}
+
+/* line 163, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+.red-mark {
+  color: red;
+}
+
+/* line 167, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+.green-mark {
+  color: green;
+}
+
+/* line 181, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+td.placed-format {
+  text-align: center;
+  color: #1C1;
+  font-weight: 900;
+  font-size: 26px;
+  padding-top: 6px;
+}
+
+/* line 189, /Users/Visiona/Documents/Viking_School/Ruby/project_viking_store/app/assets/stylesheets/dashboard.scss */
+td.unplaced-format {
+  text-align: center;
+  color: #F2007B;
+  font-weight: 900;
+  font-size: 26px;
+  padding-top: 6px;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
