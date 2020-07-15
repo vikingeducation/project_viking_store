@@ -1,0 +1,15 @@
+<table class="table table-striped table-bordered table-sm">
+  <thead class="thead-default">
+  <tr>
+    <th>Item</th>
+    <th>Data</th>
+  </tr>
+  </thead>
+
+  <% areas.each do |area| %>
+      <tr>
+        <td><%= area.name %></td>
+        <td><%= area.address_count %></td>
+      </tr>
+  <% end %>
+</table>
